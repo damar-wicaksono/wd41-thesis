@@ -1,11 +1,11 @@
 all: pdf
 
 pdf:
-	pdflatex my_thesis
-	bibtex my_thesis
-	pdflatex my_thesis
-	pdflatex my_thesis
-	pdflatex my_thesis
+	pdflatex wd41_thesis
+	bibtex wd41_thesis
+	pdflatex wd41_thesis
+	pdflatex wd41_thesis
+	pdflatex wd41_thesis
 
 clean:
 	rm -f *.aux *.log *.bbl *.blg *.toc *.lof *.lot *.out
