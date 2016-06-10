@@ -18,6 +18,7 @@
 # *.ps
 # *.eps
 # *.pdf
+wd41_thesis.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
