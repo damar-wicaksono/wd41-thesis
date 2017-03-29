@@ -1,3 +1,6 @@
+## sphinx-doc 
+sphinx-doc/build
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
