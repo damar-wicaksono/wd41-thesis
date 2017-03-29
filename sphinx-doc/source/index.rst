@@ -6,15 +6,13 @@
 Welcome to wd41-thesis's documentation!
 =======================================
 
+Lorem Ipsum Dolor Sit Amet
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   1_introduction/index.rst
+   3_gsa/index.rst
+   4_gp_regression/index.rst
+   5_bayesian_calibration/index.rst
