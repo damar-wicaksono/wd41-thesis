@@ -8,9 +8,10 @@ Quantifying Uncertainty of Computer Model: Forward and Backward
    :maxdepth: 2
    :caption: Introduction:
    
-   1_computer_simulation
-   2_uq_in_evaluation_model
-   3_premium
-   4_problem_and_objective
-   5_scope_and_limitation
-   6_thesis_overview
+   computer_simulation
+   computer_experiment
+   uq_in_evaluation_model
+   premium
+   problem_and_objective
+   scope_and_limitation
+   thesis_overview

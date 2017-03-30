@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to wd41-thesis's documentation!
-=======================================
+Bayesian Uncertainty Quantification of Physical Model in Thermal-Hydraulics System Code
+=======================================================================================
 
 Lorem Ipsum Dolor Sit Amet
 
@@ -13,6 +13,7 @@ Lorem Ipsum Dolor Sit Amet
    :caption: Contents:
 
    1_introduction/index.rst
+   2_trace_reflood/index.rst
    3_gsa/index.rst
    4_gp_regression/index.rst
    5_bayesian_calibration/index.rst
