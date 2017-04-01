@@ -1,4 +1,5 @@
-.. _screening:
+.. _gsa_screening:
 
+====================
 Parameters Screening
 ====================

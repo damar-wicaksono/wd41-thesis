@@ -1,0 +1,166 @@
+%*************************************************************************************************************************************************
+\chapter[Bayesian Calibration]{Bayesian Calibration of Computer Model: Connecting Model and Data under Uncertainty}\label{ch:bayesian_calibration}
+%*************************************************************************************************************************************************
+
+A very important factor for successful thesis writing is the
+organization of the material. This template suggests a structure as
+
+\input{Chapters/5_bayesian_calibration/statistical_framework}
+\input{Chapters/5_bayesian_calibration/model_discrepancy}
+\input{Chapters/5_bayesian_calibration/modular_bayesian}
+\input{Chapters/5_bayesian_calibration/mcmc}
+\input{Chapters/5_bayesian_calibration/application_to_feba_univariate}
+\input{Chapters/5_bayesian_calibration/identifiability_issue}
+\input{Chapters/5_bayesian_calibration/application_to_feba_multivariate}
+\input{Chapters/5_bayesian_calibration/chapter_summary}
+
+\section{Organization}
+A very important factor for successful thesis writing is the
+organization of the material. This template suggests a structure as
+the following:
+\begin{itemize}
+    \marginpar{You can use these margins for summaries of the text
+        body\dots}
+    \item\texttt{Chapters/} is where all the ``real'' content goes in
+    separate files such as \texttt{Chapter01.tex} etc.
+    %  \item\texttt{Examples/} is where you store all listings and other
+    %  examples you want to use for your text.
+    \item\texttt{FrontBackMatter/} is where all the stuff goes that
+    surrounds the ``real'' content, such as the acknowledgments,
+    dedication, etc.
+    \item\texttt{gfx/} is where you put all the graphics you use in
+    the thesis. Maybe they should be organized into subfolders
+    depending on the chapter they are used in, if you have a lot of
+    graphics.
+    \item\texttt{Bibliography.bib}: the Bib\TeX\ database to organize
+    all the references you might want to cite.
+    \item\texttt{classicthesis.sty}: the style definition to get this
+    awesome look and feel. Does not only work with this thesis template
+    but also on its own (see folder \texttt{Examples}). Bonus: works
+    with both \LaTeX\ and \textsc{pdf}\LaTeX\dots and \mLyX.
+    \item\texttt{ClassicThesis.tcp} a \TeX nicCenter project file.
+    Great tool and it's free!
+    \item\texttt{ClassicThesis.tex}: the main file of your thesis
+    where all gets bundled together.
+    \item\texttt{classicthesis-config.tex}: a central place to load all 
+    nifty packages that are used. %In there, you can also activate 
+    %backrefs in order to have information in the bibliography about 
+    %where a source was cited in the text (\ie, the page number).
+    
+    \emph{Make your changes and adjustments here.} This means that you  
+    specify here the options you want to load \texttt{classicthesis.sty} 
+    with. You also adjust the title of your thesis, your name, and all 
+    similar information here. Refer to \autoref{sec:custom} for more 
+    information.
+    
+    This had to change as of version 3.0 in order to enable an easy 
+    transition from the ``basic'' style to \mLyX.
+    
+\end{itemize}
+In total, this should get you started in no time.
+
+
+\clearpage
+\section{Style Options}\label{sec:options}
+There are a couple of options for \texttt{classicthesis.sty} that
+allow for a bit of freedom concerning the layout:
+\marginpar{\dots or your supervisor might use the margins for some
+    comments of her own while reading.}
+\begin{itemize}
+    \item General:
+    \begin{itemize}
+        \item\texttt{drafting}: prints the date and time at the bottom of
+        each page, so you always know which version you are dealing with.
+        Might come in handy not to give your Prof. that old draft.
+    \end{itemize}
+    
+    \item Parts and Chapters:
+    \begin{itemize}
+        \item\texttt{parts}: if you use Part divisions for your document,
+        you should choose this option. (Cannot be used together with 
+        \texttt{nochapters}.)
+        
+        \item\texttt{nochapters}: allows to use the look-and-feel with 
+        classes that do not use chapters, \eg, for articles. Automatically
+        turns off a couple of other options: \texttt{eulerchapternumbers}, 
+        \texttt{linedheaders}, \texttt{listsseparated}, and \texttt{parts}. 
+        
+        \item\texttt{linedheaders}: changes the look of the chapter
+        headings a bit by adding a horizontal line above the chapter
+        title. The chapter number will also be moved to the top of the
+        page, above the chapter title.
+        
+    \end{itemize}
+    
+    \item Typography:
+    \begin{itemize}
+        \item\texttt{eulerchapternumbers}: use figures from Hermann Zapf's
+        Euler math font for the chapter numbers. By default, old style
+        figures from the Palatino font are used.
+        
+        \item\texttt{beramono}: loads Bera Mono as typewriter font. 
+        (Default setting is using the standard CM typewriter font.)
+        
+        \item\texttt{eulermath}: loads the awesome Euler fonts for math. 
+        Pala\-tino is used as default font.
+        
+        \item\texttt{pdfspacing}: makes use of pdftex' letter spacing
+        capabilities via the \texttt{microtype} package.\footnote{Use 
+            \texttt{microtype}'s \texttt{DVIoutput} option to generate
+            DVI with pdftex.} This fixes some serious issues regarding 
+        math formul\ae\ etc. (\eg, ``\ss'') in headers. 
+        
+        \item\texttt{minionprospacing}: uses the internal \texttt{textssc}
+        command of the \texttt{MinionPro} package for letter spacing. This 
+        automatically enables the \texttt{minionpro} option, overriding
+        \texttt{pdfspacing}.
+        
+    \end{itemize}  
+    
+    \item Table of Contents:
+    \begin{itemize}
+        \item\texttt{tocaligned}: aligns the whole table of contents on
+        the left side. Some people like that, some don't.
+        
+        \item\texttt{dottedtoc}: sets pagenumbers flushed right in the 
+        table of contents.
+        
+        \item\texttt{manychapters}: if you need more than nine chapters for 
+        your document, you might not be happy with the spacing between the 
+        chapter number and the chapter title in the Table of Contents. 
+        This option allows for additional space in this context. 
+        However, it does not look as ``perfect'' if you use
+        \verb|\parts| for structuring your document.
+        
+    \end{itemize}
+    
+    \item Floats:
+    \begin{itemize}
+        \item\texttt{listings}: loads the \texttt{listings} package (if not 
+        already done) and configures the List of Listings accordingly.
+        
+        \item\texttt{floatperchapter}: activates numbering per chapter for
+        all floats such as figures, tables, and listings (if used). 
+        
+        \item\texttt{subfig}(\texttt{ure}): is passed to the \texttt{tocloft} 
+        package to enable compatibility with the \texttt{subfig}(\texttt{ure}) 
+        package. Use this option if you want use \texttt{classicthesis} with the
+        \texttt{subfig} package.
+        
+        %    \item\texttt{listsseparated}: will add extra space between table
+        %    and figure entries of different chapters in the list of tables or
+        %    figures, respectively. % Deprecated as of version 2.9.
+    \end{itemize}    
+    
+    %   \item\texttt{a5paper}: adjusts the page layout according to the
+    %    global \texttt{a5paper} option (\emph{experimental} feature).
+    %    \item\texttt{minionpro}: sets Robert Slimbach's Minion as the 
+    %    main font of the document. The textblock size is adjusted 
+    %    accordingly.    
+    
+\end{itemize}
+The best way to figure these options out is to try the different
+possibilities and see what you and your supervisor like best.
+
+In order to make things easier, \texttt{classicthesis-config.tex} 
+contains some useful commands that might help you.
