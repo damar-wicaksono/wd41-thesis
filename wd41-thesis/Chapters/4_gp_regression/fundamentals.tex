@@ -1,1 +1,37 @@
 \section{Gaussian Process Fundamentals}\label{sec:gp_fundamentals}
+
+\subsection{Multivariate Gaussian (Normal) Random Variable}\label{sub:gp_mvn}
+
+Multivariate Normal (or Gaussian and hereinafter, \textsc{MVN}) random variabl is the most widely studied and applied random variable.
+There are several reasons for this.
+From a practical point of view, the distribution of MVN is tractable and is special properties are well known (citation needed).
+From an epistemological point of view, as MVN distribution is fully characterized by its mean and covariance, only these wo parameters are of interest.
+Furthermore, any dependence withing structure within a set of data can sufficiently be described linearly through the notion of statistical covariance.
+
+This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
+In the next section, the MVN random variable is generalized to be defined on infinite-dimensional space through the notion of Gaussian stochastic process.
+
+A collection of $D$ random variables $\mathbf{X} = [X_1, X_2, ...,X_D] \in \mathbb{R}^D$ is said to have a multivariate normal distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma} \in S_{++}^D$ if its joint probability density function is given by,
+
+\begin{equation}
+p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
+\end{equation}
+
+The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separetes the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
+A $D$-variate random variable $\boldsymbol{X}$ distributed as multivariate normal is written as,
+
+\begin{equation}
+	\boldsymbol{X} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
+\end{equation}
+
+where $\mathbb{E}$ is the expectation operator.
+
+The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive definite (PSD) $D \times D, S_{++}^D$ defined as,
+
+\begin{equation}
+	S_{++}^D = \{A \in \mathbb{R}^{D\times D}: A = A^T and \mathbf{x}^T A \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \} 
+\end{equation}
+
+\subsection{Gaussian Process}
+
+
