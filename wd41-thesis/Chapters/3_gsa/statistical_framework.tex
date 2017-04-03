@@ -1,7 +1,41 @@
 \section{Statistical Framework}\label{sec:sa_statistical_framework}
-Illo principalmente su nos. Non message \emph{occidental} angloromanic
-da. Debitas effortio simplificate sia se, auxiliar summarios da que,
-se avantiate publicationes via. Pan in terra summarios, capital
-interlingua se que. Al via multo esser specimen, campo responder que
-da. Le usate medical addresses pro, europa origine sanctificate nos
-se.
+
+The methodology for SA presented in this work belongs to
+the category of statistical framework, a term attributed
+to Cacuci and Ionescu-Bujor \cite{Ionescu-Bujor2004} or simply the global
+method, following the terminology from Saltelli et al. \cite{Saltelli2004}.
+Within this framework, sensitivity measures of a parameterized
+model are obtained by postprocessing the collection
+of model outputs obtained from multiple model
+evaluations at different points in the input parameter space
+according to a certain experimental design. 
+As such, the model itself can be considered as a black box, 
+and the input parameters are modeled as random variables
+equipped with a joint pdf. 
+The specification of a joint pdf allows for experimental design generation.
+
+Consider the following mathematical model used as a template for the rest of the present chapter:
+\begin{equation}
+y(t) = f(t;\mathbf{x}) \bigskip t \in [t_a,t_b]
+\end{equation}
+where $y(t)$ is the scalar output at time $t$ from a deterministic
+function $f$ and $\mathbf{x}$ is the input parameter vector in
+$D$-dimension, i.e., $\mathbf{x} = (x_1, x_2, \dots , x_d, \dots , x_D)$.
+
+Let $\mathbf{DM}$ be an experimental design matrix of size
+$N \times D$, where $N$ is the number of samples. 
+Each row in the matrix represents a point in the $D$-dimensional parameter space. 
+The model is then evaluated at each of these $D$ points by using a simulation code that results in a matrix of discrete-time outputs of size $N\times \frac{t_b-t_a}{\Delta t}$ where $\Delta t$ is the time-step size,
+\begin{equation}
+y(t; \mathbf{DM}) = 
+\begin{pmatrix}
+y_1(t_a)  & \cdots & y_1(t_i) & \cdots & y_1(t_b)\\
+\vdots	  &        & \vdots   &        & \vdots\\
+y_n(t_a)  & \cdots & y_n(t_i) & \cdots & y_n(t_b)\\
+\vdots	  &        & \vdots   &        & \vdots\\
+y_N(t_a)  & \cdots & y_N(t_i) & \cdots & y_N(t_b) \\
+\end{pmatrix}
+\end{equation}
+
+Based on this general model time-dependent output description, 
+the next three sections will outline the main components of the proposed SA methodology.
