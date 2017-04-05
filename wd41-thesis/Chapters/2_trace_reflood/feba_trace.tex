@@ -1,7 +1,41 @@
 \section{FEBA Model in TRACE}\label{sec:reflood_feba_trace}
-Illo principalmente su nos. Non message \emph{occidental} angloromanic
-da. Debitas effortio simplificate sia se, auxiliar summarios da que,
-se avantiate publicationes via. Pan in terra summarios, capital
-interlingua se que. Al via multo esser specimen, campo responder que
-da. Le usate medical addresses pro, europa origine sanctificate nos
-se.
+
+The \textsc{FEBA} facility was modeled using the TH system code \textsc{TRACE}.
+The model consists of a one-dimensional \textsc{VESSEL} component (to model the bundle test section),
+a \textsc{PIPE} component (upper plenum of the test section), 
+a \textsc{FILL} component (inlet flow and inlet temperature boundary conditions),
+a \textsc{BREAK} component (outlet pressure boundary condition),
+two \textsc{HTSTR} components (heater rods simulator and non-powered test section housing),
+and a \textsc{POWER} components (imposed electrical boundary condition).
+
+The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315$ $[mm]$.
+Both \textsc{HTSTR} components were also nodalized into the sample number of coarse axial conduction nodes.
+However, since a large axial temperature gradient is expected in a reflood transient,
+the fine-mesh reflood flag in \textsc{TRACE} was enabled.
+As a result, each of the course conduction nodes is divided uniformly by $5$,
+yielding a total of $142$ axial conduction nodes.
+The main geometrical parameters and experimental conditions used to develop the \textsc{FEBA} input model
+are summarized in Table~\ref{tab:feba_trace}.
+
+\begin{table}[ht]
+    \myfloatalign
+    \caption[]{Geometrical parameters}  \label{tab:feba_trace}
+    \begin{tabularx}{\textwidth}{Xcc} \toprule
+        \tableheadline{Parameter}		& \tableheadline{Unit} & \tableheadline{Value} \\ \midrule
+        Test section total length 		& $[m]$		& $4.114$ \\
+        Total heated length 			& $[m]$		& $3.9$ \\
+        Flow area						& $[m^2]$	& $3.901 \times 10^{-3}$\\
+        Hydraulic diameter				& $[mm]$	& $3.901 \times 10^{-3}$\\
+        Rectangular housing width   	& $[mm]$	& $3.901 \times 10^{-3}$\\
+        Rectangular housing thickness	& $[mm]$	& $3.901 \times 10^{-3}$\\
+        Number of rods					& $[-]$		& $3.901 \times 10^{-3}$\\
+        Rod outer diameter				& $[mm]$	& $3.901 \times 10^{-3}$\\
+        Pitch-to-Diameter ratio			& $[-]$		& $3.901 \times 10^{-3}$\\
+        Number of spacer grids			& $[-]$		& $3.901 \times 10^{-3}$\\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Base Case Simulation Results}
+
+\subsection{Prior Uncertainty Propagation}
