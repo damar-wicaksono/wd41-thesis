@@ -1,7 +1,29 @@
 \section{Parameters Screening}\label{sec:sa_parameters_screening}
-Illo principalmente su nos. Non message \emph{occidental} angloromanic
-da. Debitas effortio simplificate sia se, auxiliar summarios da que,
-se avantiate publicationes via. Pan in terra summarios, capital
-interlingua se que. Al via multo esser specimen, campo responder que
-da. Le usate medical addresses pro, europa origine sanctificate nos
-se.
+
+Screening methods are used to rank the importance of the model parameters using a relatively small number of model evaluations \cite{Saltelli2004}.
+However, they tend to simply give qualitative measures.
+That is, meaningful information resides in the rank itself but not in the exact importance of the parameters with respect to the output. 
+These methods are particularly valuable in the early phase of a SA to identify the non-influential parameters of a model, 
+which then could be safely excluded from further detailed analysis. 
+This exclusion step is important to reduce the size of the problem especially if a more expensive method is to be applied at the subsequent step. 
+In this work, attention was paid to a particular screening method proposed by Morris \cite{Morris1991} with an extension proposed by Campolongo et al. cite.
+
+\subsection{Elementary Effects}
+
+Consider a model with $D$ parameters, where $\mathbf{x} = (x_1, x_2, \dots,x_D)$ is a vector of parameter value evaluated at point $\mathbf{x}$.
+The elementary effect of the $d$-th parameter is defined as
+
+\begin{equation}
+EE_d = \frac{y(x_1, x_2, \dots, x_d+\Delta,\dots,x_D) - y(x_1, x_2, \dots, x_d,\dots,x_D)}{\Delta}
+\end{equation}
+
+where
+
+The key idea behind the original Morris method is in initiating the mdeol evaluations from various \textit{nominal} points $\mathbf{x}$ randomly selected over the grid and then gradually advancing one grid jump at a time between each model evaluation (one at a time), along a different dimension of the parameter space selected randomly. This ensures 
+
+To remove the necessity to specify the method-specific parameter $p$ (the number of levels), Campolongo et al. proposed to use a radial based design coupled with Sobol' quasirandom sequence (cite). In addition to removing the number of levels, radial design does not require nominal points to lie in a grid and at the same time varies the size of parameter perturbations from one dimension to another, from replica to replica, incorporating additional possible sources of variation in the method.
+An illustration of a radial design in $2$-dimensional input space with $4$ base points is shown in Fig.~ as a comparison with the trajectory design.
+
+ 
+\subsection{Statistics of Elementary Effects and Sensitivity Measures}
+
