@@ -1,6 +1,6 @@
 \section{Statistical Framework for Computer Model Analysis, Approximation, and Calibration}\label{sec:intro_statistical_framework}
 
-\subsection{Sensitivity Analysis}
+\subsection{\Glsentryfull{sa}}
 
 An essential part of model development and assesment is 
 properly describing and understanding the impact of model parameter variations on the model prediction.
@@ -16,12 +16,10 @@ and the work by Saltelli et al. \cite{Saltelli2008} and by Santner et al. \cite{
 the statistical framework is implicitly assumed deriving ideas from design of experiment, 
 and the classification is based on the parameter space of interest (local vs. global).
 
-
 Local analysis is based on calculating the effect on the model output of small perturbations around a nominal parameter value. 
 \marginpar{local sensitivity analysis}
 Often the perturbation is done one parameter at a time thus approximating the first-order partial derivative of the model output with respect to the perturbed parameter. 
 The derivative can be computed through efficient adjoint formulation \cite{Cacuci2003,Cacuci2010} capable of handling large number of parameters.
-
 
 Besides being numerically efficient, 
 sensitivity coefficients obtained from local deterministic sensitivity analysis have the advantage of being intuitive in their interpretation, 
