@@ -17,3 +17,12 @@ Because we are dealing with a document, the versioning has to be adapted:
    Finishing a subsection does not warrant a review yet.
    The tag used is `-<initial>.<iteration>`, so for example `1.5.0-ZO40.1` 
    for first iteration on the 5th finished section of major release 1. 
+
+## [Unreleased]
+
+### Added
+- Complete Subsection 1.6.1
+- Compelete Chapter 3 Introduction
+- Complete Subsection 3.1
+
+[Unreleased]: https://github.com/damar-wicaksono/wd41-thesis/tree/develop
