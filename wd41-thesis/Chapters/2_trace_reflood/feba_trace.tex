@@ -1,6 +1,6 @@
-\section{FEBA Model in TRACE}\label{sec:reflood_feba_trace}
+\section{\glsentryshort{feba} Model in \glsentryshort{trace}}\label{sec:reflood_feba_trace}
 
-The \textsc{FEBA} facility was modeled using the TH system code \textsc{TRACE}.
+The \gls{feba} facility was modeled using the TH system code \gls{trace}.
 The model consists of a one-dimensional \textsc{VESSEL} component (to model the bundle test section),
 a \textsc{PIPE} component (upper plenum of the test section), 
 a \textsc{FILL} component (inlet flow and inlet temperature boundary conditions),
@@ -11,11 +11,12 @@ and a \textsc{POWER} components (imposed electrical boundary condition).
 The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315$ $[mm]$.
 Both \textsc{HTSTR} components were also nodalized into the sample number of coarse axial conduction nodes.
 However, since a large axial temperature gradient is expected in a reflood transient,
-the fine-mesh reflood flag in \textsc{TRACE} was enabled.
+the fine-mesh reflood flag in \gls{trace} was enabled.
 As a result, each of the course conduction nodes is divided uniformly by $5$,
 yielding a total of $142$ axial conduction nodes.
-The main geometrical parameters and experimental conditions used to develop the \textsc{FEBA} input model
-are summarized in Table~\ref{tab:feba_trace}.
+The main geometrical parameters and experimental conditions used to develop the \gls{trace} input model
+are summarized in Table~\ref{tab:feba_trace},
+and the nodalization of the model is illustrated in Fig.~\ref{fig:feba_nodalization}.
 
 \begin{table}[ht]
     \myfloatalign
@@ -36,7 +37,7 @@ are summarized in Table~\ref{tab:feba_trace}.
         Spacer grid axial locations		& $[m]$		& $7$\\
         \midrule
         Number of hydraulic nodes		& $[-]$		& $28$ (varying length)\\
-        \multirow{2}{*}{Number of axial nodes}   		& \multirow{2}{*}{$[-]$}		& $28$ (coarse)\\
+        \multirow{2}{*}{Number of axial nodes}   	& \multirow{2}{*}{$[-]$}		& $28$ (coarse)\\
                                 		&   		& $142$ (fine)\\
         \midrule
         Inlet liquid temperature        & $[K]$		&  $312$ \\
@@ -45,6 +46,13 @@ are summarized in Table~\ref{tab:feba_trace}.
         \bottomrule
     \end{tabularx}
 \end{table}
+
+\begin{figure}[bth]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../figures/febaNodalization/febaNodalization.png}
+    \caption[\gls{trace} nodalization of FEBA]{Nodalization of FEBA experimental facility in \gls{trace}}
+    \label{fig:feba_nodalization}
+\end{figure}
 
 \subsection{Base Case Simulation Results}
 
