@@ -2,19 +2,23 @@
 
 \subsection{Sensitivity Analysis}
 
-Sensitivity analysis (SA) is an important methodological step in that context \cite{Trucano2006}.
-SA is the process of investigating the role of input parameters in determining the model output \cite{Iooss2015}. 
+An essential part of model development and assesment is 
+properly describing and understanding the impact of model parameter variations on the model prediction.
+\Gls{sa} is an important methodological step in that context \cite{Trucano2006}.
+\gls{sa} is the process of investigating the role of input parameters in determining the model output \cite{Iooss2015}. 
 It seeks to quantify the importance of each model input parameter on the output.
 
-Various classifications exist in the literature to categorize SA techniques \cite{Frey2002, Ionescu-Bujor2004, Cacuci2004, Saltelli2008, Iooss2015}.
+Various classifications exist in the literature to categorize \gls{sa} techniques \cite{Frey2002, Ionescu-Bujor2004, Cacuci2004, Saltelli2008, Iooss2015}.
 In the review by Ionescu-Bujor and Cacuci \cite{Ionescu-Bujor2004, Cacuci2004}, 
-SA techniques are classified with respect to their scope (local vs. global) and to their framework (deterministic vs. statistical).
-In the review of SA methods by Iooss and Lemaître \cite{Iooss2015}, 
+\gls{sa} techniques are classified with respect to their scope (local vs. global) and to their framework (deterministic vs. statistical).
+In the review of \gls{sa} methods by Iooss and Lemaître \cite{Iooss2015}, 
 and the work by Saltelli et al. \cite{Saltelli2008} and by Santner et al. \cite{Santner2003}, 
 the statistical framework is implicitly assumed deriving ideas from design of experiment, 
 and the classification is based on the parameter space of interest (local vs. global).
 
+
 Local analysis is based on calculating the effect on the model output of small perturbations around a nominal parameter value. 
+\marginpar{local sensitivity analysis}
 Often the perturbation is done one parameter at a time thus approximating the first-order partial derivative of the model output with respect to the perturbed parameter. 
 The derivative can be computed through efficient adjoint formulation \cite{Cacuci2003,Cacuci2010} capable of handling large number of parameters.
 
@@ -27,6 +31,7 @@ Thus the coefficients can be readily compared over different modeled systems,
 independently of the range of parameters variations.
 
 The global analysis, on the other hand, 
+\marginpar{global sensitivity analysis}
 seeks to explore the input parameters space across its range of variation 
 and then quantify the input parameter importance based on a characterization of the resulting output response surface. 
 In global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, 
@@ -42,6 +47,7 @@ In some cases, different methods can give different and inconsistent parameters 
 Furthermore, the result of the analysis can be highly dependent to the assumed input parameters probability distribution and/or their range of variation \cite{Cacuci2004,Cacuci2010}.
 
 Yet, despite the aforementioned shortcomings, 
+\marginpar{global statistical sensitivity analysis}
 the global statistical framework has three particular attractive features relevant to the present study. 
 First, the statistical method for sensitivity analysis is non-intrusive in the sense that minimal or no modification to the original code is required. 
 In other words, the code can be taken as a black box and the analysis is focused on the input/output relationship \cite{Saltelli2008} of the code. 
@@ -62,6 +68,7 @@ Statistical global sensitivity analysis thus complements the propagation step
 by addressing the follow-up question on the identification of the most important parameters in driving the prediction uncertainty. 
 
 Saltelli et al. \cite{Saltelli2006} emphasized that an analysis using computer simulation 
+\marginpar{choosing model output as the quantity of interest}
 should be focused on the specific question the simulation is required to answer 
 as opposed to the analysis of each and every individual model output. 
 This is done through judicious choice of representative quantity of interest (QoI) 
@@ -71,21 +78,23 @@ In such case, Saltelli et al. \cite{Saltelli2008,Saltelli2004} proposed to deriv
 using a predefined scalar function such as the maximum, the minimum, the average, etc. that fits the initial question.
 
 However, in some cases, the whole course of a transient is of primary interest 
+\marginpar{function as model output}
 such as in assessing the ability of a model to reproduce the overall dynamics of the simulated system. 
 If the attention is focused on the overall change in shape of the time-dependent output (a shift in the Y-axis, a delay, a distortion, etc.), 
 the descriptions provided by the aforementioned scalar functions might be incomplete and overlook important features of the variation. 
 To tackle this problem, Campbell et al. \cite{Campbell2006} proposed to represent the functional (time-dependent) output in a certain basis function expansion 
 and to carry out the sensitivity analysis on the coefficients of the expansion. 
-In accordance to such approach, Functional Data Analysis (FDA) popularized by Ramsay and Silverman \cite{Ramsay2005} can be useful to reduce the high dimensionality of time-dependent output.
+In accordance to such approach, \gls{fda} popularized by Ramsay and Silverman \cite{Ramsay2005} can be useful to reduce the high dimensionality of time-dependent output.
 
 Despite these recent developments, 
+\marginpar{recent development in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
-Notable recent examples related of sensitivity analysis for a time-dependent thermal-hydraulics (TH) problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
+Notable recent examples related of sensitivity analysis for a time-dependent \gls{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
 for reflooding experiment of degraded fuel rods, utilizing adjoint sensitivity method; 
 by Auder et al. \cite{Auder2012} for pressurized thermal shock analysis, 
 utilizing statistical method with emphasis on metamodeling; 
-and by Prošek and Leskovar \cite{Prosek2015} for Large Break Loss-of-Coolant-Accident (LBLOCA) analysis, 
-utilizing Fast Fourier Transform-Based method (FFTBM) and local sensitivity analysis.
+and by Prošek and Leskovar \cite{Prosek2015} for \gls{lbloca} analysis, 
+utilizing \gls{fftbm} and local sensitivity analysis.
 
 \subsection{Statistical Metamodeling}
 
