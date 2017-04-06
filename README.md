@@ -92,7 +92,7 @@ Filewise, a section constitutes the smalles unit.
 6. Method Validation (`wd41-thesis/Chapters/Chapters/6_validation`)
  - Introduction (`./index.tex`)
  - XXX Separate Effect Test Facility (`./validate_setf.tex`)
- - FEBA Model of XXX SETF (`./validate_model.tex`)
+ - TRACE Model of XXX SETF (`./validate_model.tex`)
  - Global Sensitivity Analysis of XXX Model (`./validate_gsa.tex`)
  - Uncertainty Propagation (`./validate_uq.tex`)
  - Chapter Summary (`./chapter_summary.tex`)
