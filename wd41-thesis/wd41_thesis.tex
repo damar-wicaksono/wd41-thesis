@@ -48,8 +48,10 @@
 % Bibliographies
 %*******************************************************
 %\addbibresource{Bibliography.bib}
-\addbibresource{../references/wd41-thesis.bib}
-
+%\addbibresource{../references/wd41-thesis.bib}
+\makeatletter
+\@ifpackageloaded{biblatex}{\addbibresource{../references/wd41-thesis.bib}}{\bibliography{../references/wd41-thesis}}
+\makeatother
 %\addbibresource[label=ownpubs]{AMiede_Publications.bib}
 
 %********************************************************************
