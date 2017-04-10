@@ -17,25 +17,32 @@ The elementary effect of the $d$-th parameter is defined as
 EE_d = \frac{y(x_1, \dots, x_d+\Delta,\dots,x_D) - y(x_1, \dots, x_d,\dots,x_D)}{\Delta}
 \end{equation}
 where $\Delta$, the grid jump, is chosen such that $\mathbf{x} + \Delta$ is still in the specified domain of the parameter space; $\Delta$ is a value in $\{\frac{1}{p-1}, \dots, 1 - \frac{1}{p-1}\}$, 
-where $p$ is the number of levels that partition the model parameter space into a uniform gird of points at which the model can be evaluated. 
+where $p$ is the number of (discretization) levels that partition the model parameter space into a uniform grid of points at which the model can be evaluated. 
 For a given $p$, the grid constructs a finite distribution of $p^{D-1}[p - \Delta(p-1)]$ elementary effects for each input parameter.
 
+The elementary effect distributions for each of the parameters, evaluated across discretized input parameter space, 
+\marginpar{\gls{oat} experimental design}
+provide useful information on the importance of a parameter on the output.
+Unfortunately, an exhaustive evaluation of all elementary effects for a given discretization levels suffers from a curse of dimensionality especially for numerous parameters and/or for reasonably fine discretization level\footnote{for $p = 8$ and $D = 20$ the total number of evaluations for exhaustive computation for $EE$ is $\approx 6 \times 10^17$ for each parameter}.
+Consequently, a class of design of experiment that only change one parameter at a time (\gls{oat}) are devised to estimate the statistics of the distributions.
+  
 The key idea behind the original Morris method is in initiating the model evaluations from various \textit{nominal} points, $\mathbf{x}$,
 \marginpar{trajectory OAT design}
 randomly selected over the grid and then gradually advancing one grid jump, perturbing one parameter at a time.
-The order of perturbation (i.e., which dimension to perturb first) and the direction of the perturbation (i.e., added or subtracted) are also randomized between replication to replication.
-As such, different replication generates different starting nominal point as well as different order and sign, but with with the same size, of perturbation.
-The \gls{oat} computer experimental design added with this requirement is known as the trajectory design \cite{Ruano2012}.
+The order of perturbation (i.e., which dimension to perturb first) and the direction of the perturbation (i.e., whether it is added or subtracted) are also randomized between replication to replication.
+As such, different replication generates different starting nominal point as well as different order and sign (but with with the same size) of perturbation.
+The \gls{oat} computer experimental design complemented with this requirement is known as the trajectory design \cite{Ruano2012}.
 Fig.~\ref{fig:illustrate_oat_design} (left) illustrates a trajectory design in two-dimensional input parameter space discretized in $6$ levels with 4 design replications.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/illustrateOATDesign/illustrateOATDesign.png}
-	\caption[Illustration of One-at-a-Time (OAT) design using trajectory and radial schemes]{Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels. The number of levels is irrelevant for radial design.}\label{fig:illustrate_oat_design}
+	\caption[Illustration of One-at-a-Time (OAT) design using trajectory and radial schemes]{Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels, while the number of levels is irrelevant for radial design. Filled circles are the base/nominal points and crosses are the perturbed levels.}
+	\label{fig:illustrate_oat_design}
 \end{figure}
 
 To remove the requirement to specify a method-specific parameter $p$ (the number of levels),
 \marginpar{radial OAT design}
-Campolongo et al. proposed to use a radial scheme coupled with Sobol' quasirandom sequence \cite{Campolongo2011}.
+Campolongo et al.\cite{Campolongo2011} proposed to use a radial scheme coupled with Sobol' quasirandom sequence.
 In a single replication of this particular OAT design, 
 each parameter is perturbed relative to a \textit{base/nominal} point 
 which is not required to be located in a predetermined grid.
