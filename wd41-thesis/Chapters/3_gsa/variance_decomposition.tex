@@ -1,7 +1,36 @@
 \section{Variance Decomposition}\label{sec:sa_variance_decomposition}
-Illo principalmente su nos. Non message \emph{occidental} angloromanic
-da. Debitas effortio simplificate sia se, auxiliar summarios da que,
-se avantiate publicationes via. Pan in terra summarios, capital
-interlingua se que. Al via multo esser specimen, campo responder que
-da. Le usate medical addresses pro, europa origine sanctificate nos
-se.
+
+Variance-based methods for global sensitivity analysis use variance as the basis to define a measure of input parameter influence on the overall output variation \cite{Cacuci2004}.
+In a statistical framework of sensitivity and uncertainty analysis, 
+this choice is natural because variance (or standard deviation, a related concept) is often used as a measure of dispersion or variability in the model prediction \cite{Saltelli2008}.
+A measure of such dispersion, in turn, indicates the precision of the prediction due to variations in the input parameters.
+
+This section, a method to decompose the output variance into the contributions from the input variances is presented.
+Afterward, two sensitivity measures based on the decomposition and a method for their estimation are introduced.
+
+\subsection{High-Dimensional Model Representation}\label{sec:sa_hdmr}
+
+Consider once more a mathematical model $f: \mathbf{x} \in [0,1]^D \mapsto y = f(\mathbf{x}) \in \mathbb{R}$.
+The high-dimensional model representation (HDMR) if $f(\mathbf{x})$ is a linear combination of functions with increasing dimensionality \cite{Li2001},
+\begin{equation}
+	\begin{split}
+		f(\mathbf{x}) = f_o & + \sum_{d=1,2,...D} f_d(x_d) + \sum_{1\leq d < e \leq D} f_{d,e} (x_d, x_e) + \cdots  \\
+	                      & + f_{1,2,\cdots,D} (x_1, x_2, \cdots, x_D)
+	\end{split}
+\label{eq:sa_hdmr}
+\end{equation}
+where $f_o$ is a constant. 
+The representation in Eq.~\ref{eq:sa_hdmr} is unique given the following condition \cite{Sobol2001}:
+\begin{equation}
+	\int_{0}^{1} 
+\label{eq:sa_unicity}
+\end{equation}
+
+Assume now that $\mathbf{X}$ is a random vector of independent and uniform random variables over a unit hypercube
+$\{\Omega = \mathbf{x} | 0 \leq x_i  \leq 1; 1 = 1,\cdots D\}$ such that
+\begin{equation}
+	Y = f(\mathbf{X})
+\label{eq:sa_random_function}
+\end{equation}
+where $Y$ is a random variable, resulting from the transformation of random vector $\mathbf{X}$ by function $f$.
+Using Eq.~\ref{eq:sa_unicity} to express each term in Eq.~\ref{eq:sa_hdmr}, it follows that
