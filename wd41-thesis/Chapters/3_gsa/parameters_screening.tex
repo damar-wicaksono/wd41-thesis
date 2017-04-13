@@ -63,7 +63,7 @@ An illustration of a radial design in two-dimensional input space with $4$ base 
 Consider now that an $N_R$ number of elementary effects associated with the $d$-th parameter have been sampled from the finite distribution of $EE_d$.
 The statistical summary of sampled $EE_d$ based on a given number of OAT design replications generated using either the trajectory or the radial design can be calculated.
 The first is the arithmetic mean defined as,
-\marginpar{the mean of the elementary effects}
+\marginpar{the mean of the (sampled) elementary effects}
 \begin{equation}
 	\mu_d = \frac{1}{N_R} \sum_{r = 1}^{R} EE^r_d
 	\label{eq:sa_morris_mu}
@@ -71,8 +71,8 @@ The first is the arithmetic mean defined as,
 where $EE^r_d$ is the elementary effect of the $d$-th parameter of the $r$-th sampled block.
 The mean gives the global influence of the $d$-th parameter on the chosen output $y$.
 
-The second statistical summary of interest is the standard deviation of the elementary effects associated with the $d$-th parameter from all the replications,
-\marginpar{the standard deviation of the elementary effects}
+The second statistical summary of interest is the standard deviation of the (sampled) elementary effects associated with the $d$-th parameter from all the replications,
+\marginpar{the standard deviation of the (sampled) elementary effects}
 \begin{equation}
 	\mu_d = \sqrt{\frac{1}{N_R} \sum_{r = 1}^{R} (EE^r_d - \mu_d)^2}
 	\label{eq:sa_morris_sd}
@@ -82,9 +82,9 @@ The standard deviation gives an indication of the present of nonlinearity and/or
 As a change in a parameter value might have a changing sign on the change of the output,
 a cancellation effect on the estimation of $mu_d$ might occur 
 (as can be the case for a non-monotonic function).
-Campolongo et al. \cite{Campolongo2011} proposed the use of the mean of absolute elementary effect to circumvent this issue.
+Campolongo et al. \cite{Campolongo2011} proposed to take the absolute value of the sampled elementary effects before taking the mean to circumvent this issue.
 It is defined as,
-\marginpar{the mean of the absolute elementary effects}
+\marginpar{the mean of the (sampled) absolute elementary effects}
 \begin{equation}
 	\mu^*_d = \frac{1}{N_R} \sum_{r = 1}^{R} |EE^r_d|
 	\label{eq:sa_morris_mustar}
