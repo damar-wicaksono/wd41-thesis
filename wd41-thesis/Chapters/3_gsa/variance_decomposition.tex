@@ -34,3 +34,15 @@ $\{\Omega = \mathbf{x} | 0 \leq x_i  \leq 1; 1 = 1,\cdots D\}$ such that
 \end{equation}
 where $Y$ is a random variable, resulting from the transformation of random vector $\mathbf{X}$ by function $f$.
 Using Eq.~\ref{eq:sa_unicity} to express each term in Eq.~\ref{eq:sa_hdmr}, it follows that
+\begin{equation}
+	\begin{split}
+		f_o & = \mathbb{E}[Y] \\
+	  f_d(x_d) & = \mathbb{E}_{\sim d}[Y|X_d] 
+	\end{split}
+\label{eq:sa_conditional_expectation}
+\end{equation}
+
+\subsection{Sobol' Sensitivity Indices}\label{sub:sa_sobol_indices}
+
+Division by $\mathbb{V}[Y]$ aptly normalizes Eq.~:
+
