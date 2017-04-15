@@ -37,9 +37,25 @@ Using Eq.~\ref{eq:sa_unicity} to express each term in Eq.~\ref{eq:sa_hdmr}, it f
 \begin{equation}
 	\begin{split}
 		f_o & = \mathbb{E}[Y] \\
-	  f_d(x_d) & = \mathbb{E}_{\sim d}[Y|X_d] 
+	  f_d(x_d) & = \mathbb{E}_{\sim d}[Y|X_d] \\
+    f_{d,e}(x_d,x_e) & = \mathbb{E}_{\sim d,e} [Y|X_d, X_e] - \mathbb{E}_{\sim d}[Y|X_d] - \mathbb{E}_{\sim e}[Y|X_e] - \mathbb{E}[Y] 
 	\end{split}
 \label{eq:sa_conditional_expectation}
+\end{equation}
+
+The same follows for higher-order terms in the decomposition. 
+In Eq.~\ref{eq:sa_conditional_expectation}, $\mathbb{E}_{\sim e} [Y|X_e]$ corresponds to the conditional expectation operator,
+and the $\sim\circ$ in the subscript means that the integration over the parameter space is carried out over all parameters except the specified parameter in the subscript.
+For instance, $\mathbb{E}_{\sim 1} [Y|X_1]$ refers to the conditional mean of $Y$ given $X_1$, and the integration is carried out for all possible values of parameters in $\mathbf{x}$ except $x_1$.
+Note that because $X_1$ is a random variable, the expectation conditioned on it is also a random variable.
+
+Assuming that $f$ is a square integrable function, applying the variance operator on $Y$ results is
+\begin{equation}
+	\begin{split}
+		\mathbb{V}[Y] = \sum_{d=1}^{D} \mathbb{V}[f_d (x_D)] & + \sum_{1 \leq d < e \leq D} \mathbb{V} [f_{d,e} (x_d, x_e)] + \cdots \\
+	                                                       & + \mathbb{V} [f_{1,2,\cdots,D} (x_1, x_2, \cdots, x_D)]
+		\end{split}
+\label{eq:sa_variance_decomposition}
 \end{equation}
 
 \subsection{Sobol' Sensitivity Indices}\label{sub:sa_sobol_indices}
