@@ -75,18 +75,26 @@ Finally, the main-effect sensitivity index can be written as an integral as foll
 \begin{equation}
   \begin{split}
     S_d & = \frac{\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]]}{\mathbb{V}[Y]} \\
-        & = \frac{\int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x}_{\sim d} - \left(\int f(\mathbf{x}) d\mathbf{x}\right)^2}{\int f(\mathbf{x})^2 d\mathbf{x} - \left( \int f(\mathbf{x}) d\mathbf{x}\right)^2}
+        & = \frac{\int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x} - \left(\int f(\mathbf{x}) d\mathbf{x}\right)^2}{\int f(\mathbf{x})^2 d\mathbf{x} - \left( \int f(\mathbf{x}) d\mathbf{x}\right)^2}
   \end{split}
 \label{eq:ss_main_effect_integral}
 \end{equation}
 The integral form given above dispenses with the nested structure of multiple integrals in the original definition of main-effect index.
 The multidimensional integration is over $2 \times D - 1$ dimensions 
 and it is the basis of estimating sensitivity index using \gls{mc} simulation in this thesis, hereinafter referred to as the Sobol'-Saltelli method.
-The same procedure applies to derive the total effect-index.
+The same procedure applies to derive the total effect-index which yields,
+\begin{equation}
+  \begin{split}
+    ST_d & = \frac{\mathbb{E}_{\sim d}[\mathbb{V}_{d}[Y|\mathbf{X}_{\sim d}]]}{\mathbb{V}[Y]} \\
+        & = \frac{\int f^2(\mathbf{x}) d\mathbf{x} - \int \int f(\mathbf{x}_{\sim d}, x^{\prime}_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{d} d\mathbf{x}}{\int f(\mathbf{x})^2 d\mathbf{x} - \left( \int f(\mathbf{x}) d\mathbf{x}\right)^2}
+  \end{split}
+\label{eq:ss_total_effect_integral}
+\end{equation}
 
-For $N$ number of \gls{mc} samples and $D$ number of model parameters, the \gls{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996}.
+As it was for the Morris method, an implementation of the Sobol'-Saltelli method is also part of \texttt{gsa-module} python3 package (see Appendix~\ref{app:gsa_module} for detail). 
+For $N$ number of \gls{mc} samples and $D$ number of model parameters, the \gls{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996} described in the following.
 
-First, generate two $N \times D$ independent random samples from a uniform independent distribution in $D$-dimension, $[0,1]^D$:
+\textsc{First}, generate two $N \times D$ independent random samples from a uniform independent distribution in $D$-dimension, $[0,1]^D$:
 \begin{equation}
 A = 
 \begin{pmatrix}
@@ -103,7 +111,7 @@ b_{N1}  & \cdots  & b_{ND}\\
 \label{eq:ss_two_samples}
 \end{equation}
 
-Second, construct $D$ additional design of experiment matrices where each matrix is matrix $A$ with the $d$-th column substituted by the $d$-th column of matrix $B$:\begin{equation}
+\textsc{Second}, construct $D$ additional design of experiment matrices where each matrix is matrix $A$ with the $d$-th column substituted by the $d$-th column of matrix $B$:\begin{equation}
   \begin{split}
   & A_{B}^1 = 
   \begin{pmatrix}
@@ -127,11 +135,11 @@ Second, construct $D$ additional design of experiment matrices where each matrix
 \label{eq:ss_sampling_resampling}
 \end{equation}
 
-Third, rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
+\textsc{Third}, rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
 
-Fourth, evaluate the model multiple times using input vectors that correspond to each row of $A$, $B$, and all the $A_B^d$.
+\textsc{Fourth}, evaluate the model multiple times using input vectors that correspond to each row of $A$, $B$, and all the $A_B^d$.
 
-Fifth, extract the \gls{qoi}s from all the outputs and recast them as vectors.
+\textsc{Fifth} and finally, extract the \gls{qoi}s from all the outputs and recast them as vectors.
 The main-effect and total-effect indices are then estimated using the estimators described below.
 
 For the main-effect sensitivity index, two estimators are considered.
@@ -172,9 +180,12 @@ The estimator reads
 where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator as prescribed in Table~\ref{tab:ss_main_effect_estimator}.
 
 The computational cost associated with the estimation of all the main-effect and total-effect indices is $N \times (D + 2)$ code runs,
-\marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
+\marginpar{computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
 where $N$ is the number of \gls{mc} samples and $D$ is the number of parameters.
-As a comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
+Compare this to the cost of brute force Monte Carlo of $2 \times D \times N^2$ to estimate all the main-effect and total-effect sensitivity indices. 
+
+As an additional comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
+\marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
 where $N_R$ is the number of OAT design replications.
 In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
 determines the precision of the estimates.
