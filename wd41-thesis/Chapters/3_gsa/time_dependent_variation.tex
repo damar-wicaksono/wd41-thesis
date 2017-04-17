@@ -28,3 +28,22 @@ This projection can be done through the functional principal component (fPC) ana
 \end{equation}
 where $\rho_j$ is a series of ordered eigenvalues of decreasing values; 
 $\xi_j(t)$ is the corresponding series of orthogonal eigenfunctions (or the fPC).
+
+The transformation of the covariance function into pairs of eigenvalues and eigenfunctions also allows each element of the original dataset $\{y_n(t)\}$ to be represented as a series that is optimal in the root-mean-square-of-error sense:
+\begin{equation}
+  y_n(t) = \bar{y}(t) + \sum_{j=1}^{+\infty} \theta_{j,n} \cdot \xi_j (t); \quad n = 1, 2, \cdots, N
+\label{eq:pod}
+\end{equation}
+were the fPC score $\theta_{j,n}$ associated with each realized function is defined by the orthogonality condition
+\begin{equation}
+  \theta_{j,n} = \int_(t_a)^(t_b) \left[y_n(t) - \bar{y}(y)\right] \cdot \xi_j (t) dt
+\label{eq:pod_orthogonality}
+\end{equation}
+
+Eqs.~(\ref{eq:pod}) and (\ref{eq:pod_orthogonality}) imply that across realizations in the samples, 
+$\{y_n(t)\}$ can represented linearly using a common mean function and sums of deviation terms from the mean.
+The deviation terms consist of a set of common eigenfunctions and a set of fPC scores.
+As such, the random character of each realization is left to the score associated with each component and each realization.
+Put differently, the eigenfunctions described the (common) modes of variations, 
+while the scores quantify the strength of a particular mode~\cite{Wang2012}.
+These scores will be used as the \gls{qoi} in the subsequent global \gls{sa}. 
