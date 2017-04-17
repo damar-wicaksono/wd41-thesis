@@ -1,8 +1,21 @@
 \section{Implementation}\label{sec:sa_implementation}
 
-\subsection{The Morris Method}
+\subsection{The Morris Method}\label{sub:sa_morris}
 
-\subsection{The Sobol'-Saltelli Method}
+The implementation of the Morris method follows four sequential steps. 
+First, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well
+
+Second, each point of each of the replications is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
+
+Third, the model is evaluated for each point in the design matrix. The total number of model evaluations for a given design matrix of size $N_R$ is $N_R \times (D + 1)$.
+
+Fourth and finally, the $N_R$ elementary effects $EE_d$ for each parameter and each trajectory are computed for a selected \gls{qoi}.
+Their statistical summaries ($mu_d$, $\mu_d^*$, $\sigma_d$) are then computed, 
+and the ranking of the parameters can be constructed based on $\mu_d^*$ for a selected \gls{qoi}.
+The $\mu_d^*$ can be directly used to rank the parameters to systematically identify 
+and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
+
+\subsection{The Sobol'-Saltelli Method}\label{sub:sa_sobol_saltelli}
 
 In principle, the estimation of the Sobol' indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls{mc} simulation.
 \marginpar{brute force \\ Monte Carlo}
@@ -67,7 +80,8 @@ Finally, the main-effect sensitivity index can be written as an integral as foll
 \label{eq:ss_main_effect_integral}
 \end{equation}
 The integral form given above dispenses with the nested structure of multiple integrals in the original definition of main-effect index.
-It is the basis of estimating sensitivity index using \gls{mc} simulation in this thesis, hereinafter referred to as the Sobol'-Saltelli method.
+The multidimensional integration is over $2 \times D - 1$ dimensions 
+and it is the basis of estimating sensitivity index using \gls{mc} simulation in this thesis, hereinafter referred to as the Sobol'-Saltelli method.
 The same procedure applies to derive the total effect-index.
 
 For $N$ number of \gls{mc} samples and $D$ number of model parameters, the \gls{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996}.
@@ -110,7 +124,7 @@ Second, construct $D$ additional design of experiment matrices where each matrix
     a_{N1}  & \cdots  & b_{ND}\\
   \end{pmatrix}
   \end{split}
-\label{eq:ss_two_samples}
+\label{eq:ss_sampling_resampling}
 \end{equation}
 
 Third, rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
@@ -119,6 +133,21 @@ Fourth, evaluate the model multiple times using input vectors that correspond to
 
 Fifth, extract the \gls{qoi}s from all the outputs and recast them as vectors.
 The main-effect and total-effect indices are then estimated using the estimators described below.
+
+For the main-effect sensitivity index, two estimators are considered.
+One is proposed by Saltelli~\cite{Saltelli2002}, and the other, as an alternative, is proposed by Janon et al~\cite{Janon2014}.
+The latter proved to be more efficient, especially for a large variation around a parameter estimate~\cite{Iooss2015,Janon2014}.
+
+The first term in the numerator of Eq.~(\ref{eq:ss_main_effect_integral}) is the same for both estimators and is given by
+\begin{equation}
+  \int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x}_{\sim d} \approx \frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n
+\label{eq:ss_first_term}
+\end{equation}
+where the subscript $n$ corresponds to the row of the sampled model parameters 
+such that $f(B)_n$ is the model output evaluated using inputs taken from the $n$-th row of matrix $B$ 
+and $f(A_B^d)_n$ is the model output evaluated using inputs taken from the $n$-th row of matrix $A_B^K$.
+The \gls{mc} estimator for the second term in the numerator and for the denominator differ for the two considered estimators.
+They are given in Table~\ref{tab:ss_main_effect_estimator}.
 
 \begin{table}[h]
 	\myfloatalign
@@ -134,10 +163,18 @@ The main-effect and total-effect indices are then estimated using the estimators
 	\end{tabularx}
 \end{table}
 
-The computational cost associated with the estimation of all the main-effect and total-effect indices is $N \times (K + 2)$ code runs,
+To estimate the total-effect sensitivity indices, the Jansen estimator~\cite{Jansen1999} is recommended in~\cite{Saltelli2010a}.
+The estimator reads
+\begin{equation}
+  \hat{ST}_d = \frac{\frac{1}{2N}\sum_{n=1}^{N}\left(f(A)_n - f(A_B^d)_n\right)^2}{\mathbb{V}[Y]}
+\label{eq:ss_jansen_estimator}
+\end{equation}
+where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator as prescribed in Table~\ref{tab:ss_main_effect_estimator}.
+
+The computational cost associated with the estimation of all the main-effect and total-effect indices is $N \times (D + 2)$ code runs,
 \marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
-where $N$ is the number of \gls{mc} samples and $K$ is the number of parameters.
-As a comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (K + 1)$ code runs,
+where $N$ is the number of \gls{mc} samples and $D$ is the number of parameters.
+As a comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
 where $N_R$ is the number of OAT design replications.
 In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
 determines the precision of the estimates.
