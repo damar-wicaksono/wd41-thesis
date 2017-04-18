@@ -8,6 +8,27 @@ These scalars, in turn, can be used as the \gls{qoi} for \gls{sa}.
 
 \subsection{Functional Output Representation}\label{sub:sa_spline}
 
+The assumption of continuity within a practically discrete data set (such as the numerical code output of Eq.~(\ref{eq:discrete_time}) is made explicit through a functional representation.
+The recommended representation is through a linear combinations of basis functions \cite{Ramsay2005}.
+This thesis adopts the B-spline basis function \cite{Gillies2010} expansion because of its flexibility \cite{Eilers1996,Eilers2010} 
+and the wide availability of its implementation in open numerical libraries \cite{RCT2017}.
+
+Within this framework, a function can be written using basis function expansion as,
+\begin{equation}
+	y_i (t) = \sum_{k = 1}^{K} c_{ik} \cdot \phi_k (t); \quad i = 1, 2, \cdots N
+\label{eq:basis_function_expansion}
+\end{equation}
+where $K$ indicates the number of basis functions. $\phi_k (t)$ is the $k$-th basis function, 
+and $c_{ik}$ is the basis coefficient.
+The latter is fitted to the data set to construct curve $i$ with or without smoothing (i.e., interpolating condition vs. penalized ).
+
+A B-spline basis function consists of polynomial pieces connected at a point in the domain called \emph{knot}.
+The B-spline basis function based on a specified set of knots $\{t_k; k = 1, 2, \cdots, K\}$ can be recursively defined as follows:
+
+where $B_k^p (t)$ denotes the $k$-th B-spline of degree $p$.
+
+Figure
+
 \subsection{Curve Registration by Landmarks}\label{sub:sa_registration}
 
 \subsection{Functional Principal Component Analysis}\label{sub:sa_fpca}
