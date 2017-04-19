@@ -22,14 +22,57 @@ where $K$ indicates the number of basis functions. $\phi_k (t)$ is the $k$-th ba
 and $c_{ik}$ is the basis coefficient.
 The latter is fitted to the data set to construct curve $i$ with or without smoothing (i.e., interpolating condition vs. penalized ).
 
-A B-spline basis function consists of polynomial pieces connected at a point in the domain called \emph{knot}.
-The B-spline basis function based on a specified set of knots $\{t_k; k = 1, 2, \cdots, K\}$ can be recursively defined as follows:
+A B-spline basis function is a basis system constructed using piecewise polynomial (\emph{spline}) connected at select points in the domain called \emph{knots}.
+Let $\boldsymbol{\tau}=\{\tau_l; l = 0,1,\cdots, L\}$ be a sequence of knots, non-decreasing numbers that divide the function domain into $L$ sub-intervals.
+Within each of these sub-intervals, piecewise polynomial of degree $p$ is defined.
+At the interconnection, adjacent polynomials are continuous with derivatives up to $p-1$ match up.
 
+The basis functions in the B-spline system are determined by the degree of the polynomial $p$ and the knot sequence sequence $\boldsymbol{\tau}=\{\tau_l; l = 0,1,\cdots, L\}$.
+At the left and right boundaries, several spline basis functions are defined with decreasing continuity up to being discontinuous in the either end.
+To satisfy these condition, the endpoints are repeated and augmented into the knot sequence such that
+\begin{equation}
+	\tau_{-(p-2)} = \cdots = \tau_{0} \leq \tau_{1} \leq \cdots \leq \tau_{L} = \cdots = \tau_{L+(p-2)} 
+\label{eq:augmented_knots}
+\end{equation}
+As such, the augmented knot becomes $\boldsymbol{\tau}=\{\tau_l; l = 0,1,\cdots, L + 2p\}$.
+B-spline basis functions of degree $p$ can then be defined recursively on the augmented knot sequence using de Boor - Cox formula as follows, 
+\begin{equation}
+	\begin{split}
+		B^0_k = 
+			\begin{cases}
+				1, & \tau_k \leq t < \tau_{k+1} \\
+			0, & \text{otherwise}
+	\end{cases} \\
+	B^p_k =  \alpha^p_k (t) B^{p-1}_k + \left[1 - \alpha^p_{k+1} (t)\right] B^{p-1}_{k+1} \\
+	\alpha^p_k (t) =
+	\begin{cases}
+				\frac{t - \tau_i}{\tau_{i+p}-\tau_i}, & \tau_{i+p} \neq \tau_i \\
+			  0, & \text{otherwise}
+	\end{cases}
+	\end{split} 
+\label{eq:}
+\end{equation}
 where $B_k^p (t)$ denotes the $k$-th B-spline of degree $p$.
+The degree, $p$, and the number of interior knots, $L-1$, (that is excluding the end points) determine the number of spline basis functions according to $K = p + L$.
 
-Figure
+Fig.~\ref{fig:b_spline} illustrates all the fourteen spline basis functions of degree $3$ over $10$ uniform interior knots defined in $[0,1]$.
+The three leftmost and three rightmost basis functions are less smooth compared to the other (twice continuously differentiable) eight basis functions in the center. 
+From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
+\begin{figure}[bth]
+	\centering
+	\includegraphics[width=1.0\textwidth]{../figures/r-figures/bSpline.png}
+	\caption[Spline basis functions of order $4$]{The fourteen spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into 11 sub-intervals}
+	\label{fig:b_spline}
+\end{figure}
 
 \subsection{Curve Registration by Landmarks}\label{sub:sa_registration}
+
+Two types of variations are often simultaneously present in a functional dataset: the variation in magnitude (\emph{vertical} variation) and the variation in phase (\emph{horizontal} variation).
+The simultaneous presence of these two types of variations makes even the definition of a mean function difficult \cite{Kneip1992}. (see illustration)
+To address this issue, the two types of variation are first separated through a registration procedure.
+The procedure transforms the time argument using a warping function such that there is less phase variation in the dataset.
+In this work, the landmark type registration type is employed because the main features of the function of interest (i.e., reflood curve) are readily identifiable.
+In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time.
 
 \subsection{Functional Principal Component Analysis}\label{sub:sa_fpca}
 
