@@ -1,15 +1,25 @@
 \section{Implementation}\label{sec:sa_implementation}
 
+An implementation of the Morris method and a Monte Carlo method to estimate the main- and total-effect sensitivity indices has been developed using the Python programming language 
+for the purpose of this work, to allow for well-controlled parametric and convergence studies.
+The implementation follows a black box approach of sensitivity analysis. 
+It deals with the generation of design of experiment (which is used to evaluate the model or code) and the post-processing of output to obtain the select measures of sensitivity.
+In the following, the basic procedures that underlie the implementation of both methods are laid out.
+More details on the programming aspects of the implementation (the so-called \texttt{gsa-module}) can be found in Appendix~\ref{app:gsa_module}.
+
 \subsection{The Morris Method}\label{sub:sa_morris}
 
 The implementation of the Morris method follows four sequential steps. 
-First, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well
+\textsc{First}, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal (base) points as well as the perturbed points for each parameter.
+A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
+In each of the perturbed points, only one parameter change its value relative to the base.
+Different replication yields different nominal point and the associated perturbed points.
 
-Second, each point of each of the replications is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
+\textsc{Second}, each point in the design matrix is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
 
-Third, the model is evaluated for each point in the design matrix. The total number of model evaluations for a given design matrix of size $N_R$ is $N_R \times (D + 1)$.
+\textsc{Third}, the model is evaluated for each (rescaled) point in the design matrix. The total number of model evaluations for a given design matrix of size $N_R$ is $N_R \times (D + 1)$.
 
-Fourth and finally, the $N_R$ elementary effects $EE_d$ for each parameter and each trajectory are computed for a selected \gls{qoi}.
+\textsc{Fourth} and finally, the $N_R$ elementary effects $EE_d$ for each parameter and each trajectory are computed for a selected \gls{qoi}.
 Their statistical summaries ($mu_d$, $\mu_d^*$, $\sigma_d$) are then computed, 
 and the ranking of the parameters can be constructed based on $\mu_d^*$ for a selected \gls{qoi}.
 The $\mu_d^*$ can be directly used to rank the parameters to systematically identify 
@@ -163,8 +173,8 @@ They are given in Table~\ref{tab:ss_main_effect_estimator}.
 	\label{tab:ss_main_effect_estimator}
 	\begin{tabularx}{\textwidth}{cll} \toprule
 		\tableheadline{Estimator}     & \tableheadline{$\mathbb{E}^2[Y] = \left( \int f d\mathbf{x}\right)^2$} & \tableheadline{$\mathbb{V}[Y] = \int f^2 d\mathbf{x} - \left( \int f d\mathbf{x}\right)^2$} \\ \midrule 
-		Saltelli             & $\frac{1}{N} \sum f(A)_n \cdot f(B)_n$  & $\frac{1}{N}\sum f(A)_n^2 - \left(\frac{1}{N}\sum f(A)_n\right)^2$ \\
-    \cite{Saltelli2002}  &                                         & \\
+		Saltelli             & $\frac{1}{N} \sum f(A)_n \cdot f(B)_n$  & $\frac{1}{N}\sum f(A)_n^2$  \\
+    \cite{Saltelli2002}  &                                         & $-\left(\frac{1}{N}\sum f(A)_n\right)^2$\\
 		Janon et al.         & $\left(\frac{1}{N} \sum \frac{f(B)_n + f(A_B^d)_n}{2}\right)^2$  & $\frac{1}{N} \sum \frac{f(B)_n^2 + f(A_B^d)_n^2}{2}$ \\
     \cite{Janon2014}     &                                                                  & $-\left(\frac{1}{N} \sum \frac{f(B)_n^2 + f(A_B^d)_n^2}{2}\right)^2$ \\
 		\bottomrule
