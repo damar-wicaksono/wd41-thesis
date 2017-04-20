@@ -60,10 +60,10 @@ for (i in 1:11)
     abline(v=knots_interior, lty = 5)
 }
 
-png("bSpline.png", width=22, height=11, units="cm", res=600, bg = "transparent")
-par(mfrow=c(1, 2), mar=c(4,4,1,1) + 0.1, las = 1, oma = c(0,0,0,0) + 0.1)
+png("bSpline.png", width=11, height=7.5, units="cm", res=600)
+par(mfrow=c(1, 1), mar=c(4,4,1,1) + 0.1, las = 1, oma = c(0,0,0,0) + 0.1)
 # Set up knots
-knots_interior <- seq(0,1,length.out = 11)
+knots_interior <- seq(0,1,length.out = 12)
 knots <- c(0, 0, 0, knots_interior, 1.0, 1.0, 1.0)
 x_tests <- c()
 for (j in seq(0,0.999,length.out = 1000)) {
@@ -75,18 +75,20 @@ plot(seq(0,1,length.out = 1000), x_tests, type = "l",
      xlim = c(0,1),
      ylim = c(0,1))
 title(xlab = "t", mgp = c(1.5,1,0))
-for (i in 2:13) {
+for (i in 2:14) {
     x_tests <- c()
     for (j in seq(0,0.999,length.out = 1000)) {
         x_tests <- c(x_tests, spline_function(j, knots, i, 3))
     }
     lines(seq(0,1,length.out = 1000), x_tests)    
 }
-for (i in 1:11)
+for (i in 2:11)
 {
-    abline(v=knots_interior, lty = 5)
+    abline(v=knots_interior[i], lty = 5, lwd = 0.5)
 }
-
+abline(v=knots_interior[1], lty = 5, lwd = 1)
+abline(v=knots_interior[12], lty = 5, lwd = 1)
+dev.off()
 # Set up knots
 knots_interior <-  c(seq(0, 0.5, length.out = 5), 
                      seq(0.6, 1.0, length.out = 8))
