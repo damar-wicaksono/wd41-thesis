@@ -62,12 +62,12 @@ Filewise, a section constitutes the smalles unit.
  - FEBA Model in TRACE (`./feba_trace.tex`)
  - Chapter Summary (`./chapter_summary.tex`)
 3. Sensitivity Analysis (`wd41-thesis/Chapters/Chapters/3_gsa`)
- - Introduction (`./index.tex`)
- - Statistical Framework (`./statistical_framework.tex`)
- - Describing Time-Dependent Variation (`./time_dependent_variation.tex`)
- - Parameter Screening (`./parameters_screening.tex`)
- - Variance Decomposition (`./variance_decomposition.tex`)
- - Implementation (`./implementation.tex`)
+ - Introduction (`./index.tex`) **DRAFT**
+ - Statistical Framework (`./statistical_framework.tex`) **DRAFT**
+ - Describing Time-Dependent Variation (`./time_dependent_variation.tex`) **DRAFT**
+ - Parameter Screening (`./parameters_screening.tex`) **DRAFT**
+ - Variance Decomposition (`./variance_decomposition.tex`) **DRAFT**
+ - Implementation (`./implementation.tex`) **DRAFT**
  - Application to FEBA (`./application_to_feba.tex`)
  - Chapter Summary (`./chapter_summary.tex`)
 4. Gaussian Process Metamodeling (`wd41-thesis/Chapters/Chapters/4_gp_regression`)
@@ -104,7 +104,7 @@ Filewise, a section constitutes the smalles unit.
 8. Appendices (`wd41-thesis/Appendices`)
  - Design of Computer Experiments (`./design_of_experiment.tex`)
  - `gsa-module` (`./gsa_module.tex`)
-- `trace-simexp` (`./trace_simexp.tex`)
+ - `trace-simexp` (`./trace_simexp.tex`)
  - `DiceKriging` (`./dice_kriging.tex`)
  - Some useful mathematical results and recipes (`./math_results.tex`)
 9. Front and Backmatter (`wd41-thesis/FrontBackMatter`)
