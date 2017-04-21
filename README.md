@@ -43,7 +43,7 @@ Each Chapter is separated into its own folder inside `wd41-thesis/Chapters`.
 Within this folder the section is written in separate file as well, 
 but all  Chapter folders have a file called `index.tex` 
 which contains the chapter introduction and input statement to include files of sections.
-Filewise, a section constitutes the smalles unit.
+Filewise, a section constitutes the smallest unit.
 
 1. Introduction (`wd41-thesis/Chapters/Chapters/1_introduction`)
  - Introduction (`./index.tex`)
