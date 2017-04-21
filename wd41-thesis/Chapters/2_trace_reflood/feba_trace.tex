@@ -8,7 +8,7 @@ a \textsc{BREAK} component (outlet pressure boundary condition),
 two \textsc{HTSTR} components (heater rods simulator and non-powered test section housing),
 and a \textsc{POWER} components (imposed electrical boundary condition).
 
-The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315$ $[mm]$.
+The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315 \ [mm]$.
 Both \textsc{HTSTR} components were also nodalized into the sample number of coarse axial conduction nodes.
 However, since a large axial temperature gradient is expected in a reflood transient,
 the fine-mesh reflood flag in \gls{trace} was enabled.
@@ -23,27 +23,27 @@ and the nodalization of the model is illustrated in Fig.~\ref{fig:feba_nodalizat
     \caption{Geometrical parameters and experimental conditions for the \Glsentryshort{feba} model in \Glsentryshort{trace}}
     \label{tab:feba_trace}
     \begin{tabularx}{\textwidth}{Xcc} \toprule
-        \tableheadline{Parameter}		& \tableheadline{Unit} & \tableheadline{Value} \\ \midrule
+        \tableheadline{Parameter}		  & \tableheadline{Unit} & \tableheadline{Value} \\ \midrule
         Test section total length 		& $[m]$		& $4.114$ \\
-        Total heated length 			& $[m]$		& $3.9$ \\
-        Flow area						& $[m^2]$	& $3.901 \times 10^{-3}$\\
-        Hydraulic diameter				& $[mm]$	& $13.45$\\
+        Total heated length 			    & $[m]$		& $3.9$ \\
+        Flow area						          & $[m^2]$	& $3.901 \times 10^{-3}$\\
+        Hydraulic diameter				    & $[mm]$	& $13.45$\\
         Rectangular housing width   	& $[mm]$	& $78.55$\\
         Rectangular housing thickness	& $[mm]$	& $6.5$\\
-        Number of rods					& $[-]$		& $25$\\
-        Rod outer diameter				& $[mm]$	& $10.75$\\
-        Pitch-to-Diameter ratio			& $[-]$		& $1.33$\\
-        Number of spacer grids			& $[-]$		& $7$\\
+        Number of rods					      & $[-]$		& $25$\\
+        Rod outer diameter				    & $[mm]$	& $10.75$\\
+        Pitch-to-Diameter ratio			  & $[-]$		& $1.33$\\
+        Number of spacer grids			  & $[-]$		& $7$\\
         Spacer grid flow obstruction	& $[\%]$	& $20$\\
         Spacer grid axial locations		& $[m]$		& $7$\\
         \midrule
-        Number of hydraulic nodes		& $[-]$		& $28$ (varying length)\\
-        \multirow{2}{*}{Number of axial nodes}   	& \multirow{2}{*}{$[-]$}		& $28$ (coarse)\\
-                                		&   		& $142$ (fine)\\
+        Number of hydraulic nodes		  & $[-]$		& $28$ (varying length)\\
+        \multirow{2}{*}{Number of axial nodes} 	& \multirow{2}{*}{$[-]$}		& $28$ (coarse)\\
+                                		  &   		  & $142$ (fine)\\
         \midrule
-        Inlet liquid temperature        & $[K]$		&  $312$ \\
-        Inlet flow velocity				& $[cm\cdot s^{-1}]$ & see Table~\ref{tab:feba_exp} \\
-        System backpressure             & $[bar]$   & see Table~\ref{tab:feba_exp} \\
+        Inlet liquid temperature      & $[K]$		&  $312$ \\
+        Inlet flow velocity				    & $[cm\cdot s^{-1}]$ & see Table~\ref{tab:feba_exp} \\
+        System backpressure           & $[bar]$            & see Table~\ref{tab:feba_exp} \\
         \bottomrule
     \end{tabularx}
 \end{table}
