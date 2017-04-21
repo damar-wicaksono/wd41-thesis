@@ -60,33 +60,38 @@ The three leftmost and three rightmost basis functions are less smooth compared 
 From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.9,trim={0 0.15cm 0 0},clip]{../figures/r-figures/bSpline.png}
+	\includegraphics[scale=0.85,trim={0 0.15cm 0 0},clip]{../figures/r-figures/bSpline.png}
 	\caption[Spline basis functions of order $4$]{The fourteen spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into 11 sub-intervals}
 	\label{fig:b_spline}
 \end{figure}
 
 \subsection{Curve Registration by Landmarks}\label{sub:sa_registration}
 
-Two types of variations are often simultaneously present in a functional dataset: the variation in magnitude (\emph{vertical} variation) and the variation in phase (\emph{horizontal} variation).
-\marginpar{amplitude vs. phase variation in functional data set}
+Essential to the idea of summary statistics of a data set is the measure of central tendency (e.g., the mean) which characterizes a \emph{typical} realization.
+\marginpar{variation in a functional dataset: amplitude \& phase}
+The measure of dispersion such as the variance, in turn, is defined relative to the mean. 
+Two types of variations are often simultaneously present in a functional data set: 
+the variation in magnitude (\emph{vertical} variation) and the variation in phase (\emph{horizontal} variation).
 The simultaneous presence of these two types of variations makes even the definition of a mean function difficult \cite{Kneip1992}.
+
 Fig.~\ref{fig:illustrate_phase_variation} illustrates this point.
-For a functional data set that does not contain strong phase variation simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~left).
-On the other hand, with a strong phase variation (mixed with amplitude variation), the cross-sectional mean failed to produce a typical realization as the landmarks occured at different times might cancel each other (Fig.~\ref{fig:illustrate_phase_variation}~right).
-In this case, according to Kneip (\cite{Kneip1992}) a more proper, representative \emph{structural} mean of the data set can be defined instead by separating the phase and amplitude variations.
+For a functional data set that does not contain strong phase variation, 
+a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~left).
+On the other hand, with a strong phase variation (often mixed with amplitude variation), 
+the cross-sectional mean failed to produce a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~right).
+In this case, according to Kneip (\cite{Kneip1992}) a more proper \emph{structural} mean of the data set can be defined instead by first separating the phase and amplitude variations.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.48,trim={0 1cm 0 0},clip]{../figures/r-figures/illustratePhaseVariation.png}
-	\caption[Variation in functional data sets, with and without phase variation]{Two examples of functional data sets. (Left) no pronounced phase variation exists, cross-sectional (arithmetic) mean can reflect a typical realization. (Right) phase variation exists, cross-sectional (arithmetic) mean differs from the notion of typical realization. \emph{Structural} mean derived after registration represents better the typical realization. The scales in the axes are arbitrary.}
+	\caption[Variation in functional data sets, with and without phase variation]{Two examples of functional data sets. (Left) without pronounced phase variation, cross-sectional mean can reflect a typical realization. (Right) with pronounced phase variations, cross-sectional mean differs from the notion of typical realization. \emph{Structural} mean derived after registration represents better a typical realization. The scales in the axes are arbitrary.}
 	\label{fig:illustrate_phase_variation}
 \end{figure}
 
-In this work, the notion of variance is used to characterize variation and it is defined relative to the proper mean.
+In the presence of strong amplitude and phase variation, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
 \marginpar{landmark registration}
-As such, in the presence of strong amplitude and phase variation, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
 The procedure transforms the time argument using a warping function such that there is less phase variation in the dataset.
 Specifically, the landmark type registration type is employed because the main features of the function of interest (i.e., reflood curve) are readily identifiable.
-In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time relative to a reference values.
+In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time relative to a set of reference values.
 
 This is illustrated in Fig.~\ref{fig:illustrate_registered_curves}.
 The left panel shows the functional data set with its phase variation to be reduced by aligning its landmark (i.e., the time of maximum) to a reference value 
@@ -96,7 +101,7 @@ Indeed, this mean is more representative as a typical realization of the curves 
 \begin{figure}[bth!]
 	\centering
 	\includegraphics[scale=0.48,trim={0 1cm 0 0},clip]{../figures/r-figures/illustrateRegisteredCurves.png}
-	\caption[Illustration of curves registration]{Illustration of curves registration. (Left) curves with phase variation are to be aligned with respect to a reference value. (Right) the registered curves where all curves have been aligned. The structural mean is shown as dashed curve. The scales in the axes are arbitrary.}
+	\caption[Illustration of curves registration]{Illustration of curves registration. (Left) curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). (Right) the registered curves where all curves have been aligned to each other. The structural mean is shown as dashed curve. The scales in the axes are arbitrary.}
 	\label{fig:illustrate_registered_curves}
 \end{figure}
 
