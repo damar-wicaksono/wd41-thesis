@@ -182,7 +182,7 @@ The \gls{mc} estimator for the second term in the numerator and for the denomina
 	\end{tabularx}
 \end{table}
 
-As such the general form of main-effect sensitivity index is
+The general formula of the main-effect sensitivity index estimator is
 \begin{equation}
   \widehat{S}_d = \frac{\frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n - \mathbb{E}^2[Y]}{\mathbb{V}[Y]}
 \label{eq:ss_main_effec_estimator}
@@ -195,7 +195,7 @@ The estimator reads
   \widehat{ST}_d = \frac{\frac{1}{2N}\sum_{n=1}^{N}\left(f(A)_n - f(A_B^d)_n\right)^2}{\mathbb{V}[Y]}
 \label{eq:ss_jansen_estimator}
 \end{equation}
-where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator as prescribed in Table~\ref{tab:ss_main_effect_estimator}.
+where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator in Table~\ref{tab:ss_main_effect_estimator}.
 
 The computational cost associated with the estimation of all the main-effect and total-effect indices is $N \times (D + 2)$ code runs,
 \marginpar{computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
