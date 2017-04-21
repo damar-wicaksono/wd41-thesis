@@ -7,6 +7,10 @@ to modernize into a single software package all previous \gls{usnrc} \gls{th} co
 that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 
+The hydraulic model of \gls{trace} is based on a two-fluid six-equation model, 
+solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant.
+These equations are described in the following.
+
 \paragraph{Mass balance equations, liquid and gas phases:}
 \begin{equation}
 	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l}] = - \Gamma
@@ -16,25 +20,46 @@ This ultimately would make the code more versatile for end users and more effici
 	\frac{\partial [\alpha \rho_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g}] = \Gamma
 \label{eq:mass_balance_gas}
 \end{equation}
-where the subscripts indicate the phase, $l$ for the liquid phase and $g$ for the gas phase (vapor).
-The first term in the left-hand-si
+where the subscripts indicate the phase, $l$ for the liquid phase and $g$ for the gas phase (vapor); 
+$\alpha$ is the void fraction; 
+$\rho$ is the mass density of the respective phase;
+$\mathbf{v}$ is the velocity of the respective phase.
+
+The first term on the left hand side is the volumetric rate of change of the mass of the corresponding phase.
+The second term is the the volumetric mass convection of the corresponding phase.
+The term $\Gamma$ on the right hand side is the volumetric interfacial mass-transfer rate,
+with a convention that it is positive for the transfer from liquid phase to gas phase.
 
 \paragraph{Momentum balance equations, liquid and gas phases:}
 \begin{equation}
-	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha \rho_l \mathbf{v_l}] = - \Gamma
-\label{eq:}
+	\begin{split}
+		& \frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \mathbf{v_l}] + (1 - \alpha) \nabla P = \\
+		& \quad
+	\end{split}
+\label{eq:momentum_balance_liquid}
 \end{equation}
 \begin{equation}
-	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha \rho_l \mathbf{v_l}] = - \Gamma
-\label{eq:}
+	\begin{split}
+		& \frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g} \mathbf{v_g}] + \alpha \nabla P = \\
+		& \quad
+	\end{split}
+\label{eq:momentum_balance_gas}
 \end{equation}
+where
 
 \paragraph{Energy balance equations, liquid and gas phases:}
 \begin{equation}
-	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha \rho_l \mathbf{v_l}] = - \Gamma
-\label{eq:}
+	\begin{split}
+		& \frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t} + \nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right)\right] = \\
+		&	\qquad q_{il}
+	\end{split}
+\label{eq:energy_balance_liquid}
 \end{equation}
 \begin{equation}
-	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha \rho_l \mathbf{v_l}] = - \Gamma
-\label{eq:}
+	\begin{split}
+		 & \frac{\partial [\alpha \rho_g (e_g + |\mathbf{v_g}|^2/2]}{\partial t} + \nabla \cdot \left[\alpha \rho_g \left(e_g+\frac{P}{\rho_g}+\frac{|\mathbf{v_g}|^2}{2}\right)\right] = \\
+		 & \qquad q_{ig}
+	\end{split}
+\label{eq:energy_balance_gas}
 \end{equation}
+where
