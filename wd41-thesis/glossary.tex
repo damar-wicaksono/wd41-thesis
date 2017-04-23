@@ -1,8 +1,93 @@
+\newglossaryentry{alphanumeric}{
+  type=symbol,
+  name={Alphanumeric},
+  description={}}
+
+\newglossaryentry{greek}{
+  type=symbol,
+  name={Greek letters},
+  description={}}
+
+\newglossaryentry{fi}
+{
+  type=symbol,
+	name={\ensuremath{\mathbf{f}_i}},
+	description={volumetric force due to shear at the phase interface},
+	parent=alphanumeric,
+	sort={fi}
+}
+
+\newglossaryentry{fwl}
+{
+  type=symbol,
+	name={\ensuremath{\mathbf{f}_{wl}}},
+	description={volumetric force acting on the liquid phase due to shear at the wall},
+	parent=alphanumeric,
+	sort={fwl}
+}
+
+\newglossaryentry{fwg}
+{
+  type=symbol,
+	name={\ensuremath{\mathbf{f}_{wg}}},
+	description={volumetric force acting on the gas phase due to shear at the wall},
+	parent=alphanumeric,
+	sort={fwg}
+}
+
+\newglossaryentry{gravity}
+{
+  type=symbol,
+	name={\ensuremath{\mathbf{g}}},
+	description={gravitational acceleration},
+	parent=alphanumeric,
+	sort={g}
+}
+
+\newglossaryentry{vinterface}
+{
+  type=symbol,
+	name={\ensuremath{\mathbf{v}_i}},
+	description={flow velocity at the phase interface},
+	parent=alphanumeric,
+	sort={vinterface}
+}	
+
+\newglossaryentry{alpha}
+{
+  type=symbol,
+	name={\ensuremath{\alpha}},
+	description={gas phase volume fraction},
+	parent=greek,
+	sort={a}
+}	
+
+\newglossaryentry{Gamma}
+{
+	type=symbol,
+	name={\ensuremath{\Gamma}},
+	description={volumetric interfacial mass-transfer rate},
+	parent=greek,
+	sort={Gamma}
+}
+	
+
+
 \newglossaryentry{matrix}% the label
 {name={matrix},% the term
     description={a rectangular table of elements},% brief description
     plural={matrices}% the plural
 }
+
+%\newglossaryentry{alpha}
+%{
+%	type=symbol,
+%	name = {\ensuremath{\alpha}},
+%	description = {gas phase volume fraction, $[-]$}
+%	parent=alphanumeric,
+%	sort={a}
+%}
+
 \newacronym{ci}{CI}{confidence interval}
 \newacronym{fda}{FDA}{functional data analysis}
 \newacronym{feba}{FEBA}{Flooding Experiments with Blocked Arrays}
