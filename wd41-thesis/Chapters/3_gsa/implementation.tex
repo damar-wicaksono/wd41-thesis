@@ -37,8 +37,30 @@ the outer loop samples values of $X_d$ while the inner loop samples values of $\
 These samples, in turn, are used to evaluate the model output.
 In the inner loop, the mean of the model output (for a given value of $X_d$ but over many values of $\mathbf{X}_{\sim d}$) is taken. 
 Afterward, in the outer loop, the variance of the model output (over many values of $X_d$) is taken.
-This approach can easily become prohibitively expensive as the nested structure requires $N^2$ model evaluations \emph{per input dimension} for either the main-effect and total-effect indices, 
+This approach can easily become prohibitively expensive as the nested structure requires $N^2$ model evaluations \emph{per input dimension} for one of the sensitivity indices (i.e., the main- or total-effect index), 
 while $N$ (the size of \gls{mc} samples) are typically in the range of $10^2 - 10^4$ for a reliable estimate. 
+Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of the $d$-th parameter.
+
+\begin{algorithm}
+\caption{Brute Force \gls{mc} for estimating $\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]]$}
+\label{alg:brute_force_mc}
+\begin{algorithmic}
+\STATE $\Sigma_i \leftarrow 0$
+\STATE $\Sigma_{i^2} \leftarrow 0$
+  \FOR{$i=1$ to $N$}
+    \STATE sample $x_d^{(i)}$ from $X_d$
+    \STATE $\Sigma_j \leftarrow 0$
+    \FOR{$j=1$ to $N$}
+      \STATE sample $\mathbf{x}_{\sim d}^{(j)}$ from $\mathbf{X}_{\sim d}$
+      \STATE $\Sigma_j \mathrel{+}= f(\mathbf{x}_{\sim d}^{(j)}, x_d^{(i)})$ 
+    \ENDFOR
+    \STATE $\mathbb{E}_{\sim d} [Y|X_d]^{(i)} \leftarrow \frac{1}{N} \Sigma_j$
+    \STATE $\Sigma_i \mathrel{+}= \mathbb{E}_{\sim d} [Y|X_d]^{(i)}$
+    \STATE $\Sigma_{i^2} \mathrel{+}= \mathbb{E}_{\sim d} [Y|X_d]^{(i)} \times \mathbb{E}_{\sim d} [Y|X_d]^{(i)}$
+  \ENDFOR
+  \STATE $\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]] \leftarrow \frac{1}{N} \left(\Sigma_{i^2} - \Sigma_i^2/N\right)$
+\end{algorithmic}
+\end{algorithm}
 
 Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls{mc} simulation to estimate the indices.
 The formulation starts by expressing the the expectation and variance operators in their integral form 

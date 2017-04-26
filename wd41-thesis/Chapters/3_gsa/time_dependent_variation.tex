@@ -32,10 +32,10 @@ The basis functions in the B-spline system are determined by the degree of the p
 At the left and right boundaries, several spline basis functions are defined with decreasing continuity up to being discontinuous in both ends.
 To satisfy these condition, the endpoints are repeated and augmented into the knot sequence such that
 \begin{equation}
-	\tau_{-(p-2)} = \cdots = \tau_{0} \leq \tau_{1} \leq \cdots \leq \tau_{L} = \cdots = \tau_{L+(p-2)} 
+	\tau_{-p} = \cdots = \tau_{0} \leq \tau_{1} \leq \cdots \leq \tau_{L} = \cdots = \tau_{L+p} 
 \label{eq:augmented_knots}
 \end{equation}
-As such, the augmented knot becomes $\boldsymbol{\tau}=\{\tau_k; k = 0,1,\cdots, L + 2p\}$.
+The augmented knot becomes $\boldsymbol{\tau}=\{\tau_k; \, k = -p,-p+1,\cdots, 0, 1, \cdots, L + p\}$. 
 B-spline basis functions of degree $p$ can then be defined recursively on the augmented knot sequence using de Boor - Cox formula as follows, 
 \begin{equation}
 	\begin{split}
@@ -54,9 +54,12 @@ B-spline basis functions of degree $p$ can then be defined recursively on the au
 \label{eq:deboor_cox}
 \end{equation}
 where $B_k^p (t)$ denotes the $k$-th B-spline of degree $p$.
-The degree, $p$, and the number of interior knots, $L-1$, (that is excluding the end points) determine the number of spline basis functions according to $K = p + L$.
+The degree, $p$, and the number of interior knots, $L-1$ (i.e., excluding the end points), 
+determine the number of spline basis functions according to $K = p + L$.
+In other words, the B-spline basis functions are $\{B_k^p (t); \, k = -p,-p+1,\cdots,L-1\}$.
 
-Fig.~\ref{fig:b_spline} illustrates all the fourteen spline basis functions of degree $3$ over $10$ uniform interior knots defined in $[0,1]$.
+Fig.~\ref{fig:b_spline} illustrates all the $14$ spline basis functions of degree $3$ over $10$ uniform interior knots (or $11$ sub-intervals) defined in $[0,1]$.
+The resulting augmented knot sequence is $\boldsymbol{\tau}=\{0, 0, 0, 0, \frac{1}{11}, \cdots, \frac{10}{11}, 1, 1, 1, 1\}$.
 The three leftmost and three rightmost basis functions are less smooth compared to the other (twice continuously differentiable) eight basis functions in the center. 
 From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
 \begin{figure}[bth]
@@ -66,9 +69,10 @@ From leftmost to the right (rightmost to the left) the basis functions are disco
 	\label{fig:b_spline}
 \end{figure}
 
-Following Eq.~(\ref{eq:basis_function_expansion}) a function can be written using the B-spline basis functions of a given order $B_k^p (t)$ defined above,
+According to Eq.~(\ref{eq:basis_function_expansion}), B-spline basis functions of a given order $B_k^p (t)$ and a knot sequence $\boldsymbol{\tau}$ 
+represents function $y_i$ as follows,
 \begin{equation}
-	y_i (t) = \sum_{k = 1}^{K} c_{ik} \cdot B^p_k (t); \quad i = 1, 2, \cdots N
+	y_i (t) = \sum_{k = -p}^{L-1} c_{ik} \cdot B^p_k (t); \quad i = 1, 2, \cdots N
 \label{eq:basis_function_expansion}
 \end{equation}
 
