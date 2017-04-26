@@ -1,0 +1,22 @@
+\section{Generating Samples from a Multivariate Normal Distribution}
+
+Drawing $n$ number of samples from an $m$-variate Normal distribution, $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ having an arbitrary $m \times 1$ mean vector $\boldsymbol{\mu}$ and an arbitrary, but valid, $m \times m$ covariance matrix $\boldsymbol{\Sigma}$ can be achieved by using a (univariate) standard normal random number generator available in most numerical computing environment.
+The procedure is as follows (citation):
+
+\begin{enumerate}
+	\item Factorize the covariance matrix $\boldsymbol{\Sigma}$ using the Cholesky decomposition,
+	\begin{equation}
+	\boldsymbol{\Sigma} = L L^T
+	\end{equation}
+	where $L$ and $L^T$ are the Cholesky factor and its transpose, respectively. $L$ is a lower triangular matrix.
+	
+	\item Generate vector $\mathbf{z}=(z_1, z_2, \dots, z_m)^T$ by taking $m$ random draws from a standard normal random generator, $u \sim \mathcal{N}(0, 1)$.
+	
+	\item Transform the vector $\mathbf{z}$ by the following formula,
+	\begin{equation}
+	\mathbf{x} = \boldsymbol{x} + L \boldsymbol{z}
+	\end{equation}
+	where the $m \times 1$ vector $\mathbf{x}$ is a single realization of the specified $m$-variate normal random variable.
+	
+	\item Repeat Step $2$ and Step $3$ $n$ times to obtain the desired number of samples 
+\end{enumerate}
