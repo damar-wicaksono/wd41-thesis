@@ -7,9 +7,14 @@ to modernize into a single software package all previous \gls{usnrc} \gls{th} co
 that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 
-The hydraulic model of \gls{trace} is based on a two-fluid six-equation model, 
+\subsection{Governing Equations}\label{sub:governing_equations}
+
+The hydraulic module of \gls{trace} is based on a two-fluid six-equation model, 
 solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant.
-These equations are described in the following.
+The formulations are both averaged in time and volume to filter out short-term and short scale variations in the flow.
+Furthermore, the formulations are given in volumetric term (i.e., per unit volume) with respect to pre-defined control volume (the so-called \emph{node}).
+A symbol is defined the first time it appears in an equation.
+The complete list of symbol can be found in Appendix~\ref{app:glossary}.
 
 \paragraph{Mass balance equations, liquid and gas phases:}
 \begin{equation}
@@ -26,9 +31,10 @@ $\rho_\circ$ is the mass density of the respective phase;
 and $\mathbf{v}_\circ$ is the velocity of the respective phase.
 
 The first term on the left hand side is the volumetric rate of change of the mass of the corresponding phase.
-The second term is the the volumetric mass convection of the corresponding phase.
+The second term is the the volumetric mass convected out of the control volume for the corresponding phase.
 The term \gls{Gamma} on the right hand side is the volumetric interfacial mass-transfer rate,
 with a convention that it is positive for the transfer from liquid phase to gas phase.
+This term is defined in Eq.~\ref{eq:Gamma} below.
 
 \paragraph{Momentum balance equations, liquid and gas phases:}
 \begin{equation}
@@ -53,7 +59,7 @@ where $\nabla P$ is the pressure gradient;
 and \gls{vinterface} is the flow velocity at the phase interface.
 
 The first term on the left hand side is the volumetric rate of change of the momentum acting on the corresponding phase.
-The second term is the volumetric momentum convection acting on the corresponding phase.
+The second term is the volumetric momentum convected out of the control volume for the corresponding phase.
 The third term is momentum exchange due to pressure gradient.
 Here, the formulation in \gls{trace} uses the simplifying assumption of $P_i = P_g = P_l$.
 That is, the local pressure is the same in either phases as well as at the interface \cite{USNRC2012}.
@@ -61,7 +67,7 @@ That is, the local pressure is the same in either phases as well as at the inter
 All the terms in the right hand side constitute the momentum sources (and sinks) due to shear at the interface and at the wall, 
 to body force (i.e, gravity), 
 and to mass exchange at the interface, respectively.
-For the shear terms, TRACE uses the following formulations
+For the shear terms, TRACE uses the following formulations,
 \begin{equation}
 	\mathbf{f}_i = C_i (\mathbf{v}_g - \mathbf{v}_l) |\mathbf{v}_g - \mathbf{v}_l| 
 \label{eq:fi}
@@ -80,7 +86,7 @@ are obtained from flow regime-dependent empirical correlations.
 \paragraph{Energy balance equations, liquid and gas phases:}
 \begin{equation}
 	\begin{split}
-		& \frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t} + \nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right)\right] \\
+		& \frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t} + \nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right) \mathbf{v_l} \right] \\
 		&	\quad = q_{il} + q_{wl} + q_{wsat} + q_{dl} + (1 - \alpha) \rho_l \mathbf{g} \cdot \mathbf{v}_l \\
 		& \qquad - \Gamma h^\prime_l + (\mathbf{f}_{i} + \mathbf{f}_{wl}) \cdot \mathbf{v}_l
 	\end{split}
@@ -88,9 +94,91 @@ are obtained from flow regime-dependent empirical correlations.
 \end{equation}
 \begin{equation}
 	\begin{split}
-		 & \frac{\partial [\alpha \rho_g (e_g + |\mathbf{v_g}|^2/2]}{\partial t} + \nabla \cdot \left[\alpha \rho_g \left(e_g+\frac{P}{\rho_g}+\frac{|\mathbf{v_g}|^2}{2}\right)\right] \\
+		 & \frac{\partial [\alpha \rho_g (e_g + |\mathbf{v_g}|^2/2]}{\partial t} + \nabla \cdot \left[\alpha \rho_g \left(e_g+\frac{P}{\rho_g}+\frac{|\mathbf{v_g}|^2}{2}\right) \mathbf{v_g} \right] \\
 		 & \quad  = q_{ig} + q_{wg} + q_{dg} + \alpha \rho_g \mathbf{g} \cdot \mathbf{v}_g - \Gamma h^\prime_g + (-\mathbf{f}_{i} + \mathbf{f}_{wg}) \cdot \mathbf{v}_g
 	\end{split}
 \label{eq:energy_balance_gas}
 \end{equation}
-where
+where \gls{el} (\gls{eg}) is the liquid (gas) phase internal energy;
+\gls{qil} (\gls{qig}) is the volumetric interfacial heat transfer on the liquid (gas) phase;
+\gls{qwl} (\gls{qwg}) is the volumetric wall (sensible) heat transfer on the liquid (gas) phase;
+\gls{qwsat} is the volumetric wall (latent) heat transfer on the liquid phase;
+\gls{qdl} (\gls{qdg}) is the volumetric direct power deposition on the liquid (gas) phase;
+\gls{hlp} is the bulk liquid enthalpy;
+and \gls{hgp} is the gas phase saturation enthalpy.
+
+The first term on the left hand side of both equations is the volumetric rate of change of the energy of the corresponding phase.
+The second term is the volumetric energy convected out the control volume for the corresponding phase.
+
+Similar to the momentum balance equation, all terms in the right hand side of both equations constitute the energy sources (and sinks) for the corresponding phase.
+The mechanisms of energy transfer includes sensible heat transfer at the interface between the two phases (\gls{qil} and \gls{qig});  
+sensible heat transfer between the wall and the two phases (\gls{qwl} and \gls{qwg});
+latent heat transfer between the wall and the saturated liquid (\gls{qwsat});
+direct power deposition to either phase (\gls{qdl} and \gls{qdg});
+energy transfer due to mass transfer at the interface ($\Gamma h^\prime_l$ and $\Gamma h^\prime_g$); 
+and finally, due to friction at the interface and at the wall for either phase ($(\mathbf{f}_{i} + \mathbf{f}_{wl}) \cdot \mathbf{v}_l$ and $(-\mathbf{f}_{i} + \mathbf{f}_{wg}) \cdot \mathbf{v}_g$).
+
+The heat transfer terms between the wall and the phases follow Newton's law of cooling,
+\begin{equation}
+	q_{wl} = h_{wl} \, a_{wl} \, (T_w - T_l)
+\label{eq:qwl}
+\end{equation}
+\begin{equation}
+	q_{wg} = h_{wg} \, a_{wg} \, (T_w - T_g)
+\label{eq:qwg}
+\end{equation}
+\begin{equation}
+	q_{w\text{sat}} = h_{w\text{sat}} \, a_{wl} \, (T_w - T_\text{sat})
+\label{eq:qwsat}
+\end{equation}
+where $T_w$, $T_l$, $T_g$, and $T_\text{sat}$ are the wall, liquid phase, liquid phase, and liquid saturation temperatures, respectively;
+$a_{wg}$ ($a_{wl}$) is the volumetric surface contact area between the wall and liquid (gas) phase;
+and $h_{wl}$, $h_{wg}$, and $h_{w\text{sat}}$ are the \glspl{htc} between wall and liquid, wall and gas, and wall-saturated liquid, respectively.
+The volumetric surface contact area as well as the heat transfer coefficients are obtained from a set of flow regime-dependent empirical correlations.
+
+Additionally, the heat transfer terms at the interface between the two phases are also modeled using Newton's law cooling,
+\begin{equation}
+	q_{il} = h_{il} \, a_{i} \, (T_{sg} - T_l)
+\label{eq:qil}
+\end{equation}
+\begin{equation}
+	q_{ig} = h_{ig} \, a_{i} \, (T_{sg} - T_g)
+\label{eq:qig}
+\end{equation}
+where \gls{hil} (\gls{hig}) is the \gls{htc} for liquid (gas) phase at the interface;
+\gls{ai} is the volumetric interfacial surface area;
+and \gls{tsg} is the saturation temperature corresponding to partial pressure of the gas phase.
+
+Finally, the mass-transfer rate at the interface is defined using a thermal-energy jump condition that results in
+\begin{equation}
+	\Gamma = \frac{-(q_{ig} + q_{il}) + q_{w\text{sat}}}{(h^\prime_g - h^\prime_l)}
+\label{eq:Gamma}
+\end{equation}
+In other words, the net heat transfer rate given to the saturated liquid phase, is used entirely for phase change.
+
+\paragraph{}
+
+Besides the set balance equations that govern the two-phase fluid flow given above,
+\gls{trace} also includes a heat conduction module (known as \emph{heat structure} component) 
+to model correctly the heat transfer process in solid structures (e.g., active fuel, internal passive structures, etc.) 
+and between the surface of such structures and contacting fluid.
+\paragraph{Heat conduction equation, solid structures:}
+\begin{equation}
+	\rho_s \, C_{ps} \frac{\partial T}{\partial t} - \nabla \cdot (k_s \nabla T) = q_s 
+\label{eq:conduction}
+\end{equation}
+where \gls{rhos} is the solid structure mass density;
+\gls{cps} is the solid structure thermal capacity;
+\gls{ks} is the solid structure thermal conductivity;
+and $q_s$ is the volumetric heat source term in the solid.
+
+At the contact between fluid and solid material, the total heat flux is given as,
+\begin{equation}
+	q'' = h_{wl} \, (T_{w} - T_l) + h_{w\text{sat}} \, (T_w - T_\text{sat}) + h_{wg} \, (T_w - T_g)
+\label{eq:conduction_surface}
+\end{equation}
+where the heat flux at the surface of the structure, $q''$ is partitioned to different phases of the fluid, either as sensible or latent heat.
+As can be seen, 
+Eq.~(\ref{eq:conduction_surface}) couples the heat conduction equation with energy balance equations of the fluid through the terms defined in Eqs.~(\ref{eq:qwl}), (\ref{eq:qwg}), and (\ref{eq:qwsat}).
+
+\subsection{Closure}\label{sub:closure}
