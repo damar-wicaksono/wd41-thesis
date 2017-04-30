@@ -1,6 +1,28 @@
 \section{Initial Selection of Input Parameters and Prior Uncertainty Propagation}\label{sec:reflood_initial_selection}
 
+The nominal values of selected model parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by their respective perturbation factors.
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf}, 
+from which a set of samples of model parameters values can be generated.
+The choice of the distribution is influenced by both the available information and the aim of the analysis.
+As the aim of this particular step is to obtain preliminary (or \emph{prior}) uncertainty of the \gls[hyper=false]{trace} model prediction, 
+uniform (or log-uniform) distributions with reasonable range of variation are deemed sufficient for the model parameters.
+Hence, the \emph{prior uncertainty propagation} step constitutes of generating samples for each model parameter from its prior \gls[hyper=false]{pdf}, 
+carrying out a set of \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model using the sampled parameters, 
+and analyzing the results to quantify the uncertainty of the model prediction.
 
+For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive, multiplicative,} and \emph{substitutive}.
+In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
+In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
+Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
+
+A tool to assist the uncertainty propagation of model parameters in a \gls[hyper=false]{trace} model is developed in the Python programming language.
+This tool, detailed in Appendix~\ref{app:trace_simexp}.
+
+As show in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}, the list of perturbation factors involves the perturbation of various model parameters related to:
+\begin{enumerate}
+	\item \gls[hyper=false]{th} boundary conditions
+  \item material properties
+\end{enumerate}
 \begin{sidewaystable}
 
 \caption{Selected \glsentryshort{trace} model parameter perturbation factors and their range of variations, continued in Table~\ref{tab:trace_model_parameter_2}}
