@@ -41,26 +41,27 @@
 %********************************************************************
 % Adding Glossary
 %*******************************************************
-\newglossarystyle{supergroup}{%
-  \setglossarystyle{super}%
-  \renewcommand*{\glsgroupskip}{}%
-  \renewcommand{\glossentry}[2]{%
-    \tabularnewline
-    \multicolumn{2}{c}{%
-     \bfseries\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
-    }% 
-    \tabularnewline
-    \tabularnewline
-  }%
-  \renewcommand{\subglossentry}[3]{%
-     \glssubentryitem{##2}%
-     \glstarget{##2}{\glossentryname{##2}}
-     &
-     \glossentrydesc{##2}\glspostdescription\space
-     ##3\tabularnewline
-  }%
-}
-\newglossary[slg]{symbol}{sot}{stn}{Symbols}
+%\newglossarystyle{supergroup}{%
+%  \setglossarystyle{super}%
+%  \renewcommand*{\glsgroupskip}{}%
+%  \renewcommand{\glossentry}[2]{%
+%    \tabularnewline
+%    \multicolumn{2}{c}{%
+%     \bfseries\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
+%    }% 
+%    \tabularnewline
+%    \tabularnewline
+%  }%
+%  \renewcommand{\subglossentry}[3]{%
+%     \glssubentryitem{##2}%
+%     \glstarget{##2}{\glossentryname{##2}}
+%     &
+%     \glossentrydesc{##2}\glspostdescription\space
+%     ##3\tabularnewline
+%  }%
+%}
+\newglossary[alg]{alphanumeric}{alp}{aln}{Notation (Alphanumeric)}
+\newglossary[glg]{greek}{gre}{grk}{Notation (Greek)}
 \makeglossaries
 \loadglsentries{glossary}
 \renewcommand{\glsnamefont}[1]{\spacedlowsmallcaps{#1}}
@@ -115,11 +116,14 @@
 % use \cleardoublepage here to avoid problems with pdfbookmark
 \cleardoublepage
 %\part{Some Kind of Manual}
+\part{Introduction}
 \include{Chapters/1_introduction/index}
 \include{Chapters/2_trace_reflood/index}
+\part{Methods and Results}
 \include{Chapters/3_gsa/index}
 \include{Chapters/4_gp_regression/index}
 \include{Chapters/5_bayesian_calibration/index}
+\part{Validation and Conclusions}
 \include{Chapters/6_validation/index}
 \include{Chapters/7_conclusions/index}
 \cleardoublepage
@@ -139,7 +143,7 @@
 \appendix
 %\renewcommand{\thechapter}{\alph{chapter}}
 \cleardoublepage
-%\part{Appendix}
+\part{Appendix}
 \include{Appendices/design_of_experiment}
 \include{Appendices/gsa_module}
 \include{Appendices/trace_simexp}
@@ -148,8 +152,9 @@
 %********************************************************************
 % Other Stuff in the Back
 %*******************************************************
+\part{Bibliography and Glossaries}
 \cleardoublepage\include{FrontBackmatter/Bibliography}
-\cleardoublepage\include{FrontBackmatter/Glossary}
+%\include{FrontBackmatter/Glossary}
 \cleardoublepage\include{FrontBackmatter/Declaration}
 \cleardoublepage\include{FrontBackmatter/Colophon}
 % ********************************************************************
