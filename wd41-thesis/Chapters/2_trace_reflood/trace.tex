@@ -10,7 +10,7 @@ This ultimately would make the code more versatile for end users and more effici
 \subsection{Governing Equations}\label{sub:governing_equations}
 
 The hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
-solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant.
+solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant \cite{USNRC2012}.
 The formulations are both averaged in time and volume to filter out short-term and short scale variations in the flow.
 Furthermore, the formulations are given in volumetric term (i.e., per unit volume basis) with respect to a defined control volume (or \emph{node}).
 A symbol is defined the first time it appears in an equation 
@@ -94,7 +94,7 @@ Table~\ref{tab:momentum_balance} lists the terms in either sides of the two mome
 	\end{tabularx}
 \end{table}
 
-Note that the formulation in \gls[hyper=false]{trace} uses the simplifying assumption of $P_i = P_g = P_l$.
+Note that the formulation in \gls[hyper=false]{trace} uses the simplifying assumption of $p_i = p_g = p_l$.
 That is, the pressure in a given control volume is the same in either phases as well as at the interface \cite{USNRC2012}.
 
 For the friction (shear) terms in right hand side, TRACE uses the following formulations,
