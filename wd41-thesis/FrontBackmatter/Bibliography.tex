@@ -10,3 +10,16 @@
 \addcontentsline{toc}{chapter}{\tocEntry{\bibname}}
 \label{app:bibliography}
 \printbibliography
+
+\manualmark
+\markboth{\spacedlowsmallcaps{Glossaries}}{\spacedlowsmallcaps{Glossaries}} % work-around to have small caps also
+%\phantomsection 
+\refstepcounter{dummy}
+%\addtocontents{gls}{\protect\vspace{\beforebibskip}} % to have the bib a bit from the rest in the toc
+%\addcontentsline{gls}{chapter}{\tocEntry{Glossaries}}
+\glsaddall
+\printglossary[type=\acronymtype,title=Acronyms and Abbreviations]
+\label{app:acronyms}
+\printglossary[title=Notations (Alphanumeric), type=alphanumeric]
+\label{app:notations}
+\printglossary[title=Notations (Greek), type=greek]
