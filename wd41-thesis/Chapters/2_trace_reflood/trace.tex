@@ -53,49 +53,49 @@ This term is defined in Eq.~(\ref{eq:Gamma}) below.
 \paragraph{Momentum balance equations, liquid and gas phases:}
 \begin{equation}
 	\begin{split}
-		& \frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}] + (1 - \alpha) \nabla P \\
+		& \frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}] + (1 - \alpha) \nabla p \\
 		& \quad = \mathbf{f}_i + \mathbf{f}_{wl} + (1 - \alpha) \rho_l \mathbf{g} - \Gamma \mathbf{v}_i
 	\end{split}
 \label{eq:momentum_balance_liquid}
 \end{equation}
 \begin{equation}
 	\begin{split}
-		& \frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g} \otimes \mathbf{v_g}] + \alpha \nabla P \\
+		& \frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g} \otimes \mathbf{v_g}] + \alpha \nabla p \\
 		& \quad = - \mathbf{f}_i + \mathbf{f}_{wg} + \alpha \rho_g \mathbf{g} + \Gamma \mathbf{v}_i
 	\end{split}
 \label{eq:momentum_balance_gas}
 \end{equation}
 where $\nabla P$ is the pressure gradient;
-\gls{fi} is the volumetric force due to shear at the phase interface;
-\gls{fwl} is the volumetric force acting on the liquid phase due to shear at the wall (i.e., fluid-structure contact);
-\gls{fwg} is the volumetric force acting on the gas phase due to shear at the wall;
-\gls{gravity} is the gravitational acceleration;
-and \gls{vinterface} is the flow velocity at the phase interface.
+\gls[hyper=false]{fi} is the volumetric force due to shear at the phase interface;
+\gls[hyper=false]{fwl} is the volumetric force acting on the liquid phase due to shear at the wall (i.e., fluid-structure contact);
+\gls[hyper=false]{fwg} is the volumetric force acting on the gas phase due to shear at the wall;
+\gls[hyper=false]{gravity} is the gravitational acceleration;
+and \gls[hyper=false]{vinterface} is the flow velocity at the phase interface.
+Table~\ref{tab:momentum_balance} lists the terms in either sides of the two momentum balance equations.
 
-The first term on the left hand side is the volumetric rate of change of the momentum acting on the corresponding phase.
-The second term is the volumetric momentum convected out of the control volume for the corresponding phase.
-The third term is momentum exchange due to pressure gradient.
-Here, the formulation in \gls{trace} uses the simplifying assumption of $P_i = P_g = P_l$.
-That is, the local pressure is the same in either phases as well as at the interface \cite{USNRC2012}.
+\begin{table}[ht]
+	\myfloatalign
+	\caption[The terms in \glsentryshort{trace} two-fluid model momentum balance equations]{The terms in \glsentryshort{trace} two-fluid model momentum balance equations (all are given in volumetric term)}
+	\label{tab:momentum_balance}
+	\begin{tabularx}{\textwidth}{>{\raggedright}Xcc} 
+		\toprule
+		\tableheadline{Terms} & \tableheadline{Liquid Phase} & \tableheadline{Gas Phase} \\ 
+		\midrule
+		momentum rate of change  					 	& $\frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t}$  				& $\frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t}$ \\
+		momentum convection rate 					 	& $\nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}]$ 	& $\nabla \cdot [\alpha \rho_g \mathbf{v_g} \otimes \mathbf{v_g}]$ \\
+		pressure gradient                  	& $(1 - \alpha) \nabla p$                                        				& $\alpha \nabla p$ \\
+		\midrule
+		momentum change due to:           	&                                                                 			& \\
+		interfacial friction 								& $\mathbf{f}_i$ 																												&  $- \mathbf{f}_i$ \\
+		wall friction 											& $\mathbf{f}_{wl}$ 																										& $\mathbf{f}_{wg}$ \\
+		body force 													& $(1 - \alpha) \rho_l \mathbf{g}$ 																			& $\alpha \rho_g \mathbf{g}$ \\
+		interfacial mass-transfer 					& $- \Gamma \mathbf{v}_i$ 																							& $\Gamma \mathbf{v}_i$ \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 
-All the terms in the right hand side constitute the momentum sources (and sinks) due to shear at the interface and at the wall, 
-to body force (i.e, gravity), 
-and to mass exchange at the interface, respectively.
-For the shear terms, TRACE uses the following formulations,
-\begin{equation}
-	\mathbf{f}_i = C_i (\mathbf{v}_g - \mathbf{v}_l) |\mathbf{v}_g - \mathbf{v}_l| 
-\label{eq:fi}
-\end{equation}
-\begin{equation}
-	\mathbf{f}_{wl} = - C_{wl} \mathbf{v}_l |\mathbf{v}_l|
-\label{eq:fwl}
-\end{equation}
-\begin{equation}
-	\mathbf{f}_{wg} = - C_{wg} \mathbf{v}_g |\mathbf{v}_g|
-\label{eq:fwg}
-\end{equation}
-where the friction coefficients $C_i$, $C_{wl}$, $C_{wg}$ for interfacial shear, wall-liquid shear, and wall-gas shear, respectively 
-are obtained from flow regime-dependent empirical correlations.
+Note that the formulation in \gls[hyper=false]{trace} uses the simplifying assumption of $P_i = P_g = P_l$.
+That is, the pressure in a given control volume is the same in either phases as well as at the interface \cite{USNRC2012}.
 
 \paragraph{Energy balance equations, liquid and gas phases:}
 \begin{equation}
@@ -197,3 +197,19 @@ As can be seen,
 Eq.~(\ref{eq:conduction_surface}) couples the heat conduction equation with energy balance equations of the fluid through the terms defined in Eqs.~(\ref{eq:qwl}), (\ref{eq:qwg}), and (\ref{eq:qwsat}).
 
 \subsection{Closure}\label{sub:closure}
+
+For the shear terms, TRACE uses the following formulations,
+\begin{equation}
+	\mathbf{f}_i = C_i (\mathbf{v}_g - \mathbf{v}_l) |\mathbf{v}_g - \mathbf{v}_l| 
+\label{eq:fi}
+\end{equation}
+\begin{equation}
+	\mathbf{f}_{wl} = - C_{wl} \mathbf{v}_l |\mathbf{v}_l|
+\label{eq:fwl}
+\end{equation}
+\begin{equation}
+	\mathbf{f}_{wg} = - C_{wg} \mathbf{v}_g |\mathbf{v}_g|
+\label{eq:fwg}
+\end{equation}
+where the friction coefficients $C_i$, $C_{wl}$, $C_{wg}$ for interfacial shear, wall-liquid shear, and wall-gas shear, respectively 
+are obtained from flow regime-dependent empirical correlations.
