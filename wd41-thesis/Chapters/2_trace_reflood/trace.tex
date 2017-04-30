@@ -1,20 +1,20 @@
 \section{Thermal-Hydraulics System Code \glsentryshort{trace}}\label{sec:reflood_trace}
 
-\gls{trace} is the best-estimate system \gls{th} code developed by the \gls{usnrc} 
+\gls[hyper=false]{trace} is the best-estimate system \gls[hyper=false]{th} code developed by the \gls[hyper=false]{usnrc} 
 as a tool for light water reactor transient analysis during normal and accident scenarios.
 Its development is an on-going effort 
-to modernize into a single software package all previous \gls{usnrc} \gls{th} codes
+to modernize into a single software package all previous \gls[hyper=false]{usnrc} \gls[hyper=false]{th} codes
 that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 
 \subsection{Governing Equations}\label{sub:governing_equations}
 
-The hydraulic module of \gls{trace} is based on a two-fluid six-equation model, 
+The hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
 solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant.
 The formulations are both averaged in time and volume to filter out short-term and short scale variations in the flow.
-Furthermore, the formulations are given in volumetric term (i.e., per unit volume) with respect to pre-defined control volume (the so-called \emph{node}).
-A symbol is defined the first time it appears in an equation.
-The complete list of symbol can be found in Appendix~\ref{app:glossary}.
+Furthermore, the formulations are given in volumetric term (i.e., per unit volume basis) with respect to a defined control volume (or \emph{node}).
+A symbol is defined the first time it appears in an equation 
+and the complete list of symbols can be found in the \hyperref[app:notations]{Glossary of Notations} at back of the thesis.
 
 \paragraph{Mass balance equations, liquid and gas phases:}
 \begin{equation}
@@ -26,15 +26,29 @@ The complete list of symbol can be found in Appendix~\ref{app:glossary}.
 \label{eq:mass_balance_gas}
 \end{equation}
 where the subscripts indicate the phase, $l$ for the liquid phase and $g$ for the gas phase (vapor); 
-\gls{alpha} is the void fraction; 
-$\rho_\circ$ is the mass density of the respective phase;
-and $\mathbf{v}_\circ$ is the velocity of the respective phase.
+\gls[hyper=false]{alpha} is the void fraction; 
+\gls[hyper=false]{rhol} (\gls[hyper=false]{rhog}) is the mass density of the liquid (gas) phase;
+and \gls[hyper=false]{vl} (\gls[hyper=false]{vg}) is the flow velocity of the liquid (gas) phase.
+The terms in either sides of the two mass balance equations are explained in Table~\ref{tab:mass_balance}.
 
-The first term on the left hand side is the volumetric rate of change of the mass of the corresponding phase.
-The second term is the the volumetric mass convected out of the control volume for the corresponding phase.
-The term \gls{Gamma} on the right hand side is the volumetric interfacial mass-transfer rate,
-with a convention that it is positive for the transfer from liquid phase to gas phase.
-This term is defined in Eq.~\ref{eq:Gamma} below.
+\begin{table}[ht]
+	\myfloatalign
+	\caption[The terms in \glsentryshort{trace} two-fluid model mass balance equations]{The terms in \glsentryshort{trace} two-fluid model mass balance equations (all are given in volumetric term)}
+	\label{tab:mass_balance}
+	\begin{tabularx}{\textwidth}{Xcc} 
+		\toprule
+		\tableheadline{Terms} & \tableheadline{Liquid Phase} & \tableheadline{Gas Phase} \\ 
+		\midrule
+		mass rate of change  					 & $\frac{\partial [(1-\alpha)\rho_l]}{\partial t}$  & $\frac{\partial [\alpha \rho_g]}{\partial t}$ \\
+		mass convection rate 					 & $\nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l}]$   & $\nabla \cdot [\alpha \rho_g \mathbf{v_g}]$ \\
+		interfacial mass-transfer rate & $- \Gamma$                                        & $\Gamma$ \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Note that the term \gls[hyper=false]{Gamma}, the volumetric interfacial mass-transfer rate,
+is given with a convention that it is positive for the transfer from liquid phase to gas phase.
+This term is defined in Eq.~(\ref{eq:Gamma}) below.
 
 \paragraph{Momentum balance equations, liquid and gas phases:}
 \begin{equation}
@@ -142,11 +156,12 @@ Additionally, the heat transfer terms at the interface between the two phases ar
 \label{eq:qil}
 \end{equation}
 \begin{equation}
-	q_{ig} = h_{ig} \, a_{i} \, (T_{sg} - T_g)
+	q_{ig} = \frac{p_g}{p} \, h_{ig} \, a_{i} \, (T_{sg} - T_g)
 \label{eq:qig}
 \end{equation}
 where \gls{hil} (\gls{hig}) is the \gls{htc} for liquid (gas) phase at the interface;
 \gls{ai} is the volumetric interfacial surface area;
+\gls{pg} is the partial pressure of the gas phase;
 and \gls{tsg} is the saturation temperature corresponding to partial pressure of the gas phase.
 
 Finally, the mass-transfer rate at the interface is defined using a thermal-energy jump condition that results in
