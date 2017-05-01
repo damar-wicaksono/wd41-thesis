@@ -2,9 +2,22 @@
 
 The ubiquity of computer simulation applications in many fields of science and engineering results in an even more pervasive definitions of the term \textit{scientific computer simulation} itself 
 and other associated terms such as \textit{model} and \textit{simulation}.
+\marginpar{scientific computer simulation}
 Though most of the definitions in the literature are not necessarily in contradiction to each other, 
 to avoid confusion, this thesis adopts a recent definition proposed by Kaizer et al.\cite{Kaizer2015} quoted below,
 
 \begin{quote}
-	Scientific Computer Simulation is the imitation of a behavior of a system, entity, phenomenon, or process in the physical universe using limited mathematical concepts, symbols, and relations through the exercise or use of scientific computer model.
+	Scientific Computer Simulation is the imitation of a behavior of a system, entity, phenomenon, or process in the physical universe 
+	using limited mathematical concepts, symbols, and relations through the exercise or use of scientific computer model.
 \end{quote}
+
+There are three main points in this definition.
+\marginpar{model, simulation, and computer simulation}
+First, this definition accentuates the difference between a \emph{model} and its \emph{simulation}.
+Specifically, the former deals with the notion of representation, while the latter deals with the notion of imitation of a behavior.
+Secondly, what makes a model scientific is that it treats physical phenomena or the behavior of a real world system as its subject.
+Thirdly and finally, the modifier \emph{computer} in the definition makes it explicit that digital computer is used to solve whatever mathematical models serve as the representation.
+This is usually the case for mathematical models that cannot be solved analytically.
+Though this limitation what makes a solution of the model possible in the first place, 
+it also affects the solution and its possible interpretation and thus many computational-related aspects also need to be comprehensively considered.
+\footnote{Beven \cite{Beven2009} articulates this distinction into three levels of model: perceptual model (i.e., theoretical description of some physical phenomena), formal model (i.e., the mathematical description of it), and procedural model  (i.e., computer implementation of the formal model). For many physical system modeling applications, only the procedural model is able to make a quantitative prediction of the system. These distinctions are useful in acknowledging the level of approximation involved in moving from perceptual to procedural model.}
