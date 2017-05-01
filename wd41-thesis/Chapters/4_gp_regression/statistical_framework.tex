@@ -1,1 +1,26 @@
 \section{Statistical Framework}\label{sec:gp_statistical_framework}
+
+Consider a (possibly nonlinear) \emph{regression} problem:
+Given a deterministic computer code (which again, in essence a function) $f:\mathbf{x} \in \boldsymbol{\chi} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
+evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_i\}_{i=1}^N$, 
+resulting in a finite set inputs/outputs pair of such code $\{\mathbf{x}_i, f(\mathbf{x}_i) = y_i\}_{i=1}^N$\footnote{often referred to as \emph{training data}},
+the objective of regression is to compute (or \emph{predict}) the value of $\mathbf{x}^*$ with $\mathbf{x}^* \notin \mathbf{DM}$.
+As before, the domain $\boldsymbol{\chi}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
+
+To evaluate $f$ at any given $\mathbf{x}^*$ not in the original design matrix (or training data), 
+the function has to be reconstructed or estimated based on the given training data.
+Furthermore, the true underlying function $f(\circ)$ that produces $y_i$ itself might be too complex and expensive to evaluate, 
+such as in the case of a complex computer code.
+This fact also often limits the size of training data.
+As such, the estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
+Although simpler, such an approximation should capture the most, if not all, important aspects of the inputs/outputs relationship of the true underlying function.
+This simpler, approximating function is often referred to as an \emph{emulator}, \emph{surrogate model}, or \emph{meta-model}.
+
+In this thesis, 
+the meta-model is represented using \gls[hyper=false]{gp}, following the seminal works of Sacks et al. (\cite{Sacks1989, Sacks1989a}) and interpreted through a Bayesian perspective.
+The advantages of using \gls[hyper=false]{gp} to represent an unknown function are its ability to model a complicated multi-dimensional function with limited number of parameters (\cite{Jones2009})
+as well as the provision of prediction error estimate (\cite{Santner2003,Currin1991}).
+The Bayesian perspective, in turn, gives more intuitive interpretation of the prediction error in terms of (epistemic) uncertainty.
+
+\paragraph{a Bayesian Perspective}
+
