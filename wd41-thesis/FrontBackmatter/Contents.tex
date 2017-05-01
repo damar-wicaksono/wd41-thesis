@@ -49,9 +49,12 @@
     %*******************************************************      
       %\phantomsection 
     \refstepcounter{dummy}
+    \listofalgorithms
+    \addtocontents{loa}{\def\string\figurename{Algorithm}}
+    %\addcontentsline{toc}{chapter}{List of Algorithms}
     %\addcontentsline{toc}{chapter}{\lstlistlistingname}
-    \pdfbookmark[1]{\lstlistlistingname}{lol}
-    \lstlistoflistings 
+    %\pdfbookmark[1]{\lstlistlistingname}{lol}
+    %\lstlistoflistings 
 
     \vspace{8ex}
        
