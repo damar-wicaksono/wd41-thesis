@@ -7,6 +7,16 @@ to modernize into a single software package all previous \gls[hyper=false]{usnrc
 that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 
+\subsection{System Code}\label{sub:system_code}
+
+System code is 
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=0.55]{../figures/heatedChannel/heatedChannel.pdf}
+	\caption[Illustration of Heated Channel]{System thermal-hydraulics encompasses many aspects of nuclear system thermal-hydraulics, but the core of the problem is to model appropriately the two-phase hydraulics and heat conduction of coolant flow in a heated channel in steady or transient condition. Here it is shown a simplified picture of loss of coolant accident in a \glsentryshort{pwr} where phase change along the heated channel occurs.}
+	\label{fig:heated_channel}
+\end{figure}
+
 \subsection{Governing Equations}\label{sub:governing_equations}
 
 The hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
