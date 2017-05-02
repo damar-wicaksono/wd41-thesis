@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170501110047" modified="D:20170501125736"/>
+<info created="D:20170501110047" modified="D:20170502203853"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -254,21 +254,22 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1.14518 0 0 0.993308 91.0691 2.75203" fill="lightblue" opacity="75%">
-192.379 572.126 m
-192.379 411.196 l
-200.238 411.196 l
-200.238 572.126 l
+<path layer="alpha" matrix="0.54067 0 0 0.556874 174.618 181.357" stroke="black">
+240 384 m
+464 352 l
+</path>
+<path matrix="0.541845 0 0 1.4278 174.336 -212.458" stroke="black">
+240 448 m
+464 480 l
+</path>
+<path matrix="0.6 0 0 0.75 147.089 113.376" stroke="black" fill="white" dash="dashed">
+384 480 m
+384 352 l
+464 352 l
+464 480 l
 h
 </path>
-<path fill="lightblue" opacity="75%">
-192.379 572.126 m
-192.379 411.196 l
-200.238 411.196 l
-200.238 572.126 l
-h
-</path>
-<path matrix="1 0 0 1 128.379 -116.804" fill="lightblue" opacity="75%">
+<path matrix="1 0 0 1 128.379 -116.804" fill="darkgray" opacity="75%">
 192 512 m
 64 0 0 -64 128 512 64 512 a
 64 528 m
@@ -279,43 +280,42 @@ h
 192 528 l
 h
 </path>
-<path matrix="0.8685 0 0 1 89.0705 11.1963" fill="lightblue" opacity="30%">
+<path matrix="1.14518 0 0 0.993308 91.0691 2.75203" fill="darkgray" opacity="75%">
+192.379 572.126 m
+192.379 411.196 l
+200.238 411.196 l
+200.238 572.126 l
+h
+</path>
+<path fill="darkgray" opacity="75%">
+192.379 572.126 m
+192.379 411.196 l
+200.238 411.196 l
+200.238 572.126 l
+h
+</path>
+<path matrix="0.8685 0 0 1 89.0705 11.1963" fill="darkgray" opacity="30%">
 128 480 m
 128 440.982 l
 256.492 440.982 l
 256.492 480 l
 h
 </path>
-<path matrix="0.541845 0 0 1.4278 174.336 -212.458" stroke="black">
-240 448 m
-464 480 l
-</path>
-<path fill="lightblue" opacity="75%">
+<path fill="darkgray" opacity="75%">
 192.379 555.196 m
 192.379 542.412 l
 128.379 542.412 l
 128.379 555.196 l
 h
 </path>
-<path matrix="1 0 0 1 -0.414063 0" fill="lightblue" opacity="10%">
+<path matrix="1 0 0 1 -0.414063 0" fill="darkgray" opacity="10%">
 320.379 587.196 m
 320.379 576.045 l
 384.379 576.045 l
 384.379 587.196 l
 h
 </path>
-<path matrix="0.54067 0 0 0.556874 174.618 181.357" stroke="black">
-240 384 m
-464 352 l
-</path>
-<path matrix="0.6 -0 0 0.75 147.089 113.376" stroke="black" fill="white" dash="dashed">
-384 480 m
-384 352 l
-464 352 l
-464 480 l
-h
-</path>
-<path matrix="1 0 0 1 64.3785 43.1963" fill="lightblue" opacity="10%">
+<path matrix="1 0 0 1 64.3785 43.1963" fill="darkgray" opacity="10%">
 255.682 584.462 m
 64 0 0 64 191.682 584.462 127.682 584.462 a
 128 576 m
@@ -336,14 +336,14 @@ h
 192 576 m
 64 0 0 64 128 576 64 576 a
 </path>
-<path matrix="0.864957 -0 0 3.28054 89.5239 -955.462" fill="lightblue" opacity="10%">
+<path matrix="0.864957 0 0 3.28054 89.5239 -955.462" fill="darkgray" opacity="10%">
 128 480 m
 128 440.982 l
 256.492 440.982 l
 256.492 480 l
 h
 </path>
-<path matrix="0.868282 0 -0 0.853791 89.0983 69.6797" fill="lightblue" opacity="50%">
+<path matrix="0.868282 0 0 0.853791 89.0983 69.6797" fill="darkgray" opacity="50%">
 128 448 m
 128 400 l
 256 400 l
@@ -360,12 +360,12 @@ h
 128 512 l
 64 512 l
 </path>
-<path matrix="0.492548 0 -0 1.41288 194.286 -147.349" stroke="black" pen="heavier">
+<path matrix="0.492548 0 0 1.41288 194.286 -147.349" stroke="black" pen="heavier">
 256 384 m
 256 512 l
 320 512 l
 </path>
-<path matrix="1 0 0 2 64.3785 -532.804" stroke="black" pen="heavier">
+<path matrix="0.477207 0 0 2 131.296 -532.804" stroke="black" pen="heavier">
 64 544 m
 128 544 l
 128 576 l
@@ -391,42 +391,42 @@ h
 128 585 l
 112 585 l
 </path>
-<path matrix="1 -0 0 1 65.4551 11.1963" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 65.4551 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 84.6848 11.1963" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 84.6848 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 101.761 10.658" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 101.761 10.658" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 119.914 11.2671" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 119.914 11.2671" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 47.8402 11.7345" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 47.8402 11.7345" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 64.3785 11.1963" fill="darkred" opacity="50%">
+<path matrix="1 0 0 1 64.3785 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
 240 464 m
 240 384 l
 234 384 l
@@ -445,7 +445,7 @@ h
 435 464 l
 h
 </path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="darkred" tiling="falling">
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="black" tiling="falling">
 435 464 m
 435 432 l
 448 432 l
@@ -459,21 +459,21 @@ h
 422 464 l
 h
 </path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="lightblue">
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="darkgray">
 400 464 m
 400 432 l
 426 432 l
 426 464 l
 h
 </path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="lightblue">
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="darkgray">
 400 432 m
 400 400 l
 426 400 l
 426 432 l
 h
 </path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="lightblue">
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="darkgray">
 400 400 m
 400 368 l
 426 368 l
@@ -507,14 +507,14 @@ h
 <path matrix="1 0 0 1 -18.3708 29.3685" fill="1">
 2 0 0 2 416 384 e
 </path>
-<path matrix="1 0 0 1 -22.5114 -22.6237" fill="darkred" tiling="falling">
+<path matrix="1 0 0 1 -22.5114 -22.6237" fill="black" tiling="falling">
 435 464 m
 435 432 l
 448 432 l
 448 464 l
 h
 </path>
-<path matrix="1 0 0 1 -22.5114 -54.6237" fill="darkred" tiling="falling">
+<path matrix="1 0 0 1 -22.5114 -54.6237" fill="black" tiling="falling">
 435 464 m
 435 432 l
 448 432 l
@@ -566,7 +566,7 @@ h
 </path>
 <text matrix="1 0 0 1 -136.993 73.5963" transformations="translations" pos="480 416" stroke="black" type="label" width="111.012" height="8.307" depth="2.32" valign="baseline" size="large">Two-phase hydraulics</text>
 <text matrix="0.994039 0 0 1.00766 -89.0574 -28.6506" transformations="translations" pos="448 384" stroke="black" type="label" width="155.815" height="8.307" depth="2.32" valign="baseline" size="large">Heat conduction through solid</text>
-<path matrix="1.13193 -0 0 0.518174 -79.2737 228.085" stroke="black">
+<path matrix="1.13193 0 0 0.518174 -79.2737 228.085" stroke="black">
 403.489 473.376 m
 403.489 486.257 l
 426.358 486.257 l
@@ -619,14 +619,14 @@ h
 239.181 367.681
 238.481 390.774 c
 </path>
-<path fill="lightblue" opacity="10%">
+<path fill="darkgray" opacity="10%">
 192.379 619.196 m
 192.379 572.126 l
 200.238 572.126 l
 200.238 619.196 l
 h
 </path>
-<path matrix="1.14518 0 0 1.02288 91.0691 -14.1669" fill="lightblue" opacity="10%">
+<path matrix="1.14518 0 0 1.02288 91.0691 -14.1669" fill="darkgray" opacity="10%">
 192.379 619.196 m
 192.379 572.126 l
 200.238 572.126 l
@@ -647,7 +647,7 @@ h
 306.127 374.584
 298.259 367.959 c
 </path>
-<path stroke="black">
+<path stroke="black" pen="heavier">
 368 576 m
 383.964 576.045 l
 </path>
@@ -676,5 +676,59 @@ h
 368 576 l
 </path>
 <text matrix="1 0 0 1 3.47869 -9.60346" transformations="translations" pos="340.494 557.211" stroke="black" type="label" width="30.076" height="8.302" depth="0" valign="baseline" size="large">Break</text>
+<path stroke="black" pen="heavier">
+128 576 m
+145.906 555.196 l
+</path>
+<path stroke="black" pen="heavier">
+144 576 m
+161.837 555.196 l
+</path>
+<path stroke="black" pen="heavier">
+145.906 555.196 m
+128.379 555.196 l
+</path>
+<path fill="darkgray" opacity="75%">
+128 576 m
+144 576 l
+161.837 555.196 l
+145.906 555.196 l
+128 576 l
+</path>
+<text matrix="1 0 0 1 -30.6345 -26.0137" transformations="translations" pos="112 608" stroke="black" type="label" width="108.676" height="6.926" depth="1.93" valign="baseline">Emergency Core Cooling</text>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+139.534 571.34 m
+149.093 558.596 l
+</path>
+<path matrix="1 0 0 1 -32 32" fill="darkgray" opacity="30%">
+64 416 m
+64 392 l
+88 392 l
+88 416 l
+h
+</path>
+<path matrix="1 0 0 1 -32 32" fill="darkgray" opacity="50%">
+64 392 m
+64 368 l
+88 368 l
+88 392 l
+h
+</path>
+<path matrix="1 0 0 1 -32 32" fill="darkgray" opacity="75%">
+64 368 m
+64 344 l
+88 344 l
+88 368 l
+h
+</path>
+<path matrix="1 0 0 1 -32 32" fill="darkgray" opacity="10%">
+64 440 m
+64 416 l
+88 416 l
+88 440 l
+h
+</path>
+<text matrix="1 0 0 1 -72 16" transformations="translations" pos="136 368" stroke="black" type="label" width="111.859" height="6.926" depth="1.93" valign="baseline">High liquid phase content</text>
+<text matrix="1 0 0 1 -40 24" transformations="translations" pos="104 432" stroke="black" type="label" width="101.121" height="6.926" depth="1.93" valign="baseline">High gas phase content</text>
 </page>
 </ipe>

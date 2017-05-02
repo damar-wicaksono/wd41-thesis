@@ -7,14 +7,61 @@ to modernize into a single software package all previous \gls[hyper=false]{usnrc
 that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 
-\subsection{System Code}\label{sub:system_code}
+\subsection{Thermal-hydraulics System Code}\label{sub:th_system_code}
 
-System code is 
+% What is system code
+Thermal-hydraulics system code is a computer code used to analyze thermal-hydraulics behavior of nuclear power plants \cite{Roth2014}.
+Its current usage ranges from safety analysis and licensing process of current reactor designs to qualification of a new reactor design \cite{Petruzzi2008, Petruzzi2016}.
+To that end, the code is designed to be a comprehensive tool capable of simulating wide range of operating conditions, 
+from normal operations, anticipated transients, to accident scenarios foreseen in nuclear power plant operation.
+
+% What is inside system code and how it is being used
+To model properly the thermal-hydraulics behavior of nuclear power plants, many aspects.
+
+% Component-system code
+
+% The essence of the problem tackled in thermal-hydraulics system code
+As such, system thermal-hydraulics distinguishes itself by considering explicitly the geometry, materials, boundary conditions, and control systems of an operating nuclear power plant \cite{DAuria2012}.
+Yet, it can be argued that the modeling of two-phase flow inside a heated channel remains a central part in nuclear thermal-hydraulics analysis 
+which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios. 
+This is also supported by the fact that the majority of operating nuclear power plants is of Light Water Reactor type, 
+where two-phase flow can be expected to occur during its operation\footnote{in normal operating condition for BWR, and accident condition for PWR}.
+
+% Major difficulty
+The remaining problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is still a difficult task.
+The due to the fact that in two-phase flow, the morphological configurations of the flow varies widely, affected by many flow parameters and fluid properties.
+Different morphological configuration implies different interfacial structure between the two phases (see figure), 
+which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
+Put differently,  
+The wide range of morphological configurations, characterized by different interfacial structure between the two phases (see figure) in turn affects the   
+Though mass, momentum, and energy conservation equations remain a valid mathematical model remains 
+The solution of local instantaneous formulation of two-phase flow, where the interface structure fully resolved, is still intractable for the purpose of system thermal-hydraulics analysis.
+
+% Major simplification
+ 
+Most system code, such as trace, adopted a component-based approach to modeling a reactor system.
+In such approach the
+
+
+Indeed, according to D'Auria the distinguishing feature of system code is the ca.
+And yet, at its heart, the essence of the problem remains, 
+ 
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.55]{../figures/heatedChannel/heatedChannel.pdf}
 	\caption[Illustration of Heated Channel]{System thermal-hydraulics analysis encompasses many aspects of nuclear system thermal-hydraulics, but the core of the problem for predicting the cladding temperature evolution (especially during accident condition) is to model the coolant flow in a heated channel in steady or transient condition. Here it is shown a simplified picture of loss of coolant accident in a \glsentryshort{pwr} where phase change along the heated channel occurs.}
 	\label{fig:heated_channel}
+\end{figure}
+
+Time- and volume-averThere major, but common simplifications adopted in the modeling of nuclear reactor systems by system codes.
+ 
+Though three-dimensional treatment of flow is available in some, the flow in majority of hydraulic components are still treated as one-dimension.
+
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=0.55]{../figures/flowAveraging/flowAveraging.pdf}
+	\caption[Illustration of Flow Averaging]{}
+	\label{fig:flow_averaging}
 \end{figure}
 
 \subsection{Governing Equations}\label{sub:governing_equations}
@@ -186,7 +233,7 @@ The heat transfer terms between the wall and the phases follow Newton's law of c
 \label{eq:qwsat}
 \end{equation}
 where \gls[hyper=false]{tw}, \gls[hyper=false]{tl}, \gls[hyper=false]{tg}, \gls[hyper=false]{tsat} are the wall, liquid phase, liquid phase, and liquid saturation temperatures, respectively;
-\gls[hyper=false]{awl} (\gls[hyper=false]{awg}) is the volumetric surface contact area between the wall and liquid (gas) phase;
+\gls[hyper=false]{awl} (\gls[hyper=false]{awg}) is the volumetric surface contact area between the wall and liquid (gas) phase (or \emph{the interfacial area concentration});
 and \gls[hyper=false]{hwl}, \gls[hyper=false]{hwg}, and \gls[hyper=false]{hwsat} are the \glspl[hyper=false]{htc} between wall and liquid, wall and gas, and wall-saturated liquid, respectively.
 The volumetric surface contact area as well as the heat transfer coefficients are obtained from a set of flow regime-dependent empirical correlations.
 
