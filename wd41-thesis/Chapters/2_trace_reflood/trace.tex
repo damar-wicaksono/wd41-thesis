@@ -26,24 +26,6 @@ Yet, it can be argued that the modeling of two-phase flow inside a heated channe
 which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios. 
 This is also supported by the fact that the majority of operating nuclear power plants is of Light Water Reactor type, 
 where two-phase flow can be expected to occur during its operation\footnote{in normal operating condition for BWR, and accident condition for PWR}.
-
-% Major difficulty
-The remaining problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is still a difficult task.
-This due to the fact that in two-phase flow, the morphological configurations of the flow can vary widely.
-Different morphological configuration implies different interfacial structure between the two phases (see figure), 
-which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
-Additionally, the interfacial structure and its deformation in an arbitrary flow configuration are not known \emph{a priori} and becomes part of the solution.
-The solution of local instantaneous formulation of two-phase flow, where the interface structure fully resolved, is still intractable for the purpose of system thermal-hydraulics analysis.
-
-% Major simplification
- 
-Most system code, such as trace, adopted a component-based approach to modeling a reactor system.
-In such approach the
-
-
-Indeed, according to D'Auria the distinguishing feature of system code is the ca.
-And yet, at its heart, the essence of the problem remains, 
- 
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.55]{../figures/heatedChannel/heatedChannel.pdf}
@@ -51,9 +33,49 @@ And yet, at its heart, the essence of the problem remains,
 	\label{fig:heated_channel}
 \end{figure}
 
-Time- and volume-averThere major, but common simplifications adopted in the modeling of nuclear reactor systems by system codes.
- 
-Though three-dimensional treatment of flow is available in some, the flow in majority of hydraulic components are still treated as one-dimension.
+% Major difficulty
+This remaining problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is far from trivial.
+This due to the fact that in two-phase flow, the morphological configurations of the flow can vary widely.
+Different morphological configuration implies different interfacial surface structure between the two phases (see figure), 
+which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
+Additionally, the interfacial surface and its deformation in an arbitrary flow configuration are not known \emph{a priori} and becomes part of the solution.
+
+% Rigorous approach
+Rigorous solution of local instantaneous formulation of two-phase flow respects, on top of the mass, momentum, and energy balance of each phase, the \emph{topological constraint} of the flow.
+The constraint states that only one phase can exist at any given time and at any given location in the flow.
+This is illustrated in the Fig. where a hypothetical probe is put within a two-phase flow and a signal of indicator function $\alpha(\mathbf{r}, t)$ is recorded.
+The indicator function\footnote{the indicator function defined above is equivalent to the local instantaneous void fraction, which can also be interpreted as the probability that the gas phase is present at a given location at a given moment} is defined as,
+\begin{equation}
+  \alpha (\mathbf{r}, t) =
+    \begin{cases}
+      1 \, ; \, \text{if} A \in \text{gas} \\
+      0 \, ; \, \text{otherwise}
+    \end{cases}
+\label{eq:indicator_function}
+\end{equation}
+where 
+The solution of local instantaneous formulation of two-phase flow requires the motion of interfacial surface is resolved. 
+As the time and length scales of two-phase flow of an arbitrary morphological configurations can vary wildly, 
+the problem of resolving the interfacial surface becomes intractable. 
+Though advances have been made in the area of Computational Fluid Dynamics (such as PSI boil) in this regards, 
+the problem remains intractable for the purpose of thermal-hydraulics system analysis.
+
+% Time and Volume Averaged
+To simplify the intractability problem of resolving the motion of interfacial surface motion in two-phase flow, 
+time- and volume-average is carried out on the flow.
+Averaging can be seen as a filtering operation to remove the temporal and spatial fluctuation (short scale variation) in the flow.
+The length and duration which define short scale variation are problem specific 
+(that is, at least qualitatively, not longer than the length and time scales of the flow configuration of interest).
+The volume over which averaging is carried out is referred to as a \emph{control volume} or a \emph{cell}.
+
+Averaging the indicator function both in time and in volume gives the void fraction,
+\begin{equation}
+  \langle \bar{\alpha} \rangle =  \frac{1}{\Delta V \Delta t} \int_{V}^{V + \Delta V} \int_{t}^{t + \Delta t} \alpha(\mathbf{r}, t) d\mathbf{r} dt = \frac{1}{\Delta V} \int_{V}^{V + \Delta V} \overline{\alpha(\mathbf{r})} d\mathbf{r}
+\label{eq:void_fraction}
+\end{equation}
+Following the above formulation, void fraction can be interpreted as the fraction of the control volume occupied by the gas phase (cite TRACE). 
+In the subsequent section the angle brackets and the overbar will be dropped from the void fraction notation 
+and any mention of void fraction will refer to the time- and volume-averaged formulation given above.
 
 \begin{figure}[bth]
 	\centering
@@ -62,11 +84,15 @@ Though three-dimensional treatment of flow is available in some, the flow in maj
 	\label{fig:flow_averaging}
 \end{figure}
 
+Time and volume average the states variables in the conservation equation results in the so-called two-fluid six equation model (cite ISHII).
+This is the state of the art formulation for describing two-phase flow in system codes, which include CATHARE, RELAP5, and TRACE.
+In the subsequent section the final formulation of the governing equations (time- and volume-averaged) adopted in TRACE are summarized. 
+Complete derivation of this formulation can be found in (TRACE theory manual)
+
 \subsection{Governing Equations}\label{sub:governing_equations}
 
-The hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
+As mentioned, the hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
 solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant \cite{USNRC2012}.
-The formulations are both averaged in time and volume to filter out short-term and short scale variations in the flow.
 Furthermore, the formulations are given in volumetric term (i.e., per unit volume basis) with respect to a defined control volume (or \emph{node}).
 A symbol is defined the first time it appears in an equation 
 and the complete list of symbols can be found in the \hyperref[app:notations]{Glossary of Notations} at back of the thesis.
