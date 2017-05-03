@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170501110047" modified="D:20170502203853"/>
+<info created="D:20170501110047" modified="D:20170503193139"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -254,11 +254,11 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="0.54067 0 0 0.556874 174.618 181.357" stroke="black">
+<path layer="alpha" matrix="0.540671 0 0 0.58198 174.617 172.52" stroke="black">
 240 384 m
 464 352 l
 </path>
-<path matrix="0.541845 0 0 1.4278 174.336 -212.458" stroke="black">
+<path matrix="0.541846 0 0 1.40264 174.335 -200.38" stroke="black">
 240 448 m
 464 480 l
 </path>
@@ -391,42 +391,42 @@ h
 128 585 l
 112 585 l
 </path>
-<path matrix="1 0 0 1 65.4551 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.33333 0 0 1 10.6667 12" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 84.6848 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.29797 0 0 1 36.537 12" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 101.761 10.658" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.33333 0 0 1 46.6667 12" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 119.914 11.2671" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.33333 0 0 1 66.6667 12" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 47.8402 11.7345" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.35997 0 0 1.00332 -9.75447 10.4601" stroke="0" fill="black" opacity="75%" tiling="falling">
 160 464 m
 160 384 l
 166 384 l
 166 464 l
 h
 </path>
-<path matrix="1 0 0 1 64.3785 11.1963" stroke="0" fill="black" opacity="75%" tiling="falling">
+<path matrix="1.33333 0 0 1 -16 12" stroke="0" fill="black" opacity="75%" tiling="falling">
 240 464 m
 240 384 l
 234 384 l
@@ -437,27 +437,6 @@ h
 127.5 560.93 m
 136 560.93 l
 136 399.445 l
-</path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="lightgray">
-432 464 m
-432 432 l
-435 432 l
-435 464 l
-h
-</path>
-<path matrix="1 0 0 1 -22.5114 9.3763" fill="black" tiling="falling">
-435 464 m
-435 432 l
-448 432 l
-448 464 l
-h
-</path>
-<path matrix="1 0 0 1 -12.5114 9.3763" fill="darkgray" tiling="rising">
-416 464 m
-416 432 l
-422 432 l
-422 464 l
-h
 </path>
 <path matrix="1 0 0 1 -22.5114 9.3763" fill="darkgray">
 400 464 m
@@ -549,20 +528,9 @@ h
 422 464 l
 h
 </path>
-<path matrix="1 0 0 0.5 64.3785 203.196" stroke="black">
-224 448 m
-224 384 l
-240 384 l
-240 448 l
-h
-</path>
-<path matrix="0.556938 0 0 0.556874 163.624 181.357" stroke="black">
+<path matrix="0.534299 0 0 0.58198 172.317 172.52" stroke="black">
 224 384 m
 384 352 l
-</path>
-<path matrix="0.556938 0 0 1.43478 163.624 -215.587" stroke="black">
-224 448 m
-384 480 l
 </path>
 <text matrix="1 0 0 1 -136.993 73.5963" transformations="translations" pos="480 416" stroke="black" type="label" width="111.012" height="8.307" depth="2.32" valign="baseline" size="large">Two-phase hydraulics</text>
 <text matrix="0.994039 0 0 1.00766 -89.0574 -28.6506" transformations="translations" pos="448 384" stroke="black" type="label" width="155.815" height="8.307" depth="2.32" valign="baseline" size="large">Heat conduction through solid</text>
@@ -591,7 +559,7 @@ h
 247 559.853 l
 247 399.983 l
 </path>
-<text matrix="1 0 0 1 69.4384 85.5868" transformations="translations" pos="138.864 391.8" stroke="black" type="label" width="67.795" height="8.169" depth="0" valign="baseline" size="large">Reactor Core</text>
+<text matrix="1 0 0 1 69.4384 89.5868" transformations="translations" pos="138.864 391.8" stroke="black" type="label" width="67.795" height="8.169" depth="0" valign="baseline" size="large">Reactor Core</text>
 <text matrix="1 0 0 1 -158.147 107.764" transformations="translations" pos="446.762 582.89" stroke="black" type="label" width="118.131" height="8.307" depth="2.32" valign="baseline" size="large">Reactor pressure vessel</text>
 <text matrix="1 0 0 1 -373.46 -29.2287" transformations="translations" pos="452.61 574.812" stroke="black" type="label" width="46.334" height="8.307" depth="2.32" valign="baseline" size="large">Cold Leg</text>
 <text matrix="1 0 0 1 -60.1799 -62.2792" transformations="translations" pos="450.51 640.59" stroke="black" type="label" width="41.452" height="8.174" depth="2.32" valign="baseline" size="large">Hot Leg</text>
@@ -730,5 +698,37 @@ h
 </path>
 <text matrix="1 0 0 1 -72 16" transformations="translations" pos="136 368" stroke="black" type="label" width="111.859" height="6.926" depth="1.93" valign="baseline">High liquid phase content</text>
 <text matrix="1 0 0 1 -40 24" transformations="translations" pos="104 432" stroke="black" type="label" width="101.121" height="6.926" depth="1.93" valign="baseline">High gas phase content</text>
+<path stroke="black">
+292 428.002 m
+292 396 l
+304.378 396 l
+304.378 428.002 l
+h
+</path>
+<path matrix="0.534299 0 0 1.40956 172.317 -203.48" stroke="black">
+224 448 m
+384 480 l
+</path>
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="black" tiling="falling">
+435 464 m
+435 432 l
+448 432 l
+448 464 l
+h
+</path>
+<path matrix="1 0 0 1 -12.5114 9.3763" fill="darkgray" tiling="rising">
+416 464 m
+416 432 l
+422 432 l
+422 464 l
+h
+</path>
+<path matrix="1 0 0 1 -22.5114 9.3763" fill="lightgray">
+432 464 m
+432 432 l
+435 432 l
+435 464 l
+h
+</path>
 </page>
 </ipe>
