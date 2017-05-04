@@ -16,8 +16,8 @@ Its current usage ranges from safety analysis and licensing process of current r
 To that end, the code is designed to be a comprehensive tool capable of simulating wide range of operating conditions, 
 from normal operations, anticipated transients, to accident scenarios foreseen in nuclear power plant operation.
 
-% Component
-Nuclear reactor system is a complex system of many interconnected components, each serving distinct purpose, built with many engineered safety features.
+% Component-based system code
+Nuclear reactor system is a complex system of numerous interconnected components, each serving distinct purpose, built with multiple engineered safety features.
 During a transient, the system might exhibit complex behavior with important physical phenomena interacting at vastly different time scales ($10^{-1} \, [s]$ in a power excursion due to control rod ejection, $10^5 \, [s]$ for decay heat removal after successful reactor shutdown) and
 length scales ($10^{-3} \, [mm]$ for boiling at sub-channel level, $10^3 \, [m]$ for coolant flow in the primary/secondary circuit).
 Additionally, the engineered safety features are designed for some equipments (such as control rods, valves, pump, etc.) to perform safety-related action.
@@ -27,6 +27,12 @@ Indeed, com\-ponent-based codes, such as \gls[hyper=false]{trace}, approach the 
 On top of a two-phase fluid dynamics equation solver, system code includes models for steam separator, pump, heat exchanger, valve, pressurizer, and neutron-kinetics 
 as well as comprehensive models for control system to mimic the signal monitoring and component action actuation systems in a \gls[hyper=false]{npp}.   
 System thermal-hydraulics thus distinguishes itself by considering explicitly the geometry, materials, boundary conditions, various interconnecting components, and control systems that constitute an \gls[hyper=false]{npp} \cite{DAuria2012}.
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=0.50]{../figures/nuclearTHSystem/nuclearTHSystem.pdf}
+	\caption[Illustration of Heated Channel]{}
+	\label{fig:nuclear_th_system}
+\end{figure}
 
 % The essence of the problem tackled in thermal-hydraulics system code
 However, it can be argued that the modeling of two-phase flow inside a heated channel remains a central part in nuclear thermal-hydraulics analysis 
