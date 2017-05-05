@@ -19,7 +19,7 @@ A collection of $D$ random variables $\mathbf{X} = [X_1, X_2, ...,X_D] \in \math
 p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
 \end{equation}
 
-The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separetes the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
+The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separates the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
 A $D$-variate random variable $\boldsymbol{X}$ distributed as multivariate normal is written as,
 
 \begin{equation}
@@ -31,9 +31,150 @@ where $\mathbb{E}$ is the expectation operator.
 The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive definite (PSD) $D \times D, S_{++}^D$ defined as,
 
 \begin{equation}
-	S_{++}^D = \{A \in \mathbb{R}^{D\times D}: A = A^T and \mathbf{x}^T A \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \} 
+	S_{++}^D = \{A \in \mathbb{R}^{D\times D}: A = A^T and \mathbf{x}^T A \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \}
+	\label{eq:covariance_matrix}
 \end{equation}
 
 \subsection{Gaussian Process}
 
+% What is a stochastic process
+Gaussian stochastic process is a particular class of \emph{stochastic} or \emph{random} process.
+\marginpar{Stochastic process}
+Stochastic process is a collection of random variables, each of which are often indexed with certain underlying rules or ordering.
+To be precise, a stochastic process is a set of random variables $\mathbf{X} = \{X_i, i \in I\}$, where $I$ is an index set, 
+and it is defined on a probability space $(\Omega, \mathcal{F}, \mathbb{P})$, 
+where $\Omega$, $\mathcal{F}$, and $\mathbb{P}$ are the sample space, the set of events, and the assigned probability to the event, respectively \cite{Syski2014}.
 
+% Examples of stochastic process applications
+For example, a time series can be modeled using stochastic process where the random variables are the observations taken at different time ordered sequentially.
+\marginpar{Stochastic process applications}
+In this case the index set is the time index of the observations.
+A spatial model, as another example, can be modeled as a collection of random variables indexed by their locations in space.
+And finally, in the metamodeling application, the random variables are collection of computational model output values at different input values.
+
+% Gaussian stochastic process
+\emph{Gaussian stochastic process} (GP) is defined as a collection of random variables, 
+\emph{arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
+\marginpar{Gaussian process}
+To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $Y(\circ)$ at various possible input $\mathbf{x}$ in the domain $\chi$.
+Specifically, $Y(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \chi \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the vector $\left[Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
+
+% Basic notation
+A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead mean vector and covariance matrix.
+A \gls[hyper=false]{gp} $Y$ with a given mean function $m$ and covariance $K$ is denoted as
+\begin{equation}
+	Y(\mathbf{x}) \sim \mathcal{GP} \left(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}^*) \right)
+\label{eq:gp_notation}
+\end{equation}
+
+% Mean Function
+The mean function of a Gaussian process $Y(\mathbf{x})$ is the function $m: \chi \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ defined as,
+\marginpar{Mean function}
+\begin{equation}
+	m(\mathbf{x}) = \mathbb{E}[Y(\mathbf{x})]
+\label{eq:gp_mean_functions}
+\end{equation}
+
+% Covariance Function
+The covariance function of a Gaussian process $Y(\mathbf{x})$, on the other hand, is the function $K: (\chi \subseteq \mathbb{R}^D) \times (\chi \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
+\marginpar{Covariance Function}
+\begin{equation}
+	K(\mathbf{x}_i, \mathbf{x}_j) = \text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_j)]
+\label{eq:gp_cov_functions}
+\end{equation}
+Notice that while the covariance function describes the covariance describes the covariance between pair of random function values, 
+it is defined only as a function of the two inputs differentiating them.
+Covariance function is also sometimes referred to as the \emph{covariance kernel} function as it defines the elements of the covariance matrix (see example below).
+As such, not all functions of the pair of inputs $\mathbf{x}_i, \mathbf{x}_j$ are a \emph{valid} covariance function, but only the ones that yield a valid variance-covariance matrix given by condition in Eq.~(\ref{eq:covariance_matrix}). 
+
+% Process Variance
+Finally, the process variance is defined as the covariance between two random function values at the same input,
+\marginpar{Process variance}
+\begin{equation}
+	K(\mathbf{x}_i, \mathbf{x}_i) = \text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_i)] = \mathbf{V}[Y(\mathbf{x}_i)]
+\label{eq:process_variance}
+\end{equation}
+
+% Gaussian Stochastic Process and Multivariate Gaussian Random Variable
+For a given finite $L$, a \gls[hyper=false]{gp} is reduced to a multivariate Gaussian random variable characterized by its mean vector $\boldsymbol{\mu}$ and covariance matrix $\boldsymbol{\Sigma}$,
+\begin{equation}
+	\begin{split}
+		[Y(\mathbf{x}_i)] & \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
+		\boldsymbol{\mu} & = [m(\mathbf{x}_1), m(\mathbf{x}_2), \cdots, (\mathbf{x}_L)]
+	\end{split}
+\label{eq:gp_to_mvn}
+\end{equation}
+
+
+% Example
+The shape of the random function drawn from a \gls[hyper=false]{gp} (or \emph{sampled path}) is characterized by its mean and covariance functions.
+Brief explanations of these functions will be provided in the next two subsections.
+In the meantime, an example of a fully specified Gaussian process will be used to illustrate how samples of functions can be drawn from such a stochastic process.
+For the example, the following mean and covariance function will be used
+\begin{equation}
+	\begin{split}
+		m(\mathbf{x}_1) & = 0 \\
+		K(\mathbf{x}, \mathbf{x}^*) & = \sigma^2 \exp{\left[-\frac{(\mathbf{x} - \mathbf{x}^*)^2}{2\theta^2}\right]}
+	\end{split}
+\label{eq:gp_example}
+\end{equation}
+
+
+% Stationarity Assumption
+
+% Strongly Stationary and Weakly Stationary
+
+% Stationary Covariance Function
+
+% Non-Stationary Gaussian Process
+
+\subsection{Covariance Kernel Function}\label{sub:gp_covariance}
+
+Covariance kernel function determines the covariation structure of dependent data.
+This, in turn, determines the behavior (or shape) of the sample path of the outputs between input points.
+For a stationary covariance function, it is more convenient to separate the constant stochastic process variance $\sigma^2$ and the stochastic process kernel correlation function $R(\circ,\circ)$ between two input points using the following relation,
+\begin{equation}
+	K (\mathbf{x}_i, \mathbf{x}_j) = \sigma^2 R(\mathbf{x}_i, \mathbf{x}_j) 
+	\label{eq:cov_function}
+\end{equation}
+where $R$, the correlation kernel function, is defined such that $\forall \, \mathbf{x}_i, \mathbf{x}_j \in \chi \subseteq \mathbb{R}^D$;
+and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
+
+\subsubsection{Gaussian Kernel}\label{subsub:gp_gaussian_cov}
+
+The Gaussian correlation kernel function, also known as the \emph{squared exponential} kernel, is given by the following formula,
+\begin{equation}
+	r(x_i, x_j) = \exp{- \frac{(x_i - x_j)^2}{2 \theta^2}}
+\label{eq:gaussian_kernel}
+\end{equation}
+
+The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length scale of the process (or simply \emph{the scale parameter}).
+Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
+for 3 different characteristic length scales.
+Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=0.5]{../figures/chapter4/figures/plotCorrFunGauss.pdf}
+	\caption[Gaussian correlation kernels with 3 different characteristic length scales]{Examples of Gaussian correlation kernels with 3 different characteristic length scales}
+	\label{fig:plot_corrfun_gauss}
+\end{figure}
+As its name suggests, the characteristic length scale of a Gaussian kernel determines the scale or range of variation over the input domain.
+To be precise, the notion how similar (or dissimilar) two input locations is defined relative to the characteristic length scale.
+With a very short length scale, the output of random functions becomes uncorrelated easily except for the relatively very close (similar) inputs.
+The realization of the process, therefore, will exhibit more erratic behavior in short length scale as it allows for more abrupt changes over shorter distance.
+On the other hand, with a longer length scale, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more regular pattern.
+Gaussian kernel, however, always produces smooth realization. That is, two input points that have a zero separation on the limit are both continuous and differentiable (see Fig.~\ref{fig:gaussian_kernel}).
+
+Fig.~\ref{fig:plot_corrfun_gauss_realization} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for two different values of characteristic length scale.
+The short length scale, illustrated on the left panel, allows for more sudden change in the output values while the long length scale on the right shows smoother (and rigid) pattern for the same input domain ($0.0 \leq x \leq 3.0$). 
+Notice that the realizations, regardless of the length scale are smooth although as noted in, the shorter length scale produces more local maxima and minima in the realization.
+The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length scale of the process (or simply \emph{the scale parameter}).
+Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
+for 3 different characteristic length scales.
+Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=1.0]{../figures/chapter4/figures/plot_corrfun_gauss_realization.pdf}
+	\caption[Gaussian correlation kernels with 2 different characteristic length scales]{Examples of Gaussian correlation kernels with two different characteristic length scales}
+	\label{fig:plot_corrfun_gauss_realization}
+\end{figure}
