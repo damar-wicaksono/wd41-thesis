@@ -2,7 +2,7 @@
 
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
-Appendix~\ref{app:probability} review some the basic concepts of multivariate random variable.
+Appendix~\ref{app:probability} reviews some the basic concepts of multivariate random variable.
 
 \subsection[Multivariate Normal Random Variable]{Multivariate Gaussian (Normal) Random Variable}\label{sub:gp_mvn}
 
@@ -39,13 +39,44 @@ The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space 
 	\label{eq:covariance_matrix}
 \end{equation}
 
+% Why Gaussian
+
+% Definition of Gaussian Random Vector
+
+% Joint Distribution
+
+% Mean Vector
+
+% Variance-Covariance Matrix
+
+% Diagonal Elements of the Variance-Covariance Matrix
+
+% Partitioning Gaussian Random Vector
+
+% Marginal Distribution
+
+% Illustration of Joint, Marginal, and Conditional
+The joint, marginal, and conditional probability distributions of random vector $\mathbf{Z}$ are illustrated in Fig.~\ref{fig:plot_bivariate_normal}.
+\begin{figure}[bth]
+	\centering
+	\includegraphics[scale=0.50]{../figures/chapter4/figures/plotBivariateNormal.pdf}
+	\caption[Illustration of a bivariate Gaussian distribution]{An illustration of bivariate Gaussian distribution of random vector $Z = [Z_1, Z_2]$ having marginal means of $0.0$ and variances of $0.5$ and $0.25$, respectively and with covariance of $-0.265165$. The solid ellipsoids indicate the contour of joint density of random vector $[Z_1, Z_2]$. The two solid curves at the x- and y-axis indicate the marginal densities of $Z_1$ and $Z_2$, respectively. The dotted curve shows the conditional density of random variable $Z_1$ given $z_2 = 0.35$, while the dashed curve shows the conditional density of $Z_2$ given $z_1 = 0.75$.}
+	\label{fig:plot_bivariate_normal}
+\end{figure}
+
+The joint d
+
+% Drawing from Multivariate Gaussian
+
+% From Multivariate to Infinite Variate
+
 \subsection{Gaussian Process}
 
 % What is a stochastic process
 Gaussian stochastic process is a particular class of \emph{stochastic} or \emph{random process}.
 \marginpar{Stochastic process}
 Stochastic process is a collection of random variables, each of which are often indexed with certain underlying rules or ordering.
-To be precise, a stochastic process is a set of random variables $\mathbf{X} = \{X_i, i \in I\}$, where $I$ is an index set, 
+To be precise, a stochastic process is a set of random variables $\mathbf{Y} = \{Y_i, i \in I\}$, where $I$ is an index set, 
 and it is defined on a probability space $(\Omega, \mathcal{F}, \mathbb{P})$, 
 where $\Omega$, $\mathcal{F}$, and $\mathbb{P}$ are the sample space, the set of events, and the assigned probability to the event, respectively \cite{Syski2014}.
 
@@ -61,7 +92,7 @@ And finally, in the metamodeling application, the random variables are collectio
 \emph{arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
 \marginpar{Gaussian process}
 To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $Y(\circ)$ at various possible input $\mathbf{x}$ in the domain $\mathcal{X} \subseteq \mathbb{R}^D$.
-Specifically, $Y(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the random vector $\left[Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
+Specifically, $Y(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the random vector $\left[Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
 
 % Basic notation
 A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead mean vector and covariance matrix.
@@ -167,13 +198,44 @@ The conditional $15$-variates Gaussian distribution can be constructed in the sa
 Examples of $5$ sample paths from such conditional distribution are shown in Fig.~\ref{fig:sample_path_conditional}.
 Observe that the standard deviations of the observed variables are zero and the areas between known values are substantially reduced.
 
-% Stationarity Assumption
+% Strongly Stationary
+An assumption for a class of stochastic process commonly made for convenience is \emph{stationarity}.
+\marginpar{strongly stationary process}
+A stochastic process $Y(\circ)$ is called \emph{strictly/strongly stationary} if and only if for any finite set of inputs $\{\mathbf{x}_1, \mathbf{x}_2,$
+$\cdots, \mathbf{x}_L\} \in \mathcal{X} \subseteq \mathbb{R}^D$ with $L \leq 1$, 
+and for $\mathbf{h} \in \mathbb{R}^D$ such that $\{(\mathbf{x}_1 + \mathbf{h}),$ 
+$(\mathbf{x}_2 + \mathbf{h}), \cdots, (\mathbf{x}_L + \mathbf{h})\} \in \mathcal{X}$, the distribution of random vector $[Y(\mathbf{x}_1 + \mathbf{h}), $
+$Y(\mathbf{x}_2 + \mathbf{h}), \cdots, Y(\mathbf{x}_L + \mathbf{h})]$ is \emph{the same as} the distribution of random vector $[Y(\mathbf{x}_1 + \mathbf{h}), Y(\mathbf{x}_2 + \mathbf{h}), \cdots, Y(\mathbf{x}_L + \mathbf{h})]$ \cite{Santner2003, Bachoc2013}.
+In other words, the process is invariant under translation.
 
-% Strongly Stationary and Weakly Stationary
+% Weakly Stationary
+The \emph{weakly stationary process} used stronger assumption than the strongly stationary process.
+\marginpar{weakly stationary process}
+A stochastic process $Y(\circ)$ is called \emph{weakly stationary} if and only if
+the first two moments of the process are constant.
+As such, the weakly stationary process is also referred to as \emph{second-order stationary process}.
 
-% Stationary Covariance Function
+% Stationary, Isotropic Covariance Function
+As mentioned, a \gls[hyper=false]{gp} is fully defined by its mean and covariance functions.
+\marginpar{stationary, isotropic covariance function}
+Therefore, if two \glspl[hyper=false]{gp} have the same mean and covariance functions defined over the same domain then the two process have exactly the same same distribution and are the same process.
+Furthermore, for the case of \gls[hyper=false]{gp}, the notions of strongly stationary and weakly stationary coincide.
+This implies that a stationary \gls[hyper=false]{gp} has a constant mean and a constant variance, as well as a covariance function that satisfies the condition of being invariant under translation as follows,
+\begin{equation}
+	\text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_j)] = \text{Cov}[Y(\mathbf{x}_i + \mathbf{h}), Y(\mathbf{x}_j + \mathbf{h})] = K (\mathbf{x}_i - \mathbf{x}_j)
+\label{eq:stationary_covariance}
+\end{equation}
+In stationary \gls[hyper=false]{gp}, the covariance of random function values between two input points is only determined by the \emph{distance} between the two inputs and the covariance function is called \emph{stationary, isotropic covariance function} \cite{Rasmussen2006}. 
+The notion of distance used in the above definition depends on the specific type of the covariance function as will be explained in the next subsection.
+Additionally, following Eq.~\ref{eq:stationary_covariance}, the process variance can be defined as the covariance at zero distance or $K(0)$, which is constant across input parameter space.
 
 % Non-Stationary Gaussian Process
+A more flexible class of \gls[hyper=false]{gp} models can be constructed by relaxing the stationarity assumption.
+\marginpar{non-stationary process}
+However, stationarity is often assumed because it requires less assumption than the alternatives, considered non-informative, and therefore more generic \cite{Currin1991}.
+Moreover, the stationary process remains important to study as they serve as building block for more advanced models \cite{Santner2003}.
+For instance, the stationarity assumption can be relaxed simply by considering non-constant mean function as proposed in  \cite{Marrel2008,Ginsbourger2009}, while keeping the covariance part stationary.
+Another alternative is to consider multiple stationary covariance functions defined for each partitioned region of the whole input parameter space as proposed in \cite{Gramacy2008}.
 
 \subsection{Covariance Kernel Function}\label{sub:gp_covariance}
 
