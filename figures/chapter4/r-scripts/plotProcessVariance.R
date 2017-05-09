@@ -67,12 +67,13 @@ for (i in 1:length(proc_vars))
 
     # Set Axis, Ticks and Labels
     # x-axis
-    axis(side = 1, at = c(0:3), 
+    axis(side = 1, lwd = 1.5,
+         at = c(0:3), 
          mgp = c(3, cex_lab_shift, 0), 
          tcl = tck_len, cex.axis = cex_axis)
     title(xlab = "x", mgp = c(2.5, 0, 0), cex.lab = cex_lab)
     # y-axis
-    axis(side = 2, 
+    axis(side = 2, lwd = 1.5,
          at = c(-3*sqrt(proc_vars[i]), 0, 3*sqrt(proc_vars[i])), 
          mgp = c(3, cex_lab_shift, 0), 
          tcl = tck_len, 
