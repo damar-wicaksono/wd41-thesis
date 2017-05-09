@@ -2,7 +2,7 @@
 
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
-Appendix~\ref{app:probability} reviews some the basic concepts of multivariate random variable.
+Appendix~\ref{app:probability} gives some the basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities.
 
 \subsection[Multivariate Normal Random Variable]{Multivariate Gaussian (Normal) Random Variable}\label{sub:gp_mvn}
 
@@ -21,6 +21,7 @@ A collection of $D$ random variables $\mathbf{X} = [X_1, X_2, ...,X_D] \in \math
 
 \begin{equation}
 p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
+	\label{eq:gaussian_joint_density}
 \end{equation}
 
 The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separates the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
@@ -57,14 +58,55 @@ while the off-diagonal elements, $\Sigma_{i,j}$, describe the covariation betwee
 	\begin{pmatrix}
 			\mathbf{V}[\mathbf{Z}_1] & \cdots                & \text{Cov}[\mathbf{Z}_1, \mathbf{Z}_L] \\
 			\vdots                   & \ddots                & \vdots \\
-			\text{Cov}[\mathbf{Z}_1, \mathbf{Z}_L] & \ddots & \mathbf{V}[\mathbf{Z}_L]
+			\text{Cov}[\mathbf{Z}_L, \mathbf{Z}_1] & \ddots & \mathbf{V}[\mathbf{Z}_L]
 	\end{pmatrix}
 \label{eq:covariance_matrix}
 \end{equation}
+where $\mathbb{V} [\circ]$ and $\text{Cov} [\circ]$ are the variance and covariance operators, respectively. 
 
 % Partitioning Gaussian Random Vector
-Provided that $\mathbf{Z}$ is partitioned into two disjoint set (sub-vectors) $\mathbf{Z}_A$ and $\mathbf{Z}_B$
-% Marginal Distribution
+Suppose that $\mathbf{Z}$ is partitioned into two sub-vectors (two disjoint sets) $\mathbf{Z}_A$ and $\mathbf{Z}_B$ such that $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ 
+(see Appendix~\ref{app:probability}).
+Then the Gaussian random vector $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ can be written as,
+\begin{equation}
+	\begin{pmatrix}
+		 \mathbf{Z}_A \\
+		 \mathbf{Z}_B
+	\end{pmatrix} \sim \mathcal{N} \left (
+	\begin{pmatrix}
+			\boldsymbol{\mu_A} \\
+			\boldsymbol{\mu_B}
+	\end{pmatrix}, \begin{pmatrix}
+		  \boldsymbol{\Sigma_{1,1}}   & \boldsymbol{\Sigma_{1,2}} \\
+			\boldsymbol{\Sigma^T_{1,2}} & \boldsymbol{\Sigma_{2,2}} \\
+	\end{pmatrix} \right)
+\label{eq:gaussian_random_vector}
+\end{equation}
+
+with $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_1}$, $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_2}$, and $D = D_1 + D_2$ 
+
+% Marginal Distribution of Gaussian Random Vector
+The marginal density of both $\mathbf{Z}_A$ and $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
+\begin{equation}
+	\begin{split}
+		p(\mathbf{z}_A) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
+		p(\mathbf{z}_B) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{2,2}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_B-\boldsymbol{\mu}_B)^T\boldsymbol{\Sigma^{-1}_{2,2}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]}
+	\end{split}
+\label{eq:gaussian_marginal}
+\end{equation}
+
+% Conditional Distribution of Gaussian Random Vector
+Similarly, the conditional density of $\mathbf{Z}_A$ conditioned on $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
+\begin{equation}
+	\begin{split}
+		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
+		& \boldsymbol{\mu}_A = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \left(\mathbf{z}_B - \boldsymbol{\mu}_B \right) \\
+		& \boldsymbol{\Sigma}^*_{1,1} = \boldsymbol{\Sigma}^*_{1,1} - \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \boldsymbol{\Sigma}^T_{1,2} 
+	\end{split}
+\label{eq:gaussian_conditional}
+\end{equation}
+The results are analagous for $p(\mathbf{z}_B|\mathbf{z}_A)$. 
+The proofs of these special properties of the MVN are provided in Appendix~\ref{app:gaussian_identities}.
 
 % Illustration of Joint, Marginal, and Conditional
 To illustrate the notions of joint, marginal, and conditional distributions, an example of a bivariate random variable, a random vector $Z = [Z_1, Z_2] \in \mathbb{R}^2$ is given.
@@ -97,7 +139,7 @@ The joint, marginal, and conditional probability distributions of random vector 
 	\label{fig:plot_bivariate_normal}
 \end{figure}
 
-The joint density for Gaussian random vector is given in Eq.~.
+The joint density for Gaussian random vector is given in Eq.~(\ref{eq:gaussian_joint_density}.
 \marginpar{joint density, illustrated}
 For the bivariate random variable in the example, the density can be shown as contour plot in Fig.~\ref{fig:plot_bivariate_normal}.
 In the figure, the solid ellipsoids are the iso-contours of the distribution, where each pair of values lies along the contour line has the same probability density value.
@@ -114,8 +156,34 @@ Conditioning two correlated random variables on one, in general, changes the sha
 From the figure, conditioning shifts the mean and reduces the variance of the resulting conditional distribution. 
 
 % Drawing from Multivariate Gaussian
+There are multiple ways to draw samples from a multivariate Gaussian distribution.
+One method is particular require the deco
+This method, so-called \emph{Cholesky} method, is detailed in Appendix.
+A random number generator for the standard univariate distribution itself is widely available in many standard numerical computing environments.
+The method in Appendix is used to generate 250 samples for the bivariate.
+The resulting scatter plot and sample histograms of the marginal distributions 
 
 % From Multivariate to Infinite Variate
+\gls[hyper=false]{gp} can often be thought simply as a generalization of finite multivariate Gaussian random variable into an infinite multivariate one.
+\marginpar{An entry to Gaussian Process}
+To illustrate this idea, the marginal and conditional distributions of the bivariate distribution depicted in Fig.~ is plotted with the random variables at the same axis ($x$) while the range pf values of the variables are plotted in another axis ($y$).
+The left panels shows the marginal distributions of random variables $Z_1$ and $Z_2$, where in Fig.~ they are plotted as black curves in their respective axes.
+The center panel shows an observed value of $z_1 = 0.75$ depicted in Fig.~ as vertical dashed line.
+Finally the right panel shows the conditional distribution of the non-observed variable $Z_2$ given $z_1 = 0.75$, which in Fig.~ was depicted as the dashed curve in the $y$-axis.
+As it can be seen, the mean and standard deviation of the conditional distribution of $Z_2$ have been shifted and reduced, respectively, according to the information about $Z_1$.
+
+Depiction in Fig.~ can easily be extended to a larger number of random variables, provided a valid mean vector and a valid covariance matrix.
+Fig.~ shows such an extension to $15$-variate Gaussian random variable.
+The origin of the underlying $15 \times 15$ covariance matrix is at the moment unimportant, but what the matrix does is defining how the variables are correlated to each other.
+The whole covariance matrix, except its diagonal elements, is irrelevant in describing the marginal (Fig, left),
+but it is significant in describing the shape of the conditional (Fig, right) according to Eqs.~.
+As before, the conditional probability of the non-observed random variables are shifted and their standard deviation are reduced due to the information provided from the observed variables.
+
+% Closing Sentence
+Gaussian stochastic generalizes this procedure beyond $2$- or $15$-variate Gaussian random variable to an arbitrary number of variables at arbitrary locations in the real line.
+It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more of a smooth function.
+In fact, it is one of the interpretations of Gaussian process: a distribution over functions (citation). 
+
 
 \subsection{Gaussian Process}
 
@@ -220,7 +288,7 @@ For the present example, $x$ is chosen to be uniformly distributed $\{-2 + 0.2 \
 By specifying these locations, the $21$-variates Gaussian random variable can be constructed using Eq.~(\ref{eq:gp_to_mvn}) with the elements of variance-covariance matrix computed by the formula in Eq.~(\ref{eq:gp_example}) for all pairs of inputs.
 Examples of $5$ realizations from the \gls[hyper=false]{gp} are shown in the left panel Fig~\ref{fig:sample_path_unconditional}.
 A realization of a \gls[hyper=false]{gp} on a select input locations is also called a \emph{trajectory} or a \emph{sample path} of the process \cite{Santner2003}.
-In this thesis the term \emph{sample path} will be used for a realization of a \gls[hyper=false]{gp}.
+In this thesis the term \emph{sample path} will be used interchangeable with the term realization of a \gls[hyper=false]{gp}.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:sample_paths},
                   maincaption={Five realizations (sample paths) of a Gaussian process specified in Eq.~(\ref{eq:gp_example}) at $x_i = \{-2 + 0.2 \times i\}_{i=0}^{20}$. Shaded area indicates the area enveloped by twice standard deviation of the process (or $95\%$ probability region). In the right panel, the sample paths are drawn conditional on $6$ observed values (cross symbols).},%
@@ -342,4 +410,37 @@ Obviously, for smaller $\theta$ the correlation between two inputs drops more qu
 {../figures/chapter4/figures/plot_corrfun_gauss_realization.pdf}
 {Damar}
 
-Test 123
+\subsubsection{Power-Exponential Kernel}
+
+\subsubsection{Mat\'ern Class Kernel}
+
+\subsection{Multidimensional Construction}
+
+\subsection{Process Variance}
+
+For stationary \gls[hyper=false]{gp}, the shape of sample path is determined solely by the form of the correlation.
+The role of process variance according to Eq.~(\ref{eq:cov_function}) is to determine the scale of magnitude of output variation. 
+Fig.~\ref{fig:plot_process_variance} gives an illustration of realizations drawn from a set of \glspl[hyper=false]{gp} with the same kernel correlation function (i.e., Gaussian kernel with $\theta = 1.0$), 
+but with different values of process variance.
+As it can be seen, the visible features of the realizations remain the very similar to each other.
+What has changed, however, is the scale of the variation in the output space.  
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_process_variance},
+			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of process variance. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$.},
+			           mainshortcaption={Bundle collision strategies.},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_process_variance_1},
+			           leftcaption={},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_process_variance_2},
+			           midcaption={},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_process_variance_3},
+			           rightcaption={},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotProcessVariance_1}
+{../figures/chapter4/figures/plotProcessVariance_2}
+{../figures/chapter4/figures/plotProcessVariance_3}
+
+\subsection{Mean Function}
