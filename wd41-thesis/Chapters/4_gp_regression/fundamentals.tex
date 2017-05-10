@@ -416,6 +416,39 @@ Obviously, for smaller $\theta$ the correlation between two inputs drops more qu
 
 \subsection{Multidimensional Construction}
 
+In order to create a valid multidimensional correlation kernel function from a valid $1$-dimensional correlation function given above, 
+a tensor product construction is used as follows,
+\marginpar{tensor product}
+\begin{equation}
+	R(\mathbf{x}_i, \mathbf{x}_j) = \prod_{d = 1}^{D} r_d \left(x_i^{(d)}, x_j^{(d)}\right)
+\label{eq:tensor_product}
+\end{equation}
+where $r_d$ is a $1$-dimensional correlation kernel function for the $d$-th input dimension;
+while $x_i^{(d)}$ and $x_j^{(d)}$ are a pair of values in the $d$-th input dimension.
+
+Although it is possible to mix different types of correlation function or use different kind of multidimensional construction (see for example \cite{Higdon2002}),
+the tensor product with the same correlation function for each input dimension is the most well-established 
+and, by far, the most popular approach in the applied metamodeling literature to date \cite{Roustant2012,Sacks1989,Sacks1989a,Santner2003,Currin1991,Marrel2008,Bachoc2014,Kennedy2006,Jones2009}.
+
+Fig.~\ref{fig:random_surfaces} shows two examples of realizations of random surface drawn from a multidimensional \gls[hyper=false]{gp} with the same process variance ($\sigma^2 = 10.0$) but with two different correlation kernels.
+On the left is an example of a realization drawn from the \gls[hyper=false]{gp} using Gaussian correlation kernel function with relatively the characteristic length scale in $y$-direction is four times the scale in $x$-direction.
+On the right is an example of a realization drawn from the \gls[hyper=false]{gp} using Mat\'ern correlation kernel function.
+For this case, the shape parameter is three times larger in the $x$-direction than in the $y$-direction.
+As such, for both cases, the surface appears less smooth in one of the direction.
+\bigdoublefigure[pos=tbhp,
+                 mainlabel={fig:random_surfaces},
+								 mainshortcaption={Random surface realizations},
+                 maincaption={Two random surfaces drawn from two different multidimensional \gls[hyper=false]{gp} with the same process variance of $\sigma^2 = 9.0$. Differences in the scale (for Gaussian) and shape (for Mat\'ern) parameters for the inputs yield smoother path in one direction. The color scheme is the same for both plots with the range of $\pm \, 3 \times \sigma$.},
+                 leftopt={width=0.475\textwidth},
+                 leftlabel={fig:random_surface_gaussian},
+                 leftcaption={Gaussian, $\theta_x = 0.5, \theta_y = 2.0$},
+                 rightopt={width=0.475\textwidth},
+                 rightlabel={fig:random_surface_matern},
+                 rightcaption={Mat\'ern, $\theta_x = 1.5, \theta_y = 0.5$},
+                 ]
+{../figures/chapter4/figures/plotRandomSurface_1}
+{../figures/chapter4/figures/plotRandomSurface_2}
+
 \subsection{Process Variance}
 
 For stationary \gls[hyper=false]{gp}, the shape of sample path is determined solely by the form of the correlation.
