@@ -45,8 +45,7 @@ for (i in 1:length(proc_vars))
     
 }
 
-# Make the plot ---------------------------------------------------------------
-# Plot with process variance of 1.0 (left)
+# Make the plots --------------------------------------------------------------
 for (i in 1:length(proc_vars))
 {
     pdf(otpfullnames[i], family = "CM Roman", 
