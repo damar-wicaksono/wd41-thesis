@@ -4,109 +4,7 @@ This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
 Appendix~\ref{app:probability} gives some the basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities.
 
-\subsection[Multivariate Normal Random Variable]{Multivariate Gaussian (Normal) Random Variable}\label{sub:gp_mvn}
-
-Multivariate Normal (or Gaussian and hereinafter, \textsc{MVN}) random variable is the most widely studied and applied random variable.
-There are several reasons for this.
-From a practical viewpoint, 
-the distribution of MVN is tractable and 
-its special properties are well known (citation needed).
-From an epistemological point of view, as MVN distribution is fully characterized by its mean and covariance, only these wo parameters are of interest.
-Furthermore, any dependence withing structure within a set of data can sufficiently be described linearly through the notion of statistical covariance.
-
-This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
-In the next section, the MVN random variable is generalized to be defined on infinite-dimensional space through the notion of Gaussian stochastic process.
-
-A collection of $D$ random variables $\mathbf{X} = [X_1, X_2, ...,X_D] \in \mathbb{R}^D$ is said to have a multivariate normal distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma} \in S_{++}^D$ if its joint probability density function is given by,
-
-\begin{equation}
-p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
-	\label{eq:gaussian_joint_density}
-\end{equation}
-
-The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separates the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
-A $D$-variate random variable $\boldsymbol{X}$ distributed as multivariate normal is written as,
-
-\begin{equation}
-	\boldsymbol{X} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
-\end{equation}
-
-where $\mathbb{E}$ is the expectation operator.
-
-The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive definite (PSD) $D \times D, S_{++}^D$ defined as,
-
-\begin{equation}
-	S_{++}^D = \{A \in \mathbb{R}^{D\times D}: A = A^T and \mathbf{x}^T A \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \}
-	\label{eq:def_covariance_matrix}
-\end{equation}
-
-% Why Gaussian
-
-% Definition of Gaussian Random Vector
-
-% Joint Distribution
-
-% Mean Vector
-
-% Variance-Covariance Matrix
-
-% Diagonal Elements of the Variance-Covariance Matrix
-The diagonal elements of the variance-covariance matrix, $\Sigma_{i,i}$, describe the variance of a single random variable,
-while the off-diagonal elements, $\Sigma_{i,j}$, describe the covariation between a pair of random variables,
-\begin{equation}
-	\boldsymbol{\Sigma} =
-	\begin{pmatrix}
-			\mathbf{V}[\mathbf{Z}_1] & \cdots                & \text{Cov}[\mathbf{Z}_1, \mathbf{Z}_L] \\
-			\vdots                   & \ddots                & \vdots \\
-			\text{Cov}[\mathbf{Z}_L, \mathbf{Z}_1] & \ddots & \mathbf{V}[\mathbf{Z}_L]
-	\end{pmatrix}
-\label{eq:covariance_matrix}
-\end{equation}
-where $\mathbb{V} [\circ]$ and $\text{Cov} [\circ]$ are the variance and covariance operators, respectively. 
-
-% Partitioning Gaussian Random Vector
-Suppose that $\mathbf{Z}$ is partitioned into two sub-vectors (two disjoint sets) $\mathbf{Z}_A$ and $\mathbf{Z}_B$ such that $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ 
-(see Appendix~\ref{app:probability}).
-Then the Gaussian random vector $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ can be written as,
-\begin{equation}
-	\begin{pmatrix}
-		 \mathbf{Z}_A \\
-		 \mathbf{Z}_B
-	\end{pmatrix} \sim \mathcal{N} \left (
-	\begin{pmatrix}
-			\boldsymbol{\mu_A} \\
-			\boldsymbol{\mu_B}
-	\end{pmatrix}, \begin{pmatrix}
-		  \boldsymbol{\Sigma_{1,1}}   & \boldsymbol{\Sigma_{1,2}} \\
-			\boldsymbol{\Sigma^T_{1,2}} & \boldsymbol{\Sigma_{2,2}} \\
-	\end{pmatrix} \right)
-\label{eq:gaussian_random_vector}
-\end{equation}
-
-with $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_1}$, $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_2}$, and $D = D_1 + D_2$ 
-
-% Marginal Distribution of Gaussian Random Vector
-The marginal density of both $\mathbf{Z}_A$ and $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
-\begin{equation}
-	\begin{split}
-		p(\mathbf{z}_A) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
-		p(\mathbf{z}_B) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{2,2}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_B-\boldsymbol{\mu}_B)^T\boldsymbol{\Sigma^{-1}_{2,2}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]}
-	\end{split}
-\label{eq:gaussian_marginal}
-\end{equation}
-
-% Conditional Distribution of Gaussian Random Vector
-Similarly, the conditional density of $\mathbf{Z}_A$ conditioned on $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
-\begin{equation}
-	\begin{split}
-		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
-		& \boldsymbol{\mu}_A = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \left(\mathbf{z}_B - \boldsymbol{\mu}_B \right) \\
-		& \boldsymbol{\Sigma}^*_{1,1} = \boldsymbol{\Sigma}^*_{1,1} - \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \boldsymbol{\Sigma}^T_{1,2} 
-	\end{split}
-\label{eq:gaussian_conditional}
-\end{equation}
-The results are analagous for $p(\mathbf{z}_B|\mathbf{z}_A)$. 
-The proofs of these special properties of the MVN are provided in Appendix~\ref{app:gaussian_identities}.
+\subsection[From Multivariate Gaussian to Gaussian Process]{From Multivariate Gaussian to Gaussian Process}\label{sub:gp_mvn}
 
 % Illustration of Joint, Marginal, and Conditional
 To illustrate the notions of joint, marginal, and conditional distributions, an example of a bivariate random variable, a random vector $Z = [Z_1, Z_2] \in \mathbb{R}^2$ is given.
@@ -183,7 +81,6 @@ As before, the conditional probability of the non-observed random variables are 
 Gaussian stochastic generalizes this procedure beyond $2$- or $15$-variate Gaussian random variable to an arbitrary number of variables at arbitrary locations in the real line.
 It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more of a smooth function.
 In fact, it is one of the interpretations of Gaussian process: a distribution over functions (citation). 
-
 
 \subsection{Gaussian Process}
 
@@ -372,43 +269,49 @@ The Gaussian correlation kernel function, also known as the \emph{squared expone
 \label{eq:gaussian_kernel}
 \end{equation}
 
-The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length scale of the process (or simply \emph{the scale parameter}).
+The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or simply \emph{the scale parameter}).
+\marginpar{characteristic length-scale}
 Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
 for 3 different characteristic length scales.
 Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.5]{../figures/chapter4/figures/plotCorrFunGauss.pdf}
+	\includegraphics[scale=0.35]{../figures/chapter4/figures/plotCorrFunGauss.pdf}
 	\caption[Gaussian correlation kernels with 3 different characteristic length scales]{Examples of Gaussian correlation kernels with 3 different characteristic length scales}
 	\label{fig:plot_corrfun_gauss}
 \end{figure}
-As its name suggests, the characteristic length scale of a Gaussian kernel determines the scale or range of variation over the input domain.
-To be precise, the notion how similar (or dissimilar) two input locations is defined relative to the characteristic length scale.
-With a very short length scale, the output of random functions becomes uncorrelated easily except for the relatively very close (similar) inputs.
-The realization of the process, therefore, will exhibit more erratic behavior in short length scale as it allows for more abrupt changes over shorter distance.
-On the other hand, with a longer length scale, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more regular pattern.
-Gaussian kernel, however, always produces smooth realization. That is, two input points that have a zero separation on the limit are both continuous and differentiable (see Fig.~\ref{fig:gaussian_kernel}).
 
-Fig.~\ref{fig:plot_corrfun_gauss_realization} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for two different values of characteristic length scale.
+The characteristic length-scale of a Gaussian kernel determines the range over which the distance between two input locations affects the output correlation.
+To be precise, the notion how similar (or dissimilar) two input locations is defined relative to the characteristic length-scale.
+With a very short length-scale, the output of random functions becomes easily uncorrelated except for a very close (similar) inputs.
+The realization of the process, therefore, will exhibit more erratic behavior in short length scale as it allows for more abrupt changes over shorter distance and less dependent of the neighboring values.
+On the other hand, with a longer length-scale, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more rigid pattern.
+Gaussian kernel, however, always produces smooth realization. That is, two input points that have a zero separation on the limit are both continuous and differentiable 
+(see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
+The Gaussian kernel is widely applied in the metamodeling literature and almost become a default choice for the correlation kernel \cite{Kennedy2006},
+though as mentioned in \cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly select design points).
+
+Fig.~\ref{fig:plot_corrfun_gauss_realizations} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for three different characteristic length-scales.
 The short length scale, illustrated on the left panel, allows for more sudden change in the output values while the long length scale on the right shows smoother (and rigid) pattern for the same input domain ($0.0 \leq x \leq 3.0$). 
-Notice that the realizations, regardless of the length scale are smooth although as noted in, the shorter length scale produces more local maxima and minima in the realization.
-The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length scale of the process (or simply \emph{the scale parameter}).
-Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
-for 3 different characteristic length scales.
-Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
-%\begin{figure}[bth]
-%	\centering
-%	\includegraphics[scale=1.0]{../figures/chapter4/figures/plot_corrfun_gauss_realization.pdf}
-%	\caption[Gaussian correlation kernels with 2 different characteristic length scales]{Examples of Gaussian correlation kernels with two different characteristic length scales}
-%	\label{fig:plot_corrfun_gauss_realization}
-%\end{figure}
-
-\bigfigure[%pos=tbhp,
-						%opt={},
-						shortcaption={Stream tracing result.},
-						label={fig:plot_corrfun_gauss}]
-{../figures/chapter4/figures/plot_corrfun_gauss_realization.pdf}
-{Damar}
+Also notice that the realizations with the shorter length scale produces more local maxima and minima.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_corrfun_gauss_realizations},
+			           maincaption={Examples of realizations from \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of characteristic length-scale. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$. Each process has the same process variance, $\sigma^2 = 1.0$},
+			           mainshortcaption={Realizations of random function drawn from \gls[hyper=false]{gp} with Gaussian kernel},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_corrfun_gauss_realization_1},
+			           leftcaption={},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_corrfun_gauss_realization_2},
+			           midcaption={},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_corrfun_gauss_realization_3},
+			           rightcaption={},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotCorrFunGaussRealization_1}
+{../figures/chapter4/figures/plotCorrFunGaussRealization_2}
+{../figures/chapter4/figures/plotCorrFunGaussRealization_3}
 
 \subsubsection{Power-Exponential Kernel}
 
@@ -460,7 +363,7 @@ What has changed, however, is the scale of the variation in the output space.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_process_variance},
 			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of process variance. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$.},
-			           mainshortcaption={Bundle collision strategies.},%
+			           mainshortcaption={Effect of different process variance values on GP realization},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_process_variance_1},
 			           leftcaption={},

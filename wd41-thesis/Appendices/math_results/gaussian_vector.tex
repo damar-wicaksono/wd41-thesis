@@ -1,0 +1,104 @@
+\section{Gaussian Random Vector}\label{app:gaussian_vector}
+
+
+Multivariate Normal (or Gaussian and hereinafter, \textsc{MVN}) random variable is the most widely studied and applied random variable.
+There are several reasons for this.
+From a practical viewpoint, 
+the distribution of MVN is tractable and 
+its special properties are well known (citation needed).
+From an epistemological point of view, as MVN distribution is fully characterized by its mean and covariance, only these wo parameters are of interest.
+Furthermore, any dependence withing structure within a set of data can sufficiently be described linearly through the notion of statistical covariance.
+
+This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
+In the next section, the MVN random variable is generalized to be defined on infinite-dimensional space through the notion of Gaussian stochastic process.
+
+A collection of $D$ random variables $\mathbf{X} = [X_1, X_2, ...,X_D] \in \mathbb{R}^D$ is said to have a multivariate normal distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma} \in S_{++}^D$ if its joint probability density function is given by,
+
+\begin{equation}
+p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
+	\label{eq:gaussian_joint_density}
+\end{equation}
+
+The joint distribution of MVN random variable is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. The symbol ``;'' separates the value of the variates $\boldsymbol{x}$ from the parameters of the distribution. 
+A $D$-variate random variable $\boldsymbol{X}$ distributed as multivariate normal is written as,
+
+\begin{equation}
+	\boldsymbol{X} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
+\end{equation}
+
+where $\mathbb{E}$ is the expectation operator.
+
+The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive definite (PSD) $D \times D, S_{++}^D$ defined as,
+
+\begin{equation}
+	S_{++}^D = \{A \in \mathbb{R}^{D\times D}: A = A^T and \mathbf{x}^T A \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \}
+	\label{eq:def_covariance_matrix}
+\end{equation}
+
+% Why Gaussian
+
+% Definition of Gaussian Random Vector
+
+% Joint Distribution
+
+% Mean Vector
+
+% Variance-Covariance Matrix
+
+% Diagonal Elements of the Variance-Covariance Matrix
+The diagonal elements of the variance-covariance matrix, $\Sigma_{i,i}$, describe the variance of a single random variable,
+while the off-diagonal elements, $\Sigma_{i,j}$, describe the covariation between a pair of random variables,
+\begin{equation}
+	\boldsymbol{\Sigma} =
+	\begin{pmatrix}
+			\mathbf{V}[\mathbf{Z}_1] & \cdots                & \text{Cov}[\mathbf{Z}_1, \mathbf{Z}_L] \\
+			\vdots                   & \ddots                & \vdots \\
+			\text{Cov}[\mathbf{Z}_L, \mathbf{Z}_1] & \ddots & \mathbf{V}[\mathbf{Z}_L]
+	\end{pmatrix}
+\label{eq:covariance_matrix}
+\end{equation}
+where $\mathbb{V} [\circ]$ and $\text{Cov} [\circ]$ are the variance and covariance operators, respectively. 
+
+% Partitioning Gaussian Random Vector
+Suppose that $\mathbf{Z}$ is partitioned into two sub-vectors (two disjoint sets) $\mathbf{Z}_A$ and $\mathbf{Z}_B$ such that $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ 
+(see Appendix~\ref{app:probability}).
+Then the Gaussian random vector $\mathbf{Z} = [\mathbf{Z}_A, \mathbf{Z}_B]$ can be written as,
+\begin{equation}
+	\begin{pmatrix}
+		 \mathbf{Z}_A \\
+		 \mathbf{Z}_B
+	\end{pmatrix} \sim \mathcal{N} \left (
+	\begin{pmatrix}
+			\boldsymbol{\mu_A} \\
+			\boldsymbol{\mu_B}
+	\end{pmatrix}, \begin{pmatrix}
+		  \boldsymbol{\Sigma_{1,1}}   & \boldsymbol{\Sigma_{1,2}} \\
+			\boldsymbol{\Sigma^T_{1,2}} & \boldsymbol{\Sigma_{2,2}} \\
+	\end{pmatrix} \right)
+\label{eq:gaussian_random_vector}
+\end{equation}
+
+with $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_1}$, $\mathbf{Z}_A \in \mathcal{Z} \subseteq \mathbb{R}^{D_2}$, and $D = D_1 + D_2$ 
+
+% Marginal Distribution of Gaussian Random Vector
+The marginal density of both $\mathbf{Z}_A$ and $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
+\begin{equation}
+	\begin{split}
+		p(\mathbf{z}_A) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
+		p(\mathbf{z}_B) & = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{2,2}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_B-\boldsymbol{\mu}_B)^T\boldsymbol{\Sigma^{-1}_{2,2}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]}
+	\end{split}
+\label{eq:gaussian_marginal}
+\end{equation}
+
+% Conditional Distribution of Gaussian Random Vector
+Similarly, the conditional density of $\mathbf{Z}_A$ conditioned on $\mathbf{Z}_B$ also follows a multivariate Gaussian distribution given as,
+\begin{equation}
+	\begin{split}
+		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma_{1,1}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{1,1}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
+		& \boldsymbol{\mu}_A = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \left(\mathbf{z}_B - \boldsymbol{\mu}_B \right) \\
+		& \boldsymbol{\Sigma}^*_{1,1} = \boldsymbol{\Sigma}^*_{1,1} - \boldsymbol{\Sigma}_{1,2} \boldsymbol{\Sigma}^{-1}_{2,2} \boldsymbol{\Sigma}^T_{1,2} 
+	\end{split}
+\label{eq:gaussian_conditional}
+\end{equation}
+The results are analagous for $p(\mathbf{z}_B|\mathbf{z}_A)$. 
+%The proofs of these special properties of the MVN are provided in Appendix~\ref{app:gaussian_identities}.
