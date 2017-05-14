@@ -12,7 +12,7 @@ library("DiceKriging")
 otpfullname <- c("./figures/plotCorrFunGauss.pdf")
 
 # Graphic Parameters
-fig_size <- c(6.5, 6.5)             # width, height
+fig_size <- c(6.5, 6.5)                   # width, height
 margin <- c(5.25, 6.25, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
 cex_axis <- 2.0     # Axis marker size
 cex_lab  <- 2.5     # Axis label size
@@ -87,4 +87,4 @@ legend(1.50, 0.9, legend_expressions, lty = c(1, 2, 3),
        cex = leg_cex)
 
 dev.off()
-embed_fonts(otpfullname, outfile=otpfullname)
+embed_fonts(otpfullname, outfile = otpfullname)

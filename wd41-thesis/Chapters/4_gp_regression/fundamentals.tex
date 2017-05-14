@@ -100,7 +100,7 @@ A spatial model, as another example, can be modeled as a collection of random va
 And finally, in the metamodeling application, the random variables are collection of computational model output values at different input values.
 
 % Gaussian stochastic process
-\emph{Gaussian stochastic process} (GP) is defined as a collection of random variables, 
+\emph{Gaussian stochastic process} (GP, or Gaussian Random Field GRF) is defined as a collection of random variables, 
 \emph{arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
 \marginpar{Gaussian process}
 To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $Y(\circ)$ at various possible input $\mathbf{x}$ in the domain $\mathcal{X} \subseteq \mathbb{R}^D$.
@@ -261,16 +261,23 @@ For a stationary covariance function, it is more convenient to separate the cons
 where $R$, the correlation kernel function, is defined such that $\forall \, \mathbf{x}_i, \mathbf{x}_j \in \chi \subseteq \mathbb{R}^D$;
 and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
 
+In the following, three different types of stationary correlation kernel functions are presented. 
+These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
+\marginpar{one-dimensional correlation kernel, $r$}
+For each, the function is defined and several sample paths are drawn to illustrate the effect of different kernels and different respective parameters on the realization.
+At first, only $1$-dimensional kernel functions denoted by $r(x_i, x_j)$ are described.
+Afterward, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\mathbf{x}_i, \mathbf{x}_j)$ by means of tensor product.
+
 \subsubsection{Gaussian Kernel}\label{subsub:gp_gaussian_cov}
 
-The Gaussian correlation kernel function, also known as the \emph{squared exponential} kernel, is given by the following formula,
+The Gaussian correlation kernel function, also known as the \emph{squared exponential} kernel, is given by the following formula \cite{Roustant2012,Santner2003,Rasmussen2006},
 \begin{equation}
-	r(x_i, x_j) = \exp{- \frac{(x_i - x_j)^2}{2 \theta^2}}
+	r(x_i, x_j; \theta) = \exp{\left[- \frac{(x_i - x_j)^2}{2 \theta^2}\right]}
 \label{eq:gaussian_kernel}
 \end{equation}
 
 The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or simply \emph{the scale parameter}).
-\marginpar{characteristic length-scale}
+\marginpar{characteristic length-scale parameter}
 Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
 for 3 different characteristic length scales.
 Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
@@ -315,7 +322,66 @@ Also notice that the realizations with the shorter length scale produces more lo
 
 \subsubsection{Power-Exponential Kernel}
 
+The Gaussian correlation kernel belongs to a wider class of $2$-parameter kernel function family called the \emph{power-exponential} kernel and is given by \cite{Roustant2012,Santner2003,Rasmussen2006},
+\begin{equation}
+	r(x_i, x_j; \theta, p) = \exp{\left[ - \left( \frac{|x_i - x_j|}{\theta} \right)^p \right]} \, \text{for} \, \theta > 0.0 \, \text{and} \, 0 < p \leq 2
+\label{eq:powexp_kernel}
+\end{equation}
+
+The parameter $\theta$ remains the (length-) scale parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
+\marginpar{shape parameter}
+Specifically, the shape parameter $p$ determines the differentiability of the process at the origin (citation needed).
+Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_corrfun_powexp},
+			           maincaption={Examples of power exponential kernel functions for different values of shape parameter $p$ and scale parameter $\theta$ as function of $L_1$ norm.},
+			           mainshortcaption={Examples of power exponential kernel functions},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_corrfun_powexp_1},
+			           leftcaption={},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_corrfun_powexp_2},
+			           midcaption={},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_corrfun_powexp_3},
+			           rightcaption={},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotCorrFunPowExp_1}
+{../figures/chapter4/figures/plotCorrFunPowExp_2}
+{../figures/chapter4/figures/plotCorrFunPowExp_3}
+
+Although, strictly speaking, only when $p = 2$ that the power-exponential correlation is differentiable at the origin (thus guarantee the smoothness of the realization),
+the shape parameter does dictate the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_corrfun_powexp_realizations},
+			           maincaption={Several realizations from \gls[hyper=false]{gp} with power-exponential kernel functions of different shape $p$ and scale $\theta$ parameters.},
+			           mainshortcaption={Examples of power exponential kernel functions},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_corrfun_powexp_realization_1},
+			           leftcaption={},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_corrfun_powexp_realization_2},
+			           midcaption={},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_corrfun_powexp_realization_3},
+			           rightcaption={},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotCorrFunPowExpRealizations_1}
+{../figures/chapter4/figures/plotCorrFunPowExpRealizations_2}
+{../figures/chapter4/figures/plotCorrFunPowExpRealizations_3}
+
+It is argued in \cite{Marrel2008} that the power-exponential kernel function is an appropriate choice in metamodeling application due to its flexibility of representing different shape with respective to its regularity and differentiability mainly controlled through the additional parameter $p$.
+\marginpar{exponential kernel}
+For instance, Gaussian correlation kernel is a special case of the power-exponential kernel when $p$ equals to 2. 
+Another special case is when $p = 1$ which is called the \emph{exponential} kernel.
+In this particular case, realizations of which are depicted in Fig.~\ref{fig:plot_corrfun_powexp_realization_2}, the process is continuous but not differentiable \cite{Rasmussen2006}.
+
 \subsubsection{Mat\'ern Class Kernel}
+
+The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula
+\lipsum[2]
 
 \subsection{Multidimensional Construction}
 
