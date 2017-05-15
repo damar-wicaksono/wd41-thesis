@@ -86,6 +86,7 @@ To tackle this problem, Campbell et al. \cite{Campbell2006} proposed to represen
 and to carry out the sensitivity analysis on the coefficients of the expansion. 
 In accordance to such approach, \gls{fda} popularized by Ramsay and Silverman \cite{Ramsay2005} can be useful to reduce the high dimensionality of time-dependent output.
 
+% Recent Development in Nuclear Engineering Application
 Despite these recent developments, 
 \marginpar{recent development in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
@@ -99,6 +100,41 @@ utilizing \gls{fftbm} and local sensitivity analysis.
 \subsection{Bayesian Calibration}
 
 \subsection{Statistical Metamodeling}\label{sub:intro_statistical_metamodeling}
+
+% Why we need metamodel
+
+% What is a metamodel
+
+% Gaussian Process, What
+
+% Gaussian Process, Why
+
+% Gaussian Process, and others
+\gls[hyper=false]{gp} metamodel is by no means the only method to construct a metamodel of a simulator, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
+\marginpar{Other metamodeling approaches}
+Response Surface Method (RSM), originally developed as a technique in the design and analysis of physical experiments \cite{Box2007}, 
+has a long history of being adapted to the design and analysis of computer experiments \cite{Kerrigan1979,Lucia1982,Faravelli1989,Engel1990}.
+It is mostly based on either linear or quadratic regression (with interaction terms) (see for instance cite \cite{Kleijnen2000}, and more recent reviews \cite{Simpson1998,Simpson2001}).
+In recent times, other methods such as the ones based on artificial neural network \cite{Fonseca2003} and polynomial chaos expansion \cite{Sudret2008,Sudret2012} have also gained traction.
+For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits from Scopus, an online bibliographic database \cite{Elsevier2017}, for the different select metamodeling approaches.
+
+\begin{table}[ht]
+    \myfloatalign
+    \caption{Number of publications related to different metamodeling approaches based on Scopus web search as of Feb. $14$. $2017$.}
+    \label{tab:metamodel_in_literature}
+    \begin{tabularx}{\textwidth}{cXcc} \toprule
+        \tableheadline{\footnotesize{Metamodeling}}	& \tableheadline{\footnotesize{Search}}\parnote{\texttt{(...) AND ("surrogate" OR "metamodel")}}  & \tableheadline{\footnotesize{Number of}}  & \tableheadline{\footnotesize{Since}} \\ 
+				\tableheadline{\footnotesize{Approach}}     & \tableheadline{\footnotesize{Keyword}}  & \tableheadline{\footnotesize{Publications}}  &  \\ \midrule
+        \multicolumn{1}{l}{\footnotesize{Gaussian Process / Kriging}} 		& \footnotesize{(\texttt{"Gaussian Process OR kriging"})}		& \footnotesize{$1838$} & \footnotesize{$1992$} \\
+        \multicolumn{1}{l}{\footnotesize{Artificial Neural Network}}      & \footnotesize{\texttt{"neural network"}} 	 & \footnotesize{$997$} & \footnotesize{$1993$} \\
+        \multicolumn{1}{l}{\footnotesize{Response Surface Method}}			  & \footnotesize{\texttt{"response surface"}} & \footnotesize{$947$} & \footnotesize{$1977$} \\
+        \multicolumn{1}{l}{\footnotesize{Polynomial Chaos Expansion}}     & \footnotesize{\texttt{"polynomial chaos"}} & \footnotesize{$208$} & \footnotesize{$2004$} \\ \bottomrule
+    \end{tabularx}
+		\parnotes
+\end{table}
+
+% Recent development in nuclear engineering application
+\lipsum[1]
 
 \begin{sidewaysfigure}
 	\centering

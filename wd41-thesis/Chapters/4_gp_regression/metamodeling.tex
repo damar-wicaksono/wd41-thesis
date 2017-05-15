@@ -1,1 +1,84 @@
 \section{Gaussian Process Metamodel and its Construction}\label{sec:gp_metamodeling}
+
+% Kriging Model, Drift and Bias
+To formalize the use of in the meta-modeling of computer simulation, consider once again a computer code represented as 
+
+The output of code at an arbitrary inputs, $\mathbf{x}$, is modeled using a predictor of the following form
+\begin{equation}
+	Y (\mathbf{x}) = \mu (\mathbf{x}) + Z (\mathbf{x})
+\label{eq:kriging_model}
+\end{equation}
+The equation above, also known as the kriging model (cite Owen, Simpson, Dupuy), consists of two components:
+\begin{itemize}
+	\item The \emph{mean/drift/trend} term, a deterministic function
+	\begin{equation}
+		\mu: \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}
+	\label{eq:trend_function_mapping}
+	\end{equation}
+	The trend term, in turn, usually consists of general linear model of polynomials (cite Owen and Dupuy, Marrel).
+	\begin{equation}
+		\mu(\mathbf{x}) = \sum_{j=0}^{k} \beta_j h_j(\mathbf{x})
+	\label{eq:trend_function_definition}
+	\end{equation}
+	The trend term captures the global input output space which has an equivalent interpretation to that of a linear regression model\footnote{$Y() = \mu(\mathbf{x} + \epsilon$ with $\epsilon$ is Normally independent and identically distributed measurement error term}.
+	\item The \emph{bias} term, a stochastic process. 
+	This term, in turn, usually modeled using zero mean, stationary Gaussian stochastic process (such as presented in Section~\ref{sub:gp_covariance}).
+	\begin{equation}
+		\mathcal{Z}(\mathbf{x}) \sim \mathcal{GP}(0, R(\mathbf{x},\mathbf{x}^*))
+	\label{eq:stationary_gp}
+	\end{equation}
+	The bias term captures the local variation of the output space such that it pulls the predictor.
+	The term local here is referring to the neighborhood of training data.
+	In linear regression model the error between observation and prediction is due to experimental error.
+	This, in essence, what distinguishes kriging model to ordinary least square.
+	Furthermore, by using stationary Gaussian process it is also assumed that the bias term will be a function of distance between design points and test point. 
+\end{itemize}
+
+% Hyper-parameters
+Following the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
+\marginpar{hyper-parameters}
+This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or often simply as the parameter.
+The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the trend function (Eq.~\ref{eq:trend_function_definition});
+the ones associated with select correlation functions (Section~\ref{sub:gp_covariance}); and the one associated with the process variance $\sigma^2$.
+The total number of hyper-parameters depends on the number of simulation model parameters as well as the select structure of mean and correlation functions.
+For instance, for a $D$-parameter simulation model represented using \gls[hyper=false]{gp} metamodel with a constant mean and Gaussian correlation functions (Eq.~(\ref{eq:gaussian_kernel})), 
+the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \boldsymbol{\theta})$ is $D + 2$.
+On the other hand, the same model represented using a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential functions (Eq.~(\ref{eq:powexp_kernel})),
+the total number of the hyper-parameters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
+
+\subsection{Simple, Ordinary, and Universal Kriging Models}\label{sub:gp_sk_ok_uk}
+
+% Three classes of Kriging Model
+Three classes of Kriging models can be distinguished depending on the nature of and what is known of the hyper $\mu(\mathbf{x})$:
+\begin{enumerate}
+	\item \emph{Simple Kriging}, which the t
+	\item \emph{Ordinary Kriging},
+	\item \emph{Universal Kriging},
+\end{enumerate}
+
+% Simple Kriging
+
+% Ordinary Kriging
+
+% Universal Kriging
+
+\subsection{Learning Hyperparameters}\label{sub:gp_learning_hyperparameters}
+
+In the discussion above the,
+In practice, however, these hyper-parameter values are not known and must be estimated by the data.
+
+% Kriging Variance
+
+% Likelihood
+
+% Profile/Concentrated Likelihood
+
+% Maximum Likelihood Estimation / Empirical Bayes
+
+% Fully Bayesian Approach
+
+\subsection{Selection of Design Points}\label{sub:gp_design}
+
+\subsection{Validation}\label{sub:gp_validation}
+
+\subsection{Summary}\label{sub:gp_summary}
