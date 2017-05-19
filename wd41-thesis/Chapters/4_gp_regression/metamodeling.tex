@@ -47,15 +47,15 @@ the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \bolds
 On the other hand, the same model represented using a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential functions (Eq.~(\ref{eq:powexp_kernel})),
 the total number of the hyper-parameters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
 
-\subsection{Simple, Ordinary, and Universal Kriging Models}\label{sub:gp_sk_ok_uk}
-
 % Three classes of Kriging Model
 Three classes of Kriging models can be distinguished depending on what is known about the hyper-parameters 
 and what is assumed regarding the structure of the deterministic mean function $\mu(\mathbf{x})$: 
 \emph{Simple Kriging}, \emph{Ordinary Kriging}, and \emph{Universal Kriging}.
 
+\subsection{Simple Kriging}\label{sub:gp_sk}
+
 % Simple Kriging
-Simple Kriging is the simplest of the three where all the hyper-parameters involved are assumed to be known.
+Simple Kriging is the simpler case of the two where all the hyper-parameters involved are assumed to be known.
 \marginpar{simple Kriging}
 In that case the estimation of code output at an arbitrary input location becomes straightforward.
 Given a deterministic function for the mean term and a stationary Gaussian stochastic process for the bias term following the formulation above, 
@@ -97,12 +97,10 @@ The \emph{Kriging predictor} and the \emph{Kriging variance} are obtained throug
 
 % Interesting Observation
 
-% Ordinary Kriging and Universal Kriging
+\subsection{Universal Kriging and Hyper-Parameter Estimation}\label{sub:gp_uk}
 
-\subsection{Learning Hyperparameters}\label{sub:gp_learning_hyperparameters}
-
-In the discussion above the,
-In practice, however, these hyper-parameter values are not known and must be estimated by the data.
+However, in most practical situation, the values of the hyper-parameters are not known a priori.
+This is indeed the case for \emph{Universal Kriging} model where hyper-parameters values associated both with the mean and covariance functions are to be estimated simultaneously from the training data.
 
 % Likelihood
 
