@@ -1,14 +1,15 @@
 \section{Gaussian Process Metamodel and its Construction}\label{sec:gp_metamodeling}
 
 % Kriging Model, Drift and Bias
-To formalize the use of in the meta-modeling of computer simulation, consider once again a computer code represented as 
+To formalize the use of in the meta-modeling of computer simulation, 
+consider once again a computer code represented as 
 
-The output of code at an arbitrary inputs, $\mathbf{x}$, is modeled using a predictor of the following form
+The output of code at an arbitrary inputs, $\mathbf{x_o}$, is then modeled using a predictor of the following form
 \begin{equation}
-	Y (\mathbf{x}) = \mu (\mathbf{x}) + Z (\mathbf{x})
+	Y (\mathbf{x_o}) = \mu (\mathbf{x_o}) + Z (\mathbf{x_o})
 \label{eq:kriging_model}
 \end{equation}
-The equation above, also known as the kriging model (cite Owen, Simpson, Dupuy), consists of two components:
+The equation above, also known as the \emph{Kriging} model (cite Owen, Simpson, Dupuy)\footnote{in fact, the term Kriging model will be used interchangeably as Gaussian process metamodel in this thesis} , consists of two components:
 \begin{itemize}
 	\item The \emph{mean/drift/trend} term, a deterministic function
 	\begin{equation}
@@ -35,7 +36,7 @@ The equation above, also known as the kriging model (cite Owen, Simpson, Dupuy),
 \end{itemize}
 
 % Hyper-parameters
-Following the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
+Additionaly, following the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
 \marginpar{hyper-parameters}
 This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or often simply as the parameter.
 The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the trend function (Eq.~\ref{eq:trend_function_definition});
@@ -49,25 +50,59 @@ the total number of the hyper-parameters $\boldsymbol{\Psi} = (\boldsymbol{\beta
 \subsection{Simple, Ordinary, and Universal Kriging Models}\label{sub:gp_sk_ok_uk}
 
 % Three classes of Kriging Model
-Three classes of Kriging models can be distinguished depending on the nature of and what is known of the hyper $\mu(\mathbf{x})$:
-\begin{enumerate}
-	\item \emph{Simple Kriging}, which the t
-	\item \emph{Ordinary Kriging},
-	\item \emph{Universal Kriging},
-\end{enumerate}
+Three classes of Kriging models can be distinguished depending on what is known about the hyper-parameters 
+and what is assumed regarding the structure of the deterministic mean function $\mu(\mathbf{x})$: 
+\emph{Simple Kriging}, \emph{Ordinary Kriging}, and \emph{Universal Kriging}.
 
 % Simple Kriging
+Simple Kriging is the simplest of the three where all the hyper-parameters involved are assumed to be known.
+\marginpar{simple Kriging}
+In that case the estimation of code output at an arbitrary input location becomes straightforward.
+Given a deterministic function for the mean term and a stationary Gaussian stochastic process for the bias term following the formulation above, 
+a \gls[hyper=false]{gp} metamodel, then by definition implies that the computer code outputs at every input locations are jointly Gaussian.
+As such, the code outputs at the training inputs $\mathbf{DM} = \{\mathbf{x}_i\}_{i=1}^N, Y(\mathbf{DM}) = \{Y(\mathbf{x}_i)\}_{i=1}^N$ 
+and the output at an arbitrary input location $\mathbf{x}_o$ are distributed jointly as a $N+1$-dimensional Gaussian,
+\begin{equation}
+	\begin{bmatrix}
+			Y(\mathbf{DM}) \\
+			Y(\mathbf{x}_o)
+		\end{bmatrix} \sim \mathcal{N} \left(
+			\begin{bmatrix}
+				\mu(\mathbf{DM}) \\
+				\mu(\mathbf{x}_o)
+			\end{bmatrix}, \sigma^2
+			\begin{bmatrix}
+				R(\mathbf{DM}, \mathbf{DM})  & R(\mathbf{DM}, \mathbf{x}_o) \\
+				R(\mathbf{x}_o, \mathbf{DM}) & R(\mathbf{x}_o, \mathbf{x}_o)
+			\end{bmatrix} \right)
+\label{eq:joint_training_test}
+\end{equation}
+where $\mu(\mathbf{DM}) = \{\mu(\mathbf{x}_i)\}_{i=1}^N$ is the vector of mean at the training inputs;
+$\mu(\mathbf{x}_o)$ is the mean at an arbitrary input location;
+$R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between point in the training set;
+$R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between point in the training set and the test point;
+and $R(\mathbf{x}_o, \mathbf{x}_o) = 1$ is the correlation.
 
-% Ordinary Kriging
+Given the outputs at the training inputs are observed (i.e., the code is actually run at the inputs), $Y(\mathbf{DM}) = {y_i}_{i=1}^N$,
+then the prediction at given the observation can be obtained through the properties of Gaussian distribution,
+\begin{equation}
+	Y(\mathbf{x}_o) | Y(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( \mu_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
+\label{eq:joint_training_test}
+\end{equation}
 
-% Universal Kriging
+% Kriging Predictor, the mean
+The \emph{Kriging predictor} and the \emph{Kriging variance} are obtained through conditioning operation of a Gaussian random vector (see appendix).
+
+% Kriging Variance
+
+% Interesting Observation
+
+% Ordinary Kriging and Universal Kriging
 
 \subsection{Learning Hyperparameters}\label{sub:gp_learning_hyperparameters}
 
 In the discussion above the,
 In practice, however, these hyper-parameter values are not known and must be estimated by the data.
-
-% Kriging Variance
 
 % Likelihood
 
