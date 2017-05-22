@@ -36,32 +36,31 @@ The equation above, also known as the \emph{Kriging} model (cite Owen, Simpson, 
 \end{itemize}
 
 % Hyper-parameters
-Additionaly, following the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
+Additionally, according to the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
 \marginpar{hyper-parameters}
 This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or often simply as the parameter.
-The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the trend function (Eq.~\ref{eq:trend_function_definition});
+The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the chosen trend function (Eq.~\ref{eq:trend_function_definition});
 the ones associated with select correlation functions (Section~\ref{sub:gp_covariance}); and the one associated with the process variance $\sigma^2$.
 The total number of hyper-parameters depends on the number of simulation model parameters as well as the select structure of mean and correlation functions.
 For instance, for a $D$-parameter simulation model represented using \gls[hyper=false]{gp} metamodel with a constant mean and Gaussian correlation functions (Eq.~(\ref{eq:gaussian_kernel})), 
 the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \boldsymbol{\theta})$ is $D + 2$.
 On the other hand, the same model represented using a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential functions (Eq.~(\ref{eq:powexp_kernel})),
-the total number of the hyper-parameters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
+the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
 
 % Three classes of Kriging Model
-Three classes of Kriging models can be distinguished depending on what is known about the hyper-parameters 
-and what is assumed regarding the structure of the deterministic mean function $\mu(\mathbf{x})$: 
-\emph{Simple Kriging}, \emph{Ordinary Kriging}, and \emph{Universal Kriging}.
+Two classes of Kriging models can be distinguished depending on what is known about the hyper-parameters: 
+\emph{Simple Kriging} and \emph{Universal Kriging}.
 
 \subsection{Simple Kriging}\label{sub:gp_sk}
 
 % Simple Kriging
-Simple Kriging is the simpler case of the two where all the hyper-parameters involved are assumed to be known.
+Simple Kriging is the simplest case of the Kriging models where all the hyper-parameters involved are assumed to be known.
 \marginpar{simple Kriging}
 In that case the estimation of code output at an arbitrary input location becomes straightforward.
-Given a deterministic function for the mean term and a stationary Gaussian stochastic process for the bias term following the formulation above, 
+Following the formulation above, 
 a \gls[hyper=false]{gp} metamodel, then by definition implies that the computer code outputs at every input locations are jointly Gaussian.
-As such, the code outputs at the training inputs $\mathbf{DM} = \{\mathbf{x}_i\}_{i=1}^N, Y(\mathbf{DM}) = \{Y(\mathbf{x}_i)\}_{i=1}^N$ 
-and the output at an arbitrary input location $\mathbf{x}_o$ are distributed jointly as a $N+1$-dimensional Gaussian,
+As such, the code outputs at the training inputs $\mathbf{DM} = \{\mathbf{x}_i\}_{i=1}^N, Y(\mathbf{DM}) = (Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_N))$
+and the output at an arbitrary input $\mathbf{x}_o$, $Y(\mathbf{x}_o)$ are distributed jointly as an $N+1$-dimensional Gaussian,
 \begin{equation}
 	\begin{bmatrix}
 			Y(\mathbf{DM}) \\
@@ -77,25 +76,70 @@ and the output at an arbitrary input location $\mathbf{x}_o$ are distributed joi
 			\end{bmatrix} \right)
 \label{eq:joint_training_test}
 \end{equation}
-where $\mu(\mathbf{DM}) = \{\mu(\mathbf{x}_i)\}_{i=1}^N$ is the vector of mean at the training inputs;
-$\mu(\mathbf{x}_o)$ is the mean at an arbitrary input location;
-$R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between point in the training set;
-$R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between point in the training set and the test point;
-and $R(\mathbf{x}_o, \mathbf{x}_o) = 1$ is the correlation.
+where
+\begin{itemize}
+	\item $\mu(\mathbf{DM})$ is the vector of mean at the training points;
+		\begin{equation}
+			\mu(\mathbf{DM}) = (\mu(\mathbf{x}_1), \mu(\mathbf{x}_2), \cdots, \mu(\mathbf{x}_N)) 
+		\label{eq:training_mean_vector}
+		\end{equation}
+	\item $\mu(\mathbf{x}_o)$ is the mean at an arbitrary test location;
+	\item $R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between output at the training points
+		\begin{equation}
+			R(\mathbf{DM}, \mathbf{DM}) = 
+				\begin{bmatrix}
+					R(\mathbf{x}_1, \mathbf{x}_1) & \cdots												& R(\mathbf{x}_1, \mathbf{x}_N) \\
+					\vdots												& \ddots												&	\vdots \\
+					R(\mathbf{x}_N, \mathbf{x}_1)	&	R(\mathbf{x}_N, \mathbf{x}_2) & R(\mathbf{x}_N, \mathbf{x}_N)
+				\end{bmatrix}
+		\label{eq:training_correlation_matrix}
+		\end{equation}
+	\item $R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point
+			\begin{equation}
+				R(\mathbf{x}_o, \mathbf{DM}) = R(\mathbf{DM}, \mathbf{x}_o) =  
+					\begin{bmatrix}
+						R(\mathbf{x}_o, \mathbf{x}_1) \\
+						\vdots												\\
+						R(\mathbf{x}_o, \mathbf{x}_N)	
+					\end{bmatrix}
+			\label{eq:training_test_correlation}
+			\end{equation}
+		\item and $R(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
+\end{itemize}
 
-Given the outputs at the training inputs are observed (i.e., the code is actually run at the inputs), $Y(\mathbf{DM}) = {y_i}_{i=1}^N$,
-then the prediction at given the observation can be obtained through the properties of Gaussian distribution,
+% Conditional Distribution, Simple Kriging
+Provided that the outputs at the training inputs are fully observed (i.e., the code is actually run at those inputs),
+then the output at the test input $Y(\mathbf{x}_o)$ \emph{given	} the observed outputs $Y(\mathbf{DM}) = \mathbf{y} = (y_1, y_2, \cdots,$ 
+$y_N)^T$ is a conditional Gaussian random variable,
 \begin{equation}
 	Y(\mathbf{x}_o) | Y(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( \mu_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
 \label{eq:joint_training_test}
 \end{equation}
+where $\mu_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution, respectively.
+They are also often referred to as the \emph{simple Kriging mean} and \emph{simple Kriging variance}, respectively.
 
 % Kriging Predictor, the mean
-The \emph{Kriging predictor} and the \emph{Kriging variance} are obtained through conditioning operation of a Gaussian random vector (see appendix).
-
+The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follow
+\marginpar{(simple) Kriging mean, \\ Kriging predictor}
+\begin{equation}
+	\mu_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + R^T(\mathbf{x}_o, \mathbf{DM}) R^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \mu(\mathbf{DM}))
+\label{eq:mean_sk}
+\end{equation}
 % Kriging Variance
+The simple Kriging variance, on the other hand, is expressed as
+\marginpar{(simple) Kriging variance}
+\begin{equation}
+	s^2_{SK} = \sigma^2 (1 - R^T(\mathbf{x}_o, \mathbf{DM}) R^T(\mathbf{DM}, \mathbf{DM}) R(\mathbf{x}_o, \mathbf{DM}))
+\label{eq:variance_sk}
+\end{equation}
+The expressions for the mean and the variance above are obtained through the conditioning operation of the Gaussian random vector in Eq.(~\ref{eq:joint_training_test}) (See Appendix). 
+In practice, the Kriging mean are used as a predictor of the code output at an arbitrary input location, 
+while the variance is used as a measure of error of that prediction.
 
 % Interesting Observation
+% Linearity
+% Collapse at training, interpolant
+% Epistemic Uncertainty interpretation
 
 \subsection{Universal Kriging and Hyper-Parameter Estimation}\label{sub:gp_uk}
 
