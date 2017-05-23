@@ -120,7 +120,7 @@ They are also often referred to as the \emph{simple Kriging mean} and \emph{simp
 
 % Kriging Predictor, the mean
 The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follow
-\marginpar{(simple) Kriging mean, \\ Kriging predictor}
+\marginpar{(simple) Kriging mean}
 \begin{equation}
 	m_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + R^T(\mathbf{x}_o, \mathbf{DM}) R^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \mu(\mathbf{DM}))
 \label{eq:mean_sk}
@@ -141,12 +141,26 @@ The simple Kriging model has several interesting features:
 \begin{itemize}
 	% Linearity
 	\item The Kriging predictor given by the mean in Eq.(\ref{eq:mean_sk}) is a \emph{linear predictor}. 
+				\marginpar{linear predictor}
 	      In other words, the centered predictor $m_{SK}(\mathbf{x}_o) - \mu (\mathbf{x}_o))$)  is a linear combination of the centered data 
 	      ($\mathbf{y} - \mu(\mathbf{DM})$).
+	% Interpolant
 	\item The variance collapses at the training points, that is plugging-in $\mathbf{x}_i \in DM$ into Eq.(\ref{eq:variance_sk}) will yield $s^2_{SK}(\mathbf{x}_i) = 0$.
-	      As such Kriging predictor is also an \emph{interpolant}, which exactly fits the observed data (i.e., deterministic code output at the training inputs).
-	\item The variance on a given test point does not depend on the observed data. 
+				\marginpar{Kriging as an interpolant}
+	      As such, the Kriging predictor is also an \emph{interpolant}, which exactly fits the observed data (i.e., deterministic code output at the training inputs).
+	% Dependence of the variance
+	\item The variance on a given test point does not depend on the observed data.
+				\marginpar{Variance as function of distance between test and training points}
 	      Strictly speaking, it is only dependent on the process variance $\sigma^2$ and the correlation function $R(\circ,\circ)$.
+				Furthermore, the variance on a given test point is also equal or less than the process variance, 
+				the difference of which depends on the distance between $\mathbf{x}_o$ and the training points $\mathbf{DM}$.
+				The closer $\mathbf{x}_o$ is to the training points, the smaller the variance at that point.
+	% Uncertainty
+	\item Being a variance of a conditional Gaussian distribution, the Kriging variance can be intuitively interpreted as the posterior \emph{uncertainty} of the prediction given the observed data.
+				\marginpar{Variance as measure of epistemic uncertainty}
+	      The nature of this uncertainty is clearly epistemic as, in the case of this thesis, the computer code that underlies the observed data is deterministic.
+				In other words, the uncertainty associated with the prediction at an arbitrary input is due to the lack of knowledge as the code itself is not run at that point.
+				However, the prediction at that point is informed by the observed data contained in the training data.
 \end{itemize}
 
 
