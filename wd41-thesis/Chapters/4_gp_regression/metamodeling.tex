@@ -112,7 +112,7 @@ Provided that the outputs at the training inputs are fully observed (i.e., the c
 then the output at the test input $Y(\mathbf{x}_o)$ \emph{given	} the observed outputs $Y(\mathbf{DM}) = \mathbf{y} = (y_1, y_2, \cdots,$ 
 $y_N)^T$ is a conditional Gaussian random variable,
 \begin{equation}
-	Y(\mathbf{x}_o) | Y(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( \mu_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
+	Y(\mathbf{x}_o) | Y(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( m_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
 \label{eq:joint_training_test}
 \end{equation}
 where $\mu_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution, respectively.
@@ -122,14 +122,14 @@ They are also often referred to as the \emph{simple Kriging mean} and \emph{simp
 The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follow
 \marginpar{(simple) Kriging mean, \\ Kriging predictor}
 \begin{equation}
-	\mu_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + R^T(\mathbf{x}_o, \mathbf{DM}) R^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \mu(\mathbf{DM}))
+	m_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + R^T(\mathbf{x}_o, \mathbf{DM}) R^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \mu(\mathbf{DM}))
 \label{eq:mean_sk}
 \end{equation}
 % Kriging Variance
 The simple Kriging variance, on the other hand, is expressed as
 \marginpar{(simple) Kriging variance}
 \begin{equation}
-	s^2_{SK} = \sigma^2 (1 - R^T(\mathbf{x}_o, \mathbf{DM}) R^T(\mathbf{DM}, \mathbf{DM}) R(\mathbf{x}_o, \mathbf{DM}))
+	s^2_{SK} (\mathbf{x}_o) = \sigma^2 (1 - R^T(\mathbf{x}_o, \mathbf{DM}) R^T(\mathbf{DM}, \mathbf{DM}) R(\mathbf{x}_o, \mathbf{DM}))
 \label{eq:variance_sk}
 \end{equation}
 The expressions for the mean and the variance above are obtained through the conditioning operation of the Gaussian random vector in Eq.(~\ref{eq:joint_training_test}) (See Appendix). 
@@ -137,8 +137,19 @@ In practice, the Kriging mean are used as a predictor of the code output at an a
 while the variance is used as a measure of error of that prediction.
 
 % Interesting Observation
-% Linearity
-% Collapse at training, interpolant
+The simple Kriging model has several interesting features:
+\begin{itemize}
+	% Linearity
+	\item The Kriging predictor given by the mean in Eq.(\ref{eq:mean_sk}) is a \emph{linear predictor}. 
+	      In other words, the centered predictor $m_{SK}(\mathbf{x}_o) - \mu (\mathbf{x}_o))$)  is a linear combination of the centered data 
+	      ($\mathbf{y} - \mu(\mathbf{DM})$).
+	\item The variance collapses at the training points, that is plugging-in $\mathbf{x}_i \in DM$ into Eq.(\ref{eq:variance_sk}) will yield $s^2_{SK}(\mathbf{x}_i) = 0$.
+	      As such Kriging predictor is also an \emph{interpolant}, which exactly fits the observed data (i.e., deterministic code output at the training inputs).
+	\item The variance on a given test point does not depend on the observed data. 
+	      Strictly speaking, it is only dependent on the process variance $\sigma^2$ and the correlation function $R(\circ,\circ)$.
+\end{itemize}
+
+
 % Epistemic Uncertainty interpretation
 
 \subsection{Universal Kriging and Hyper-Parameter Estimation}\label{sub:gp_uk}
