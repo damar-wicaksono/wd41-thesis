@@ -2,7 +2,7 @@
 \chapter[Gaussian Process Metamodeling]{Gaussian Process Metamodeling: Emulating Code Input/Output for Faster Evaluation}\label{ch:gp_metamodel}
 %***********************************************************************************************************************************************
 
-Tens, if not hundred, of thousands code runs to appropriately explore the posterior probability distribution using different values of parameters are to be expected under Bayesian calibration framework.
+Tens, if not hundreds, of thousands code runs to appropriately explore the posterior probability distribution using different values of parameters are to be expected under Bayesian calibration framework.
 Such number of runs are only feasible for simulation with a negligible running time.
 Therefore, to balance the need of vast number of code runs with the finite computing resources and time, 
 an alternative approach is required to approximate the input/output relationships of the code for select relevant outputs within a select input domain of interest. 
@@ -15,11 +15,8 @@ The framework casts the problem metamodeling as a problem of nonlinear regressio
 
 Afterward, a review on some fundamentals concepts of multivariate Gaussian random variable and Gaussian stochastic process is presented in Section~\ref{sec:gp_fundamentals}.
 The section also tries to establish an intuitive connection between multivariate Gaussian random variable and Gaussian stochastic process.
-Section~\ref{sec:gp_metamodeling} then presents the formal Gaussian stochastic process formulation used for metamodeling.
-
-Section~\ref{sec:gp_constructing_metamodel} and Section~\ref{sec:gp_dimension_reduction} deal with practical aspects of constructing a metamodel based on Gaussian process.
-The first includes brief explanations on the choice design of experiments used to generate data (i.e., code runs), the metamodel fitting, and the metamodel validation, 
-while the latter deals specifically with an approach to tackle the case of codes with multiple outputs.
+Section~\ref{sec:gp_metamodeling} then presents the formal Gaussian stochastic process formulation used for metamodeling along with important practical aspects of constructing it. 
+Section~\ref{sec:gp_dimension_reduction} specifically deals with an approach to tackle the case of code with multiple outputs.
 
 The application of the metamodeling approach to the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility is given in Section~\ref{sec:gp_application_to_feba}.
 The suitability of Gaussian process metamodel on the \gls[hyper=false]{trace} model is assessed using different choices made during the metamodel construction.
