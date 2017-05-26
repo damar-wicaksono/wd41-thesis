@@ -46,7 +46,7 @@ for (i in 1:3)
     points(dm[[i]]$x1, dm[[i]]$x2, pch = 4, 
          xlab = expression(x[1]),
          ylab = expression(x[2]),
-         cex = 1.0)
+         cex = 2.0)
     
     # Set Axis, Ticks and Labels
     # x-axis
