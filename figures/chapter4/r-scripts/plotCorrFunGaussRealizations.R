@@ -2,7 +2,6 @@
 # title     : plotCorrFunGaussRealizations.R
 # purpose   : R script to create an illustration of realizations from GP using 
 #           : Gaussian correlation function
-# figure    : 7
 # author    : WD41, LRS/EPFL/PSI
 # date      : Jan. 2017
 #

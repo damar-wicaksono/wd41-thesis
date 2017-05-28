@@ -1,1 +1,126 @@
-\section{Constructing a Gaussian Process Metamodel}\label{sec:gp_constructing_metamodel}
+\newpage
+%***********************************************************************************
+\section{Practical Aspects of GP Metamodel Constructions}\label{sec:gp_construction}
+%***********************************************************************************
+
+Three basic tasks involved in the construction of a valid metamodel outlined in Section~\ref{sec:gp_metamodeling}:
+selecting the design/training points (i.e., generating $\mathbf{DM}$),
+model fitting (i.e., estimating the hyper-parameters $\boldsymbol{\Psi}$),
+and model validation (i.e., assessing whether the constructed metamodel is appropriate for its intended use: to replace the expensive simulator code).
+
+%--------------------------------------------------------------------
+\subsection{Selection of Design/Training Points}\label{sub:gp_design}
+%--------------------------------------------------------------------
+
+% Introductory Paragraph
+The metamodeling of deterministic simulator $f$ to obtain the surrogate $\tilde{f}$ is based on the training data $\left(\mathbf{DM} = \{\mathbf{x}_n\}_{n=1}^N, \mathbf{y} = \{f(\mathbf{x}_{n})\}_{n=1}^N\right)$, 
+the design matrix and the corresponding outputs from the actual simulator runs.
+The accuracy of $\tilde{f}$, in turn, is determined by the configuration of $\mathbf{DM}$,
+the sample size $N$, the true underlying relationship of $f$ \cite{Ginsbourger2010}.
+
+% On the "Geometry" of DM, and curse of dimensionality
+The selection of points in the input parameter space, which determines the geometrical configuration of $\mathbf{DM}$, is aimed at exploring the whole input parameter space $\mathcal{X}$, at least at the region where important features of model (e.g., region of strong non-linearity) are located.
+\marginpar{grid approach}
+As this region (or regions) is often not known in advance, 
+the most straightforward approach that explore the parameter space is by using the grid approach with a fine discretization shown in Fig.~\ref{fig:plot_grid_approach} \cite{Koehler1996}.
+In practice, with a constraint on computational budget, the amount of actual code runs is limited.
+The objective is then to select the limited points more judiciously to obtain as much information about the model as possible with as few points as possible \cite{Simpson2001a,Fang2006}.  
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_grid_approach},
+			           maincaption={Grid approach to select training points becomes prohibitively expensive for high-dimensional problem. Shown here is grid in 2-dimensional input parameter space and the code is supposed to be evaluated at each vertex. In larger-dimension, the problem is worsened with requirement of $N = \Delta^{D}$ code runs, where $\Delta$ is the discretization level assumed uniform for all parameters and $D$ is the number of parameters.},
+			           mainshortcaption={Grid approach to select training points},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_grid_approach_1},
+			           leftcaption={$\Delta = 5, N = 25$},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_grid_approach_2},
+			           midcaption={$\Delta = 10, N = 100$},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_grid_approach_3},
+			           rightcaption={$\Delta = 20, N = 400$},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotGridApproach_1}
+{../figures/chapter4/figures/plotGridApproach_2}
+{../figures/chapter4/figures/plotGridApproach_3}
+
+% A Good Design 
+Some techniques to select the training points are based on are borrowed from the design of (physical) experiments.
+\marginpar{Design for computer experiment}
+Deterministic computer code, however, lacks random error and (hidden) nuisance parameters that renders techniques such as randomization, replication, and blocking irrelevant \cite{Santner2003}.
+On the other hand, computer experiment tends to involve many more input parameters compared to its physical counterpart, which is constrained by cost. 
+A good design for (deterministic) computer experiment, therefore, are constructed based on different set of principles.
+First, due to the deterministic nature of the underlying code, the design should avoid any repetition of observation. 
+Second, due to the lack of knowledge about the underlying inputs/output relationship of the model, the design should spread the available points evenly across input parameter space \cite{Santner2003}.
+In other words, the design should be model-free without assuming any explicit form of inputs/output relationship.
+Third and finally, the design should have a good low dimensional projection properties\footnote{good coverage, no cluster, and does not induced artifical correlation in the projection of the design} \cite{Jin2003,Damblin2013}.
+It is further argued in \cite{Damblin2013} that due to the effect sparsity principle (in relation parameter interaction), 
+a design with good $2$-dimensional projection property is enough to construct an accurate metamodel.   
+Design for computer experiment that roughly follows these principles are generically termed "Space-Filling" \cite{Simpson2001a,Jin2003,Santner2003,Chen2006,Damblin2013}.
+
+%This principle is related to the construction of Gaussian process metamodel as opposed to the classical response surface method.
+%In response surface method, because the degree and structure of parameter interaction of the metamodel is already set up in advance (such as polynomials up to certain degree), the design can then be tailored to directly estimate the features contained in the metamodel (cite Simpson).
+%As Gaussian process metamodel is more flexible than polynomials, and no assumption made about the underlying model, the corresponding design should reflect this.
+
+% SRS, LHS, Optimized LHS, and Quasi-Random Sequence
+\Gls[hyper=false]{srs} (Fig~\ref{fig:plot_design_srs}) is the simplest and most generic approach to generate design of computer experiment.
+\marginpar{Examples of design: SRS, LHS, and Quasi-Random}
+While technically non-repetitive, the samples generated by \gls[hyper=false]{srs}  are not guaranteed to be well-separated; 
+clusters tends to form around one region of parameter space while leaving other part of the region unexplored.
+The \gls[hyper=false]{lhs} initially developed for the analysis of computer experiment in lieu of \gls[hyper=false]{srs} \cite{Mckay1979} has become a popular alternative in computer experiment \cite{Viana2016}.
+\gls[hyper=false]{lhs} guarantees that values for each input dimension is different (Fig.~\ref{fig:plot_design_lhs}) (i.e., has an excellent $1$-dimensional projection).
+The projection in higher dimension, however, is still not guaranteed to be optimal.
+Its improvement to provide a better uniformity properties in all dimension have been continuously proposed in the literature \cite{Santner2003,Fang2006,Chen2006,Damblin2013,Viana2016}.
+More recently, the use of quasi-random sequence originally applied to accelerate the convergence of Monte Carlo integration (see for instance \cite{Caflisch1998}) has also been applied for constructing experimental design.
+Fig.~\ref{fig:plot_design_sobol} is an example of such design, generated using Sobol' quasi-random sequence.
+Appendix~\ref{app:doe} presents some more detail on the subject.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_design_examples},
+			           maincaption={Examples of experimental design for metamodel training in $2$-dimensional input parameter space. Any $2$-dimensional projection from higher dimension is represented in the same manner.},
+			           mainshortcaption={Examples of experimental design for metamodel training},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_design_srs},
+			           leftcaption={\gls[hyper=false]{srs}},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_design_lhs},
+			           midcaption={\gls[hyper=false]{lhs}},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_design_sobol},
+			           rightcaption={Sobol' sequence},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotDesignExamples_1}
+{../figures/chapter4/figures/plotDesignExamples_2}
+{../figures/chapter4/figures/plotDesignExamples_3}
+
+% On the Sample Size, and why design might not be that important
+It is also worth noting that the literature has no consensus regarding the extend of which the design of experiment is important for metamodel accuracy \cite{Viana2016}.
+\marginpar{on the importance of sample size}
+Several authors (such as in \cite{Koehler1996,Jin2003,Damblin2013}) emphasized the design utmost importance while others (such as in \cite{Simpson2001a,Liu2005,Chen2016}) considered it to be less important, especially compared to the training sample size. 
+Those three latter studies reported that while a better design might be important for a relatively small sample, the importance of sample size will eventually eclipse the importance of a more efficient design (especially when such a convergence study can be afforded).
+That is, the accuracy of the resulting metamodel converges to the same value with increasing sample size regardless of the design.
+On the other hand, the size of training sample at which the metamodel accuracy becomes acceptable, is different from application to application and, as noted in \cite{Loeppky2009}, is closely related to the complexity of the underlying function.
+The paper proposes the sample size of $N = 10\times D$ as a rule of thumb for starting point.
+As the complexity of the underlying function is not known in advance, an empirical study for each case has to be carried out to assess whether the resulting metamodel is acceptable.    
+
+% Other Issues, sequntial
+As a final remark on the subject of design, all the designs considered in this thesis belong to a strategy called one-stage or one-shot strategy \cite{Kleijnen2007,Crombecq2011}.
+\marginpar{one-shot vs. sequential design}
+The strategy means that the training samples are generated at once and a metamodel is constructed and applied only based on that.
+Generating training samples of larger size might be necessary, but the larger samples will be generated essentially from scratch without using the results obtained from the smaller samples. 
+Sequential design is the alternative approach where the new design point is added sequentially to the initial batch of training set.
+In essence, it adaptively samples the input parameter space around the more interesting region (with more variation thus more difficult to approximate) based on the previously constructed metamodel.
+The newly found point is then augmented and new metamodel is constructed and the process is repeated until the required level of accuracy is attained.
+Though it potentially leads to a more efficient design (fewer samples required overall), it also adds additional complexity to metamodel construction (see for example \cite{Xiong2009,Crombecq2011}). 
+
+%-----------------------------------------------
+\subsection{Model Fitting}\label{sub:gp_fitting}
+%-----------------------------------------------
+
+%-----------------------------------------------------
+\subsection{Model Validation}\label{sub:gp_validation}
+%-----------------------------------------------------
+
+%------------------------------------------------------
+\subsection{Summary}\label{sub:gp_construction_summary}
+%------------------------------------------------------
