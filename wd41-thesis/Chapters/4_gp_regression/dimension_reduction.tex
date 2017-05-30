@@ -1,8 +1,11 @@
+\newpage
+%*************************************************************************** 
 \section{Dealing with Multivariate Output}\label{sec:gp_dimension_reduction}
+%***************************************************************************
 
 % Introductory Paragraph, Multiple Output
 The previous discussion on \gls[hyper=false]{gp} metamodel dealt with a single output (univariate) case.
-On the other hand, many computer simulations produce multiple (multivariate) outputs\footnote{in this thesis the number of outputs are referred to as the \emph{dimension of the output parameter space}.}.
+Many computer simulations produce multivariate outputs\footnote{in this thesis the number of outputs are referred to as the \emph{dimension of the output parameter space}.}.
 \marginpar{multivariate outputs}
 A typical \gls[hyper=false]{trace} simulation, for example, produces flow variables as functions of time and space as its \emph{raw} outputs.
 This is indeed the case for the reflood simulation problem presented in Chapter~\ref{ch:trace_reflood}.
@@ -20,17 +23,21 @@ As such, developing individual metamodels to represent the correlated outputs se
 % The approach in this thesis
 To cope with the problem of high-dimensionality of the outputs,
 \marginpar{extension to multivariate case} 
-this thesis adopted \gls[hyper=false]{lmc} (cite Raul) coupled with \gls[hyper=false]{pca} technique (cite Jolife and Higdon) to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
+this thesis adopted \gls[hyper=false]{lmc} \cite{Goulard1992,Paulo2012} coupled with \gls[hyper=false]{pca} technique \cite{Jolliffe2002,Higdon2008} to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
 The original \gls[hyper=false]{lmc} was formulated to model multivariate data in geostatistics that covary together over a region in a linear fashion, 
 while \gls[hyper=false]{pca} is used here a data-driven dimensional reduction tool.
 The resulting model consists of few \emph{independent, univariate} \gls[hyper=false]{gp} metamodels, each of which is the one presented in the previous section.
 
+%---------------------------------------------------------------------
+\subsection{Linear Model of Coregionalization (LMC)}\label{sub:gp_lmc}
+%---------------------------------------------------------------------
+
 % Linear Model of Coregionalization
 The function that represents the computer code simulation $f$ is now cast in its multivariate version, $\mathbf{f}:\mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^P$ where $P$ is the dimension of the output parameter space.
 \marginpar{Linear model of coregionalization}
-The \gls[hyper=false]{lmc} of the $P$-dimensional \gls[hyper=false]{gp} metamodel $\tilde{\mathbf{f}}$ can be written as,
+The \gls[hyper=false]{lmc} of the $P$-dimensional \gls[hyper=false]{gp} metamodel $\bm{Y}$ can be written as,
 \begin{equation}
-	\tilde{\mathbf{f}}(\mathbf{x}) = \boldsymbol{\mu}(\mathbf{x}) + \boldsymbol{\Phi} \mathbf{w}(\mathbf{x}) + \boldsymbol{\epsilon}
+	\bm{Y}(\mathbf{x}) = \boldsymbol{\mu}(\mathbf{x}) + \boldsymbol{\Phi} \mathbf{w}(\mathbf{x}) + \boldsymbol{\epsilon}
 \label{eq:lmc}
 \end{equation}
 where $\boldsymbol{\mu}$ is the $P$-dimensional mean vector of the multivariate process;
@@ -43,6 +50,10 @@ and $\mathbf{w}(\mathbf{x}) = (w_i(\mathbf{x}))$ is a $Q$-dimensional vector wit
 \end{equation}
 where $\sigma^2_i$ and $R_i$ are the process variance and correlation function associated with each element of the vector, respectively.
 The term $\boldsymbol{\Phi} \mathbf{w}(\mathbf{x})$ describes the covariation between the multivariate outputs as function of model parameters.
+
+%----------------------------------------------------------
+\subsection{Principal Component Analysis}\label{sub:gp_pca}
+%----------------------------------------------------------
 
 % Principal Component Analysis
 \gls[hyper=false]{pca} is then used as a data-driven approach to obtain the components of the \gls[hyper=false]{lmc} in Eq.~(\ref{eq:lmc}).
@@ -135,12 +146,106 @@ A unique set of $Q$ principal component scores are associated with each points i
 The scores describe the locations of the multivariate data points in the new coordinate system as defined by the principal components.
 
 % Illustration here
+\bigdoublefigure[pos=tbhp,
+                 mainlabel={fig:pca_illustrate},
+								 mainshortcaption={Random surface realizations},
+                 maincaption={PCA},
+                 leftopt={width=0.475\textwidth},
+                 leftlabel={fig:pca_original},
+                 leftcaption={Original data},
+                 rightopt={width=0.475\textwidth},
+                 rightlabel={fig:pca_transformed},
+                 rightcaption={Transformed data},
+                 ]
+{../figures/chapter4/figures/plotPCA_1}
+{../figures/chapter4/figures/plotPCA_2}
 
 % Dimension Reduction
 The dimension reduction takes place when the $Q$ is chosen such that $Q << P$.
 Such selection is justified by a certain amount of partial variance explained by the first $Q$ principal components.
 
+The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
+\begin{equation}
+	\boldsymbol{\lambda} = \text{diag}\left(\frac{\mathbf{S}^2}{N-1}\right)
+\label{eq:singular_values_variance}
+\end{equation}
+Selection of the number of principal components to retain usually justified by the.
 
 % Truncation Error
 
-% Full Probabilistic Model
+%------------------------------------------------------------------------------
+\subsection{Multivariate Gaussian Process Metamodel}\label{sub:gp_multivariate}
+%------------------------------------------------------------------------------
+
+% LMC - PCA
+The multivariate output formulation of a \gls[hyper=false]{gp} metamodel based on the previous discussion is summarized as the following equation, 
+where a prediction at an arbitrary input $\mathbf{x}_o \in \mathcal{X}$ is made,
+\begin{equation}
+		\bm{Y}(\mathbf{x}_o) = \bar{\mathbf{Y}} + \text{diag}(\boldsymbol{\sigma}_{\mathbf{y}}) (\boldsymbol{\Phi}_Q \bm{w} (\mathbf{x}_o) + \boldsymbol{\Phi}_{>Q} \mathbf{e})
+\label{eq:lmc_pca}
+\end{equation}
+where $\bar{\bm{Y}}$ is the $P$-dimensional vector of sample mean (Eq.~(\ref{eq:sample_mean}));
+and $\text{diag}(\boldsymbol{\sigma}_{\mathbf{y}})$ is the $P \times P$ diagonal matrix of sample standard deviation (Eq.~(\ref{eq:sample_standard_deviation})). 
+The other elements in the equation is described below.
+
+% The Retained Eigenvectors
+$\boldsymbol{\Phi}_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
+Specifically, $\boldsymbol{\Phi}_Q$ is,
+\begin{equation}
+		\boldsymbol{\Phi}_Q = (\boldsymbol{\phi}_1, \boldsymbol{\phi}_2, \cdots, \boldsymbol{\phi}_Q) ; \, Q < P
+\label{eq:retained_pc}
+\end{equation}
+where $\boldsymbol{\phi}_i$ is the $P$-dimensional column vector of the $i$-th PC loading.
+
+% The Standardized PC Scores, a Gaussian process
+$\mathbf{w}$ is the $Q$-dimensional vector of standardized PC scores for each PC loadings, modeled as set of univariate, independent, zero-mean \gls[hyper=false]{gp},
+\begin{equation}
+		\begin{split}
+			\bm{w} & = [\mathit{w}_1, \mathit{w}_2, \cdots, \mathit{w}_Q] ; \, Q < P \\
+			 \mathit{w}_i (\circ) & \sim \mathcal{GP}(0, \sigma_i^2 R_i(\circ, \circ)) 
+		\end{split}
+\label{eq:retained_pc}
+\end{equation}
+where $\mathit{w}_i$ is the standardized PC scores of the $i$-th PC loading;
+$\sigma_i^2$ and $R_i(\circ, \circ)$ are the process variance and the correlation function 
+associated with \gls[hyper=false]{gp} of $\mathit{w}_i$, respectively.
+
+% Conditioning the process by observed data
+The observed data from the training samples is related to each of the $\mathit{w}_i$ by,
+\begin{equation}
+	\bm{w}_i(\mathbf{DM}) \equiv \mathbf{w}_i = \mathbf{Y}^* \boldsymbol{\phi}_i ; \, i = 1, \cdots, Q
+\label{eq:data_w}
+\end{equation}
+That is, the observed data for the $i$-th standardized PC score is the projection of the standardized data on the $i$-th PC loading.
+Conditioning the \gls[hyper=false]{gp} of $\mathit{w}_i$ by the observed data yields,
+\begin{equation}
+	\bm{w}_i (\mathbf{x}_o) | \mathbf{w}_i \sim \mathcal{N} (m_{SK,i}(\mathbf{x}_o), s^2_{SK,i}(\mathbf{x}_o)) ; \, i = 1, \cdots, Q 
+\label{eq:conditional_w}
+\end{equation}
+where $m_{SK,i}$ and $s^2_{SK,i}$ are the simple Kriging mean and variance, respectively (Eq.~(\ref{eq:mean_sk}) and Eq.~(\ref{eq:variance_sk})),
+associated to the $i$-th standardized PC score.
+The simple Kriging formulation is used here as the assumed process is already centered (zero-mean).
+
+% The unretained eigenvectors
+$\boldsymbol{\Phi}_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns of the PC loadings,
+\begin{equation}
+		\boldsymbol{\Phi}_{>Q} = (\boldsymbol{\phi}_{Q+1}, \boldsymbol{\phi}_{Q+2}, \cdots, \boldsymbol{\phi}_N)
+\label{eq:unretained_pc}
+\end{equation}
+where $\boldsymbol{\phi}_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading.
+
+Finally, following \cite{Wilkinson2010}, $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distributed normal random variable with mean $0$ and variance $1$.
+In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as independent normal random variable with the variance given the PC loadings.
+
+% The Full Probability Model
+The multivariate output at evaluated $\mathbf{x}_o$ conditioned by the training samples is thus distributed as $P$-variate Gaussian random variable,
+\begin{equation}
+	\begin{split}
+		& \bm{Y} (\mathbf{x}_o) | \bm{Y}(DM)=\mathbf{Y} \sim \mathcal{N}_P (\boldsymbol{\mu}_P (\mathbf{x}_o), \Sigma_{P \times P} (\mathbf{x}_o)) \\
+		& \boldsymbol{\mu}_P  = \bar{\mathbf{Y}} + \text{diag}(\boldsymbol{\sigma}_{\mathbf{y}}) \boldsymbol{\Phi} \mathbf{m}_{SK}(\mathbf{x}_o) \\
+		& \Sigma_{P \times P} = \text{diag}(\boldsymbol{\sigma}_{\mathbf{y}}) (\boldsymbol{\Phi} \text{diag}(\mathbf{s}^2_{SK}(\mathbf{x}_o)) \boldsymbol{\Phi}^T + \boldsymbol{\Phi}_{>Q} \mathbf{I}\boldsymbol{\Phi}^T_{>Q}) \text{diag}(\boldsymbol{\sigma}_{\mathbf{y}}) \\
+		& \mathbf{m}_{SK} = [m_{SK,1}(\mathbf{x}_o), m_{SK,2}(\mathbf{x}_o), \cdots, m_{SK,Q}(\mathbf{x}_o)] \\
+		& \mathbf{s}^2_{SK} = [s^2_{SK,1}(\mathbf{x}_o), s^2_{SK,2}(\mathbf{x}_o), \cdots, s^2_{SK,Q}(\mathbf{x}_o)]
+	\end{split}
+\label{eq:p_variate_metamodel}
+\end{equation} 
