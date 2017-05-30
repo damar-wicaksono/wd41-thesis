@@ -6,7 +6,7 @@
 # date      : May 2017
 #
 # Global variables ------------------------------------------------------------
-set.seed(2450)
+set.seed(11245012)
 otpfullnames <- c("./figures/plotPCA_1.pdf",
                   "./figures/plotPCA_2.pdf")
 
@@ -20,7 +20,7 @@ tck_len  <- -0.35   # Tick length
 cex_lab_shift <- 1.25   # Shift of the axis label from the axis
 
 # Define the illustrative case ------------------------------------------------
-mu <- matrix(c(5, 3))                   # Mean vector
+mu <- matrix(c(0, 0))                   # Mean vector
 rr <- matrix(c(0.81, -1 * sqrt(0.81) * sqrt(0.25) * 0.85, 
                -1 * sqrt(0.81) * sqrt(0.16) * 0.85, 0.16), 
              nrow = 2)                              # Arbitrary covariance
@@ -36,12 +36,26 @@ for (i in 1:n)
 }
 
 # Carry out the principal component analysis ----------------------------------
-zz_svd <- svd(scale(zz,scale = F), nv = 2) # SVD on unscaled data
+zz_svd  <- svd(scale(zz,scale = F), nv = 2) # SVD on unscaled data
+std_dev <- sqrt((zz_svd$d)^2/(n-1))
+D <- diag(zz_svd$d)
+pc_scores <- zz_svd$u %*% D
 
-zz_svd_scaled <- svd(scale(zz), nv = 2)    # SVD on scaled data
-D <- diag(zz_svd_scaled$d)
-pc_scores <- zz_svd_scaled$u %*% D
-std_dev <- sqrt(diag(D^2 / (n - 1)))
+#zz_svd_scaled <- svd(scale(zz), nv = 2)    # SVD on scaled data
+#D <- diag(zz_svd_scaled$d)
+#pc_scores <- zz_svd_scaled$u %*% D
+#std_dev <- sqrt(diag(D^2 / (n - 1)))
+#diag(D^2 / (n - 1))
+
+computeXY <- function(xx, yy, std_x, eigenvector)
+{
+    ax1 <- 3 * std_x * cos(atan(eigenvector[2]/eigenvector[1]))
+    ax2 <- 3 * std_x * sin(atan(eigenvector[2]/eigenvector[1]))
+    return(list(c(mean(xx) - ax1, mean(xx), mean(xx) + ax1),
+                c(mean(yy) - ax2, mean(yy), mean(yy) + ax2)))
+}
+
+
 
 # Data points in the original coordinate system plot --------------------------
 idx <- c(104,  62, 231, 193, 168)   # Select illustrative points
@@ -51,47 +65,58 @@ par(mfrow = c(1,1), mar = margin, las = 1,
     oma = c(0, 0, 0, 0), bty = "n")
 
 plot(0, 0, type = "n", 
-     xlim = c(5 - 1 * ceiling(3 * sqrt(0.81)), 5 + ceiling(3 * sqrt(0.81))), 
-     ylim = c(3 - 1 * ceiling(3 * sqrt(0.16)), 3 + ceiling(3 * sqrt(0.16))),
+     xlim = c(mean(zz[,1]) - 1 * ceiling(3 * sqrt(0.81)), mean(zz[,1]) + ceiling(3 * sqrt(0.81))), 
+     ylim = c(mean(zz[,2]) - 1 * ceiling(3 * sqrt(0.16)), mean(zz[,2]) + ceiling(3 * sqrt(0.16))),
      axes = FALSE,
      ylab = "", 
      xlab = "")
 
 points(zz[,1], zz[,2], col = rgb(0, 0, 0, 0.25))
-abline(coef = c(3 - 5 * zz_svd$v[2,1]/zz_svd$v[1,1], 
-                zz_svd$v[2,1]/zz_svd$v[1,1]),  lwd = 0.1)
-abline(coef = c(3 - 5 * zz_svd$v[2,2]/zz_svd$v[1,2], 
-                zz_svd$v[2,2]/zz_svd$v[1,2]),  lwd = 0.1)
+lines(computeXY(zz[,1], zz[,2], std_dev[1], zz_svd$v[,1])[[1]],
+      computeXY(zz[,1], zz[,2], std_dev[1], zz_svd$v[,1])[[2]],
+      lwd = 0.1)
+lines(computeXY(zz[,2], zz[,1], std_dev[2], zz_svd$v[,2])[[1]],
+      computeXY(zz[,2], zz[,1], std_dev[2], zz_svd$v[,2])[[2]],
+      lwd = 0.1)
+
 # Illustrative points
-points(zz[idx,1], zz[idx,2], pch = 4, cex = 2)
+points(zz[idx,1], zz[idx,2], pch = 4, cex = 1.5)
 
 # Put labels
 label <- data.frame(x = zz[idx,1],
                     y = zz[idx,2])
 text(label$x[1], label$y[1], 
-     labels = c(parse(text=paste("y[",idx[1],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("y[",idx[1],"]", sep = ""))), cex = 0.9, pos = 4)
 text(label$x[2], label$y[2], 
-     labels = c(parse(text=paste("y[",idx[2],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("y[",idx[2],"]", sep = ""))), cex = 0.9, pos = 4)
 text(label$x[3], label$y[3], 
-     labels = c(parse(text=paste("y[",idx[3],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("y[",idx[3],"]", sep = ""))), cex = 0.9, pos = 4)
 text(label$x[4], label$y[4], 
-     labels = c(parse(text=paste("y[",idx[4],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("y[",idx[4],"]", sep = ""))), cex = 0.9, pos = 4)
 text(label$x[5], label$y[5], 
-     labels = c(parse(text=paste("y[",idx[5],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("y[",idx[5],"]", sep = ""))), cex = 0.9, pos = 4)
 
-#text(7.75, 5, labels = "PC1")
-#text(7.75, 5, labels = "PC1")
+text(computeXY(zz[,1], zz[,2], std_dev[1], zz_svd$v[,1])[[1]][1]-0.1, 
+     computeXY(zz[,1], zz[,2], std_dev[1], zz_svd$v[,1])[[2]][1], 
+     labels = expression(v[1]))
+text(computeXY(zz[,2], zz[,1], std_dev[2], zz_svd$v[,2])[[1]][3] + 0.1, 
+     computeXY(zz[,2], zz[,1], std_dev[2], zz_svd$v[,2])[[2]][3], 
+     labels = expression(v[2]))
 
 # Set Axis, Ticks and Labels
 # x-axis
 axis(side = 1, lwd = 1.5,
-     at = c(5 - ceiling(3 * sqrt(0.81)), 5, 5 + ceiling(3 * sqrt(0.81))), 
+     at = c(round(mean(zz[,1])) - ceiling(3 * sqrt(0.81)), 
+            round(mean(zz[,1])), 
+            round(mean(zz[,1])) + ceiling(3 * sqrt(0.81))), 
      mgp = c(3, cex_lab_shift, 0), 
      tcl = tck_len, cex.axis = cex_axis)
 title(xlab = expression(y[n1]), mgp = c(3.0, 0, 0), cex.lab = cex_lab)
 # y-axis
 axis(side = 2, lwd = 1.5,
-     at = c(3 - ceiling(3 * sqrt(0.25)), 3, 3 + ceiling(3 * sqrt(0.25))), 
+     at = c(round(mean(zz[,2])) - ceiling(3 * sqrt(0.25)), 
+            round(mean(zz[,2])), 
+            round(mean(zz[,2])) + ceiling(3 * sqrt(0.25))), 
      mgp = c(3, cex_lab_shift, 0), 
      tcl = tck_len, 
      cex.axis = cex_axis)
@@ -117,12 +142,14 @@ plot(0, 0, type = "n",
 
 points(pc_scores[,1], pc_scores[,2], col = rgb(0, 0, 0, 0.25))
 
-abline(v = 0, lwd = 0.01)
-abline(h = 0, lwd = 0.01)
+lines(c(-3 * sd(pc_scores[,1]), 0, 3 * sd(pc_scores[,1])), c(0, 0, 0), 
+      lwd = 0.1)
+lines(c(0, 0, 0), c(-3 * sd(pc_scores[,2]), 0, 3 * sd(pc_scores[,2])), 
+      lwd = 0.1)
 # Illustrative points
 points(pc_scores[idx,1], pc_scores[idx,2], 
        xlim = c(-3* 1.336841,3* 1.336841), 
-       ylim = c(-3* 1.336841,3* 1.336841), pch = 4, cex = 2)
+       ylim = c(-3* 1.336841,3* 1.336841), pch = 4, cex = 1.5)
 label <- data.frame(x = pc_scores[idx,1],
                     y = pc_scores[idx,2])
 # Put labels
@@ -132,15 +159,15 @@ for (i in 1:5)
     lines(c(0, pc_scores[idx[i],1]), c(pc_scores[idx[i],2], pc_scores[idx[i],2]), lwd = .1, lty = 2)
 }
 text(label$x[1], label$y[1], 
-     labels = c(parse(text=paste("w[",idx[1],"]", sep = ""))), cex = 0.8, pos = 2)
+     labels = c(parse(text=paste("w[",idx[1],"]", sep = ""))), cex = 0.9, pos = 2)
 text(label$x[2], label$y[2], 
-     labels = c(parse(text=paste("w[",idx[2],"]", sep = ""))), cex = 0.8, pos = 2)
+     labels = c(parse(text=paste("w[",idx[2],"]", sep = ""))), cex = 0.9, pos = 3)
 text(label$x[3], label$y[3], 
-     labels = c(parse(text=paste("w[",idx[3],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("w[",idx[3],"]", sep = ""))), cex = 0.9, pos = 4)
 text(label$x[4], label$y[4], 
-     labels = c(parse(text=paste("w[",idx[4],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("w[",idx[4],"]", sep = ""))), cex = 0.9, pos = 1)
 text(label$x[5], label$y[5], 
-     labels = c(parse(text=paste("w[",idx[5],"]", sep = ""))), cex = 0.8, pos = 4)
+     labels = c(parse(text=paste("w[",idx[5],"]", sep = ""))), cex = 0.9, pos = 3)
 
 # Set Axis, Ticks and Labels
 # x-axis
