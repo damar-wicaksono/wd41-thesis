@@ -21,12 +21,12 @@ The equation above, the \emph{Kriging} model (cite Owen, Simpson, Dupuy), consis
 	\end{equation}
 	The choice of the trend term distinguishes different classes of Kriging model.
 	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified.
-	\emph{Universal Kriging} (UK), on the other hand, refers to class of Kriging where where general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
+	\emph{Universal Kriging} (UK), on the other hand, refers to class of Kriging where a general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
 	\begin{equation}
 		\mu(\mathbf{x}) = \sum_{j=0}^{k} \beta_j h_j(\mathbf{x})
-	\label{eq:trend_function_definition}
+	\label{eq:trend_polynomial}
 	\end{equation}
-	where $h_j$ is a set of basis function; and $\beta_j$ is the set of the associated coefficients.
+	where $h_j$ is a set of polynomials basis function; and $\beta_j$ is the set of the associated coefficients.
 	\emph{Ordinary Kriging} is a special case of UK where the trend is set as an unknown constant. 
 	\item The \emph{bias} or \emph{residual} term, a stochastic process. 
 		This term, in turn, usually modeled using zero mean, stationary Gaussian stochastic process (such as presented in Section~\ref{sub:gp_covariance}).
@@ -168,8 +168,7 @@ The simple Kriging model has several interesting features:
 \end{itemize}
 
 % Ordinary and Universal Kriging
-In most practical situation, however, the values of the hyper-parameters are not known a priori.
-This is indeed the case for the Universal Kriging model where all the hyper-parameters values associated with both a linear mean and covariance functions are to be estimated simultaneously from the training data.
+Adding a general polynomial trend term with unknown coefficients results in a Universal Kriging model.
 
 % Some thought
 
