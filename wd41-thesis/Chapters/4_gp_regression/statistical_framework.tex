@@ -1,34 +1,67 @@
 \section{Statistical Framework}\label{sec:gp_statistical_framework}
 
-Consider a (possibly nonlinear) \emph{regression} problem:
-Given a deterministic computer code (which again, in essence a function) $f:\mathbf{x} \in \boldsymbol{\chi} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
-evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_i\}_{i=1}^N$, 
-resulting in a finite set inputs/outputs pair of such code $\{\mathbf{x}_i, f(\mathbf{x}_i) = y_i\}_{i=1}^N$\footnote{often referred to as \emph{training data}},
-the objective of regression is to compute (or \emph{predict}) the value of $\mathbf{x}^*$ with $\mathbf{x}^* \notin \mathbf{DM}$.
-As before, the domain $\boldsymbol{\chi}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
+Consider a general \emph{regression} problem:
+\marginpar{regression problem}
+Given a deterministic computer simulator (which again, in essence is a function) $f:\mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
+evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_n\}_{n=1}^N$,
+yielding $N$ outputs $\mathbf{y} = \{f(\mathbf{x}_n) = y_n)\}_{n=1}^N$. 
+the objective of regression is to compute (or \emph{predict}) the value of $\mathbf{x}_o$ with $\mathbf{x}_o \notin \mathbf{DM}$.
 
-To evaluate $f$ at any given $\mathbf{x}^*$ not in the original design matrix (or training data), 
-the function has to be reconstructed or estimated based on the given training data.
-Furthermore, the true underlying function $f(\circ)$ that produces $y_i$ itself might be too complex and expensive to evaluate, 
-such as in the case of a complex computer code.
-This fact also often limits the size of training data.
-As such, the estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
+The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\mathbf{x}_n, f(\mathbf{x}_n) = y_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
+\marginpar{training data, training samples, and training outputs}
+though the term is used interchangeably with the training outputs $\mathbf{y}$.
+The experimental design matrix $\mathbf{DM}$ introduced in the previous chapter is interchangeably referred to as the training samples, inputs, or points in this chapter.
+As before, the domain $\boldsymbol{X}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
+
+To evaluate $f$ at any given $\mathbf{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
+\marginpar{emulator, surrogate model, and metamodel} 
+Unfortunately, the true underlying function $f(\circ)$ that produces $y_i$ itself might be too complex and expensive to evaluate.
+As such, the response surface of the function has to be reconstructed or estimated based only on the given training data before the prediction is made.
+The estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
 Although simpler, such an approximation should capture the most, if not all, important aspects of the inputs/outputs relationship of the true underlying function.
-This simpler, approximating function is often referred to as an \emph{emulator}, \emph{surrogate model}, or \emph{meta-model}.
+This simpler, approximating function is often referred to as an \emph{emulator}, \emph{surrogate model}, or \emph{metamodel}.
 
+% Adopted framework
 In this thesis, 
-the meta-model is represented using \gls[hyper=false]{gp}, following the seminal works of Sacks et al. (\cite{Sacks1989, Sacks1989a}) and interpreted through a Bayesian perspective.
+\marginpar{Gaussian process metamodel}
+the metamodel is represented using \gls[hyper=false]{gp}, following the seminal works of Sacks et al. (\cite{Sacks1989, Sacks1989a}) and interpreted through a Bayesian perspective.
 The advantages of using \gls[hyper=false]{gp} to represent an unknown function are its ability to model a complicated multi-dimensional function with limited number of parameters (\cite{Jones2009})
 as well as the provision of prediction error estimate (\cite{Santner2003,Currin1991}).
-The Bayesian perspective, in turn, gives more intuitive interpretation of the prediction error in terms of (epistemic) uncertainty.
+Furthermore, being a statistical model based on a stochastic process, it fits the statistical calibration framework of computer model presented in the next chapter.
 
-% Summary of interpretations
-To summarize, the statistical process model above can be interpreted either in frequentistic sense or Bayesian sense.
-In frequentistic sense, the stochastic process $Y(\circ)$ is a particular realization of stochastic process.
-The prediction made at particular value of $\mathbf{x}$ is made based on the process as estimated based on the training data.
-On the other had, in Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and the
-prediction made at particular value of of $\mathbf{x}$ is made based on the posterior (or conditional) process as updated by the data.   
-These two possible interpretations ultimately yield a subtle difference in the interpretation of the associated prediction uncertainty.
+% Two Interpretations
+The \gls[hyper=false]{gp} metamodel, like many statistical models, can be interpreted either in frequentistic sense or Bayesian sense.
+\marginpar{Two interpretations}
+In the frequentistic sense, the stochastic process $Y(\circ)$ is one particular realization of stochastic process (need not be Gaussian, but second-order stationary).
+The prediction made at particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data\footnote{The frequentistic case is the classical approach with a geostatistical analysis method due to Krige dating back to the 1950s \cite{Krige1951} and Matheron to the 1960s \cite{Matheron1963}}.
+On the other hand, in the Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and the
+prediction of the output at $\mathbf{x}_o$ is made based on the posterior (or conditional) process as updated by the training data.   
 
-\paragraph{a Bayesian Perspective}
+Both of these interpretations give an equivalent results.
 
+The subtle difference lies in the interpretation of prediction error.
+In the frequentistic case, the error is defined as the mean squared of error between the prediction made by the estimated process and (hypothetical) true process;
+\marginpar{prediction error}
+while in the Bayesian case the error corresponds to the \emph{epistemic} uncertainty of the prediction conditional on the observed data.
+That is, though the underlying computer simulation itself might be deterministic, 
+the uncertainty of the prediction at $\mathbf{x}_o$ stems from the fact that the simulator was not actually run at that input and thus the output is not \emph{known}. 
+The Bayesian perspective, as argued in \cite{Currin1991,Santner2003,OHagan2006}, gives more intuitive interpretation of the prediction error.
+This perspective is illustrated in Fig.~\ref{fig:plot_bayesian_perspective}.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_bayesian_perspective},
+			           maincaption={Gaussian process prior is equivalent to setting prior over functions. After observing data the process is updated to obtain the posterior process with a reduced uncertainties. Uncertainties are attached to each prediction made at arbitrary input outside the data (red points). Dashed lines and gray region signify the mean and $3\times \sigma$, respectively. The scales in the axes are arbitrary.},
+			           mainshortcaption={Illustration of Bayesian perspective of regression and metamodeling.},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_bayesian_perspective_1},
+			           leftcaption={Prior of functions},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_bayesian_perspective_2},
+			           midcaption={Observed data},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_bayesian_perspective_3},
+			           rightcaption={Posterior function and predictions},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotBayesianPerspective_1}
+{../figures/chapter4/figures/plotBayesianPerspective_2}
+{../figures/chapter4/figures/plotBayesianPerspective_3}

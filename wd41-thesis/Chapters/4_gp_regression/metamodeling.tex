@@ -53,10 +53,8 @@ the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\be
 Two classes of Kriging models can be distinguished depending on what is known about the hyper-parameters: 
 \emph{Simple Kriging} and \emph{Universal Kriging}.
 
-\subsection{Simple Kriging}\label{sub:gp_sk}
-
 % Simple Kriging
-Simple Kriging is the simplest case of the Kriging models where all the hyper-parameters involved are assumed to be known.
+Simple Kriging is the simpler case of the Kriging models where all the hyper-parameters involved are assumed to be known.
 \marginpar{simple Kriging}
 In that case the estimation of code output at an arbitrary input location becomes straightforward.
 Following the formulation above, 
@@ -166,76 +164,9 @@ The simple Kriging model has several interesting features:
 				However, the prediction at that point is informed by the observed data as contained in the training data.
 \end{itemize}
 
-\subsection{Universal Kriging and Hyper-Parameter Estimation}\label{sub:gp_uk}
-
 % Ordinary and Universal Kriging
 In most practical situation, however, the values of the hyper-parameters are not known a priori.
 This is indeed the case for the Universal Kriging model where all the hyper-parameters values associated with both a linear mean and covariance functions are to be estimated simultaneously from the training data.
-
-
-% Likelihood
-To estimate the values of the hyper-parameters $\boldsymbol{\Psi}$ of a chosen structure of mean and covariance functions,
-\marginpar{the likelihood function} 
-it is should be first acknowledged that under \gls[hyper=false]{gp} model, the distribution of the observed data given a Gaussian process $\mathbf{y} \, | \, Y(\mathbf{x}), \boldsymbol{\Psi}$ is Gaussian such that
-\begin{equation}
-	\mathcal{L}(\boldsymbol{\Psi}; \mathbf{y}) = \frac{1}{(2\pi)^{N/2}(\sigma)^{N/2}|\mathbf{R}|^{1/2}} \exp{\left[- \frac{(\mathbf{y} - \mathbf{F} \boldsymbol{\beta})^T \mathbf{R}^{-1} (\mathbf{y} - \mathbf{F} \boldsymbol{\beta})}{2\sigma^2}\right]}
-\label{eq:gp_likelihood}
-\end{equation}
-The term above is called the \emph{likelihood} function.
-The slight change of perspective from a conditional density function to a common function is due to the fact that the data is already observed (cite Bayesian Tutorial).
-For compactness, the $N \times N$ correlation matrix between outputs at the training points $R(\mathbf{DM}, \mathbf{DM})$ are written simply as $\mathbf{R}$;
-and the $N \times M$ basis function matrix at the training points $\mathbf{f}(\mathbf{DM})$ as $\mathbf{F}$.
-Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified through its hyper-parameterization $\boldsymbol{\Psi}$ on $\boldsymbol{\mu}$ and $\mathbf{R}$
-such that the notation $Y(\mathbf{x})$ is removed from the expression.
-
-% Maximum Likelihood Estimation / Empirical Bayes, Profile/Concentrated Likelihood
-Starting from the likelihood formulation, a common approach to estimate the hyper-parameters values is by selecting the ones that maximize the likelihood for a given observed data $\mathbf{y}$.
-\marginpar{maximum likelihood estimation / empirical Bayes}
-This estimation procedure, the maximum likelihood estimation, is also known in the literature as the \emph{empirical Bayes} (citation needed, Bayarri, Arendt) where the estimation is derived strictly from available data.
-The procedures is as follow:
-First, the hyper-parameters related to $\mathbf{R}$, $\boldsymbol{\Theta} = \{\boldsymbol{\theta}, \mathbf{p}\}$, are initially assumed to be known to estimate $\sigma^2$ and $\boldsymbol{\beta}$ by minimizing the negative log likelihood\footnote{logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number} (which is equivalent to maximizing the likelihood),
-\begin{equation}
-	\hat{\boldsymbol{\beta}}, \hat{\sigma}^2; \boldsymbol{\Theta} = \underset{\boldsymbol{\beta},\sigma^2}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\beta}}, \hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})
-\label{eq:concentrated_likelihood_1}
-\end{equation} 
-yielding
-\begin{equation}
-	\begin{split}
-		\hat{\boldsymbol{\beta}} & = (\mathbf{F} \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{F})^{-1} \mathbf{F}^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{y} \\
-		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})}{N}\\
-	\end{split}
-\label{eq:beta_sigma_ml}
-\end{equation}
-The estimated $\hat{\boldsymbol{\beta}}$ and $\hat{\sigma}^2$ are then fed back to Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} (citation needed).
-\marginpar{concentrated (profile) likelihood}
-The term is due to the fact that the full likelihood has been further conditioned by setting some of the parameters 
-(in this case, $\boldsymbol{\beta}$ and $\sigma^2$) to constants (in this case, their maximum likelihood estimates).
-This procedure eases the numerical difficulty of finding simultaneously the maximum likelihood estimates of all the hyper-parameters in high-dimensional space (citation needed).
-Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through its the maximum likelihood
-\begin{equation}
-	\hat{\boldsymbol{\Theta}} ; \hat{\boldsymbol{\beta}}, \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\boldsymbol{\beta}}, \hat{\sigma}^2)
-\label{eq:theta_ml}
-\end{equation}
-The computation of Eq.~(\ref{eq:theta_ml}) is then carried out using optimization algorithm with (such as the FS and BFGS of the gradient-based family cite()) or without derivative (such as simulated annealing (cite) and genetic algorithms cite() of metaheuristics family) information.
-
-% Universal Kriging Predictor and Variance
-Having estimated the hyper-parameters, the Universal Kriging predictor is expressed as (citation),
-\begin{equation}
-	m_{UK}(\mathbf{x}_o) = \mathbf{f}_o \hat{\boldsymbol{\beta}} + \mathbf{r}^T_{\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \mathbf{f}_o \hat{\boldsymbol{\beta}})
-\label{eq:uk_predictor}
-\end{equation}
-As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $R(\mathbf{x}_o, \mathbf{DM})$ are written simply as $\mathbf{r}_o$;
-and the $M \times 1$ basis function vector at the test point $\mathbf{f}(\mathbf{x}_o)$ as $\mathbf{f}_o$.
-The subscript of $\hat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
-
-The variance associated with the predictor is expressed as
-\begin{equation}
-	\begin{split}
-		s^2_{UK}(\mathbf{x}_o) & = s^2_{SK} (\mathbf{x}_o) + \\
-			& \medskip \medskip \sigma^2 \left((\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F}) (\mathbf{F}^T \mathbf{R}^{-1} \mathbf{F}) (\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F})^T \right) 
-	\end{split}
-\label{eq:uk_variance}
-\end{equation}
 
 % Some interesting Observation, not so intuitive interpretation
 The Kriging variance given

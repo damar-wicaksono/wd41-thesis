@@ -57,7 +57,7 @@ The term $\boldsymbol{\Phi} \mathbf{w}(\mathbf{x})$ describes the covariation be
 
 % Principal Component Analysis
 \gls[hyper=false]{pca} is then used as a data-driven approach to obtain the components of the \gls[hyper=false]{lmc} in Eq.~(\ref{eq:lmc}).
-The term data-driven is used as the components are derived directly from the training samples.
+The term data-driven is used as the components are derived directly from the training data.
 The raw outputs of the training runs are first concatenated row-wise resulting in an $N \times P$ matrix $\mathbf{Y}(\mathbf{DM})$,
 \begin{equation}
 	\begin{split}
@@ -75,7 +75,7 @@ The raw outputs of the training runs are first concatenated row-wise resulting i
 where $y(\mathbf{x}_n)_p$ is the $p$-th output dimension, evaluated using the $n$-th training sample.
 Note that the notation above is similar to Eq.~(\ref{eq:discrete_time}) but now the dimension of the output $y_p$ is not only restricted to time, 
 nor they have to be of the same (physical) dimension.
-In the formulation below, the raw training outputs is always assumed to be dependent on the training sample and thus the notation $\mathbf{DM}$ is suppressed.
+In the formulation below, the raw training outputs is always assumed to be dependent on the training samples and thus the notation $\mathbf{DM}$ is suppressed.
 
 % The mean
 The sample mean of the raw outputs is used to substitute the mean in the \gls[hyper=false]{lmc} formulation,
@@ -235,10 +235,10 @@ $\boldsymbol{\Phi}_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns o
 where $\boldsymbol{\phi}_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading.
 
 Finally, following \cite{Wilkinson2010}, $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distributed normal random variable with mean $0$ and variance $1$.
-In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as independent normal random variable with the variance given the PC loadings.
+In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as independent normal random variable with the variance given by the PC loadings.
 
 % The Full Probability Model
-The multivariate output at evaluated $\mathbf{x}_o$ conditioned by the training samples is thus distributed as $P$-variate Gaussian random variable,
+The multivariate output at evaluated $\mathbf{x}_o$ conditioned by the training data is thus distributed as $P$-variate Gaussian random variable,
 \begin{equation}
 	\begin{split}
 		& \bm{Y} (\mathbf{x}_o) | \bm{Y}(DM)=\mathbf{Y} \sim \mathcal{N}_P (\boldsymbol{\mu}_P (\mathbf{x}_o), \Sigma_{P \times P} (\mathbf{x}_o)) \\
@@ -248,4 +248,7 @@ The multivariate output at evaluated $\mathbf{x}_o$ conditioned by the training 
 		& \mathbf{s}^2_{SK} = [s^2_{SK,1}(\mathbf{x}_o), s^2_{SK,2}(\mathbf{x}_o), \cdots, s^2_{SK,Q}(\mathbf{x}_o)]
 	\end{split}
 \label{eq:p_variate_metamodel}
-\end{equation} 
+\end{equation}
+The model above assumed the hyper-parameters associated with a select correlation function are known.
+In practice they are not and thus estimated from the data itself using \gls[hyper=false]{mle} outlined in Section~\ref{sub:gp_fitting}.
+Additionally, the underestimation of the Kriging variance explained in that section is also the case here when the \gls[hyper=false]{ml} estimates are plugged-in to the formulation.
