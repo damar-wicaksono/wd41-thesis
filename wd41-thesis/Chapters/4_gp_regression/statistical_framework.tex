@@ -1,4 +1,6 @@
+%******************************************************************
 \section{Statistical Framework}\label{sec:gp_statistical_framework}
+%******************************************************************
 
 Consider a general \emph{regression} problem:
 \marginpar{regression problem}
@@ -11,7 +13,7 @@ The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\mathbf{x}_n, f(\
 \marginpar{training data, training samples, and training outputs}
 though the term is used interchangeably with the training outputs $\mathbf{y}$.
 The experimental design matrix $\mathbf{DM}$ introduced in the previous chapter is interchangeably referred to as the training samples, inputs, or points in this chapter.
-As before, the domain $\boldsymbol{X}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
+As before, the domain $\mathcal{X}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
 
 To evaluate $f$ at any given $\mathbf{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
 \marginpar{emulator, surrogate model, and metamodel} 
@@ -33,14 +35,13 @@ Furthermore, being a statistical model based on a stochastic process, it fits th
 The \gls[hyper=false]{gp} metamodel, like many statistical models, can be interpreted either in frequentistic sense or Bayesian sense.
 \marginpar{Two interpretations}
 In the frequentistic sense, the stochastic process $Y(\circ)$ is one particular realization of stochastic process (need not be Gaussian, but second-order stationary).
-The prediction made at particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data\footnote{The frequentistic case is the classical approach with a geostatistical analysis method due to Krige dating back to the 1950s \cite{Krige1951} and Matheron to the 1960s \cite{Matheron1963}}.
+The prediction made at particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data\footnote{The frequentistic case is the classical approach with a geostatistical analysis method due to Krige dating back to the 1950s \cite{Krige1951} and Matheron to the 1960s \cite{Matheron1963}. In fact, Kriging model (due to Krige) is the more popular term for \gls[hyper=false]{gp} metamodel. The terms will be used interchangeably in this thesis.}.
 On the other hand, in the Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and the
 prediction of the output at $\mathbf{x}_o$ is made based on the posterior (or conditional) process as updated by the training data.   
 
 Both of these interpretations give an equivalent results.
-
 The subtle difference lies in the interpretation of prediction error.
-In the frequentistic case, the error is defined as the mean squared of error between the prediction made by the estimated process and (hypothetical) true process;
+In the frequentistic case, the error is defined as the mean squared of error between the prediction made by the estimated process and (hypothetical) true process \cite{Isaaks1989};
 \marginpar{prediction error}
 while in the Bayesian case the error corresponds to the \emph{epistemic} uncertainty of the prediction conditional on the observed data.
 That is, though the underlying computer simulation itself might be deterministic, 

@@ -1,40 +1,41 @@
+\newpage
 %**************************************************************
 \section{Gaussian Process Metamodel}\label{sec:gp_metamodeling}
 %**************************************************************
 
 % Kriging Model, Drift and Bias
-To formalize the use of in the meta-modeling of computer simulation, 
-consider once again a computer code represented as 
+To formalize the use of \gls[hyper=false]{gp} in the metamodeling of computer simulation, 
+consider once again a represented as 
 
-The output of code at an arbitrary inputs, $\mathbf{x_o}$, is then modeled using a predictor of the following form
+The output of code at an arbitrary inputs, $\mathbf{x_o}$, is then modeled using a predictor of the following form:
 \begin{equation}
-	Y (\mathbf{x_o}) = \mu (\mathbf{x_o}) + Z (\mathbf{x_o})
+	\mathcal{Y} (\mathbf{x_o}) = \mu (\mathbf{x_o}) + \mathcal{Z} (\mathbf{x_o})
 \label{eq:kriging_model}
 \end{equation}
-The equation above, also known as the \emph{Kriging} model (cite Owen, Simpson, Dupuy)\footnote{in fact, the term Kriging model will be used interchangeably as Gaussian process metamodel in this thesis} , consists of two components:
+The equation above, the \emph{Kriging} model (cite Owen, Simpson, Dupuy), consists of two components:
 \begin{itemize}
-	\item The \emph{mean/drift/trend} term, a deterministic function
+	\item The \emph{mean/drift/trend} term, a deterministic function.
 	\begin{equation}
 		\mu: \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}
 	\label{eq:trend_function_mapping}
 	\end{equation}
-	The trend term, in turn, usually consists of general linear model of polynomials (cite Owen and Dupuy, Marrel).
+	The choice of the trend term distinguishes different classes of Kriging model.
+	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified.
+	\emph{Universal Kriging} (UK), on the other hand, refers to class of Kriging where where general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
 	\begin{equation}
 		\mu(\mathbf{x}) = \sum_{j=0}^{k} \beta_j h_j(\mathbf{x})
 	\label{eq:trend_function_definition}
 	\end{equation}
-	The trend term captures the global input output space which has an equivalent interpretation to that of a linear regression model\footnote{$Y() = \mu(\mathbf{x} + \epsilon$ with $\epsilon$ is Normally independent and identically distributed measurement error term}.
-	\item The \emph{bias} term, a stochastic process. 
-	This term, in turn, usually modeled using zero mean, stationary Gaussian stochastic process (such as presented in Section~\ref{sub:gp_covariance}).
-	\begin{equation}
-		\mathcal{Z}(\mathbf{x}) \sim \mathcal{GP}(0, R(\mathbf{x},\mathbf{x}^*))
-	\label{eq:stationary_gp}
-	\end{equation}
-	The bias term captures the local variation of the output space such that it pulls the predictor.
-	The term local here is referring to the neighborhood of training data.
-	In linear regression model the error between observation and prediction is due to experimental error.
-	This, in essence, what distinguishes kriging model to ordinary least square.
-	Furthermore, by using stationary Gaussian process it is also assumed that the bias term will be a function of distance between design points and test point. 
+	where $h_j$ is a set of basis function; and $\beta_j$ is the set of the associated coefficients.
+	\emph{Ordinary Kriging} is a special case of UK where the trend is set as an unknown constant. 
+	\item The \emph{bias} or \emph{residual} term, a stochastic process. 
+		This term, in turn, usually modeled using zero mean, stationary Gaussian stochastic process (such as presented in Section~\ref{sub:gp_covariance}).
+		\begin{equation}
+			\mathcal{Z}(\mathbf{x}) \sim \mathcal{GP}(0, \sigma^2 R(\mathbf{x},\mathbf{x}^*))
+		\label{eq:stationary_gp}
+		\end{equation}
+	The residuals, being modelled as a \gls[hyper=false]{gp}, are correlated and the correlation is a function of inputs.
+	As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix is specified explicitly by a parametric correlation function \cite{Martin2005}.
 \end{itemize}
 
 % Hyper-parameters
@@ -50,7 +51,7 @@ On the other hand, the same model represented using a \gls[hyper=false]{gp} meta
 the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
 
 % Three classes of Kriging Model
-Two classes of Kriging models can be distinguished depending on what is known about the hyper-parameters: 
+As mentioned, two classes of Kriging models can be distinguished depending on what is specified on the trend term: 
 \emph{Simple Kriging} and \emph{Universal Kriging}.
 
 % Simple Kriging
@@ -149,6 +150,7 @@ The simple Kriging model has several interesting features:
 	\item The variance collapses at the training points, that is plugging-in $\mathbf{x}_i \in DM$ into Eq.(\ref{eq:variance_sk}) will yield $s^2_{SK}(\mathbf{x}_i) = 0$.
 				\marginpar{Kriging as an interpolant}
 	      As such, the Kriging predictor is also an \emph{interpolant}, which exactly fits the observed data (i.e., deterministic code output at the training inputs).
+				See Fig.~\ref{fig:plot_bayesian_perspective_3}.
 	% Dependence of the variance
 	\item The variance on a given test point does not depend on the observed data.
 				\marginpar{Variance as function of distance between test and training points}
@@ -156,6 +158,7 @@ The simple Kriging model has several interesting features:
 				Furthermore, the variance on a given test point is also equal or less than the process variance, 
 				the difference of which depends on the distance between $\mathbf{x}_o$ and the training points $\mathbf{DM}$.
 				The closer $\mathbf{x}_o$ is to the training points, the smaller the variance at that point.
+				See the difference between two red points in Fig.~\ref{fig:plot_bayesian_perspective_3} in relation to their relative position to the data.
 	% Epistemic Uncertainty interpretation
 	\item Being the variance of a conditional Gaussian distribution, the Kriging variance can be intuitively interpreted as the posterior \emph{uncertainty} of the prediction given the observed data.
 				\marginpar{Variance as measure of epistemic uncertainty}
@@ -168,7 +171,11 @@ The simple Kriging model has several interesting features:
 In most practical situation, however, the values of the hyper-parameters are not known a priori.
 This is indeed the case for the Universal Kriging model where all the hyper-parameters values associated with both a linear mean and covariance functions are to be estimated simultaneously from the training data.
 
-% Some interesting Observation, not so intuitive interpretation
-The Kriging variance given
+% Some thought
 
-% Fully Bayesian Approach
+% Model selection and model fitting
+Both Simple and Universal Kriging models assume that the correlation function has been selected and its hyper-parameters are fully known.
+\marginpar{model selection, model fitting}
+In most practical situations, there are different choices of correlation functions (such as the ones discussed before) to choose.
+Additionally, its hyper-parameters are not known a priori and have to be estimated from a set of observations.
+These two problems, \emph{model selection} and \emph{model fitting}, will be discussed in the next section. 
