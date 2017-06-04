@@ -5,9 +5,6 @@
 # author    : WD41, LRS/EPFL/PSI
 # date      : June 2017
 #
-# Load required libraries or custom functions ---------------------------------
-library("DiceKriging")
-
 # Global variables ------------------------------------------------------------
 otpfullnames <- c("./figures/plotCorrFunMatern_1.pdf",
                   "./figures/plotCorrFunMatern_2.pdf")

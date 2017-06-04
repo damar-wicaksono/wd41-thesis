@@ -99,7 +99,7 @@ for (i in 1:length(thetas))
     title(main = parse(text=paste("theta ==", thetas[i], sep = " ")),
           cex.main = cex_main)
     
-    legend(1.5, 2.6, legend_expressions, lty = c(1, 2), 
+    legend(1.5, 2.7, legend_expressions, lty = c(1, 2), 
            lwd = 2, bty = "n", 
            cex = leg_cex)
     
