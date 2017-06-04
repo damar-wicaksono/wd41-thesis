@@ -26,7 +26,7 @@ thetas <- c(1.0, 2.0)
 matern <- c("matern3_2", "matern5_2")
 nu_string <- c("3 / 2", " 5 / 2")
 nu <- c(3/2, 5/2)
-n_sim <- 2
+n_sim <- 1
 
 x <- seq(0, 3, length.out = 100)
 
@@ -80,7 +80,7 @@ for (i in 1:length(thetas))
          type = "n", xlim = c(0, 3.0), ylim = c(-3, 3), axes = FALSE,
          ylab = "",
          xlab = "")
-    for (k in 1:3) lines(x, y_sim[[i]][k,], lty = k, lwd = 1.5)
+    for (k in 1:2) lines(x, y_sim[[i]][k,], lty = k, lwd = 1.5)
     
     # Set Axis, Ticks and Labels
     # x-axis

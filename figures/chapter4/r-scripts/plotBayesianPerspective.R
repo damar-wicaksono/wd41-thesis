@@ -170,7 +170,7 @@ lines(xx, mu, lwd = 1.5, lty = 2)
 # Observed Data
 points(xx[index_obs], yy_obs, pch = 4, cex = 3, lwd = 1)
 points(x = xx[index_pred], y = mu_pred,
-       pch = 21, cex = 2.25, bg = "red", col = "red")
+       pch = 21, cex = 2., bg = "red", col = "red")
 # Uncertainty Region
 polygon(c(xx, rev(xx)), c(yy_high_star, rev(yy_low_star)),
         col = rgb(0, 0, 0,0.1), border = NA)
