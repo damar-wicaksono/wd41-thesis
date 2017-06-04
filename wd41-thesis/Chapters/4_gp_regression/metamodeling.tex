@@ -4,68 +4,64 @@
 %**************************************************************
 
 % Kriging Model, Drift and Bias
-To formalize the use of \gls[hyper=false]{gp} in the metamodeling of computer simulation, 
-consider once again a represented as 
-
-The output of code at an arbitrary inputs, $\mathbf{x_o}$, is then modeled using a predictor of the following form:
+To formalize the use of \gls[hyper=false]{gp} in the metamodeling of a simulator, 
+consider once again regression problem of predicting the output at an arbitrary input $f(\mathbf{x}_o) ; \, \mathbf{x}_o \notin \mathbf{DM}$ given $\{(\mathbf{DM}, \mathbf{y})\}$;
+where $f$, $\mathbf{DM}$, $\mathbf{y}$ are the function representing the simulator, the design matrix, and training output, respectively.
+A \gls[hyper=false]{gp} metamodel makes the prediction as
 \begin{equation}
 	\mathcal{Y} (\mathbf{x_o}) = \mu (\mathbf{x_o}) + \mathcal{Z} (\mathbf{x_o})
 \label{eq:kriging_model}
 \end{equation}
-The equation above, the \emph{Kriging} model (cite Owen, Simpson, Dupuy), consists of two components:
+The equation above, the \emph{Kriging} model, consists of two components:
 \begin{itemize}
-	\item The \emph{mean/drift/trend} term, a deterministic function.
-	\begin{equation}
-		\mu: \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}
-	\label{eq:trend_function_mapping}
-	\end{equation}
+	\item The \emph{mean/drift/trend} term, $\mu: \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$,
+	is a deterministic function.
 	The choice of the trend term distinguishes different classes of Kriging model.
-	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified.
-	\emph{Universal Kriging} (UK), on the other hand, refers to class of Kriging where a general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
+	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified up to its coefficients (if any).
+	\emph{Universal Kriging} (UK), on the other hand, is a class of Kriging where a general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
 	\begin{equation}
-		\mu(\mathbf{x}) = \sum_{j=0}^{k} \beta_j h_j(\mathbf{x})
+		\mu(\mathbf{x}) = \sum_{j=0}^{J} \beta_j h_j(\mathbf{x})
 	\label{eq:trend_polynomial}
 	\end{equation}
-	where $h_j$ is a set of polynomials basis function; and $\beta_j$ is the set of the associated coefficients.
-	\emph{Ordinary Kriging} is a special case of UK where the trend is set as an unknown constant. 
+	where $h_j$ is a set of polynomials basis function; and $\beta_j$ is the associated coefficients.
+	\emph{Ordinary Kriging} (OK) is a special case of UK where the trend is set as an unknown constant ($h_0(\mathbf{x}) = 1;\,J = 0$). 
 	\item The \emph{bias} or \emph{residual} term, a stochastic process. 
-		This term, in turn, usually modeled using zero mean, stationary Gaussian stochastic process (such as presented in Section~\ref{sub:gp_covariance}).
+		In particular, it is modeled using a zero-mean, stationary Gaussian stochastic process,
 		\begin{equation}
 			\mathcal{Z}(\mathbf{x}) \sim \mathcal{GP}(0, \sigma^2 R(\mathbf{x},\mathbf{x}^*))
 		\label{eq:stationary_gp}
 		\end{equation}
-	The residuals, being modelled as a \gls[hyper=false]{gp}, are correlated and the correlation is a function of inputs.
-	As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix is specified explicitly by a parametric correlation function \cite{Martin2005}.
+		where $\sigma^2$ and $R$ are the process variance and a stationary correlation function (such as the ones presented in Section~\ref{sub:gp_covariance}), respectively.
+		The residuals, being modeled as a \gls[hyper=false]{gp}, are correlated and this correlation is a function of inputs.
+		As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix is specified explicitly by a parametric function \cite{Martin2005}.
+		Note that the predictor in Eq.~(\ref{eq:kriging_model}) becomes a stochastic process due to this bias term.
 \end{itemize}
 
 % Hyper-parameters
-Additionally, according to the above formulation, a \gls[hyper=false]{gp} metamodel contains several parameters called the \emph{hyper-parameters}.
+According to the above, a \gls[hyper=false]{gp} metamodel thus contains several parameters called the \emph{hyper-parameters}.
 \marginpar{hyper-parameters}
-This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or often simply as the parameter.
-The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the chosen trend function (Eq.~\ref{eq:trend_function_definition});
-the ones associated with select correlation functions (Section~\ref{sub:gp_covariance}); and the one associated with the process variance $\sigma^2$.
-The total number of hyper-parameters depends on the number of simulation model parameters as well as the select structure of mean and correlation functions.
-For instance, for a $D$-parameter simulation model represented using \gls[hyper=false]{gp} metamodel with a constant mean and Gaussian correlation functions (Eq.~(\ref{eq:gaussian_kernel})), 
-the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \boldsymbol{\theta})$ is $D + 2$.
-On the other hand, the same model represented using a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential functions (Eq.~(\ref{eq:powexp_kernel})),
-the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$.
+This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or simply as the parameter.
+The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the chosen trend function (Eq.~\ref{eq:trend_polynomial});
+the ones associated with select correlation functions (Section~\ref{sub:gp_covariance}); and the process variance $\sigma^2$.
+The total number of hyper-parameters depends on the number of model parameters as well as the select structure of mean and correlation functions.
+For instance, for a $D$-parameter simulation model represented by a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential correlation function (Eq.~(\ref{eq:powexp_kernel})), the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$; while for the same model represented by a \gls[hyper=false]{gp} metamodel with a constant mean and Gaussian correlation functions (Eq.~(\ref{eq:gaussian_kernel})), the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \boldsymbol{\theta})$ is $D + 2$.
+%while the same model 
 
-% Three classes of Kriging Model
+% Two classes of Kriging Model
 As mentioned, two classes of Kriging models can be distinguished depending on what is specified on the trend term: 
-\emph{Simple Kriging} and \emph{Universal Kriging}.
+\emph{Simple Kriging} and \emph{Universal Kriging}. 
+Simple Kriging is the simpler case where all the hyper-parameters involved are known.
+In that case the prediction of output at an arbitrary input location is straightforward.
 
-% Simple Kriging
-Simple Kriging is the simpler case of the Kriging models where all the hyper-parameters involved are assumed to be known.
-\marginpar{simple Kriging}
-In that case the estimation of code output at an arbitrary input location becomes straightforward.
 Following the formulation above, 
-a \gls[hyper=false]{gp} metamodel, then by definition implies that the computer code outputs at every input locations are jointly Gaussian.
-As such, the code outputs at the training inputs $\mathbf{DM} = \{\mathbf{x}_i\}_{i=1}^N, Y(\mathbf{DM}) = (Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_N))$
-and the output at an arbitrary input $\mathbf{x}_o$, $Y(\mathbf{x}_o)$ are distributed jointly as an $N+1$-dimensional Gaussian,
+\marginpar{simple Kriging}
+a \gls[hyper=false]{gp} metamodel, implies that the computer code outputs at every input locations are jointly Gaussian.
+As such, the code outputs at the training inputs $\mathbf{DM} = \{\mathbf{x}_i\}_{i=1}^N, \mathcal{Y}(\mathbf{DM}) = (\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_N))$
+and the output at an arbitrary input $\mathbf{x}_o$, $\mathcal{Y}(\mathbf{x}_o)$ are distributed jointly as an $(N+1)$-dimensional Gaussian,
 \begin{equation}
 	\begin{bmatrix}
-			Y(\mathbf{DM}) \\
-			Y(\mathbf{x}_o)
+			\mathcal{Y}(\mathbf{DM}) \\
+			\mathcal{Y}(\mathbf{x}_o)
 		\end{bmatrix} \sim \mathcal{N} \left(
 			\begin{bmatrix}
 				\mu(\mathbf{DM}) \\
@@ -79,33 +75,28 @@ and the output at an arbitrary input $\mathbf{x}_o$, $Y(\mathbf{x}_o)$ are distr
 \end{equation}
 where
 \begin{itemize}
-	\item $\mu(\mathbf{DM})$ is the vector of mean at the training points;
+	\item $\mu(\mathbf{DM})$ is the vector of mean at the training points,
 		\begin{equation}
-			\mu(\mathbf{DM}) = (\mu(\mathbf{x}_1), \mu(\mathbf{x}_2), \cdots, \mu(\mathbf{x}_N)) 
+			\mu(\mathbf{DM}) = [\mu(\mathbf{x}_1), \cdots, \mu(\mathbf{x}_N)]^T 
 		\label{eq:training_mean_vector}
 		\end{equation}
-	\item $\mu(\mathbf{x}_o)$ is the mean at an arbitrary test location;
-	\item $R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between outputs at the training points
+	\item $\mu(\mathbf{x}_o)$ is the mean at an arbitrary test location.
+	\item $R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between outputs at the training points,
 		\begin{equation}
 			R(\mathbf{DM}, \mathbf{DM}) = 
 				\begin{bmatrix}
 					R(\mathbf{x}_1, \mathbf{x}_1) & \cdots												& R(\mathbf{x}_1, \mathbf{x}_N) \\
 					\vdots												& \ddots												&	\vdots \\
-					R(\mathbf{x}_N, \mathbf{x}_1)	&	R(\mathbf{x}_N, \mathbf{x}_2) & R(\mathbf{x}_N, \mathbf{x}_N)
+					R(\mathbf{x}_N, \mathbf{x}_1)	&	\cdots                        & R(\mathbf{x}_N, \mathbf{x}_N)
 				\end{bmatrix}
 		\label{eq:training_correlation_matrix}
 		\end{equation}
-	\item $R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point
+	\item $R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point,
 			\begin{equation}
-				R(\mathbf{x}_o, \mathbf{DM}) = R(\mathbf{DM}, \mathbf{x}_o) =  
-					\begin{bmatrix}
-						R(\mathbf{x}_o, \mathbf{x}_1) \\
-						\vdots												\\
-						R(\mathbf{x}_o, \mathbf{x}_N)	
-					\end{bmatrix}
+				R(\mathbf{x}_o, \mathbf{DM}) = R(\mathbf{DM}, \mathbf{x}_o) =  [R(\mathbf{x}_o, \mathbf{x}_1), \cdots, R(\mathbf{x}_o, \mathbf{x}_N)]^T
 			\label{eq:training_test_correlation}
 			\end{equation}
-		\item and $R(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
+		\item $R(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
 \end{itemize}
 
 % Conditional Distribution, Simple Kriging
@@ -175,6 +166,6 @@ Adding a general polynomial trend term with unknown coefficients results in a Un
 % Model selection and model fitting
 Both Simple and Universal Kriging models assume that the correlation function has been selected and its hyper-parameters are fully known.
 \marginpar{model selection, model fitting}
-In most practical situations, there are different choices of correlation functions (such as the ones discussed before) to choose.
-Additionally, its hyper-parameters are not known a priori and have to be estimated from a set of observations.
+In most practical situations, there are different choices of correlation functions (such as the ones discussed before) to choose from.
+Its hyper-parameters are also not known a priori and have to be estimated from a set of observations.
 These two problems, \emph{model selection} and \emph{model fitting}, will be discussed in the next section. 
