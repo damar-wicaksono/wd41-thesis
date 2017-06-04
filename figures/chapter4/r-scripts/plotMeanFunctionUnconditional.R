@@ -13,7 +13,7 @@ otpfullnames <- c("./figures/plotMeanFunctionUnconditional_1.pdf",
                   "./figures/plotMeanFunctionUnconditional_2.pdf",
                   "./figures/plotMeanFunctionUnconditional_3.pdf")
 # Graphic Parameters
-fig_size <- c(5, 5)             # width, height
+fig_size <- c(5, 5)                 # width, height
 margin <- c(4, 5, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
 cex_axis <- 2.5     # Axis marker size
 cex_lab  <- 3.0     # Axis label size
