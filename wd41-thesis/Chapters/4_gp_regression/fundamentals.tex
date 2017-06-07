@@ -1,4 +1,6 @@
+%*****************************************************************
 \section{Gaussian Process Fundamentals}\label{sec:gp_fundamentals}
+%*****************************************************************
 
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
@@ -190,6 +192,7 @@ first it must be specified at which input $x$ the function values are to be draw
 \marginpar{sample path (trajectory) of a GP}
 For the present example, $x$ is chosen to be uniformly distributed $\{-2 + 0.2 \times i\}_{i=0}^{20}$.
 By specifying these locations, the $21$-variates Gaussian random variable can be constructed using Eq.~(\ref{eq:gp_to_mvn}) with the elements of variance-covariance matrix computed by the formula in Eq.~(\ref{eq:gp_example}) for all pairs of inputs.
+Sampling from such a distribution can be done using algorithm outlined in Appendix~.\ref{app:mvn_sampling}.
 Examples of $5$ realizations from the \gls[hyper=false]{gp} are shown in Fig~\ref{fig:plot_random_function_1}.
 A realization of a \gls[hyper=false]{gp} on a select input locations is also called a \emph{trajectory} or a \emph{sample path} of the process \cite{Santner2003}.
 In this thesis the term \emph{sample path} will be used interchangeable with the term realization of a \gls[hyper=false]{gp}.
@@ -269,14 +272,19 @@ For a stationary covariance function, it is more convenient to separate the cons
 where $R$, the correlation kernel function, is defined such that $\forall \, \mathbf{x}_i, \mathbf{x}_j \in \chi \subseteq \mathbb{R}^D$;
 and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
 
+% Continuity and Differentiability of Stochastic Process
 In the following, three different types of stationary correlation kernel functions are presented. 
 These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
-\marginpar{one-dimensional correlation kernel, $r$}
-For each, the function is defined and several sample paths are drawn to illustrate the effect of different kernels and different respective parameters on the realization.
+\marginpar{one-dimensional correlation kernel, $r$}.
 At first, only $1$-dimensional kernel functions denoted by $r(x_i, x_j)$ are described.
 Afterward, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\mathbf{x}_i, \mathbf{x}_j)$ by means of tensor product.
 
-% Continuity and Differentiability of Stochastic Process
+For each, the correlation function is defined and several sample paths are drawn to illustrate the effect of using different kernels as well as respective parameters on the sample path.
+It is important to note that it is a sample path of a stochastic process that is used as a metamodel and thus it is important to study its properties.
+For a stationary Gaussian stochastic process, only the correlation function determines the main properties of sample path, namely its continuity and differentiability (or smoothness).
+In particular, the continuity of a stationary correlation function at the origin guarantees the continuity of the sample path, 
+and the smoothness of the correlation function determines the smoothness of the sample path.
+The mathematics behind these assertions is beyond the scope of this thesis, but an accessible reference on the topic can be found in \cite{Abrahamsen1997}.
 
 \subsubsection{Gaussian Kernel}\label{subsub:gp_gaussian_cov}
 
