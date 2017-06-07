@@ -154,18 +154,33 @@ The simple Kriging model has several interesting features:
 	\item Being the variance of a conditional Gaussian distribution, the Kriging variance can be intuitively interpreted as the posterior \emph{uncertainty} of the prediction given the observed data.
 				\marginpar{Variance as measure of epistemic uncertainty}
 	      The nature of this uncertainty is epistemic as, in the case of this thesis, the computer code that underlies the observed data is deterministic.
-				In other words, the uncertainty associated with the prediction at an arbitrary input is due to the lack of knowledge because the code itself is not run at that point.
-				However, the prediction at that point is informed by the observed data as contained in the training data.
+				That is, the uncertainty associated with the prediction at an arbitrary input is due to the lack of knowledge because the code itself is not run at that point,
+				though the prediction is informed by the observed data as contained in the training data.
 \end{itemize}
 
 % Ordinary and Universal Kriging
-Adding a general polynomial trend term with unknown coefficients results in a Universal Kriging model.
+As mentioned in Section~\ref{sub:gp_mean_function}, adding a mean function in the \gls[hyper=false]{gp} metamodel formulation can provide an opportunity for a more flexible metamodel in the extrapolatory region, where prediction is made at a point far away from the training points.
+\marginpar{Ordinary and Universal Kriging}
+Although there is practically unlimited number of possible mean functions, the function is often represented simply by fixed basis function whose coefficients are unknown (Eq.~(\ref{eq:trend_polynomial})).
+This leads to the Universal Kriging formulation (Ordinary Kriging for constant mean function), where extra hyper-parameters are introduced in the metamodel.
+Even by restricting the mean function to be within this family, the possibility over the choice of such function is still wide.
+The questions about the degrees, the interaction terms, etc., are now part of the metamodel construction. 
+All of these eventually results in an even more complex metamodel.
 
-% Some thought
-
+The literature, however, is split on the usefulness of adding a mean function in the metamodel formulation.
+\marginpar{Simple vs. Ordinary vs. Universal Kriging}
+\cite{Martin2005} reported that Kriging with complex trend function gave a better prediction performance for the $2$-dimensional non-linear test problem used in the article,
+while \cite{Marrel2008} argued that using mean function of one-degree polynomial allows for a global (i.e., extrapolatory) non-stationary model which did not affect the metamodel performance on the test function.
+On the other hand, \cite{Journel1989} noted that adding a mean function within the Universal Kriging framework affects the prediction in the extrapolatory situation, while any formulation yielded the same performace in the interpolatory situation.
+\cite{Ginsbourger2009} concurred with the conclusion and further warned that in high-dimensional problem with small training samples size, 
+all problems tend to be extrapolatory and a misspecification of the mean function bears the risk of large error in the prediction.
+The studies in \cite{Currin1991,Chen2016} provided less convincing results of using mean functions and thus suggested the use of either zero or constant mean function for simplicity.
+%\cite{Chen2016} further suggested that the use of mean function might be detrimental due to increase in computational effort either through increase in required training samples or required iteration in the maximum likelihood estimation.
+And indeed, in this work, the mean function is assumed to be zero by first standardizing the output.
+ 
 % Model selection and model fitting
-Both Simple and Universal Kriging models assume that the correlation function has been selected and its hyper-parameters are fully known.
+All the Kriging models above assume that the correlation function has been selected and its hyper-parameters are fully known.
 \marginpar{model selection, model fitting}
-In most practical situations, there are different choices of correlation functions (such as the ones discussed before) to choose from.
+In most practical situations, there are different choices of correlation functions to choose from.
 Its hyper-parameters are also not known a priori and have to be estimated from a set of observations.
 These two problems, \emph{model selection} and \emph{model fitting}, will be discussed in the next section. 

@@ -4,41 +4,42 @@
 
 % Introductory Paragraph, Why Gaussian
 Gaussian random vector is a vector with random elements that are \emph{jointly} Gaussian.
-That is, the random variables have an \gls[hyper=false]{mvn} distribution. 
+That is, the random variables have a \gls[hyper=false]{mvn} distribution. 
 It is the most widely studied and applied multivariate random variable.
 There are a couple of reasons for this.
-From a practical viewpoint, the distribution of MVN is tractable and its special properties are well known \cite{Jensen2014}.
-From an epistemological viewpoint, modeling a quif only the mean and variance are what's to be then MVN distribution is fully characterized by its mean and covariance, only these wo parameters are of interest \cite{McElreath2015}.
-This section of the appendices reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
+From a practical viewpoint, the \gls[hyper=false]{mvn} distribution is tractable and its special properties are well known \cite{Jensen2014}.
+From an epistemological viewpoint, a variable modeled as \gls[hyper=false]{mvn} distribution is a particular way of quantifying uncertainty about that variable.
+Specifically, if only the mean and variance are of interest then the \gls[hyper=false]{mvn} distribution is the most consistent and parsimonious distribution to describe the variable \cite{McElreath2015}.
+This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
 
-A $D$-dimensional random vector $\bm{\mathcal{X}}$ whose elements are random variables, $\bm{\mathcal{X}} = [\mathcal{X}_1, \cdots, \mathcal{X}_D] \in \mathbb{R}^D$, 
+A $D$-dimensional random vector $\bm{\mathcal{Z}}$ whose elements are random variables, $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \cdots, \mathcal{Z}_D] \in \mathbb{R}^D$, 
 is said to have an \gls[hyper=false]{mvn} distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma} \in S_{++}^D$,
 \marginpar{multivariate normal distribution}
 if its joint probability density function is given by,
 \begin{equation}
-	p(\mathbf{x};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right]}
+	p(\mathbf{z};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{z}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{z}-\boldsymbol{\mu})\right]}
 	\label{eq:gaussian_joint_density}
 \end{equation}
 The joint distribution of a Gaussian random vector is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. 
 The symbol ``;'' separates the value of the variates $\mathbf{x}$ from the parameters of the distribution. 
-A $D$-dimensional random vector $\bm{\mathcal{X}}$ distributed as a joint Gaussian is denoted by,
+A $D$-dimensional random vector $\bm{\mathcal{Z}}$ distributed as a joint Gaussian is denoted by,
 \begin{equation}
-	\bm{\mathcal{X}} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
+	\bm{\mathcal{Z}} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
 \end{equation}
 
 % Mean vector
 The mean vector $\boldsymbol{\mu}$ is defined as,
 \marginpar{mean vector}
 \begin{equation}
-	\boldsymbol{\mu} = [\mathbb{E}[\mathcal{X}_1], \cdots, \mathbb{E}[\mathcal{X}_D]]^T
+	\boldsymbol{\mu} = [\mathbb{E}[\mathcal{Z}_1], \cdots, \mathbb{E}[\mathcal{Z}_D]]^T
 \label{eq:mean_vector}
 \end{equation}
-where $\mathbb{E}[\circ]$ is the expectation operator, such that $\mathbb{E}[\mathcal{X}] = \int_x x p(x) dx$.
+where $\mathbb{E}[\circ]$ is the expectation operator, such that $\mathbb{E}[\mathcal{Z}] = \int_z z p(z) dz$.
 
 % Variance-Covariance Matrix
 The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive semi-definite (PSD) $D \times D$ matrices, $S_{++}^D$ defined as,
 \begin{equation}
-	S_{++}^D = \{\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}: \boldsymbol{\Sigma} = \boldsymbol{\Sigma}^T, \mathbf{x}^T \boldsymbol{\Sigma} \mathbf{x} \geq 0, \forall \mathbf{x} \in \mathbb{R}^D \textnormal{and } \mathbf{x} \neq 0 \}
+	S_{++}^D = \{\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}: \boldsymbol{\Sigma} = \boldsymbol{\Sigma}^T, \mathbf{z}^T \boldsymbol{\Sigma} \mathbf{z} \geq 0, \forall \mathbf{z} \in \mathbb{R}^D \textnormal{and } \mathbf{z} \neq 0 \}
 	\label{eq:def_covariance_matrix}
 \end{equation}
 
@@ -49,23 +50,23 @@ while the off-diagonal elements, $\Sigma_{i,j}$, describe the covariation betwee
 \begin{equation}
 	\boldsymbol{\Sigma} =
 	\begin{pmatrix}
-			\mathbb{V}[\mathcal{X}_1] 							 & \cdots		& \text{Cov}[\mathcal{X}_1, \mathcal{X}_D] \\
+			\mathbb{V}[\mathcal{Z}_1] 							 & \cdots		& \text{Cov}[\mathcal{Z}_1, \mathcal{Z}_D] \\
 			\vdots                   								 & \ddots   & \vdots \\
-			\text{Cov}[\mathcal{X}_D, \mathcal{X}_1] & \cdots 	& \mathbb{V}[\mathcal{X}_D]
+			\text{Cov}[\mathcal{Z}_D, \mathcal{Z}_1] & \cdots 	& \mathbb{Z}[\mathcal{Z}_D]
 	\end{pmatrix}
 \label{eq:covariance_matrix}
 \end{equation}
-where $\mathbb{V} [\circ]$ is the variance operator, such that $\mathbb{V} [\mathcal{X}] = \mathbb{E}[(\mathcal{X} - \mathbb{E}[\mathcal{X}])^2]$;
-and $\text{Cov} [\circ, \circ]$ is the covariance operators, such that $\text{Cov} [\mathcal{X}, \mathcal{X}^*] = \mathbb{E}[(\mathcal{X}-\mathbb{E}[\mathcal{X}])(\mathcal{X}^*-\mathbb{E}[\mathcal{X}^*])]$.
+where $\mathbb{V} [\circ]$ is the variance operator, such that $\mathbb{V} [\mathcal{Z}] = \mathbb{E}[(\mathcal{Z} - \mathbb{E}[\mathcal{Z}])^2]$;
+and $\text{Cov} [\circ, \circ]$ is the covariance operators, such that $\text{Cov} [\mathcal{Z}, \mathcal{Z}^*] = \mathbb{E}[(\mathcal{Z}-\mathbb{E}[\mathcal{Z}])(\mathcal{Z}^*-\mathbb{E}[\mathcal{Z}^*])]$.
 
 % Partitioning Gaussian Random Vector
-Suppose that the $D$-dimensional random vector $\bm{\mathcal{X}}$ is partitioned into two sub-vectors (disjoint sets) of $D_1$-dimensional random vector $\bm{\mathcal{X}}_A$ and $D_2$-dimensional random vector $\bm{\mathcal{X}}_B$, such that $\bm{\mathcal{X}} = [\bm{\mathcal{X}}_A, \bm{\mathcal{X}}_B]$ and $D = D_1 + D_2$ (see Appendix~\ref{app:probability}).
+Suppose that the $D$-dimensional random vector $\bm{\mathcal{Z}}$ is partitioned into two sub-vectors (disjoint sets) of $D_1$-dimensional random vector $\bm{\mathcal{Z}}_A$ and $D_2$-dimensional random vector $\bm{\mathcal{Z}}_B$, such that $\bm{\mathcal{Z}} = [\bm{\mathcal{Z}}_A, \bm{\mathcal{Z}}_B]$ and $D = D_1 + D_2$ (see Appendix~\ref{app:probability}).
 \marginpar{Gaussian random vector partition}
-Then the Gaussian random vector $[\bm{\mathcal{X}}_A, \bm{\mathcal{X}}_B]$ is written,
+Then the Gaussian random vector $[\bm{\mathcal{X}}_A, \bm{\mathcal{Z}}_B]$ is written,
 \begin{equation}
 	\begin{bmatrix}
-		 \bm{\mathcal{X}}_A \\
-		 \bm{\mathcal{X}}_B
+		 \bm{\mathcal{Z}}_A \\
+		 \bm{\mathcal{Z}}_B
 	\end{bmatrix} \sim \mathcal{N} \left (
 	\begin{bmatrix}
 			\boldsymbol{\mu}_A \\
@@ -76,37 +77,37 @@ Then the Gaussian random vector $[\bm{\mathcal{X}}_A, \bm{\mathcal{X}}_B]$ is wr
 	\end{pmatrix} \right)
 \label{eq:gaussian_random_vector}
 \end{equation}
-where $\boldsymbol{\mu}_A$ and $\boldsymbol{\mu}_B$ are the $D_1$-dimensional and $D_2$-dimensional mean vectors of $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$, respectively;
+where $\boldsymbol{\mu}_A$ and $\boldsymbol{\mu}_B$ are the $D_1$-dimensional and $D_2$-dimensional mean vectors of $\bm{\mathcal{Z}}_A$ and $\bm{\mathcal{Z}}_B$, respectively;
 and $\boldsymbol{\Sigma}_{A,A}$, $\boldsymbol{\Sigma}_{A,B}$, $\boldsymbol{\Sigma}_{B,A}$, $\boldsymbol{\Sigma}_{B,B}$ are the $D_1 \times D_1$, $D_1 \times D_2$, $D_2 \times D_1$, and $D_2 \times D_2$ sub-matrices of the partitioned covariance matrix, respectively. 
 So for instance, 
 \begin{equation*}
 	\boldsymbol{\Sigma}_{A,B} =
 	\begin{pmatrix}
-			\text{Cov}[\mathcal{X}_1, \mathcal{X}_{D_1+1}] 			& \cdots	& \text{Cov}[\mathcal{X}_1, \mathcal{X}_{D}] \\
+			\text{Cov}[\mathcal{Z}_1, \mathcal{Z}_{D_1+1}] 			& \cdots	& \text{Cov}[\mathcal{Z}_1, \mathcal{Z}_{D}] \\
 			\vdots                   								 			 			& \ddots  & \vdots \\
-			\text{Cov}[\mathcal{X}_{D_1}, \mathcal{X}_{D_1+1}]  & \cdots 	& \text{Cov}[\mathcal{X}_{D_1}, \mathcal{X}_{D}]
+			\text{Cov}[\mathcal{Z}_{D_1}, \mathcal{Z}_{D_1+1}]  & \cdots 	& \text{Cov}[\mathcal{Z}_{D_1}, \mathcal{Z}_{D}]
 	\end{pmatrix}
 \label{eq:covariance_matrix}
 \end{equation*}
 
 % Marginal Distribution of Gaussian Random Vector
-The marginal density of both $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$ follows an \gls[hyper=false]{mvn} distribution given by,
+The marginal density of both $\bm{\mathcal{Z}}_A$ and $\bm{\mathcal{Z}}_B$ follows an \gls[hyper=false]{mvn} distribution given by,
 \marginpar{Gaussian identity: marginal density}
 \begin{equation}
-		p(\mathbf{x}_A) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{x}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{x}_A-\boldsymbol{\mu}_B)\right]}
+		p(\mathbf{z}_A) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]}
 \label{eq:gaussian_marginal}
 \end{equation}
-The results are analogous for the marginal of $\bm{\mathcal{X}}_B$, $p(\mathbf{x}_B)$ of which all the subscripts $A$ is replaced by $B$.
+The results are analogous for the marginal of $\bm{\mathcal{Z}}_B$, $p(\mathbf{z}_B)$ of which all the subscripts $A$ is replaced by $B$.
 
 % Conditional Distribution of Gaussian Random Vector
-The conditional density of $\bm{\mathcal{X}}_A$ conditioned on $\bm{\mathcal{X}}_B$, again, also follows an \gls[hyper=false]{mvn} distribution given as,
+The conditional density of $\bm{\mathcal{Z}}_A$ conditioned on $\bm{\mathcal{Z}}_B$, again, also follows an \gls[hyper=false]{mvn} distribution given as,
 \marginpar{Gaussian identity: conditional density}
 \begin{equation}
 	\begin{split}
-		& p(\mathbf{x}_A|\mathbf{x}_B) = \frac{1}{2\pi^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{x}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{x}_A-\boldsymbol{\mu}_B)\right]} \\
+		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{2\pi^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
 		& \boldsymbol{\mu}_A = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{A,B} \boldsymbol{\Sigma}^{-1}_{B,B} \left(\mathbf{x}_B - \boldsymbol{\mu}_B \right) \\
 		& \boldsymbol{\Sigma}^*_{A,A} = \boldsymbol{\Sigma}_{A,A} - \boldsymbol{\Sigma}_{A,B} \boldsymbol{\Sigma}^{-1}_{B,B} \boldsymbol{\Sigma}^T_{A,B} 
 	\end{split}
 \label{eq:gaussian_conditional}
 \end{equation}
-The results are analogous for the conditional $\bm{\mathcal{X}}_B$ given $\bm{\mathcal{X}}_A$, $p(\mathbf{x}_B|\mathbf{x}_A)$ of which all the subscripts $A$ is replaced by $B$, and vice versa.
+The results are analogous for the conditional $\bm{\mathcal{Z}}_B$ given $\bm{\mathcal{Z}}_A$, $p(\mathbf{z}_B|\mathbf{z}_A)$ of which all the subscripts $A$ is replaced by $B$, and vice versa.

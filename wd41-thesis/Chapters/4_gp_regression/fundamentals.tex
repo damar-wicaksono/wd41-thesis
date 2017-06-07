@@ -2,7 +2,8 @@
 
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
-Appendix~\ref{app:probability} gives some the basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities.
+Appendix~\ref{app:probability} gives some the basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities, 
+while Appendix~\ref{app:gaussian_vector} gives more detail account on Gaussian random vector (\gls[hyper=false]{mvn}).
 
 \subsection[From Multivariate Gaussian to Gaussian Process]{From Multivariate Gaussian to Gaussian Process}\label{sub:gp_mvn}
 
@@ -49,38 +50,44 @@ As illustrated, the marginalization of the joint distribution can be thought as 
 Finally, two conditional distributions $p(z_1|z_2=0.35)$ and $p(z_2|z_1=0.75)$ are given as examples of conditioning a probability distribution in Fig.~\ref{fig:plot_bivariate_normal}.
 \marginpar{conditional density, illustrated}
 They are shown as dotted and dashed curves plotted in both axes.
-Instead of projection to either of the axes, conditioning can be thought of as \emph{slicing} the $2$-dimensional distribution.
+Conditioning can be thought of as \emph{slicing} the $2$-dimensional distribution.
 Conditioning two correlated random variables on one, in general, changes the shape of the distribution of the other variable.
 From the figure, conditioning shifts the mean and reduces the variance of the resulting conditional distribution. 
-
-% Drawing from Multivariate Gaussian
-There are multiple ways to draw samples from a multivariate Gaussian distribution.
-One method is particular require the deco
-This method, so-called \emph{Cholesky} method, is detailed in Appendix.
-A random number generator for the standard univariate distribution itself is widely available in many standard numerical computing environments.
-The method in Appendix is used to generate 250 samples for the bivariate.
-The resulting scatter plot and sample histograms of the marginal distributions 
 
 % From Multivariate to Infinite Variate
 \gls[hyper=false]{gp} can often be thought simply as a generalization of finite multivariate Gaussian random variable into an infinite multivariate one.
 \marginpar{An entry to Gaussian Process}
-To illustrate this idea, the marginal and conditional distributions of the bivariate distribution depicted in Fig.~ is plotted with the random variables at the same axis ($x$) while the range pf values of the variables are plotted in another axis ($y$).
-The left panels shows the marginal distributions of random variables $Z_1$ and $Z_2$, where in Fig.~ they are plotted as black curves in their respective axes.
-The center panel shows an observed value of $z_1 = 0.75$ depicted in Fig.~ as vertical dashed line.
-Finally the right panel shows the conditional distribution of the non-observed variable $Z_2$ given $z_1 = 0.75$, which in Fig.~ was depicted as the dashed curve in the $y$-axis.
-As it can be seen, the mean and standard deviation of the conditional distribution of $Z_2$ have been shifted and reduced, respectively, according to the information about $Z_1$.
-
-Depiction in Fig.~ can easily be extended to a larger number of random variables, provided a valid mean vector and a valid covariance matrix.
-Fig.~ shows such an extension to $15$-variate Gaussian random variable.
+To illustrate this idea, the marginal and conditional distributions of a 15-variate \gls[hyper=false]{mvn} distribution is plotted with the random variables at one common axis ($x$) while the range of values of the variables are plotted in another axis ($y$).
+This is practically an extension to the bivariate case exemplified before.
 The origin of the underlying $15 \times 15$ covariance matrix is at the moment unimportant, but what the matrix does is defining how the variables are correlated to each other.
-The whole covariance matrix, except its diagonal elements, is irrelevant in describing the marginal (Fig, left),
-but it is significant in describing the shape of the conditional (Fig, right) according to Eqs.~.
-As before, the conditional probability of the non-observed random variables are shifted and their standard deviation are reduced due to the information provided from the observed variables.
+Fig.~\ref{fig:plot_mvn_vars} shows the depiction.
+Fig.~\ref{fig:plot_mvn_vars_1} shows the marginal distributions of random variables $z_1$ to $z_{15}$.
+Suppose the variables $z_2, z_4, z_7, z_9, z_{12},$ and $z_{14}$ is observed (Fig.~\ref{fig:plot_mvn_vars_2}).
+Now Fig.~\ref{fig:plot_mvn_vars_3} shows the conditional distribution of the non-observed variables (the rest).
+As can be seen, the conditional probability of the non-observed random variables are shifted and their standard deviation are reduced.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_mvn_vars},
+			           maincaption={A 15-variate \gls[hyper=false]{mvn} random variable $\bm{\mathcal{Z}}$. Prior to observing data, the mean and variance of each variable correspond to the marginal mean (in this case $0$) and variance. Conditioning on the observed data shifts the mean and reduces the variance. Illustration is adapted from \cite{Roberts2012}.},
+			           mainshortcaption={From multivariate Normal to Gaussian process},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_mvn_vars_1},
+			           leftcaption={unconditional (marginal)},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_mvn_vars_2},
+			           midcaption={observed data},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_mvn_vars_3},
+			           rightcaption={conditional},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotMVN15Vars_1}
+{../figures/chapter4/figures/plotMVN15Vars_2}
+{../figures/chapter4/figures/plotMVN15Vars_3}
 
 % Closing Sentence
-Gaussian stochastic generalizes this procedure beyond $2$- or $15$-variate Gaussian random variable to an arbitrary number of variables at arbitrary locations in the real line.
+Gaussian stochastic generalizes this procedure beyond this $15$-variate Gaussian random variable to an arbitrary number of variables at arbitrary locations in the real line.
 It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more of a smooth function.
-In fact, it is one of the interpretations of Gaussian process: a distribution over functions (citation). 
+In fact, it is one of the interpretations of Gaussian process: a distribution over functions \cite{OHagan2006}. 
 
 \subsection{Gaussian Process}
 
@@ -166,8 +173,8 @@ In the meantime, an example of a fully specified Gaussian process will be used t
 For the example, the following mean and covariance function will be used
 \begin{equation}
 	\begin{split}
-		m(\mathbf{x}) & = 0 \\
-		K(\mathbf{x}, \mathbf{x}^*) & = \sigma^2 \exp{\left[-\frac{(\mathbf{x} - \mathbf{x}^*)^2}{2\theta^2}\right]} = 10 \exp{\left[-\frac{(\mathbf{x} - \mathbf{x}^*)^2}{0.98}\right]}
+		m(x) & = 0 \\
+		K(x, x^*) & = \sigma^2 \exp{\left[-\frac{(x - x^*)^2}{2\theta^2}\right]} = 10 \exp{\left[-\frac{(x - x^*)^2}{0.98}\right]}
 	\end{split}
 \label{eq:gp_example}
 \end{equation}
@@ -183,32 +190,33 @@ first it must be specified at which input $x$ the function values are to be draw
 \marginpar{sample path (trajectory) of a GP}
 For the present example, $x$ is chosen to be uniformly distributed $\{-2 + 0.2 \times i\}_{i=0}^{20}$.
 By specifying these locations, the $21$-variates Gaussian random variable can be constructed using Eq.~(\ref{eq:gp_to_mvn}) with the elements of variance-covariance matrix computed by the formula in Eq.~(\ref{eq:gp_example}) for all pairs of inputs.
-Examples of $5$ realizations from the \gls[hyper=false]{gp} are shown in the left panel Fig~\ref{fig:sample_path_unconditional}.
+Examples of $5$ realizations from the \gls[hyper=false]{gp} are shown in Fig~\ref{fig:plot_random_function_1}.
 A realization of a \gls[hyper=false]{gp} on a select input locations is also called a \emph{trajectory} or a \emph{sample path} of the process \cite{Santner2003}.
 In this thesis the term \emph{sample path} will be used interchangeable with the term realization of a \gls[hyper=false]{gp}.
-%\normdoublefigure[pos=tbhp,
-%                  mainlabel={fig:sample_paths},
-%                  maincaption={Five realizations (sample paths) of a Gaussian process specified in Eq.~(\ref{eq:gp_example}) at $x_i = \{-2 + 0.2 \times i\}_{i=0}^{20}$. Shaded area indicates the area enveloped by twice standard deviation of the process (or $95\%$ probability region). In the right panel, the sample paths are drawn conditional on $6$ observed values (cross symbols).},%
-%                  leftopt={width=0.45\textwidth},%width=0.45\textwidth},
-%                  leftlabel={fig:sample_path_unconditional},
-%                  leftcaption={Unconditional},
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:plot_random_function},
+                  maincaption={Five realizations (sample paths) of a Gaussian process specified in Eq.~(\ref{eq:gp_example}) at $x_i = \{-2 + 0.2 \times i\}_{i=0}^{20}$. Shaded area indicates the area enveloped by twice standard deviation of the process (or $95\%$ probability region). In the right panel, the sample paths are drawn conditional on $6$ observed values (cross symbols).},%
+									mainshortcaption={Realizations of a Gaussian process (sample path), conditional and unconditional},
+                  leftopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  leftlabel={fig:plot_random_function_1},
+                  leftcaption={Unconditional},
                   %leftshortcaption={},%
-%                  rightopt={width=0.45\textwidth},%width=0.45\textwidth},
-%                  rightlabel={fig:sample_path_conditional},
-%                  rightcaption={Conditional},
+                  rightopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  rightlabel={fig:plot_random_function_2},
+                  rightcaption={Conditional},
                   %rightshortcaption={},
                   %spacing={\hfill}
                  ]
-%{../figures/chapter4/figures/plotSamplePath.pdf}
-%{../figures/chapter4/figures/plotSamplePathCond.pdf}
+{../figures/chapter4/figures/plotRandomFunction_1.pdf}
+{../figures/chapter4/figures/plotRandomFunction_2.pdf}
 
 % Example, conditional simulation
 Suppose now that values of $6$ variables are fully observed as follows $\{(x_i, y_i)\}_{i=1}^{6} = \{(-2.0, -0.75), (-1.2, 1.5), (-0.8, 2.75), (0.4, 3.75),$ 
 $(1.2, -1.3), (1.8, -3.8)\}$.
 \marginpar{conditional sample path}
-The conditional $15$-variates Gaussian distribution can be constructed in the same manner as before with the conditional mean and covariance following Eqs.~.
-Examples of $5$ sample paths from such conditional distribution are shown in Fig.~\ref{fig:sample_path_conditional}.
-Observe that the standard deviations of the observed variables are zero and the areas between known values are substantially reduced.
+The conditional $15$-variates Gaussian distribution can be constructed in the same manner as before with the conditional mean and covariance following Eq.~(\ref{eq:gaussian_conditional}).
+Examples of $5$ sample paths from such conditional distribution are shown in Fig.~\ref{fig:plot_random_function_2}.
+Observe that the standard deviations of the observed variables are zero and the gray areas between them are substantially reduced.
 
 % Strongly Stationary
 An assumption for a class of stochastic process commonly made for convenience is \emph{stationarity}.
@@ -382,8 +390,73 @@ In this particular case, realizations of which are depicted in Fig.~\ref{fig:plo
 
 \subsubsection{Mat\'ern Class Kernel}
 
-The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula
-\lipsum[2]
+The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula \cite{Santner2003,Rasmussen2006}
+\begin{equation}
+	r(x_i, x_j; \theta, \nu) = \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\frac{2\sqrt{\nu} |x_i - x_j|}{\theta}\right)^\nu K_{\nu}\left(\frac{2\sqrt{\nu} |x_i - x_j|}{\theta}\right)
+\label{eq:matern_kernel}
+\end{equation}
+where positive $\nu$ and $\theta$ are the correlation kernel parameters;
+$\Gamma(\circ)$ is the Gamma function;
+and $K_\nu (\circ)$ is the modified Bessel function of order $\nu$.
+In the literature, the value of $\nu$ is often restricted to half integer $\nu = n + \frac{1}{2}; n \in {0,1,\cdots}$,
+because the resulting modified Bessel function can be written simply as a finite series given by
+\begin{equation}
+	K_\nu(t) = \exp{-t} \sqrt{\frac{\pi}{2t}} \sum_{k = 0}^{n} \frac{(n+k)!}{k! (n-k)} \frac{1}{(2t)^k}
+\label{eq:modified_bessel}
+\end{equation}
+
+The Mat\'ern class is considered more flexible than the power-exponential kernel because \emph{shape} parameter $\nu$ directly controls the number of differentiability of the process \cite{Stein1989}\footnote{that was not the case for power-exponential kernel because, strictly speaking, the process in only differentiable at $p = 2$ (and in fact, infinitely differentiable).}.
+\marginpar{shape parameter $\nu$}
+However, it was argued in \cite{Rasmussen2006}, that for machine learning application (i.e., regression and classification) only $\nu = 3/2$ (once differentiable) and $\nu = 5/2$ (twice differentiable) are of practical interest.
+This is due to the fact that for $\nu < 3/2$ the process becomes too rough\footnote{in fact, it reduces to the exponential correlation function},
+while for $\nu \geq 7/2$ the smoothness of the process realization cannot be distinguished anymore from an even smoother process.
+These two Mat\'ern correlation kernels are given below \cite{Roustant2012,Rasmussen2006}
+\begin{equation}
+	r_{\nu=3/2}(x_i, x_j;\theta) = \left(1 + \frac{\sqrt{3}|x_i - x_j|}{\theta}\right) \exp{\left[-\frac{\sqrt{3} |x_i - x_j|}{\theta}\right]}
+\label{eq:matern3_2}
+\end{equation}
+\begin{equation}
+	r_{\nu=5/2}(x_i, x_j;\theta) = \left(1 + \frac{\sqrt{5}|x_i - x_j|}{\theta} + \frac{5|x_i - x_j|^2}{3\theta^2}\right) \exp{\left[-\frac{\sqrt{5} |x_i - x_j|}{\theta}\right]}
+\label{eq:matern5_2}
+\end{equation}
+
+As the two previous kernels, the parameter $\theta$ serves as the range parameter of the process.
+Example plots of the Mat\'ern kernel with different shape and range parameters are shown in Fig.~\ref{fig:plot_corrfun_matern}.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:plot_corrfun_matern},
+                  maincaption={Mat\'ern kernels for $2$ different range parameters $\theta$ and, for each, $2$ different shape parameters $\nu$.},%
+									mainshortcaption={Examples of Mat\'ern kernel functions},
+                  leftopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  leftlabel={fig:plot_corrfun_matern_1},
+                  leftcaption={},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  rightlabel={fig:plot_corrfun_matern},
+                  rightcaption={},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter4/figures/plotCorrFunMatern_1.pdf}
+{../figures/chapter4/figures/plotCorrFunMatern_2.pdf}
+
+Examples realizations drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel with different shape and range parameters are shown in Fig.~\ref{fig:plot_corrfun_matern_realizations}.
+As expected, the realizations from Mat\'ern kernel with $\nu = 5/2$ is smoother than the ones from $\nu = 3/2$.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:plot_corrfun_matern_realizations},
+                  maincaption={Example of sample paths drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel for different range and shape parameters. One realization is drawn from each combinations of the parameters.},%
+									mainshortcaption={Sample paths drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel functions},
+                  leftopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  leftlabel={fig:plot_corrfun_matern_realizations_1},
+                  leftcaption={},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},%width=0.45\textwidth},
+                  rightlabel={fig:plot_corrfun_matern_realizations_2},
+                  rightcaption={},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter4/figures/plotCorrFunMaternRealizations_1.pdf}
+{../figures/chapter4/figures/plotCorrFunMaternRealizations_2.pdf}
 
 \subsection{Multidimensional Construction}
 
@@ -415,7 +488,7 @@ As such, for both cases, the surface appears less smooth in one of the direction
                  leftcaption={Gaussian, $\theta_x = 0.5, \theta_y = 2.0$},
                  rightopt={width=0.475\textwidth},
                  rightlabel={fig:random_surface_matern},
-                 rightcaption={Mat\'ern, $\theta_x = 1.5, \theta_y = 0.5$},
+                 rightcaption={Mat\'ern $\nu = 5/2$, $\theta_x = 1.5, \theta_y = 0.5$},
                  ]
 {../figures/chapter4/figures/plotRandomSurface_1}
 {../figures/chapter4/figures/plotRandomSurface_2}
@@ -447,4 +520,37 @@ What has changed, however, is the scale of the variation in the output space.
 {../figures/chapter4/figures/plotProcessVariance_2}
 {../figures/chapter4/figures/plotProcessVariance_3}
 
-\subsection{Mean Function}
+%-----------------------------------------------------
+\subsection{Mean Function}\label{sub:gp_mean_function}
+%-----------------------------------------------------
+
+Mean function is the drift term in the \gls[hyper=false]{gp} model.
+Strictly speaking, incorporating other than a constant mean function to the specification of a \gls[hyper=false]{gp} introduces non-stationarity to the process.
+But as the known mean function can always be removed from the formulation (i.e., by \emph{centering}), the process, especially with respect to its correlation function, can still be considered stationary.
+Fig.~\ref{fig:plot_mean_function_unconditional} shows several realizations drawn from $3$ \glspl[hyper=false]{gp} having the same covariance kernel, but with three different mean functions.
+As it can be seen, the process are centered differently for the $3$ \glspl[hyper=false]{gp}. 
+The choice of mean function determines the behavior of the conditional process (where it is constrained by the observed data) in the region far away from the available data.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:plot_mean_function_unconditional},
+			           maincaption={The effect of using three different mean functions (in dashed lines) on the realization of \gls[hyper=false]{gp} having the same covariance kernel (Gaussian). The scales in the axes are arbitrary.},
+			           mainshortcaption={Effect of different mean functions on GP realization having the same covariance kernel},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:plot_mean_function_unconditional_1},
+			           leftcaption={constant},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:plot_mean_function_unconditional_2},
+			           midcaption={linear},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:plot_mean_function_unconditional_3},
+			           rightcaption={quadratic},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotMeanFunctionUnconditional_1}
+{../figures/chapter4/figures/plotMeanFunctionUnconditional_2}
+{../figures/chapter4/figures/plotMeanFunctionUnconditional_3}
+
+The use of mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose (citation).
+However, without a very specific knowledge of how a process is expected to behave, it is difficult to completely specify a justifiable mean a priori.
+Instead, the zero-mean stationary Gaussian process is the most widely used in the applied literature (citation).
+Indeed, it was argued in (citation) that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
+This eventually leads to the most generic formulation.
