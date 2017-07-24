@@ -1,4 +1,3 @@
-\newpage
 %*************************************************************************** 
 \section{Dealing with Multivariate Output}\label{sec:gp_dimension_reduction}
 %***************************************************************************
@@ -94,7 +93,7 @@ The sample mean is obtained by taking the column-wise average of Eq.~(\ref{eq:ra
 Note that by the above, it implies the mean of the \gls[hyper=false]{lmc} is a constant vector.
 
 % Standardization of output
-As the output dimensions might be of different physical dimensions or measurement units, the raw outputs in Eq.~(\ref{eq:raw_output}) is centered and standardized to a unit norm (or equivalently, unit variance),
+If the output dimensions is of different physical dimensions or measurement units, the raw outputs in Eq.~(\ref{eq:raw_output}) should be also centered and rescaled to a unit variance (standardization),
 \begin{equation}
 	\mathbf{Y}^* = (\mathbf{Y} - \mathbf{j}_N \bar{\mathbf{y}}) \, \text{diag}^{-1}(\boldsymbol{\sigma}_{\mathbf{y}})
 \label{eq:standardization_raw_output}
@@ -121,35 +120,18 @@ $\mathbf{S}$ is the $N \times N$ diagonal matrix of singular values;
 and $\mathbf{V}$ is the $N \times P$ orthogonal, right singular matrix.
 
 % Principal Component and Principal Component Scores
-The matrix $\boldsymbol{\Phi}$ in Eq.~(\ref{eq:lmc}) is substituted by a set of empirical orthogonal basis functions obtained from the first $Q$ \emph{principal components} (eigenvectors) of the dataset, which is defined as
+The column vector elements of $\mathbf{V}$ are the principal components of the dataset which describe the main directions of the dataset, along which the variance of the dataset is the largest.
+Principal components is sorted in descending order such that the first principal component (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
+% Partial Variance of principal component
+The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
 \begin{equation}
-	\boldsymbol{\Phi} = [\mathbf{v_1}, \cdots, \mathbf{v}_q, \cdots, \mathbf{v}_Q]
-\label{eq:pc_direction}
+	\boldsymbol{\lambda} = \text{diag}\left(\frac{\mathbf{S}^2}{N-1}\right)
+\label{eq:singular_values_variance}
 \end{equation}
-where $\mathbf{v}_q$ is the $P$-dimensional column-vector taken from the $q$-th column of matrix $V$;
-and $Q \leq P$.
-The principal components of the dataset describe the main direction of the dataset.
-The main direction, in turn, is defined such that the transformation of the data into the new coordinate system will maximize its variance.
-The partial (explained) variance of the principal components can be obtained from diagonal elements of the matrix $\mathbf{S}^2/(N-1)$.
-
-The partial variance obtained from the diagonal is automatically sorted in descending order with the top-left element being the largest.
-As such, the first principal component is always associated with the largest partial variance.
-Futhermore, the partial variance associated with a principal component also quantifies the strength of the component relative to the others.
-
-Projection of the data into the principal components results in \emph{principal component scores} (PC scores),
-\begin{equation}
-	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
-\label{eq:pc_scores}
-\end{equation}
-where $W$ is the $N \times Q$ matrix of principal component scores.
-A unique set of $Q$ principal component scores are associated with each points in the multivariate dataset.
-The scores describe the locations of the multivariate data points in the new coordinate system as defined by the principal components.
-
-% Illustration here
 \bigdoublefigure[pos=tbhp,
                  mainlabel={fig:pca_illustrate},
-								 mainshortcaption={Random surface realizations},
-                 maincaption={PCA},
+								 mainshortcaption={Principal Component Analysis of bivariate dataset},
+                 maincaption={\gls[hyper=false]{pca} of bivariate dataset. A highly correlated bivariate dataset can be transformed into a new orthogonal coordinate system according to the principal direction of the dataset. The principal directions redistribute the total variance such that the partial variance is  The total variance, though, is preserved in the transformed coordinate. Illustrated above, $5$ select points in the dataset in both coordinates.},
                  leftopt={width=0.475\textwidth},
                  leftlabel={fig:pca_original},
                  leftcaption={Original data},
@@ -160,18 +142,47 @@ The scores describe the locations of the multivariate data points in the new coo
 {../figures/chapter4/figures/plotPCA_1}
 {../figures/chapter4/figures/plotPCA_2}
 
+% Projection of data
+Projection of the data into the principal components results in \emph{principal component scores} (PC scores),
+\begin{equation}
+	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
+\label{eq:pc_scores}
+\end{equation}
+where $W$ is the $N \times Q$ matrix of principal component scores.
+A unique set of $Q$ principal component scores are associated with each points in the multivariate dataset.
+The scores describe the locations of the multivariate data points in the new coordinate system as defined by the principal components (Fig.~\ref{fig:pca_transformed}).
+
+%The partial variance obtained from the diagonal is automatically sorted in descending order with the top-left element being the largest.
+%As such, the first principal component is always associated with the largest partial variance.
+%Futhermore, the partial variance associated with a principal component also quantifies the strength of the component relative to the others.
+% 
+Often the results of \gls[hyper=false]{pca} are reformulated in terms of principal component loadings and standardized scores,
+\begin{equation}
+	\mathbf{V}^* = \frac{1}{\sqrt{N-1}} \mathbf{V} \mathbf{S} 
+\label{eq:pc_loadings}
+\end{equation}
+\begin{equation}
+	\mathbf{W}^* = \sqrt{N-1} \mathbf{U}
+\label{eq:standardized_pc_scores}
+\end{equation}
+This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})), it also results in standardized PC scores with variance of $1.0$.
+In the context of regression of PC scores used later in metamodeling, the latter property improves the numerical stability of the maximum likelihood estimation of the hyper-parameters. 
+
 % Dimension Reduction
 The dimension reduction takes place when the $Q$ is chosen such that $Q << P$.
-Such selection is justified by a certain amount of partial variance explained by the first $Q$ principal components.
+Such selection is justified by a certain amount of partial variance explained by the few first $Q$ principal components.
+In the illustration of Fig.~\ref{fig:pca_illustrate}, dimension reduction is carried out by simply using the first principal component (horizontal axis of Fig.~\ref{fig:pca_transformed}) to describe the dataset.
+It should be noted, however, the total variance in the dataset is preserved in both coordinates and requires no interpretation on the principal components.
 
-The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
+Back to the formulation of \gls[hyper=false]{lmc}, the matrix $\boldsymbol{\Phi}$ in Eq.~(\ref{eq:lmc}) is substituted by the set of empirical orthogonal basis functions obtained from the first $Q$ \emph{principal components} loadings of the dataset, which is defined as
 \begin{equation}
-	\boldsymbol{\lambda} = \text{diag}\left(\frac{\mathbf{S}^2}{N-1}\right)
-\label{eq:singular_values_variance}
+	\boldsymbol{\Phi} = [\mathbf{v_1}, \cdots, \mathbf{v}_q, \cdots, \mathbf{v}_Q]
+\label{eq:pc_direction}
 \end{equation}
-Selection of the number of principal components to retain usually justified by the.
-
-% Truncation Error
+where $\mathbf{v}_q$ is the $P$-dimensional column-vector taken from the $q$-th column of matrix $V$;
+and $Q \leq P$.
+This empirical orthogonal basis functions expansion is obviously related to the ones presented in Chapter 3.
+The analysis done here, however, used the point-wise data formulation as opposed to functional formulation.
 
 %------------------------------------------------------------------------------
 \subsection{Multivariate Gaussian Process Metamodel}\label{sub:gp_multivariate}
