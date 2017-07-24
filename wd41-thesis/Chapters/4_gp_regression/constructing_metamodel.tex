@@ -1,4 +1,3 @@
-\newpage
 %***********************************************************************************
 \section{Practical Aspects of GP Metamodel Constructions}\label{sec:gp_construction}
 %***********************************************************************************
@@ -118,74 +117,119 @@ Though it potentially leads to a more efficient design (fewer samples required o
 %--------------------------------------------------------
 
 % Introductory
-In most practical situation the values of the hyper-parameters for a select \gls[hyper=false]{gp} are not known a priori.
-These values are to be estimated simultaneously from the training data.
+In most metamodeling applications, the values of the hyper-parameters for a select \gls[hyper=false]{gp} metamodel are not known a priori.
+The parameter estimation process, a term interchangeably used with \emph{fitting}, \emph{training}, and \emph{learning}, 
+applies mathematical techniques to a set of training data to estimate the values of hyper-parameters \cite{Kleijnen2000}.
+In the following it is assumed that a particular correlation function has been selected and the mean function represented using a set of basis fucntion is assumed to be known.
+That is, it starts from the Simple Kriging formulation.
 
 % Likelihood
 To estimate the values of the hyper-parameters $\boldsymbol{\Psi}$ of a chosen structure of mean and covariance functions,
 \marginpar{the likelihood function} 
-it is should be first acknowledged that under \gls[hyper=false]{gp} model, the distribution of the observed data given a Gaussian process $\mathbf{y} \, | \, Y(\mathbf{x}), \boldsymbol{\Psi}$ is Gaussian such that
+it is should be first acknowledged that under \gls[hyper=false]{gp} model, the distribution of the observed data given a Gaussian process $\mathbf{y} \, | \, \mathcal{Y}(\mathbf{x}); \boldsymbol{\Psi}$ is Gaussian such that
 \begin{equation}
 	\mathcal{L}(\boldsymbol{\Psi}; \mathbf{y}) = \frac{1}{(2\pi)^{N/2}(\sigma)^{N/2}|\mathbf{R}|^{1/2}} \exp{\left[- \frac{(\mathbf{y} - \mathbf{F} \boldsymbol{\beta})^T \mathbf{R}^{-1} (\mathbf{y} - \mathbf{F} \boldsymbol{\beta})}{2\sigma^2}\right]}
 \label{eq:gp_likelihood}
 \end{equation}
 The term above is called the \emph{likelihood} function.
-The slight change of perspective from a conditional density function to a common function is due to the fact that the data is already observed (cite Bayesian Tutorial).
+The slight change of perspective from a conditional density function to a common function is due to the fact that the data is already observed \cite{Ulrych2001}.
 For compactness, the $N \times N$ correlation matrix between outputs at the training points $R(\mathbf{DM}, \mathbf{DM})$ are written simply as $\mathbf{R}$;
 and the $N \times M$ basis function matrix at the training points $\mathbf{f}(\mathbf{DM})$ as $\mathbf{F}$.
-Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified through its hyper-parameterization $\boldsymbol{\Psi}$ on $\boldsymbol{\mu}$ and $\mathbf{R}$
+Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified through its hyper-parameterization $\boldsymbol{\Psi}$ on $\sigma^2$ and $\mathbf{R}$
 such that the notation $Y(\mathbf{x})$ is removed from the expression.
 
 % Maximum Likelihood Estimation / Empirical Bayes, Profile/Concentrated Likelihood
 Starting from the likelihood formulation, a common approach to estimate the hyper-parameters values is by selecting the ones that maximize the likelihood for a given observed data $\mathbf{y}$.
 \marginpar{maximum likelihood estimation / empirical Bayes}
-This estimation procedure, the maximum likelihood estimation, is also known in the literature as the \emph{empirical Bayes} (citation needed, Bayarri, Arendt) where the estimation is derived strictly from available data.
+This estimation procedure, the maximum likelihood estimation, is also known in the literature as the \emph{empirical Bayes} \cite{Koehler1996} where the estimation is derived strictly from available data.
 The procedures is as follow:
-First, the hyper-parameters related to $\mathbf{R}$, $\boldsymbol{\Theta} = \{\boldsymbol{\theta}, \mathbf{p}\}$, are initially assumed to be known to estimate $\sigma^2$ and $\boldsymbol{\beta}$ by minimizing the negative log likelihood\footnote{logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number} (which is equivalent to maximizing the likelihood),
+First, the hyper-parameters related to $\mathbf{R}$, $\boldsymbol{\Theta}$, are initially assumed to be known to estimate $\sigma^2$ by minimizing the negative log likelihood\footnote{logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number} (which is equivalent to maximizing the likelihood),
 \begin{equation}
-	\hat{\boldsymbol{\beta}}, \hat{\sigma}^2; \boldsymbol{\Theta} = \underset{\boldsymbol{\beta},\sigma^2}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\beta}}, \hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})
+	\hat{\sigma}^2; \boldsymbol{\Theta} = \underset{\boldsymbol{\beta},\sigma^2}{\arg\min} - \ln \mathcal{L} (\hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})
 \label{eq:concentrated_likelihood_1}
 \end{equation} 
 yielding
 \begin{equation}
 	\begin{split}
-		\hat{\boldsymbol{\beta}} & = (\mathbf{F} \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{F})^{-1} \mathbf{F}^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{y} \\
 		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})}{N}\\
 	\end{split}
-\label{eq:beta_sigma_ml}
+\label{eq:sigma_ml}
 \end{equation}
-The estimated $\hat{\boldsymbol{\beta}}$ and $\hat{\sigma}^2$ are then fed back to Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} (citation needed).
+
+The estimated $\hat{\sigma}^2$ are then fed back to Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} \cite{Cole2013,Kreutz2013}.
 \marginpar{concentrated (profile) likelihood}
 The term is due to the fact that the full likelihood has been further conditioned by setting some of the parameters 
-(in this case, $\boldsymbol{\beta}$ and $\sigma^2$) to constants (in this case, their maximum likelihood estimates).
-This procedure eases the numerical difficulty of finding simultaneously the maximum likelihood estimates of all the hyper-parameters in high-dimensional space (citation needed).
-Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through its the maximum likelihood
+(in this case $\sigma^2$) to a constant (in this case, its maximum likelihood estimates).
+This procedure eases the numerical difficulty of finding simultaneously the maximum likelihood estimates of all the hyper-parameters in high-dimensional space.
+Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through the maximum of the (profile) likelihood,
 \begin{equation}
-	\hat{\boldsymbol{\Theta}} ; \hat{\boldsymbol{\beta}}, \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\boldsymbol{\beta}}, \hat{\sigma}^2)
-\label{eq:theta_ml}
+	\hat{\boldsymbol{\Theta}} ; \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\sigma}^2)
 \end{equation}
-The computation of Eq.~(\ref{eq:theta_ml}) is then carried out using optimization algorithm with (such as the FS and BFGS of the gradient-based family cite()) or without derivative (such as simulated annealing (cite) and genetic algorithms cite() of metaheuristics family) information.
+The computation of Eq.~(\ref{eq:theta_ml}) can then be carried out using unconstrained optimization algorithm, 
+such as the Newton's, quasi-Newton, or one of the global stochastic (e.g., genetic algorithm) methods.
+Review of different types of optimization algorithms can be found in \cite{Venter2010}.
+
+%\begin{equation}
+%	\hat{\boldsymbol{\beta}}, \hat{\sigma}^2; \boldsymbol{\Theta} = \underset{\boldsymbol{\beta},%\sigma^2}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\beta}}, \hat{\sigma}^2 ; \hat{%\boldsymbol{\Theta}})
+%\label{eq:concentrated_likelihood_1}
+%\end{equation} 
+%and $\boldsymbol{\beta}$ 
+%\begin{equation}
+%	\begin{split}
+%		\hat{\boldsymbol{\beta}} & = (\mathbf{F} \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{F})^{-1} \mathbf{F}^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} \mathbf{y} \\
+%		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})}{N}\\
+%	\end{split}
+%\label{eq:beta_sigma_ml}
+%\end{equation}
+%\begin{equation}
+%	\hat{\boldsymbol{\Theta}} ; \hat{\boldsymbol{\beta}}, \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\boldsymbol{\beta}}, \hat{\sigma}^2)
+%\label{eq:theta_ml}
+%\end{equation}
+%\begin{equation}
+%	\begin{split}
+%		s^2_{UK}(\mathbf{x}_o) & = s^2_{SK} (\mathbf{x}_o) + \\
+%			& \medskip \medskip \sigma^2 \left((\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F}) (\mathbf{F}^T \mathbf{R}^{-1} \mathbf{F}) (\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F})^T \right) 
+%	\end{split}
+%\label{eq:uk_variance}
+%\end{equation}
+%\begin{equation}
+%	m_{UK}(\mathbf{x}_o) = \mathbf{f}_o \boldsymbol{\beta} + \mathbf{r}^T_{\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \mathbf{f}_o \boldsymbol{\beta})
+%\label{eq:uk_predictor_ml}
+%\end{equation}
 
 % Full Bayesian Approach
 
 % Universal Kriging Predictor and Variance
-Having estimated the hyper-parameters, the Universal Kriging predictor is expressed as (citation),
+Having estimated the hyper-parameters, the Kriging predictor is expressed as,
 \begin{equation}
-	m_{UK}(\mathbf{x}_o) = \mathbf{f}_o \hat{\boldsymbol{\beta}} + \mathbf{r}^T_{\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \mathbf{f}_o \hat{\boldsymbol{\beta}})
-\label{eq:uk_predictor}
+	\hat{m}_{SK}(\mathbf{x}_o) = \mathbf{f}_o \boldsymbol{\beta} + \mathbf{r}^T_{o,\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \mathbf{f}_o \boldsymbol{\beta})
+\label{eq:sk_predictor_ml}
 \end{equation}
-As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $R(\mathbf{x}_o, \mathbf{DM})$ are written simply as $\mathbf{r}_o$;
+As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $\mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ are written simply as $\mathbf{r}_o$;
 and the $M \times 1$ basis function vector at the test point $\mathbf{f}(\mathbf{x}_o)$ as $\mathbf{f}_o$.
-The subscript of $\hat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
+The subscript $\hat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
 
 The variance associated with the predictor is expressed as
 \begin{equation}
-	\begin{split}
-		s^2_{UK}(\mathbf{x}_o) & = s^2_{SK} (\mathbf{x}_o) + \\
-			& \medskip \medskip \sigma^2 \left((\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F}) (\mathbf{F}^T \mathbf{R}^{-1} \mathbf{F}) (\mathbf{f}_o^T - \mathbf{r}^T_o \mathbf{R}^{-1} \mathbf{F})^T \right) 
-	\end{split}
-\label{eq:uk_variance}
+	\hat{s}^2_{SK} (\mathbf{x}_o) = \hat{\sigma}^2 (1 - \mathbf{r}_{o,\hat{\boldsymbol{\Theta}}}^T \mathbf{R}_{\hat{\boldsymbol{\Theta}}}^{-1} \mathbf{r}_{o,\hat{\boldsymbol{\Theta}}})
+\label{eq:sk_variance_ml}
 \end{equation}
+
+% Full Bayesian Treatment
+The Eqs.~(\ref{eq:sk_predictor_ml}-\ref{eq:sk_variance_ml}) are the same as Eqs.~(\ref{eq:mean_sk}-\ref{eq:variance_sk}), 
+except now the hyper-parameters are replaced by their \gls[hyper=false]{ml} estimates.
+\marginpar{Uncertainty on $\boldsymbol{\Psi}$, full Bayesian treatment}
+They also imply that the uncertainties associated with the \gls[hyper=false]{ml} estimates are not incorporated into the Kriging predictor and variance \cite{Helbert2009}.
+In other words, the uncertainties of the predictor (i.e., its variance) given the observed data is also conditional on a particular set of hyper-parameters values which is the underestimator of true Kriging variance \cite{Hertog2006}.
+Full Bayesian treatment of this problem acknowledges this additional source of uncertainty and considers the hyper-parameters as nuisance parameters. 
+It assumes a prior over the hyper-parameters, compute the posterior, and then use the posterior to average (integrate) the hyper-parameters out from the Kriging predictor and variance \cite{Kennedy2001,Bayarri2007,Higdon2008,Helbert2009}.
+This increases the computational cost as well as the complexity of the analysis with mixed results \cite{Chen2006}.
+As noted in Bayarri, whose ultimate goal was model calibration against experimental data, the answers provided by either analysis (\gls[hyper=false]{ml} estimates and full Bayesian) are equivalent as the effect of model parameters uncertainties tend to dominate the effect of hyper-parameters uncertainties.
+
+% Closing remark
+Metamodel fitting estimates the optimal hyper-parameters values relative only to the training data.
+Its robustness, which depends on the training data, the estimation technique, and the underlying complexity of the simulator, 
+is subjected to validation process presented in the next section.
 
 %-------------------------------------------------------------------
 \subsection{Model Validation and Selection}\label{sub:gp_validation}
@@ -206,14 +250,13 @@ dealing with the approach in generating validation data and in using them to ass
 % Validation Strategy (Holdout Strategy)
 The gold standard of validation strategy is by an independent validation (holdout) data \cite{Chen2016}.
 \marginpar{Validation (holdout) samples strategy}
-In this strategy, a separate validation dataset (samples) is created by generating a new set of validation inputs at which the simulator is evaluated.  
-Using random sampling the possibility of having exactly the same training and validation data is excluded.
+In this strategy, a separate validation dataset (samples) is created by generating randomly a new set of validation inputs at which the simulator is evaluated.  
 The metamodel assessment is then made by comparing the prediction made by the metamodel and the output produced by the actual simulator runs.
 The strategy is straightforward, but because the simulator has to be run at the new validation inputs, the cost of generating the validation dataset is high for an expensive simulator.
 In addition to that, the results can also be sensitive to the size of validation samples \cite{Hamad2011}.
 
 % Validation strategy (cross-validation)
-For a computationally expensive simulator, it is not always possible to generate large (if any) independent validation samples.
+For a computationally expensive simulator, it is not always possible to generate large (if any at all) independent validation samples.
 \marginpar{cross-validation strategy}
 The cross-validation is an alternative approach to validate a metamodel in this situation \cite{Meckesheimer2002,Iooss2010}.
 In cross-validation, a batch of samples (\emph{subsamples}) are removed from the available training samples, 
