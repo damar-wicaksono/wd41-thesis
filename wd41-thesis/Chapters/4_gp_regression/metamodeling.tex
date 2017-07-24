@@ -1,4 +1,3 @@
-\newpage
 %**************************************************************
 \section{Gaussian Process Metamodel}\label{sec:gp_metamodeling}
 %**************************************************************
@@ -64,47 +63,47 @@ and the output at an arbitrary input $\mathbf{x}_o$, $\mathcal{Y}(\mathbf{x}_o)$
 			\mathcal{Y}(\mathbf{x}_o)
 		\end{bmatrix} \sim \mathcal{N} \left(
 			\begin{bmatrix}
-				\mu(\mathbf{DM}) \\
-				\mu(\mathbf{x}_o)
+				\boldsymbol{\mu}(\mathbf{DM}) \\
+				\boldsymbol{\mu}(\mathbf{x}_o)
 			\end{bmatrix}, \sigma^2
 			\begin{bmatrix}
-				R(\mathbf{DM}, \mathbf{DM})  & R(\mathbf{DM}, \mathbf{x}_o) \\
-				R(\mathbf{x}_o, \mathbf{DM}) & R(\mathbf{x}_o, \mathbf{x}_o)
+				\mathbf{R}(\mathbf{DM}, \mathbf{DM})  & \mathbf{R}(\mathbf{DM}, \mathbf{x}_o) \\
+				\mathbf{R}(\mathbf{x}_o, \mathbf{DM}) & \mathbf{R}(\mathbf{x}_o, \mathbf{x}_o)
 			\end{bmatrix} \right)
 \label{eq:joint_training_test}
 \end{equation}
 where
 \begin{itemize}
-	\item $\mu(\mathbf{DM})$ is the vector of mean at the training points,
+	\item $\boldsymbol{\mu}(\mathbf{DM})$ is the vector of mean at the training points,
 		\begin{equation}
-			\mu(\mathbf{DM}) = [\mu(\mathbf{x}_1), \cdots, \mu(\mathbf{x}_N)]^T 
+			\boldsymbol{\mu}(\mathbf{DM}) = [\mu(\mathbf{x}_1), \cdots, \mu(\mathbf{x}_N)]^T 
 		\label{eq:training_mean_vector}
 		\end{equation}
-	\item $\mu(\mathbf{x}_o)$ is the mean at an arbitrary test location.
-	\item $R(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between outputs at the training points,
+	\item $\boldsymbol{\mu}(\mathbf{x}_o)$ is the mean at an arbitrary test location.
+	\item $\mathbf{R}(\mathbf{DM}, \mathbf{DM})$ is the $N \times N$ correlation matrix between outputs at the training points,
 		\begin{equation}
-			R(\mathbf{DM}, \mathbf{DM}) = 
+			\mathbf{R}(\mathbf{DM}, \mathbf{DM}) = 
 				\begin{bmatrix}
-					R(\mathbf{x}_1, \mathbf{x}_1) & \cdots												& R(\mathbf{x}_1, \mathbf{x}_N) \\
-					\vdots												& \ddots												&	\vdots \\
-					R(\mathbf{x}_N, \mathbf{x}_1)	&	\cdots                        & R(\mathbf{x}_N, \mathbf{x}_N)
+					R(\mathbf{x}_1, \mathbf{x}_1)	& \cdots		& R(\mathbf{x}_1, \mathbf{x}_N) \\
+					\vdots												& \ddots		&	\vdots \\
+					R(\mathbf{x}_N, \mathbf{x}_1)	&	\cdots    & R(\mathbf{x}_N, \mathbf{x}_N)
 				\end{bmatrix}
 		\label{eq:training_correlation_matrix}
 		\end{equation}
-	\item $R(\mathbf{DM}, \mathbf{x}_o) = R(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point,
+	\item $\mathbf{R}(\mathbf{DM}, \mathbf{x}_o) = \mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point,
 			\begin{equation}
-				R(\mathbf{x}_o, \mathbf{DM}) = R(\mathbf{DM}, \mathbf{x}_o) =  [R(\mathbf{x}_o, \mathbf{x}_1), \cdots, R(\mathbf{x}_o, \mathbf{x}_N)]^T
+				\mathbf{R}(\mathbf{x}_o, \mathbf{DM}) = \mathbf{R}(\mathbf{DM}, \mathbf{x}_o) =  [R(\mathbf{x}_o, \mathbf{x}_1), \cdots, R(\mathbf{x}_o, \mathbf{x}_N)]^T
 			\label{eq:training_test_correlation}
 			\end{equation}
-		\item $R(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
+		\item $\mathbf{R}(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
 \end{itemize}
 
 % Conditional Distribution, Simple Kriging
 Provided that the outputs at the training inputs are fully observed (i.e., the code is actually run at those inputs),
-then the output at the test input $Y(\mathbf{x}_o)$ \emph{given	} the observed outputs $Y(\mathbf{DM}) = \mathbf{y} = (y_1, y_2, \cdots,$ 
+then the output at the test input $\mathcal{Y}(\mathbf{x}_o)$ \emph{given	} the observed outputs $\mathcal{Y}(\mathbf{DM}) = \mathbf{y} = (y_1, y_2, \cdots,$ 
 $y_N)^T$ is a conditional Gaussian random variable,
 \begin{equation}
-	Y(\mathbf{x}_o) | Y(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( m_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
+	\mathcal{Y}(\mathbf{x}_o) | \mathcal{Y}(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( m_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
 \label{eq:joint_training_test}
 \end{equation}
 where $\mu_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution, respectively.
@@ -114,17 +113,17 @@ They are also often referred to as the \emph{simple Kriging mean} and \emph{simp
 The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follow
 \marginpar{(simple) Kriging mean}
 \begin{equation}
-	m_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + R^T(\mathbf{x}_o, \mathbf{DM}) R^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \mu(\mathbf{DM}))
+	m_{SK} (\mathbf{x}_o) = \mu (\mathbf{x}_o) + \mathbf{R}^T(\mathbf{x}_o, \mathbf{DM}) \mathbf{R}^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \boldsymbol{\mu}(\mathbf{DM}))
 \label{eq:mean_sk}
 \end{equation}
 % Kriging Variance
 The simple Kriging variance, on the other hand, is expressed as
 \marginpar{(simple) Kriging variance}
 \begin{equation}
-	s^2_{SK} (\mathbf{x}_o) = \sigma^2 (1 - R^T(\mathbf{x}_o, \mathbf{DM}) R^T(\mathbf{DM}, \mathbf{DM}) R(\mathbf{x}_o, \mathbf{DM}))
+	s^2_{SK} (\mathbf{x}_o) = \sigma^2 (1 - \mathbf{R}^T(\mathbf{x}_o, \mathbf{DM}) \mathbf{R}^{-1}(\mathbf{DM}, \mathbf{DM}) \mathbf{R}(\mathbf{x}_o, \mathbf{DM}))
 \label{eq:variance_sk}
 \end{equation}
-The expressions for the mean and the variance above are obtained through the conditioning operation of the Gaussian random vector in Eq.(~\ref{eq:joint_training_test}) (See Appendix). 
+The expressions for the mean and the variance above are obtained through the conditioning operation of the Gaussian random vector in Eq.(~\ref{eq:joint_training_test}) (See Appendix~\ref{app:gaussian_vector}). 
 In practice, the Kriging mean are used as a predictor of the code output at an arbitrary input location, 
 while the variance is used as a measure of error of that prediction.
 
