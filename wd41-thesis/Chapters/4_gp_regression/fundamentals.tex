@@ -91,7 +91,9 @@ Gaussian stochastic generalizes this procedure beyond this $15$-variate Gaussian
 It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more of a smooth function.
 In fact, it is one of the interpretations of Gaussian process: a distribution over functions \cite{OHagan2006}. 
 
-\subsection{Gaussian Process}
+%---------------------------------------------
+\subsection{Gaussian Process}\label{sub:gp_gp}
+%---------------------------------------------
 
 % What is a stochastic process
 Gaussian stochastic process is a particular class of \emph{stochastic} or \emph{random process}.
@@ -119,7 +121,7 @@ Specifically, $Y(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathcal{X} \subse
 A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead mean vector and covariance matrix.
 A \gls[hyper=false]{gp} $Y$ on $\mathcal{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
 \begin{equation}
-	Y(\mathbf{x}) \sim \mathcal{GP} \left(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}^*) \right)
+	\mathcal{Y}(\mathbf{x}) \sim \mathcal{GP} \left(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}^*) \right)
 \label{eq:gp_notation}
 \end{equation}
 
@@ -135,7 +137,7 @@ The mean function of a Gaussian process $Y(\mathbf{x})$ is the function $m: \chi
 The covariance function of a Gaussian process $Y(\mathbf{x})$, on the other hand, is the function $K: (\chi \subseteq \mathbb{R}^D) \times (\chi \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
 \marginpar{Covariance Function}
 \begin{equation}
-	K(\mathbf{x}_i, \mathbf{x}_j) = \text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_j)]
+	K(\mathbf{x}_i, \mathbf{x}_j) = \text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_j)]
 \label{eq:gp_cov_functions}
 \end{equation}
 Notice that while the covariance function describes the covariance between pair of random function values, 
@@ -147,21 +149,21 @@ As such, not all functions of the pair of inputs $\mathbf{x}_i, \mathbf{x}_j$ ar
 Finally, the process variance is defined as the covariance between two random function values at the same input,
 \marginpar{Process variance}
 \begin{equation}
-	K(\mathbf{x}_i, \mathbf{x}_i) = \text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_i)] = \mathbf{V}[Y(\mathbf{x}_i)]
+	K(\mathbf{x}_i, \mathbf{x}_i) = \text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_i)] = \mathbb{V}[Y(\mathbf{x}_i)]
 \label{eq:process_variance}
 \end{equation}
 
 % Gaussian Stochastic Process and Multivariate Gaussian Random Variable
-For a given finite $L$, a \gls[hyper=false]{gp} is reduced to a multivariate Gaussian random variable characterized by its mean vector $\boldsymbol{\mu}$ and covariance matrix $\boldsymbol{\Sigma}$,
+For a given finite $L$, a \gls[hyper=false]{gp} is reduced to a Gaussian random vector with mean vector $\boldsymbol{\mu}$ and covariance matrix $\boldsymbol{\Sigma}$,
 \begin{equation}
 	\begin{split}
-		& [Y(\mathbf{x}_i)] \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
+		& [\mathcal{Y}(\mathbf{x}_i)] \sim \mathcal{N}_L(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
 		& \boldsymbol{\mu} = [m(\mathbf{x}_1), m(\mathbf{x}_2), \cdots, (\mathbf{x}_L)]^T \\
 		  & \boldsymbol{\Sigma} = 
 				\begin{pmatrix}
-					\mathbf{V}[Y(\mathbf{x}_1)]  & \cdots & \text{Cov}[Y(\mathbf{x}_1), Y(\mathbf{x}_L)]\\
+					\mathbb{V}[\mathcal{Y}(\mathbf{x}_1)]  & \cdots & \text{Cov}[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_L)]\\
 					\vdots	& \ddots & \vdots\\
-					\text{Cov}[Y(\mathbf{x}_L), Y(\mathbf{x}_1)]  & \cdots  & \mathbf{V}[Y(\mathbf{x}_L)]\\
+					\text{Cov}[Y(\mathbf{x}_L), Y(\mathbf{x}_1)]  & \cdots  & \mathbb{V}[\mathcal{Y}(\mathbf{x}_L)]\\
 			\end{pmatrix} \\
 	\end{split}
 \label{eq:gp_to_mvn}
@@ -184,7 +186,7 @@ where $x$ is a $1$-dimensional input parameter such that $x \in [-2, 2]$.
 The mean function is set to constant zero, while the covariance function is chosen to be the so-called \emph{Gaussian covariance function} (which will be detailed in the sequel).
 The Gaussian covariance function is parameterized by the characteristic length scale $\theta$ which is set to $0.70$.
 This parameter is often referred to as the \emph{hyper-parameter} of the function.
-Finally, $\sigma^2$ is the common variance of the stochastic process and it is set to $10$.
+Lastly, $\sigma^2$ is the variance of the stochastic process and it is set to $10$.
 
 % Example continued, sample path
 To generate random draws of function from the fully specified \gls[hyper=false]{gp} given in Eq.~(\ref{eq:gp_example}), 
@@ -294,8 +296,8 @@ The Gaussian correlation kernel function, also known as the \emph{squared expone
 \label{eq:gaussian_kernel}
 \end{equation}
 
-The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or simply \emph{the scale parameter}).
-\marginpar{characteristic length-scale parameter}
+The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or the \emph{range} parameter).
+\marginpar{characteristic length-scale (range) parameter}
 Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
 for 3 different characteristic length scales.
 Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
@@ -306,22 +308,22 @@ Obviously, for smaller $\theta$ the correlation between two inputs drops more qu
 	\label{fig:plot_corrfun_gauss}
 \end{figure}
 
-The characteristic length-scale of a Gaussian kernel determines the range over which the distance between two input locations affects the output correlation.
+The range parameter of a Gaussian kernel determines the range over which the distance between two input locations affects the output correlation.
 To be precise, the notion how similar (or dissimilar) two input locations is defined relative to the characteristic length-scale.
-With a very short length-scale, the output of random functions becomes easily uncorrelated except for a very close (similar) inputs.
-The realization of the process, therefore, will exhibit more erratic behavior in short length scale as it allows for more abrupt changes over shorter distance and less dependent of the neighboring values.
-On the other hand, with a longer length-scale, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more rigid pattern.
+With a very short range, the output of random functions becomes easily uncorrelated except for a very close (similar) inputs.
+The realization of the process, therefore, will exhibit more erratic behavior in short range as it allows for more abrupt changes over shorter distance and less dependent of the neighboring values.
+On the other hand, with a longer range, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more rigid pattern.
 Gaussian kernel, however, always produces smooth realization. That is, two input points that have a zero separation on the limit are both continuous and differentiable 
 (see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
 The Gaussian kernel is widely applied in the metamodeling literature and almost become a default choice for the correlation kernel \cite{Kennedy2006},
 though as mentioned in \cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly select design points).
 
-Fig.~\ref{fig:plot_corrfun_gauss_realizations} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for three different characteristic length-scales.
-The short length scale, illustrated on the left panel, allows for more sudden change in the output values while the long length scale on the right shows smoother (and rigid) pattern for the same input domain ($0.0 \leq x \leq 3.0$). 
-Also notice that the realizations with the shorter length scale produces more local maxima and minima.
+Fig.~\ref{fig:plot_corrfun_gauss_realizations} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for three different range parameters.
+The short range, illustrated on the left panel, allows for more sudden change in the output values while the long range on the right shows smoother (and rigid) pattern for the same input domain ($0.0 \leq x \leq 3.0$). 
+Also notice that the realizations with the shorter range produces more local maxima and minima.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_gauss_realizations},
-			           maincaption={Examples of realizations from \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of characteristic length-scale. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$. Each process has the same process variance, $\sigma^2 = 1.0$},
+			           maincaption={Examples of realizations from \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of range parameter. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$. Each process has the same process variance, $\sigma^2 = 1.0$},
 			           mainshortcaption={Realizations of random function drawn from \gls[hyper=false]{gp} with Gaussian kernel},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_corrfun_gauss_realization_1},
@@ -346,13 +348,13 @@ The Gaussian correlation kernel belongs to a wider class of $2$-parameter kernel
 \label{eq:powexp_kernel}
 \end{equation}
 
-The parameter $\theta$ remains the (length-) scale parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
+The parameter $\theta$ remains the range parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
 \marginpar{shape parameter}
 Specifically, the shape parameter $p$ determines the differentiability of the process at the origin (citation needed).
 Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp},
-			           maincaption={Examples of power exponential kernel functions for different values of shape parameter $p$ and scale parameter $\theta$ as function of $L_1$ norm.},
+			           maincaption={Examples of power exponential kernel functions for different values of shape parameter $p$ and range parameter $\theta$ as function of $L_1$ norm.},
 			           mainshortcaption={Examples of power exponential kernel functions},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_corrfun_powexp_1},
@@ -557,8 +559,7 @@ The choice of mean function determines the behavior of the conditional process (
 {../figures/chapter4/figures/plotMeanFunctionUnconditional_2}
 {../figures/chapter4/figures/plotMeanFunctionUnconditional_3}
 
-The use of mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose (citation).
+The use of mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose \cite{Ginsbourger2009,Roberts2012}.
 However, without a very specific knowledge of how a process is expected to behave, it is difficult to completely specify a justifiable mean a priori.
-Instead, the zero-mean stationary Gaussian process is the most widely used in the applied literature (citation).
-Indeed, it was argued in (citation) that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
+Indeed, it was argued in \cite{Currin1991} that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
 This eventually leads to the most generic formulation.
