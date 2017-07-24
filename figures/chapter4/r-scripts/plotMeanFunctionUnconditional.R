@@ -13,7 +13,7 @@ otpfullnames <- c("./figures/plotMeanFunctionUnconditional_1.pdf",
                   "./figures/plotMeanFunctionUnconditional_2.pdf",
                   "./figures/plotMeanFunctionUnconditional_3.pdf")
 # Graphic Parameters
-fig_size <- c(5, 5)                 # width, height
+fig_size <- c(5, 5)             # width, height
 margin <- c(4, 5, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
 cex_axis <- 2.5     # Axis marker size
 cex_lab  <- 3.0     # Axis label size
@@ -74,7 +74,7 @@ pdf(otpfullnames[1], family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 par(mfrow = c(1,1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
-plot(x, rep(10.0, D), type = "l", lwd = 2, lty = 3, 
+plot(x, rep(10.0, D), type = "l", lwd = 2.5, lty = 2, 
      xlim  = c(0, 8), ylim = c(-50, 50),
      xlab = "", xaxt = "n",
      ylab = "", yaxt = "n")  # The mean
@@ -93,7 +93,7 @@ pdf(otpfullnames[2], family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 par(mfrow = c(1,1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
-plot(x, 1 + 4 * x, type = "l", lwd = 2, lty = 3, 
+plot(x, 1 + 4 * x, type = "l", lwd = 2.5, lty = 2,
      xlim  = c(0, 8), ylim = c(-50, 50),
      xlab = "", xaxt = "n",
      ylab = "", yaxt = "n")  # The mean
@@ -112,7 +112,7 @@ pdf(otpfullnames[3], family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 par(mfrow = c(1,1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
-plot(x, 1 + 2 * x - 2 * x^2, type = "l", lwd = 2, lty = 3,
+plot(x, 1 + 2 * x - 2 * x^2, type = "l", lwd = 2.5, lty = 2,
      xlim  = c(0, 8), ylim = c(-40, 40),
      xlab = "", xaxt = "n",
      ylab = "", yaxt = "n")  # The mean
