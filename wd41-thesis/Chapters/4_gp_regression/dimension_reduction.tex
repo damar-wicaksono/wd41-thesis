@@ -209,13 +209,13 @@ Specifically, $\boldsymbol{\Phi}_Q$ is,
 where $\boldsymbol{\phi}_i$ is the $P$-dimensional column vector of the $i$-th PC loading.
 
 % The Standardized PC Scores, a Gaussian process
-$\mathbf{w}$ is the $Q$-dimensional vector of standardized PC scores for each PC loadings, modeled as set of univariate, independent, zero-mean \gls[hyper=false]{gp},
+$\mathbf{w}$ is the $Q$-dimensional vector of standardized PC scores for each of the retained PC loadings, modeled as set of univariate, independent, zero-mean \gls[hyper=false]{gp},
 \begin{equation}
 		\begin{split}
 			\bm{w} & = [\mathit{w}_1, \mathit{w}_2, \cdots, \mathit{w}_Q] ; \, Q < P \\
 			 \mathit{w}_i (\circ) & \sim \mathcal{GP}(0, \sigma_i^2 R_i(\circ, \circ)) 
 		\end{split}
-\label{eq:retained_pc}
+\label{eq:retained_pc_scores}
 \end{equation}
 where $\mathit{w}_i$ is the standardized PC scores of the $i$-th PC loading;
 $\sigma_i^2$ and $R_i(\circ, \circ)$ are the process variance and the correlation function 

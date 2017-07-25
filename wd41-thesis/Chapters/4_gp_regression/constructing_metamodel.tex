@@ -164,6 +164,7 @@ This procedure eases the numerical difficulty of finding simultaneously the maxi
 Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through the maximum of the (profile) likelihood,
 \begin{equation}
 	\hat{\boldsymbol{\Theta}} ; \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\sigma}^2)
+	\label{eq:theta_ml}
 \end{equation}
 The computation of Eq.~(\ref{eq:theta_ml}) can then be carried out using unconstrained optimization algorithm, 
 such as the Newton's, quasi-Newton, or one of the global stochastic (e.g., genetic algorithm) methods.
