@@ -1,0 +1,36 @@
+%*****************************************************************************************
+\subsection{Convergence of the Sobol' Indices}\label{sub:sa_application_convergence_sobol}
+%*****************************************************************************************
+
+The convergence of the Sobol' indices' estimator can be investigated from their evolutions as functions of increasing number of samples.
+Shown in Fig.~\ref{fig:ch3_plot_running_indices} is the evolution (trace plot) of the estimated main-effect indices with the maximum cladding temperature as the \gls[hyper=false]{qoi}.
+The Saltelli et al. estimator performs poorly compared to the Janon et al. estimator.
+This means that a larger number of samples are required to obtain a stable ranking.
+
+\bigfigure[pos=tbhp,
+					 opt={width=0.85\textwidth},
+           label={fig:ch3_plot_running_indices},
+           shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
+{../figures/chapter3/figures/plotRunningIndices}
+{Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples.
+The QoI is the maximum cladding temperature}
+
+
+\bigfigure[pos=tbhp,
+					 opt={width=0.85\textwidth},
+           label={fig:ch3_plot_convergence_maxtemp},
+           shortcaption={Convergence of the Sobol' main effect indices estimators w.r.t maximum cladding temperature.}]
+{../figures/chapter3/figures/plotConvergenceMaxTemp}
+{The $95\%$ percentile boostrapped CI length as a function of the number of samples for five selected estimated Sobol' main-effect indices,
+with respect to the maximum cladding temperature using two different estimators.
+The lines shown are the regression through the origin lines.}
+
+
+\bigfigure[pos=tbhp,
+					 opt={width=0.85\textwidth},
+           label={fig:ch3_plot_convergence_pc1score},
+           shortcaption={Convergence of the Sobol' main effect indices estimators w.r.t first principal component.}]
+{../figures/chapter3/figures/plotConvergencePC1Score}
+{The $95\%$ percentile boostrapped CI length as a function of the number of samples for five selected estimated Sobol' main-effect indices,
+with respect to the first principal component using two different estimators.
+The lines shown are the regression through the origin lines.}
