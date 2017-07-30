@@ -1,0 +1,5 @@
+library(ggplot2)
+library(extrafont)
+#font_install("fontcm")
+#font_import()
+loadfonts(device="win")
