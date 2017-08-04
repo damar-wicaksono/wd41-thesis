@@ -1,7 +1,7 @@
 #
-# title     : plotPC1PerturbationTC4Warp.R
+# title     : plotPC1PerturbationTC4Reg.R
 # purpose   : Create an illustration plot of the 1st principal component of the
-#           : mid-assembly temperature curve warping functions
+#           : mid-assembly registered temperature curves 
 #           : and the effect of perturbing around the mean function
 # author    : WD41, LRS/EPFL/PSI
 # date      : August 2017
@@ -14,19 +14,20 @@ source("./r-scripts/plotPCPerturbation.R")
 
 # Global variables ------------------------------------------------------------
 # Output filenames (2 separate files)
-otpfullnames <- c("./figures/plotPC1TC4Warp.pdf",
-                  "./figures/plotPC1PerturbationTC4Warp.pdf")
+otpfullnames <- c("./figures/plotPC1TC4.pdf",
+                  "./figures/plotPC1PerturbationTC4.pdf")
 
 # Input filename
-pca_fd_fullname <- "../../../analysis/sobol/results/tc_warpfd_pcafd-tc_4.Rds"
+pca_fd_fullname <- "../../../analysis/sobol/results/tc_regfd_pcafd-tc_4.Rds"
 
 harmonic <- 1   # which harmonics
 
 # Graphic Parameters
 fig_size <- c(4, 4)             # width, height
-x_limits <- c(0, 550.)
-output_labels <- c("Principal Component [s]",
-                   "Warping Function [s]")
+x_limits <- c(0, 500)
+y_limits <- c(400, 1400)
+output_labels <- c("Principal Component [K]",
+                   "Cladding Temperature [K]")
 
 # Read the Data ----
 pca_fd <- readRDS(pca_fd_fullname)

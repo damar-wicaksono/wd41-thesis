@@ -10,19 +10,16 @@ source("./r-scripts/calcConvergenceSlope.R")
 source("./r-scripts/tidyConvergence.R")
 
 # Global variables ------------------------------------------------------------
+# Output filename
 otpfullname <- "./figures/plotConvergenceMaxTemp.pdf"  # Output filename
 
+# Input filename or path
 qoi_label <- "maxTemp"
 output_label <- "tc_4"
-
 data_path <- "../../../analysis/sobol/results"
-y_max <- 4.0
-
-param_names <- c("break_ptb", "fill_tltb", "fill_vmtbm", "power_rpwtbr",
-                 "gridHTEnh", "iafbWallHTC", "dffbWallHTC", "dffbVIHTC", 
-                 "iafbIntDrag", "dffbIntDrag", "dffbWallDrag", "tempQuench")
 
 # Graphic Parameters
+y_max <- 4.0                    # Maximum value of CI length
 fig_size <- c(8, 4)             # width, height
 
 # Read and Scrub Data ---------------------------------------------------------
@@ -57,8 +54,7 @@ df_convergence$parameter <- factor(param_names, ordered = TRUE)
 
 # Subset 5 parameters ---------------------------------------------------------
 # 4 are important and 1 is not
-param_names <- c("gridHTEnh", "dffbWallHTC", "dffbVIHTC", "dffbIntDrag",
-                 "break_ptb")
+param_names <- c("gridHT", "dffbWHT", "dffbVIHT", "dffbIntDr", "breakP")
 df_conv_sub <- subset(df_convergence, (parameter == param_names[1]| 
                                            parameter == param_names[2]|
                                            parameter == param_names[3]|
@@ -109,7 +105,7 @@ p <- p + geom_abline(data = df_conv_sub,
                      show.legend = TRUE)
 
 
-# Save into a pdf
+# Save the plot into a pdf ----------------------------------------------------
 pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 print(p)

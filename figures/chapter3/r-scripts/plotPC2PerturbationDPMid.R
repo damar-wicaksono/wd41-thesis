@@ -1,8 +1,8 @@
 #
-# title     : plotPC1PerturbationTC4Warp.R
-# purpose   : Create an illustration plot of the 1st principal component of the
-#           : mid-assembly temperature curve warping functions
-#           : and the effect of perturbing around the mean function
+# title     : plotPC2PerturbationDPMid.R
+# purpose   : Create an illustration plot of the 2nd principal component of the
+#           : middle pressure drop curves 
+#           : and the effect of perturbing the mean function
 # author    : WD41, LRS/EPFL/PSI
 # date      : August 2017
 #
@@ -14,19 +14,18 @@ source("./r-scripts/plotPCPerturbation.R")
 
 # Global variables ------------------------------------------------------------
 # Output filenames (2 separate files)
-otpfullnames <- c("./figures/plotPC1TC4Warp.pdf",
-                  "./figures/plotPC1PerturbationTC4Warp.pdf")
+otpfullnames <- c("./figures/plotPC2PMid.pdf",
+                  "./figures/plotPC2PerturbationDPMid.pdf")
 
-# Input filename
-pca_fd_fullname <- "../../../analysis/sobol/results/tc_warpfd_pcafd-tc_4.Rds"
+pca_fd_fullname <- "../../../postpro/result-qoi/dp_mid/rds_fd/febaTrans216Ext-febaVars12Influential-sobol_2000_12-dp_mid-fpc.Rds"
 
-harmonic <- 1   # which harmonics
+harmonic <- 2   # which harmonics
 
 # Graphic Parameters
 fig_size <- c(4, 4)             # width, height
-x_limits <- c(0, 550.)
-output_labels <- c("Principal Component [s]",
-                   "Warping Function [s]")
+x_limits <- c(0, 500)
+output_labels <- c("Principal Component [Pa]",
+                   "Pressure Drop [Pa]")
 
 # Read the Data ----
 pca_fd <- readRDS(pca_fd_fullname)
@@ -41,7 +40,7 @@ p1 <- p1 + labs(x = "Time [s]")
 p1 <- p1 + labs(y = output_labels[1])
 
 # Perturbation plot
-p2 <- plotPCPerturbation(pca_fd, 1)
+p2 <- plotPCPerturbation(pca_fd, harmonic)
 # Set x-axis limits and labels
 p2 <- p2 + scale_x_continuous(limits = c(x_limits[1], x_limits[2]))
 p2 <- p2 + labs(x = "Time [s]")

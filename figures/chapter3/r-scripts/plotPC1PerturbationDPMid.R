@@ -8,12 +8,14 @@
 #
 # Load the Required Library ---------------------------------------------------
 library(fda)
+source("./r-scripts/import.R")
 source("./r-scripts/plotHarmonic.R")
 source("./r-scripts/plotPCPerturbation.R")
 
 # Global variables ------------------------------------------------------------
+# Output filenames (2 separate files)
 otpfullnames <- c("./figures/plotPC1DPMid.pdf",
-                  "./figures/plotPC1PerturbationDPMid.pdf") # Output filenames
+                  "./figures/plotPC1PerturbationDPMid.pdf")
 
 pca_fd_fullname <- "../../../postpro/result-qoi/dp_mid/rds_fd/febaTrans216Ext-febaVars12Influential-sobol_2000_12-dp_mid-fpc.Rds"
 

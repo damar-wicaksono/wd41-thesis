@@ -11,8 +11,10 @@ source("./r-scripts/import.R")
 source("./r-scripts/tidyRunIndex.R")
 
 # Global variables ------------------------------------------------------------
-otpfullname <- "./figures/plotRunningIndices.pdf"  # Output filename
+# Output filename
+otpfullname <- "./figures/plotRunningIndices.pdf"
 
+# Input filenames
 qoi_label <- "maxTemp"
 output_label <- "tc_4"
 
@@ -24,6 +26,7 @@ runindices_filename_2 <- paste0("trace-", output_label, "-", qoi_label,
                                 "-janon.csv")
 runindices_fullname_2 <- paste0(data_path, "/", runindices_filename_2)
 
+# Estimators label
 estimator_1 <- "Saltelli et al."
 estimator_2 <- "Janon et al."
 

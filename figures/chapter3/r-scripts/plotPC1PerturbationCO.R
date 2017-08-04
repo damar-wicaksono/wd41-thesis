@@ -8,12 +8,14 @@
 #
 # Load the Required Library ---------------------------------------------------
 library(fda)
+source("./r-scripts/import.R")
 source("./r-scripts/plotHarmonic.R")
 source("./r-scripts/plotPCPerturbation.R")
 
 # Global variables ------------------------------------------------------------
+# Output filenames (2 separate files)
 otpfullnames <- c("./figures/plotPC1CO.pdf",
-                  "./figures/plotPC1PerturbationCO.pdf") # Output filenames
+                  "./figures/plotPC1PerturbationCO.pdf")
 
 pca_fd_fullname <- "../../../postpro/result-qoi/co/rds_fd/febaTrans216Ext-febaVars12Influential-sobol_2000_12-co-fpc.Rds"
 
@@ -21,7 +23,7 @@ harmonic <- 1   # which harmonics
 
 # Graphic Parameters
 fig_size <- c(4, 4)             # width, height
-x_limits <- c(0, 500)
+x_limits <- c(0, 550)
 y_limits <- c(0, 20)
 output_labels <- c("Principal Component [kg]",
                    "Liquid Carryover [kg]")

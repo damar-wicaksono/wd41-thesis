@@ -8,6 +8,7 @@
 #
 # Load the Required Library ---------------------------------------------------
 library(fda)
+source("./r-scripts/import.R")
 source("./r-scripts/plotHarmonic.R")
 source("./r-scripts/plotPCPerturbation.R")
 
@@ -22,7 +23,6 @@ harmonic <- 2   # which harmonics
 # Graphic Parameters
 fig_size <- c(4, 4)             # width, height
 x_limits <- c(0, 550)
-#y_limits <- c(400, 1400)
 output_labels <- c("Principal Component [s]",
                    "Warping Function [s]")
 

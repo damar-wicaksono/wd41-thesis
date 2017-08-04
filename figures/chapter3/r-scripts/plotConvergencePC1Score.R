@@ -11,19 +11,16 @@ source("./r-scripts/calcConvergenceSlope.R")
 source("./r-scripts/tidyConvergence.R")
 
 # Global variables ------------------------------------------------------------
-otpfullname <- "./figures/plotConvergencePC1Score.pdf"  # Output filename
+# Output filename
+otpfullname <- "./figures/plotConvergencePC1Score.pdf"
 
+# Input filename or path
 qoi_label <- "pc1"
 output_label <- "tc_4_regfd"
-
 data_path <- "../../../analysis/sobol/results"
-y_max <- 0.30
-
-param_names <- c("break_ptb", "fill_tltb", "fill_vmtbm", "power_rpwtbr",
-                 "gridHTEnh", "iafbWallHTC", "dffbWallHTC", "dffbVIHTC", 
-                 "iafbIntDrag", "dffbIntDrag", "dffbWallDrag", "tempQuench")
 
 # Graphic Parameters
+y_max <- 0.30                   # Maximum value of the CI length
 fig_size <- c(8, 4)             # width, height
 
 # Read and Scrub Data ---------------------------------------------------------
@@ -58,8 +55,7 @@ df_convergence$parameter <- factor(param_names, ordered = TRUE)
 
 # Subset 5 parameters ---------------------------------------------------------
 # 4 are important and 1 is not
-param_names <- c("gridHTEnh", "dffbWallHTC", "dffbVIHTC", "dffbIntDrag",
-                 "break_ptb")
+param_names <- c("gridHT", "dffbWHT", "dffbVIHT", "dffbIntDr", "breakP")
 df_conv_sub <- subset(df_convergence, (parameter == param_names[1]| 
                                            parameter == param_names[2]|
                                            parameter == param_names[3]|
@@ -108,7 +104,7 @@ p <- p + geom_abline(data = df_conv_sub,
                                    linetype = parameter), 
                      show.legend = TRUE)
 
-# Save into a pdf
+# Save the plot into a pdf ----------------------------------------------------
 pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 print(p)
