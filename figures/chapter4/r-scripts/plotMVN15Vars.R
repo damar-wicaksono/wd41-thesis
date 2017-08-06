@@ -38,7 +38,7 @@ otpfullnames <- c("./figures/plotMVN15Vars_1.pdf",
                   "./figures/plotMVN15Vars_2.pdf",
                   "./figures/plotMVN15Vars_3.pdf")
 # Graphic Parameters
-fig_size <- c(5, 5)                 # width, height
+fig_size <- c(7, 7)                 # width, height
 margin <- c(4, 5, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
 cex_axis <- 2.5     # Axis marker size
 cex_lab  <- 3.0     # Axis label size
@@ -81,7 +81,8 @@ mu_star_low <- mu_star - 3 * calcStdDevStar(index_obs, rr)
 # Create tick labels
 x_ticks <- c()
 for (i in 1:length(xx)) x_ticks <- c(x_ticks, paste("z[", i, "]", sep = ""))
-y_ticks <- c("-3 * sigma", "-2 * sigma", "-1 * sigma", 0, "1 * sigma", "2 * sigma", "3 * sigma")
+y_ticks <- c("-3 * sigma", "-2 * sigma", "-1 * sigma", 0, 
+             "1 * sigma", "2 * sigma", "3 * sigma")
 
 # Plot 1: Unconditional Marginal ----------------------------------------------
 pdf(otpfullnames[1], family = "CM Roman", 
@@ -142,7 +143,8 @@ plot(0, 0, xlim = c(1, 3), ylim = c(-3,3),
      xlab = "", xaxt = "n",
      ylab = "", yaxt = "n")
 points(xx[index_int], calcMuStar(x_obs, index_obs, mu, rr), cex = 2)
-for (i in 1:length(index_int)) lines(c(xx[index_int][i], xx[index_int][i]), c(mu_star_low[i], mu_star_upp[i]))
+for (i in 1:length(index_int)) lines(c(xx[index_int][i], xx[index_int][i]),
+                                     c(mu_star_low[i], mu_star_upp[i]))
 points(xx[index_obs], x_obs, pch = 4, cex = 2, col = rgb(0, 0, 0, 0.25))
 # Set Axis, Ticks and Labels
 # x-axis
