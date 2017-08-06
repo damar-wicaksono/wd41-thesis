@@ -15,10 +15,10 @@ and model validation (i.e., assessing whether the constructed metamodel is appro
 The metamodeling of deterministic simulator $f$ to obtain the surrogate $\tilde{f}$ is based on the training data $\left(\mathbf{DM} = \{\mathbf{x}_n\}_{n=1}^N, \mathbf{y} = \{f(\mathbf{x}_{n})\}_{n=1}^N\right)$, 
 the design matrix and the corresponding outputs from the actual simulator runs.
 The accuracy of $\tilde{f}$, in turn, is determined by the configuration of $\mathbf{DM}$,
-the sample size $N$, the true underlying relationship of $f$ \cite{Ginsbourger2010}.
+the sample size $N$, and the true underlying relationship of $f$ \cite{Ginsbourger2010}.
 
 % On the "Geometry" of DM, and curse of dimensionality
-The selection of points in the input parameter space, which determines the geometrical configuration of $\mathbf{DM}$, is aimed at exploring the whole input parameter space $\mathcal{X}$, at least at the region where important features of model (e.g., region of strong non-linearity) are located.
+The selection of points in the input parameter space, which determines the geometrical configuration of $\mathbf{DM}$, is aimed at exploring the whole input parameter space $\mathcal{X}$, at least in the region where the important features of the model (e.g., region of strong non-linearity) are located.
 \marginpar{grid approach}
 As this region (or regions) is often not known in advance, 
 the most straightforward approach that explore the parameter space is by using the grid approach with a fine discretization shown in Fig.~\ref{fig:plot_grid_approach} \cite{Koehler1996}.
@@ -93,7 +93,7 @@ Appendix~\ref{app:doe} presents some more detail on the subject.
 {../figures/chapter4/figures/plotDesignExamples_3}
 
 % On the Sample Size, and why design might not be that important
-It is also worth noting that the literature has no consensus regarding the extend of which the design of experiment is important for metamodel accuracy \cite{Viana2016}.
+It is also worth noting that the literature has no consensus regarding the extend to which the design of experiment is important for metamodel accuracy \cite{Viana2016}.
 \marginpar{on the importance of sample size}
 Several authors (such as in \cite{Koehler1996,Jin2003,Damblin2013}) emphasized the design utmost importance while others (such as in \cite{Simpson2001a,Liu2005,Chen2016}) considered it to be less important, especially compared to the training sample size. 
 Those three latter studies reported that while a better design might be important for a relatively small sample, the importance of sample size will eventually eclipse the importance of a more efficient design (especially when such a convergence study can be afforded).
@@ -103,13 +103,14 @@ The paper proposes the sample size of $N = 10\times D$ as a rule of thumb for st
 As the complexity of the underlying function is not known in advance, an empirical study for each case has to be carried out to assess whether the resulting metamodel is acceptable.    
 
 % Other Issues, sequntial
-As a final remark on the subject of design, all the designs considered in this thesis belong to a strategy called one-stage or one-shot strategy \cite{Kleijnen2007,Crombecq2011}.
+As a final remark on the subject of design,
+all the designs considered in this thesis belong to a strategy called one-stage or one-shot strategy \cite{Kleijnen2007,Crombecq2011}.
 \marginpar{one-shot vs. sequential design}
 The strategy means that the training samples are generated at once and a metamodel is constructed and applied only based on that.
 Generating training samples of larger size might be necessary, but the larger samples will be generated essentially from scratch without using the results obtained from the smaller samples. 
-Sequential design is the alternative approach where the new design point is added sequentially to the initial batch of training set.
+Sequential design is the alternative approach where the new design points are added sequentially to the initial batch of training set.
 In essence, it adaptively samples the input parameter space around the more interesting region (with more variation thus more difficult to approximate) based on the previously constructed metamodel.
-The newly found point is then augmented and new metamodel is constructed and the process is repeated until the required level of accuracy is attained.
+The newly found point is then augmented and a new metamodel is constructed and the process is repeated until the required level of accuracy is attained.
 Though it potentially leads to a more efficient design (fewer samples required overall), it also adds additional complexity to metamodel construction (see for example \cite{Xiong2009,Crombecq2011}). 
 
 %--------------------------------------------------------
@@ -119,24 +120,27 @@ Though it potentially leads to a more efficient design (fewer samples required o
 % Introductory
 In most metamodeling applications, the values of the hyper-parameters for a select \gls[hyper=false]{gp} metamodel are not known a priori.
 The parameter estimation process, a term interchangeably used with \emph{fitting}, \emph{training}, and \emph{learning}, 
-applies mathematical techniques to a set of training data to estimate the values of hyper-parameters \cite{Kleijnen2000}.
-In the following it is assumed that a particular correlation function has been selected and the mean function represented using a set of basis fucntion is assumed to be known.
-That is, it starts from the Simple Kriging formulation.
+applies mathematical techniques to a set of training data to estimate the values of the hyper-parameters \cite{Kleijnen2000}.
+In the following it is assumed that a particular correlation function has been selected and that the mean function $\mu(\circ)$ is known,
+with values at training points denoted in the following simply as $\boldsymbol{\mu}$.
+In other words, it starts from the Simple Kriging formulation.
 
 % Likelihood
 To estimate the values of the hyper-parameters $\boldsymbol{\Psi}$ of a chosen structure of mean and covariance functions,
 \marginpar{the likelihood function} 
-it is should be first acknowledged that under \gls[hyper=false]{gp} model, the distribution of the observed data given a Gaussian process $\mathbf{y} \, | \, \mathcal{Y}(\mathbf{x}); \boldsymbol{\Psi}$ is Gaussian such that
+it should be first acknowledged that under \gls[hyper=false]{gp} model, 
+the distribution of the observed data given a Gaussian process $(\mathbf{y} \, | \, \mathcal{Y}(\mathbf{x}); \boldsymbol{\Psi})$ is Gaussian,
+such that its \gls[hyper=false]{pdf} is of the form
 \begin{equation}
-	\mathcal{L}(\boldsymbol{\Psi}; \mathbf{y}) = \frac{1}{(2\pi)^{N/2}(\sigma)^{N/2}|\mathbf{R}|^{1/2}} \exp{\left[- \frac{(\mathbf{y} - \mathbf{F} \boldsymbol{\beta})^T \mathbf{R}^{-1} (\mathbf{y} - \mathbf{F} \boldsymbol{\beta})}{2\sigma^2}\right]}
+	\mathcal{L}(\boldsymbol{\Psi}; \mathbf{y}) = \frac{1}{(2\pi)^{N/2}(\sigma)^{N/2}|\mathbf{R}|^{1/2}} \exp{\left[- \frac{(\mathbf{y} - \boldsymbol{\mu})^T \mathbf{R}^{-1} (\mathbf{y} - \boldsymbol{\mu})}{2\sigma^2}\right]}
 \label{eq:gp_likelihood}
 \end{equation}
 The term above is called the \emph{likelihood} function.
 The slight change of perspective from a conditional density function to a common function is due to the fact that the data is already observed \cite{Ulrych2001}.
 For compactness, the $N \times N$ correlation matrix between outputs at the training points $R(\mathbf{DM}, \mathbf{DM})$ are written simply as $\mathbf{R}$;
 and the $N \times M$ basis function matrix at the training points $\mathbf{f}(\mathbf{DM})$ as $\mathbf{F}$.
-Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified through its hyper-parameterization $\boldsymbol{\Psi}$ on $\sigma^2$ and $\mathbf{R}$
-such that the notation $Y(\mathbf{x})$ is removed from the expression.
+Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified, through its hyper-parameterization $\boldsymbol{\Psi}$, by $\sigma^2$ and $\mathbf{R}$
+such that the notation $\mathcal{Y}(\mathbf{x})$ is removed from the expression.
 
 % Maximum Likelihood Estimation / Empirical Bayes, Profile/Concentrated Likelihood
 Starting from the likelihood formulation, a common approach to estimate the hyper-parameters values is by selecting the ones that maximize the likelihood for a given observed data $\mathbf{y}$.
@@ -145,25 +149,25 @@ This estimation procedure, the maximum likelihood estimation, is also known in t
 The procedures is as follow:
 First, the hyper-parameters related to $\mathbf{R}$, $\boldsymbol{\Theta}$, are initially assumed to be known to estimate $\sigma^2$ by minimizing the negative log likelihood\footnote{logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number} (which is equivalent to maximizing the likelihood),
 \begin{equation}
-	\hat{\sigma}^2; \boldsymbol{\Theta} = \underset{\boldsymbol{\beta},\sigma^2}{\arg\min} - \ln \mathcal{L} (\hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})
+	\left(\hat{\sigma}^2; \boldsymbol{\Theta}\right) = \underset{\sigma^2}{\arg\min} \left(- \ln \mathcal{L} (\hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})\right)
 \label{eq:concentrated_likelihood_1}
 \end{equation} 
 yielding
 \begin{equation}
 	\begin{split}
-		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \mathbf{F} \hat{\boldsymbol{\beta}})}{N}\\
+		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \boldsymbol{\mu})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \boldsymbol{\mu})}{N}\\
 	\end{split}
 \label{eq:sigma_ml}
 \end{equation}
 
-The estimated $\hat{\sigma}^2$ are then fed back to Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} \cite{Cole2013,Kreutz2013}.
+The estimated $\hat{\sigma}^2$ are then fed back into Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} \cite{Cole2013,Kreutz2013}.
 \marginpar{concentrated (profile) likelihood}
 The term is due to the fact that the full likelihood has been further conditioned by setting some of the parameters 
 (in this case $\sigma^2$) to a constant (in this case, its maximum likelihood estimates).
 This procedure eases the numerical difficulty of finding simultaneously the maximum likelihood estimates of all the hyper-parameters in high-dimensional space.
 Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through the maximum of the (profile) likelihood,
 \begin{equation}
-	\hat{\boldsymbol{\Theta}} ; \hat{\sigma}^2 = \underset{\boldsymbol{\Theta}}{\arg\min} - \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\sigma}^2)
+	\left(\hat{\boldsymbol{\Theta}} ; \hat{\sigma}^2\right) = \underset{\boldsymbol{\Theta}}{\arg\min} \left(- \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\sigma}^2)\right)
 	\label{eq:theta_ml}
 \end{equation}
 The computation of Eq.~(\ref{eq:theta_ml}) can then be carried out using unconstrained optimization algorithm, 
@@ -203,7 +207,7 @@ Review of different types of optimization algorithms can be found in \cite{Vente
 % Universal Kriging Predictor and Variance
 Having estimated the hyper-parameters, the Kriging predictor is expressed as,
 \begin{equation}
-	\hat{m}_{SK}(\mathbf{x}_o) = \mathbf{f}_o \boldsymbol{\beta} + \mathbf{r}^T_{o,\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \mathbf{f}_o \boldsymbol{\beta})
+	\hat{m}_{SK}(\mathbf{x}_o) =  \mu(\mathbf{x}_o) + \mathbf{r}^T_{o,\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \boldsymbol{\mu})
 \label{eq:sk_predictor_ml}
 \end{equation}
 As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $\mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ are written simply as $\mathbf{r}_o$;
@@ -219,18 +223,21 @@ The variance associated with the predictor is expressed as
 % Full Bayesian Treatment
 The Eqs.~(\ref{eq:sk_predictor_ml}-\ref{eq:sk_variance_ml}) are the same as Eqs.~(\ref{eq:mean_sk}-\ref{eq:variance_sk}), 
 except now the hyper-parameters are replaced by their \gls[hyper=false]{ml} estimates.
-\marginpar{Uncertainty on $\boldsymbol{\Psi}$, full Bayesian treatment}
+\marginpar{Uncertainty on $\boldsymbol{\Psi}$}
 They also imply that the uncertainties associated with the \gls[hyper=false]{ml} estimates are not incorporated into the Kriging predictor and variance \cite{Helbert2009}.
-In other words, the uncertainties of the predictor (i.e., its variance) given the observed data is also conditional on a particular set of hyper-parameters values which is the underestimator of true Kriging variance \cite{Hertog2006}.
-Full Bayesian treatment of this problem acknowledges this additional source of uncertainty and considers the hyper-parameters as nuisance parameters. 
-It assumes a prior over the hyper-parameters, compute the posterior, and then use the posterior to average (integrate) the hyper-parameters out from the Kriging predictor and variance \cite{Kennedy2001,Bayarri2007,Higdon2008,Helbert2009}.
+In other words, the uncertainties of the predictor (i.e., its variance) given the observed data is also conditional on a particular set of hyper-parameters values which underestimate the true Kriging variance \cite{Hertog2006}.
+
+Full Bayesian treatment of this problem acknowledges this additional source of uncertainty and considers the hyper-parameters as nuisance parameters.
+\marginpar{Full Bayesian treatment}
+It assumes a prior over the hyper-parameters, compute the posterior based on the training data, and then use the posterior to average (integrate) the hyper-parameters out from the Kriging predictor and variance \cite{Kennedy2001,Bayarri2007,Higdon2008,Helbert2009}.
 This increases the computational cost as well as the complexity of the analysis with mixed results \cite{Chen2006}.
-As noted in Bayarri, whose ultimate goal was model calibration against experimental data, the answers provided by either analysis (\gls[hyper=false]{ml} estimates and full Bayesian) are equivalent as the effect of model parameters uncertainties tend to dominate the effect of hyper-parameters uncertainties.
+As noted in Bayarri, whose ultimate goal was model calibration against experimental data, 
+the answers provided by either analysis (\gls[hyper=false]{ml} estimates and full Bayesian) are equivalent as the effect of model parameters uncertainties tends to dominate the effect of hyper-parameters uncertainties.
 
 % Closing remark
 Metamodel fitting estimates the optimal hyper-parameters values relative only to the training data.
 Its robustness, which depends on the training data, the estimation technique, and the underlying complexity of the simulator, 
-is subjected to validation process presented in the next section.
+is subjected to the validation process presented in the next section.
 
 %-------------------------------------------------------------------
 \subsection{Model Validation and Selection}\label{sub:gp_validation}
@@ -239,7 +246,7 @@ is subjected to validation process presented in the next section.
 % What is Validation and Why
 Metamodel is always fitted based on a relatively small training data, much smaller than the space of all possible inputs/output.
 \marginpar{metamodel validation}
-As such, its validation is a necessary step in applying the metamodel, at any given input, as a surrogate of the original computer simulator with confidence.
+As such, its validation is a necessary step in applying the metamodel with confidence at any given input as a surrogate of the original computer simulator.
 Metamodel validation is defined as a process to determine whether a metamodel has a sufficient range of accuracy within its domain of applicability, consistent with its intended use \cite{Kleijnen2000}.
 As the metamodel is based on a deterministic simulator, 
 the output of running the simulator at an input not used in the fitting process provides the ground truth for assessing the metamodel performance.
@@ -249,7 +256,7 @@ a validation strategy is devised,
 dealing with the approach in generating validation data and in using them to assess the metamodel \cite{Meckesheimer2002}.
 
 % Validation Strategy (Holdout Strategy)
-The gold standard of validation strategy is by an independent validation (holdout) data \cite{Chen2016}.
+The gold standard of validation strategy is by an \emph{independent validation (holdout)} data \cite{Chen2016}.
 \marginpar{Validation (holdout) samples strategy}
 In this strategy, a separate validation dataset (samples) is created by generating randomly a new set of validation inputs at which the simulator is evaluated.  
 The metamodel assessment is then made by comparing the prediction made by the metamodel and the output produced by the actual simulator runs.
@@ -259,15 +266,15 @@ In addition to that, the results can also be sensitive to the size of validation
 % Validation strategy (cross-validation)
 For a computationally expensive simulator, it is not always possible to generate large (if any at all) independent validation samples.
 \marginpar{cross-validation strategy}
-The cross-validation is an alternative approach to validate a metamodel in this situation \cite{Meckesheimer2002,Iooss2010}.
+The \emph{cross-validation} is an alternative approach to validate a metamodel in this situation \cite{Meckesheimer2002,Iooss2010}.
 In cross-validation, a batch of samples (\emph{subsamples}) are removed from the available training samples, 
 used the remaining training samples for fitting and the subsamples for assessing the metamodel (essentially becomes the validation samples).
 The procedure is repeated by selecting randomly the elements of the removed batch.
 The most extreme case of this approach is the so-called \emph{leave-one-out} (LOO) cross validation, 
 where a single training point is removed for validation purpose and exhaustively repeating the procedure.
-Cross-validation does not require additional simulator runs to generate validation samples 
+Cross-validation does not require additional simulator runs to generate validation samples.
 It also incorporates in its results, to a certain extend, the sensitivity due to perturbation in the training samples.
-However, it can potentially be expensive if numerous metamodel fitting is to be carried out (such as in the case of the LOO approach).
+However, it can potentially be expensive if numerous metamodel fitting are to be carried out (such as in the case of the LOO approach).
 Furthermore, if an experimental design with a particular geometrical structure is used, removing one or more points might destroy its property\footnote{this is indeed the case for an optimized latin hypercube design}.
 The fitting, in turn, is carried out in sub-optimal manner \cite{Iooss2010,Challenor2013} and the prediction becomes rather pessimistic (i.e., with larger error).
 
@@ -277,21 +284,21 @@ The second part of the strategy is to define a validation metric in line with th
 Because the metamodel in this thesis is going to be used to explore the posterior probability across the model parameter space,
 the aim is to construct a metamodel that has a decent global accuracy\footnote{as opposed the (local) accuracy in a particular region of input parameter space such as during design optimization}.
 Global accuracy measures the metamodel performance over many different input values across its parameter space, on average.
-The accuracy of the metamodel for a particular inputs, however, can still be poor and in the case of \gls[hyper=false]{gp} metamodel is defined probabilistically.  
+The accuracy of the metamodel for a particular input, however, can still be poor and in the case of \gls[hyper=false]{gp} metamodel is defined probabilistically.  
 
 % Predictivity Coefficient
-A particular validation metric that quantifies such global accuracy is the predictivity coefficient $Q_2$ \cite{Iooss2010}.
+A particular validation metric that quantifies such global accuracy is the \emph{predictivity coefficient} $Q_2$ \cite{Iooss2010}.
 \marginpar{predictivity coefficient}
 Assuming that the independent validation samples strategy is adopted, 
 let $\mathbf{DM}^* = \{\mathbf{x}^*_n\}_{n=1}^{N_{valid}}$ denote the set of validation inputs at which the computer simulator is evaluated, 
 yielding $N_{valid}$ outputs $\mathbf{y}^* = \{f(\mathbf{x}^*_n) = y^*_n\}_{n=1}^{N_{valid}}$.
 The predictivity coefficient of a metamodel $\hat{y} (\circ)$ (trained using different set of sample) is given by, 
 \begin{equation}
-	Q_2 (\hat{\mathbf{y}}^*, \mathbf{y}^*) = 1 - \frac{\sum_{n=1}^{N_{valid}} (y^*_n - \hat{y}^*_n)^2}{\sum_{n=1}^{N_{valid}} (\bar{y}^* - y^*_n)^2}
+	Q_2 (\hat{\mathbf{y}}^*, \mathbf{y}^*) = 1 - \frac{\sum_{n=1}^{N_{valid}} (y^*_n - \hat{y}^*_n)^2}{\sum_{n=1}^{N_{valid}} (y^*_n - \bar{y}^*)^2}
 \label{eq:predictivity_coefficient}
 \end{equation} 
 where $\mathbf{y}^*$ is the outputs at validation inputs produced by the simulator;
-$\bar{\mathbf{y}}^*$ is the predictions at validation inputs made by the metamodel;
+$\hat{\mathbf{y}}^*$ is the predictions at validation inputs made by the metamodel;
 and $\bar{y}^*$ is the sample mean of the simulator output in the validation samples.
 The predictivity coefficient can be interpreted as the proportion of the output variance explained by the metamodel relative to the variance of the validation samples.
 $Q_2$ with values close to $1.0$ implies a highly accurate metamodel.

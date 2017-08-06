@@ -17,14 +17,14 @@ An approach proposed in \cite{Kleijnen2000} is to represent the multiple outputs
 That is, one metamodel is developed to represent each one of the multiple outputs individually.
 Yet, for a very high-dimensional output (from tens to thousands), this approach is impractical as the numbers of metamodel to train becomes too numerous.
 Furthermore, the outputs produced by the computer simulation are often highly correlated to each other.
-As such, developing individual metamodels to represent the correlated outputs separately, especially when they are numerous, are wasteful. 
+As such, developing individual metamodels to represent the correlated outputs separately, especially when they are numerous, is wasteful. 
 
 % The approach in this thesis
 To cope with the problem of high-dimensionality of the outputs,
 \marginpar{extension to multivariate case} 
 this thesis adopted \gls[hyper=false]{lmc} \cite{Goulard1992,Paulo2012} coupled with \gls[hyper=false]{pca} technique \cite{Jolliffe2002,Higdon2008} to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
 The original \gls[hyper=false]{lmc} was formulated to model multivariate data in geostatistics that covary together over a region in a linear fashion, 
-while \gls[hyper=false]{pca} is used here a data-driven dimensional reduction tool.
+while \gls[hyper=false]{pca} is used here as a data-driven dimensional reduction tool.
 The resulting model consists of few \emph{independent, univariate} \gls[hyper=false]{gp} metamodels, each of which is the one presented in the previous section.
 
 %---------------------------------------------------------------------

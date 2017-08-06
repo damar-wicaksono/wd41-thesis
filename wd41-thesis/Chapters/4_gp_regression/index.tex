@@ -2,19 +2,19 @@
 \chapter[Gaussian Process Metamodeling]{Gaussian Process Metamodeling: Emulating Code Input/Output for Faster Evaluation}\label{ch:gp_metamodel}
 %***********************************************************************************************************************************************
 
-Tens, if not hundreds, of thousands code runs to appropriately explore the posterior probability distribution using different values of parameters are to be expected under Bayesian calibration framework.
+Under Bayesian calibration framework, tens, if not hundreds, of thousands code runs are to be expected to appropriately explore the posterior probability distribution using different values of parameters.
 Such number of runs are only feasible for simulation with a negligible running time.
-Therefore, to balance the need of vast number of code runs with the finite computing resources and time, 
-an alternative approach is required to approximate the input/output relationships of the code for select relevant outputs within a select input domain of interest. 
+Therefore, to balance the need for vast number of code runs with the finite computing resources and time, 
+an alternative approach is required to approximate the input/output relationships of the code for the selected relevant outputs within a selected input domain of interest. 
 
 This chapter describes an approach to construct a fast surrogate model (metamodel) that approximates (or emulate) the input/output relationship of an expensive code for faster evaluation at any given input parameters values located in the specified domain.
-As argued in Section~\ref{sub:intro_statistical_metamodeling} this thesis used the one based on Gaussian stochastic process which results in a statistical metamodel. 
+As argued in Section~\ref{sub:intro_statistical_metamodeling} this thesis used the one based on Gaussian stochastic process, which results in a statistical metamodel. 
 
-Following a common theme adopted in this thesis, a statistical framework of metamodeling along with necessary notational conventions are first presented in Section~\ref{sec:gp_statistical_framework}.
-The framework casts the problem metamodeling as a problem of nonlinear regression where a set of limited actual code runs (with inputs parameters values judiciously selected) is used to predict code output at any other input values.
+A statistical framework of metamodeling along with necessary notational conventions are first presented in Section~\ref{sec:gp_statistical_framework}.
+The framework casts the problem of metamodeling as a problem of nonlinear regression where a set of limited actual code runs (with input parameters values judiciously selected) is used to predict code output at any other input values.
 
-Afterward, a review on some fundamentals concepts of multivariate Gaussian random variable and Gaussian stochastic process is presented in Section~\ref{sec:gp_fundamentals}.
-The section also tries to establish an intuitive connection between multivariate Gaussian random variable and Gaussian stochastic process.
+Afterward, a review on some fundamental concepts of multivariate Gaussian random variable and Gaussian stochastic process is presented in Section~\ref{sec:gp_fundamentals}.
+The section also establishes an intuitive connection between multivariate Gaussian random variable and Gaussian stochastic process.
 Section~\ref{sec:gp_metamodeling} then presents the formal Gaussian stochastic process formulation used for metamodeling followed by the important aspects of constructing it in Section~\ref{sec:gp_construction}.
 Section~\ref{sec:gp_dimension_reduction} specifically deals with an approach to tackle the case of code with multiple outputs.
 
