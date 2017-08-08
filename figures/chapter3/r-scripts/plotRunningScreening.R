@@ -70,7 +70,7 @@ p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.text.y = element_text(size = 14))
 
 # Set the color of the facet box
-p <- p + theme(strip.text.x = element_text(size = 14, face = "bold"),
+p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"),
                strip.background = element_rect(fill = "grey",
                                                colour = "black"))
 
