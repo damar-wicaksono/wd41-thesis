@@ -34,12 +34,12 @@ Furthermore, being a statistical model based on a stochastic process, it fits th
 % Two Interpretations
 The \gls[hyper=false]{gp} metamodel, like many statistical models, can be interpreted either in frequentist sense or Bayesian sense.
 \marginpar{Two interpretations}
-In the frequentist sense, the stochastic process $Y(\circ)$ is one particular realization of stochastic process (need not be Gaussian, but second-order stationary).
-The prediction made at particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data\footnote{The frequentistic case is the classical approach first developed as spatial interpolation tool in geostatistics by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. In fact, Kriging model (due to Krige) is the more popular term for \gls[hyper=false]{gp} metamodel. These two terms, Kriging model and \gls[hyper=false]{gp} metamodel, will be used interchangeably in this thesis.}.
-On the other hand, in the Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and the
-prediction of the output at $\mathbf{x}_o$ is made based on the posterior (or conditional) process as updated by the training data.   
+In the frequentist sense, the stochastic process $Y(\circ)$ is one particular realization of stochastic process.
+The prediction at a particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data.
+On the other hand, in the Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and 
+the prediction of the output at $\mathbf{x}_o$ is made based on the posterior (or conditional) process as updated by the training data\footnote{The frequentist case is the classical approach first developed as spatial interpolation tool in geostatistics by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. In fact, Kriging model (due to Krige) is the more popular term for \gls[hyper=false]{gp} metamodel. These two terms, Kriging model and \gls[hyper=false]{gp} metamodel, will be used interchangeably in this thesis.}.
 
-Both of these interpretations give an equivalent results.
+Both of these interpretations give equivalent results.
 The subtle difference lies in the interpretation of prediction error.
 In the frequentist case, the error is defined as the mean squared of error between the prediction made by the estimated process and the (hypothetical) true process \cite{Isaaks1989};
 \marginpar{prediction error}
