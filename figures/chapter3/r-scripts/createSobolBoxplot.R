@@ -5,8 +5,6 @@
 #' @
 createSobolBoxplot <- function(bootstrap_df)
 {
-    bootstrap_df
-    
     # Create a facetted boxplot based with parameter as the pivot
     # Note that the definition of the whisker has been changed by 2.5 to 97.5
     # percentiles
