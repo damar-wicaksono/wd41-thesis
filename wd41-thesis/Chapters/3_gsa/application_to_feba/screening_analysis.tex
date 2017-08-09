@@ -3,6 +3,20 @@
 %***************************************************************************
 
 % Introductory paragraph
+A screening analysis to identify noninfluential parameters was first carried out on the $27$ model parameters using the Morris screening method.
+The \gls[hyper=false]{qoi} for this screening analysis was the time-averaged quantities for all output types (cladding temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
+
+%
+\bigfigure[pos=tbhp,
+					 opt={width=0.9\textwidth},
+           label={fig:ch3_plot_running_indices},
+           shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
+{../figures/chapter3/figures/plotRunningScreening}
+{Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples.
+The QoI is the maximum cladding temperature}
+
+A more important finding here is that the non-influential parameters identified by both variants of the Morris method are confirmed by the total-effect indices based on the variance decomposition.
+The estimations of these indices were obtained with small uncertainty.
 
 % Explaining the table of results
 \begin{table*}\centering
@@ -11,13 +25,13 @@
 \caption{Parameters importance across different outputs, average quantities over the transient.
 Checkmark signifies parameters with the Sobol' total-effect indices above $5\%$ and shaded cells signify the final selection of important parameters.}
 \begin{tabular}{@{}rlrrrrrrrrcrrrrcr@{}}\toprule
-\multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multicolumn{8}{c}{$TC$} & \phantom{a} & \multicolumn{4}{c}{$DP$} & \phantom{a} & \multirow{2}{*}{$CO$}\\             
+\multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multicolumn{8}{c}{$TC$ \tiny{($1$ is at the top, $8$ is at the bottom)}} & \phantom{a} & \multicolumn{4}{c}{$DP$} & \phantom{a} & \multirow{2}{*}{$CO$}\\             
                   \cmidrule{3-10}                          \cmidrule{12-15}
-    &                                         & $1$      & $2$      & $3$      & $4$      & $5$ & $6$ & $7$ & $8$ && Bot. & Mid. & Top & Tot && \\ \midrule
-1   & \cellcolor[gray]{0.8}\texttt{breakP}	  &          &          &          &          &     &     &     &     &&      &\Checkmark&     &     && \\
-2   & \cellcolor[gray]{0.8}\texttt{fillT}     &          &          &          &          &     &     &     &\Checkmark&&      &      &     &     && \\
+    &                                         & $1$      & $2$      & $3$      & $4$      & $5$      & $6$ & $7$ & $8$ && Bot. & Mid. & Top & Tot && \\ \midrule
+1   & \cellcolor[gray]{0.8}\texttt{breakP}	  &          &          &          &          &          &     &     &     &&      &\Checkmark&     &     && \\
+2   & \cellcolor[gray]{0.8}\texttt{fillT}     &          &          &          &          &          &     &     &\Checkmark&&      &      &     &     && \\
 3   & \cellcolor[gray]{0.8}\texttt{fillV}     &          &          &          &          &\Checkmark&\Checkmark&\Checkmark&\Checkmark&&\Checkmark&\Checkmark&\Checkmark&\Checkmark&& \Checkmark\\
-4   & \cellcolor[gray]{0.8}\texttt{pwr}       &          &          &          &          &     &     &     &     &&      &   \Checkmark   &     &     && \\
+4   & \cellcolor[gray]{0.8}\texttt{pwr}       &          &          &          &          &          &     &     &     &&      &   \Checkmark   &     &     && \\
 5   & \texttt{nicK}                           &          &          &          &          &     &     &     &     &&      &      &     &     && \\
 6   & \texttt{nicCP}                          &          &          &          &          &     &     &     &     &&      &      &     &     && \\
 7   & \texttt{nicEm}                          &          &          &          &          &     &     &     &     &&      &      &     &     && \\
@@ -47,19 +61,17 @@ Checkmark signifies parameters with the Sobol' total-effect indices above $5\%$ 
 \end{table*}
 
 % Consistency of results
-\bigfigure[pos=tbhp,
-					 opt={width=0.9\textwidth},
-           label={fig:ch3_plot_running_indices},
-           shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
-{../figures/chapter3/figures/plotRunningScreening}
-{Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples.
-The QoI is the maximum cladding temperature}
+To check the consistency of the screening, Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs} illustrates the notion of noninfluential and influential parameters,
+in terms of the effects of their perturbations on the transient of three different outputs.
+\gls[hyper=false]{trace} was executed using $500$ \gls[hyper=false]{mc} samples of parameter value from each of the sets.
+The figure confirms that the use of time-averaged quantity for each output types as viable \gls[hyper=false]{qoi} for screening as the identified noninfluential parameters were indeed the ones that result in minor distortion of all outputs transient as compared to the distortion brought by the influential parameter perturbations.
+Furthermore, it also confirms that by making the union set of all the important parameters subsets (each with respect to different outputs), the noninfluential parameters are indeed valid for all outputs.
 
-% Influnetial vs non influential runs, examples
+% Influential vs non influential runs, examples
 \bigfigure[pos=tbhp,
 					 opt={width=0.9\textwidth},
-           label={fig:ch3_plot_running_indices},
-           shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
+           label={fig:ch3_plot_influential_noninfluential_runs},
+           shortcaption={The effect of influential vs. noninfluential parameters perturbations on different output.}]
 {../figures/chapter3/figures/plotInfluentialNonInfluentialRuns}
-{Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples.
-The QoI is the maximum cladding temperature}
+{Illustration of the variations in the transient of three different outputs using only the $12$ influential parameters (background, gray) and only the $16$ noninfluential parameters (foreground, black).
+Each cases uses $500$ \gls[hyper=false]{mc} samples.}
