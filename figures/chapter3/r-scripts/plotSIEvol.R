@@ -62,7 +62,7 @@ tidy_df$value[tidy_df$value < 0] <- 0.0
 # Create the Plot of Main-effect Indices Evolution  ---------------------------
 p1 <- ggplot(tidy_df, aes(x = time, y = value, shape = parameter)) + 
     geom_point(size = 3)
-p1 <- p1 + scale_shape_manual(values = seq(0,12,1))
+p1 <- p1 + scale_shape_manual(values = c(16, 0, 1, 2, 7, 4, 3, 15, 5, 17, 6, 8))
 
 # Set the plotting canvas
 p1 <- p1 + theme_bw()

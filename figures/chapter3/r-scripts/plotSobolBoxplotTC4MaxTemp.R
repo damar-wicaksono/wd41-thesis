@@ -64,8 +64,10 @@ p <- createSobolBoxplot(bootstrap_df)
 p <- p + scale_y_continuous(breaks = seq(-0.1, 0.6, 0.1),
                             limits = c(-0.1, 0.5))
 
-# Calculate the sum of first order indices
-sum(indices_df[, idx_estimator]) # 0.82
+# Calculate the sum of first order indices, all, first 4, and DFFB-related
+sum(indices_df[, idx_estimator])                # 0.82
+sum(indices_df[c(5,7,8,10), idx_estimator])     # 0.77
+sum(indices_df[c(7,8,10), idx_estimator])       # 0.63
 
 # Make a title informing the sum of the first order indices
 first_line <- "Sum of the main effect indices = 0.82 \n"

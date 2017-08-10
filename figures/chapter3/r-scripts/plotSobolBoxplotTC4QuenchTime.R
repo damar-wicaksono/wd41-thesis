@@ -63,8 +63,10 @@ p <- createSobolBoxplot(bootstrap_df)
 p <- p + scale_y_continuous(breaks = seq(-0.1, 0.6, 0.1),
                             limits = c(-0.1, 0.6))
 
-# Calculate the sum of first order indices
-sum(indices_df[, idx_estimator]) # 0.85
+# Calculate the sum of first order indices, gridHT
+sum(indices_df[, idx_estimator])            # 0.85
+indices_df[5, idx_estimator]                # 0.50
+sum(indices_df[c(7,8,10),idx_estimator])    # 0.18
 
 # Make a title informing the sum of the first order indices
 first_line <- "Sum of the main effect indices = 0.85 \n"
