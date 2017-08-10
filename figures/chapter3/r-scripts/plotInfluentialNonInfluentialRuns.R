@@ -158,8 +158,8 @@ p <- p + scale_color_manual(values = c("darkgrey", "black"),
 
 # Customize the Legend
 p <- p + theme(legend.position = "top",
-               legend.text = element_text(size = 16),
-               legend.title = element_text(size = 16))
+               legend.text = element_text(size = 18),
+               legend.title = element_text(size = 18))
 p <- p + guides(colour = guide_legend("Parameter Subsets"))
 
 # Save the plot to a file -----------------------------------------------------
