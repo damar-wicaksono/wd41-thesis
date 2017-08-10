@@ -31,7 +31,7 @@ estimator_1 <- "Saltelli et al."
 estimator_2 <- "Janon et al."
 
 # Graphic Parameters
-fig_size <- c(8, 4)             # width, height
+fig_size <- c(7, 3)             # width, height
 
 # Create a tidy dataframe -----------------------------------------------------
 df_runindex <- tidyRunIndex(runindices_fullname_1, estimator_1,
@@ -41,22 +41,22 @@ df_runindex <- tidyRunIndex(runindices_fullname_1, estimator_1,
 p <- ggplot(subset(df_runindex, samples <= 1000),
             aes(x = samples, y = value, colour = index)) 
 p <- p + facet_wrap(~estimator) + geom_line()
-p <- p + scale_y_continuous(breaks = seq(-0.1, 1.0, 0.10), 
-                            limits = c(-0.2, 1.0))
+
 
 # Set the correct font
 p <- p + theme(text=element_text(family="CM Roman"))
 p <- p + theme_bw(base_size = 16)
+p <- p + theme(panel.grid.minor = element_blank())
 
 # Edit the x-axis and y-axis labels
-
+p <- p + scale_y_continuous(breaks = seq(-0.1, 1.0, 0.2), 
+                            limits = c(-0.2, 1.0))
 p <- p + labs(y = "Index Value [-]",
               x = "Number of Sobol Samples")
 
 # Set axis labels and font size
 p <- p + theme(axis.title.y = element_text(vjust = 1.5, size = 18),
-               axis.title.x = element_text(vjust = -0.5, size = 18)
-)
+               axis.title.x = element_text(vjust = -0.5, size = 18))
 p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.ticks.x = element_line(size = 1),
                axis.text.x = element_text(size = 14),
