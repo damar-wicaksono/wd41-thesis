@@ -1,0 +1,549 @@
+%-----------------------------------------------------------------------------------
+\section{Screening Analysis ($27$-parameter Model)}\label{app:tbl_results_screening}
+%-----------------------------------------------------------------------------------
+
+% TC1 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+
+\end{table*}
+
+% TC2 Screening
+
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{ Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC3 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC4 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC5 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC6 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC7 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% TC8 Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% DP Bottom Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% DP Middle Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% DP Top Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% DP Total Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% Liquid Carryover Screening
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-2cm}
+\caption{Parameters importance ranking with respect to average temperature output (TC$1$) based on Morris screening methods}
+\begin{tabular}{@{}rlrrrrrrrrrc@{}}\toprule
+\multirow{2}{*}{\footnotesize{No.}} & \multirow{2}{*}{\footnotesize{Parameter}} & \multicolumn{3}{c}{\footnotesize{Morris Radial}} & \phantom{a} & \multicolumn{3}{c}{\footnotesize{Morris Trajectory}}  &\phantom{a}& \multicolumn{2}{c}{\footnotesize{Sobol'-Saltelli}} \\             
+                                                    \cmidrule{3-5}                            \cmidrule{7-9} \cmidrule{11-12}
+    &                                             & \footnotesize{Rank}   & $\mu^*_d$ & $\sigma_d$   &             & \footnotesize{Rank} & $\mu^*_d$ & $\sigma_d$          &           & \footnotesize{Rank} & \footnotesize{$\hat{ST}_d$}\\ \midrule
+\footnotesize{1}   & \footnotesize{\texttt{breakP}} & \footnotesize{$10$} & \footnotesize{$0.25$} &  \footnotesize{$0.25$}  & & \footnotesize{$10$}    & \footnotesize{$0.25$}     & \footnotesize{$0.25$} &          & \footnotesize{$10$}    &   \footnotesize{$0.25 (0.25;0.21)$}   \\
+%1   & \texttt{breakP}	 		& \footnotesize{$10$} & \footnotesize{$0.25 (0.25;0.21)$} &  \footnotesize{$0.25 (0.25;0.21)$}  &   & $10$  & \footnotesize{$0.25 (0.25;0.21)$} &   \footnotesize{$0.25 (0.25;0.21)$}   & & $10$   & $0.25 (0.25;0.21)$\\
+\footnotesize{2}   & \footnotesize{\texttt{fillT}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{3}   & \footnotesize{\texttt{fillV}}     	&          &          &          &          &     &     & &          &     &      \\
+\footnotesize{4}   & \footnotesize{\texttt{pwr}}       	&          &          &          &          &     &     & &          &     &     \\
+\footnotesize{5}   & \footnotesize{\texttt{nicK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{6}   & \footnotesize{\texttt{nicCP}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{7}   & \footnotesize{\texttt{nicEm}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{8}   & \footnotesize{\texttt{mgoK}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{9}   & \footnotesize{\texttt{mgoCp}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{10}  & \footnotesize{\texttt{vesEps}}     &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{11}  & \footnotesize{\texttt{ssK}}        &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{12}  & \footnotesize{\texttt{ssCp}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{13}  & \footnotesize{\texttt{ssEm}}       &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{14}  & \footnotesize{\texttt{GridK}}      &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{15}  & \footnotesize{\texttt{GridHT}}     &          &          &          &          &     &     & &          &     &      \\
+\footnotesize{16}  & \footnotesize{\texttt{iafbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{17}  & \footnotesize{\texttt{dffbWHT}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{18}  & \footnotesize{\texttt{iafbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{19}  & \footnotesize{\texttt{iafbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{20}  & \footnotesize{\texttt{dffbLIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{21}  & \footnotesize{\texttt{dffbVIHT}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{22}  & \footnotesize{\texttt{iafbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{23}  & \footnotesize{\texttt{dffbIntDr}}  &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{24}  & \footnotesize{\texttt{iafbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{25}  & \footnotesize{\texttt{dffbWDr}}    &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{26}  & \footnotesize{\texttt{transHTW}}   &          &          &          &          &     &     & &          &     &     \\
+\footnotesize{27}  & \footnotesize{\texttt{tQuench}}    &          &          &          &          &     &     & &          &     &     \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
