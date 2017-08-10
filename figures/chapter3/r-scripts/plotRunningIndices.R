@@ -31,7 +31,7 @@ estimator_1 <- "Saltelli et al."
 estimator_2 <- "Janon et al."
 
 # Graphic Parameters
-fig_size <- c(8, 3)             # width, height
+fig_size <- c(7, 3)             # width, height
 
 # Create a tidy dataframe -----------------------------------------------------
 df_runindex <- tidyRunIndex(runindices_fullname_1, estimator_1,

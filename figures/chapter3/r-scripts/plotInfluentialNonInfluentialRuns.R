@@ -25,7 +25,7 @@ trc_runs_influential_dp_fullname <- "../../../postpro/result-compiled/febaTrans2
 trc_runs_noninfluential_dp_fullname <- "../../../postpro/result-compiled/febaTrans216-febaVars15NonInfluential-lhs_1000_15-dp_mid-fd.Rds"
 
 # Graphic Parameters
-fig_size <- c(14, 4)             # width, height
+fig_size <- c(12, 4)             # width, height
 
 # Read Data and tidying up things ---------------------------------------------
 trc_runs_influential <- readRDS(trc_runs_influential_fullname)
