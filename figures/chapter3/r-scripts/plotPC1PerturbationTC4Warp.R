@@ -49,8 +49,9 @@ p2 <- p2 + labs(x = "Time [s]")
 p2 <- p2 + labs(y = output_labels[2])
 
 # Add vertical lines indicating landmarks
-p2 <- p2 + geom_vline(xintercept = c(68.8, 312.4),
-                      size=0.5)
+p2 <- p2 + geom_vline(xintercept = c(68.8, 312.4), size = 0.75)
+p2 <- p2 + annotate("text", x = 120.0, y = 500, label = "maximum\ntemperature")
+p2 <- p2 + annotate("text", x = 350.0, y = 500, label = "quenching")
 
 # Save into a pdf -------------------------------------------------------------
 # 1st plot
