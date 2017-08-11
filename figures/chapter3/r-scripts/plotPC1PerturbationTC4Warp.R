@@ -48,6 +48,10 @@ p2 <- p2 + labs(x = "Time [s]")
 # Set y-axis limits and labels
 p2 <- p2 + labs(y = output_labels[2])
 
+# Add vertical lines indicating landmarks
+p2 <- p2 + geom_vline(xintercept = c(68.8, 312.4),
+                      size=0.5)
+
 # Save into a pdf -------------------------------------------------------------
 # 1st plot
 pdf(otpfullnames[1], family = "CM Roman",
