@@ -1,3 +1,73 @@
 %****************************************************************************************************
 \subsection{Sobol Indices for QoIs based on Principal Components}\label{sub:sa_application_pca_sobol}
 %****************************************************************************************************
+
+% Introductory paragraph
+The \gls[hyper=false]{fpc} score $\theta_{n,i}$ associated with each single realization $n$ and a principal component $i$ is used as the \gls[hyper=false]{qoi} in a \gls[hyper=false]{sa} similar to that was done for the conventional \gls[hyper=false]{qoi} is Section~\ref{sub:sa_application_conventional_sobol}.
+In other words, the variance of the score is decomposed into the variance contribution associated with each model parameter.
+
+% 1st fPC of Registered TC4
+The estimated Sobol' indices for the first \gls[hyper=false]{fpc} of the registered clad temperature transient at the mid-height of the assembly are given in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc1}.
+As can be seen, the variation in the amplitude of the temperature reversal was mainly due to the spacer grid HT enhancement and the \gls[hyper=false]{dffb}-related model parameters.
+The other parameters are proved to be almost noninfluential with high certainty in the estimates.
+This result is consistent with the result obtained when using the maximum clad temperature as the \gls[hyper=false]{qoi} 
+and confirms the maximum cladding temperature as a viable representative \gls[hyper=false]{qoi} during the temperature reversal period.
+\bigfigure[pos=tbhp,
+					 opt={width=0.925\textwidth},
+           label={fig:ch3_plot_sobol_boxplot_tc4_pc1},
+           shortcaption={Sobol Indices estimates with the time of quenching as \gls[hyper=false]{qoi}}]
+{../figures/chapter3/figures/plotSobolBoxplotTC4RegPC1}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the (registered) clad temperature transient at the mid-height of the assembly. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+
+% 2nd fPC of Registered TC4
+Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2} shows the Sobol' sensitivity indices using the scores associated with the second \gls[hyper=false]{fpc} as the \gls[hyper=false]{qoi}.
+Contrary to the first component, most of the variation in the second \gls[hyper=false]{fpc} can only be explained through interactions between model parameters since the main-effect indices only summed up to $27\%$.
+The difference between the main-effect and total-effect indices are large especially for the \gls[hyper=false]{dffb}-related parameters.
+These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum cladding temperature),
+or only in speculative manner from the time-dependent representation of the sensitivity indices showed in Fig.~\ref{fig:ch3_plot_si_evol}, which gave a less concise description of the parameter sensitivity.
+\bigfigure[pos=!tbhp,
+					 opt={width=0.925\textwidth},
+           label={fig:ch3_plot_sobol_boxplot_tc4_pc2},
+           shortcaption={Sobol Indices estimates with the time of quenching as \gls[hyper=false]{qoi}}]
+{../figures/chapter3/figures/plotSobolBoxplotTC4RegPC2}
+{The sensitivity indices with respect to the $2$\textsuperscript{nd} \gls[hyper=false]{fpc} of the (registered) clad temperature transient at the mid-height of the assembly. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+
+% 1st fPC of Warping TC4
+The sensitivity indices with respect to the first \gls[hyper=false]{fpc} of the warping functions for the clad temperature transient at the mid-height of the assembly are shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_warp_pc1}.
+The spacer grid HT enhancement model is the main source of variation in the time-shift of the landmarks,
+while two \gls[hyper=false]{dffb}-related parameters (\texttt{dffbWHT} and \texttt{dffbIntDr}) and the quenching temperature each contributes around $10\%$ to the total output variation.
+The rest of the parameters have a trivial effect to the shift in comparison.
+Only a small portion of the output variation is due to parameters interaction from the fact that the main-effect indices summed up to a value close to $1.0$ ($94\%$).
+\bigfigure[pos=!tbhp,
+					 opt={width=0.925\textwidth},
+           label={fig:ch3_plot_sobol_boxplot_tc4_warp_pc1},
+           shortcaption={Sobol Indices estimates with the time of quenching as \gls[hyper=false]{qoi}}]
+{../figures/chapter3/figures/plotSobolBoxplotTC4WarpPC1}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function for the clad temperature transient at the mid-height of the assembly. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+
+% 1st fPC of DP Pressure Drop
+Fig.~\ref{fig:ch3_plot_sobol_boxplot_dpmid_pc1} presents the sensitivity indices with respect to the scores associated with the first \gls[hyper=false]{fpc} of the pressure drop transient at the middle of the assembly.
+The inlet mass velocity parameter (\texttt{fillV}) is the main contributor to the overall output variation ($\sim 30\%$), while the two interfacial drag parameters of the reflood model amount to the same combined contribution.  
+\bigfigure[pos=tbhp,
+					 opt={width=0.925\textwidth},
+           label={fig:ch3_plot_sobol_boxplot_dpmid_pc1},
+           shortcaption={Sobol Indices estimates with the time of quenching as \gls[hyper=false]{qoi}}]
+{../figures/chapter3/figures/plotSobolBoxplotDPMidPC1}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the middle of the assembly. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+
+% 1st fPC of Liquid Carryover
+Finally, Fig.~\ref{fig:ch3_plot_sobol_boxplot_co_pc1} shows the sensitivity indices with the first \gls[hyper=false]{fpc} of the liquid carryover transient as the \gls[hyper=false]{qoi}.
+The inlet mass velocity parameter (\texttt{fillV}) is by far the main source of variation in the output variation ($\sim 90\%$),
+followed by minor contributions ($\sim 9\%$) from two \gls[hyper=false]{dffb}-related parameters (\texttt{dffbVIHT} and \texttt{dffbIntDr}),
+and the rest of the parameters have a negligible effect.
+\bigfigure[pos=tbhp,
+					 opt={width=0.925\textwidth},
+           label={fig:ch3_plot_sobol_boxplot_co_pc1},
+           shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the liquid carryover transient as the \gls[hyper=false]{qoi}.}]
+{../figures/chapter3/figures/plotSobolBoxplotCOPC1}
+{The main-effect and total-effect sensitivity indices with the maximum clad temperature as the \gls[hyper=false]{qoi}. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+
+% Closing Paragraph
+The numerical results of the estimated Sobol' indices presented above are tabulated in Table~\ref{tab:app_sobol_tc4_pc1} through \ref{tab:app_sobol_co_pc1} in Appendix~\ref{app:tbl_results_sobol}.
+To give a measure of uncertainties on the estimates due to \gls[hyper=false]{mc} sampling, 
+the results in the table are complemented by the $95\%$ bootstrap percentile confidence interval $CI_{pct}$, which was based on the percentile method \cite{Efron1986}.
