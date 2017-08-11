@@ -48,15 +48,16 @@ for (i in 1:3)
     # Set plotting canvas
     p <- p + labs(x = "fPC", y = "Explained Variance [%]")
     p <- p + theme_bw()
-    p <- p + annotate("text", x = 7, y = 87.5,
-                      label = paste0(
-                          round(sum(pca_10_varprop$varprop[1:2]), 0),
-                          "% Cumulative Variance by first 2 fPC"),
-                      size = 3)
     p <- p + theme(axis.title.x = element_text(size = 18))
     p <- p + theme(axis.title.y = element_text(size = 18, vjust = 1.5))
     p <- p + theme(axis.text.x = element_text(size = 14))
     p <- p + theme(axis.text.y = element_text(size = 14))
+    
+    # Set the plot title
+    p <- p + ggtitle(paste0(round(sum(pca_10_varprop$varprop[1:2]), 0),
+                            "% Cumulative Variance by first 2 fPC"))
+    p <- p + theme(plot.title = element_text(size = 11, face = "bold"))
+    
     
     # Save the plots
     pdf(otpfullnames[i], family = "CM Roman",
