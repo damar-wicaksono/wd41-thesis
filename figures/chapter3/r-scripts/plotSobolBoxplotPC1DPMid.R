@@ -18,7 +18,7 @@ f <- function(x) {
 
 # Global variables ------------------------------------------------------------
 # Output filename
-otpfullname <- "./figures/plotSobolBoxplotTC4DPMid.pdf"
+otpfullname <- "./figures/plotSobolBoxplotDPMidPC1.pdf"
 
 # Input filenames
 bootstrap_files <- c(

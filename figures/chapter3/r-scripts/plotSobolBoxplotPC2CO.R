@@ -18,7 +18,7 @@ f <- function(x) {
 }
 
 # Global variables ------------------------------------------------------------
-otpfullname <- "./figures/plotSobolBoxplotPC2CO.pdf"
+otpfullname <- "./figures/plotSobolBoxplotCOPC2.pdf"
 
 bootstrap_files <- c(
     "../../../analysis/sobol/results/bootstrap-saltelli-co-pc2-2000.csv",

@@ -19,7 +19,7 @@ f <- function(x) {
 
 # Global variables ------------------------------------------------------------
 # Output filename
-otpfullname <- "./figures/plotSobolBoxplotPC1TC4Reg.pdf"
+otpfullname <- "./figures/plotSobolBoxplotTC4RegPC1.pdf"
 
 # Input filenames
 data_path <- "../../../analysis/sobol/results"

@@ -19,7 +19,7 @@ f <- function(x) {
 
 # Global variables ------------------------------------------------------------
 # Output filename
-otpfullname <- "./figures/plotSobolBoxplotPC1CO.pdf"
+otpfullname <- "./figures/plotSobolBoxplotCOPC1.pdf"
 
 # Input filenames
 bootstrap_files <- c(
