@@ -5,8 +5,7 @@
 % Introductory paragraph
 A screening analysis to identify noninfluential parameters was first carried out on the $27$ model parameters using three different methods.
 The \gls[hyper=false]{qoi} for this screening analysis was the time-averaged quantities for all output types (cladding temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
-The methods considered here are two variants of the Morris screening method (the radial and the trajectory designs) and the Sobol'-Saltelli method to estimate the total-effect indices.
-$320$ replications are used for the Morris method while $1000$ samples are used to estimate the total-effect indices.
+$320$ replications are used for the Morris method while $1'000$ samples are used to estimate the total-effect indices.
 Finally, the parameter ranking are constructed based on $\mu^*_d$ (for the two Morris methods) and $\hat{ST}_d$ (the total-effect indices).
 
 % Convergence of results
@@ -26,7 +25,7 @@ The sensitivity measures related to the four most important parameters, the same
 
 % Explaining the table of results
 The numerical results of the sensitivity measures used in the ranking/screening for each parameter with respect to each of the different outputs are tabulated in the Appendix~\ref{app:tbl_results_screening}.
-An important finding here is that the noninfluential parameters identified by both variants of the Morris method are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
+An important finding here is that the noninfluential parameters identified by both variants of the Morris methods are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
 Table~\ref{tab:ch3_screening_results} presents the summary of parameters importance across different outputs.
 In the table, a parameter is considered noninfluential with respect to a particular output type if its Sobol' total-effect index value fall below $5\%$.
 This parameter will be screened out in the downstream analysis.

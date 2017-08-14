@@ -4,16 +4,16 @@
 
 % Maximum temperature as QoI
 As explained in before, two conventional \gls[hyper=false]{qoi} to characterize a reflood curve are the maximum clad temperature and the time of quenching.
-As shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_maxtemp} the variation of the maximum clad temperature at the middle of the assembly (with standard devitaion of $59.7\,[K]$ was driven mainly by four model parameters,
-contributing to $77\%$ of the total output variation.
-One influential parameter is related to the spacer grid HT enhancement model and the three others are related to the \gls[hyper=false]{dffb} regime model parameters (with the combined effect contributing to $63\%$ of the total output variation).
-Moreover since the sum of all the main-effect indices was relative close to $1.0$, the parameters were not interacting with respect to this particular \gls[hyper=false]{qoi}.
+As shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_maxtemp} the variation of the maximum mid-height clad temperature (with standard deviation of $59.7\,[K]$) was driven mainly by four model parameters,
+contributing up to $77\%$ of the total output variation.
+One influential parameter is related to the spacer grid HT enhancement model and the three others are related to the \gls[hyper=false]{dffb}-regime model parameters (with the combined effect of $63\%$).
+Moreover since the sum of all the main-effect indices was relatively close to $1.0$, the parameters were not interacting with respect to this particular \gls[hyper=false]{qoi}.
 \bigfigure[pos=tbhp,
 					 opt={width=0.925\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_maxtemp},
-           shortcaption={Sobol Indices estimates with the maximum clad temperature as \gls[hyper=false]{qoi}.}]
+           shortcaption={Sobol' Indices estimates with the maximum mid-height clad temperature as the \gls[hyper=false]{qoi}.}]
 {../figures/chapter3/figures/plotSobolBoxplotTC4MaxTemp}
-{The main-effect and total-effect sensitivity indices with the maximum clad temperature as the \gls[hyper=false]{qoi}. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
+{The main-effect and total-effect sensitivity indices with the maximum mid-height clad temperature as the \gls[hyper=false]{qoi}. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sampe percentile.}
 
 % Time of Quenching as QoI
 The parameter sensitivity with respect to the time of quenching gave a different picture as shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_quenchtime}.
@@ -23,11 +23,9 @@ Similar to the case of the maximum clad temperature as the \gls[hyper=false]{qoi
 \bigfigure[pos=tbhp,
 					 opt={width=0.925\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_quenchtime},
-           shortcaption={Sobol Indices estimates with the time of quenching as \gls[hyper=false]{qoi}}]
+           shortcaption={Sobol' Indices estimates with the time of quenching at mid-height of the assembly as the \gls[hyper=false]{qoi}}]
 {../figures/chapter3/figures/plotSobolBoxplotTC4QuenchTime}
-{The main-effect and total-effect sensitivity indices with the maximum clad temperature as the \gls[hyper=false]{qoi}. The boxplots represent the bootstrap samples quartile statistics, while the vertical line of each box encompasses the $95\%$ percentile of the sample.}
-
-The numerical results of the Sobol' indices estimates for both main-effect and total-effect for each parameter with respect to these two outputs are tabulated in the Appendix~\ref{app:tbl_results_sobol}.
+{The main-effect and total-effect sensitivity indices with the time of quenching at the mid-height of the assembly as the \gls[hyper=false]{qoi}. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % Time-dependent sensitivity indices
 To better understand how the output sensitivity to the model parameters is changing over the course of the reflood transient, 
@@ -64,3 +62,6 @@ The figure also shows some sign of imperfection in the registration procedure.
 The sudden jump of variation around the time of quenching can be attributed to a residual misalignment that still exists in the registered dataset.
 As the landmark registration is supposed to remove the phase variation with respect to time of quenching (one of the landmarks),
 temperature variation of this magnitude at the particular time should not have been observed.
+
+% Closing paragraph
+The numerical results of the Sobol' indices estimates presented above for each parameter with respect to these two outputs are tabulated in \ref{tab:app_sobol_tc4_maxtemp} and Table~\ref{tab:app_sobol_tc4_quenchtime} in Appendix~\ref{app:tbl_results_sobol}.
