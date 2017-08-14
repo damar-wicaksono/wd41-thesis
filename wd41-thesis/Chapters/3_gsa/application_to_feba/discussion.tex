@@ -1,3 +1,48 @@
 %***********************************************************
 \subsection{Discussion}\label{sub:sa_application_discussion}
 %***********************************************************
+
+% On screening
+The Morris screening method was used as a screening tool to filter out noninfluential parameters from further analysis.
+It was shown that such reduction was valuable to the downstream analysis by reducing the size of the problem (i.e., the number of parameters).
+The screening results with respect to the average temperature showed that most of the model parameters related to the \gls[hyper=false]{iafb} regime have relatively lower importance than the ones related to the \gls[hyper=false]{dffb} regime. 
+This finding confirmed that the implementation of the reflood models in \gls[hyper=false]{trace} is consistent with the widely accepted phenomenological view on the relevance of \gls[hyper=false]{dffb} for heated channel reflooding at low flooding rate \cite{Andreani1994}.
+Intuitively, most drag related parameters are more prominent with respect to the average pressure drop output, though correlation between outputs does not exclude the common importance of heat transfer related parameters.
+Finally with respect to average liquid carryover, only four parameters are found to be of prominence which confirm the soundness of the physical process being simulated (that is, \texttt{fillV} and \texttt{dffbIntDr} were responsible for the liquid and droplets to be transported, \texttt{dffbVIHT} was responsible for evaporation of droplets in the channel, while \texttt{gridHT} strongly influenced the quenching of the rod). 
+
+The explanation above also illustrates the fact that the Morris screening method could serve as a preliminary analysis of model parameters to verify if the model behaves (in terms of parameters importance) as expected with limited number of code runs.
+In Ref.~\cite{Wicaksono2014} the Morris methow was used in this perspective in mind.
+
+% Radial vs Trajectory
+A comparison between the importance rankings obtained by the two Morris screening method variants showed a consistent result.
+The radial design, however, exhibited more erratic variations in the elementary effect statistics estimations and thus requires slightly more replications (thus code runs) to stabilize.
+This is due to the fact that, in the radial design, grid jump varies from replication to replication and from parameter to parameter excluding the possible bias due to unexplored area of input parameter space. 
+Trajectory design, on the other hand, uses a constant grid jump which constrain the possible parameter perturbation in the input parameter space.
+Increasing the number of replications while keeping the same grid jump might give an impression that the elementary effects statistics converge quickly, especially if the grid jump is relatively large.
+As such, to avoid the aforementioned possible bias, different sizes of grid jump should be considered before a more robust conclusion on the ranking can be drawn.
+This, in turn, entails additional calculations.
+
+% On the use of Sobol' total effect
+The elementary effects statistics, however, are deemed qualitative as they do not quantify exactly the contribution of the parameters variations to the output variations.
+The comparison between two parameters whose value of the first $\mu^*$ is larger than the second is hard to intuit beyond the fact that the first parameter is relatively more important than the second.
+In this regard, the Sobol' total-effect indices were found to be useful for screening application in a more quantitative manner but required more code runs as compared to the Morris method ($\sim 3'000$ vs $\sim 7'000$).
+As explained, the total-effect index of a parameter is the proportion of output variance due to the variation of the parameter, including all the possible interactions of any order with any other input parameters.
+A parameter with low total-effect index implies that a parameter is simply less influential with respect to the selected output.
+By setting a cut-off value, a parameter was classified as either influential and noninfluential in a quantitative and consistent manner with reference always to the same output variance.
+Nevertheless, the selection of threshold (cut-off) value is admittedly subjective and the results needs to be further verified.
+This was done through uncertainty propagation using influential and noninfluential parameter subsets which is presented in Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs}.
+
+% Conventional reflood QoI
+\lipsum[10]
+% Time-Dependent QoI
+\lipsum[10]
+% Result of registered temperature fpc1
+\lipsum[10]
+% Result of registered temperature fpc2
+\lipsum[10]
+% Result of warping function fpc1
+\lipsum[10]
+% Result of Pressure Drop fpc1
+\lipsum[10]
+% Result of Liquid carryover fpc1
+\lipsum[10]
