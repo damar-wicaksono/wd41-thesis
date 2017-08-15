@@ -15,10 +15,10 @@ This means that a larger number of samples are required to obtain a stable ranki
 {Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples. The \gls[hyper=false]{qoi} is the maximum cladding temperature}
 
 % Uncertainty in the estimation
-If the main purpose of the \gls[hyper=false]{sa} is simply to rank the parameter importance with respect to a particular \gls[hyper=false]{qoi} (as before),
+If the main purpose of the \gls[hyper=false]{sa} is simply to rank the parameter importance with respect to a particular \gls[hyper=false]{qoi},
 then the Janon et al. estimator visibly requires fewer samples and the ranking can be reliably constructed.
-However, the apparent stabilization of the indices' estimator is not sufficient to establish a robust quantitative estimate of the indices since \gls[hyper=false]{mc} estimation entails sampling uncertainty due to finite number of samples.
-Such uncertainty needs to be addressed and reported for all the indices estimates.
+However, the apparent stabilization of the indices' estimator is not sufficient to establish a robust estimate of the indices since \gls[hyper=false]{mc} estimation entails uncertainty due to finite number of samples.
+Such uncertainty needs to be addressed for all the estimates.
 
 % Empirical convergence study
 In this work, an empirical convergence study was established using three different sample sizes ($250$; $500$; $1000$),
@@ -57,3 +57,7 @@ As for the total-effect indices, the results obtained using the Jansen's estimat
 reaching below $10\%$ \gls[hyper=false]{ci} length for $1'000$ \gls[hyper=false]{mc} samples across all \gls[hyper=false]{qoi}.
 Benefiting from the screening procedure taken before ($12$ influential parameters instead of $27$ parameters) and considering the empirical convergence,
 a total of $2'000$ samples (which corresponds to $28'000$ \gls[hyper=false]{trace} runs) was deemed appropriate for the more detailed \gls[hyper=false]{sa} presented below.
+For conciseness only the results of selected types of output are presented to illustrate the method application, 
+namely the mid-height clad temperature transient (TC$4$ at elevation $z = 2.4 \, [m]$),
+the pressure drop transient at the middle of the assembly (the segment between $z = 1.7 \, [m]$ and $z = 2.3 \, [m]$),
+and the liquid carryover.
