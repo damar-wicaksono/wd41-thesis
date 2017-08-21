@@ -1,9 +1,9 @@
 #
 # title     : plotPCAImageTC.R
-# purpose   : R script to create a plot of reconstruction error for the 
-#           : liquid carryover output using increasing number of principal
-#           : components in the reconstruction
-#           : 0 PC indicates only the training sample average is used
+# purpose   : R script to create a plot of principal component of 
+#           : the temperature output as image (function of time and axial 
+#           : location)
+#           : 0-th PC indicates the average output
 # author    : WD41, LRS/EPFL/PSI
 # date      : Aug. 2017
 #
