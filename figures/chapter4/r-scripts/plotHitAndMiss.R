@@ -68,7 +68,7 @@ yy_train_loadings <- trc_train_pca$yy_train_loadings # Training outputs PC load
 # Make the plot ---------------------------------------------------------------
 for (i in 1:2)
 {
-    pdf(otpfullnames[i], 
+    pdf(otpfullnames[i], family = "CM Roman",
         width = fig_size[1], height = fig_size[2])
     par(mfrow = c(1,1), mar = margin, las = 1,
         oma = c(0, 0, 0, 0), bty = "n")
