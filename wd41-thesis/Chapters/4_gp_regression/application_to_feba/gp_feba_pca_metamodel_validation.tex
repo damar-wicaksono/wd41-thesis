@@ -1,0 +1,31 @@
+%************************************************************************************************************************
+\subsection{\gls[hyper=false]{gp} \gls[hyper=false]{pc} Metamodel Validation}\label{sub:gp_feba_pca_metamodel_validation}
+%************************************************************************************************************************
+
+
+\bigfigure[pos=!tbhp,
+					 opt={width=1.0\textwidth},
+           label={fig:ch4_plot_pc_q2},
+           shortcaption={Sobol' Indices estimates with the scores of the warping function for the mid-height clad temperature transient as the \gls[hyper=false]{qoi}}]
+{../figures/chapter4/figures/plotQ2PCs}
+{The sensitivity indices with respect to of the warping function for the mid-height clad temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
+
+\bigtriplefigure[pos=tbhp,
+                 mainlabel={fig:ch4_plot_rec_error_pred_obs},
+			           maincaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}. Some realizations might still be inaccurately predicted, due to both the limitation in the approximations incurred by using \gls[hyper=false]{gp} and \gls[hyper=false]{pc}.},
+			           mainshortcaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}.},%
+			           leftopt={width=0.305\textwidth},
+			           leftlabel={fig:ch4_plot_rec_error_pred_obs},
+			           leftcaption={Clad temperature output},
+			           midopt={width=0.305\textwidth},
+			           midlabel={fig:ch4_plot_hit_and_miss_1},
+			           midcaption={Pressure drop output},
+			           rightopt={width=0.305\textwidth},
+			           rightlabel={fig:ch4_plot_hit_and_miss_2},
+			           rightcaption={Liquid carryover output},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotRecErrorPredObsTC}
+{../figures/chapter4/figures/plotRecErrorPredObsDP}
+{../figures/chapter4/figures/plotRecErrorPredObsCO}
+

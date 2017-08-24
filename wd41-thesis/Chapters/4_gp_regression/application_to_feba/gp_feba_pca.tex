@@ -1,0 +1,60 @@
+%**************************************************************************************
+\subsection{Dimension Reduction by Principal Component Analysis}\label{sub:gp_feba_pca}
+%**************************************************************************************
+
+\bigtriplefigure[pos=tbhp,
+                 mainlabel={fig:ch4_plot_image_tc_run},
+			           maincaption={Examples of multivariate clad temperature output at 8 different locations as function of time, presented as ``images'', taken from three different training runs.},
+			           mainshortcaption={Examples of multivariate clad temperature output at 8 different locations as function of time, presented as ``images''},%
+			           leftopt={width=0.305\textwidth},
+			           leftlabel={fig:ch4_plot_image_tc_run_1},
+			           leftcaption={Training run 996},
+			           midopt={width=0.305\textwidth},
+			           midlabel={fig:ch4_plot_image_tc_run_2},
+			           midcaption={Training run 1480},
+			           rightopt={width=0.305\textwidth},
+			           rightlabel={fig:ch4_plot_image_tc_run_3},
+			           rightcaption={Training run $1805$},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotImageTCRun1}
+{../figures/chapter4/figures/plotImageTCRun2}
+{../figures/chapter4/figures/plotImageTCRun3}
+
+\bigtriplefigure[pos=tbhp,
+                 mainlabel={fig:ch4_plot_pca_image},
+			           maincaption={PCA of clad temperature output},
+			           mainshortcaption={PCA of clad temperature output},%
+			           leftopt={width=0.305\textwidth},
+			           leftlabel={fig:ch4_plot_pca_image_ave},
+			           leftcaption={Mean output},
+			           midopt={width=0.305\textwidth},
+			           midlabel={fig:ch4_plot_pca_image_pc1},
+			           midcaption={$1$\textsuperscript{st} PC ($73\%$)},
+			           rightopt={width=0.305\textwidth},
+			           rightlabel={fig:ch4_plot_pca_image_pc2},
+			           rightcaption={$2$\textsuperscript{nd} PC ($10\%$)},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotPCAImageAve}
+{../figures/chapter4/figures/plotPCAImagePC1}
+{../figures/chapter4/figures/plotPCAImagePC2}
+
+\bigtriplefigure[pos=tbhp,
+                 mainlabel={fig:ch4_plot_reconstruction_error},
+			           maincaption={The reconstruction error, in terms of \gls[hyper=false]{rmse}, as a function of the number of \gls[hyper=false]{pc} used in the reconstruction of the output space for three different output types.},
+			           mainshortcaption={Convergence of the reconstruction error as function of the number of \gls[hyper=false]{pc} used in the reconstruction of the output space for three different output types.},%
+			           leftopt={width=0.305\textwidth},
+			           leftlabel={fig:ch4_plot_reconstruction_error_tc},
+			           leftcaption={Clad temperature},
+			           midopt={width=0.305\textwidth},
+			           midlabel={fig:ch4_plot_reconstruction_error_dp},
+			           midcaption={Pressure drop output},
+			           rightopt={width=0.305\textwidth},
+			           rightlabel={fig:ch4_plot_reconstruction_error_co},
+			           rightcaption={Liquid carryover output},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter4/figures/plotReconstructionErrorTC}
+{../figures/chapter4/figures/plotReconstructionErrorDP}
+{../figures/chapter4/figures/plotReconstructionErrorCO}
