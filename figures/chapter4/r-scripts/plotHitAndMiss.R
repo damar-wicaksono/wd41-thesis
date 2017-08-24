@@ -92,7 +92,7 @@ for (i in 1:2)
             rec <- rec + matrix(pc_pred, ncol = 8)[, j]
         }
         lines(trc_test$time[2:length(trc_test$time)], rec,
-              lty = 2, col = "dark gray")
+              lty = 2, lwd = 2, col = "dark gray")
     }
     
     # x-axis
