@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170824172132" modified="D:20170824192126"/>
+<info created="D:20170824172132" modified="D:20170825112641"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -502,18 +502,10 @@ h
 <tiling name="rising" angle="30" step="4" width="1"/>
 </ipestyle>
 <page>
-<layer name="alpha"/>
-<view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -80 8" transformations="translations" pos="240 496" stroke="black" type="label" width="168.944" height="14.348" depth="4.02" valign="baseline" size="huge">Metamodel Training</text>
-<text matrix="1 0 0 1 80 24" transformations="translations" pos="464 480" stroke="black" type="label" width="278.571" height="14.348" depth="4.02" valign="baseline" size="huge">Validation, Selection, and Testing</text>
-<text matrix="1 0 0 1 -168 -40" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<text matrix="1 0 0 1 -144 -68" transformations="translations" pos="176 548" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Design
-Generation</text>
-<text matrix="1 0 0 1 -84 48" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Training
-Runs</text>
-<text matrix="1 0 0 1 -20 44" transformations="translations" pos="440 436" stroke="black" type="minipage" width="56" height="21.082" depth="16.14" valign="top" size="LARGE">Model
-Fitting</text>
+<layer name="EDIT-GROUP*"/>
+<view layers="EDIT-GROUP*" active="EDIT-GROUP*"/>
+<text layer="EDIT-GROUP*" matrix="1 0 0 1 -96 32" transformations="translations" pos="240 496" stroke="black" type="label" width="92.904" height="14.115" depth="4.02" valign="baseline" size="huge">1. Training</text>
+<text matrix="1 0 0 1 -320 -180" transformations="translations" pos="464 480" stroke="black" type="label" width="224.544" height="14.349" depth="0" valign="baseline" size="huge">2. Validation and Selection</text>
 <group matrix="1 0 0 1 32 16">
 <path matrix="1 0 0 1 4 4" stroke="black">
 112 352 m
@@ -562,59 +554,31 @@ Fitting</text>
 </path>
 <text matrix="1 0 0 1 -188 -32" transformations="translations" pos="316 408" stroke="black" type="label" width="50.326" height="9.803" depth="0" valign="baseline" size="Large">TRACE</text>
 </group>
-<use matrix="1 0 0 1 -468 -160" name="mark/disk(sx)" pos="516 560" size="normal" stroke="black"/>
-<path matrix="1 0 0 1.2 -64 -86.4" stroke="black" rarrow="normal/normal">
-96 432 m
-96 352 l
+<path matrix="2.45454 0 0 1 -187.635 -208" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
 </path>
-<path matrix="1 0 0 1 -64 -16" stroke="black" arrow="normal/normal">
-80 368 m
-176 368 l
+<text matrix="1 0 0 1 -92 -288" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Testing
+Runs</text>
+<path matrix="-13.8586 0 0 0.568181 2573.91 -35.6358" stroke="black" pen="heavier" arrow="normal/normal">
+128 464 m
+128 288 l
+144 288 l
 </path>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="112 368" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -80 4" name="mark/disk(sx)" pos="152 396" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -60 12" name="mark/disk(sx)" pos="156 372" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="140 372" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="104 380" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="152 412" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="116 416" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="128 356" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 -56 36" transformations="translations" pos="152 304" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_1</text>
-<text matrix="1 0 0 1 -160 92" transformations="translations" pos="172 324" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_2</text>
-<path matrix="1 0 0 1 180 -16" stroke="black" arrow="normal/normal">
-80 368 m
-176 368 l
+<path matrix="0.727273 0 0 1 74.1818 -208" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
 </path>
-<path matrix="1 0 0 1.2 180 -86.4" stroke="black" rarrow="normal/normal">
-96 432 m
-96 352 l
+<path matrix="0.727273 0 0 1 74.1818 -336" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
 </path>
-<use matrix="1 0 0 1 -40 28" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -72 -4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -68 -20" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -80 -20" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -36 12" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -32 20" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -64 -4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -56 4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -32 28" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -44 16" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -48 8" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -20 36" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -16 40" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -84 -28" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<path matrix="1 0 0 1 -60 0" stroke="black" arrow="normal/normal" rarrow="normal/normal" opacity="50%">
-340 356 m
-416 432 l
+<path matrix="0.5 0 0 13 248 -5548" stroke="black" pen="heavier" arrow="normal/normal">
+496 464 m
+560 464 l
+560 448 l
 </path>
-<path matrix="0.833333 0 -0 0.833333 4.66667 64" stroke="black" arrow="normal/normal" rarrow="normal/normal" opacity="50%">
-364 408 m
-388 384 l
-</path>
-<text matrix="1 0 0 1 184 36" transformations="translations" pos="152 304" stroke="black" type="label" width="14.57" height="7.41" depth="3.35" valign="baseline" size="LARGE" style="math">y_1</text>
-<text matrix="1 0 0 1 108 112" transformations="translations" pos="152 304" stroke="black" type="label" width="14.57" height="7.41" depth="3.35" valign="baseline" size="LARGE" style="math">y_2</text>
-<text matrix="1 0 0 1 200 112" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
+<group matrix="1 0 0 1 0 8">
 <path matrix="1 0 0 1.2 312 -86.4" stroke="black" rarrow="normal/normal">
 96 432 m
 96 352 l
@@ -626,9 +590,6 @@ Fitting</text>
 <text matrix="1 0 0 1 328 36" transformations="translations" pos="152 304" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_1</text>
 <text matrix="1 0 0 1 240 112" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
 <use matrix="1 0 0 1 316 0" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -52 -4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -44 8" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -60 32" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 300 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
 <use matrix="1 0 0 1 328 8" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
 <use matrix="1 0 0 1 336 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
@@ -654,76 +615,237 @@ Fitting</text>
 544 372 c
 </path>
 <text matrix="1 0 0 1 268 84" transformations="translations" pos="152 304" stroke="black" type="label" width="27.535" height="11.456" depth="2.99" valign="baseline" size="large" style="math">\hat{f}(x_1)</text>
-<text matrix="1 0 0 1 -60 -56" transformations="translations" pos="576 464" stroke="black" type="minipage" width="108" height="19.413" depth="14.46" valign="top" size="LARGE">Validation Metric
-Calculation</text>
-<path matrix="0.727273 0 0 1 70.1818 0" stroke="black" pen="heavier" arrow="normal/normal">
-228 464 m
-272 464 l
+</group>
+<group matrix="1 0 0 1 -8 8">
+<use matrix="1 0 0 1 -468 -160" name="mark/disk(sx)" pos="516 560" size="normal" stroke="black"/>
+<path matrix="1 0 0 1.2 -64 -86.4" stroke="black" rarrow="normal/normal">
+96 432 m
+96 352 l
 </path>
-<path matrix="0.818182 0 0 1 -74.5455 0" stroke="black" pen="heavier" arrow="normal/normal">
-228 464 m
-272 464 l
+<path matrix="1 0 0 1 -64 -16" stroke="black" arrow="normal/normal">
+80 368 m
+176 368 l
 </path>
-<path matrix="0.909091 0 0 1 160.727 0" stroke="black" pen="heavier" arrow="normal/normal">
-228 464 m
-272 464 l
-</path>
-<text matrix="1 0 0 1 -88 -136" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Validation
-Runs</text>
-<text matrix="1 0 0 1 -88 -208" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Testing
-Runs</text>
-<text matrix="1 0 0 1 -168 -224" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<text matrix="1 0 0 1 -168 -296" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<path matrix="1 0 0 1.04545 0 -21.0909" stroke="black" pen="heavier" arrow="normal/normal">
-128 464 m
-128 288 l
-144 288 l
-</path>
-<path matrix="1 0 0 1 0 -8" stroke="black" pen="heavier" arrow="normal/normal">
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="112 368" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -80 4" name="mark/disk(sx)" pos="152 396" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -60 12" name="mark/disk(sx)" pos="156 372" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="140 372" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="104 380" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="152 412" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="116 416" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 0" name="mark/disk(sx)" pos="128 356" size="normal" stroke="black"/>
+<text matrix="1 0 0 1 -56 36" transformations="translations" pos="152 304" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_1</text>
+<text matrix="1 0 0 1 -160 92" transformations="translations" pos="172 324" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_2</text>
+<use matrix="1 0 0 1 -44 8" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -60 32" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
+</group>
+<path matrix="1 0 0 4.94444 -8 -940" stroke="black" pen="heavier" arrow="normal/normal">
 128 288 m
 128 216 l
 144 216 l
 </path>
-<path matrix="0.738462 0 0 0.571429 111.015 115.429" stroke="black" pen="heavier" arrow="normal/normal">
-348 288 m
-608 288 l
-608 428 l
+<text matrix="1 0 0 1 -216 -36" transformations="translations" pos="640 464" stroke="black" type="label" width="46.883" height="23.752" depth="6.18" valign="baseline" size="Huge" style="math">\hat{f} (\mathbf{x})</text>
+<path matrix="0.727274 0 0 1 206.181 20" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
 </path>
-<text matrix="1 0 0 1 132 136" transformations="translations" pos="624 272" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Final Error Assessment</text>
-<text matrix="1 0 0 1 -12 72" transformations="translations" pos="672 336" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
+<text matrix="1 0 0 1 -148 -212" transformations="translations" pos="640 464" stroke="black" type="label" width="71.08" height="11.955" depth="0" valign="baseline" size="LARGE">Prediction</text>
+<group matrix="1 0 0 1 8 20">
+<text matrix="1 0 0 1 -168 -40" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<path stroke="black">
+272 484 m
+272 440 l
+356 440 l
+356 484 l
+h
+</path>
+</group>
+<path matrix="0.727274 0 0 1 -61.8187 20" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<group matrix="1 0 0 1 8 164">
+<text matrix="1 0 0 1 -100 -96" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Training
+Runs</text>
+<path stroke="black">
+136 340 m
+136 300 l
+224 300 l
+224 340 l
+h
+</path>
+</group>
+<path matrix="0.727274 0 0 1 74.1812 20" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<path matrix="0.545456 0 0 1 451.636 -208" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<path matrix="0.727274 0 0 1 562.181 -208" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<path matrix="1 0 0 1 0 -28" stroke="black">
+488 296 m
+488 276 l
+568 276 l
+568 296 l
+h
+</path>
+<group matrix="1 0 0 1 8 -204">
+<text matrix="1 0 0 1 -168 -40" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<path stroke="black">
+272 484 m
+272 440 l
+356 440 l
+356 484 l
+h
+</path>
+</group>
+<group matrix="1 0 0 1 0 -28">
+<text matrix="1 0 0 1 36 -160" transformations="translations" pos="576 464" stroke="black" type="minipage" width="108" height="19.413" depth="14.46" valign="top" size="LARGE">Validation Metric
+Calculation</text>
+<path stroke="black">
+608 308 m
+608 264 l
+724 264 l
+724 308 l
+h
+</path>
+</group>
+<group matrix="1 0 0 1 -4 -24">
+<text matrix="1 0 0 1 -88 -132" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Validation
+Runs</text>
+<path stroke="black">
+148 304 m
+148 264 l
+236 264 l
+236 304 l
+h
+</path>
+</group>
+<path matrix="1 0 0 1 -4 -156" stroke="black">
+148 304 m
+148 264 l
+236 264 l
+236 304 l
+h
+</path>
+<group matrix="1 0 0 1 0 -84">
+<text matrix="1 0 0 1 -160 -292" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<path matrix="1 0 0 1 8 -252" stroke="black">
+272 484 m
+272 440 l
+356 440 l
+356 484 l
+h
+</path>
+</group>
+<text matrix="1 0 0 1 -168 -248" transformations="translations" pos="640 464" stroke="black" type="label" width="113.917" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\hat{f} (\mathbf{x}_{i}^{\textrm{valid}}) \approx y_i^{\textrm{valid}}</text>
+<group matrix="1 0 0 1 0 20">
+<text matrix="1 0 0 1 -164 -68" transformations="translations" pos="176 548" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Design
+Generation</text>
+<path matrix="1 0 0 0.909091 -20 44" stroke="black">
+28 484 m
+28 440 l
+116 440 l
+116 484 l
+h
+</path>
+</group>
+<text matrix="1 0 0 1 -36 -248" transformations="translations" pos="640 464" stroke="black" type="label" width="128.613" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">Q_2 (\hat{f} (\mathbf{x}_{i}^{\textrm{valid}}), y_i^{\textrm{valid}})</text>
+<text matrix="1 0 0 1 -148 -344" transformations="translations" pos="640 464" stroke="black" type="label" width="71.08" height="11.955" depth="0" valign="baseline" size="LARGE">Prediction</text>
+<path matrix="1 0 0 1 0 -160" stroke="black">
+488 296 m
+488 276 l
+568 276 l
+568 296 l
+h
+</path>
+<path matrix="2.45454 0 0 1 -187.635 -336" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<path matrix="1 0 0 1 0 -84" stroke="black" arrow="normal/normal">
+528 192 m
+528 144 l
+</path>
+<group matrix="1 0 0 1 4 -84">
+<text matrix="1 0 0 1 -140 -140" transformations="translations" pos="624 272" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Final Error Assessment</text>
+<path stroke="black">
+480 136 m
+480 92 l
+568 92 l
+568 136 l
+h
+</path>
+</group>
+<path matrix="0.363636 0 0 1 37.091 -204" stroke="black" pen="heavier" arrow="normal/normal">
+228 464 m
+272 464 l
+</path>
+<text matrix="0.944444 0 0 1 133.111 -60" transformations="translations" pos="672 336" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
 Selection</text>
-<path matrix="1.25 0 0 3 -140 -920" stroke="black" pen="heavier" arrow="normal/normal">
-496 464 m
-560 464 l
-560 448 l
+<path matrix="1 0 0 1 -0 -28" stroke="black">
+764 308 m
+764 264 l
+836 264 l
+836 308 l
+h
 </path>
-<path matrix="0.666667 0 0 1 217.333 -24" stroke="black" pen="heavier" arrow="normal/normal">
-616 416 m
-652 416 l
+<text matrix="1 0 0 1 -24 64" transformations="translations" pos="440 436" stroke="black" type="minipage" width="56" height="21.082" depth="16.14" valign="top" size="LARGE">Model
+Fitting</text>
+<path matrix="1.26316 0 0 1 -113.474 20" stroke="black">
+416 484 m
+416 440 l
+476 440 l
+476 484 l
+h
 </path>
-<path matrix="0.714286 0 0 1 210.857 -24" stroke="black" pen="heavier" arrow="normal/normal">
-724 416 m
-752 416 l
+<text matrix="1 0 0 1 -220 -372" transformations="translations" pos="640 464" stroke="black" type="label" width="100.807" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\hat{f} (\mathbf{x}_{i}^{\textrm{test}}) \approx y_i^{\textrm{test}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 -37.7893" transformations="translations" pos="640 464" stroke="black" type="label" width="65.453" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 94.2107" transformations="translations" pos="640 464" stroke="black" type="label" width="76.532" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
+<text matrix="0.999999 -0.0015143 0.0015143 0.999999 -320.362 -307.189" transformations="translations" pos="464 480" stroke="black" type="label" width="83.535" height="14.115" depth="4.02" valign="baseline" size="huge">3. Testing</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 318.211" transformations="translations" pos="640 464" stroke="black" type="label" width="77.828" height="14.724" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{train}}\}_{i=1}^{n_{train}}</text>
+<path matrix="1 0 0 1 188 -8" stroke="black" arrow="normal/normal">
+80 368 m
+176 368 l
 </path>
-<path matrix="1.66154 0 0 1.08571 -210.215 -104.686" stroke="black" pen="heavier" arrow="normal/normal">
-348 288 m
-608 288 l
-608 428 l
+<path matrix="1 0 0 1.2 188 -78.4" stroke="black" rarrow="normal/normal">
+96 432 m
+96 352 l
 </path>
-<path matrix="0.727273 0 0 1 70.1818 -184" stroke="black" pen="heavier" arrow="normal/normal">
-228 464 m
-272 464 l
+<use matrix="1 0 0 1 -32 36" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -64 4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -60 -12" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -72 -12" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -28 20" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -24 28" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -56 4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -48 12" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -24 36" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -36 24" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -40 16" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -12 44" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -8 48" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<use matrix="1 0 0 1 -76 -20" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<path matrix="1 0 0 1 -52 8" stroke="black" arrow="normal/normal" rarrow="normal/normal" opacity="50%">
+340 356 m
+416 432 l
 </path>
-<path matrix="0.727273 0 0 1 70.1818 -256" stroke="black" pen="heavier" arrow="normal/normal">
-228 464 m
-272 464 l
+<path matrix="0.833333 0 0 0.833333 12.6667 72" stroke="black" arrow="normal/normal" rarrow="normal/normal" opacity="50%">
+364 408 m
+388 384 l
 </path>
-<path matrix="1.25 0 0 3 -140 -920" stroke="black" pen="heavier" arrow="normal/normal">
-496 464 m
-560 464 l
-560 448 l
-</path>
+<text matrix="1 0 0 1 192 40" transformations="translations" pos="152 304" stroke="black" type="label" width="15.11" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">d_1</text>
+<text matrix="0.996014 0.0891973 -0.0891973 0.996014 140.17 102.999" transformations="translations" pos="152 304" stroke="black" type="label" width="15.11" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">d_2</text>
+<text matrix="1 0 0 1 208 120" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
+<use matrix="1 0 0 1 -44 4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
 </page>
 </ipe>
