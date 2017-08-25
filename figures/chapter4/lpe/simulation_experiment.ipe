@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170824172132" modified="D:20170825112641"/>
+<info created="D:20170824172132" modified="D:20170825114341"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -554,13 +554,13 @@ h
 </path>
 <text matrix="1 0 0 1 -188 -32" transformations="translations" pos="316 408" stroke="black" type="label" width="50.326" height="9.803" depth="0" valign="baseline" size="Large">TRACE</text>
 </group>
-<path matrix="2.45454 0 0 1 -187.635 -208" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="2.54545 0 0 1 -208.362 -208" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
 <text matrix="1 0 0 1 -92 -288" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Testing
 Runs</text>
-<path matrix="-13.8586 0 0 0.568181 2573.91 -35.6358" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="-13.8625 0 0 0.590908 2566.41 -42.1813" stroke="black" pen="heavier" arrow="normal/normal">
 128 464 m
 128 288 l
 144 288 l
@@ -573,49 +573,11 @@ Runs</text>
 228 464 m
 272 464 l
 </path>
-<path matrix="0.5 0 0 13 248 -5548" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.625 0 0 13 178 -5548" stroke="black" pen="heavier" arrow="normal/normal">
 496 464 m
 560 464 l
 560 448 l
 </path>
-<group matrix="1 0 0 1 0 8">
-<path matrix="1 0 0 1.2 312 -86.4" stroke="black" rarrow="normal/normal">
-96 432 m
-96 352 l
-</path>
-<path matrix="1.20833 0 0 1 291.333 -16" stroke="black" arrow="normal/normal">
-80 368 m
-176 368 l
-</path>
-<text matrix="1 0 0 1 328 36" transformations="translations" pos="152 304" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_1</text>
-<text matrix="1 0 0 1 240 112" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
-<use matrix="1 0 0 1 316 0" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 300 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 328 8" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 336 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 344 24" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 348 36" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 360 24" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 304 4" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 356 32" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 368 16" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<use matrix="1 0 0 1 380 4" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
-<path matrix="1 0 0 1 -40 0" stroke="black" pen="undefined">
-452 380 m
-456 372
-468 368
-480 376
-488 380
-496 392
-500 404
-508 400
-512 392
-520 384
-532 372
-544 372 c
-</path>
-<text matrix="1 0 0 1 268 84" transformations="translations" pos="152 304" stroke="black" type="label" width="27.535" height="11.456" depth="2.99" valign="baseline" size="large" style="math">\hat{f}(x_1)</text>
-</group>
 <group matrix="1 0 0 1 -8 8">
 <use matrix="1 0 0 1 -468 -160" name="mark/disk(sx)" pos="516 560" size="normal" stroke="black"/>
 <path matrix="1 0 0 1.2 -64 -86.4" stroke="black" rarrow="normal/normal">
@@ -640,48 +602,26 @@ Runs</text>
 <use matrix="1 0 0 1 -44 8" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -60 32" name="mark/disk(sx)" pos="128 384" size="normal" stroke="black"/>
 </group>
-<path matrix="1 0 0 4.94444 -8 -940" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="1.25 0 0 4.94444 -44 -940" stroke="black" pen="heavier" arrow="normal/normal">
 128 288 m
 128 216 l
 144 216 l
 </path>
 <text matrix="1 0 0 1 -216 -36" transformations="translations" pos="640 464" stroke="black" type="label" width="46.883" height="23.752" depth="6.18" valign="baseline" size="Huge" style="math">\hat{f} (\mathbf{x})</text>
-<path matrix="0.727274 0 0 1 206.181 20" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.999997 0 0 1 144 20" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
 <text matrix="1 0 0 1 -148 -212" transformations="translations" pos="640 464" stroke="black" type="label" width="71.08" height="11.955" depth="0" valign="baseline" size="LARGE">Prediction</text>
-<group matrix="1 0 0 1 8 20">
-<text matrix="1 0 0 1 -168 -40" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<path stroke="black">
-272 484 m
-272 440 l
-356 440 l
-356 484 l
-h
-</path>
-</group>
 <path matrix="0.727274 0 0 1 -61.8187 20" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
-<group matrix="1 0 0 1 8 164">
-<text matrix="1 0 0 1 -100 -96" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Training
-Runs</text>
-<path stroke="black">
-136 340 m
-136 300 l
-224 300 l
-224 340 l
-h
-</path>
-</group>
 <path matrix="0.727274 0 0 1 74.1812 20" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
-<path matrix="0.545456 0 0 1 451.636 -208" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.636365 0 0 1 426.909 -208" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
@@ -689,86 +629,10 @@ h
 228 464 m
 272 464 l
 </path>
-<path matrix="1 0 0 1 0 -28" stroke="black">
-488 296 m
-488 276 l
-568 276 l
-568 296 l
-h
-</path>
-<group matrix="1 0 0 1 8 -204">
-<text matrix="1 0 0 1 -168 -40" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<path stroke="black">
-272 484 m
-272 440 l
-356 440 l
-356 484 l
-h
-</path>
-</group>
-<group matrix="1 0 0 1 0 -28">
-<text matrix="1 0 0 1 36 -160" transformations="translations" pos="576 464" stroke="black" type="minipage" width="108" height="19.413" depth="14.46" valign="top" size="LARGE">Validation Metric
-Calculation</text>
-<path stroke="black">
-608 308 m
-608 264 l
-724 264 l
-724 308 l
-h
-</path>
-</group>
-<group matrix="1 0 0 1 -4 -24">
-<text matrix="1 0 0 1 -88 -132" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Validation
-Runs</text>
-<path stroke="black">
-148 304 m
-148 264 l
-236 264 l
-236 304 l
-h
-</path>
-</group>
-<path matrix="1 0 0 1 -4 -156" stroke="black">
-148 304 m
-148 264 l
-236 264 l
-236 304 l
-h
-</path>
-<group matrix="1 0 0 1 0 -84">
-<text matrix="1 0 0 1 -160 -292" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
-Reduction</text>
-<path matrix="1 0 0 1 8 -252" stroke="black">
-272 484 m
-272 440 l
-356 440 l
-356 484 l
-h
-</path>
-</group>
 <text matrix="1 0 0 1 -168 -248" transformations="translations" pos="640 464" stroke="black" type="label" width="113.917" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\hat{f} (\mathbf{x}_{i}^{\textrm{valid}}) \approx y_i^{\textrm{valid}}</text>
-<group matrix="1 0 0 1 0 20">
-<text matrix="1 0 0 1 -164 -68" transformations="translations" pos="176 548" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Design
-Generation</text>
-<path matrix="1 0 0 0.909091 -20 44" stroke="black">
-28 484 m
-28 440 l
-116 440 l
-116 484 l
-h
-</path>
-</group>
 <text matrix="1 0 0 1 -36 -248" transformations="translations" pos="640 464" stroke="black" type="label" width="128.613" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">Q_2 (\hat{f} (\mathbf{x}_{i}^{\textrm{valid}}), y_i^{\textrm{valid}})</text>
-<text matrix="1 0 0 1 -148 -344" transformations="translations" pos="640 464" stroke="black" type="label" width="71.08" height="11.955" depth="0" valign="baseline" size="LARGE">Prediction</text>
-<path matrix="1 0 0 1 0 -160" stroke="black">
-488 296 m
-488 276 l
-568 276 l
-568 296 l
-h
-</path>
-<path matrix="2.45454 0 0 1 -187.635 -336" stroke="black" pen="heavier" arrow="normal/normal">
+<text matrix="1 0 0 1 -148 -340" transformations="translations" pos="640 464" stroke="black" type="label" width="71.08" height="11.955" depth="0" valign="baseline" size="LARGE">Prediction</text>
+<path matrix="2.54545 0 0 1 -208.362 -336" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
@@ -776,38 +640,14 @@ h
 528 192 m
 528 144 l
 </path>
-<group matrix="1 0 0 1 4 -84">
-<text matrix="1 0 0 1 -140 -140" transformations="translations" pos="624 272" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Final Error Assessment</text>
-<path stroke="black">
-480 136 m
-480 92 l
-568 92 l
-568 136 l
-h
-</path>
-</group>
-<path matrix="0.363636 0 0 1 37.091 -204" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.454545 0 0 1 12.3637 -204" stroke="black" pen="heavier" arrow="normal/normal">
 228 464 m
 272 464 l
 </path>
 <text matrix="0.944444 0 0 1 133.111 -60" transformations="translations" pos="672 336" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
 Selection</text>
-<path matrix="1 0 0 1 -0 -28" stroke="black">
-764 308 m
-764 264 l
-836 264 l
-836 308 l
-h
-</path>
-<text matrix="1 0 0 1 -24 64" transformations="translations" pos="440 436" stroke="black" type="minipage" width="56" height="21.082" depth="16.14" valign="top" size="LARGE">Model
+<text matrix="1 0 0 1 -16 64" transformations="translations" pos="440 436" stroke="black" type="minipage" width="56" height="21.082" depth="16.14" valign="top" size="LARGE">Model
 Fitting</text>
-<path matrix="1.26316 0 0 1 -113.474 20" stroke="black">
-416 484 m
-416 440 l
-476 440 l
-476 484 l
-h
-</path>
 <text matrix="1 0 0 1 -220 -372" transformations="translations" pos="640 464" stroke="black" type="label" width="100.807" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\hat{f} (\mathbf{x}_{i}^{\textrm{test}}) \approx y_i^{\textrm{test}}</text>
 <text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 -37.7893" transformations="translations" pos="640 464" stroke="black" type="label" width="65.453" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
 <text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 94.2107" transformations="translations" pos="640 464" stroke="black" type="label" width="76.532" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
@@ -847,5 +687,57 @@ h
 <text matrix="0.996014 0.0891973 -0.0891973 0.996014 140.17 102.999" transformations="translations" pos="152 304" stroke="black" type="label" width="15.11" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">d_2</text>
 <text matrix="1 0 0 1 208 120" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
 <use matrix="1 0 0 1 -44 4" name="mark/disk(sx)" pos="368 388" size="small" stroke="black"/>
+<text matrix="1 0 0 1 -164 -48" transformations="translations" pos="176 548" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Design
+Generation</text>
+<text matrix="1 0 0 1 -92 68" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Training
+Runs</text>
+<text matrix="1 0 0 1 -160 -20" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<text matrix="1 0 0 1 -92 -156" transformations="translations" pos="240 432" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Validation
+Runs</text>
+<text matrix="1 0 0 1 -160 -244" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<text matrix="1 0 0 1 -160 -376" transformations="translations" pos="444 520" stroke="black" type="minipage" width="80" height="19.319" depth="14.36" valign="top" size="LARGE">Dimension
+Reduction</text>
+<text matrix="1 0 0 1 36 -188" transformations="translations" pos="576 464" stroke="black" type="minipage" width="108" height="19.413" depth="14.46" valign="top" size="LARGE">Validation Metric
+Calculation</text>
+<text matrix="1 0 0 1 -136 -224" transformations="translations" pos="624 272" stroke="black" type="minipage" width="80" height="19.413" depth="14.46" valign="top" size="LARGE">Final Error Assessment</text>
+<group>
+<path matrix="1 0 0 1.2 312 -78.4" stroke="black" rarrow="normal/normal">
+96 432 m
+96 352 l
+</path>
+<path matrix="1.20833 0 0 1 291.333 -8" stroke="black" arrow="normal/normal">
+80 368 m
+176 368 l
+</path>
+<text matrix="1 0 0 1 328 44" transformations="translations" pos="152 304" stroke="black" type="label" width="15.93" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">x_1</text>
+<text matrix="1 0 0 1 240 120" transformations="translations" pos="152 304" stroke="black" type="label" width="14.5" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">v_1</text>
+<use matrix="1 0 0 1 316 8" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 300 20" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 328 16" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 336 20" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 344 32" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 348 44" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 360 32" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 304 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 356 40" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 368 24" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<use matrix="1 0 0 1 380 12" name="mark/disk(sx)" pos="112 368" size="small" stroke="black"/>
+<path matrix="1 0 0 1 -40 8" stroke="black" pen="undefined">
+452 380 m
+456 372
+468 368
+480 376
+488 380
+496 392
+500 404
+508 400
+512 392
+520 384
+532 372
+544 372 c
+</path>
+</group>
 </page>
 </ipe>
