@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170824172132" modified="D:20170825114341"/>
+<info created="D:20170824172132" modified="D:20170825182818"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -644,15 +644,15 @@ Runs</text>
 228 464 m
 272 464 l
 </path>
-<text matrix="0.944444 0 0 1 133.111 -60" transformations="translations" pos="672 336" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
+<text matrix="0.944444 0 0 1 1005.11 -632" transformations="translations" pos="672 336" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
 Selection</text>
 <text matrix="1 0 0 1 -16 64" transformations="translations" pos="440 436" stroke="black" type="minipage" width="56" height="21.082" depth="16.14" valign="top" size="LARGE">Model
 Fitting</text>
 <text matrix="1 0 0 1 -220 -372" transformations="translations" pos="640 464" stroke="black" type="label" width="100.807" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\hat{f} (\mathbf{x}_{i}^{\textrm{test}}) \approx y_i^{\textrm{test}}</text>
-<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 -37.7893" transformations="translations" pos="640 464" stroke="black" type="label" width="65.453" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
-<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 94.2107" transformations="translations" pos="640 464" stroke="black" type="label" width="76.532" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 -37.7893" transformations="translations" pos="640 464" stroke="black" type="label" width="66.832" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{y}_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 94.2107" transformations="translations" pos="640 464" stroke="black" type="label" width="77.91" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{y}_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
 <text matrix="0.999999 -0.0015143 0.0015143 0.999999 -320.362 -307.189" transformations="translations" pos="464 480" stroke="black" type="label" width="83.535" height="14.115" depth="4.02" valign="baseline" size="huge">3. Testing</text>
-<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 318.211" transformations="translations" pos="640 464" stroke="black" type="label" width="77.828" height="14.724" depth="3.59" valign="baseline" size="Large" style="math">\{y_i^{\textrm{train}}\}_{i=1}^{n_{train}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -631.926 318.211" transformations="translations" pos="640 464" stroke="black" type="label" width="79.206" height="14.724" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{y}_i^{\textrm{train}}\}_{i=1}^{n_{train}}</text>
 <path matrix="1 0 0 1 188 -8" stroke="black" arrow="normal/normal">
 80 368 m
 176 368 l
@@ -739,5 +739,8 @@ Calculation</text>
 544 372 c
 </path>
 </group>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 166.72" transformations="translations" pos="640 464" stroke="black" type="label" width="77.686" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 194.72" transformations="translations" pos="640 464" stroke="black" type="label" width="78.982" height="14.724" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{train}}\}_{i=1}^{n_{train}}</text>
+<text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 142.72" transformations="translations" pos="640 464" stroke="black" type="label" width="66.607" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
 </page>
 </ipe>
