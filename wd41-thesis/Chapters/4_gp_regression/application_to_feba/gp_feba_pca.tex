@@ -30,10 +30,11 @@ Though not shown here, the other two types of output were of similar nature: pre
 
 % Multivariate Clad Temperature
 \gls[hyper=false]{pca} was used to reduce this significant number of output dimensions.
-Fig.~\ref{fig:ch4_plot_pca_image} shows the sample mean surface and the first two \glspl[hyper=false]{pc} estimated using $1'920$ training samples.
+Fig.~\ref{fig:ch4_plot_pca_image} shows the sample mean surface and the first two \glspl[hyper=false]{pc} (loadings) estimated using $1'920$ training samples.
 These two \glspl[hyper=false]{pc} explained about $83\%$ of the output variance in training samples.
 This implied that any realization of the training samples could be reconstructed by using the mean surface 
-added by linear combination of the \gls[hyper=false]{pc} multiplied by a unique set of scalars (the \gls[hyper=false]{pc} scores) associated with that realization, such that on average (over many realizations) the reconstruction would be $83\%$ accurate with respect to the \gls[hyper=false]{rmse}.  
+added by linear combination of the \gls[hyper=false]{pc} multiplied by a unique set of scalars (the standardized \gls[hyper=false]{pc} scores) associated with that realization, such that on average (over many realizations) the reconstruction would be $83\%$ accurate with respect to the \gls[hyper=false]{rmse}.
+In other words, ``images'' in Fig.~\ref{fig:ch4_plot_image_tc_run} can be reconstructed by overlapping the mean surface and the multiples of \glspl[hyper=false]{pc} ``images'' shown in Fig.\ref{fig:ch4_plot_pca_image}.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_pca_image},
 			           maincaption={PCA results of the clad temperature output},
@@ -43,10 +44,10 @@ added by linear combination of the \gls[hyper=false]{pc} multiplied by a unique 
 			           leftcaption={Mean surface},
 			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch4_plot_pca_image_pc1},
-			           midcaption={$1$\textsuperscript{st} PC ($73\%$)},
+			           midcaption={$1$\textsuperscript{st} PC loading ($73\%$)},
 			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch4_plot_pca_image_pc2},
-			           rightcaption={$2$\textsuperscript{nd} PC ($10\%$)},
+			           rightcaption={$2$\textsuperscript{nd} PC loading ($10\%$)},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter4/figures/plotPCAImageAve}
