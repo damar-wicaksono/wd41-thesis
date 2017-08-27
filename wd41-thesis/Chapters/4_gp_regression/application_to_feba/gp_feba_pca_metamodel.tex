@@ -5,7 +5,7 @@
 % Introductory paragraph
 Following the \gls[hyper=false]{pca} of the multivariate output, 
 \gls[hyper=false]{gp} metamodels were constructed with respect to the standardized \gls[hyper=false]{pc} scores for each of the output types.
-The construction invol that affected the resulting metamodel's predictive performance.
+The effect of several factors potentially affecting the predictive performance of \gls[hyper=false]{gp} metamodel were also investigated, including training sample size as well as the choice of experimental design and covariance kernel function.
 
 % PC GP Metamodel, Clad Temperature Output
 It was found that higher \glspl[hyper=false]{pc} tends to be harder to fit.
@@ -13,9 +13,9 @@ It was found that higher \glspl[hyper=false]{pc} tends to be harder to fit.
 That is, more and more training samples were required to have a \gls[hyper=false]{gp} metamodel of good predictive accuracy.
 Fig.~\ref{fig:ch4_plot_pc_q2_tc} shows the predictivity coefficient $Q_2$ as function of training samples for 3 different \glspl[hyper=false]{pc} \gls[hyper=false]{gp} metamodels with respect to the clad temperature output.
 The $Q_2$ was calculated based on the validation dataset of size $5'000$ data points (i.e., independent \gls[hyper=false]{trace} runs.
-Multiple points per training sample size correspond to \gls[hyper=false]{gp} metamodels constructed using different experimental designs and covariance kernel functions, including multiple replications for each experimental design.
+Multiple points per training sample size correspond to \gls[hyper=false]{gp} metamodels constructed using different experimental designs and covariance kernel functions, as well as the multiple replications for each experimental design.
 \bigfigure[pos=!tbhp,
-					 opt={width=1.0\textwidth},
+					 opt={width=0.97\textwidth},
            label={fig:ch4_plot_pc_q2_tc},
            shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the clad temperature output}]
 {../figures/chapter4/figures/plotPCQ2TC}
@@ -24,7 +24,7 @@ Multiple points per training sample size correspond to \gls[hyper=false]{gp} met
 The leftmost panel of the plot shows that indeed the \gls[hyper=false]{gp} metamodel for the first standardized \gls[hyper=false]{pc} score is the easiest to fit,
 requiring only small number of training samples.
 On the other hand, the rightmost panel of the plot shows that not even the largest number of training samples considered is enough to have a \gls[hyper=false]{gp} metamodel with decent performance.
-Furthermore the plot also shows that the variations in the performance become smaller and smaller with increasing sample size.
+Furthermore the plot also shows that the variations in the performance tends to become smaller with increasing sample size.
 
 % (negative and zero predictivity coefficient means that no benefit is gained from using \gls[hyper=false]{gp} metamodel to make the prediction)
 
@@ -57,7 +57,7 @@ However, it was also found that the metamodel of the higher \gls[hyper=false]{pc
 That is,
 a metamodel with a decent predictive performance could be obtained to predict the standardized \gls[hyper=false]{pc} score as high as the $10$\textsuperscript{th} \gls[hyper=false]{pc} using the considered sample sizes.
 \bigfigure[pos=!tbhp,
-					 opt={width=1.0\textwidth},
+					 opt={width=0.95\textwidth},
            label={fig:ch4_plot_pc_q2_dp},
            shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the pressure drop output}]
 {../figures/chapter4/figures/plotPCQ2DP}
