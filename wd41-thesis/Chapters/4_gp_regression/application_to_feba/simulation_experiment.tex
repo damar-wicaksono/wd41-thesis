@@ -70,7 +70,7 @@ This error combined the error due to the misprediction of the standardized \gls[
 The best setting of the metamodel (the experimental design and the covariance function) was then selected based on the \gls[hyper=false]{rmse} and one additional metamodel was trained using an increased number of training samples.
 
 % Testing
-Finally, the ultimate performance of the metamodel constructed with best selected setting were assessed in the testing step based on yet another large number of test dataset, separately generated.
+Finally, the ultimate performance of the metamodel were assessed in the testing step based on yet another large number of test dataset, separately generated.
 \marginpar{testing}
 The purpose of this step was to further confirm the previous results on another dataset 
 and to give a more robust idea on the expected error of the metamodel in the application setting.
@@ -94,7 +94,7 @@ The settings used in the simulation experiment for constructing and assessing th
         \textbf{\small{Training}}             & \\
         \footnotesize{Experimental Designs}   & \footnotesize{Simple random (SRS), latin hypercube (LHS),} \\
                                               & \footnotesize{optimized latin hypercube (Opt. LHS), Sobol' sequence} \\
-        \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960$}\\
+        \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960, 1'920$ (only for testing)}\\
         \footnotesize{Replication}           	& \footnotesize{$5$}\\
         \footnotesize{Covariance kernels}     & \footnotesize{Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, power exponential} \\
         \footnotesize{Model fitting}          & \footnotesize{\glsfirst[hyper=false]{mle}} \\
