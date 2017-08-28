@@ -29,10 +29,7 @@ liquid carryover was a time-dependent quantity,
 while clad temperature and pressure drop were a time- and space-dependent quantities.
 As such, \gls[hyper=false]{pca} was carried out on the raw outputs to reduce their dimensionality and 
 the metamodel was trained with respect to a few retained \gls[hyper=false]{pc} scores.
-%\footnote{Though in principle it was possible to combine all different outputs into a single metamodel through the correlation formulation of the \gls[hyper=false]{pca},
-%this combination was avoided to allow for important parameters with respect to each outputs retained its prominence.
-%Because some parameters were found to be important only with respect to a particular output,
-%combining outputs together would have changed the parameter's importance.}
+
 Carrying out \gls[hyper=false]{pca} for each type of outputs results in pairs of standardized \gls[hyper=false]{pc} scores and \gls[hyper=false]{pc} loadings.
 A \gls[hyper=false]{gp} metamodel was then trained with respect to the standardized \gls[hyper=false]{pc} scores for selected number of retained \gls[hyper=false]{pc} loadings.
 As such, there would be multiple \gls[hyper=false]{gp} metamodels representing the standardized \gls[hyper=false]{pc} scores associated with each of the retained \gls[hyper=false]{pc} loadings for each of the output types.
