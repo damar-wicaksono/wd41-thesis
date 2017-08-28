@@ -15,16 +15,17 @@ Fig.~\ref{fig:ch4_plot_pc_q2_tc} shows the predictivity coefficient $Q_2$ as fun
 The $Q_2$ was calculated based on the validation dataset of size $5'000$ data points (i.e., independent \gls[hyper=false]{trace} runs.
 Multiple points per training sample size correspond to \gls[hyper=false]{gp} metamodels constructed using different experimental designs and covariance kernel functions, as well as the multiple replications for each experimental design.
 \bigfigure[pos=!tbhp,
-					 opt={width=0.97\textwidth},
+					 opt={width=0.9\textwidth},
            label={fig:ch4_plot_pc_q2_tc},
-           shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the clad temperature output}]
+           shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the clad temperature output}]
 {../figures/chapter4/figures/plotPCQ2TC}
-{Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the clad temperature output and $Q_2$ validation metric.}
+{Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the clad temperature output and $Q_2$ validation metric. The first $10$ \glspl[hyper=false]{pc} contained about $96\%$ of the total clad temperature output variation.
+}
 
 The leftmost panel of the plot shows that indeed the \gls[hyper=false]{gp} metamodel for the first standardized \gls[hyper=false]{pc} score is the easiest to fit,
 requiring only small number of training samples.
 On the other hand, the rightmost panel of the plot shows that not even the largest number of training samples considered is enough to have a \gls[hyper=false]{gp} metamodel with decent performance.
-Furthermore the plot also shows that the variations in the performance tends to become smaller with increasing sample size.
+Furthermore, the plot also shows that the variations in the performance tends to become smaller with increasing sample size.
 
 % (negative and zero predictivity coefficient means that no benefit is gained from using \gls[hyper=false]{gp} metamodel to make the prediction)
 
@@ -39,7 +40,7 @@ Furthermore the plot also shows that the variations in the performance tends to 
 % Describing the figure itself (as it is the first time it appears)
 Fig.~\ref{fig:ch4_plot_pc_gp_construction_tc} summarizes the effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the predictive performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels to predict the clad temperature output.
 The training samples were replicated $5$ times for each size and for each design.
-The predictive performance was assessed in terms of the \gls[hyper=false]{rmse} which was computed by retaining the first $7$ \gls[hyper=false]{pc} and it was also based on the same validation dataset.
+The predictive performance was assessed in terms of the \gls[hyper=false]{rmse} which was computed by retaining the first $7$ \glspl[hyper=false]{pc} and it was also based on the same validation dataset.
 As such the \gls[hyper=false]{rmse} shown in the figure represents the combined error due to \gls[hyper=false]{pc} truncation and misprediction of the standardized \gls[hyper=false]{pc} scores.
 
 % Describing the finding in the figure
@@ -56,36 +57,58 @@ The \gls[hyper=false]{gp} metamodel for the first standardized \gls[hyper=false]
 However, it was also found that the metamodel of the higher \gls[hyper=false]{pc} had a much better convergence property.
 That is,
 a metamodel with a decent predictive performance could be obtained to predict the standardized \gls[hyper=false]{pc} score as high as the $10$\textsuperscript{th} \gls[hyper=false]{pc} using the considered sample sizes.
+The first $10$ \glspl[hyper=false]{pc}, in turn, carried close to $100\%$ of the total output variation.
 \bigfigure[pos=!tbhp,
-					 opt={width=0.95\textwidth},
+					 opt={width=0.92\textwidth},
            label={fig:ch4_plot_pc_q2_dp},
-           shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the pressure drop output}]
+           shortcaption={Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the pressure drop output}]
 {../figures/chapter4/figures/plotPCQ2DP}
-{Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the pressure drop output and $Q_2$ validation metric.}
+{Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the pressure drop output and $Q_2$ validation metric.}
 
 % PC GP Metamodel Construction, Pressure Drop Output
 \clearpage
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter4/figures/plotPCGPConstructionDP}
-	\caption[The flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of FEBA facility]{The flowchart for the implemented sensitivity analysis methodology applied to the \gls{trace} model of \gls{feba} facility}
+	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the pressure drop output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}, of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the pressure drop output.}
 	\label{fig:ch4_plot_pc_gp_construction_dp}
 \end{sidewaysfigure}
 \clearpage
 
+% Describing finding in the figure, pressure drop output
+Fig,~\ref{fig:ch4_plot_pc_gp_construction_dp} presents the summary of the effect of different factors in the construction of a \gls[hyper=false]{gp} metamodel with the pressure drop output as its output.
+The reconstruction error was computed using the first $10$ \glspl[hyper=false]{pc}.
+The findings were mostly consistent with the previous results for the clad temperature output.
+The Gaussian covariance kernel function, as before, had the least stable performance across replication especially when combined with latin hypercube type of experimental design.
+Except for that, most of the factors considered converged to the same value of the reconstruction error with less variation across replication compared to the clad temperature output.
+
+% The Liquid carryover output
+Finally, the liquid carryover output was found to be even easier to construct compared to the other two types of output.
+\marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, liquid carryover output}
+The first $5$ \glspl[hyper=false]{pc} contained almost all of the total output variation ($\approx 100\%$).
+Furthermore, the predictive performance of the \gls[hyper=false]{gp} metamodel converged faster across the first $5$ standardized \gls[hyper=false]{pc} scores (see Fig.~\ref{fig:ch4_plot_pc_q2_co}). 
 \bigfigure[pos=!tbhp,
 					 opt={width=1.0\textwidth},
            label={fig:ch4_plot_pc_q2_co},
-           shortcaption={Sobol' Indices estimates with the scores of the warping function for the mid-height clad temperature transient as the \gls[hyper=false]{qoi}}]
+           shortcaption={Convergence of \gls[hyper=false]{gp} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the liquid carryover output}]
 {../figures/chapter4/figures/plotPCQ2CO}
-{The sensitivity indices with respect to the of the warping function for the mid-height clad temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
+{Convergence of \gls[hyper=false]{gp} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with liquid carryover output and $Q_2$ validation metric.}
 
 
+% Describing finding in the figure, liquid carryover output
+As before, Fig.~\ref{fig:ch4_plot_pc_gp_construction_co} summarizes the effect of different factor in the construction of a \gls[hyper=false]{gp} metamodel with the liquid carryover output as its output.
+The reconstruction error was computed using the first $5$ \glspl[hyper=false]{pc}.
+The findings here were also similar to the ones from the previous two outputs:
+the training sample size was the most important factor in determining the predictive performance,
+there was a relatively minor effect of the choice of covariance kernel functions especially in terms of the performance variation,
+and the choice of experimental design was relatively non-influential.
+
+% PC GP Metamodel Construction, Liquid Carryover output
+\clearpage
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter4/figures/plotPCGPConstructionCO}
-	\caption[The flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of FEBA facility]{The flowchart for the implemented sensitivity analysis methodology applied to the \gls{trace} model of \gls{feba} facility}
+	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the liquid carryover output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}, of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the liquid carryover output.}
 	\label{fig:ch4_plot_pc_gp_construction_co}
 \end{sidewaysfigure}
-
-\lipsum[20]
+\clearpage
