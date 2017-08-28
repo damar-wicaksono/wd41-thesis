@@ -16,7 +16,7 @@ The notion of reconstruction error more intuitively explains the notion of expla
 The error represents the difference between the original data and reconstructed data using only a small number of \gls[hyper=false]{pc}.
 The series of plots shown in Fig.~\ref{fig:ch4_plot_reconstruction_error} also illustrates the limit of \gls[hyper=false]{pca} as a dimension reduction tool.
 The method performs best for the liquid carryover output and worst for the clad temperature output.
-The latter is mostly due to the fact that the clad temperature output include a sharp discontinuity (i.e., quenching).
+The latter is mostly due to the fact that the clad temperature output includes a sharp discontinuity (i.e., quenching).
 \gls[hyper=false]{pca}, being a linear transformation, can deal with this strong non-linearities sub-optimally.
 That is, significantly large number of \glspl[hyper=false]{pc} are required to bring the reconstruction error to $0$.
 
@@ -79,5 +79,5 @@ the cost of evaluating the metamodel for an arbitrary input is still expected to
 For instance, the most naive implementation in \texttt{R} involving loops takes, on average, about $< 5 \, [s]$ to predict and reconstruct all outputs (clad temperature, pressure drop, and liquid carryover) for a given input.
 However, it is also important to take into account the computational cost required to train, validate, and test the metamodel.
 The training, validation, and testing data have to be generated from actual \gls[hyper=false]{trace} runs.
-Additionally, the model fitting step during training, is an optimization problem that becomes computationally expensive for large training samples of large dimension (large number of input parameters).
-Again, no further study was conducted to have a quantitative cost measure.
+Additionally, the model fitting step during training is an optimization problem that becomes computationally expensive for large training samples of large dimension (large number of input parameters).
+Again, further study is required to have a more quantitative cost measure.
