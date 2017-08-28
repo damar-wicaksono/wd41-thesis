@@ -1,31 +1,77 @@
-%************************************************************************************************************************
-\subsection{\gls[hyper=false]{gp} \gls[hyper=false]{pc} Metamodel Validation}\label{sub:gp_feba_pca_metamodel_validation}
-%************************************************************************************************************************
+%******************************************************************************************************************
+\subsection{\gls[hyper=false]{gp} \gls[hyper=false]{pc} Metamodel Testing}\label{sub:gp_feba_pca_metamodel_testing}
+%******************************************************************************************************************
 
+% Introductory paragraph
+Based on the results presented above, one additional set of \gls[hyper=false]{gp} metamodels was constructed with an increase training sample size and with best choice of factors.
+Specifically, the metamodels were constructed using power-exponential covariance kernel function based on a Sobol' sequence training dataset of size $1'920$.
+Furthermore, $7$, $10$, and $5$ \glspl[hyper=false]{pc} were used in the reconstruction clad temperature, pressure drop, and liquid carryover outputs, respectively.
+As such there were $22$ separate \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels. 
+Additional (i.e., \emph{testing}) dataset of size $5'000$ was then independently generated (with actual \gls[hyper=false]{trace} code runs) 
+and used as the basis for testing the predictive performance of the final model.
+This additional step was done to avoid any possible bias due to the fact that the the validation dataset was already used as the basis of this particular selection of model choices.
 
+% Convergence of error measure, test dataset
+The validation metric $Q_2$ of the metamodels with respect to the standardized \glspl[hyper=false]{pc} scores computed on the testing dataset converged for all types of output (Fig.~\ref{fig:ch4_plot_q2_pcs}).
+In other words, the size of the testing dataset was found to be (or more than) sufficient to assess the predictive performance of the selected metamodel.
 \bigfigure[pos=!tbhp,
 					 opt={width=1.0\textwidth},
-           label={fig:ch4_plot_pc_q2},
-           shortcaption={Sobol' Indices estimates with the scores of the warping function for the mid-height clad temperature transient as the \gls[hyper=false]{qoi}}]
+           label={fig:ch4_plot_q2_pcs},
+           shortcaption={Convergence of the predictive performance of the metamodel with respect to the standardized \glspl[hyper=false]{pc} scores for each output type}]
 {../figures/chapter4/figures/plotQ2PCs}
-{The sensitivity indices with respect to of the warping function for the mid-height clad temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
+{Convergence of the predictive performance of the metamodel with respect to the standardized \glspl[hyper=false]{pc} scores for each output type. There are $10$ \glspl[hyper=false]{pc} used in the metamodels of both the clad temperature and pressure drop and $5$ \glspl[hyper=false]{pc} in the metamodel of liquid carryover.}
 
+% The final reconstruction error
+There were two main sources of error that dictated the predictive performance of a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel.
+The first was due to the representation of the full output dimension only with a few selected \glspl[hyper=false]{pc} (i.e., the dimension reduction) 
+and the second was due to misprediction of the standardized \gls[hyper=false]{pc} scores by the \gls[hyper=false]{gp} metamodel (i.e., the functional approximation).
+Fig.~\ref{fig:ch4_plot_rec_error_pred_obs} illustrates these errors by presenting the predicted and observed reconstruction error (in terms of \gls[hyper=false]{rmse}) for each realization in the testing dataset.
+Note that the \emph{observed} reconstruction error was obtained using the reference standardized \gls[hyper=false]{pc} scores of the testing dataset,
+while the \emph{predicted} reconstruction error was obtained using the standardized \gls[hyper=false]{pc} scores as predicted by the \gls[hyper=false]{gp} metamodels.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_rec_error_pred_obs},
-			           maincaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}. Some realizations might still be inaccurately predicted, due to both the limitation in the approximations incurred by using \gls[hyper=false]{gp} and \gls[hyper=false]{pc}.},
-			           mainshortcaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}.},%
+			           maincaption={Errors, predicted and observed, due to the dimension reduction procedure (\gls[hyper=false]{pca}) and the functional approximation (\gls[hyper=false]{gp}) for the three types of output.},
+			           mainshortcaption={Errors, predicted and observed, due to the dimension reduction procedure and the functional approximation for the three types of output.},%
 			           leftopt={width=0.31\textwidth},
-			           leftlabel={fig:ch4_plot_rec_error_pred_obs},
-			           leftcaption={Clad temperature output},
+			           leftlabel={fig:ch4_plot_rec_error_pred_obs_tc},
+			           leftcaption={Clad temperature ($TC$) output},
 			           midopt={width=0.31\textwidth},
-			           midlabel={fig:ch4_plot_hit_and_miss_1},
-			           midcaption={Pressure drop output},
+			           midlabel={fig:ch4_plot_rec_error_pred_obs_dp},
+			           midcaption={Pressure drop ($DP$) output},
 			           rightopt={width=0.31\textwidth},
-			           rightlabel={fig:ch4_plot_hit_and_miss_2},
-			           rightcaption={Liquid carryover output},
+			           rightlabel={fig:ch4_plot_rec_error_pred_obs_cp},
+			           rightcaption={Liquid carryover ($CO$) output},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter4/figures/plotRecErrorPredObsTC}
 {../figures/chapter4/figures/plotRecErrorPredObsDP}
 {../figures/chapter4/figures/plotRecErrorPredObsCO}
 
+The extend of the $x$-axis signifies the range of error due to the \gls[hyper=false]{pc} truncation.
+The farther a data point is from the left, the larger the error is due to the dimension reduction.
+On the other hand, the extend of the $y$-axis, specifically the vertical distance between the data points and the line,
+signifies the error due to the misprediction of the standardized \glspl[hyper=false]{pc} scores by the \gls[hyper=false]{gp} metamodel.
+Data points which are located along the line implied a perfect prediction by the \gls[hyper=false]{gp} metamodel.
+The farther a data point is from the line, the larger the error is due to the metamodel approximation.
+As can be seen, no data point is located below the line as the truncation error sets the limit of the metamodel predictive performance.
+Furthermore, though some data points (i.e., realizations) might be mispredicted and lie over a wide range of value,
+the cloud of the data points is only concentrated around a particular range of value.
+Table~\ref{tab:ch4_gp_testing} numerically summarizes the results of the testing step. 
+
+\begin{table*}[!bhtp]\centering
+\ra{0.9}
+\caption{Predictive performance of the selected \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel on the testing dataset of size $5'000$}
+\label{tab:ch4_gp_testing}
+\begin{tabular*}{\textwidth}{@{}rrrrrrr@{}}\toprule
+\multirow{2}{*}{\footnotesize{Output}}&\multirow{2}{*}{\footnotesize{\gls[hyper=false]{pc}\textsubscript{max}}}&\multicolumn{2}{c}{\footnotesize{Predictivity Coefficient}}&\phantom{a}&\multicolumn{2}{c}{\footnotesize{Reconstruction error}}\\             
+                                                                              \cmidrule{3-4}                                       \cmidrule{6-7}
+																			&                                 & \footnotesize{$Q_2$ \gls[hyper=false]{pc}$1$}&\footnotesize{$Q_2$ \gls[hyper=false]{pc}\textsubscript{max}}&&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{obs}}&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{\gls[hyper=false]{pred}}} \\ \midrule
+\footnotesize{$TC$} & \footnotesize{$7$}  & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.77$} && \footnotesize{$20.17 \, [K] $} & \footnotesize{$22.43 \, [K] $} \\
+\footnotesize{$DP$} & \footnotesize{$10$} & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.74$} && \footnotesize{$55.57 \, [Pa]$} & \footnotesize{$77.95 \, [Pa]$} \\
+\footnotesize{$CO$} & \footnotesize{$5$}  & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.77$} && \footnotesize{$ 0.16 \, [kg]$} & \footnotesize{$ 0.27 \, [kg]$} \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
+%\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}. Some realizations might still be inaccurately predicted, due to both the limitation in the approximations incurred by using \gls[hyper=false]{gp} and \gls[hyper=false]{pc}.
+%\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}.
