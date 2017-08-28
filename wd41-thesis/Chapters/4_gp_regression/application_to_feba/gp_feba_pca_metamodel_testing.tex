@@ -1,9 +1,9 @@
-%******************************************************************************************************************
-\subsection{\gls[hyper=false]{gp} \gls[hyper=false]{pc} Metamodel Testing}\label{sub:gp_feba_pca_metamodel_testing}
-%******************************************************************************************************************
+%*******************************************************************************************************************************************
+\subsection[GP PC Metamodel Testing]{\gls[hyper=false]{gp} \gls[hyper=false]{pc} Metamodel Testing}\label{sub:gp_feba_pca_metamodel_testing}
+%*******************************************************************************************************************************************
 
 % Introductory paragraph
-Based on the results presented above, one additional set of \gls[hyper=false]{gp} metamodels was constructed with an increase training sample size and with best choice of factors.
+Based on the results presented above, one additional set of \gls[hyper=false]{gp} metamodels was constructed with an increase training sample size and with the best choice of factors.
 Specifically, the metamodels were constructed using power-exponential covariance kernel function based on a Sobol' sequence training dataset of size $1'920$.
 Furthermore, $7$, $10$, and $5$ \glspl[hyper=false]{pc} were used in the reconstruction clad temperature, pressure drop, and liquid carryover outputs, respectively.
 As such there were $22$ separate \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels. 
@@ -65,7 +65,7 @@ Table~\ref{tab:ch4_gp_testing} numerically summarizes the results of the testing
 \begin{tabular*}{\textwidth}{@{}rrrrrrr@{}}\toprule
 \multirow{2}{*}{\footnotesize{Output}}&\multirow{2}{*}{\footnotesize{\gls[hyper=false]{pc}\textsubscript{max}}}&\multicolumn{2}{c}{\footnotesize{Predictivity Coefficient}}&\phantom{a}&\multicolumn{2}{c}{\footnotesize{Reconstruction error}}\\             
                                                                               \cmidrule{3-4}                                       \cmidrule{6-7}
-																			&                                 & \footnotesize{$Q_2$ \gls[hyper=false]{pc}$1$}&\footnotesize{$Q_2$ \gls[hyper=false]{pc}\textsubscript{max}}&&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{obs}}&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{\gls[hyper=false]{pred}}} \\ \midrule
+																			&                                 & \footnotesize{$Q_2$ \gls[hyper=false]{pc}$1$}&\footnotesize{$Q_2$ \gls[hyper=false]{pc}\textsubscript{max}}&&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{obs}}&\footnotesize{\gls[hyper=false]{rmse}\textsubscript{pred}} \\ \midrule
 \footnotesize{$TC$} & \footnotesize{$7$}  & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.77$} && \footnotesize{$20.17 \, [K] $} & \footnotesize{$22.43 \, [K] $} \\
 \footnotesize{$DP$} & \footnotesize{$10$} & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.74$} && \footnotesize{$55.57 \, [Pa]$} & \footnotesize{$77.95 \, [Pa]$} \\
 \footnotesize{$CO$} & \footnotesize{$5$}  & \footnotesize{$\approx 1.0$}  & \footnotesize{$0.77$} && \footnotesize{$ 0.16 \, [kg]$} & \footnotesize{$ 0.27 \, [kg]$} \\
