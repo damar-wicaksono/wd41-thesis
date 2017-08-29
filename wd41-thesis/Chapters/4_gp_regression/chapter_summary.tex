@@ -7,18 +7,18 @@ The goal of such an approximation was to evaluate the output of a computer simul
 The approximation is based on Gaussian stochastic process resulting in a statistical metamodel.
 As the dimensionality of the output is large, in the order of tens of thousands, a dimension reduction step is adopted by means of \gls[hyper=false]{pca} (an approach similar to what was adopted in Chapter 3).
 
-The results obtained on the \gls[hyper=false]{trace} model \gls[hyper=false]{feba} is satisfactory.
-Though the prediction error can at times be large, the resulting metamodel gives a good performance on average and in context for the three types of multivariate output (clad temperature, pressure drop, and liquid carryover). 
-The limitation of the approach is mainly for output which exhibits strong non-linearity and discontinuity (such as the quenching in the clad temperature transient).
+The results obtained on the \gls[hyper=false]{trace} model \gls[hyper=false]{feba} is reasonable.
+Though the prediction error can at times be large, the metamodel gives an overall good performance on average and in context for the three types of multivariate output (clad temperature, pressure drop, and liquid carryover). 
+The limitation of the approach is mainly for the output which exhibits strong non-linearity and discontinuity (such as the quenching in the clad temperature transient).
 This, in turn, is due to the use of \gls[hyper=false]{pca} as the (linear) dimension reduction tool.
-As such, a first step of improvement in this regard can be aimed toward replacing \gls[hyper=false]{pca} with other, more advanced dimension reduction tool.
+As such, a first step of improvement in this regard can be aimed toward replacing \gls[hyper=false]{pca} with another, more advanced dimension reduction tool.
 
 Using the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel as the surrogate for \gls[hyper=false]{trace} run, 
-the prediction for arbitrary model parameters values can be made much faster ($< 5 [s]$ per metamodel evaluation vs. $5-15 \, [min]$ per \gls[hyper=false]{trace} run).
+the prediction for arbitrary model parameters values can be made much faster ($< 5 [s]$ per metamodel evaluation vs. $6-15 \, [min]$ per \gls[hyper=false]{trace} run).
 As such the metamodel constructed in this chapter can be used as the basis for Bayesian model calibration which requires tens if not hundreds of thousands function evaluations. 
-However, it is also important to note that the time required for the construction of the metamodel and as well as for its convergence study has to be taken into account as well.
+However, it is also important to note that the time required for the construction of the metamodel and as well as for its convergence study has to be taken into account.
 The training, validation, and testing data have to be generated from actual code runs.
-Additionally, the model fitting step to estimate \gls[hyper=false]{gp} metamodel hyper-parameters, is an optimization problem that can easily become expensive for large training samples of large dimension (large number of input parameters).
+Additionally, the model fitting step to estimate \gls[hyper=false]{gp} metamodel hyper-parameters is an optimization problem that can easily become expensive for large training samples of large dimension (large number of input parameters).
  
 The study also confirms that the size of the training sample is the main factor in determining the predictive performance of the metamodel.
 The choice of covariance function has some impact especially in relation to the stability of the performance,
