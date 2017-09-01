@@ -1,9 +1,39 @@
 %*************************************************************************************************************************************************
-\chapter[Bayesian Calibration]{Bayesian Calibration of Computer Model: Connecting Model and Data under Uncertainty}\label{ch:bayesian_calibration}
+\chapter[Bayesian Calibration]{Bayesian Calibration of Computer Model: Bridging Model \& Data under Uncertainty}\label{ch:bayesian_calibration}
 %*************************************************************************************************************************************************
 
+% Link paragraph
+In Chapter 3, a sensitivity analysis method was employed to understand better the inputs/outputs relationship in a computer simulation model where its inputs were considered uncertain.
+The method was also able to reduce the size of the problem by screening out non-influential inputs.
+Chapter~\ref{ch:gp_metamodel} then developed a fast approximation to evaluate the output at any given input, in anticipation to the high cost of a calibration approach of this chapter.
+The respective methods were exemplified by their application to a \gls[hyper=false]{trace} reflood simulation model whose inputs were uncertain, as assumed in Chapter~2.
+
+% Focus paragraph
+This chapter deals with a statistical framework for calibrating the inputs of a simulation model.
+The framework casts the calibration problem as a statistical inverse problem where the initial (prior) uncertainties of the inputs are updated based on available observed data.
+It considers the uncertainties in the inputs a priori, in the experimental data, and in the possible bias of the model.
+Acknowledging them,
+the inputs uncertainties are then updated via the Bayes' theorem resulting in an updated (posterior) probability density.
+The uncertainty of the inputs are thus coherently quantified and it can be propagated through the simulation model to quantify the prediction uncertainty.
+
+% Overview paragraphs
+% Modular Bayes
+Section~\ref{sec:bc_statistical_framework} first elaborates the framework further, 
+while Section~\ref{sec:bc_modular_bayes} outlines a practical modularized approach for conducting the calibration.
+Each module represents a model for the data-generating processes involved: the computer simulation model, the experimental data, and the model discrepancy.
+Those are the ingredients in the formulation of the posterior density.
+The posterior density is often a highly multi-dimensional function.
+As a probability density, it involves normalizing factor that requires a multi-dimensional integration across the input parameter space.
+Section~\ref{sec:bc_mcmc} presents a simulation method to circumvent this integration.
+A \glsfirst[hyper=false]{mcmc} simulation directly generates representative samples from the posterior density.
+These samples can be used to approximate the posterior density or for uncertainty propagation.
+Section~\ref{sec:bc_application_to_feba} then discusses the application of the approach to the \gls[hyper=false]{feba} \gls[hyper=false]{trace} reflood simulation model to constrain the prior uncertainty range of the model parameters based on the available experimental data.
+Different types of output - data pairs are used and their ability to constrain the range is investigated.
+The resulting posterior uncertainty, derived from one set of experimental condition, is verified by propagating it on the other \gls[hyper=false]{feba} tests.
+Section~\ref{sec:bc_chapter_summary} concludes the chapter.
+
 \input{Chapters/5_bayesian_calibration/statistical_framework}
-\input{Chapters/5_bayesian_calibration/model_discrepancy}
+%\input{Chapters/5_bayesian_calibration/model_discrepancy}
 \input{Chapters/5_bayesian_calibration/modular_bayesian}
 \input{Chapters/5_bayesian_calibration/mcmc}
 \input{Chapters/5_bayesian_calibration/application_to_feba/index}
