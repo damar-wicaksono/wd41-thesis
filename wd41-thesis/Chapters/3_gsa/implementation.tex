@@ -47,23 +47,23 @@ while $N$ (the size of \gls{mc} samples) are typically in the range of $10^2 - 1
 Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of the $d$-th parameter.
 
 \begin{algorithm}
-\caption{Brute Force \gls{mc} for estimating $\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]]$}
+\caption{Brute Force \gls{mc} for estimating $\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]]$}
 \label{alg:brute_force_mc}
 \begin{algorithmic}
 \STATE $\Sigma_i \leftarrow 0$
 \STATE $\Sigma_{i^2} \leftarrow 0$
   \FOR{$i=1$ to $N$}
-    \STATE sample $x_d^{(i)}$ from $X_d$
+    \STATE sample $x_d^{(i)}$ from $\mathcal{X}_d$
     \STATE $\Sigma_j \leftarrow 0$
     \FOR{$j=1$ to $N$}
-      \STATE sample $\mathbf{x}_{\sim d}^{(j)}$ from $\mathbf{X}_{\sim d}$
-      \STATE $\Sigma_j \mathrel{+}= f(\mathbf{x}_{\sim d}^{(j)}, x_d^{(i)})$ 
+      \STATE sample $\bm{x}_{\sim d}^{(j)}$ from $\bm{\mathcal{X}}_{\sim d}$
+      \STATE $\Sigma_j \mathrel{+}= f(\bm{x}_{\sim d}^{(j)}, x_d^{(i)})$ 
     \ENDFOR
-    \STATE $\mathbb{E}_{\sim d} [Y|X_d]^{(i)} \leftarrow \frac{1}{N} \Sigma_j$
-    \STATE $\Sigma_i \mathrel{+}= \mathbb{E}_{\sim d} [Y|X_d]^{(i)}$
-    \STATE $\Sigma_{i^2} \mathrel{+}= \mathbb{E}_{\sim d} [Y|X_d]^{(i)} \times \mathbb{E}_{\sim d} [Y|X_d]^{(i)}$
+    \STATE $\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)} \leftarrow \frac{1}{N} \Sigma_j$
+    \STATE $\Sigma_i \mathrel{+}= \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)}$
+    \STATE $\Sigma_{i^2} \mathrel{+}= \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)} \times \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)}$
   \ENDFOR
-  \STATE $\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]] \leftarrow \frac{1}{N} \left(\Sigma_{i^2} - \Sigma_i^2/N\right)$
+  \STATE $\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]] \leftarrow \frac{1}{N} \left(\Sigma_{i^2} - \Sigma_i^2/N\right)$
 \end{algorithmic}
 \end{algorithm}
 
