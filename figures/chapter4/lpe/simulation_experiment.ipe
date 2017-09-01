@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170824172132" modified="D:20170825182818"/>
+<info created="D:20170824172132" modified="D:20170828164639"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -742,5 +742,7 @@ Calculation</text>
 <text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 166.72" transformations="translations" pos="640 464" stroke="black" type="label" width="77.686" height="15.165" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{valid}}\}_{i=1}^{n_{valid}}</text>
 <text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 194.72" transformations="translations" pos="640 464" stroke="black" type="label" width="78.982" height="14.724" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{train}}\}_{i=1}^{n_{train}}</text>
 <text matrix="0.890079 -0.455807 0.455807 0.890079 -765.145 142.72" transformations="translations" pos="640 464" stroke="black" type="label" width="66.607" height="14.027" depth="3.59" valign="baseline" size="Large" style="math">\{\mathbf{x}_i^{\textrm{test}}\}_{i=1}^{n_{test}}</text>
+<text matrix="1 0 0 1 0 4" transformations="translations" pos="768 272" stroke="black" type="minipage" width="64" height="19.413" depth="14.46" valign="top" size="LARGE">Model
+Selection</text>
 </page>
 </ipe>

@@ -19,7 +19,7 @@ The training inputs of certain size was generated using an experimental design a
 Following the recommendation in \cite{Loeppky2009} the starting sample size was 120 (or $10\times D$, with $D$ is the number of dimension) and increased in multiples of two ($240$, $480$, and $960$).
 Furthermore, to take into account the effect of random variation of the training dataset of the same design and size,
 $5$ replications of each were generated for training.
-That is, for a given experimental design algorithm of a given size, $5$ different metamodels were trained.
+That is, for a given experimental design algorithm of a given size, $5$ different set of metamodels were trained.
 
 % Dimension Reduction
 Metamodels predicting different types of outputs (i.e., clad temperature, pressure drop, and liquid carryover) were constructed separately.
@@ -29,10 +29,7 @@ liquid carryover was a time-dependent quantity,
 while clad temperature and pressure drop were a time- and space-dependent quantities.
 As such, \gls[hyper=false]{pca} was carried out on the raw outputs to reduce their dimensionality and 
 the metamodel was trained with respect to a few retained \gls[hyper=false]{pc} scores.
-%\footnote{Though in principle it was possible to combine all different outputs into a single metamodel through the correlation formulation of the \gls[hyper=false]{pca},
-%this combination was avoided to allow for important parameters with respect to each outputs retained its prominence.
-%Because some parameters were found to be important only with respect to a particular output,
-%combining outputs together would have changed the parameter's importance.}
+
 Carrying out \gls[hyper=false]{pca} for each type of outputs results in pairs of standardized \gls[hyper=false]{pc} scores and \gls[hyper=false]{pc} loadings.
 A \gls[hyper=false]{gp} metamodel was then trained with respect to the standardized \gls[hyper=false]{pc} scores for selected number of retained \gls[hyper=false]{pc} loadings.
 As such, there would be multiple \gls[hyper=false]{gp} metamodels representing the standardized \gls[hyper=false]{pc} scores associated with each of the retained \gls[hyper=false]{pc} loadings for each of the output types.
@@ -70,7 +67,7 @@ This error combined the error due to the misprediction of the standardized \gls[
 The best setting of the metamodel (the experimental design and the covariance function) was then selected based on the \gls[hyper=false]{rmse} and one additional metamodel was trained using an increased number of training samples.
 
 % Testing
-Finally, the ultimate performance of the metamodel constructed with best selected setting were assessed in the testing step based on yet another large number of test dataset, separately generated.
+Finally, the ultimate performance of the metamodel were assessed in the testing step based on yet another large number of test dataset, separately generated.
 \marginpar{testing}
 The purpose of this step was to further confirm the previous results on another dataset 
 and to give a more robust idea on the expected error of the metamodel in the application setting.
@@ -94,7 +91,7 @@ The settings used in the simulation experiment for constructing and assessing th
         \textbf{\small{Training}}             & \\
         \footnotesize{Experimental Designs}   & \footnotesize{Simple random (SRS), latin hypercube (LHS),} \\
                                               & \footnotesize{optimized latin hypercube (Opt. LHS), Sobol' sequence} \\
-        \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960$}\\
+        \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960, 1'920$ (only for testing)}\\
         \footnotesize{Replication}           	& \footnotesize{$5$}\\
         \footnotesize{Covariance kernels}     & \footnotesize{Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, power exponential} \\
         \footnotesize{Model fitting}          & \footnotesize{\glsfirst[hyper=false]{mle}} \\

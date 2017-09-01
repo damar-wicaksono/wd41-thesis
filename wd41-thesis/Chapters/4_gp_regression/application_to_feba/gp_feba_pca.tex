@@ -1,7 +1,14 @@
-%**************************************************************************************
-\subsection{Dimension Reduction by Principal Component Analysis}\label{sub:gp_feba_pca}
-%**************************************************************************************
+%*************************************************************************************
+\subsection{Dimension Reduction by \glsfirst[hyper=false]{pca}}\label{sub:gp_feba_pca}
+%*************************************************************************************
 
+% Introductory paragraph
+As mentioned, the different outputs considered in this study (i.e., clad temperature, pressure drop, and liquid carryover) were of multivariate nature.
+For instance, the clad temperature output was defined both in time instance and axial location.
+Considering $8$ different axial locations for the thermocouples and $1'000 \, [s]$ transient (to ensure that all runs were quenched) with $0.1 \, [s]$, the dimensionality of this output amounted to $8'000$.
+Fig.~\ref{fig:ch4_plot_image_tc_run} shows $3$ different clad temperature output from $3$ different \gls[hyper=false]{trace} runs.
+It shows the contour plot of clad temperature as function of time and axial location in the $x$- and $y$- axes, respectively.
+Though not shown here, the other two types of output were of similar nature: pressure drop was also defined in time instance and in $4$ axial segments (with dimensionality of the output amounted to $40'000$), while liquid carryover output was defined only in time (with dimensionality amounted to $10'000$).
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_image_tc_run},
 			           maincaption={Examples of multivariate clad temperature output at 8 different locations as function of time, presented as ``images'', taken from three different training runs.},
@@ -21,36 +28,46 @@
 {../figures/chapter4/figures/plotImageTCRun2}
 {../figures/chapter4/figures/plotImageTCRun3}
 
+% Multivariate Clad Temperature
+\gls[hyper=false]{pca} was used to reduce this significant number of output dimensions.
+Fig.~\ref{fig:ch4_plot_pca_image} shows the sample mean surface and the first two \glspl[hyper=false]{pc} (loadings) estimated using $1'920$ training samples.
+These two \glspl[hyper=false]{pc} explained about $83\%$ of the output variance in training samples.
+This implied that any realization of the training samples could be reconstructed by using the mean surface 
+added by linear combination of the \gls[hyper=false]{pc} multiplied by a unique set of scalars (the standardized \gls[hyper=false]{pc} scores) associated with that realization, such that on average (over many realizations) the reconstruction would be $83\%$ accurate with respect to the \gls[hyper=false]{rmse}.
+In other words, ``images'' in Fig.~\ref{fig:ch4_plot_image_tc_run} can be reconstructed by overlapping the mean surface and the multiples of \glspl[hyper=false]{pc} ``images'' shown in Fig.\ref{fig:ch4_plot_pca_image}.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_pca_image},
-			           maincaption={PCA of clad temperature output},
-			           mainshortcaption={PCA of clad temperature output},%
-			           leftopt={width=0.305\textwidth},
+			           maincaption={PCA results of the clad temperature output},
+			           mainshortcaption={PCA results of the clad temperature output},%
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch4_plot_pca_image_ave},
-			           leftcaption={Mean output},
-			           midopt={width=0.305\textwidth},
+			           leftcaption={Mean surface},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch4_plot_pca_image_pc1},
-			           midcaption={$1$\textsuperscript{st} PC ($73\%$)},
-			           rightopt={width=0.305\textwidth},
+			           midcaption={$1$\textsuperscript{st} PC loading ($73\%$)},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch4_plot_pca_image_pc2},
-			           rightcaption={$2$\textsuperscript{nd} PC ($10\%$)},
+			           rightcaption={$2$\textsuperscript{nd} PC loading ($10\%$)},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter4/figures/plotPCAImageAve}
 {../figures/chapter4/figures/plotPCAImagePC1}
 {../figures/chapter4/figures/plotPCAImagePC2}
 
+% RMSE of PCA, different output
+Fig.\ref{fig:ch4_plot_reconstruction_error} summarizes the convergence behavior of the reconstruction error for the three types of output with increasing number of \glspl[hyper=false]{pc} (up to the first $10$, out of $80'000$ \glspl[hyper=false]{pc} obtained) used for the reconstruction.
+The plots were obtained from reconstructing the outputs in the validation dataset (with sample size of $5'000$) using a set of \glspl[hyper=false]{pc} derived from the training dataset and compute the average of the squared error over all realizations in the validation dataset.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_reconstruction_error},
-			           maincaption={The reconstruction error, in terms of \gls[hyper=false]{rmse}, as a function of the number of \gls[hyper=false]{pc} used in the reconstruction of the output space for three different output types.},
+			           maincaption={The reconstruction error, in terms of \gls[hyper=false]{rmse}, as a function of the number of \glspl[hyper=false]{pc} used in the reconstruction of the output space for three different output types.},
 			           mainshortcaption={Convergence of the reconstruction error as function of the number of \gls[hyper=false]{pc} used in the reconstruction of the output space for three different output types.},%
-			           leftopt={width=0.305\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch4_plot_reconstruction_error_tc},
-			           leftcaption={Clad temperature},
-			           midopt={width=0.305\textwidth},
+			           leftcaption={Clad temperature output},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch4_plot_reconstruction_error_dp},
 			           midcaption={Pressure drop output},
-			           rightopt={width=0.305\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch4_plot_reconstruction_error_co},
 			           rightcaption={Liquid carryover output},
 			           spacing={},
@@ -58,3 +75,6 @@
 {../figures/chapter4/figures/plotReconstructionErrorTC}
 {../figures/chapter4/figures/plotReconstructionErrorDP}
 {../figures/chapter4/figures/plotReconstructionErrorCO}
+
+Because the \gls[hyper=false]{pc} scores used in the reconstruction were exact, the plot shows the magnitude of error to be expected from the dimension reduction procedure for each type of outputs.
+It also shows that the benefit of using larger number of \gls[hyper=false]{pc} is increasingly marginal.
