@@ -1,12 +1,14 @@
+%****************************************************************
 \section{Parameters Screening}\label{sec:sa_parameters_screening}
+%****************************************************************
 
 Screening methods are used to rank the importance of the model parameters using a relatively small number of model evaluations \cite{Saltelli2004}.
 However, they tend to simply give qualitative measures.
 That is, meaningful information resides in the rank itself but not in the exact importance of the parameters with respect to the output. 
-These methods are particularly valuable in the early phase of a SA to identify the non-influential parameters of a model,
+Screening is particularly valuable in the early phase of a SA to identify the noninfluential parameters of a model,
 which then could be safely excluded from further detailed analysis. 
-This exclusion step is important to reduce the size of the problem especially if a more expensive method is to be applied at the subsequent step. 
-In this work, attention was paid to a particular screening method proposed by Morris \cite{Morris1991} with an extension proposed by Campolongo et al. \cite{Campolongo2011}
+This step is important to reduce the size of the problem especially if more expensive methods are to be applied at the subsequent steps. 
+In this work, attention was paid to a particular screening method proposed by Morris \cite{Morris1991} with an extension proposed by Campolongo et al. \cite{Campolongo2011}.
 
 \subsection{Elementary Effects and One-at-a-Time Design}\label{sub:sa_ee_oat}
 
