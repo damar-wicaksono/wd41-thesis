@@ -1,13 +1,18 @@
+%****************************************************
 \section{Implementation}\label{sec:sa_implementation}
+%****************************************************
 
-An implementation of the Morris method and a Monte Carlo method to estimate the main- and total-effect sensitivity indices has been developed using the Python \cite{PCT2017} programming language 
-for the purpose of this work, to allow for well-controlled parametric and convergence studies.
-The implementation follows a black box approach of sensitivity analysis. 
-It deals with the generation of design of experiment (which is used to evaluate the model or code) and the post-processing of output to obtain the select measures of sensitivity.
+In this work, 
+an implementation of the Morris method and a Monte Carlo method to estimate the main- and total-effect sensitivity indices has been developed using the Python \cite{PCT2017} programming language, 
+to allow for well-controlled parametric and convergence studies.
+The implementation follows a black box approach of \gls[hyper=false]{sa}. 
+It deals with the generation of design of experiment (a set of input values at which the model or code is evaluated) and the post-processing of output to obtain the select measures of sensitivity presented in the previous sub-sections.
 In the following, the basic procedures that underlie the implementation of both methods are laid out.
 More details on the programming aspects of the implementation (the so-called \texttt{gsa-module}) can be found in Appendix~\ref{app:gsa_module}.
 
+%--------------------------------------------------
 \subsection{The Morris Method}\label{sub:sa_morris}
+%--------------------------------------------------
 
 The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps. 
 \textsc{First}, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal (base) points as well as the perturbed points for each parameter.
