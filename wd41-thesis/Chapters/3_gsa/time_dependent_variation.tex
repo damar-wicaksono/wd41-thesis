@@ -4,10 +4,11 @@
 
 Ramsay and Silverman \cite{Ramsay2005} popularized \gls[hyper=false]{fda},
 which refers to statistical analysis of data that are functions.
+\marginpar{Functional Data Analysis (FDA)}
 The main assumption of \gls[hyper=false]{fda}, as opposed to a more conventional multivariate analysis, is that data present sufficient smoothness, defined by existence of derivatives up to a certain order.
 Another distinguishing feature of \gls[hyper=false]{fda}, as opposed to time-series analysis or spatial statistics, is the availability of numerous replications of such data (i.e., set of functions) produced by the same or similar underlying process. 
-The role of \gls[hyper=false]{fda} in this work is to describe the overall variation within the dataset $\bm{Y}$ using a reduced set of scalars and functions obtained from \glsentryfull{pca}.
-The functions remain the same for all of the dataset,
+The role of \gls[hyper=false]{fda} in this work is to describe the overall variation within the data set $\bm{Y}$ using a reduced set of scalars and functions obtained from \glsentryfull{pca}.
+The functions remain the same for all of the data set,
 while the scalars vary as function of the sample.
 Key here is that the required number of scalars is much smaller than the size of $\mathbf{Y}$ 
 and, in turn, can be used as the \gls[hyper=false]{qoi} for \gls[hyper=false]{sa}.
@@ -74,7 +75,7 @@ From leftmost to the right (rightmost to the left) the basis functions are disco
            label={fig:ch3_bspline},
            shortcaption={Spline basis functions of order $4$}]
 {../figures/chapter3/figures/plotBSplineIllustration}
-{The fourteen spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into $11$ sub-intervals}
+{The fourteen B-spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into $11$ sub-intervals}
 
 According to Eq.~(\ref{eq:basis_function_expansion}), B-spline basis functions of a given order $B_k^p (t)$ and a knot sequence $\boldsymbol{\tau}$ 
 represents function $y_i$ as follows,
@@ -83,21 +84,29 @@ represents function $y_i$ as follows,
 \label{eq:basis_function_expansion}
 \end{equation}
 
+%----------------------------------------------------------------------
 \subsection{Curve Registration by Landmarks}\label{sub:sa_registration}
+%----------------------------------------------------------------------
 
-Essential to the idea of summary statistics of a data set is the measure of central tendency (e.g., the mean), which characterizes a \emph{typical} realization.
-\marginpar{variation in a functional dataset: amplitude \& phase}
-The measure of dispersion such as the variance, in turn, is defined relative to the mean. 
+% Summary Statistics in Data Set with Phase Variation
+Essential to the idea of summary statistics of a data set is the measure of central tendency (e.g., the mean),
+which characterizes a \emph{typical} realization.
+\marginpar{variation in a functional data set: amplitude \& phase}
+The measure of dispersion such as the variance, in turn, can be defined relative to the mean. 
 Two types of variations are often simultaneously present in a functional data set: 
 the variation in magnitude (\emph{vertical} variation) and the variation in phase (\emph{horizontal} variation).
-The simultaneous presence of these two types of variations makes even the definition of a mean function difficult \cite{Kneip1992}.
+The simultaneous presence of these two types of variations makes the definition of a mean function difficult \cite{Kneip1992}.
 
+% Cross-sectional mean vs. Structural Mean
 Fig.~\ref{fig:illustrate_phase_variation} illustrates this point.
+\marginpar{Cross-sectional vs. structural mean}
 For a functional data set that does not contain strong phase variations, 
 a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~left).
 On the other hand, with a strong phase variation (often mixed with amplitude variation), 
-the cross-sectional mean failed to produce a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~right).
-In this case, according to Kneip (\cite{Kneip1992}) a more proper \emph{structural} mean of the data set can be defined instead by first separating the phase and amplitude variations.
+the cross-sectional mean fails to produce a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~right).
+In this case,
+according to Kneip (\cite{Kneip1992}) a more proper \emph{structural} mean of the data set can be defined instead
+by first separating the phase and amplitude variations.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.48,trim={0 1cm 0 0},clip]{../figures/r-figures/illustratePhaseVariation.png}
@@ -105,7 +114,8 @@ In this case, according to Kneip (\cite{Kneip1992}) a more proper \emph{structur
 	\label{fig:illustrate_phase_variation}
 \end{figure}
 
-In the presence of strong amplitude and phase variation, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
+% Landmark registration
+In the presence of strong amplitude and phase variations, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
 \marginpar{landmark registration}
 The procedure transforms the time argument using a warping function to reduce the phase variation in the dataset.
 Specifically, the landmark type registration type is employed because the main features of the function of interest (i.e., reflood curve) are readily identifiable.
@@ -125,7 +135,9 @@ Indeed, this mean is more representative as a typical realization of the curves 
 
 More details on the properties of the warping functions used to transform the time argument for registration can be found in Appendix~\ref{app:landmark}.
 
+%----------------------------------------------------------------------
 \subsection{Functional Principal Component Analysis}\label{sub:sa_fpca}
+%----------------------------------------------------------------------
 
 Separation of phase variation from magnitude variation by registration procedure allows for the definition of a proper mean function.
 With respect to the mean, the notion of functional variation can then be defined.
