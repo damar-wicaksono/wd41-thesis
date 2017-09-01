@@ -61,43 +61,52 @@ where now each parameter at each design replication has its corresponding pertur
 
 An illustration of a radial design in two-dimensional input space with $4$ base points is shown in Fig.~\ref{fig:illustrate_oat_design} (right).
  
-\subsection{Statistics of Elementary Effects and Sensitivity Measures}
+%-------------------------------------------------------------------------------------------------
+\subsection{Statistics of Elementary Effects and Sensitivity Measures}\label{sub:sa_ee_statistics}
+%-------------------------------------------------------------------------------------------------
 
+% Mean of the elementary effects
 Consider now that an $N_R$ number of elementary effects associated with the $d$-th parameter have been sampled from the finite distribution of $EE_d$,
 using a \gls{oat} design with $N_R$ replications.
 The statistical summary of sampled $EE_d$ based on a given number of OAT design replications generated using either the trajectory or the radial design can be calculated.
 The first is the arithmetic mean defined as,
 \marginpar{the mean of the (sampled) elementary effects}
 \begin{equation}
-	\mu_d = \frac{1}{N_R} \sum_{r = 1}^{R} EE^r_d
+	\mu_d = \frac{1}{N_R} \sum_{r = 1}^{N_R} EE^r_d
 	\label{eq:sa_morris_mu}
 \end{equation} 
 where $EE^r_d$ is the elementary effect of the $d$-th parameter of the $r$-th replication.
-The mean gives the global influence of the $d$-th parameter on the chosen output $y$.
+The mean gives the global influence of the $d$-th parameter on the chosen output $f$.
 
-The second statistical summary of interest is the standard deviation of the (sampled) elementary effects associated with the $d$-th parameter from all the replications,
+% Standard deviation of the elementary effects
+The second statistical summary of interest is the standard deviation of the (sampled) elementary effects for input parameter $x_d$,
 \marginpar{the standard deviation of the (sampled) elementary effects}
 \begin{equation}
-	\sigma_d = \sqrt{\frac{1}{N_R} \sum_{r = 1}^{R} (EE^r_d - \mu_d)^2}
+	\sigma_d = \sqrt{\frac{1}{N_R} \sum_{r = 1}^{N_R} (EE^r_d - \mu_d)^2}
 	\label{eq:sa_morris_sd}
 \end{equation} 
-The standard deviation gives an indication of the presence of nonlinearity and/or interactions between the $d$-th parameter and other parameters.
+The standard deviation gives an indication of the presence of nonlinearity and/or interactions between the $d$-th input parameter and the others.
 
-As a change in a parameter value might have a changing sign on the change of the output,
-a cancellation effect on the estimation of $\mu_d$ might occur 
+% Mean of absolute values of the elementary effects
+In cases where $f$ is a non-monotonic function,
+the sign of $EE_d$ may change according to the change of the output,
+and cancellation effects on the estimation of $\mu_d$ might occur 
 (as can be the case for a non-monotonic function).
-Campolongo et al. \cite{Campolongo2011} proposed to take the absolute value of the sampled elementary effects before taking the mean to circumvent this issue.
+To circumvent this issue,
+Campolongo et al (\cite{Campolongo2011}) proposed to take the absolute values of the sampled elementary effects.
 It is defined as,
 \marginpar{the mean of the (sampled) absolute elementary effects}
 \begin{equation}
-	\mu^*_d = \frac{1}{N_R} \sum_{r = 1}^{R} |EE^r_d|
+	\mu^*_d = \frac{1}{N_R} \sum_{r = 1}^{N_R} |EE^r_d|
 	\label{eq:sa_morris_mustar}
 \end{equation}
 Note that although the overall sign of output perturbation is lost by using this measure,
 its use is justified if parameters are to be ranked based on a single importance measure.
 
-The three aforementioned statistical summaries, when evaluated over a large number of replications $N_R$,
-can provide global sensitivity measures of the importance of the $d$-th parameter.
+% Interpretation and importance classification
+The aforementioned statistical summaries, when evaluated over a large number of replications $N_R$,
+can provide global sensitivity measures of the importance of each input parameter.
+\marginpar{input parameter importance classification}
 As indicated by Morris \cite{Morris1991}, there are three possible categories of parameter importance based on those statistics:
 \begin{enumerate}
 	\item Parameters with noninfluential effects, i.e., the parameters that have relatively small values of both $\mu_d$ (or $\mu^*_d$) and $\sigma_d$;
@@ -105,10 +114,11 @@ As indicated by Morris \cite{Morris1991}, there are three possible categories of
 	\item Parameters with linear and/or additive effects, i.e., the parameters that have relatively large value of $\mu_d$ (or $\mu^*_d$) and relatively small value of $\sigma_d$.
 	The small value of $\sigma_d$ and the large value of $\mu_d$ (or $\mu^*_d$) indicate that the variation of elementary effects across replications is small while the magnitude of the effect itself is consistently large for the perturbations in the parameter space.
 	\item Parameters with nonlinear and/or interaction effects, i.e., the parameters that have a relatively small value of $\mu_d$ (or $\mu^*_d$) and a relatively large value of $\sigma_d$.
-	Opposite to the previous case, a small value of $\mu_d$ (or $\mu^*_d$) indicates that the aggregate effect of perturbation is relatively small (or in the case of $\mu$, can be close to zero) while a large value of $\sigma_d$ indicates that the variation of the effect is large; the effect can be large or negligibly small depending on the values of the other parameters at which the model is evaluated.
+	Opposite to the previous case, a small value of $\mu_d$ (or $\mu^*_d$) indicates that the aggregate effect of perturbation is relatively small (or in the case of $\mu_d$, can be close to zero) while a large value of $\sigma_d$ indicates that the variation of the effect is large; the effect can be large or negligibly small depending on the values of the other parameters at which the model is evaluated.
 	Such large variation is a symptom of nonlinear effects and/or parameter interaction.
 \end{enumerate}
 
+% Classification and qualitative measure
 Such classification makes parameter importance ranking and, in turn, screening of noninfluential parameters possible.
 However, the procedure is done rather qualitatively, and this is illustrated in Fig.~\ref{fig:illustration_morris_result}, 
 which depicts a typical parameter classification derived from visual inspection of the elementary effects statistics on the $\sigma$ vs. $\mu^*$ plane.
@@ -122,5 +132,5 @@ the method cannot distinguish between nonlinearity effect from parameter interac
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.90]{../figures/illustrateMorrisResult/illustrateMorrisResult.png}
-	\caption[Illustration of a typical parameter importance classification based on Morris screening method]{Illustration of a typical parameter importance classification obtained from the Morris screening method. The importance of each parameter is defined relative to each other with respect to their location in the $\sigma - \mu_*$ plane. Each dot represents a parameter, and the line corresponds to twice the standard error of the mean (SEM) indicating the relative magnitude of the standard deviation to the mean.}\label{fig:illustration_morris_result}
+	\caption[Illustration of a typical parameter importance classification based on Morris screening method]{Illustration of a typical parameter importance classification obtained from the Morris screening method. The importance of each parameter relative to the other ones is defined with respect to its location on the $\sigma - \mu^*$ plane. Each dot represents a parameter, and the line corresponds to twice the standard error of the mean (SEM) indicating the relative magnitude of the standard deviation to the mean.}\label{fig:illustration_morris_result}
 \end{figure}
