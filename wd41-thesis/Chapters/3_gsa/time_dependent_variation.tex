@@ -1,13 +1,20 @@
+%*********************************************************************************************
 \section{Describing Variation of Time-Dependent Output}\label{sec:sa_time_dependent_variation}
+%*********************************************************************************************
 
-Ramsay and Silverman \cite{Ramsay2005} popularized \gls{fda}, which refers to statistical analyses of data that are functions.
-The main assumption of \gls{fda}, as opposed to a more conventional multivariate analysis, is that data present sufficient smoothness, defined by existence of derivatives up to a certain order.
-Another distinguishing feature of \gls{fda}, as opposed to time-series analysis or spatial statistics, is the availability of numerous replications of such data (i.e., set of functions) produced by the same or similar underlying process. 
-The goal of \gls{fda} related to this work is to describe the overall variation of a set of functions using a smaller set of scalars and functions based on \glsentryfull{pca}.
-The functions remain the same for all of the functions in the dataset. 
-On the other hand, the scalars vary and, in turn, can be used as the \gls{qoi} for \gls{sa}.
+Ramsay and Silverman \cite{Ramsay2005} popularized \gls[hyper=false]{fda},
+which refers to statistical analysis of data that are functions.
+The main assumption of \gls[hyper=false]{fda}, as opposed to a more conventional multivariate analysis, is that data present sufficient smoothness, defined by existence of derivatives up to a certain order.
+Another distinguishing feature of \gls[hyper=false]{fda}, as opposed to time-series analysis or spatial statistics, is the availability of numerous replications of such data (i.e., set of functions) produced by the same or similar underlying process. 
+The role of \gls[hyper=false]{fda} in this work is to describe the overall variation within the dataset $\bm{Y}$ using a reduced set of scalars and functions obtained from \glsentryfull{pca}.
+The functions remain the same for all of the dataset,
+while the scalars vary as function of the sample.
+Key here is that the required number of scalars is much smaller than the size of $\mathbf{Y}$ 
+and, in turn, can be used as the \gls[hyper=false]{qoi} for \gls[hyper=false]{sa}.
 
+%-----------------------------------------------------------------
 \subsection{Functional Output Representation}\label{sub:sa_spline}
+%-----------------------------------------------------------------
 
 The assumption of continuity within a practically discrete data set (such as the numerical code output of Eq.~(\ref{eq:discrete_time}) is made explicit through a functional representation.
 The recommended representation is through a linear combination of basis functions \cite{Ramsay2005}.
@@ -58,16 +65,16 @@ The degree, $p$, and the number of interior knots, $L-1$ (i.e., excluding the en
 determine the number of spline basis functions according to $K = p + L$.
 In other words, the B-spline basis functions are $\{B_k^p (t); \, k = -p,-p+1,\cdots,L-1\}$.
 
-Fig.~\ref{fig:b_spline} illustrates all the $14$ spline basis functions of degree $3$ over $10$ uniform interior knots (or $11$ sub-intervals) defined in $[0,1]$.
+Fig.~\ref{fig:ch3_bspline} illustrates all the $14$ spline basis functions of degree $3$ over $10$ uniform interior knots (or $11$ sub-intervals) defined in $[0,1]$.
 The resulting augmented knot sequence is $\boldsymbol{\tau}=\{0, 0, 0, 0, \frac{1}{11}, \cdots, \frac{10}{11}, 1, 1, 1, 1\}$.
 The three leftmost and three rightmost basis functions are less smooth compared to the other (twice continuously differentiable) eight basis functions in the center. 
 From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
-\begin{figure}[bth]
-	\centering
-	\includegraphics[scale=0.85,trim={0 0.15cm 0 0},clip]{../figures/r-figures/bSpline.png}
-	\caption[Spline basis functions of order $4$]{The fourteen spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into 11 sub-intervals}
-	\label{fig:b_spline}
-\end{figure}
+\bigfigure[pos=!tbhp,
+					 opt={width=1.0\textwidth},
+           label={fig:ch3_bspline},
+           shortcaption={Spline basis functions of order $4$}]
+{../figures/chapter3/figures/plotBSplineIllustration}
+{The fourteen spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into $11$ sub-intervals}
 
 According to Eq.~(\ref{eq:basis_function_expansion}), B-spline basis functions of a given order $B_k^p (t)$ and a knot sequence $\boldsymbol{\tau}$ 
 represents function $y_i$ as follows,
