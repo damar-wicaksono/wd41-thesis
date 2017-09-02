@@ -126,12 +126,22 @@ The left panel shows the functional data set with its phase variation to be redu
 (shown as the vertical lines, solid and dashed for the landmarks of realizations and reference, respectively).
 The structural mean was computed from the cross-sectional mean of registered curves shown in both panels as dashed curve. 
 Indeed, this mean is more representative as a typical realization of the curves in the original dataset.
-\begin{figure}[bth!]
-	\centering
-	\includegraphics[scale=0.48,trim={0 1cm 0 0},clip]{../figures/r-figures/illustrateRegisteredCurves.png}
-	\caption[Illustration of curve registration]{Illustration of curve registration. (Left) curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). (Right) the registered curves where all curves have been aligned to each other. The structural mean is shown as dashed curve. The scales in the axes are arbitrary.}
-	\label{fig:illustrate_registered_curves}
-\end{figure}
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch3_plot_registered_curves_illustration},
+                  maincaption={Illustration of curve registration. Shown in the left, surves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as dased curve. The scale in the axes are arbitrary},%
+									mainshortcaption={Illustration of curve registration.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch3_plot_registered_curves_illustration_1},
+                  leftcaption={Unregistered curves},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch3_plot_registered_curves_illustration_2},
+                  rightcaption={Registered curves, by landmark},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter3/figures/plotRegisteredCurvesIllustration_1}
+{../figures/chapter3/figures/plotRegisteredCurvesIllustration_2}
 
 More details on the properties of the warping functions used to transform the time argument for registration can be found in Appendix~\ref{app:landmark}.
 
