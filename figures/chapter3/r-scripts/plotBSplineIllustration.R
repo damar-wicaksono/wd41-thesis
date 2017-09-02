@@ -4,7 +4,7 @@
 # author    : WD41, LRS/EPFL/PSI
 # date      : September 2017
 #
-# Custom function --------------------------------------------------------------
+# Custom function -------------------------------------------------------------
 spline_function <- function(x, knots, i, p)
 {
     # number of basis functions
@@ -40,8 +40,8 @@ alpha <- function(x, knots, i, p) {
 otpfullname <- c("./figures/plotBSplineIllustration.pdf")
 
 # Graphic Parameters
-fig_size <- c(10, 5)                 # width, height
-margin   <- c(4, 6.5, 2.2, 1) + 0.1   # canvas margin (bot, left, top, right)
+fig_size <- c(10, 5)                    # width, height
+margin   <- c(4, 6.5, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
 cex_axis <- 2.0     # Axis marker size
 cex_lab  <- 2.0     # Axis label size
 cex_main <- 3.0     # Main title size
