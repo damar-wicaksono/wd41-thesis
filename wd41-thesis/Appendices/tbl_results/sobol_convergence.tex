@@ -1,9 +1,9 @@
-%*****************************************************************************************
-\subsection{Convergence of the Sobol' Indices}\label{sub:sa_application_convergence_sobol}
-%*****************************************************************************************
+%***********************************************************************
+\section{Convergence of the Sobol' Indices}\label{app:sobol_convergence}
+%***********************************************************************
 
 % TRACE plot of total effect indices estimation
-The convergence of the Sobol' indices' estimator can be investigated from their evolutions as functions of increasing number of samples.
+The convergence of the Sobol' indices' estimator can be investigated from their evolutions as functions of the number of samples.
 Shown in Fig.~\ref{fig:ch3_plot_running_indices} is the evolution (trace plot) of the estimated main-effect indices with the maximum cladding temperature as the \gls[hyper=false]{qoi}.
 The Saltelli et al. estimator performs poorly compared to the Janon et al. estimator for this particular output.
 This means that a larger number of samples are required to obtain a stable ranking.
@@ -12,7 +12,7 @@ This means that a larger number of samples are required to obtain a stable ranki
            label={fig:ch3_plot_running_indices},
            shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
 {../figures/chapter3/figures/plotRunningIndices}
-{Evolution of all the main-effect sensitivity indices using two different estimators as a function of the number of Sobol' sequence samples. The \gls[hyper=false]{qoi} is the maximum cladding temperature}
+{Evolution of the main-effect sensitivity indices for all input paramters using two different estimators as a function of the number of Sobol' sequence samples. The \gls[hyper=false]{qoi} is the maximum cladding temperature}
 
 % Uncertainty in the estimation
 If the main purpose of the \gls[hyper=false]{sa} is simply to rank the parameter importance with respect to a particular \gls[hyper=false]{qoi},
@@ -22,12 +22,12 @@ Such uncertainty needs to be addressed for all the estimates.
 
 % Empirical convergence study
 In this work, an empirical convergence study was established using three different sample sizes ($250$; $500$; $1000$),
-and for each size, the $95\%$ \gls[hyper=false]{ci} length (the difference between the upper bound and lower bound) using the bootstrap technique \cite{Efron1986} using $10'000$ replications.
+and for each size, the $95\%$ \gls[hyper=false]{ci} length (the difference between the upper and lower bounds) is determined using the bootstrap technique \cite{Efron1986} using $10'000$ replications.
 The results are shown if Fig.~\ref{fig:ch3_plot_convergence_maxtemp} for the maximum cladding temperature as the \gls[hyper=false]{qoi}.
 Note that the comparisons between \gls[hyper=false]{ci} lengths of different estimates can be made directly as the Sobol' index itself is dimensionless.
 As can be seen, with respect to this \gls[hyper=false]{qoi}, the Janon et al. estimator is further confirmed as the more efficient estimator.
 The uncertainty of indices estimated by the Saltelli et al. estimator is still high for numbers of samples in the range of thousands.
-Also, the efficiency of the Saltelli et al. estimator is also found to be more sensitive to the choice of estimand (i.e., Sobol' index of a given parameter). 
+The efficiency of the Saltelli et al. estimator is also found to be more sensitive to the choice of estimand (i.e., Sobol' index of a given input parameter). 
 \normfigure[pos=tbhp,
 	         opt={width=1.0\textwidth},
            label={fig:ch3_plot_convergence_maxtemp},
@@ -55,9 +55,3 @@ The regression lines also indicate the projection of the reduction in the \gls[h
 % Total-effect Indices convergence
 As for the total-effect indices, the results obtained using the Jansen's estimator confirmed the good efficiency of the estimator,
 reaching below $10\%$ \gls[hyper=false]{ci} length for $1'000$ \gls[hyper=false]{mc} samples across all \gls[hyper=false]{qoi}.
-Benefiting from the screening procedure taken before ($12$ influential parameters instead of $27$ parameters) and considering the empirical convergence,
-a total of $2'000$ samples (which corresponds to $28'000$ \gls[hyper=false]{trace} runs) was deemed appropriate for the more detailed \gls[hyper=false]{sa} presented below.
-For conciseness only the results of selected types of output are presented to illustrate the method application, 
-namely the mid-height clad temperature transient (TC$4$ at elevation $z = 2.4 \, [m]$),
-the pressure drop transient at the middle of the assembly (the segment between $z = 1.7 \, [m]$ and $z = 2.3 \, [m]$),
-and the liquid carryover.
