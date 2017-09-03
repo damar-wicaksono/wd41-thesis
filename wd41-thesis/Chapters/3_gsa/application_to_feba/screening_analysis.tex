@@ -3,38 +3,37 @@
 %***************************************************************************
 
 % Introductory paragraph
-A screening analysis to identify noninfluential parameters was first carried out on the $27$ model parameters using three different methods.
+A screening analysis to identify the noninfluential parameters was first carried out on the $27$ model parameters using three different methods.
 The \gls[hyper=false]{qoi} for this screening analysis was the time-averaged quantities for all output types (cladding temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
-$320$ replications are used for the Morris method while $1'000$ samples are used to estimate the total-effect indices.
-Finally, the parameter ranking are constructed based on $\mu^*_d$ (for the two Morris methods) and $\hat{ST}_d$ (the total-effect indices).
+$320$ replications were used for the Morris method while $1'000$ samples were used to estimate the total-effect indices for the Sobol'-Saltelli method.
+The parameter ranking was constructed based on $\mu^*_d$ (for the two Morris methods) and $\hat{ST}_d$ (the total-effect indices).
 
 % Convergence of results
-Fig.~\ref{fig:ch3_plot_running_indices} gives an example of convergence of sensitivity measures $\mu^*_d$ and $\hat{ST}_d$ with respect to the average temperature at the middle of the assembly, 
+Fig.~\ref{fig:ch3_plot_running_screening} gives an example of convergence of sensitivity measures $\mu^*_d$ and $\hat{ST}_d$ with respect to the average temperature at the middle of the assembly, 
 with increasing number of replications (for the Morris methods) and samples (for the Sobol' total-effect indices estimation).
 It is shown that all of the sensitivity measures converged
 and the most important parameters identified by each of the methods are the same (in this case: \texttt{gridHT}, \texttt{dffbIntD}, \texttt{dffbWHT}, \texttt{dffbVIHT}).
-Note that the values of the two measures are not to be compared with each other.
-The convergence of these measures with respect to other outputs also gave the same behavior and are not shown here. 
+Note that the values of the two measures cannot be compared with each other.
+The convergence of these measures with respect to other outputs also gave the same behavior. 
 \bigfigure[pos=tbhp,
            opt={width=0.9\textwidth},
-           label={fig:ch3_plot_running_indices},
+           label={fig:ch3_plot_running_screening},
            shortcaption={Trace plot of screening sensitivity estimations.}]
 {../figures/chapter3/figures/plotRunningScreening}
-{Evolution of $\mu^*_d$ and $\hat{ST}_d$ with respect to average temperature at the middle of the assembly as function of number of replications or samples.
+{Evolution of $\mu^*_d$ and $\hat{ST}_d$ with respect to the average temperature at the middle of the assembly as a function of the number of replications or samples.
 The sensitivity measures related to the four most important parameters, the same for each method, are given unique line types in the plots}
 
 % Explaining the table of results
-The numerical results of the sensitivity measures used in the ranking/screening for each parameter with respect to each of the different outputs are tabulated in the Appendix~\ref{app:tbl_results_screening}.
 An important finding here is that the noninfluential parameters identified by both variants of the Morris methods are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
 Table~\ref{tab:ch3_screening_results} presents the summary of parameters importance across different outputs.
-In the table, a parameter is considered noninfluential with respect to a particular output type if its Sobol' total-effect index value fall below $5\%$.
+In the table, a parameter is considered noninfluential with respect to a particular output type if its Sobol' total-effect index value falls below $5\%$.
 This parameter will be screened out in the downstream analysis.
-The final selection of $12$ important parameters are then made by making a union set of the important parameters identified with respect to different outputs.
-
+The final selection of $12$ important parameters are then made by making a union set of the important parameters identified with respect to the different outputs.
+Complete numerical results of the sensitivity measures used in the ranking/screening of each parameter with respect to each of the different outputs are tabulated in Appendix~\ref{app:tbl_results_screening}.
 \begin{table*}[!htbp]\centering
 \ra{1.1}
 \begin{adjustwidth*}{}{-3cm}
-\caption{Parameters importance across different outputs, average quantities over the transient. Checkmark signifies parameters with the Sobol' total-effect indices above $5\%$ and shaded cells signify the final selection of important parameters.}
+\caption{Parameters importance across different outputs, average quantities over the transient. Checkmark signifies a parameter with a Sobol' total-effect indices above $5\%$ and shaded cells signify the final selection of the retained influential parameters.}
 \label{tab:ch3_screening_results}
 \begin{tabular}{@{}rlrrrrrrrrcrrrrcr@{}}\toprule
 \multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multicolumn{8}{c}{$TC$ \tiny{($1$ is at the top, $8$ is at the bottom of the assembly)}} & \phantom{a} & \multicolumn{4}{c}{$DP$} & \phantom{a} & \multirow{2}{*}{$CO$}\\             
@@ -72,13 +71,13 @@ The final selection of $12$ important parameters are then made by making a union
 \end{table*}
 
 % Consistency of results
-Using $5\%$ cut-off value to screen out noninfluential parameters is admittedly an \emph{ad hoc} approach.
+Using a $5\%$ cut-off value to screen out noninfluential parameters is admittedly an \emph{ad hoc} approach.
 To check the consistency of the screening approach, Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs} illustrates the notion of noninfluential and influential parameters,
 in terms of the effects of their perturbations on the transient of three different outputs.
-\gls[hyper=false]{trace} was executed using $500$ \gls[hyper=false]{mc} samples of parameter value from each of the sets.
-The figure confirms that the use of time-averaged quantity for each output types as a viable \gls[hyper=false]{qoi} for screening as the identified noninfluential parameters were indeed the ones that result in minor variation of all outputs transient as compared to the variation brought by the influential parameter perturbations.
+\gls[hyper=false]{trace} was executed using $500$ samples of parameter value from each set of parameter (i.e., influential and noninfluential).
+The figure confirms that the use of time-averaged quantity for each output type is a viable \gls[hyper=false]{qoi} for screening as the identified noninfluential parameters were indeed the ones that result in minor variation (shown in black curves) of all outputs transient as compared to the variation brought by the influential parameter perturbations (shown in gray curves).
 Furthermore, it also confirms that by making the union set of all the important parameters subsets (each with respect to a particular output, using the $5\%$ cut-off value), 
-the final selection of $12$ noninfluential parameters is valid for all outputs.
+the final selection of $12$ influential parameters is valid for all outputs.
 
 % Influential vs non influential runs, examples
 \bigfigure[pos=tbhp,
@@ -87,4 +86,6 @@ the final selection of $12$ noninfluential parameters is valid for all outputs.
            shortcaption={The effect of influential vs. noninfluential parameters perturbations on different output.}]
 {../figures/chapter3/figures/plotInfluentialNonInfluentialRuns}
 {Illustration of the variations in the transient of three different outputs using only the $12$ influential parameters (background, gray) and only the $15$ noninfluential parameters (foreground, black).
-Each cases uses $500$ \gls[hyper=false]{mc} samples.}
+Each case uses $500$ samples.}
+
+
