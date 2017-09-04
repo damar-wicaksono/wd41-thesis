@@ -22,29 +22,44 @@ The recommended representation is through a linear combination of basis function
 This thesis adopts the B-spline basis function \cite{Gillies2010} expansion because of its flexibility \cite{Eilers1996,Eilers2010} 
 and the wide availability of its implementation in open numerical libraries \cite{RCT2017}.
 
+% Basis function expansion
 Within this framework, a function can be written using basis function expansion as,
 \begin{equation}
 	y_i (t) = \sum_{k = 1}^{K} c_{ik} \cdot \phi_k (t); \quad i = 1, 2, \cdots N
 \label{eq:basis_function_expansion}
 \end{equation}
-where $K$ indicates the number of basis functions. $\phi_k (t)$ is the $k$-th basis function, 
-and $c_{ik}$ is the basis coefficient.
-The latter is fitted to the data set to construct curve $i$ with or without smoothing (i.e., interpolating condition vs. penalized ).
+where $K$ indicates the number of basis functions; 
+$\phi_k (t)$ is the $k$-th basis function;
+and $c_{ik}; \, k = 1, \dots, K$ are the basis coefficients for curve $i$.
+These coeffiecients are fitted to the data set to construct curve $i$, with or without smoothing.
 
-A B-spline basis function is a basis system constructed using piecewise polynomial (\emph{spline}) connected at select points in the domain called \emph{knots}.
-Let $\boldsymbol{\tau}=\{\tau_k; \, k = 0,1,\cdots, L\}$ be a sequence of knots, non-decreasing numbers that divide the function domain into $L$ sub-intervals.
-Within each of these sub-intervals, piecewise polynomial of degree $p$ is defined.
-At the interconnection, adjacent polynomials are continuous with derivatives up to $p-1$ matching up.
+% Spline
+A B-spline is constructed using piecewise polynomial (\emph{spline}) connected at selected points in the domain called \emph{knots}.
+Let $\boldsymbol{\tau}=\{\tau_k; \, k = 0,1,\cdots, L\}$ be a sequence of knots, i.e., an ordered set of non-decreasing numbers that divide the function domain into $L$ sub-intervals.
+Within each sub-interval, a piecewise polynomial of degree $p$ is defined.
+At the interconnection (knots), adjacent polynomials are continuous with their derivatives up to $p-1$ matching up.
+In other words, the spline is $p-1$ differentiable at the knots.
 
+% B-Spline
 The basis functions in the B-spline system are determined by the degree of the polynomial $p$ and the knot sequence $\boldsymbol{\tau}=\{\tau_k; \, k = 0,1,\cdots, L\}$.
-At the left and right boundaries, several spline basis functions are defined with decreasing continuity up to being discontinuous in both ends.
-To satisfy these condition, the endpoints are repeated and augmented into the knot sequence such that
+However, per definition, there is no data point available on the left (right) of the leftmost (rightmost) knot.
+As such, there is no differentiable (smoothness) condition to uphold at the boundaries and the resulting system of equations are underdetermined.
+To resolve this issue, the endpoints can be repeated $p$ times and augmented into both ends of the knot sequence such that
 \begin{equation}
 	\tau_{-p} = \cdots = \tau_{0} \leq \tau_{1} \leq \cdots \leq \tau_{L} = \cdots = \tau_{L+p} 
 \label{eq:augmented_knots}
 \end{equation}
-The augmented knot becomes $\boldsymbol{\tau}=\{\tau_k; \, k = -p,-p+1,\cdots, 0, 1, \cdots, L + p\}$. 
-B-spline basis functions of degree $p$ can then be defined recursively on the augmented knot sequence using de Boor - Cox formula as follows, 
+
+% Constructing B-Spline
+This procedure procedure will only reduce the order of continuity of the $p$ outer left and $p$ outer right basis functions of the domain such that the system of equations becomes fully determined.
+As a result, the augmented knot sequence becomes
+\begin{equation}
+  \boldsymbol{\tau}=\{\tau_k; \, k = -p,-p+1,\cdots, 0, 1, \cdots, L + p\}
+\label{eq:augmented_knots_sequence}
+\end{equation}
+
+% de Boor-Cox formula
+The B-spline basis functions of degree $p$ can then be defined recursively on the augmented knot sequence using de Boor - Cox formula as follows, 
 \begin{equation}
 	\begin{split}
 		B^0_k (t) = 
@@ -62,13 +77,13 @@ B-spline basis functions of degree $p$ can then be defined recursively on the au
 \label{eq:deboor_cox}
 \end{equation}
 where $B_k^p (t)$ denotes the $k$-th B-spline of degree $p$.
-The degree, $p$, and the number of interior knots, $L-1$ (i.e., excluding the end points), 
+The degree $p$ and the number of interior knots $L-1$ (i.e., excluding the end points), 
 determine the number of spline basis functions according to $K = p + L$.
 In other words, the B-spline basis functions are $\{B_k^p (t); \, k = -p,-p+1,\cdots,L-1\}$.
 
 Fig.~\ref{fig:ch3_bspline} illustrates all the $14$ spline basis functions of degree $3$ over $10$ uniform interior knots (or $11$ sub-intervals) defined in $[0,1]$.
 The resulting augmented knot sequence is $\boldsymbol{\tau}=\{0, 0, 0, 0, \frac{1}{11}, \cdots, \frac{10}{11}, 1, 1, 1, 1\}$.
-The three leftmost and three rightmost basis functions are less smooth compared to the other (twice continuously differentiable) eight basis functions in the center. 
+The three leftmost and three rightmost basis functions are less smooth at the two boundaries than the other eight basis functions in the center. 
 From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
 \bigfigure[pos=!tbhp,
 					 opt={width=1.0\textwidth},
@@ -77,8 +92,8 @@ From leftmost to the right (rightmost to the left) the basis functions are disco
 {../figures/chapter3/figures/plotBSplineIllustration}
 {The fourteen B-spline basis functions of degree $3$ (cubic) with $10$ uniform interior knots (shown in light dashed vertical lines) that divides the domain into $11$ sub-intervals.}
 
-According to Eq.~(\ref{eq:basis_function_expansion}), B-spline basis functions of a given order $B_k^p (t)$ and a knot sequence $\boldsymbol{\tau}$ 
-represents function $y_i$ as follows,
+Returning to the formulation of Eq.~(\ref{eq:basis_function_expansion}),
+a function $y_i$ is then represented by B-spline basis functions of a given order $B_k^p (t)$ and a knot sequence $\boldsymbol{\tau}$ as follows,
 \begin{equation}
 	y_i (t) = \sum_{k = -p}^{L-1} c_{ik} \cdot B^p_k (t); \quad i = 1, 2, \cdots N
 \label{eq:basis_function_expansion}
@@ -98,7 +113,7 @@ the variation in magnitude (\emph{vertical} variation) and the variation in phas
 The simultaneous presence of these two types of variations makes the definition of a mean function difficult \cite{Kneip1992}.
 
 % Cross-sectional mean vs. Structural Mean
-Fig.~\ref{fig:illustrate_phase_variation} illustrates this point.
+Fig.~\ref{fig:ch3_plot_phase_variation_illustration} illustrates this point.
 \marginpar{Cross-sectional vs. structural mean}
 For a functional data set that does not contain strong phase variations, 
 a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:ch3_plot_phase_variation_illustration_1}).
@@ -122,17 +137,17 @@ by first separating the phase and amplitude variations.
 {../figures/chapter3/figures/plotPhaseVariationIllustration_2}
 
 % Landmark registration
-In the presence of strong amplitude and phase variations, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
+In order to obtain a meaningful structural mean in presence of strong amplitude and phase variations,
+the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
 \marginpar{landmark registration}
-The procedure transforms the time argument using a warping function to reduce the phase variation in the dataset.
-Specifically, the landmark type registration type is employed because the main features of the function of interest (i.e., reflood curve) are readily identifiable.
+The procedure transforms the time argument using a warping function to reduce the phase variation in the data set.
+Specifically, the landmark based registration can be employed when the main features of the function of interest (i.e., reflood curve) are readily identifiable.
 In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time relative to a set of reference values.
 
 This is illustrated in Fig.~\ref{fig:ch3_plot_registered_curves_illustration}.
-The left panel shows the functional data set with its phase variation to be reduced by aligning its landmark (i.e., the time of maximum) to a reference value 
-(shown as the vertical lines, solid and dashed for the landmarks of realizations and reference, respectively).
-The structural mean was computed from the cross-sectional mean of registered curves shown in both panels as dashed curve. 
-Indeed, this mean is more representative as a typical realization of the curves in the original dataset.
+The left panel shows a functional data set exhibiting phase variation, which is reduced by aligning its landmark, here the time of maximum of each realization (shown as vertical solid lines) to a reference value (sjpwn as the vertical dashed line).
+The structural mean (solid line curve) is the simply computed as the cross-sectional mean of the registered curves shown on the right panel. 
+The structural mean properly represents the inflection and the maximum points of a typical realization indeed, and therefore is more representative of the curves in the original data set.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_registered_curves_illustration},
                   maincaption={Illustration of curve registration. Shown in the left, curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as a thick solid line curve. The scale in the axes are arbitrary.},%

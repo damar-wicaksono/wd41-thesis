@@ -14,37 +14,41 @@ More details on the programming aspects of the implementation (the so-called \te
 \subsection{The Morris Method}\label{sub:sa_morris}
 %--------------------------------------------------
 
-The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps. 
-\textsc{First}, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal (base) points as well as the perturbed points for each parameter.
+The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps.
+\begin{enumerate}
+
+	\item An OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well as the perturbed points for each parameter.
 A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
 In each of the perturbed points, only one parameter change its value relative to the base.
+Note that in trajectory design, the nominal point only serves as the starting point and a perturbed point becomes the base point for the next perturbation.
 Different replication yields different nominal point and the associated perturbed points.
 
-\textsc{Second}, each point in the design matrix is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
+  \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
 
-\textsc{Third}, the model is evaluated for each (rescaled) point in the design matrix. The total number of model evaluations for a given design matrix of size $N_R$ is $N_R \times (D + 1)$.
+  \item The model is evaluated for each (rescaled) point of the design matrix. The total number of model evaluations for a given design matrix is $N_R \times (D + 1)$.
+  
+  \item Finally, for a selected \gls[hyper=false]{qoi} the $N_R$ elementary effects $EE_d$ are computed for each input parameter $x_d$ and each trajectory. The statistical summaries $\mu_d, \mu^*_d,$ and $\sigma_d$ are computed, and the ranking of the input parameters for the selected \gls[hyper=false]{qoi} is established based on $\mu^*_d$.
 
-\textsc{Fourth} and finally, the $N_R$ elementary effects $EE_d$ for each parameter and each trajectory are computed for a selected \gls{qoi}.
-Their statistical summaries ($\mu_d$, $\mu_d^*$, $\sigma_d$) are then computed, 
-and the ranking of the parameters can be constructed based on $\mu_d^*$ for a selected \gls{qoi}.
-The $\mu_d^*$ can be directly used to rank the parameters to systematically identify 
-and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
+\end{enumerate}
 
+The different rankings based on $\mu_d^*$ obtained from various relevant \glspl[hyper=false]{qoi} can then be used and compared to consistently identify and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
+
+%-------------------------------------------------------------------
 \subsection{The Sobol'-Saltelli Method}\label{sub:sa_sobol_saltelli}
+%-------------------------------------------------------------------
 
-In principle, the estimation of the Sobol' indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls{mc} simulation.
+In principle, the estimation of the Sobol' indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls[hyper=false]{mc} simulation.
 \marginpar{brute force \\ Monte Carlo}
-The most straightforward, though rather naive, 
-implementation of \gls{mc} simulation to conduct the estimation is using two nested loops for the computation of the conditional variances and expectations appearing in both equations.
+The most straightforward, though rather rudimentary, 
+estimation method is to use two nested loops for the computation of the conditional variances and expectations appearing in both indices.
 
 In the estimation of the main-effect index of parameter $x_d$, for instance, 
-the outer loop samples values of $X_d$ while the inner loop samples values of $\mathbf{X}_{\sim d}$ (anything else other than $x_d$).
-These samples, in turn, are used to evaluate the model output.
-In the inner loop, the mean of the model output (for a given value of $X_d$ but over many values of $\mathbf{X}_{\sim d}$) is taken. 
-Afterward, in the outer loop, the variance of the model output (over many values of $X_d$) is taken.
-This approach can easily become prohibitively expensive as the nested structure requires $N^2$ model evaluations \emph{per input dimension} for one of the sensitivity indices (i.e., the main- or total-effect index), 
-while $N$ (the size of \gls{mc} samples) are typically in the range of $10^2 - 10^4$ for a reliable estimate. 
-Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of the $d$-th parameter.
+the outer loop samples values of $X_d$ while the inner loop samples values of $\bm{\mathcal{X}}_{\sim d}$ (all parameters except $x_d$).
+These samples, in turn, are used to evaluate the model and generate the output realizations.
+
+Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of a parameter $x_d$.
+In the inner loop, the arithmetic mean of the model output is taken for a given value of $X_d$ but over many values of $\bm{\mathcal{X}}_{\sim d}$. 
+Afterward, in the outer loop, the variance of the model output is taken over many values of $\mathcal{X}_d$.
 
 % Brute forcem Monte Carlo Pseudo-code
 \begin{algorithm}
@@ -68,75 +72,72 @@ Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the vari
 \end{algorithmic}
 \end{algorithm}
 
-Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls{mc} simulation to estimate the indices.
+% The cost of brute formce MC
+Algorithm~\ref{alg:brute_force_mc} can easily become prohibitively expensive as the nested structure requires $N^2$ model evaluations \emph{per input dimension} for one of the sensitivity indices (i.e., the main- or total-effect index), 
+while $N$ (the size of \gls[hyper=false]{mc} samples) are typically in the range of $10^2 - 10^4$ for a reliable estimate. 
+
+% Sobol'-Saltelli Approach
+Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls[hyper=false]{mc} simulation to estimate the indices.
 The formulation starts by expressing the expectation and variance operators in their integral form 
-and ends with different possible \gls{mc} estimators for both sensitivity indices.
+and ends with different possible \gls[hyper=false]{mc} estimators for both sensitivity indices.
 A detailed derivation of the integral form and the origin of the estimator can be found in Appendix~\ref{app:sobol_saltelli}. 
 
-The computational cost associated with the estimation of all the main-effect and total-effect indices using the Sobol'-Saltelli method is $N \times (D + 2)$ code runs,
-\marginpar{computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
-where $N$ is the number of \gls{mc} samples and $D$ is the number of parameters.
-Compare this to the cost of brute force Monte Carlo of $2 \times D \times N^2$ code runs to estimate all the main-effect and total-effect sensitivity indices. 
+An implementation of the Sobol'-Saltelli method is also part of \texttt{gsa-module} python3 package (see Appendix~\ref{app:gsa_module} for detail). 
+For $N$ number of \gls[hyper=false]{mc} samples and $D$ number of model parameters, the \gls[hyper=false]{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996} described in the following.
 
-As an additional comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
-\marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
-where $N_R$ is the number of OAT design replications.
-In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
-determines the precision of the estimates.
-A larger number of samples (and replications) increases the precision.
-Note, however, that in practice the typical number of Morris replications is between $10^1 - 10^2$~\cite{Saltelli2010}, 
-while the number of \gls{mc} samples for the Sobol' indices estimation amounts to $10^2 - 10^4$~\cite{Sobol2001}.
+\begin{enumerate}
 
-As it was the case for the Morris method, an implementation of the Sobol'-Saltelli method is also part of \texttt{gsa-module} python3 package (see Appendix~\ref{app:gsa_module} for detail). 
-For $N$ number of \gls{mc} samples and $D$ number of model parameters, the \gls{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996} described in the following.
+  \item Generate two $N \times D$ independent random samples $A$ and $B$ from a uniform independent distribution in $D$-dimension, $[0,1]^D$:
+    \begin{equation}
+      A = 
+      \begin{pmatrix}
+        a_{11}  & \cdots  & a_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        a_{N1}  & \cdots  & a_{ND}\\
+      \end{pmatrix}
+      ;\quad B = 
+      \begin{pmatrix}
+        b_{11}  & \cdots  & b_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        b_{N1}  & \cdots  & b_{ND}\\
+        \end{pmatrix}
+    \label{eq:ss_two_samples}
+    \end{equation}
 
-\textsc{First}, generate two $N \times D$ independent random samples from a uniform independent distribution in $D$-dimension, $[0,1]^D$:
-\begin{equation}
-A = 
-\begin{pmatrix}
-a_{11}  & \cdots  & a_{1D}\\
-\vdots	& \ddots & \vdots\\
-a_{N1}  & \cdots  & a_{ND}\\
-\end{pmatrix}
-;\quad B = 
-\begin{pmatrix}
-b_{11}  & \cdots  & b_{1D}\\
-\vdots	& \ddots & \vdots\\
-b_{N1}  & \cdots  & b_{ND}\\
-\end{pmatrix}
-\label{eq:ss_two_samples}
-\end{equation}
+  \item Construct $D$ additional design matrices from $A$ and $B$ where each matrix $A^d_B$ is matrix $A$ with the $d$-th column substituted by the $d$-th column of $B$:
+  \begin{equation}
+    \begin{split}
+      & A_{B}^1 = 
+      \begin{pmatrix}
+        b_{11}  & \cdots  & a_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        b_{N1}  & \cdots  & a_{ND}\\
+      \end{pmatrix} \\
+      & A_{B}^{d} = 
+      \begin{pmatrix}
+        a_{11}  & \cdots & b_{1d} & \cdots & a_{1D}\\
+        \vdots	& \cdots & \vdots & \cdots & \vdots\\
+        a_{N1}  & \cdots & b_{Nd} & \cdots & a_{ND}\\
+      \end{pmatrix} \\
+      & A_{B}^{D} = 
+      \begin{pmatrix}
+        a_{11}  & \cdots  & b_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        a_{N1}  & \cdots  & b_{ND}\\
+      \end{pmatrix}
+    \end{split}
+  \label{eq:ss_sampling_resampling}
+  \end{equation}
 
-\textsc{Second}, construct $D$ additional design of experiment matrices where each matrix is matrix $A$ with the $d$-th column substituted by the $d$-th column of matrix $B$:\begin{equation}
-  \begin{split}
-  & A_{B}^1 = 
-  \begin{pmatrix}
-    b_{11}  & \cdots  & a_{1D}\\
-    \vdots	& \ddots & \vdots\\
-    b_{N1}  & \cdots  & a_{ND}\\
-  \end{pmatrix} \\
-  & A_{B}^{d} = 
-  \begin{pmatrix}
-    a_{11}  & \cdots & b_{1d} & \cdots & a_{1D}\\
-    \vdots	& \cdots & \vdots & \cdots & \vdots\\
-    a_{N1}  & \cdots & b_{Nd} & \cdots & a_{ND}\\
-  \end{pmatrix} \\
-  & A_{B}^{D} = 
-  \begin{pmatrix}
-    a_{11}  & \cdots  & b_{1D}\\
-    \vdots	& \ddots & \vdots\\
-    a_{N1}  & \cdots  & b_{ND}\\
-  \end{pmatrix}
-  \end{split}
-\label{eq:ss_sampling_resampling}
-\end{equation}
+  \item Rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
 
-\textsc{Third}, rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
+  \item Evaluate the model multiple times using input parameters vectors that correspond to each row of $A$, $B$, and all $A_B^d$.
 
-\textsc{Fourth}, evaluate the model multiple times using input vectors that correspond to each row of $A$, $B$, and all the $A_B^d$.
+  \item Finally, extract the \gls[hyper=false]{qoi}s from all the outputs and recast them as vectors,
+  which will be used to estimate the main- and total-effect indices according to a selected estimator described below.
+  
+\end{enumerate}
 
-\textsc{Fifth} and finally, extract the \gls{qoi}s from all the outputs and recast them as vectors.
-The main-effect and total-effect indices are then estimated using the estimators described below.
 
 For the main-effect sensitivity index, two estimators are considered.
 One is proposed by Saltelli~\cite{Saltelli2002}, and the other, as an alternative, is proposed by Janon et al~\cite{Janon2014}.
@@ -145,14 +146,13 @@ The latter proved to be more efficient, especially for a large variation around 
 The general form of main-effect sensitivity index estimator is
 \marginpar{Main-effect sensitivity index estimators}
 \begin{equation}
-  \widehat{S}_d = \frac{\frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n - \mathbb{E}^2[Y]}{\mathbb{V}[Y]}
+  \widehat{S}_d = \frac{\frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n - \mathbb{E}^2[\mathcal{Y}]}{\mathbb{V}[\mathcal{Y}]}
 \label{eq:ss_main_effect_estimator}
 \end{equation}
-where and $\mathbb{E}^2[Y]$ and $\mathbb{V}[Y]$ are as prescribed in Table~\ref{tab:ss_main_effect_estimator}.
 where the subscript $n$ corresponds to the row of the sampled model parameters 
-such that $f(B)_n$ is the model output evaluated using inputs taken from the $n$-th row of matrix $B$ 
-and $f(A_B^d)_n$ is the model output evaluated using inputs taken from the $n$-th row of matrix $A_B^D$.
-The \gls{mc} estimator for the second term in the numerator and for the denominator differ for the two considered estimators given in Table~\ref{tab:ss_main_effect_estimator}.
+such that $f(B)_n$ and $f(A^d_B)_n$ are the model outputs evaluated using inputs taken from the $n$-th row of matrix $B$ 
+and matrix $A_B^D$, respectively.
+The estimators for the term $\mathbb{E}^2[\mathcal{Y}]$ and $\mathbb{V}[\mathcal{Y}]$ differs for the two indices estimators and they are given in Table~\ref{tab:ss_main_effect_estimator}.
 %The first term in the numerator of Eq.~(\ref{eq:ss_main_effect_estimator}) is the same for both Saltelli and Janon et al. estimators and is given by
 %\begin{equation}
 %  \int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x}_{\sim d} \approx \frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n
@@ -180,3 +180,19 @@ The estimator reads
 \label{eq:ss_jansen_estimator}
 \end{equation}
 where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator in Table~\ref{tab:ss_main_effect_estimator}.
+
+% Sobol-Saltelli Computational Cost
+The computational cost associated with the estimation of all the main-effect and total-effect indices using the Sobol'-Saltelli method is $N \times (D + 2)$ code runs,
+\marginpar{computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
+where $N$ is the number of \gls[hyper=false]{mc} samples and $D$ is the number of parameters.
+Compare this to the cost of brute force Monte Carlo of $2 \times D \times N^2$ code runs to estimate all the main-effect and total-effect sensitivity indices. 
+
+% Morris method computational cost
+As an additional comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
+\marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
+where $N_R$ is the number of OAT design replications.
+In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
+determines the precision of the estimates.
+A larger number of samples (and replications) increases the precision.
+Note, however, that in practice the typical number of Morris replications is between $10^1 - 10^2$~\cite{Saltelli2010}, 
+while the number of \gls[hyper=false]{mc} samples for the Sobol' indices estimation amounts to $10^2 - 10^4$~\cite{Sobol2001}.
