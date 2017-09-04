@@ -3,7 +3,7 @@
 %*****************************************************************************************************
 
 % Introductory paragraph
-The \gls[hyper=false]{fpc} score $\theta_{n,i}$ associated with each single realization $n$ and a principal component $i$ is used as the \gls[hyper=false]{qoi} in a \gls[hyper=false]{sa} similar to that was done for the conventional \gls[hyper=false]{qoi} is Section~\ref{sub:sa_application_conventional_sobol}.
+The \gls[hyper=false]{fpc} score $\theta_{n,i}$ associated with each single realization $n$ and a principal component $i$ is used as the \gls[hyper=false]{qoi} in a \gls[hyper=false]{sa} similar to what was done for the conventional \gls[hyper=false]{qoi} is Section~\ref{sub:sa_application_conventional_sobol}.
 In other words, the variance of the score is decomposed into the variance contribution associated with each model parameter.
 
 % 1st fPC of Registered TC4
@@ -21,8 +21,8 @@ and confirms the maximum cladding temperature as a viable representative \gls[hy
 
 % 2nd fPC of Registered TC4
 Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2} shows the Sobol' sensitivity indices using the scores associated with the second \gls[hyper=false]{fpc} of the (registered) mid-height clad temperature transient as the \gls[hyper=false]{qoi}.
-Contrary to the first component, most of the variation in the second \gls[hyper=false]{fpc} can only be explained through interactions between model parameters since the main-effect indices only summed up to $27\%$.
-The difference between the main-effect and total-effect indices are large especially for the \gls[hyper=false]{dffb}-related parameters.
+Contrary to the first component, most of the variation in the second \gls[hyper=false]{fpc} can only be explained through interactions between model parameters since the main-effect indices only summed up to $27\%$ of the total variance.
+The difference between the main-effect and total-effect indices are large for all input parameters, but especially for the \gls[hyper=false]{dffb}-related parameters.
 These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum cladding temperature),
 or only in speculative manner from the time-dependent representation of the sensitivity indices showed in Fig.~\ref{fig:ch3_plot_si_evol}, which gave a less concise description of the parameter sensitivity.
 \bigfigure[pos=!tbhp,
@@ -36,7 +36,7 @@ or only in speculative manner from the time-dependent representation of the sens
 The sensitivity indices with respect to the first \gls[hyper=false]{fpc} of the warping functions for the clad temperature transient at the mid-height of the assembly are shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_warp_pc1}.
 The spacer grid HT enhancement model is the main source of variation in the time-shift of the landmarks,
 while two \gls[hyper=false]{dffb}-related parameters (\texttt{dffbWHT} and \texttt{dffbIntDr}) and the quenching temperature each contributes around $10\%$ to the total output variation.
-The rest of the parameters have a trivial effect to the shift in comparison.
+In comparison, the rest of the parameters have a trivial effect to the shift.
 Only a small portion of the output variation is due to parameters interaction from the fact that the main-effect indices summed up to a value close to $1.0$ ($94\%$).
 \bigfigure[pos=!tbhp,
 					 opt={width=0.9\textwidth},
