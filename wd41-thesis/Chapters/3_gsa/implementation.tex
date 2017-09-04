@@ -16,7 +16,7 @@ More details on the programming aspects of the implementation (the so-called \te
 
 The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps. 
 \textsc{First}, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal (base) points as well as the perturbed points for each parameter.
-A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimen~sions/parameters) additional perturbed points.
+A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
 In each of the perturbed points, only one parameter change its value relative to the base.
 Different replication yields different nominal point and the associated perturbed points.
 
@@ -46,6 +46,7 @@ This approach can easily become prohibitively expensive as the nested structure 
 while $N$ (the size of \gls{mc} samples) are typically in the range of $10^2 - 10^4$ for a reliable estimate. 
 Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of the $d$-th parameter.
 
+% Brute forcem Monte Carlo Pseudo-code
 \begin{algorithm}
 \caption{Brute Force \gls{mc} for estimating $\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]]$}
 \label{alg:brute_force_mc}
@@ -68,7 +69,7 @@ Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the vari
 \end{algorithm}
 
 Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls{mc} simulation to estimate the indices.
-The formulation starts by expressing the the expectation and variance operators in their integral form 
+The formulation starts by expressing the expectation and variance operators in their integral form 
 and ends with different possible \gls{mc} estimators for both sensitivity indices.
 A detailed derivation of the integral form and the origin of the estimator can be found in Appendix~\ref{app:sobol_saltelli}. 
 
