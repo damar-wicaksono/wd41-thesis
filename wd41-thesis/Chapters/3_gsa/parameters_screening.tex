@@ -35,13 +35,23 @@ randomly selected over the grid and then gradually advancing one grid jump, pert
 The order of perturbation (i.e., which dimension to perturb first) and the direction of the perturbation (i.e., whether it is added or subtracted) are also randomized between replications.
 As such, different replication generates different starting nominal point as well as different order and sign (but with with the same size) of perturbation.
 The \gls{oat} computer experimental design complemented with this requirement is known as the trajectory design \cite{Ruano2012}.
-Fig.~\ref{fig:illustrate_oat_design} (left) illustrates a trajectory design in two-dimensional input parameter space discretized in $6$ levels with 4 design replications.
-\begin{figure}[bth]
-	\centering
-	\includegraphics[width=1.0\textwidth]{../figures/illustrateOATDesign/illustrateOATDesign.png}
-	\caption[Illustration of One-at-a-Time (OAT) design using trajectory and radial schemes]{Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels, while the number of levels is irrelevant for radial design. Filled circles are the base/nominal points and crosses are the perturbed levels.}
-	\label{fig:illustrate_oat_design}
-\end{figure}
+Fig.~\ref{fig:ch3_plot_oat_illustration_1} illustrates a trajectory design in two-dimensional input parameter space discretized in $6$ levels with 4 design replications.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch3_plot_oat_illustration},
+                  maincaption={Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels, while the number of levels is irrelevant for radial design. Filled circles are the nominal (for the trajectory) or base(for the radial) points and crosses are the perturbed levels.},%
+									mainshortcaption={Illustration of One-at-a-Time (OAT) design using trajectory and radial schemes.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch3_plot_oat_illustration_1},
+                  leftcaption={Trajectory scheme},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch3_plot_oat_illustration_2},
+                  rightcaption={Radial scheme},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter3/figures/plotOATIllustration_1}
+{../figures/chapter3/figures/plotOATIllustration_2}
 
 To remove the requirement to specify a method-specific parameter $p$ (the number of levels),
 \marginpar{radial OAT design}
@@ -59,7 +69,7 @@ EE_d = \frac{y(x_1, \dots, x_d+\Delta x_d,\dots,x_D) - y(x_1, \dots, x_d,\dots,x
 \end{equation}
 where now each parameter at each design replication has its corresponding perturbation size $\Delta x_d \in [-1,1]$ such that $x_d + \Delta x_d \in [0,1]$.
 
-An illustration of a radial design in two-dimensional input space with $4$ base points is shown in Fig.~\ref{fig:illustrate_oat_design} (right).
+An illustration of a radial design in two-dimensional input space with $4$ base points is shown in Fig.~\ref{fig:ch3_plot_oat_illustration_2}.
  
 %-------------------------------------------------------------------------------------------------
 \subsection{Statistics of Elementary Effects and Sensitivity Measures}\label{sub:sa_ee_statistics}

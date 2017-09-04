@@ -3,6 +3,7 @@ library(extrafont)
 #font_install("fontcm")
 #font_import()
 loadfonts(device="win")
+Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.21/bin/gswin64c.exe")
 
 # Use concise ID to code parameter names due to space constrained
 param_names <- c("breakP",    # break_ptb     1
