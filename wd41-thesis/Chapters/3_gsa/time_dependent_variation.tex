@@ -101,18 +101,25 @@ The simultaneous presence of these two types of variations makes the definition 
 Fig.~\ref{fig:illustrate_phase_variation} illustrates this point.
 \marginpar{Cross-sectional vs. structural mean}
 For a functional data set that does not contain strong phase variations, 
-a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~left).
+a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:ch3_plot_phase_variation_illustration_1}).
 On the other hand, with a strong phase variation (often mixed with amplitude variation), 
-the cross-sectional mean fails to produce a typical realization (Fig.~\ref{fig:illustrate_phase_variation}~right).
+the cross-sectional mean fails to produce a typical realization (Fig.~\ref{fig:ch3_plot_phase_variation_illustration_2}).
 In this case,
 according to Kneip (\cite{Kneip1992}) a more proper \emph{structural} mean of the data set can be defined instead
 by first separating the phase and amplitude variations.
-\begin{figure}[bth]
-	\centering
-	\includegraphics[scale=0.48,trim={0 1cm 0 0},clip]{../figures/r-figures/illustratePhaseVariation.png}
-	\caption[Variation in functional data sets, with and without phase variation]{Two examples of functional data sets. (Left) without pronounced phase variation, cross-sectional mean can reflect a typical realization. (Right) with pronounced phase variations, cross-sectional mean differs from the notion of typical realization. \emph{Structural} mean derived after registration better represents a typical realization. The scales in the axes are arbitrary.}
-	\label{fig:illustrate_phase_variation}
-\end{figure}
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch3_plot_phase_variation_illustration},
+                  maincaption={Two examples of functional data sets. (Left) without pronounced phase variation, cross-sectional mean can reflect a typical realization. (Right) with pronounced phase variations, cross-sectional mean differs from the notion of typical realization. \emph{Structural} mean derived after registration better represents a typical realization. The scales in the axes are arbitrary.},%
+									mainshortcaption={Variation in functional data set, with and without phase variation.},
+                  leftopt={width=0.46\textwidth},
+                  leftlabel={fig:ch3_plot_phase_variation_illustration_1},
+                  leftcaption={Without phase variation},
+                  rightopt={width=0.46\textwidth},
+                  rightlabel={fig:ch3_plot_phase_variation_illustration_2},
+                  rightcaption={With strong phase variation}
+                 ]
+{../figures/chapter3/figures/plotPhaseVariationIllustration_1}
+{../figures/chapter3/figures/plotPhaseVariationIllustration_2}
 
 % Landmark registration
 In the presence of strong amplitude and phase variations, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
@@ -128,17 +135,14 @@ The structural mean was computed from the cross-sectional mean of registered cur
 Indeed, this mean is more representative as a typical realization of the curves in the original dataset.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_registered_curves_illustration},
-                  maincaption={Illustration of curve registration. Shown in the left, surves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as dased curve. The scale in the axes are arbitrary.},%
+                  maincaption={Illustration of curve registration. Shown in the left, curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as a thick solid line curve. The scale in the axes are arbitrary.},%
 									mainshortcaption={Illustration of curve registration.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:ch3_plot_registered_curves_illustration_1},
                   leftcaption={Unregistered curves},
-                  %leftshortcaption={},%
                   rightopt={width=0.45\textwidth},
                   rightlabel={fig:ch3_plot_registered_curves_illustration_2},
-                  rightcaption={Registered curves, by landmark},
-                  %rightshortcaption={},
-                  %spacing={\hfill}
+                  rightcaption={Registered curves, by landmark}
                  ]
 {../figures/chapter3/figures/plotRegisteredCurvesIllustration_1}
 {../figures/chapter3/figures/plotRegisteredCurvesIllustration_2}

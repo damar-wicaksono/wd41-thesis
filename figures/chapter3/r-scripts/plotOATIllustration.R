@@ -16,8 +16,8 @@ inpfullnames <- c("./data-support/trajectory_4_2_6.csv",
 # Graphic parameters
 fig_size <- c(5, 5)                     # width, height
 margin   <- c(4, 6.5, 2.2, 1) + 0.1     # canvas margin (bot, left, top, right)
+cex_axis <- 1.5     # Axis marker size
 cex_lab  <- 2.0     # Axis label size
-cex_main <- 3.0     # Main title size
 tck_len  <- -0.35   # Tick length
 cex_lab_shift <- 1.25   # Shift of the axis label from the axis
 
@@ -69,10 +69,11 @@ axis(side = 2, lwd = 1.5,
      mgp = c(2, cex_lab_shift, 0), 
      tcl = tck_len, 
      cex.axis = cex_axis)
-title(ylab = expression(x[2]), mgp = c(4.0, 0, 0), cex.lab = cex_lab)
+title(ylab = expression(x[2]), mgp = c(3.0, 0, 0), cex.lab = cex_lab)
 
 # Close the device
 dev.off()
+embed_fonts(otpfullnames[1], outfile = otpfullnames[1])
 
 # Radial Design
 pdf(otpfullnames[2], family = "CM Roman",
@@ -109,7 +110,8 @@ axis(side = 2, lwd = 1.5,
      mgp = c(2, cex_lab_shift, 0), 
      tcl = tck_len, 
      cex.axis = cex_axis)
-title(ylab = expression(x[2]), mgp = c(4.0, 0, 0), cex.lab = cex_lab)
+title(ylab = expression(x[2]), mgp = c(3.0, 0, 0), cex.lab = cex_lab)
 
 # Close the device
 dev.off()
+embed_fonts(otpfullnames[2], outfile = otpfullnames[2])
