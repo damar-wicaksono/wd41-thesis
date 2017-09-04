@@ -155,6 +155,11 @@ More details on the properties of the warping functions used to transform the ti
 
 Separation of phase variation from magnitude variation by registration procedure allows for the definition of a proper mean function.
 With respect to the mean, the notion of functional variation can then be defined.
+In the following discussion it is assumed that the functional data set does not contain phase variation.
+That is, the functions are fully registered.
+If this is not the case then the previous step of registration is required.
+
+% Covariance function
 The covariance function of a set of function realizations $\{y_n(t);n = 1, 2, \cdots, N; t \in [t_a,t_b]\}$ from a random process $Y$ is defined as
 \begin{equation}
 	\nu (t_1, t_2) \equiv \frac{1}{N} \sum_{n=1}^{N} (y_n(t_1) - \bar{y}(t_1)) \cdot (y_n(t_2) - \bar{y}(t_2))
@@ -162,8 +167,9 @@ The covariance function of a set of function realizations $\{y_n(t);n = 1, 2, \c
 \end{equation}
 where $\bar{y} (t)$ is the proper mean function.
 
-To extract more meaningful information from the covariance function, the function is often projected onto lower-dimensional space using an orthogonal decomposition.
-This projection can be done through the functional principal component (fPC) analysis (fPCA) (also know as the Karhunen-Lo\'eve transform):
+To extract more meaningful information from the covariance function,
+the function can be projected onto lower-dimensional space using an orthogonal decomposition.
+This projection can be done through the \glsfirst[hyper=false]{fpca} (also known as the Karhunen-Lo\'eve transform (KLT), see Appendix~\ref{app:kl_theorem} for the unederlying theorem):
 \begin{equation}
 	\nu (t_1, t_2) = \sum_{j=1}^{+\infty} \rho_j \cdot \xi_j(t_1) \cdot \xi_j(t_2)
 \label{eq:kl_transform}
@@ -171,7 +177,7 @@ This projection can be done through the functional principal component (fPC) ana
 where $\rho_j$ is a series of ordered eigenvalues of decreasing values; 
 $\xi_j(t)$ is the corresponding series of orthogonal eigenfunctions (or the fPC).
 
-The transformation of the covariance function into pairs of eigenvalues and eigenfunctions also allows each element of the original dataset $\{y_n(t)\}$ to be represented as a series that is optimal in the root-mean-square-of-error sense:
+The transformation of the covariance function into pairs of eigenvalues and eigenfunctions also allows each element of the original data set $\{y_n(t)\}^N_{n=1}$ to be represented as a series that is optimal in the root-mean-square-of-error sense:
 \begin{equation}
   y_n(t) = \bar{y}(t) + \sum_{j=1}^{+\infty} \theta_{j,n} \cdot \xi_j (t); \quad n = 1, 2, \cdots, N
 \label{eq:pod}
@@ -184,8 +190,9 @@ where the fPC score $\theta_{j,n}$ associated with each realized function is def
 
 Eqs.~(\ref{eq:pod}) and (\ref{eq:pod_orthogonality}) imply that across realizations in the samples, 
 $\{y_n(t)\}$ can be represented linearly using a common mean function and sums of deviation terms from the mean.
-The deviation terms consist of a set of common eigenfunctions and a set of fPC scores.
+The deviation terms consist of a set of common eigenfunctions and a set of \gls[hyper=false]{fpc} scores.
 As such, the random character of each realization is left to the score associated with each component and each realization.
 Put differently, the eigenfunctions described the (common) modes of variations, 
 while the scores quantify the strength of a particular mode~\cite{Wang2012}.
-These scores will be used as the \gls{qoi} in the subsequent global \gls{sa}.
+These scores will be used as the \gls[hyper=false]{qoi} in the subsequent global \gls[hyper=false]{sa}.
+A way to compute the \gls[hyper=false]{fpc} and the associated scores can be found in Ref.~\cite{Wicaksono2014a}.
