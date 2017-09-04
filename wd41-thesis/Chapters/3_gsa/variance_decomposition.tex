@@ -34,12 +34,12 @@ is verified for all $i \in {1, \cdots, D}$ and
 any corresponding ordered combination of dimensions $1 \leq d_1 < d_2 < \cdots < d_i \leq D$ of the input parameter space.
 
 Assume now that $\bm{\mathcal{X}}$ is a random vector of independent and uniform random variables over a unit hypercube
-$\{\Omega = \mathbf{x} \, | \, 0 \leq x_i  \leq 1; i = 1,\cdots, D\}$ such that
+$\{\Omega = \bm{x} \, | \, 0 \leq x_i  \leq 1; i = 1,\cdots, D\}$ such that
 \begin{equation}
 	\mathcal{Y} = f(\bm{\mathcal{X}})
 \label{eq:sa_random_function}
 \end{equation}
-where $\mathcal{Y}$ is a random variable, resulting from the transformation of the random vector $\mathbf{X}$ by the function $f$.
+where $\mathcal{Y}$ is a random variable, resulting from the transformation of the random vector $\bm{\mathcal{X}}$ by the function $f$.
 Using Eq.~(\ref{eq:sa_unicity}) to express each term in Eq.~(\ref{eq:sa_hdmr}), it follows that
 \begin{equation}
 	\begin{split}
@@ -53,7 +53,7 @@ Using Eq.~(\ref{eq:sa_unicity}) to express each term in Eq.~(\ref{eq:sa_hdmr}), 
 
 The same follows for higher-order terms in the decomposition. 
 In Eq.~(\ref{eq:sa_conditional_expectation}),
-$\mathbb{E}_{\sim \circ} [Y|\circ]$ is a conditional expectation operator,
+$\mathbb{E}_{\sim \circ} [\circ|\circ]$ is a conditional expectation operator,
 where subscript symbol $\sim\circ$ in the subscript means that integration on the parameter space is carried out over all parameters except the one(s) in the subscript.
 For instance, $\mathbb{E}_{\sim 1} [\mathcal{Y}|\mathcal{X}_1]$ refers to the conditional mean of $\mathcal{Y}$ given $\mathcal{X}_1$, and the integration is carried out for all possible values of parameters in $\mathbf{x}$ except $x_1$.
 Note that because $\mathcal{X}_1$ is a random variable, the expectation conditioned on it is also a random variable.
