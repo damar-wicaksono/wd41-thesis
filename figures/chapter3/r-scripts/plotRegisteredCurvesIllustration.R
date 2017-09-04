@@ -68,9 +68,6 @@ WfdPar <- fdPar(Wfd0, 2, 1e-10)
 test_reg_0 <- landmarkreg(y1_smooth$fd, landmark, landmark_ref, WfdPar=WfdPar,
                           monwrd = TRUE)
 
-plot(test_reg_0$warpfd, col = rgb(0, 0, 0, 0.25), lty = 1)
-plot(test_reg_0$regfd)
-
 # Make the plot ---------------------------------------------------------------
 
 # Unregistered Curves
@@ -96,7 +93,7 @@ lines(y1_smooth$fd, col = rgb(0, 0, 0, 0.25), lty = 1)
 abline(v=landmark, col = rgb(0, 0, 0, 0.25), lwd = 1)
 abline(v=landmark_ref, lty = 2, lwd = 2)
 # Plot the structural mean
-lines(t, eval.fd(t,mean.fd(test_reg_0$regfd)), lwd = 3, lty = 2)
+lines(t, eval.fd(t, mean.fd(test_reg_0$regfd)), lwd = 3, lty = 1)
 
 # Close the device
 dev.off()
@@ -123,7 +120,7 @@ lines(test_reg_0$regfd, col = rgb(0, 0, 0, 0.25), lty = 1)
 # Plot the landmark reference
 abline(v=landmark_ref, lty = 2, lwd = 1)
 # Plot the structural mean
-lines(t, eval.fd(t,mean.fd(test_reg_0$regfd)), lwd = 3, lty = 2)
+lines(t, eval.fd(t, mean.fd(test_reg_0$regfd)), lwd = 3, lty = 1)
 
 # Close the device
 dev.off()
