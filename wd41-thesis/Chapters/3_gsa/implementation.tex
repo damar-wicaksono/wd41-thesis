@@ -14,21 +14,24 @@ More details on the programming aspects of the implementation (the so-called \te
 \subsection{The Morris Method}\label{sub:sa_morris}
 %--------------------------------------------------
 
-The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps. 
-\textsc{First}, an OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal (base) points as well as the perturbed points for each parameter.
+The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps.
+\begin{enumerate}
+
+	\item An OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well as the perturbed points for each parameter.
 A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
 In each of the perturbed points, only one parameter change its value relative to the base.
+Note that in trajectory design, the nominal point only serves as the starting point and a perturbed point becomes the base point for the next perturbation.
 Different replication yields different nominal point and the associated perturbed points.
 
-\textsc{Second}, each point in the design matrix is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
+  \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
 
-\textsc{Third}, the model is evaluated for each (rescaled) point in the design matrix. The total number of model evaluations for a given design matrix of size $N_R$ is $N_R \times (D + 1)$.
+  \item The model is evaluated for each (rescaled) point of the design matrix. The total number of model evaluations for a given design matrix is $N_R \times (D + 1)$.
+  
+  \item Finally, for a selected \gls[hyper=false]{qoi} the $N_R$ elementary effects $EE_d$ are computed for each input parameter $x_d$ and each trajectory. The statistical summaries $\mu_d, \mu^*_d,$ and $\sigma_d$ are computed, and the ranking of the input parameters for the selected \gls[hyper=false]{qoi} is established based on $\mu^*_d$.
 
-\textsc{Fourth} and finally, the $N_R$ elementary effects $EE_d$ for each parameter and each trajectory are computed for a selected \gls{qoi}.
-Their statistical summaries ($\mu_d$, $\mu_d^*$, $\sigma_d$) are then computed, 
-and the ranking of the parameters can be constructed based on $\mu_d^*$ for a selected \gls{qoi}.
-The $\mu_d^*$ can be directly used to rank the parameters to systematically identify 
-and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
+\end{enumerate}
+
+The different rankings based on $\mu_d^*$ obtained from various relevant \glspl[hyper=false]{qoi} can then be used and compared to consistently identify and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
 
 \subsection{The Sobol'-Saltelli Method}\label{sub:sa_sobol_saltelli}
 
