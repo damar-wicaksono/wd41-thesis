@@ -3,17 +3,17 @@
 %*******************************************************************************************
 
 % Introductory paragraph
-To derive a more innovative set of \glspl[hyper=false]{qoi},
-variance decomposition was carried out on the \gls[hyper=false]{fpc} scores of the whole time-dependent curves of the different types of outputs (i.e., clad temperature, pressure drop, and liquid carryover).
+The time-dependent clad temperature, pressure drop, and liquid carryover were decomposed in their respective functional principal components (\glspl[hyper=false]{fpc}) to better quantify the mode of variations of the whole time dependent curves.
+Therefore, the variance decomposition was also carried out on the \gls[hyper=false]{fpc} scores associated with the \glspl[hyper=false]{spc}.
 \marginpar{explained variance}
 Because each \gls[hyper=false]{fpc} is associated with a particular mode of variation over the whole transient,
-it can parsimoniously describe the overall variation of the time-dependent curve in a smaller set of numbers.
-The \gls[hyper=false]{fpc} analysis of all the time-dependent curves for each type of outputs showed that the first two respective \gls[hyper=false]{fpc} accounts for more than $85\%$ of the overall functional variations (see Fig.~\ref{fig:ch3_plot_explained_variance}).
+it parsimoniously describes the overall variation of the time-dependent curve in a smaller set of numbers.
+The \gls[hyper=false]{fpc} analysis of all the time-dependent curves for each type of output showed that the first two respective \gls[hyper=false]{fpc} account for more than $85\%$ of the overall functional variations (see Fig.~\ref{fig:ch3_plot_explained_variance}).
 
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch3_plot_explained_variance},
-			           maincaption={The proportion of explained variance for each \gls[hyper=false]{fpc} extracted from of each of the (time-dependent) outputs. The points with a connecting line are the cumulative explained variance, while the horizontal line is the cumulative of the first two \glspl[hyper=false]{fpc}.},
-			           mainshortcaption={The proportion of explained variance for each \gls[hyper=false]{fpc} extracted from of each of the (time-dependent) outputs.},%
+			           maincaption={The proportion of explained variance for each \gls[hyper=false]{fpc} extracted from selected time-dependent outputs. The points with a connecting line are the cumulative explained variance, while the horizontal line is variance explained by first two \glspl[hyper=false]{fpc}.},
+			           mainshortcaption={The proportion of explained variance for each \gls[hyper=false]{fpc} extracted from selected time-dependent outputs.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch3_plot_explained_variance_1},
 			           leftcaption={Mid-height assembly temperature},
@@ -30,11 +30,11 @@ The \gls[hyper=false]{fpc} analysis of all the time-dependent curves for each ty
 {../figures/chapter3/figures/plotExplainedVarianceCO}
 
 % 1st fPC of the mid-assembly clad temperature
-The first \gls[hyper=false]{fpc} of the (registered) clad temperature at at the mid-height of the assembly in the reflood transient and the effect of its perturbation around the mean function are shown in Fig.~\ref{fig:ch3_plot_pc1_tc4}.
+The first \gls[hyper=false]{fpc} of the (registered) clad temperature at the mid-height of the assembly (in the reflood transient) and the effect of its perturbation around the mean function are shown in Fig.~\ref{fig:ch3_plot_pc1_tc4}.
 \marginpar{the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the (registered) clad temperature transient at the mid-height of the assembly}
-The \gls[hyper=false]{fpc} shown in Fig.~\ref{fig:ch3_plot_pc1_tc4_fpc} was obtained by multiplying the eigenfunction with the square root of the respective eigenvalue, i.e., $fPC_j = \sqrt{\rho_j} \times \xi_j(t)$.
+The \gls[hyper=false]{fpc} shown in Fig.~\ref{fig:ch3_plot_pc1_tc4_fpc} was obtained by multiplying the eigenfunction $\xi_j(t)$ with the square root of the respective eigenvalue, i.e., $fPC_j = \sqrt{\rho_j} \times \xi_j(t)$.
 As the eigenfunction only represents the shape (mode) of function variation,
-this multiplication was done to give it a sense of scale with respect to the cladding temperature variation.
+this multiplication was done to give it a sense of scale with respect to the cladding temperature variation (as $\sqrt{\rho_j}$ represents the standard deviation of the mode $j$).
 The perturbation around the mean function (Fig.~\ref{fig:ch3_plot_pc1_tc4_perturbation}) is done by adding to and subtracting from the mean function,
 the eigenfunction multiplied by twice the \gls[hyper=false]{fpc}, i.e., $\bar{y}(t) \pm 2 \times \sqrt{\rho_j} \times \xi_j(t)$.
 
@@ -55,7 +55,7 @@ the eigenfunction multiplied by twice the \gls[hyper=false]{fpc}, i.e., $\bar{y}
 {../figures/chapter3/figures/plotPC1TC4.pdf}
 {../figures/chapter3/figures/plotPC1PerturbationTC4.pdf}
 
-This particular \gls[hyper=false]{fpc} corresponds to a mode of variation that relates to the amplitude of the temperature reversal period.
+This particular \gls[hyper=false]{fpc} corresponds to a mode of variation that relates to the amplitude of the temperature reversal period (see Chapter~2).
 This is the strongest mode of variation, accounting for $55\%$ of the overall clad temperature variation.
 
 % 2nd fPC of the mid-assembly clad temperature
@@ -69,11 +69,11 @@ This mode of variation constitutes $30\%$ of the overall variation.
                   maincaption={The 2\textsuperscript{nd} \gls[hyper=false]{fpc} of the (registered) clad temperature transient at the mid-height of the assembly and the effect of its perturbation on the mean function.},%
 									mainshortcaption={The 2\textsuperscript{nd} \gls[hyper=false]{fpc} of the (registered) clad temperature transient at the mid-height of the assembly and the effect of its perturbation on the mean function.},
                   leftopt={width=0.45\textwidth},
-                  leftlabel={fig:ch3_plot_pc1_tc4_fpc},
+                  leftlabel={fig:ch3_plot_pc2_tc4_fpc},
                   leftcaption={2\textsuperscript{nd} \gls[hyper=false]{fpc} ($30\%$)},
                   %leftshortcaption={},%
                   rightopt={width=0.45\textwidth},
-                  rightlabel={fig:ch3_plot_pc1_tc4_perturbation},
+                  rightlabel={fig:ch3_plot_pc2_tc4_perturbation},
                   rightcaption={Perturbation on the mean},
                   %rightshortcaption={},
                   %spacing={\hfill}
@@ -82,10 +82,10 @@ This mode of variation constitutes $30\%$ of the overall variation.
 {../figures/chapter3/figures/plotPC2PerturbationTC4.pdf}
 
 % 1st fPC of the mid-assembly clad temperature warping function
-The previous \glspl[hyper=false]{fpc} were carried on the registered clad temperature transient where the phase variations in the dataset have been removed.
+The previous \glspl[hyper=false]{fpc} were carried on the registered clad temperature transient where the phase variations in the data set have been removed.
 \marginpar{the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function of the clad temperature transient at the middle of the assembly}
-It is also interesting to see the phase variations in the dataset separately.
-This is done by carrying out the same procedure on resulting warping functions associated with each clad temperature realization.
+It is also interesting to see the phase variations in the data set separately.
+This can be done by carrying out the same procedure on the resulting warping functions associated with each clad temperature realization.
 Fig.~\ref{fig:ch3_plot_pc1_tc4_warp} shows the 1st \gls[hyper=false]{fpc} and the effect of its perturbation on the mean function.
 The mode corresponds to the overall shift in the timing of the two landmarks compared to the mean function. 
 From the figure, a delay in the maximum temperature tends also to result in a delay in the time of quenching, and vice versa.
@@ -114,8 +114,8 @@ The \gls[hyper=false]{fpc}, taking into account $77\%$ of the output variation, 
 That is, some realizations rise more quickly (or more slowly) in reaching the equilibrium pressure drop.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_pc1_dpmid},
-                  maincaption={The 1\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the mid. of the assembly and the effect of its perturbation on the mean function.},%
-									mainshortcaption={The 1\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the mid. of the assembly and the effect of its perturbation on the mean function.},
+                  maincaption={The 1\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the mid. height of the assembly and the effect of its perturbation on the mean function.},%
+									mainshortcaption={The 1\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the mid. height of the assembly and the effect of its perturbation on the mean function.},
                   leftopt={width=0.45\textwidth},%width=0.45\textwidth},
                   leftlabel={fig:ch3_plot_pc1_dpmid_fpc},
                   leftcaption={1\textsuperscript{st} fPC (77\% Output variation)},
