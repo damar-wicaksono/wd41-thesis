@@ -98,7 +98,7 @@ the variation in magnitude (\emph{vertical} variation) and the variation in phas
 The simultaneous presence of these two types of variations makes the definition of a mean function difficult \cite{Kneip1992}.
 
 % Cross-sectional mean vs. Structural Mean
-Fig.~\ref{fig:illustrate_phase_variation} illustrates this point.
+Fig.~\ref{fig:ch3_plot_phase_variation_illustration} illustrates this point.
 \marginpar{Cross-sectional vs. structural mean}
 For a functional data set that does not contain strong phase variations, 
 a simple cross-sectional mean (average values across realizations taken at every argument values) does indeed represents a typical realization (Fig.~\ref{fig:ch3_plot_phase_variation_illustration_1}).
@@ -122,17 +122,17 @@ by first separating the phase and amplitude variations.
 {../figures/chapter3/figures/plotPhaseVariationIllustration_2}
 
 % Landmark registration
-In the presence of strong amplitude and phase variations, to obtain the structural mean the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
+In order to obtain a meaningful structural mean in presence of strong amplitude and phase variations,
+the two types of variation are first separated through a \emph{registration} procedure \cite{Wang1997,Ramsay1998}.
 \marginpar{landmark registration}
-The procedure transforms the time argument using a warping function to reduce the phase variation in the dataset.
-Specifically, the landmark type registration type is employed because the main features of the function of interest (i.e., reflood curve) are readily identifiable.
+The procedure transforms the time argument using a warping function to reduce the phase variation in the data set.
+Specifically, the landmark based registration can be employed when the main features of the function of interest (i.e., reflood curve) are readily identifiable.
 In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time relative to a set of reference values.
 
 This is illustrated in Fig.~\ref{fig:ch3_plot_registered_curves_illustration}.
-The left panel shows the functional data set with its phase variation to be reduced by aligning its landmark (i.e., the time of maximum) to a reference value 
-(shown as the vertical lines, solid and dashed for the landmarks of realizations and reference, respectively).
-The structural mean was computed from the cross-sectional mean of registered curves shown in both panels as dashed curve. 
-Indeed, this mean is more representative as a typical realization of the curves in the original dataset.
+The left panel shows a functional data set exhibiting phase variation, which is reduced by aligning its landmark, here the time of maximum of each realization (shown as vertical solid lines) to a reference value (sjpwn as the vertical dashed line).
+The structural mean (solid line curve) is the simply computed as the cross-sectional mean of the registered curves shown on the right panel. 
+The structural mean properly represents the inflection and the maximum points of a typical realization indeed, and therefore is more representative of the curves in the original data set.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_registered_curves_illustration},
                   maincaption={Illustration of curve registration. Shown in the left, curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as a thick solid line curve. The scale in the axes are arbitrary.},%
