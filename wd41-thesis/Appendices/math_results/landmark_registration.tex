@@ -9,7 +9,7 @@ A transformation of time for each curve is carried out such that these features 
 
 The landmark registration problem can be expressed as the following: 
 Let $\{y_i(t); i = 1, 2, \cdots, N; t \in [t_a,t_b]\}$ be a set of continuous functions defined over the domain $t_a$ to $t_b$.
-Let $\{y_{ref}(t^{ref}_j); j = 1, \cdots, M\}$ be a set of $M$ landmarks of a given reference function $y_{ref}(t)$.
+Let $\{y_{ref}(t_{ref,j}); j = 1, \cdots, M\}$ be a set of $M$ landmarks of a given reference function $y_{ref}(t)$.
 Then a set of time warping functions $\{h_i(t); i = 1, 2, \cdots, N; t \in [t_a, t_b]\}$ for each curve in the data set can be defined.
 These functions have the following properties:
 
@@ -31,18 +31,18 @@ These functions have the following properties:
          The second implication is that the time warping function is an invertible function 
          such that for the same event there exists a unique pair of time and its transformed value.
   
-	\item Each $h_i(t)$ transforms the reference time for each curve such that the timing of the $M$ reference landmarks are aligned with respect to the landmarks of each curve,
+	\item Each $h_i(t)$ transforms the time $t_{ref}$ of the reference curve $y_{ref}(t)$ such that the timing of the $M$ reference landmarks are aligned with respect to the landmarks of each curve,
           \begin{equation}
             \begin{split}
-              y_i [h_i(t)]				& \equiv y_i(t^*_i) \equiv y^*_i(t) ; \, \forall i = 1, \cdots, N  \\
-              h_i (t^{ref}_j) & \equiv t^*_{ij} \iff h_i^{-1}[t^*_{ij}] = t^{ref}_j  ; \, \forall j = 1, \cdots, M 
+						  h_i (t_{ref,j}) 		& = t_{i,j} \iff h_i^{-1}[t_{i,j}] = t_{ref,j}  ; \ \forall i,j \\
+							y_i [h_i(t_{ref})]  & =	y_i(t_{i}) \equiv y^*_i(t_{ref}) ; \ \forall i
             \end{split}
           \label{eq:warping_transformation}
           \end{equation}
-          where $t_i^*$ and $y_i^*$ are the warped time and the \emph{registered} function of curve $i$, respectively;
+          where $y_i^*$ is the \emph{registered} function of curve $i$, whose time scale is the same as the reference curve;
 					$t_{ij}^*$ is the timing of the landmark $j$ of curve $i$;
-					and $h^{-1}_i(t)$, the inverse of the warping function, is the \emph{aligning} function. 
-					The argument $t$ appeared in $y_i^*(t)$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
+					and $h^{-1}_i(t)$, the inverse of the warping function, is the \emph{aligning} function, as it \emph{aligns} the timing of the landmark $j$ of curve $i$ to the timing of the same landmark of the reference curve. 
+					The argument $t_{ref}$ present in $y_i^*(t_{ref})$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
           For instance, if $h_i(t^{ref}_j) > t^{ref}_j$ then the landmark $j$ for curve $i$ is delayed 
           and the aligning function accelerates the time for curve $i$ to conform to the reference timing.
           On the other hand, if $h_i(t^{ref}_j) < t^{ref}_j$ then the landmark $j$ for curve $i$ occurs earlier

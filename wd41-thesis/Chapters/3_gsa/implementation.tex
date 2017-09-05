@@ -21,7 +21,7 @@ The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follow
 A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
 In each of the perturbed points, only one parameter change its value relative to the base.
 Note that in trajectory design, the nominal point only serves as the starting point and a perturbed point becomes the base point for the next perturbation.
-Different replication yields different nominal point and the associated perturbed points.
+Different replications yield different nominal points and the associated perturbed points.
 
   \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
 
@@ -43,11 +43,11 @@ The most straightforward, though rather rudimentary,
 estimation method is to use two nested loops for the computation of the conditional variances and expectations appearing in both indices.
 
 In the estimation of the main-effect index of parameter $x_d$, for instance, 
-the outer loop samples values of $X_d$ while the inner loop samples values of $\bm{\mathcal{X}}_{\sim d}$ (all parameters except $x_d$).
+the outer loop samples values of $\mathcal{X}_d$ while the inner loop samples values of $\bm{\mathcal{X}}_{\sim d}$ (all parameters except $x_d$).
 These samples, in turn, are used to evaluate the model and generate the output realizations.
 
 Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of a parameter $x_d$.
-In the inner loop, the arithmetic mean of the model output is taken for a given value of $X_d$ but over many values of $\bm{\mathcal{X}}_{\sim d}$. 
+In the inner loop, the arithmetic mean of the model output is taken for a given value of $\mathcal{X}_d$ but over many values of $\bm{\mathcal{X}}_{\sim d}$. 
 Afterward, in the outer loop, the variance of the model output is taken over many values of $\mathcal{X}_d$.
 
 % Brute forcem Monte Carlo Pseudo-code
@@ -138,7 +138,6 @@ For $N$ number of \gls[hyper=false]{mc} samples and $D$ number of model paramete
   
 \end{enumerate}
 
-
 For the main-effect sensitivity index, two estimators are considered.
 One is proposed by Saltelli~\cite{Saltelli2002}, and the other, as an alternative, is proposed by Janon et al~\cite{Janon2014}.
 The latter proved to be more efficient, especially for a large variation around a parameter estimate~\cite{Iooss2015,Janon2014}.
@@ -152,7 +151,7 @@ The general form of main-effect sensitivity index estimator is
 where the subscript $n$ corresponds to the row of the sampled model parameters 
 such that $f(B)_n$ and $f(A^d_B)_n$ are the model outputs evaluated using inputs taken from the $n$-th row of matrix $B$ 
 and matrix $A_B^D$, respectively.
-The estimators for the term $\mathbb{E}^2[\mathcal{Y}]$ and $\mathbb{V}[\mathcal{Y}]$ differs for the two indices estimators and they are given in Table~\ref{tab:ss_main_effect_estimator}.
+The estimators for the term $\mathbb{E}^2[\mathcal{Y}]$ and $\mathbb{V}[\mathcal{Y}]$ differs for the two indices estimators and are given in Table~\ref{tab:ss_main_effect_estimator}.
 %The first term in the numerator of Eq.~(\ref{eq:ss_main_effect_estimator}) is the same for both Saltelli and Janon et al. estimators and is given by
 %\begin{equation}
 %  \int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x}_{\sim d} \approx \frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n

@@ -4,13 +4,13 @@
 
 The simulation experiment for global sensitivity analysis on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} was carried out in two steps.
 \marginpar{Screening analysis}
-The first step was aimed at screening out any possible noninfluential parameters with relatively few code runs using several screening methods, i.e., the two variants of the Morris screening method (the radial and the trajectory designs) and the Sobol'-Saltelli method, with the latter only the total-effect indices were estimated, in line with the factor fixing objective.
+The first step was aimed at screening out any possible noninfluential parameters with relatively few code runs using several screening methods, i.e., the two variants of the Morris screening method (the radial and the trajectory designs) and the Sobol'-Saltelli method; with the latter only the total-effect indices were estimated, in line with the factor fixing objective.
 
 The second step of the analysis consisted of variance decomposition through the estimation of the Sobol' indices on the reduced number of parameters.
 \marginpar{Variance decomposition}
 This was a more detailed analysis where the contribution of each input parameter variation to a particular output variance was quantified.
 Since the number of code runs is directly proportional to the number of input parameters, 
-the screening procedure done in the first step allowed us to reduce the size of the problem and to generate a larger sample for a fewer code runs\footnote{Note that the total duration of the transient is set to be $600 \ [s]$ and each TRACE run required between $\sim 400 - 600 \ [CPUs]$, where$[CPUs] = $ ``Central Processing Unit seconds''}.
+the screening procedure done in the first step allowed us to reduce the size of the problem and to generate a larger sample for a fewer code runs\footnote{Note that the total duration of the transient is set to be $600 \ [s]$ and each TRACE run required between $\sim 400 - 600 \ [CPUs]$, where $[CPUs] = $ ``Central Processing Unit seconds''}.
 A larger sample, in turn, led to a more precise Sobol' indices estimates.
 The experimental design matrix used to carry out the estimation was generated using a Sobol' quasi-random sequence generator \cite{Joe2008} (See Appendix~\ref{app:doe} for more detail).
 
@@ -29,10 +29,10 @@ To further investigate these aspects, the maximum cladding temperature and the q
 
 To represent better the notion of functional variation, \gls[hyper=false]{fda}-based techniques were applied to derive a new set of \glspl[hyper=false]{qoi}.
 \marginpar{FDA-based Quantities of Interest}
-All the steps required in the application \gls[hyper=false]{fda} were already demonstrated in the context of the reflood simulation output in \cite{Wicaksono2014a}.
+All the steps required in the application of \gls[hyper=false]{fda} were already demonstrated in the context of the reflood simulation output in \cite{Wicaksono2014a}.
 All the required computations related to \gls[hyper=false]{fda} were done with the \texttt{R} programming language \cite{RCT2017} using the \texttt{fda} package \cite{Ramsay2014}.
-The application of \gls[hyper=false]{fda} resulted in a set of common \gls[hyper=false]{fpc} and a set of realization specific \gls[hyper=false]{fpc} score.
-The score was therefore used as the \gls[hyper=false]{qoi} for the Sobol' indices estimation
+The application of \gls[hyper=false]{fda} resulted in a set of common \glspl[hyper=false]{fpc} and a set of realization-specific \gls[hyper=false]{fpc} scores.
+The scores were therefore used as the \gls[hyper=false]{qoi} for the Sobol' indices estimation
 and compared to the indices obtained from the more conventional \glspl[hyper=false]{qoi} for the reflood transient.
 
 Finally, to give a measure of the uncertainty in all indices estimated by the Sobol'-Saltelli method, 
@@ -42,7 +42,7 @@ The flowchart of the simulation experiment for the analysis is illustrated and s
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.85\textwidth]{../figures/chapter3/ai/simulation_experiment.png}
-	\caption[The flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of FEBA facility]{The flowchart for the implemented sensitivity analysis methodology applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} facility.}
+	\caption[Flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of the FEBA facility]{The flowchart for the implemented sensitivity analysis methodology applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} facility.}
 	\label{fig:sensitivity_flowchart}
 \end{sidewaysfigure}
 

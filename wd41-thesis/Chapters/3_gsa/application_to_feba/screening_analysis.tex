@@ -4,7 +4,7 @@
 
 % Introductory paragraph
 A screening analysis to identify the noninfluential parameters was first carried out on the $27$ model parameters using three different methods.
-The \gls[hyper=false]{qoi} for this screening analysis was the time-averaged quantities for all output types (cladding temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
+The \glspl[hyper=false]{qoi} for this screening analysis were the time-averaged quantities for all output types (cladding temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
 $320$ replications were used for the Morris method while $1'000$ samples were used to estimate the total-effect indices for the Sobol'-Saltelli method.
 The parameter ranking was constructed based on $\mu^*_d$ (for the two Morris methods) and $\hat{ST}_d$ (the total-effect indices).
 
@@ -14,7 +14,7 @@ with increasing number of replications (for the Morris methods) and samples (for
 It is shown that all of the sensitivity measures converged
 and the most important parameters identified by each of the methods are the same (in this case: \texttt{gridHT}, \texttt{dffbIntD}, \texttt{dffbWHT}, \texttt{dffbVIHT}).
 Note that the values of the two measures cannot be compared with each other.
-The convergence of these measures with respect to other outputs also gave the same behavior. 
+The convergence of these measures with respect to other outputs was also found to have the same behavior. 
 \bigfigure[pos=tbhp,
            opt={width=0.9\textwidth},
            label={fig:ch3_plot_running_screening},
@@ -24,7 +24,7 @@ The convergence of these measures with respect to other outputs also gave the sa
 The sensitivity measures related to the four most important parameters, the same for each method, are given unique line types in the plots}
 
 % Explaining the table of results
-An important finding here is that the noninfluential parameters identified by both variants of the Morris methods are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
+An important finding is that the noninfluential parameters identified by both variants of the Morris methods are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
 Table~\ref{tab:ch3_screening_results} presents the summary of parameters importance across different outputs.
 In the table, a parameter is considered noninfluential with respect to a particular output type if its Sobol' total-effect index value falls below $5\%$.
 This parameter will be screened out in the downstream analysis.
@@ -75,7 +75,8 @@ Using a $5\%$ cut-off value to screen out noninfluential parameters is admittedl
 To check the consistency of the screening approach, Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs} illustrates the notion of noninfluential and influential parameters,
 in terms of the effects of their perturbations on the transient of three different outputs.
 \gls[hyper=false]{trace} was executed using $500$ samples of parameter value from each set of parameter (i.e., influential and noninfluential).
-The figure confirms that the use of time-averaged quantity for each output type is a viable \gls[hyper=false]{qoi} for screening as the identified noninfluential parameters were indeed the ones that result in minor variation (shown in black curves) of all outputs transient as compared to the variation brought by the influential parameter perturbations (shown in gray curves).
+The figure confirms that the use of time-averaged quantity for each output type is a viable \gls[hyper=false]{qoi} for screening.
+The identified noninfluential parameters were indeed the ones that result in minor variation (shown in black curves) of all outputs transient as compared to the variation brought by the influential parameter perturbations (shown in gray curves).
 Furthermore, it also confirms that by making the union set of all the important parameters subsets (each with respect to a particular output, using the $5\%$ cut-off value), 
 the final selection of $12$ influential parameters is valid for all outputs.
 
@@ -92,12 +93,12 @@ Each case uses $500$ samples.}
 From the screening analysis results, a more detailed analysis was carried out on the $12$-parameter model involving only the aforementioned influential parameters.
 \marginpar{\gls[hyper=false]{feba} \gls[hyper=false]{trace} model with $12$ influential parameters}
 The detailed analysis consisted of the estimation of the Sobol' main-effect sensitivity index (in complementary with the total-effect index used in the screening above) with respect to different types of time-dependent outputs as well as to different \glspl[hyper=false]{qoi} associated with each of them.
-The analysis was aimed at exposing how individual input parameter might have affected particular model behavior as highlighted by the different choices of \glspl[hyper=false]{qoi}.
+The analysis was aimed at exposing how an individual input parameter might have affected particular model behavior as highlighted by the different choices of \glspl[hyper=false]{qoi}.
 
 % Convergence study
 It should be noted that the estimation of the main-effect indices were relatively more expensive as a larger number of samples was required to reliably estimate the indices (i.e., such that the uncertainty associated with the Monte Carlo estimation was within an acceptable level).
 \marginpar{Convergence of the Sobol' indices estimation} 
-In relation to this, the convergence of two different Sobol' main-effect index estimators as well as one Sobol' total-effect index estimator were investigated empirically. 
+In relation to this, the convergence of two different Sobol' main-effect index estimators as well as one Sobol' total-effect index estimator was investigated empirically. 
 The result of the analysis was useful in the planning of the simulation experiments regarding the number of samples in relation to the expected uncertainty (in terms of \glsfirst[hyper=false]{ci}) of the estimates.
 It was found that the \gls[hyper=false]{ci} length of a given estimator depended on the \gls[hyper=false]{qoi}, the estimand, the estimator used, and the number of samples.
 A more detailed discussion is presented in Appendix~\ref{app:sobol_convergence}.

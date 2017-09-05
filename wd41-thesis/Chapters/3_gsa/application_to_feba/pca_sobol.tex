@@ -23,8 +23,8 @@ and confirms the maximum cladding temperature as a viable representative \gls[hy
 Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2} shows the Sobol' sensitivity indices using the scores associated with the second \gls[hyper=false]{fpc} of the (registered) mid-height clad temperature transient as the \gls[hyper=false]{qoi}.
 Contrary to the first component, most of the variation in the second \gls[hyper=false]{fpc} can only be explained through interactions between model parameters since the main-effect indices only summed up to $27\%$ of the total variance.
 The difference between the main-effect and total-effect indices are large for all input parameters, but especially for the \gls[hyper=false]{dffb}-related parameters.
-These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum cladding temperature),
-or only in speculative manner from the time-dependent representation of the sensitivity indices showed in Fig.~\ref{fig:ch3_plot_si_evol}, which gave a less concise description of the parameter sensitivity.
+These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum cladding temperature).
+It could only be speculated from the time-dependent representation of the sensitivity indices showed in Fig.~\ref{fig:ch3_plot_si_evol}, but with a less concise description of the parameter sensitivity.
 \bigfigure[pos=!tbhp,
 					 opt={width=0.85\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_pc2},
@@ -53,7 +53,7 @@ The inlet mass velocity parameter (\texttt{fillV}) is the main contributor to th
            label={fig:ch3_plot_sobol_boxplot_dpmid_pc1},
            shortcaption={Sobol' Indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the middle of the assembly as the \gls[hyper=false]{qoi}}]
 {../figures/chapter3/figures/plotSobolBoxplotDPMidPC1}
-{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the middle of the assembly. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the pressure drop transient at the middle of the assembly. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % 1st fPC of Liquid Carryover
 Finally, Fig.~\ref{fig:ch3_plot_sobol_boxplot_co_pc1} shows the sensitivity indices with the first \gls[hyper=false]{fpc} of the liquid carryover transient as the \gls[hyper=false]{qoi}.
@@ -65,7 +65,7 @@ and the rest of the parameters have a negligible effect.
            label={fig:ch3_plot_sobol_boxplot_co_pc1},
            shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the liquid carryover transient as the \gls[hyper=false]{qoi}.}]
 {../figures/chapter3/figures/plotSobolBoxplotCOPC1}
-{The main-effect and total-effect sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the liquid carryover transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile}
+{The main-effect and total-effect sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the liquid carryover transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % Closing Paragraph
 The numerical results of the estimated Sobol' indices presented above are tabulated in Table~\ref{tab:app_sobol_tc4_maxtemp} through \ref{tab:app_sobol_co_pc1} in Appendix~\ref{app:tbl_results_sobol}.

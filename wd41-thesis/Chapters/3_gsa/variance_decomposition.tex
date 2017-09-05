@@ -5,10 +5,10 @@
 Variance-based methods for global sensitivity analysis use variance as the basis to define a measure of input parameter influence on the overall output variation \cite{Cacuci2004}.
 In a statistical framework of sensitivity and uncertainty analysis, 
 this choice is natural because variance (or standard deviation) is often used as a measure of dispersion or variability in the model prediction \cite{Saltelli2008}.
-The  dispersion, in turn, can measure the level precision of the prediction due when the input parameters are considered uncertain.
+The  dispersion, in turn, can measure the level precision of the prediction when the input parameters are considered uncertain.
 
 This section first presents a method to decompose the model output variance into the contributions from the individual variances of the inputs.
-Then, two sensitivity measures based on the decomposition are introdiced a method for their estimation is presented.
+Then, two sensitivity measures based on the decomposition are introduced and a method for their estimations is presented.
 
 %--------------------------------------------------------------------
 \subsection{High-Dimensional Model Representation}\label{sub:sa_hdmr}
@@ -18,7 +18,7 @@ Consider once more a mathematical model $f: \bm{x} \in [0,1]^D \mapsto y = f(\bm
 The high-dimensional model representation (HDMR) of $f(\bm{x})$ is a linear combination of functions with increasing dimensionality up to the dimension of $\bm{x}$ \cite{Li2001},
 \begin{equation}
 	\begin{split}
-		f(\bm{x}) = f_o & + \sum_{d_1 = 1}^{D} f_d(x_d) + \sum_{1 \leq d_1 < d_2 \leq D} f_{d_1,d_2} (x_{d_2}, x_{d_1}) + \cdots  \\
+		f(\bm{x}) = f_o & + \sum_{d_1 = 1}^{D} f_d(x_d) + \sum_{1 \leq d_1 < d_2 \leq D} f_{d_1,d_2} (x_{d_1}, x_{d_2}) + \cdots  \\
 	                      & + f_{1,2,\cdots,D} (x_1, x_2, \cdots, x_D)
 	\end{split}
 \label{eq:sa_hdmr}
@@ -27,7 +27,7 @@ where $f_o$ is a constant.
 The representation in Eq.~(\ref{eq:sa_hdmr}) is unique if the following condition \cite{Sobol2001}
 \begin{equation}
     \int_{0}^{1} f_{d_1, d_2, \cdots d_i}(x_{d_1}, x_{d_2}, \cdots, x_{d_i}) d_{x_{d_m}} = 0 \,;
-		\, \text{for}\quad m = 1,2,\cdots,s
+		\, \text{for}\quad m = 1,2,\cdots,i
 \label{eq:sa_unicity}
 \end{equation}
 is verified for all $i \in {1, \cdots, D}$ and 
@@ -46,7 +46,7 @@ Using Eq.~(\ref{eq:sa_unicity}) to express each term in Eq.~(\ref{eq:sa_hdmr}), 
 		f_o & = \mathbb{E}[\mathcal{Y}] \\
 	  f_{d_1}(x_{d_1}) & = \mathbb{E}_{\sim d_1}[\mathcal{Y}|\mathcal{X}_{d_1}] - \mathbb{E}[\mathcal{Y}]\\
     f_{d_1,d_2}(x_{d_1},x_{d_2}) & = \mathbb{E}_{\sim d_1,d_2} [\mathcal{Y}|\mathcal{X}_{d_1}, \mathcal{X}_{d_2}] \\
-																 & - \mathbb{E}_{\sim d_1}[\mathcal{Y}|\mathcal{X}_{d_1}] - \mathbb{E}_{\sim e}[\mathcal{Y}|\mathcal{X}_{d_2}] - \mathbb{E}[\mathcal{Y}] 
+																 & - \mathbb{E}_{\sim d_1}[\mathcal{Y}|\mathcal{X}_{d_1}] - \mathbb{E}_{\sim d_2}[\mathcal{Y}|\mathcal{X}_{d_2}] - \mathbb{E}[\mathcal{Y}] 
 	\end{split}
 \label{eq:sa_conditional_expectation}
 \end{equation}
@@ -54,7 +54,7 @@ Using Eq.~(\ref{eq:sa_unicity}) to express each term in Eq.~(\ref{eq:sa_hdmr}), 
 The same follows for higher-order terms in the decomposition. 
 In Eq.~(\ref{eq:sa_conditional_expectation}),
 $\mathbb{E}_{\sim \circ} [\circ|\circ]$ is a conditional expectation operator,
-where subscript symbol $\sim\circ$ in the subscript means that integration on the parameter space is carried out over all parameters except the one(s) in the subscript.
+where the subscript symbol $\sim\circ$ means that integration on the parameter space is carried out over all parameters except the one(s) in the subscript.
 For instance, $\mathbb{E}_{\sim 1} [\mathcal{Y}|\mathcal{X}_1]$ refers to the conditional mean of $\mathcal{Y}$ given $\mathcal{X}_1$, and the integration is carried out for all possible values of parameters in $\mathbf{x}$ except $x_1$.
 Note that because $\mathcal{X}_1$ is a random variable, the expectation conditioned on it is also a random variable.
 
@@ -83,7 +83,7 @@ where Sobol' main-effect sensitivity index $S_d$ is defined as,
 \label{eq:sa_main_effect_index}
 \end{equation}
 The numerator is the variance of the conditional expectation,
-and the index is a global sensitivity measure interpreted as the amount of variance reduction in the model output if the parameter $X_d$ is fixed (i.e., its variance is reduced to zero).
+and the index is a global sensitivity measure interpreted as the amount of variance reduction in the model output if the parameter $\mathcal{X}_d$ is fixed (i.e., its variance is reduced to zero).
 The main-effect sensitivity index is also known in the literature as the \emph{first-order} sensitivity index 
 as it captures only the effect of a single parameter variation on the model output considering \emph{no interaction} with other parameters \cite{Saltelli2002}.
 

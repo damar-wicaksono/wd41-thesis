@@ -1,6 +1,6 @@
 \section{The Sobol'-Saltelli Method for Estimating Variance-Based Sensitivity Indices}\label{app:sobol_saltelli}
 
-Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls{mc} simulation to estimate sensitivity indices.
+Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \glsfirst[hyper=false]{mc} simulation to estimate sensitivity indices (see Algorithm~\ref{alg:brute_force_mc}).
 The formulation starts by expressing the expectation and variance operators in their integral form.
 As the following formulation is defined on a unit hypercube of $D$-dimension input parameter space where each parameter is a uniform and independent random variable,
 explicit writing of the distribution within the integration as well as the integration range are excluded for conciseness.

@@ -53,7 +53,7 @@ The \gls[hyper=false]{oat} experimental design complemented with this requiremen
 Fig.~\ref{fig:ch3_plot_oat_illustration_1} illustrates a trajectory design with $4$ replications in a two-dimensional input parameter space discretized in $6$ levels .
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_oat_illustration},
-                  maincaption={Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels, while the number of levels is irrelevant for radial design. Filled circles are the nominal (for the trajectory) or base(for the radial) points and crosses are the perturbed levels.},%
+                  maincaption={Illustration of One-at-a-Time (OAT) design constructed using trajectory scheme (left) and radial scheme (right) each with 4 replications. The trajectory design is discretized in 6 levels, while the number of levels is irrelevant for radial design. Filled circles are the nominal or the starting point (for the trajectory) or the base (for the radial) points and crosses are the perturbed levels.},%
 									mainshortcaption={Illustration of One-at-a-Time (OAT) design using trajectory and radial schemes.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:ch3_plot_oat_illustration_1},
@@ -84,7 +84,7 @@ EE_d = \frac{f(\bm{x} + \Delta x_d \cdot \bm{e}_d) - f(\bm{x})}{\Delta x_d}
 \end{equation}
 where now each parameter at each design replication has its corresponding perturbation size $\Delta x_d \in [-1,1]$ such that $x_d + \Delta x_d \in [0,1]$.
 
-An illustration of a radial design in two-dimensional input parameter space with $4$ base points is shown in Fig.~\ref{fig:ch3_plot_oat_illustration_2}.
+An illustration of a radial design in a two-dimensional input parameter space with $4$ nominal/base points is shown in Fig.~\ref{fig:ch3_plot_oat_illustration_2}.
  
 %-------------------------------------------------------------------------------------------------
 \subsection{Statistics of Elementary Effects and Sensitivity Measures}\label{sub:sa_ee_statistics}
@@ -115,18 +115,17 @@ The standard deviation gives an indication of the presence of nonlinearity and/o
 % Mean of absolute values of the elementary effects
 In cases where $f$ is a non-monotonic function,
 the sign of $EE_d$ may change according to the change of the output,
-and cancellation effects on the estimation of $\mu_d$ might occur 
-(as can be the case for a non-monotonic function).
+and cancellation effects on the estimation of $\mu_d$ might occur .
 To circumvent this issue,
-Campolongo et al (\cite{Campolongo2011}) proposed to take the absolute values of the sampled elementary effects.
+Campolongo et al.~\cite{Campolongo2011} proposed to take the absolute values of the sampled elementary effects.
 It is defined as,
 \marginpar{the mean of the (sampled) absolute elementary effects}
 \begin{equation}
 	\mu^*_d = \frac{1}{N_R} \sum_{r = 1}^{N_R} |EE^r_d|
 	\label{eq:sa_morris_mustar}
 \end{equation}
-Note that although the overall sign of output perturbation is lost by using this measure,
-its use is justified if parameters are to be ranked based on a single importance measure.
+Note that although the overall sign of the output perturbation is lost by using this measure,
+its use is justified if the input parameters are to be ranked based on a single importance measure.
 
 % Interpretation and importance classification
 The aforementioned statistical summaries, when evaluated over a large number of replications $N_R$,
@@ -145,7 +144,7 @@ As indicated by Morris \cite{Morris1991}, there are three possible categories of
 
 % Classification and qualitative measure
 Such classification makes parameter importance ranking and, in turn, screening of noninfluential parameters possible.
-However, the procedure is done rather qualitatively, and this is illustrated in Fig.~\ref{fig:illustration_morris_result}, 
+However, the procedure is done rather qualitatively, and this is illustrated in Fig.~\ref{fig:ch3_importance_classification}, 
 which depicts a typical parameter classification derived from visual inspection of the elementary effects statistics on the $\sigma$ vs. $\mu^*$ plane.
 The notions of influential and noninfluential parameters are based on the relative locations of those statistics in the plane.
 Typically, the noninfluential ones are clustered closer to the origin (relative to the more influential ones) with a pronounced boundary such as the one depicted in Fig.~\ref{fig:ch3_importance_classification}. 
@@ -156,6 +155,6 @@ the method cannot distinguish between nonlinearity effect from parameter interac
 
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.90]{../figures/chapter3/ipe/importance_classification}
+	\includegraphics[scale=0.80]{../figures/chapter3/ipe/importance_classification}
 	\caption[Illustration of a typical parameter importance classification based on Morris screening method]{Illustration of a typical parameter importance classification obtained from the Morris screening method. The importance of each parameter relative to the other ones is defined with respect to its location on the $\sigma - \mu^*$ plane. Each dot represents a parameter, and the line corresponds to twice the standard error of the mean (SEM) indicating the relative magnitude of the standard deviation to the mean.}\label{fig:ch3_importance_classification}
 \end{figure}

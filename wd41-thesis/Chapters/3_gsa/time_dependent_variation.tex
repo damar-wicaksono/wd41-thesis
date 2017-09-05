@@ -17,10 +17,10 @@ and, in turn, can be used as the \gls[hyper=false]{qoi} for \gls[hyper=false]{sa
 \subsection{Functional Output Representation}\label{sub:sa_spline}
 %-----------------------------------------------------------------
 
-The assumption of continuity within a practically discrete data set (such as the numerical code output of Eq.~(\ref{eq:discrete_time}) is made explicit through a functional representation.
+The assumption of continuity within a practically discrete data set (such as the numerical code output of Eq.~(\ref{eq:discrete_time})) is made explicit through a functional representation.
 The recommended representation is through a linear combination of basis functions \cite{Ramsay2005}.
 This thesis adopts the B-spline basis function \cite{Gillies2010} expansion because of its flexibility \cite{Eilers1996,Eilers2010} 
-and the wide availability of its implementation in open numerical libraries \cite{RCT2017}.
+and the availability of its implementation in open numerical libraries \cite{RCT2017}.
 
 % Basis function expansion
 Within this framework, a function can be written using basis function expansion as,
@@ -31,7 +31,7 @@ Within this framework, a function can be written using basis function expansion 
 where $K$ indicates the number of basis functions; 
 $\phi_k (t)$ is the $k$-th basis function;
 and $c_{ik}; \, k = 1, \dots, K$ are the basis coefficients for curve $i$.
-These coeffiecients are fitted to the data set to construct curve $i$, with or without smoothing.
+These coefficients are fitted to the data set to construct curve $i$, with or without smoothing.
 
 % Spline
 A B-spline is constructed using piecewise polynomial (\emph{spline}) connected at selected points in the domain called \emph{knots}.
@@ -43,7 +43,7 @@ In other words, the spline is $p-1$ differentiable at the knots.
 % B-Spline
 The basis functions in the B-spline system are determined by the degree of the polynomial $p$ and the knot sequence $\boldsymbol{\tau}=\{\tau_k; \, k = 0,1,\cdots, L\}$.
 However, per definition, there is no data point available on the left (right) of the leftmost (rightmost) knot.
-As such, there is no differentiable (smoothness) condition to uphold at the boundaries and the resulting system of equations are underdetermined.
+As such, there is no differentiability (smoothness) condition to uphold at the boundaries and the resulting system of equations are underdetermined.
 To resolve this issue, the endpoints can be repeated $p$ times and augmented into both ends of the knot sequence such that
 \begin{equation}
 	\tau_{-p} = \cdots = \tau_{0} \leq \tau_{1} \leq \cdots \leq \tau_{L} = \cdots = \tau_{L+p} 
@@ -51,7 +51,7 @@ To resolve this issue, the endpoints can be repeated $p$ times and augmented int
 \end{equation}
 
 % Constructing B-Spline
-This procedure procedure will only reduce the order of continuity of the $p$ outer left and $p$ outer right basis functions of the domain such that the system of equations becomes fully determined.
+This procedure will only reduce the order of continuity of the $p$ outer left and $p$ outer right basis functions of the domain such that the system of equations becomes fully determined.
 As a result, the augmented knot sequence becomes
 \begin{equation}
   \boldsymbol{\tau}=\{\tau_k; \, k = -p,-p+1,\cdots, 0, 1, \cdots, L + p\}
@@ -84,7 +84,7 @@ In other words, the B-spline basis functions are $\{B_k^p (t); \, k = -p,-p+1,\c
 Fig.~\ref{fig:ch3_bspline} illustrates all the $14$ spline basis functions of degree $3$ over $10$ uniform interior knots (or $11$ sub-intervals) defined in $[0,1]$.
 The resulting augmented knot sequence is $\boldsymbol{\tau}=\{0, 0, 0, 0, \frac{1}{11}, \cdots, \frac{10}{11}, 1, 1, 1, 1\}$.
 The three leftmost and three rightmost basis functions are less smooth at the two boundaries than the other eight basis functions in the center. 
-From leftmost to the right (rightmost to the left) the basis functions are discontinuous, continuous, and once continuously differentiable at the left (right) boundaries, respectively.
+From leftmost to the right (rightmost to the left) the three basis functions are non-, once-, and twice-differentiable at the left (right) boundaries, respectively.
 \bigfigure[pos=!tbhp,
 					 opt={width=1.0\textwidth},
            label={fig:ch3_bspline},
@@ -124,7 +124,7 @@ according to Kneip (\cite{Kneip1992}) a more proper \emph{structural} mean of th
 by first separating the phase and amplitude variations.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_phase_variation_illustration},
-                  maincaption={Two examples of functional data sets. (Left) without pronounced phase variation, cross-sectional mean can reflect a typical realization. (Right) with pronounced phase variations, cross-sectional mean differs from the notion of typical realization. \emph{Structural} mean derived after registration better represents a typical realization. The scales in the axes are arbitrary.},%
+                  maincaption={Two examples of functional data sets. (Left) without pronounced phase variations, cross-sectional mean can reflect a typical realization. (Right) with pronounced phase variations, cross-sectional mean differs from the notion of typical realization. \emph{Structural} mean derived after registration better represents a typical realization. The scales in the axes are arbitrary.},%
 									mainshortcaption={Variation in functional data set, with and without phase variation.},
                   leftopt={width=0.46\textwidth},
                   leftlabel={fig:ch3_plot_phase_variation_illustration_1},
@@ -145,12 +145,12 @@ Specifically, the landmark based registration can be employed when the main feat
 In a functional data set with phase variation, this particular type of registration forces important events in a curve (its \emph{landmarks}) to occur at the same time relative to a set of reference values.
 
 This is illustrated in Fig.~\ref{fig:ch3_plot_registered_curves_illustration}.
-The left panel shows a functional data set exhibiting phase variation, which is reduced by aligning its landmark, here the time of maximum of each realization (shown as vertical solid lines) to a reference value (sjpwn as the vertical dashed line).
-The structural mean (solid line curve) is the simply computed as the cross-sectional mean of the registered curves shown on the right panel. 
+The left panel shows a functional data set exhibiting phase variation, which is reduced by aligning its landmark, here the time of maximum of each realization (shown as vertical solid lines) to a reference value (shown as the vertical dashed line).
+The structural mean (solid line curve) is simply computed as the cross-sectional mean of the registered curves shown on the right panel. 
 The structural mean properly represents the inflection and the maximum points of a typical realization indeed, and therefore is more representative of the curves in the original data set.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch3_plot_registered_curves_illustration},
-                  maincaption={Illustration of curve registration. Shown in the left, curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as a thick solid line curve. The scale in the axes are arbitrary.},%
+                  maincaption={Illustration of curve registration. Shown in the left, curves whose landmarks (solid vertical lines) are to be aligned with respect to a reference value (dashed vertical line). Shown in the right, the registered curves. The structural mean is shown as a thick solid line curve. The scales in the axes are arbitrary.},%
 									mainshortcaption={Illustration of curve registration.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:ch3_plot_registered_curves_illustration_1},
@@ -172,10 +172,10 @@ Separation of phase variation from magnitude variation by registration procedure
 With respect to the mean, the notion of functional variation can then be defined.
 In the following discussion it is assumed that the functional data set does not contain phase variation.
 That is, the functions are fully registered.
-If this is not the case then the previous step of registration is required.
+If this is not the case then the previous step of registration might be required to first obtain a proper mean function.
 
 % Covariance function
-The covariance function of a set of function realizations $\{y_n(t);n = 1, 2, \cdots, N; t \in [t_a,t_b]\}$ from a random process $Y$ is defined as
+The covariance function of a set of function realizations $\{y_n(t);n = 1, 2, \cdots, N; t \in [t_a,t_b]\}$ from a random process $\mathcal{Y}$ is defined as
 \begin{equation}
 	\nu (t_1, t_2) \equiv \frac{1}{N} \sum_{n=1}^{N} (y_n(t_1) - \bar{y}(t_1)) \cdot (y_n(t_2) - \bar{y}(t_2))
 \label{eq:covariance_function}
@@ -184,7 +184,7 @@ where $\bar{y} (t)$ is the proper mean function.
 
 To extract more meaningful information from the covariance function,
 the function can be projected onto lower-dimensional space using an orthogonal decomposition.
-This projection can be done through the \glsfirst[hyper=false]{fpca} (also known as the Karhunen-Lo\'eve transform (KLT), see Appendix~\ref{app:kl_theorem} for the unederlying theorem):
+This projection can be done through the \glsfirst[hyper=false]{fpca} (also known as the Karhunen-Lo\'eve transform (KLT), see Appendix~\ref{app:kl_theorem} for the underlying theorem):
 \begin{equation}
 	\nu (t_1, t_2) = \sum_{j=1}^{+\infty} \rho_j \cdot \xi_j(t_1) \cdot \xi_j(t_2)
 \label{eq:kl_transform}
