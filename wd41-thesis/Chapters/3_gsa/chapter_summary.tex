@@ -5,15 +5,15 @@
 % Introductory paragraph and connection to the next chapter
 The global sensitivity analysis (\gls[hyper=false]{sa}) methodology part of the proposed statistical framework has been presented in this chapter.
 The objective of \gls[hyper=false]{sa} was to increase the understanding of the relationships between model input parameters and time-dependent output, within a selected region of interest in the input parameter space.
-This understanding is beneficial for the follow-up work presented in Chapter 4 and Chapter 5.
-In Chapter 4, a statistical metamodel is constructed based only on the influential parameters, in order to avoid unnecessarily large number of training samples associated with a large input parameter space.
-In Chapter 5, the initial range of variations of the model parameters assumed in this chapter are updated based on available experimental data (i.e., model calibration).
+This understanding is beneficial for the follow-up work presented in Chapters~\ref{ch:gp_metamodel} and~\ref{ch:bayesian_calibration}.
+In Chapter~\ref{ch:gp_metamodel}, a statistical metamodel is constructed based only on the influential parameters, thus avoiding an unnecessarily large number of training samples associated with a large input parameter space.
+In Chapter~\ref{ch:bayesian_calibration}, the initial range of variations of (some of) the input parameters assumed in this chapter are updated based on available experimental data.
 There, the results of the \gls[hyper=false]{sa} can provide some ideas as to which parameters can be informed (the sensitive ones),
 cannot be informed (the insensitive ones),
 or will present possible complications (the interacting ones) when considering the available experimental data.
 
 % Novelty
-In accordance with increasing the aforementioned understanding, a novel set of \glspl[hyper=false]{qoi} was derived using \gls[hyper=false]{fda} techniques to characterize the overall functional output variation.
+In accordance with the aim of increasing this understanding, a novel set of \glspl[hyper=false]{qoi} was derived using \gls[hyper=false]{fda} techniques to characterize the overall functional output variation.
 This allowed us to capture the most essential features of the model behavior through its time-dependent output,
 thus significantly departing from the more conventional \emph{ad hoc} \glspl[hyper=false]{qoi} (e.g., minimum, maximum, or time-average scalar value) that have been used so far in similar \gls[hyper=false]{sa} studies of nuclear reactor evaluation models.
 

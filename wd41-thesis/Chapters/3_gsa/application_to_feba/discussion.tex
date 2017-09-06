@@ -18,11 +18,11 @@ In Ref.~\cite{Wicaksono2014} the Morris method was used with this perspective in
 A comparison between the importance rankings obtained by the two Morris screening method variants showed a consistent result.
 \marginpar{Morris with radial design vs. trajectory trajectory design}
 The radial design, however, exhibits more erratic variations in the elementary effect statistics estimations and thus requires slightly more replications (thus code runs) to stabilize.
-This is due to the fact that, in the radial design, grid jump varies from replication to replication and from parameter to parameter excluding the possible bias due to unexplored area of input parameter space. 
-Trajectory design, on the other hand, uses a constant grid jump which constrains the possible parameter perturbation in the input parameter space.
+This is due to the fact that, in the radial design, grid jump varies from replication to replication and from parameter to parameter excluding the possible bias due to an unexplored area of the input parameter space. 
+The trajectory design, in contrast, uses a constant grid jump which constrains the possible parameter perturbation.
 Increasing the number of replications while keeping the same grid jump might give an impression that the elementary effects statistics converge quickly, especially if the grid jump is relatively large.
-As such, to avoid the aforementioned possible bias, different sizes of grid jump should be considered before a more robust conclusion on the ranking can be drawn.
-This, in turn, entails additional calculations.
+Thus, to exclude this source of bias, different sizes of grid jump should be considered before a more robust conclusion on the ranking can be drawn.
+This, however, entails more code runs.
 
 % On the use of Sobol' total effect
 The elementary effects statistics, however, are deemed qualitative as they do not quantify exactly the contribution of the parameters variations to the output variations.
@@ -65,7 +65,7 @@ This observation is inferred from the total-effect index for two parameters of t
 Indeed, the conditions and the criteria leading to the changes from one regime to another in the \gls[hyper=false]{trace} code depend indirectly on the simultaneous perturbation of these parameters.
 
 % Numerical interpretation of growing interaction
-From a strictly numerical point of view, this can also be explained by the fact that the variance of the clad temperature transient tends to grow over time up to the quenching.
+From a numerical point of view, this can also be explained by the fact that the variance of the clad temperature transient tends to grow over time up to the quenching.
 As such, any given parameter perturbation which has a minimal impact at the early phase of the transient might interact with the others and accumulate their small effects over time and later be responsible to the growing variance of the output. 
 
 % Nature of interaction
@@ -78,7 +78,7 @@ And although it was shown that a high degree of parameter interactions existed w
 The estimation of the second-order Sobol' sensitivity indices would be required.
 These indices can give a clearer picture on the actual structure of the parameter interactions.
 In relation to this, one can notice the analogy between the different phemonenological phases of the reflood curve defined in the FEBA evaluation report \cite{Ihle1984}, namely the mist cooling, the film boiling, and the quenching phase,
-with the three \glspl[hyper=false]{fpc} empirically obtained from \gls[hyper=false]{fda}, namely the temperature reversal, the temperature descent, and the quenching (the third \gls[hyper=false]{fpc} is not discussed further in this thesis for conciseness but is shown in Ref.~\cite{Wicaksono2014a}).
+with the three \glspl[hyper=false]{fpc} empirically obtained from \gls[hyper=false]{fda}, namely the temperature reversal, the temperature descent, and the quenching (the third \gls[hyper=false]{fpc} is not discussed in this thesis for conciseness but is shown in Ref.~\cite{Wicaksono2014a}).
 
 In other words, global \gls[hyper=false]{sa} using \gls[hyper=false]{fda}-based \glspl[hyper=false]{qoi} concisely and quantitatively shows how the effect of the the entrained droplets (mist) on the clad temperature,
 which is implicitly captured by the \gls[hyper=false]{dffb}-related parameters, dominates the variation of the clad temperature during the mist cooling phase (as labeled by the \gls[hyper=false]{feba} experimentalists).
