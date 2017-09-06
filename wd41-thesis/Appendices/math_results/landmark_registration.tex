@@ -40,9 +40,9 @@ These functions have the following properties:
           \label{eq:warping_transformation}
           \end{equation}
           where $y_i^*$ is the \emph{registered} function of curve $i$, whose time scale is the same as the reference curve;
-					$t_{ij}^*$ is the timing of the landmark $j$ of curve $i$;
+					$t_{i,j}$ is the timing of the landmark $j$ of curve $i$;
 					and $h^{-1}_i(t)$, the inverse of the warping function, is the \emph{aligning} function, as it \emph{aligns} the timing of the landmark $j$ of curve $i$ to the timing of the same landmark of the reference curve. 
-					The argument $t_{ref}$ present in $y_i^*(t_{ref})$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
+					The argument $t_{ref}$ in $y_i^*(t_{ref})$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
           For instance, if $h_i(t^{ref}_j) > t^{ref}_j$ then the landmark $j$ for curve $i$ is delayed 
           and the aligning function accelerates the time for curve $i$ to conform to the reference timing.
           On the other hand, if $h_i(t^{ref}_j) < t^{ref}_j$ then the landmark $j$ for curve $i$ occurs earlier
