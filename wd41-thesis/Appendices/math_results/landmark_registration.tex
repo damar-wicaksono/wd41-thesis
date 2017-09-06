@@ -43,9 +43,9 @@ These functions have the following properties:
 					$t_{i,j}$ is the timing of the landmark $j$ of curve $i$;
 					and $h^{-1}_i(t)$, the inverse of the warping function, is the \emph{aligning} function, as it \emph{aligns} the timing of the landmark $j$ of curve $i$ to the timing of the same landmark of the reference curve. 
 					The argument $t_{ref}$ in $y_i^*(t_{ref})$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
-          For instance, if $h_i(t^{ref}_j) > t^{ref}_j$ then the landmark $j$ for curve $i$ is delayed 
+          For instance, if $h_i(t_{ref,j}) > t_{ref,j}$ then the landmark $j$ for curve $i$ is delayed 
           and the aligning function accelerates the time for curve $i$ to conform to the reference timing.
-          On the other hand, if $h_i(t^{ref}_j) < t^{ref}_j$ then the landmark $j$ for curve $i$ occurs earlier
+          On the other hand, if $h_i(t_{ref,j}) < t_{ref,j}$ then the landmark $j$ for curve $i$ occurs earlier
           and the aligning function retards the time for curve $i$ to conform to the reference timing.
 \end{enumerate}
 
