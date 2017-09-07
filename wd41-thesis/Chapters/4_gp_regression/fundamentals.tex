@@ -5,7 +5,7 @@
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
 Appendix~\ref{app:probability} gives some basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities, 
-while Appendix~\ref{app:gaussian_vector} gives more detail account on Gaussian random vector (\gls[hyper=false]{mvn}).
+while Appendix~\ref{app:gaussian_vector} gives more detail (account) on Gaussian random vector (\gls[hyper=false]{mvn}).
 
 \subsection[From Multivariate Gaussian to Gaussian Process]{From Multivariate Gaussian to Gaussian Process}\label{sub:gp_mvn}
 
@@ -26,8 +26,8 @@ It has the following mean vector and variance-covariance matrix, respectively,
 					\text{Cov}[\mathcal{Z}_2, \mathcal{Z}_1]  & \mathbb{V}[\mathcal{Z}_2]\\
 			\end{pmatrix} & =
 			\begin{pmatrix}
-					0.5       & -0.265165\\
-					-0.265165 & 0.25\\
+					0.5       & -0.265\\
+					-0.265 & 0.25\\
 			\end{pmatrix}
 	\end{split}
 \label{eq:ex_bivariate}
@@ -36,7 +36,7 @@ The joint, marginal, and conditional \glspl[hyper=false]{pdf} of random vector $
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.50]{../figures/chapter4/figures/plotBivariateNormal.pdf}
-	\caption[Illustration of a bivariate Gaussian distribution]{An illustration of bivariate Gaussian distribution of random vector $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \mathcal{Z}_2] \in \mathbb{R}^2$ having marginal means of $0.0$ and variances of $0.5$ and $0.25$, respectively and with covariance of $-0.265165$. The solid ellipsoids indicate the contour of joint \gls[hyper=false]{pdf} of random vector $[\mathcal{Z}_1, \mathcal{Z}_2]$. The two solid curves at the $x$- and $y$-axes indicate the marginal \gls[hyper=false]{pdf} of $\mathcal{Z}_1$ and $\mathcal{Z}_2$, respectively. The dotted curve shows the conditional density of random variable $\mathcal{Z}_1$ given $z_2 = 0.35$, while the dashed curve shows the conditional density of $\mathcal{Z}_2$ given $z_1 = 0.75$.}
+	\caption[Illustration of a bivariate Gaussian distribution]{An illustration of bivariate Gaussian distribution of random vector $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \mathcal{Z}_2] \in \mathbb{R}^2$ having marginal means of $0.0$ and variances of $0.5$ and $0.25$, respectively and with covariance of about $-0.265$. The solid ellipsoids indicate the contour of joint \gls[hyper=false]{pdf} of random vector $[\mathcal{Z}_1, \mathcal{Z}_2]$. The two solid curves at the $x$- and $y$-axes indicate the marginal \gls[hyper=false]{pdf} of $\mathcal{Z}_1$ and $\mathcal{Z}_2$, respectively. The dotted curve shows the conditional density of random variable $\mathcal{Z}_1$ given $z_2 = 0.35$, while the dashed curve shows the conditional density of $\mathcal{Z}_2$ given $z_1 = 0.75$.}
 	\label{fig:plot_bivariate_normal}
 \end{figure}
 
