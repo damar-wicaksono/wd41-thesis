@@ -7,7 +7,9 @@ The connection between the stochastic process and multivariate Gaussian random v
 Appendix~\ref{app:probability} gives some basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities, 
 while Appendix~\ref{app:gaussian_vector} gives more detail (account) on Gaussian random vector (\gls[hyper=false]{mvn}).
 
+%----------------------------------------------------------------------------------------------------------------------------
 \subsection[From Multivariate Gaussian to Gaussian Process]{From Multivariate Gaussian to Gaussian Process}\label{sub:gp_mvn}
+%----------------------------------------------------------------------------------------------------------------------------
 
 % Illustration of Joint, Marginal, and Conditional
 To illustrate the notions of joint, marginal, and conditional distributions, an example of a bivariate random variable, a random vector $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \mathcal{Z}_2] \in \mathbb{R}^2$ is given.
@@ -111,39 +113,39 @@ A spatial model, as another example, can be modeled as a collection of random va
 And finally, in the metamodeling application, the random variables are collection of computational model output values at different input values.
 
 % Gaussian stochastic process
-\emph{Gaussian stochastic process} (GP, or Gaussian Random Field GRF) is defined as a collection of random variables, 
+\emph{Gaussian stochastic process} (GP, or Gaussian Random Field GRF) is defined as a collection of random variables $\bm{\mathcal{Y}}$, 
 \emph{any arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
 \marginpar{Gaussian process}
-To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $\mathcal{Y}(\circ)$ at various possible input $\mathbf{x}$ in the domain $\mathbf{X} \subseteq \mathbb{R}^D$.
-Specifically, $\mathcal{Y}(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathbf{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the random vector $\left[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
+To establish the connection with the notion of \emph{random function}, the collection of the random variables $\bm{\mathcal{Y}}$ refers to the collection of values of a random function $\mathcal{Y}(\circ)$ at various possible input $\bm{x}$ in the domain $\mathbf{X} \subseteq \mathbb{R}^D$.
+Specifically, $\mathcal{Y}(\bm{x}), \, \text{for} \, \bm{x} \in \mathbf{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\bm{x}_1, \bm{x}_2, \cdots, \bm{x}_L ; \, L \geq 1\}$, the random vector $\left[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
 
 % Basic notation
 A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead of a mean vector and a covariance matrix.
-A \gls[hyper=false]{gp} $\mathcal{Y}(\mathbf{x})$ on $\mathbf{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
+A \gls[hyper=false]{gp} $\mathcal{Y}(\bm{x})$ on $\mathbf{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
 \begin{equation}
-	\mathcal{Y}(\mathbf{x}) \sim \mathcal{GP} \left(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}^*) \right)
+	\mathcal{Y}(\bm{x}) \sim \mathcal{GP} \left(m(\bm{x}), K(\bm{x}, \bm{x}^*) \right)
 \label{eq:gp_notation}
 \end{equation}
 
 % Mean Function
-The mean function of a Gaussian process $Y(\mathbf{x})$ is the function $m: \chi \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ defined as,
+The mean function of a Gaussian process $\mathcal{Y}(\bm{x})$ is the function $m: \mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ defined as,
 \marginpar{Mean function}
 \begin{equation}
-	m(\mathbf{x}) = \mathbb{E}[Y(\mathbf{x})]
+	m(\bm{x}) = \mathbb{E}[\mathcal{Y}(\bm{x})]
 \label{eq:gp_mean_functions}
 \end{equation}
 
 % Covariance Function
-The covariance function of a Gaussian process $Y(\mathbf{x})$, on the other hand, is the function $K: (\chi \subseteq \mathbb{R}^D) \times (\chi \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
+The covariance function of a Gaussian process $\mathcal{Y}(\bm{x})$, on the other hand, is the function $K: (\mathbf{X} \subseteq \mathbb{R}^D) \times (\mathbf{X} \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
 \marginpar{Covariance Function}
 \begin{equation}
-	K(\mathbf{x}_i, \mathbf{x}_j) = \text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_j)]
+	K(\bm{x}_i, \bm{x}_j) = \text{Cov}[\mathcal{Y}(\bm{x}_i), \mathcal{Y}(\bm{x}_j)]
 \label{eq:gp_cov_functions}
 \end{equation}
 Notice that while the covariance function describes the covariance between pair of random function values, 
-it is defined only as a function of the two inputs, $\mathbf{x}_i$ and $\mathbf{x}_j$.
-Covariance function is also sometimes referred to as the \emph{covariance kernel} function as it defines the elements of the covariance matrix (see example below).
-As such, not all functions of the pair of inputs $\mathbf{x}_i, \mathbf{x}_j$ are a \emph{valid} covariance function, but only the ones that yield a valid variance-covariance matrix given by condition in Eq.~(\ref{eq:covariance_matrix}). 
+it is defined only as a function of the two inputs, $\bm{x}_i$ and $\bm{x}_j$.
+The Covariance function is also sometimes referred to as the \emph{covariance kernel} function as it defines the elements of the covariance matrix (see example below).
+As such, not all functions of the pair of inputs $\bm{x}_i, \bm{x}_j$ are \emph{valid} covariance functions, but only the ones that yield a valid variance-covariance matrix given by condition in Eq.~(\ref{eq:covariance_matrix}). 
 
 % Process Variance
 Finally, the process variance is defined as the covariance between two random function values at the same input,
@@ -157,13 +159,13 @@ Finally, the process variance is defined as the covariance between two random fu
 For a given finite $L$, a \gls[hyper=false]{gp} is reduced to a Gaussian random vector with mean vector $\boldsymbol{\mu}$ and covariance matrix $\boldsymbol{\Sigma}$,
 \begin{equation}
 	\begin{split}
-		& [\mathcal{Y}(\mathbf{x}_i)] \sim \mathcal{N}_L(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
-		& \boldsymbol{\mu} = [m(\mathbf{x}_1), m(\mathbf{x}_2), \cdots, m(\mathbf{x}_L)]^T \\
+		& [\mathcal{Y}(\bm{x}_i)] \sim \mathcal{N}_L(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
+		& \boldsymbol{\mu} = [m(\bm{x}_1), m(\bm{x}_2), \cdots, m(\bm{x}_L)]^T \\
 		  & \boldsymbol{\Sigma} = 
 				\begin{pmatrix}
-					\mathbb{V}[\mathcal{Y}(\mathbf{x}_1)]  & \cdots & \text{Cov}[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_L)]\\
+					\mathbb{V}[\mathcal{Y}(\bm{x}_1)]  & \cdots & \text{Cov}[\mathcal{Y}(\bm{x}_1), \mathcal{Y}(\bm{x}_L)]\\
 					\vdots	& \ddots & \vdots\\
-					\text{Cov}[Y(\mathbf{x}_L), Y(\mathbf{x}_1)]  & \cdots  & \mathbb{V}[\mathcal{Y}(\mathbf{x}_L)]\\
+					\text{Cov}[\mathcal{Y}(\bm{x}_L), \mathcal{Y}(\bm{x}_1)]  & \cdots  & \mathbb{V}[\mathcal{Y}(\bm{x}_L)]\\
 			\end{pmatrix} \\
 	\end{split}
 \label{eq:gp_to_mvn}
@@ -226,17 +228,17 @@ Observe that the standard deviations of the observed variables are zero and the 
 % Strongly Stationary
 An assumption for a class of stochastic process commonly made for convenience is \emph{stationarity}.
 \marginpar{strongly stationary process}
-A stochastic process $Y(\circ)$ is called \emph{strictly/strongly stationary} if and only if for any finite set of inputs $\{\mathbf{x}_1, \mathbf{x}_2,$
-$\cdots, \mathbf{x}_L\} \in \mathbf{X} \subseteq \mathbb{R}^D$ with $L \geq 1$, 
-and for $\mathbf{h} \in \mathbb{R}^D$ such that $\{(\mathbf{x}_1 + \mathbf{h}),$ 
-$(\mathbf{x}_2 + \mathbf{h}), \cdots, (\mathbf{x}_L + \mathbf{h})\} \in \mathbf{X}$, the distribution of random vector $[\mathcal{Y}(\mathbf{x}_1 + \mathbf{h}), $
-$\mathcal{Y}(\mathbf{x}_2 + \mathbf{h}), \cdots, \mathcal{Y}(\mathbf{x}_L + \mathbf{h})]$ is \emph{the same as} the distribution of random vector $[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)]$ \cite{Santner2003, Bachoc2013}.
+A stochastic process $\mathcal{Y}(\circ)$ is called \emph{strictly/strongly stationary} if and only if for any finite set of inputs $\{\bm{x}_1, \bm{x}_2,$
+$\cdots, \bm{x}_L\} \in \mathbf{X} \subseteq \mathbb{R}^D$ with $L \geq 1$, 
+and for $\bm{h} \in \mathbb{R}^D$ such that $\{(\bm{x}_1 + \bm{h}),$ 
+$(\bm{x}_2 + \bm{h}), \cdots, (\bm{x}_L + \bm{h})\} \in \bm{X}$, the distribution of random vector $[\mathcal{Y}(\bm{x}_1 + \bm{h}), $
+$\mathcal{Y}(\bm{x}_2 + \bm{h}), \cdots, \mathcal{Y}(\bm{x}_L + \bm{h})]$ is \emph{the same as} the distribution of random vector $[\mathcal{Y}(\bm{x}_1), \mathcal{Y}(\bm{x}_2), \cdots, \mathcal{Y}(\bm{x}_L)]$ \cite{Santner2003, Bachoc2013}.
 In other words, the process is invariant under translation.
 
 % Weakly Stationary
 The \emph{weakly stationary process} used additional weaker assumption than the strongly stationary process.
 \marginpar{weakly stationary process}
-A stochastic process $Y(\circ)$ is called \emph{weakly stationary} if and only if
+A stochastic process $\mathcal{Y}(\circ)$ is called \emph{weakly stationary} if and only if
 the first two moments of the process are constant.
 As such, the weakly stationary process is also referred to as \emph{second-order stationary process}.
 
@@ -247,7 +249,7 @@ Therefore, if two \glspl[hyper=false]{gp} have the same mean and covariance func
 For the case of \gls[hyper=false]{gp}, the notions of strongly stationary and weakly stationary coincide.
 This implies that a stationary \gls[hyper=false]{gp} has a constant mean and a constant variance, as well as a covariance function that satisfies the condition of being invariant under translation as follows,
 \begin{equation}
-	\text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_j)] = \text{Cov}[\mathcal{Y}(\mathbf{x}_i + \mathbf{h}), \mathcal{Y}(\mathbf{x}_j + \mathbf{h})] = K (\mathbf{x}_i - \mathbf{x}_j)
+	\text{Cov}[\mathcal{Y}(\bm{x}_i), \mathcal{Y}(\bm{x}_j)] = \text{Cov}[\mathcal{Y}(\bm{x}_i + \bm{h}), \mathcal{Y}(\bm{x}_j + \bm{h})] = K (\bm{x}_i - \bm{x}_j)
 \label{eq:stationary_covariance}
 \end{equation}
 In stationary \gls[hyper=false]{gp}, the covariance of random function values between two input points is only determined by the \emph{distance} between the two inputs and the covariance function is called \emph{stationary, isotropic covariance function} \cite{Rasmussen2006}. 
@@ -259,7 +261,7 @@ A more flexible class of \gls[hyper=false]{gp} models can be constructed by rela
 \marginpar{non-stationary process}
 However, stationarity is often assumed because it requires less assumption than the alternatives, considered non-informative, and therefore more generic \cite{Currin1991}.
 Moreover, the stationary process remains important to study as they serve as building block for more advanced models \cite{Santner2003}.
-For instance, the stationarity assumption can be relaxed simply by considering non-constant mean function as proposed in  \cite{Marrel2008,Ginsbourger2009}, while keeping the covariance part stationary.
+For instance, the stationarity assumption can be relaxed simply by considering a non-constant mean function as proposed in  \cite{Marrel2008,Ginsbourger2009}, while keeping the covariance part stationary.
 Another alternative is to consider multiple stationary covariance functions defined for each partitioned region of the whole input parameter space as proposed in \cite{Gramacy2008}.
 
 %---------------------------------------------------------------
@@ -270,7 +272,7 @@ Covariance kernel function determines the covariation structure of dependent dat
 This, in turn, determines the behavior (or shape) of the sample path of the outputs between input points.
 For a stationary covariance function, it is more convenient to separate the constant stochastic process variance $\sigma^2$ and the stochastic process kernel correlation function $R(\circ,\circ)$ between two input points using the following relation,
 \begin{equation}
-	K (\mathbf{x}_i, \mathbf{x}_j) = \sigma^2 R(\mathbf{x}_i, \mathbf{x}_j) 
+	K (\bm{x}_i, \bm{x}_j) = \sigma^2 R(\bm{x}_i, \bm{x}_j) 
 	\label{eq:cov_function}
 \end{equation}
 where $R$, the correlation kernel function, is defined such that $\mathbf{x}_i, \mathbf{x}_j \in \mathbf{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
