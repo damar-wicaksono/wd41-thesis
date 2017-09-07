@@ -4,21 +4,21 @@
 
 Consider a general \emph{regression} problem:
 \marginpar{regression problem}
-Given a deterministic computer simulator (which, in essence, is a function) $f:\mathbf{x} \in \mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
-evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_n\}_{n=1}^N$,
-yielding $N$ outputs $\mathbf{y} = \{f(\mathbf{x}_n) = y_n\}_{n=1}^N$, 
-the objective of the regression is to compute (or \emph{predict}) the value of $f(\mathbf{x}_o)$ with $\mathbf{x}_o \notin \mathbf{DM}$.
+Given a deterministic computer simulator (which, in essence, is a function) $f:\bm{x} \in \bm{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
+evaluated at $\mathbf{DM}$, an experimental design matrix $\{\bm{x}_n\}_{n=1}^N$,
+yielding $N$ outputs $\mathbf{y} = \{f(\bm{x}_n) = y_n\}_{n=1}^N$, 
+the objective of the regression is to compute (or \emph{predict}) the value of $f(\bm{x}_o)$ with $\bm{x}_o \notin \mathbf{DM}$.
 
-The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\mathbf{x}_n, f(\mathbf{x}_n) = y_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
+The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\bm{x}_n, f(\bm{x}_n) = y_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
 \marginpar{training data, training samples, and training outputs}
 though the term is used interchangeably with the training outputs $\mathbf{y}$.
 The experimental design matrix $\mathbf{DM}$ introduced in the previous chapter is interchangeably referred to as the training samples, inputs, or points in this chapter.
-As before, the domain $\mathcal{X}$ is often rescaled such that $\mathbf{x} \in [0,1]^D$.
+As before, the domain $\bm{X}$ is often rescaled such that $\bm{x} \in [0,1]^D$.
 
-To evaluate $f$ at any given $\mathbf{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
+To evaluate $f$ at any given $\bm{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
 \marginpar{emulator, surrogate model, and metamodel} 
 Unfortunately, the true underlying function $f(\circ)$ that produces $y_i$ itself might be too complex and expensive to evaluate.
-As such, the response surface of the function has to be reconstructed or estimated based only on the small training dataset before the prediction is made.
+As such, the response surface of the function has to be reconstructed or estimated based only on the small training data set before the prediction is made.
 The estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
 Although simpler, such an approximation should capture the most, if not all, important aspects of the inputs/outputs relationship of the true underlying function.
 This simpler, approximating function is often referred to as an \emph{emulator}, \emph{surrogate model}, or \emph{metamodel}.
@@ -34,10 +34,10 @@ Furthermore, being a statistical model based on a stochastic process, it fits th
 % Two Interpretations
 The \gls[hyper=false]{gp} metamodel, like many statistical models, can be interpreted either in frequentist sense or Bayesian sense.
 \marginpar{Two interpretations}
-In the frequentist sense, the stochastic process $Y(\circ)$ is one particular realization of stochastic process.
-The prediction at a particular value of $\mathbf{x}_o$ is made based on the process as estimated according to the training data.
+In the frequentist sense, the stochastic process $\mathcal{Y}(\circ)$ is one particular realization of an unknown stochastic process.
+The prediction at a particular value of $\bm{x}_o$ is made based on the process as estimated according to the training data.
 On the other hand, in the Bayesian sense, a Gaussian process is first set up as the prior for the stochastic process and 
-the prediction of the output at $\mathbf{x}_o$ is made based on the posterior (or conditional) process as updated by the training data\footnote{The frequentist case is the classical approach first developed as spatial interpolation tool in geostatistics by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. In fact, Kriging model (due to Krige) is the more popular term for \gls[hyper=false]{gp} metamodel. These two terms, Kriging model and \gls[hyper=false]{gp} metamodel, will be used interchangeably in this thesis.}.
+the prediction of the output at $\bm{x}_o$ is made based on the posterior (or conditional) process as updated by the training data\footnote{The frequentist case is the classical approach first developed as spatial interpolation tool in geostatistics by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. In fact, Kriging model (due to Krige) is the more popular term for \gls[hyper=false]{gp} metamodel. These two terms, Kriging model and \gls[hyper=false]{gp} metamodel, will be used interchangeably in this thesis.}.
 
 Both of these interpretations give equivalent results.
 The subtle difference lies in the interpretation of prediction error.
@@ -45,12 +45,12 @@ In the frequentist case, the error is defined as the mean squared of error betwe
 \marginpar{prediction error}
 while in the Bayesian case the error corresponds to the \emph{epistemic} uncertainty of the prediction conditional on the observed data.
 That is, though the underlying computer simulation itself might be deterministic, 
-the uncertainty of the prediction at $\mathbf{x}_o$ stems from the fact that the simulator was not actually run at that input and thus the output is not \emph{known}. 
+the uncertainty of the prediction at $\bm{x}_o$ stems from the fact that the simulator was not actually run at that input and thus the output is not \emph{known}. 
 The Bayesian perspective, as argued in \cite{Currin1991,Santner2003,OHagan2006}, gives a more intuitive interpretation of the prediction error.
 This perspective is illustrated in Fig.~\ref{fig:plot_bayesian_perspective}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_bayesian_perspective},
-			           maincaption={Gaussian process prior is equivalent to setting prior over functions. After observing data the process is updated to obtain the posterior process with a reduced uncertainties. Uncertainties are attached to each prediction made at arbitrary inputs which lay outside the observed data (e.g., red points). Dashed lines and gray region signify the mean and $3\times \sigma$, respectively. The scales in the axes are arbitrary.},
+			           maincaption={Gaussian process prior is equivalent to setting a prior over functions. After observing the data, the process is updated to obtain the posterior process with reduced uncertainties. Uncertainties are attached to each prediction made at arbitrary inputs which lie outside the observed data (e.g., red points). Dashed lines and gray region represent the mean and $3 \times \sigma$, respectively. The scales in the axes are arbitrary.},
 			           mainshortcaption={Illustration of Bayesian perspective of regression and metamodeling.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_bayesian_perspective_1},
