@@ -275,7 +275,7 @@ For a stationary covariance function, it is more convenient to separate the cons
 	K (\bm{x}_i, \bm{x}_j) = \sigma^2 R(\bm{x}_i, \bm{x}_j) 
 	\label{eq:cov_function}
 \end{equation}
-where $R$, the correlation kernel function, is defined such that $\mathbf{x}_i, \mathbf{x}_j \in \mathbf{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
+where $R$, the correlation kernel function, is defined such that $\bm{x}_i, \bm{x}_j \in \bm{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
 and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
 
 % Continuity and Differentiability of Stochastic Process
@@ -283,7 +283,7 @@ In the following, three different types of stationary correlation kernel functio
 These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
 \marginpar{one-dimensional correlation kernel, $r$}
 At first, only $1$-dimensional kernel functions denoted by $r(x_i, x_j)$ are described.
-Afterward, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\mathbf{x}_i, \mathbf{x}_j)$ by means of tensor product.
+Afterward, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\bm{x}_i, \ bm{x}_j)$ by means of tensor product.
 
 For each, the correlation function is defined and several sample paths are drawn to illustrate the effect of using different kernels as well as respective parameters on the sample path.
 It is important to note that it is a sample path of a stochastic process that is used as a metamodel and thus it is important to study its properties.
@@ -292,7 +292,9 @@ In particular, the continuity of a stationary correlation function at the origin
 and the smoothness of the correlation function determines the smoothness of the sample path.
 The mathematics behind these assertions is beyond the scope of this thesis, but an accessible reference on the topic can be found in \cite{Abrahamsen1997}.
 
+%============================================================
 \subsubsection{Gaussian Kernel}\label{subsub:gp_gaussian_cov}
+%============================================================
 
 The Gaussian correlation kernel function, also known as the \emph{squared exponential} kernel, is given by the following formula \cite{Roustant2012,Santner2003,Rasmussen2006},
 \begin{equation}
@@ -300,7 +302,7 @@ The Gaussian correlation kernel function, also known as the \emph{squared expone
 \label{eq:gaussian_kernel}
 \end{equation}
 
-The Gaussian kernel is parameterized by only a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or the \emph{range} parameter).
+The Gaussian kernel is parameterized by only a single \emph{hyper-pa}-\emph{rameter} $\theta$ that defines the characteristic length-scale of the process (or the \emph{range} parameter).
 \marginpar{characteristic length-scale (range) parameter}
 Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
 for 3 different characteristic length scales.
@@ -308,17 +310,17 @@ Obviously, for smaller $\theta$ the correlation between two inputs drops more qu
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.35]{../figures/chapter4/figures/plotCorrFunGauss.pdf}
-	\caption[Gaussian correlation kernels with 3 different characteristic length scales]{Examples of Gaussian correlation kernels with 3 different characteristic length scales}
+	\caption[Gaussian correlation kernels with 3 different characteristic length scales]{Examples of Gaussian correlation kernels with 3 different characteristic length scales.}
 	\label{fig:plot_corrfun_gauss}
 \end{figure}
 
 The range parameter of a Gaussian kernel determines the range over which the distance between two input locations affects the output correlation.
 To be precise, the notion of how similar (or dissimilar) two input locations are is defined relative to the characteristic length-scale.
 With a very short range, the output of random functions becomes easily uncorrelated except for a very close (similar) inputs.
-The realization of the process, therefore, will exhibit more erratic behavior in short range as it allows for more abrupt changes over shorter distance and less dependent of the neighboring values.
+The realization of the process, therefore, will exhibit more erratic behavior at short ranges as it allows for changes that are more abrupt over shorter distance and less dependent of the neighboring values.
 On the other hand, with a longer range, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more rigid pattern.
 Gaussian kernel, however, always produces smooth realization.
-That is, two input points that have a zero separation on are both continuous and differentiable (see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
+That is, at any given point the Gaussian kernel is continuous and differentiable (see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
 The Gaussian kernel is widely applied in the metamodeling literature and almost become a default choice for the correlation kernel \cite{Kennedy2006},
 though as mentioned in \cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly select design points).
 
@@ -344,7 +346,9 @@ Also notice that the realizations with the shorter range produces more local max
 {../figures/chapter4/figures/plotCorrFunGaussRealization_2}
 {../figures/chapter4/figures/plotCorrFunGaussRealization_3}
 
-\subsubsection{Power-Exponential Kernel}
+%===================================================================
+\subsubsection{Power-Exponential Kernel}\label{subsub:gp_powexp_cov}
+%===================================================================
 
 The Gaussian correlation kernel belongs to a wider class of $2$-parameter kernel function family called the \emph{power-exponential} kernel and is given by \cite{Roustant2012,Santner2003,Rasmussen2006},
 \begin{equation}
@@ -352,10 +356,11 @@ The Gaussian correlation kernel belongs to a wider class of $2$-parameter kernel
 \label{eq:powexp_kernel}
 \end{equation}
 
-The parameter $\theta$ remains the range parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
+The parameter $\theta$ remains the range parameter of the process,
+while the additional parameter $p$ is referred to as the shape parameter of the process.
 \marginpar{shape parameter}
 Specifically, the shape parameter $p$ determines the differentiability of the process at the origin \cite{Abrahamsen1997}.
-Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm ($|\mathbf{x}_i - \mathbf{x}_j|$).
+Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm ($|\bm{x}_i - \bm{x}_j|$).
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp},
 			           maincaption={Examples of power exponential kernel functions for different values of shape parameter $p$ and range parameter $\theta$ as function of $L_1$ norm.},
@@ -375,8 +380,8 @@ Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponent
 {../figures/chapter4/figures/plotCorrFunPowExp_2}
 {../figures/chapter4/figures/plotCorrFunPowExp_3}
 
-Although, strictly speaking, only when $p = 2$ the power-exponential correlation is differentiable at the origin (thus guarantee the smoothness of the realization),
-the shape parameter does dictate the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
+Although, strictly speaking, only when $p = 2$ the power-exponential correlation is differentiable at the origin (thus guarantee the smoothness of the realization).
+The shape parameter dictates the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp_realizations},
 			           maincaption={Several realizations from \gls[hyper=false]{gp} with power-exponential kernel functions of different shape $p$ and scale $\theta$ parameters.},
@@ -402,7 +407,9 @@ For instance, Gaussian correlation kernel is a special case of the power-exponen
 Another special case is when $p = 1$ which is called the \emph{exponential} kernel.
 In this particular case, realizations of which are depicted in Fig.~\ref{fig:plot_corrfun_powexp_realization_2}, the process is continuous but not differentiable \cite{Rasmussen2006}.
 
-\subsubsection{Mat\'ern Class Kernel}
+%================================================================
+\subsubsection{Mat\'ern Class Kernel}\label{subsub:gp_matern_cov}
+%================================================================
 
 The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula \cite{Santner2003,Rasmussen2006}
 \begin{equation}
@@ -472,13 +479,15 @@ As expected, the realizations from Mat\'ern kernel with $\nu = 5/2$ is smoother 
 {../figures/chapter4/figures/plotCorrFunMaternRealizations_1.pdf}
 {../figures/chapter4/figures/plotCorrFunMaternRealizations_2.pdf}
 
-\subsection{Multidimensional Construction}
+%----------------------------------------------------------------------
+\subsection{Multidimensional Construction}\label{sub:gp_multidimension}
+%----------------------------------------------------------------------
 
 In order to create a valid multidimensional correlation kernel function from a valid $1$-dimensional correlation function given above, 
 a tensor product construction is used as follows,
 \marginpar{tensor product}
 \begin{equation}
-	R(\mathbf{x}_i, \mathbf{x}_j) = \prod_{d = 1}^{D} r_d \left(x_i^{(d)}, x_j^{(d)}\right)
+	R(\bm{x}_i, \bm{x}_j) = \prod_{d = 1}^{D} r_d \left(x_i^{(d)}, x_j^{(d)}\right)
 \label{eq:tensor_product}
 \end{equation}
 where $r_d$ is a $1$-dimensional correlation kernel function for the $d$-th input dimension;
@@ -507,9 +516,9 @@ As such, for both cases, the surface appears less smooth in one of the direction
 {../figures/chapter4/figures/plotRandomSurface_1}
 {../figures/chapter4/figures/plotRandomSurface_2}
 
-%----------------------------
-\subsection{Process Variance}
-%----------------------------
+%---------------------------------------------------
+\subsection{Process Variance}\label{sub:gp_variance}
+%---------------------------------------------------
 
 For stationary \gls[hyper=false]{gp}, the shape of the sample path is determined solely by the form of the correlation.
 The role of the process variance according to Eq.~(\ref{eq:cov_function}) is to determine the scale of the magnitude of the output variation. 
