@@ -5,11 +5,11 @@
 Consider a general \emph{regression} problem:
 \marginpar{regression problem}
 Given a deterministic computer simulator (which, in essence, is a function) $f:\bm{x} \in \bm{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
-evaluated at $\mathbf{DM}$, an experimental design matrix $\{\bm{x}_n\}_{n=1}^N$,
-yielding $N$ outputs $\mathbf{y} = \{f(\bm{x}_n) = y_n\}_{n=1}^N$, 
+evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_n\}_{n=1}^N$,
+yielding $N$ outputs $\mathbf{y} = \{f(\mathbf{x}_n) = y_n\}_{n=1}^N$, 
 the objective of the regression is to compute (or \emph{predict}) the value of $f(\bm{x}_o)$ with $\bm{x}_o \notin \mathbf{DM}$.
 
-The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\bm{x}_n, f(\bm{x}_n) = y_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
+The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\mathbf{x}_n, f(\mathbf{x}_n) = y_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
 \marginpar{training data, training samples, and training outputs}
 though the term is used interchangeably with the training outputs $\mathbf{y}$.
 The experimental design matrix $\mathbf{DM}$ introduced in the previous chapter is interchangeably referred to as the training samples, inputs, or points in this chapter.
