@@ -224,8 +224,8 @@ The variance associated with the predictor is expressed as
 Eqs.~(\ref{eq:sk_predictor_ml}-\ref{eq:sk_variance_ml}) are the same as Eqs.~(\ref{eq:mean_sk}-\ref{eq:variance_sk}), 
 except now the hyper-parameters are replaced by their \gls[hyper=false]{ml} estimates.
 \marginpar{Uncertainty on $\boldsymbol{\Psi}$}
-This also implies that the uncertainties associated with the \gls[hyper=false]{ml} estimates are not incorporated into the Kriging predictor and variance \cite{Helbert2009}.
-That is, the uncertainties of the predictor (i.e., its variance) given the observed data is also conditional on a particular set of hyper-parameters values which underestimate the true Kriging variance \cite{Hertog2006}.
+This implies that the uncertainties associated with the \gls[hyper=false]{ml} estimates are not incorporated into the Kriging predictor and variance \cite{Helbert2009}.
+That is, the uncertainties of the predictor (its variance) given the observed data is also conditional on a particular values of hyper-parameters which underestimate the true Kriging variance \cite{Hertog2006}.
 
 Full Bayesian treatment of this problem acknowledges this additional source of uncertainty and considers the hyper-parameters as nuisance parameters.
 \marginpar{Full Bayesian treatment}
@@ -268,9 +268,9 @@ In addition to that, the results can also be sensitive to the size of validation
 For a computationally expensive simulator, it is not always possible to generate large (if any at all) independent validation samples.
 \marginpar{cross-validation strategy}
 The \emph{cross-validation} is an alternative approach to validate a metamodel in this situation \cite{Meckesheimer2002,Iooss2010}.
-In cross-validation, a batch of samples (\emph{subsamples}) are removed from the available training samples, 
+In cross-validation, a batch of samples is removed from the available training samples, 
 used the remaining training samples for fitting and the subsamples for assessing the metamodel (essentially becomes the validation samples).
-The procedure is repeated by selecting randomly the elements of the removed batch.
+The procedure is repeated by selecting randomly the elements for the removed batch.
 The most extreme case of this approach is the so-called \emph{leave-one-out} (LOO) cross validation, 
 where a single training point is removed for validation purpose and exhaustively repeating the procedure.
 Cross-validation does not require additional simulator runs to generate validation samples.
