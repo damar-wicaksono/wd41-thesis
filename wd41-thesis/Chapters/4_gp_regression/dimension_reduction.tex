@@ -67,14 +67,14 @@ The raw outputs of the training runs are first concatenated row-wise resulting i
 				\rule[.5ex]{2.5em}{0.4pt}	& \mathbf{y}_n	&	\rule[.5ex]{2.5em}{0.4pt} \\
 																	& \vdots	&
 			\end{pmatrix} \\
-		\mathbf{y}_n & = (y_{n1}, \cdots, y_{np}, \cdots, y_{nP}) \\
-		             & = (y(\mathbf{x}_n)_1, \cdots, y(\mathbf{x}_n)_p, \cdots, y(\mathbf{x}_n)_P)
+		\mathbf{y}_n & = (\text{y}_{n,1}, \cdots, \text{y}_{n,p}, \cdots, \text{y}_{n,P}) \\
+		             & = (y(\bm{x}_n)_1, \cdots, y(\bm{x}_n)_p, \cdots, y(\bm{x}_n)_P)
 	\end{split}
 \label{eq:raw_output}
 \end{equation}
 where $y(\mathbf{x}_n)_p$ is the $p$-th output dimension, evaluated using the $n$-th training sample.
 Note that the notation above is similar to Eq.~(\ref{eq:discrete_time}) but now the dimension of the output $y_p$ is not only restricted to time, 
-nor they have to be of the same (physical) dimension.
+nor do they have to be of the same (physical) dimension.
 In the formulation below, the raw training outputs is always assumed to be dependent on the training samples and thus the notation $\mathbf{DM}$ is suppressed.
 
 % The mean
@@ -86,12 +86,12 @@ The sample mean of the raw outputs is used to substitute the mean in the \gls[hy
 The sample mean is obtained by taking the column-wise average of Eq.~(\ref{eq:raw_output}),
 \begin{equation}
 	\begin{split}
-		\bar{\mathbf{y}} & = [\bar{y}_1, \cdots, \bar{y}_p, \cdots, \bar{y}_P] \\
-		\bar{y}_p & = \frac{1}{N} \sum_{n=1}^{N} y(\mathbf{x}_n)_{p} \\
+		\bar{\mathbf{y}} & = [\bar{\text{y}}_1, \cdots, \bar{\text{y}}_p, \cdots, \bar{\text{y}}_P] \\
+		\bar{\text{y}}_p & = \frac{1}{N} \sum_{n=1}^{N} y(\mathbf{x}_n)_{p} \\
 	\end{split}
 \label{eq:sample_mean}
 \end{equation}
-Note that by the above, it implies the mean of the \gls[hyper=false]{lmc} is a constant vector.
+Note that by the above, the mean of the \gls[hyper=false]{lmc} is a constant vector.
 
 % Centering of the output
 As the \gls[hyper=false]{pca} deals with the data covariance matrix,
@@ -108,12 +108,12 @@ The centered raw outputs $\mathbf{Y}^*$ is then decomposed by means of \gls[hype
 	\mathbf{Y}^* = \mathbf{U} \mathbf{S} \mathbf{V}^T
 \label{eq:svd_raw_outputs}
 \end{equation}
-where $\mathbf{U}$ is the $N \times N$ orthonormal, left singular matrix;
+where $\mathbf{U}$ is the $N \times N$ orthogonal, left singular matrix;
 $\mathbf{S}$ is the $N \times P$ diagonal matrix of singular values;
 and $\mathbf{V}$ is the $P \times P$ orthogonal, right singular matrix.
 
 % Principal Component and Principal Component Scores
-The column vector elements of $\mathbf{V}$ are the principal components of the dataset which describe the main directions of the dataset, along which the variance of the dataset is the largest.
+The column vector elements of $\mathbf{V}$ are the principal components of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
 Principal components are sorted in descending order such that the first principal component (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
 % Partial Variance of principal component
 The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
@@ -123,8 +123,8 @@ The singular values are related to the explained variance of the eigenvectors (i
 \end{equation}
 \bigdoublefigure[pos=tbhp,
                  mainlabel={fig:pca_illustrate},
-								 mainshortcaption={Principal Component Analysis of a bivariate dataset},
-                 maincaption={\gls[hyper=false]{pca} of a bivariate dataset. A highly correlated bivariate dataset can be transformed into a new orthogonal coordinate system according to the principal direction of the dataset. The principal directions redistribute the total variance such that the partial variance is preserved in the transformed coordinate. Illustrated above, $5$ selected points in the dataset in both coordinates.},
+								 mainshortcaption={Principal Component Analysis of a bivariate data set},
+                 maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal direction of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Illustrated above, $5$ selected points in the data set in both coordinates.},
                  leftopt={width=0.475\textwidth},
                  leftlabel={fig:pca_original},
                  leftcaption={Original data},
@@ -141,8 +141,8 @@ Projection of the data into the principal components results in \emph{principal 
 	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
 \label{eq:pc_scores}
 \end{equation}
-where $W$ is the $N \times P$ matrix of principal component scores.
-A unique set of $P$ principal component scores are associated with each points in the multivariate dataset.
+where $\mathbf{W}$ is the $N \times P$ matrix of principal component scores.
+A unique set of $P$ principal component scores are associated with each points in the multivariate data set.
 The scores describe the locations of the multivariate data points in the new coordinate system as defined by the principal components (Fig.~\ref{fig:pca_transformed}).
 
 %The partial variance obtained from the diagonal is automatically sorted in descending order with the top-left element being the largest.
@@ -151,31 +151,33 @@ The scores describe the locations of the multivariate data points in the new coo
 % 
 Often the results of \gls[hyper=false]{pca} are reformulated in terms of principal component loadings and standardized scores,
 \begin{equation}
-	\mathbf{V}^* = \frac{1}{\sqrt{N-1}} \mathbf{V} \mathbf{S} 
+	\mathbf{V}^* = \frac{1}{\sqrt{N-1}} \mathbf{V} \mathbf{S}
 \label{eq:pc_loadings}
 \end{equation}
 \begin{equation}
 	\mathbf{W}^* = \sqrt{N-1} \mathbf{U}
 \label{eq:standardized_pc_scores}
 \end{equation}
-This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})), it also results in standardized PC scores with variance of $1.0$.
+where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{however $\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$}.
+This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})),
+it also results in standardized PC scores with variance of $1.0$.
 In the context of regression of PC scores used later in metamodeling, the latter property improves the numerical stability of the maximum likelihood estimation of the hyper-parameters. 
 
 % Dimension Reduction
 Dimension reduction takes place when only a small numbers of \glspl[hyper=false]{pc} are kept.
 \marginpar{Dimension Reduction}
-That is, only the first $Q$ columns of $\mathbf{V}^*$ is retained with $Q << P$.
+That is, only the first $Q$ columns of $\mathbf{V}^*$ are retained with $Q << P$.
 Such selection is justified by a certain amount of partial variance explained by those few first $Q$ principal components.
 In the illustration of Fig.~\ref{fig:pca_illustrate},
-the dimension reduction is carried out by simply using the first principal component (horizontal axis of Fig.~\ref{fig:pca_transformed}) to describe the dataset.
+the dimension reduction can be carried out by simply using the first principal component (horizontal axis of Fig.~\ref{fig:pca_transformed}) to describe the data set.
 
 Back to the formulation of \gls[hyper=false]{lmc},
-the matrix $\boldsymbol{\Phi}$ in Eq.~(\ref{eq:lmc}) is substituted by the set of empirical orthogonal basis functions obtained from the first $Q$ \gls[hyper=false]{pc} loadings of the dataset, which is defined as
+the matrix $\boldsymbol{\Phi}$ in Eq.~(\ref{eq:lmc}) is substituted by the set of empirical orthogonal basis functions obtained from the first $Q$ \gls[hyper=false]{pc} loadings of the data set, and is defined as
 \begin{equation}
-	\boldsymbol{\Phi} = [\mathbf{v}^*_1, \cdots, \mathbf{v}^*_q, \cdots, \mathbf{v}^*_Q]
+	\boldsymbol{\Phi} = (\mathbf{v}^*_1, \cdots, \mathbf{v}^*_q, \cdots, \mathbf{v}^*_Q)
 \label{eq:pc_reduction}
 \end{equation}
-where $\mathbf{v}_q$ is the $P$-dimensional column-vector taken from the $q$-th column of matrix $V$;
+where $\mathbf{v}^*_q$ is the $P$-dimensional column-vector taken from the $q$-th column of matrix $\mathbf{V}^*$;
 and $Q << P$.
 This empirical orthogonal basis functions expansion is obviously related to the ones presented in Chapter 3.
 The analysis done here, however, used the point-wise data formulation as opposed to functional formulation.
@@ -186,22 +188,22 @@ The analysis done here, however, used the point-wise data formulation as opposed
 
 % LMC - PCA
 The multivariate output formulation of a \gls[hyper=false]{gp} metamodel based on the previous discussion is summarized as the following equation, 
-where a prediction at an arbitrary input $\mathbf{x}_o \in \mathbf{X}$ is made,
+where a prediction at an arbitrary input $\bm{x}_o \in \mathbf{X}$ is made,
 \begin{equation}
-		\bm{\mathcal{Y}}(\mathbf{x}_o) = \bar{\mathbf{Y}} + \boldsymbol{\Phi}_Q \bm{\mathit{w}}^* (\mathbf{x}_o) + \boldsymbol{\Phi}_{>Q} \mathbf{e}
+		\bm{\mathcal{Y}}(\bm{x}_o) = \bar{\mathbf{y}} + \boldsymbol{\Phi}^*_Q \bm{\mathit{w}}^* (\bm{x}_o) + \boldsymbol{\Phi}^*_{>Q} \mathbf{e}
 \label{eq:lmc_pca}
 \end{equation}
-where $\bar{\bm{Y}}$ is the $P$-dimensional vector of sample mean (Eq.~(\ref{eq:sample_mean})).
+where $\bar{\mathbf{y}}$ is the $P$-dimensional vector of sample mean (Eq.~(\ref{eq:sample_mean})).
 The other elements in the equation are described below.
 
 % The Retained Eigenvectors
-$\boldsymbol{\Phi}_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
-Specifically, $\boldsymbol{\Phi}_Q$ is,
+$\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
+Specifically, $\boldsymbol{\Phi}^*_Q$ is,
 \begin{equation}
-		\boldsymbol{\Phi}_Q = (\boldsymbol{\Phi}^*_1, \boldsymbol{\Phi}^*_2, \cdots, \boldsymbol{\Phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \cdots, \mathbf{v}^*_Q) ; \, Q << P
+		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\Phi}^*_1, \boldsymbol{\Phi}^*_2, \cdots, \boldsymbol{\Phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \cdots, \mathbf{v}^*_Q) ; \, Q << P
 \label{eq:retained_pc}
 \end{equation}
-where $\boldsymbol{v}^*_i$ is the $P$-dimensional column vector of the $i$-th PC loading taken from Eq.(~\ref{eq:pc_reduction}).
+where $\mathbf{v}^*_i$ is the $P$-dimensional column vector of the $i$-th PC loading taken from Eq.(~\ref{eq:pc_reduction}).
 
 % The Standardized PC Scores, a Gaussian process
 $\bm{\mathit{w}}^*$ is the $Q$-dimensional vector of standardized PC scores for each of the retained PC loading,
@@ -215,18 +217,18 @@ modeled as a set of univariate, independent, zero-mean \gls[hyper=false]{gp},
 \end{equation}
 where $\mathit{w}^*_i$ is the standardized PC scores of the $i$-th PC loading;
 $\sigma_i^2$ and $R_i(\circ, \circ)$ are the process variance and the correlation function 
-associated with \gls[hyper=false]{gp} of $\mathit{w}^*_i$, respectively.
+associated with the \gls[hyper=false]{gp} of $\mathit{w}^*_i$, respectively.
 
 % Conditioning the process by observed data
 The observed data from the $N$ training samples is related to each of the $\mathit{w}_i$ by,
 \begin{equation}
-	\bm{w}^*_i(\mathbf{DM}) \equiv \mathbf{w}^*_i = \sqrt{N - 1} \mathbf{Y}^* \mathbf{S}^{-1} \mathbf{V}_i ; \, i = 1, \cdots, Q
+	\bm{w}^*_i(\mathbf{DM}) \equiv \mathbf{w}^*_i = \sqrt{N - 1} \mathbf{Y}^* \mathbf{S}^{-1} \mathbf{v}^*_i ; \, i = 1, \cdots, Q
 \label{eq:data_w}
 \end{equation}
 That is, the observed data for the $i$-th standardized PC score is the projection of the standardized data on the $i$-th PC loading.
 Conditioning the \gls[hyper=false]{gp} of $\mathit{w}_i$ by the observed data yields,
 \begin{equation}
-	\bm{w}_i (\mathbf{x}_o) | \mathbf{w}_i \sim \mathcal{N} (m_{SK,i}(\mathbf{x}_o), s^2_{SK,i}(\mathbf{x}_o)) ; \, i = 1, \cdots, Q 
+	\bm{w}^*_i (\bm{x}_o) | \mathbf{w}_i \sim \mathcal{N} (m_{SK,i}(\bm{x}_o), s^2_{SK,i}(\bm{x}_o)) ; \, i = 1, \cdots, Q 
 \label{eq:conditional_w}
 \end{equation}
 where $m_{SK,i}$ and $s^2_{SK,i}$ are the simple Kriging mean and variance, respectively (Eq.~(\ref{eq:mean_sk}) and Eq.~(\ref{eq:variance_sk})),
@@ -234,9 +236,9 @@ associated to the $i$-th standardized PC score.
 The simple Kriging formulation is used here as the assumed process is already centered (zero-mean).
 
 % The unretained eigenvectors
-$\boldsymbol{\Phi}_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns of the PC loadings,
+$\boldsymbol{\Phi}^*_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns of the PC loadings,
 \begin{equation}
-		\boldsymbol{\Phi}_{>Q} = (\boldsymbol{\phi}_{Q+1}, \boldsymbol{\phi}_{Q+2}, \cdots, \boldsymbol{\phi}_P) = (\mathbf{v}_{Q+1}, \mathbf{v}_{Q+2}, \cdots, \mathbf{v}_P)
+		\boldsymbol{\Phi}^*_{>Q} = (\boldsymbol{\Phi}^*_{Q+1}, \boldsymbol{\Phi}^*_{Q+2}, \cdots, \boldsymbol{\Phi}^*_P) = (\mathbf{v}^*_{Q+1}, \mathbf{v}^*_{Q+2}, \cdots, \mathbf{v}^*_P)
 \label{eq:unretained_pc}
 \end{equation}
 where $\boldsymbol{\phi}_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading taken from Eq.(~\ref{eq:pc_loadings}).
@@ -246,17 +248,18 @@ $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distri
 In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as a set of independent normal random variables with the variance given by the PC loadings.
 
 % The Full Probability Model
-The multivariate output at evaluated $\mathbf{x}_o$ conditioned by the training data is thus distributed as $P$-variate Gaussian random variable,
+The multivariate output evaluated at $\bm{x}_o$ conditioned by the training data is thus distributed as $P$-variate Gaussian random variable,
 \begin{equation}
 	\begin{split}
-		& \bm{\mathcal{Y}} (\mathbf{x}_o) | \bm{\mathcal{Y}} (DM) = \mathbf{Y} \sim \mathcal{N}_P (\boldsymbol{\mu}_P (\mathbf{x}_o), \Sigma_{P \times P} (\mathbf{x}_o)) \\
-		& \boldsymbol{\mu}_P  = \bar{\mathbf{Y}} + \boldsymbol{\Phi}_Q \mathbf{m}_{SK}(\mathbf{x}_o) \\
-		& \Sigma_{P \times P} = \boldsymbol{\Phi}_Q \text{diag}(\mathbf{s}^2_{SK}(\mathbf{x}_o)) \boldsymbol{\Phi}^T_Q + \boldsymbol{\Phi}_{>Q} \mathbf{I}\boldsymbol{\Phi}^T_{>Q}) \\
-		& \mathbf{m}_{SK} = [m_{SK,1}(\mathbf{x}_o), m_{SK,2}(\mathbf{x}_o), \cdots, m_{SK,Q}(\mathbf{x}_o)] \\
-		& \mathbf{s}^2_{SK} = [s^2_{SK,1}(\mathbf{x}_o), s^2_{SK,2}(\mathbf{x}_o), \cdots, s^2_{SK,Q}(\mathbf{x}_o)]
+		& \bm{\mathcal{Y}} (\bm{x}_o) | \bm{\mathcal{Y}} (\mathbf{DM}) = \mathbf{Y} \sim \mathcal{N}_P (\boldsymbol{\mu}_P (\bm{x}_o), \Sigma_{P \times P} (\bm{x}_o)) \\
+		& \boldsymbol{\mu}_P  = \bar{\mathbf{y}} + \boldsymbol{\Phi}^*_Q \mathbf{m}_{SK}(\bm{x}_o) \\
+		& \Sigma_{P \times P} = \boldsymbol{\Phi}^*_Q \text{diag}(\mathbf{s}^2_{SK}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_Q + \boldsymbol{\Phi}^*_{>Q} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q}) \\
+		& \mathbf{m}_{SK} = [m_{SK,1}(\bm{x}_o), m_{SK,2}(\bm{x}_o), \cdots, m_{SK,Q}(\bm{x}_o)] \\
+		& \mathbf{s}^2_{SK} = [s^2_{SK,1}(\bm{x}_o), s^2_{SK,2}(\bm{x}_o), \cdots, s^2_{SK,Q}(\bm{x}_o)]
 	\end{split}
 \label{eq:p_variate_metamodel}
 \end{equation}
 The model above assumed that the hyper-parameters associated with a selected correlation function are known.
 In practice they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
-Additionally, the underestimation of the Kriging variance explained in that section is also the case here when the \gls[hyper=false]{ml} estimates are plugged-in to the formulation.
+Additionally, the (theoretical) underestimation of the Kriging variance explained in that section also applies here when the \gls[hyper=false]{ml} estimates are plugged into the formulation.
+In practice, however, Ref.~\cite{Bayarri2007} noted that the uncertainties associated with the model parameters often eclipse the uncertainties induced by the metamodel hyper-parameters.
