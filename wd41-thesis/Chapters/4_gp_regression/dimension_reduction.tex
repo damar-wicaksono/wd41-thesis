@@ -12,7 +12,7 @@ As outlined in Chapter~\ref{ch:sensitivity_analysis}, some techniques can be use
 However, in the calibration setting, some of these outputs have corresponding measurement data and need to be represented by the metamodel in their original form for a direct comparison.
 
 % Introductory Paragraph, one suggested approach
-An approach proposed in \cite{Kleijnen2000} is to represent the multiple outputs by metamodels separately.
+An approach proposed in \cite{Kleijnen2000} is to represent the multiple outputs by separate metamodels.
 \marginpar{separate univariate metamodel}
 That is, one metamodel is developed to represent each one of the multiple outputs individually.
 Yet, for a very high-dimensional output (from tens to thousands), this approach is impractical as the numbers of metamodel to train becomes too numerous.
@@ -22,8 +22,8 @@ As such, developing individual metamodels to represent the correlated outputs se
 % The approach in this thesis
 To cope with the problem of high-dimensionality of the outputs,
 \marginpar{extension to multivariate case} 
-this thesis adopted \gls[hyper=false]{lmc} \cite{Goulard1992,Paulo2012} coupled with \gls[hyper=false]{pca} technique \cite{Jolliffe2002,Higdon2008} to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
-The original \gls[hyper=false]{lmc} was formulated to model multivariate data in geostatistics that covary together over a region in a linear fashion, 
+this thesis adopted a \gls[hyper=false]{lmc} \cite{Goulard1992,Paulo2012} coupled with a \gls[hyper=false]{pca} \cite{Jolliffe2002,Higdon2008} to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
+The original \gls[hyper=false]{lmc} was formulated to model multivariate data in geostatistics that covary together (over a region) in a linear fashion, 
 while \gls[hyper=false]{pca} is used here as a data-driven dimensional reduction tool.
 The resulting model consists of few \emph{independent, univariate} \gls[hyper=false]{gp} metamodels, each of which is the one presented in the previous section.
 
@@ -33,23 +33,23 @@ The resulting model consists of few \emph{independent, univariate} \gls[hyper=fa
 
 % Linear Model of Coregionalization
 The function that represents the computer code simulation $f$ is now cast in its multivariate version,
-$\mathbf{f}:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^P$ where $P$ is the dimension of the output parameter space.
+$\bm{f}:\bm{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^P$ where $P$ is the dimension of the output parameter space.
 \marginpar{Linear model of coregionalization}
 The \gls[hyper=false]{lmc} of the $P$-dimensional \gls[hyper=false]{gp} metamodel $\bm{\mathcal{Y}}$ can be written as,
 \begin{equation}
-	\bm{\mathcal{Y}}(\mathbf{x}) = \boldsymbol{\mu}(\mathbf{x}) + \boldsymbol{\Phi} \bm{\mathit{w}} (\mathbf{x}) + \boldsymbol{\epsilon}
+	\bm{\mathcal{Y}}(\bm{x}) = \boldsymbol{\mu}(\bm{x}) + \boldsymbol{\Phi} \bm{\mathit{w}} (\bm{x}) + \boldsymbol{\epsilon}
 \label{eq:lmc}
 \end{equation}
 where $\boldsymbol{\mu}$ is the $P$-dimensional mean vector of the multivariate process;
 $\boldsymbol{\Phi}$ is a $P \times Q$ matrix, with $Q \leq P$;
 $\boldsymbol{\epsilon}$ is a $P$-dimensional vector of li\-nearization error;
-and $\bm{\mathit{w}} (\mathbf{x}) = (\mathit{w}_i(\mathbf{x}))$ is a $Q$-dimensional vector with univariate \glspl[hyper=false]{gp} as its elements,
+and $\bm{\mathit{w}} (\bm{x}) = (\mathit{w}_i(\bm{x}))$ is a $Q$-dimensional vector with univariate \glspl[hyper=false]{gp} as its elements,
 \begin{equation}
-	w_i(\mathbf{x}) \sim \mathcal{GP} (0, \sigma^2_i R_i(\mathbf{x}, \mathbf{x}^*))
+	w_i(\bm{x}) \sim \mathcal{GP} (0, \sigma^2_i R_i(\bm{x}, \bm{x}^*))
 \label{eq:lmc_weight}
 \end{equation}
 where $\sigma^2_i$ and $R_i$ are the process variance and correlation function associated with each element of the vector, respectively.
-The term $\boldsymbol{\Phi} \mathbf{w}(\mathbf{x})$ describes the covariation between the multivariate outputs as function of model parameters.
+The term $\boldsymbol{\Phi} \bm{\mathit{w}}(\bm{x})$ describes the covariation between the multivariate outputs as function of model parameters.
 
 %----------------------------------------------------------
 \subsection{Principal Component Analysis}\label{sub:gp_pca}
