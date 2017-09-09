@@ -121,17 +121,17 @@ The singular values are related to the explained variance of the eigenvectors (i
 	\boldsymbol{\lambda} = \text{diag}\left(\frac{\mathbf{S}^2}{N-1}\right)
 \label{eq:singular_values_variance}
 \end{equation}
-\bigdoublefigure[pos=tbhp,
-                 mainlabel={fig:pca_illustrate},
-								 mainshortcaption={Principal Component Analysis of a bivariate data set},
-                 maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal direction of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Illustrated above, $5$ selected points in the data set in both coordinates.},
-                 leftopt={width=0.475\textwidth},
-                 leftlabel={fig:pca_original},
-                 leftcaption={Original data},
-                 rightopt={width=0.475\textwidth},
-                 rightlabel={fig:pca_transformed},
-                 rightcaption={Transformed data},
-                 ]
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:pca_illustrate},
+                  maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal directions of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Illustrated above, $3$ selected points in the data set in both coordinates.},%
+									mainshortcaption={Principal Component Analysis of a bivariate data set.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:pca_original},
+                  leftcaption={Original data},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:pca_transformed},
+                  rightcaption={Transformed data}]
 {../figures/chapter4/figures/plotPCA_1}
 {../figures/chapter4/figures/plotPCA_2}
 
