@@ -183,6 +183,9 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 
+# THUMBS
+Thumbs.db
+
 # RStudio project
 */.Rproj.user
 

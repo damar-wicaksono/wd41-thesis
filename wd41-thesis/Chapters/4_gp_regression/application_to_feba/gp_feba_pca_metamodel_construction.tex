@@ -65,16 +65,6 @@ The first $10$ \glspl[hyper=false]{pc}, in turn, carried close to $100\%$ of the
 {../figures/chapter4/figures/plotPCQ2DP}
 {Convergence of \gls[hyper=false]{pc} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the pressure drop output and $Q_2$ validation metric.}
 
-% PC GP Metamodel Construction, Pressure Drop Output
-\clearpage
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=1.0\textwidth]{../figures/chapter4/figures/plotPCGPConstructionDP}
-	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the pressure drop output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}, of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the pressure drop output.}
-	\label{fig:ch4_plot_pc_gp_construction_dp}
-\end{sidewaysfigure}
-\clearpage
-
 % Describing finding in the figure, pressure drop output
 Fig,~\ref{fig:ch4_plot_pc_gp_construction_dp} presents the summary of the effect of different factors in the construction of a \gls[hyper=false]{gp} metamodel with the pressure drop output as its output.
 The reconstruction error was computed using the first $10$ \glspl[hyper=false]{pc}.
@@ -103,12 +93,4 @@ the training sample size was the most important factor in determining the predic
 there was a relatively minor effect of the choice of covariance kernel functions especially in terms of the performance variation,
 and the choice of experimental design was relatively non-influential.
 
-% PC GP Metamodel Construction, Liquid Carryover output
-\clearpage
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=1.0\textwidth]{../figures/chapter4/figures/plotPCGPConstructionCO}
-	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the liquid carryover output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}, of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the liquid carryover output.}
-	\label{fig:ch4_plot_pc_gp_construction_co}
-\end{sidewaysfigure}
-\clearpage
+

@@ -30,7 +30,7 @@ rec_error_filenames <- c(
     "rec_error_df_co.csv")
 
 # Graphic Parameters
-fig_size <- c(5, 5)                 # width, height
+fig_size <- c(6, 6)                 # width, height
 x_labs <- c("Observed Reconstruction Error (RMSE) [K]",
             "Observed Reconstruction Error (RMSE) [Pa]",
             "Observed Reconstruction Error (RMSE) [kg]")
@@ -53,10 +53,10 @@ for (i in 1:3)
     # Set plotting canvas
     p <- p + labs(x = x_labs[i], y = y_labs[i])
     p <- p + theme_bw()
-    p <- p + theme(axis.title.x = element_text(size = 16))
-    p <- p + theme(axis.title.y = element_text(size = 16, vjust = 1.5))
-    p <- p + theme(axis.text.x = element_text(size = 14))
-    p <- p + theme(axis.text.y = element_text(size = 14))
+    p <- p + theme(axis.title.x = element_text(size = 17))
+    p <- p + theme(axis.title.y = element_text(size = 17, vjust = 1.5))
+    p <- p + theme(axis.text.x = element_text(size = 16))
+    p <- p + theme(axis.text.y = element_text(size = 16))
     p <- p + geom_abline(slope = 1, intercept = 0)
     
     p <- p + scale_y_continuous(limits = ax_lims[[i]])
