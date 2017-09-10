@@ -33,7 +33,7 @@ The resulting model consists of few \emph{independent, univariate} \gls[hyper=fa
 
 % Linear Model of Coregionalization
 The function that represents the computer code simulation $f$ is now cast in its multivariate version,
-$\bm{f}:\bm{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^P$ where $P$ is the dimension of the output parameter space.
+$\bm{f}:\boldsymbol{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^P$ where $P$ is the dimension of the output parameter space.
 \marginpar{Linear model of coregionalization}
 The \gls[hyper=false]{lmc} of the $P$-dimensional \gls[hyper=false]{gp} metamodel $\bm{\mathcal{Y}}$ can be written as,
 \begin{equation}
@@ -188,7 +188,7 @@ The analysis done here, however, used the point-wise data formulation as opposed
 
 % LMC - PCA
 The multivariate output formulation of a \gls[hyper=false]{gp} metamodel based on the previous discussion is summarized as the following equation, 
-where a prediction at an arbitrary input $\bm{x}_o \in \mathbf{X}$ is made,
+where a prediction at an arbitrary input $\bm{x}_o \in \boldsymbol{X}$ is made,
 \begin{equation}
 		\bm{\mathcal{Y}}(\bm{x}_o) = \bar{\mathbf{y}} + \boldsymbol{\Phi}^*_Q \bm{\mathit{w}}^* (\bm{x}_o) + \boldsymbol{\Phi}^*_{>Q} \mathbf{e}
 \label{eq:lmc_pca}
