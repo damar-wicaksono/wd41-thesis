@@ -17,48 +17,50 @@ The error represents the difference between the original data and reconstructed 
 The series of plots shown in Fig.~\ref{fig:ch4_plot_reconstruction_error} also illustrates the limit of \gls[hyper=false]{pca} as a dimension reduction tool.
 The method performs best for the liquid carryover output and worst for the clad temperature output.
 The latter is mostly due to the fact that the clad temperature output includes a sharp discontinuity (i.e., quenching).
-\gls[hyper=false]{pca}, being a linear transformation, can deal with this strong non-linearities sub-optimally.
-That is, significantly large number of \glspl[hyper=false]{pc} are required to bring the reconstruction error to $0$.
+\gls[hyper=false]{pca}, being a linear transformation, deals with this strong non-linearity sub-optimally.
+That is, a significantly large number of \glspl[hyper=false]{pc} are required to resolve the discontinuity and bring the reconstruction error closer to $0$.
 
 % GP PC Metamodel, its limitation
-However as indicated in Figs.~\ref{fig:ch4_plot_pc_q2_tc}, \ref{fig:ch4_plot_pc_q2_dp}, and \ref{fig:ch4_plot_pc_q2_co},
+However, as indicated in Figs.~\ref{fig:ch4_plot_pc_q2_tc}, \ref{fig:ch4_plot_pc_q2_dp}, and \ref{fig:ch4_plot_pc_q2_co},
 constructing a \gls[hyper=false]{pc} metamodel is increasingly difficult for higher \gls[hyper=false]{pc} for all output types.
 \marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, limitation}
 In other words, as the relationship between model parameters and the standardized \gls[hyper=false]{pc} scores becomes increasingly non-linear, 
 large number of training samples are required to train the \gls[hyper=false]{gp} metamodel to attain a decent predictive performance.
 At the same time, the benefit of adding additional \gls[hyper=false]{pc} becomes increasingly marginal (Fig.~\ref{fig:ch4_plot_reconstruction_error}).
-In addition to that, some degree of error should be expected in the prediction of the \gls[hyper=false]{pc} scores by the metamodel, especially the higher ones.
-As such, unless the score is perfectly predicted, this error might offset the potential benefit of adding additional \gls[hyper=false]{pc} for the reconstruction.
+In addition, some degree of error should be expected in the prediction of the \gls[hyper=false]{pc} scores by the metamodel, especially the higher ones.
+As such, unless the score is perfectly predicted, this error might offset the potential benefit of adding \gls[hyper=false]{pc} for the reconstruction.
 
 % GP PC Metamodel, errors in context
-A pragmatic approach is thus to choose the number of retained \glspl[hyper=false]{pc} based on some target error put in context and/or number of \gls[hyper=false]{trace} runs that can be afforded.
+A pragmatic approach is thus to choose the number of retained \glspl[hyper=false]{pc} based on some target error and/or number of \gls[hyper=false]{trace} runs that can be afforded.
 \marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, errors in context}
-For the clad temperature output,
-retaining $7$ \glspl[hyper=false]{pc} for the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel gives reconstruction error of $\approx 22 \, [K]$ (\gls[hyper=false]{rmse}).
-This value is small in comparison with the output standard deviation of the test data itself, $254 \, [K]$.
-The same approach applies to the pressure drop output ($10$ \glspl[hyper=false]{pc} gives reconstruction error of $\approx 78 \, [Pa]$, compared with test data standard deviation of $9200 \, [Pa]$);
-and the liquid carryover output ($10$ \glspl[hyper=false]{pc} gives reconstruction error of $0.27 \, [kg]$, compared with the test data standard deviation of $30.4 \, [kg]$).
-Note that those numbers are based on training samples of size $1'920$ and testing samples of size $5'000$.
+To put the error into context, for the clad temperature output,
+retaining $7$ \glspl[hyper=false]{pc} for the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel gives a reconstruction error of $\approx 22 \, [K]$ (\gls[hyper=false]{rmse}).
+This value is small in comparison with the standard deviation of the output in the test data itself, $254 \, [K]$ (less than $9\%$, Table~\ref{tab:ch4_gp_testing}).
+The same approach applies to the pressure drop output $10$ \glspl[hyper=false]{pc} gives a reconstruction error of $\approx 78 \, [Pa]$, compared with the test data standard deviation of $9200 \, [Pa]$, or less than $0.9\%$);
+and the liquid carryover output ($10$ \glspl[hyper=false]{pc} gives a reconstruction error of $0.27 \, [kg]$, compared with the test data standard deviation of $30.4 \, [kg]$, or less than $0.9\%$).
+Note that those numbers are based on a training sample of size $1'920$ and a testing sample of size $5'000$.
+As shown in Fig.~\ref{fig:ch4_plot_q2_pcs}, the size of the testing sample is (much) more than enough to obtain stable estimates of these errors.
 
 % The effects of training sample size, experimental design, and covariance function
 Another important finding in this study is the major importance of the training sample size on the predictive performance of the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel.
 \marginpar{the effects of training sample size, experimental design, and covariance function}
-The choice of covariance function has some effect in the predictive performance and its variation across replication insofar the choice is between the smoother ones (e.g., the Gaussian, the Mate\'rn $5/2$) and the less smooth ones (e.g., the power-exponential, the Mate\'rn $3/2$), 
-with the performance of the smoother kernels tend to be more variable.
-The choice of experimental design, on the other hand, has a small to negligible effect on the predictive performance across different sample sizes, covariance functions, and replications.
+The choice of covariance function has some effect in the predictive performance and its variation across replication. Insofar the choice is between the smoother functions (e.g., the Gaussian, the Mate\'rn $5/2$) and the rougher ones (e.g., the power-exponential, the Mate\'rn $3/2$), 
+with the performance of the smoother kernels tending to be more variable.
+The Gaussian covariance kernel showed a particularly inconsistent predictive performance over multiple replications for all types of output, and thus should be avoided.
+The choice of experimental design, on the other hand, has a marginal effect on the predictive performance across different sample sizes, covariance functions, and replications.
 
 % GP PC Metamodel, a statistical metamodel
-It is also worth noting that that a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel.
+It is also worth noting that a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel.
 \marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, a statistical metamodel}
 This implies that its predictive performance is defined over all output space (such as through the use of $Q_2$ and \gls[hyper=false]{rmse} as the validation metrics.) and over many realizations.
-That is, a good metamodel accurately predicts the output at arbitrary input, \emph{on average}.
+That is, a good metamodel accurately predicts the output for an arbitrary input, \emph{on average}.
 This also means that the metamodel has to some extent a ``hit-and-miss'' property: 
 most realizations are accurately predicted, some realizations can be mispredicted, and some small proportion of that can be grossly mispredicted as was illustrated in Fig.~\ref{fig:ch4_plot_rec_error_pred_obs}.
 Fig.~\ref{fig:ch4_plot_hit_and_miss} illustrates this idea further for the clad temperature output.
 \normdoublefigure[pos=!tbhp,
                  mainlabel={fig:ch4_plot_hit_and_miss},
 								 mainshortcaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}.},
-                 maincaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}. Some realizations are better than the others, due to both the limitation in the approximations incurred by using \gls[hyper=false]{pc} and \gls[hyper=false]{gp} (e.g., around quenching). Solid and dashed lines are \gls[hyper=false]{trace} runs and \gls[hyper=false]{gp} \gls[hyper=false]{pc} prediction.},
+                 maincaption={\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel is a global statistical metamodel which gives global accurate prediction \emph{on average}. Some realizations are better than the others, due to both the limitation in the approximations incurred by using \gls[hyper=false]{pc} and \gls[hyper=false]{gp} (e.g., around quenching). Solid and dashed lines are \gls[hyper=false]{trace} runs and \gls[hyper=false]{gp} \gls[hyper=false]{pc} predictions, respectively},
                  leftopt={width=0.475\textwidth},
                  leftlabel={fig:ch4_plot_hit_and_miss_2},
                  leftcaption={example of better prediction},
@@ -72,12 +74,22 @@ Fig.~\ref{fig:ch4_plot_hit_and_miss} illustrates this idea further for the clad 
 A prediction made by a fully specified (or trained) \gls[hyper=false]{gp} metamodel is, according to Eq.~(\ref{eq:mean_sk}), a straightforward matrix operation.
 \marginpar{Computational cost}
 In \texttt{R} through the package \texttt{DiceKriging}, the operation to predict a standardized \gls[hyper=false]{pc} score for an arbitrary input takes about $0.05 \, [s]$.
-For a full output reconstruction, this operation has to be repeated for multiple \glspl[hyper=false]{pc} scores before multiplied with the \gls[hyper=false]{pc} loadings.
-The actual time required for this full reconstruction is specific to a particular implementation and to particular programming language.
-Though no thorough investigation was carried out, 
+For a full output reconstruction, this operation has to be repeated for multiple \glspl[hyper=false]{pc} scores before being multiplied with the \gls[hyper=false]{pc} loadings.
+The actual time required for this full reconstruction is specific to a particular implementation and to a particular programming language.
+Though only rudimentary investigations were carried out, 
 the cost of evaluating the metamodel for an arbitrary input is still expected to be much less than running an actual \gls[hyper=false]{trace} simulation ($6 - 14 \, [min]$).
-For instance, the most naive implementation in \texttt{R} involving loops takes, on average, about $< 5 \, [s]$ to predict and reconstruct all outputs (clad temperature, pressure drop, and liquid carryover) for a given input.
+For instance, the most naive implementation in \texttt{R} takes, on average, less than $5 \, [s]$ to predict and reconstruct all outputs (clad temperature, pressure drop, and liquid carryover) for a given input.
+
 However, it is also important to take into account the computational cost required to train, validate, and test the metamodel.
-The training, validation, and testing data have to be generated from actual \gls[hyper=false]{trace} runs.
-Additionally, the model fitting step during training is an optimization problem that becomes computationally expensive for large training samples of large dimension (large number of input parameters).
-Again, further study is required to have a more quantitative cost measure.
+The training, validation, and testing data sets have to be generated from actual \gls[hyper=false]{trace} runs.
+As explained, the size of the training sample data should be as large as the computational budget of running the actual codes allowed.
+In this regard, it is also worth noting that the model fitting step during training is an optimization problem that becomes computationally expensive for large training sample of large dimensions (large number of input parameters).
+Again, further study is required to have a more quantitative cost measure with respect to this optimization.
+
+Finally, for any given training sample size, 
+the predictive performance of the metamodel is assessed in the validation and testing steps.
+The former is aimed for selecting the best metamodel (among metamodels constructed with different settings),
+while the latter is aimed for estimating the true error expected from using the selected metamodel as a surrogate.
+The study used a large validation and testing data sets (each with $5'000$ data points),
+but according to Fig.~\ref{fig:ch4_plot_q2_pcs}, that many points might not have been necessary.
+The size of validation/testing data set can be optimized by first making a plot similar to the one in Fig.~\ref{fig:ch4_plot_q2_pcs} but with an initial small number of samples to first check the convergence of the error estimate before creating unnecessarily large set upfront.

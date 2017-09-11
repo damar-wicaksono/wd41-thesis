@@ -14,7 +14,7 @@ A \gls[hyper=false]{gp} metamodel makes the prediction as
 The equation above, the \emph{Kriging} model, consists of two components:
 \begin{itemize}
 
-	\item The \emph{mean/drift/trend} term, $\mu: \mathbf{x} \in \mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$,
+	\item The \emph{mean/drift/trend} term, $\mu: \bm{x} \in \boldsymbol{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$,
 	is a deterministic function.
 	The choice of the trend term distinguishes different classes of Kriging model.
 	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified.
@@ -75,7 +75,7 @@ and the output at an arbitrary input $\mathbf{x}_o$, $\mathcal{Y}(\mathbf{x}_o)$
 			\end{bmatrix} \right)
 \label{eq:joint_training_test}
 \end{equation}
-where
+where:
 \begin{itemize}
 
 	\item $\boldsymbol{\mu}(\mathbf{DM})$ is the vector of mean at the training points,

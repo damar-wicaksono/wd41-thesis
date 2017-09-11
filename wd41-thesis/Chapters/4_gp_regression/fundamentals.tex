@@ -116,19 +116,19 @@ And finally, in the metamodeling application, the random variables are collectio
 \emph{Gaussian stochastic process} (GP, or Gaussian Random Field GRF) is defined as a collection of random variables $\bm{\mathcal{Y}}$, 
 \emph{any arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
 \marginpar{Gaussian process}
-To establish the connection with the notion of \emph{random function}, the collection of the random variables $\bm{\mathcal{Y}}$ refers to the collection of values of a random function $\mathcal{Y}(\circ)$ at various possible input $\bm{x}$ in the domain $\mathbf{X} \subseteq \mathbb{R}^D$.
-Specifically, $\mathcal{Y}(\bm{x}), \, \text{for} \, \bm{x} \in \mathbf{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\bm{x}_1, \bm{x}_2, \cdots, \bm{x}_L ; \, L \geq 1\}$, the random vector $\left[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
+To establish the connection with the notion of \emph{random function}, the collection of the random variables $\bm{\mathcal{Y}}$ refers to the collection of values of a random function $\mathcal{Y}(\circ)$ at various possible input $\bm{x}$ in the domain $\boldsymbol{X} \subseteq \mathbb{R}^D$.
+Specifically, $\mathcal{Y}(\bm{x}), \, \text{for} \, \bm{x} \in \boldsymbol{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\bm{x}_1, \bm{x}_2, \cdots, \bm{x}_L ; \, L \geq 1\}$, the random vector $\left[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
 
 % Basic notation
 A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead of a mean vector and a covariance matrix.
-A \gls[hyper=false]{gp} $\mathcal{Y}(\bm{x})$ on $\mathbf{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
+A \gls[hyper=false]{gp} $\mathcal{Y}(\bm{x})$ on $\boldsymbol{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
 \begin{equation}
 	\mathcal{Y}(\bm{x}) \sim \mathcal{GP} \left(m(\bm{x}), K(\bm{x}, \bm{x}^*) \right)
 \label{eq:gp_notation}
 \end{equation}
 
 % Mean Function
-The mean function of a Gaussian process $\mathcal{Y}(\bm{x})$ is the function $m: \mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ defined as,
+The mean function of a Gaussian process $\mathcal{Y}(\bm{x})$ is the function $m: \boldsymbol{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ defined as,
 \marginpar{Mean function}
 \begin{equation}
 	m(\bm{x}) = \mathbb{E}[\mathcal{Y}(\bm{x})]
@@ -136,7 +136,7 @@ The mean function of a Gaussian process $\mathcal{Y}(\bm{x})$ is the function $m
 \end{equation}
 
 % Covariance Function
-The covariance function of a Gaussian process $\mathcal{Y}(\bm{x})$, on the other hand, is the function $K: (\mathbf{X} \subseteq \mathbb{R}^D) \times (\mathbf{X} \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
+The covariance function of a Gaussian process $\mathcal{Y}(\bm{x})$, on the other hand, is the function $K: (\boldsymbol{X} \subseteq \mathbb{R}^D) \times (\boldsymbol{X} \subseteq \mathbb{R}^D) \mapsto \mathbb{R}$ defined as,
 \marginpar{Covariance Function}
 \begin{equation}
 	K(\bm{x}_i, \bm{x}_j) = \text{Cov}[\mathcal{Y}(\bm{x}_i), \mathcal{Y}(\bm{x}_j)]
@@ -229,7 +229,7 @@ Observe that the standard deviations of the observed variables are zero and the 
 An assumption for a class of stochastic process commonly made for convenience is \emph{stationarity}.
 \marginpar{strongly stationary process}
 A stochastic process $\mathcal{Y}(\circ)$ is called \emph{strictly/strongly stationary} if and only if for any finite set of inputs $\{\bm{x}_1, \bm{x}_2,$
-$\cdots, \bm{x}_L\} \in \mathbf{X} \subseteq \mathbb{R}^D$ with $L \geq 1$, 
+$\cdots, \bm{x}_L\} \in \boldsymbol{X} \subseteq \mathbb{R}^D$ with $L \geq 1$, 
 and for $\bm{h} \in \mathbb{R}^D$ such that $\{(\bm{x}_1 + \bm{h}),$ 
 $(\bm{x}_2 + \bm{h}), \cdots, (\bm{x}_L + \bm{h})\} \in \bm{X}$, the distribution of random vector $[\mathcal{Y}(\bm{x}_1 + \bm{h}), $
 $\mathcal{Y}(\bm{x}_2 + \bm{h}), \cdots, \mathcal{Y}(\bm{x}_L + \bm{h})]$ is \emph{the same as} the distribution of random vector $[\mathcal{Y}(\bm{x}_1), \mathcal{Y}(\bm{x}_2), \cdots, \mathcal{Y}(\bm{x}_L)]$ \cite{Santner2003, Bachoc2013}.
@@ -275,7 +275,7 @@ For a stationary covariance function, it is more convenient to separate the cons
 	K (\bm{x}_i, \bm{x}_j) = \sigma^2 R(\bm{x}_i, \bm{x}_j) 
 	\label{eq:cov_function}
 \end{equation}
-where $R$, the correlation kernel function, is defined such that $\bm{x}_i, \bm{x}_j \in \bm{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
+where $R$, the correlation kernel function, is defined such that $\bm{x}_i, \bm{x}_j \in \boldsymbol{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
 and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
 
 % Continuity and Differentiability of Stochastic Process
