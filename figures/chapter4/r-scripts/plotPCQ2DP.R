@@ -33,7 +33,7 @@ fig_size <- c(10, 4)             # width, height
 
 # Read Data -------------------------------------------------------------------
 gp_error_df <- compileGPError(
-    output_type, data_path, feba_case, param_file, n_params)
+    output_type, data_path_gp_err, feba_case, param_file, n_params)
 pc_df <- readRDS(paste0(data_path_pc, "/", pc_filename))
 
 # Pre-process Data ------------------------------------------------------------
