@@ -9,7 +9,7 @@ The approximation is based on Gaussian stochastic process resulting in a statist
 As the dimensionality of the output is large, in the order of tens of thousands, a dimension reduction step is adopted by means of \gls[hyper=false]{pca} (an approach similar to what was adopted in Chapter 3).
 
 % Error in Context
-The results obtained on the \gls[hyper=false]{trace} model \gls[hyper=false]{feba} is reasonable.
+The results obtained on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} is reasonable.
 Though the prediction error can at times be large, the metamodel gives an overall good performance on average for the three types of multivariate output (clad temperature, pressure drop, and liquid carryover).
 The metamodels for both pressure drop and liquid carryover outputs have less than $0.9\%$ prediction error (\gls[hyper=false]{rmse}), while the metamodel for the clad temperature output has less than $9\%$ prediction error (\gls[hyper=false]{rmse}); these errors are relative to the standard deviation of the respective outputs in the testing data set.
 The larger error for predicting the clad temperature output highlights the limitation of the approach for outputs that exhibit strong non-linearity and discontinuity (such as the quenching in the clad temperature transient).

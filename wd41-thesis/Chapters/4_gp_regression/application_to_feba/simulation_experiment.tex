@@ -9,7 +9,7 @@ The construction of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the
            label={fig:ch4_simulation_experiment},
            shortcaption={Flowchart of the simulation experiment for constructing a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility}]
 {../figures/chapter4/lpe/simulation_experiment}
-{The flowchart of the simulation experiment for constructing a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility}
+{Flowchart of the simulation experiment for constructing a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility}
 
 % Training
 In the training step, a metamodel was constructed (i.e. \emph{trained}) based on a training data set. 
@@ -35,7 +35,7 @@ A \gls[hyper=false]{gp} metamodel was then trained with respect to the standardi
 Therefore, there were multiple \gls[hyper=false]{gp} metamodels representing the standardized \gls[hyper=false]{pc} scores associated with each of the retained \gls[hyper=false]{pc} loadings for each of the output types.
 
 % Model Fitting
-Several covariance kernel functions were considered for constructing a metamodel: Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, and power exponential kernels.
+Several covariance kernel functions were considered for constructing a metamodel: Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, and power-exponential kernels.
 \marginpar{model fitting}
 The hyper-parameters associated with each kernel were estimated (i.e., \emph{fitted}) by \gls[hyper=false]{mle} as implemented in the \texttt{R} package \texttt{DiceKriging} \cite{Roustant2012}.
 Following the hyper-parameters estimation for each \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, a metamodel of the \gls[hyper=false]{trace} model was fully trained and ready for making prediction in arbitrary inputs.

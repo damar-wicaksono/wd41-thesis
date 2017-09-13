@@ -200,7 +200,7 @@ The other elements in the equation are described below.
 $\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
 Specifically, $\boldsymbol{\Phi}^*_Q$ is,
 \begin{equation}
-		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\Phi}^*_1, \boldsymbol{\Phi}^*_2, \cdots, \boldsymbol{\Phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \cdots, \mathbf{v}^*_Q) ; \, Q << P
+		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\phi}^*_1, \boldsymbol{\phi}^*_2, \cdots, \boldsymbol{\phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \cdots, \mathbf{v}^*_Q) ; \, Q << P
 \label{eq:retained_pc}
 \end{equation}
 where $\mathbf{v}^*_i$ is the $P$-dimensional column vector of the $i$-th PC loading taken from Eq.(~\ref{eq:pc_reduction}).
@@ -228,7 +228,7 @@ The observed data from the $N$ training samples is related to each of the $\math
 That is, the observed data for the $i$-th standardized PC score is the projection of the standardized data on the $i$-th PC loading.
 Conditioning the \gls[hyper=false]{gp} of $\mathit{w}_i$ by the observed data yields,
 \begin{equation}
-	\bm{w}^*_i (\bm{x}_o) | \mathbf{w}_i \sim \mathcal{N} (m_{SK,i}(\bm{x}_o), s^2_{SK,i}(\bm{x}_o)) ; \, i = 1, \cdots, Q 
+	\bm{w}^*_i (\bm{x}_o) | \mathbf{w}^*_i \sim \mathcal{N} (m_{SK,i}(\bm{x}_o), s^2_{SK,i}(\bm{x}_o)) ; \, i = 1, \cdots, Q 
 \label{eq:conditional_w}
 \end{equation}
 where $m_{SK,i}$ and $s^2_{SK,i}$ are the simple Kriging mean and variance, respectively (Eq.~(\ref{eq:mean_sk}) and Eq.~(\ref{eq:variance_sk})),
@@ -238,10 +238,10 @@ The simple Kriging formulation is used here as the assumed process is already ce
 % The unretained eigenvectors
 $\boldsymbol{\Phi}^*_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns of the PC loadings,
 \begin{equation}
-		\boldsymbol{\Phi}^*_{>Q} = (\boldsymbol{\Phi}^*_{Q+1}, \boldsymbol{\Phi}^*_{Q+2}, \cdots, \boldsymbol{\Phi}^*_P) = (\mathbf{v}^*_{Q+1}, \mathbf{v}^*_{Q+2}, \cdots, \mathbf{v}^*_P)
+		\boldsymbol{\Phi}^*_{>Q} = (\boldsymbol{\phi}^*_{Q+1}, \boldsymbol{\phi}^*_{Q+2}, \cdots, \boldsymbol{\phi}^*_P) = (\mathbf{v}^*_{Q+1}, \mathbf{v}^*_{Q+2}, \cdots, \mathbf{v}^*_P)
 \label{eq:unretained_pc}
 \end{equation}
-where $\boldsymbol{\phi}_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading taken from Eq.(~\ref{eq:pc_loadings}).
+where $\boldsymbol{\phi}^*_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading taken from Eq.(~\ref{eq:pc_loadings}).
 
 Finally, following \cite{Wilkinson2010},
 $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distributed normal random variable with mean $0$ and variance $1$.
@@ -261,5 +261,5 @@ The multivariate output evaluated at $\bm{x}_o$ conditioned by the training data
 \end{equation}
 The model above assumed that the hyper-parameters associated with a selected correlation function are known.
 In practice they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
-Additionally, the (theoretical) underestimation of the Kriging variance explained in that section also applies here when the \gls[hyper=false]{ml} estimates are plugged into the formulation.
+Additionally, the theoretical underestimation of the Kriging variance explained in that section also applies here when the \gls[hyper=false]{ml} estimates are plugged into the formulation.
 In practice, however, Ref.~\cite{Bayarri2007} noted that the uncertainties associated with the model parameters often eclipse the uncertainties induced by the metamodel hyper-parameters.

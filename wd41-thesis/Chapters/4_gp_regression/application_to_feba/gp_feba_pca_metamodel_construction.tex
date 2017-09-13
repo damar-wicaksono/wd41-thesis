@@ -33,12 +33,12 @@ Furthermore, the plot also shows that the variations in the performance tends to
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter4/figures/plotPCGPConstructionTC}
-	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the clad temperature output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}), of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the clad temperature output. $7$ \glspl[hyper=false]{pc} were used for the reconstruction.}
+	\caption[The effect of training sample size, experimental design, and covariance function on the predictive performance of GP PC metamodel with respect to the clad temperature output]{The effect of training sample size, experimental design, and covariance function on the predictive performance (in terms of \gls[hyper=false]{rmse}) of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel with respect to the clad temperature output. $7$ \glspl[hyper=false]{pc} were used for the reconstruction.}
 	\label{fig:ch4_plot_pc_gp_construction_tc}
 \end{sidewaysfigure}
 
 % Describing the figure itself (as it is the first time it appears)
-Fig.~\ref{fig:ch4_plot_pc_gp_construction_tc} summarizes the effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the predictive performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels to predict the clad temperature output.
+Fig.~\ref{fig:ch4_plot_pc_gp_construction_tc} summarizes the effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels to predict the clad temperature output.
 The training samples were replicated $5$ times for each size and for each design.
 The predictive performance was assessed in terms of the \gls[hyper=false]{rmse} which was computed by retaining the first $7$ \glspl[hyper=false]{pc} and using the validation data set.
 As such the \gls[hyper=false]{rmse} shown in the figure represents the combined error due to \gls[hyper=false]{pc} truncation and misprediction of the \gls[hyper=false]{pc} scores.
@@ -80,7 +80,7 @@ While the predictive performance of the \gls[hyper=false]{gp} metamodel with res
 % Describing finding in the figure, pressure drop output
 The effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the predictive performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} were also investigated with respect to the pressure drop and the liquid carryover outputs.
 $10$ and $5$ \glspl[hyper=false]{pc} were used to compute the predicted reconstruction error for the pressure drop and the liquid carryover outputs, respectively. 
-The findings for these two outputs were also similar to the ones from the clad temperature output:
+The findings for these two outputs were also similar to the ones for the clad temperature output:
 the training sample size was the most important factor in determining the predictive performance,
 there was a relatively minor effect of the choice of covariance kernel functions especially in terms of the performance variation (with an exception of the Gaussian kernel function which has the worst performance in terms of consistency across replications),
 and the choice of experimental design was relatively noninfluential.
