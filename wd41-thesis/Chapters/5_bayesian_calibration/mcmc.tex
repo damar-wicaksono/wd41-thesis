@@ -3,6 +3,52 @@
 %*******************************************************************
 
 % Introductory Paragraph
+The formulation of Bayesian calibration of a computer model presented above results in a joint posterior \gls[hyper=false]{pdf} for all the parameters involved.
+This density contains all the information (and consequently, the uncertainties) regarding the model parameters conditioned on the observed data and the assumed data-generating process.
+\marginpar{Posterior uncertainty of the model parameters}
+The uncertainties associated with the model parameters can then be represented using different summary statistics, many of which involve integration.
+
+For example,
+the uncertainties associated with a model parameter $x_d$ can be represented with its variance,
+which is defined as
+\begin{equation*}
+	\begin{split}
+	\mathbb{V}[\mathcal{X}_d] & = \mathbb{E}[\mathcal{X}_d^2] - \mathbb{E}^2[\mathcal{X}_d]\\
+	                          & = \int x_d^2 p(\bm{x} | \mathbf{y}) d\bm{x} - \left( \int x_d p(\bm{x} | \mathbf{y}) d\bm{x} \right)^2
+	\end{split}
+%\label{eq:variance_marginalization}
+\end{equation*}
+where the integrations are carried out over the support of $p(\bm{x}|\mathbf{y})$.
+An alternative way to summarize the uncertainties of a model parameter is through its $\theta$-quantile $Q^{\theta}_d$,
+which for parameter $x_d$ is defined as
+\begin{equation*}
+	Q^{\theta}_d \, : \, \mathbb{P} (\mathcal{X}_d \leq Q^{\theta}_d) = \int^{Q^{\theta}_d} \int_{\mathbf{X}_{\sim d}} p(x_d, \bm{x}_{\sim d} | \mathbf{y}) d x_d d\bm{x}_{\sim d} = \theta
+%	\label{eq:quantile_integral}
+\end{equation*}
+In this manner,
+the $95\%$ confidence interval of the parameter is written as $Q_d^{0.025} \leq \mathcal{X}_d \leq Q_d^{0.975}$.
+
+Though these summaries might be of interest themselves,
+\marginpar{Posterior uncertainty of the model prediction}
+in an application setting, the model parameters uncertainties are often propagated through the simulation model to obtain the uncertainty in the output (prediction).
+The full distribution of the output uncertainty from a simulation model $y = f(\bm{x})$ is expressed with the following density function
+\begin{equation*}
+	p(y | \mathbf{y}) = \int f(\bm{x}) p(\bm{x}|\mathbf{y}) d\bm{x}
+\end{equation*}
+As before, the uncertainties in the output can then be represented with various statistics,
+many of which also involve additional integration operation.
+
+The posterior density $p(\bm{x}|\mathbf{y})$, however, is often a highly multidimensional function and 
+the performance of numerical integration is usually worsened with an increasing number of dimensions of the input parameter space.
+\marginpar{Challenges in dealing with posterior density}
+At the same time,
+conducting \gls[hyper=false]{mc} simulation for estimating the integral (such was done in Chapter~\ref{ch:gsa}) is not straightforward.
+The multiplication of likelihood and prior density will, in general, yield an arbitrary posterior density not available in a closed-form expression.
+As a result, generating independent samples from the posterior density for the \gls[hyper=false]{mc} estimation becomes a difficult task.
+
+This section presents a simulation approach, the so-called \gls[hyper=false]{mcmc} simulation,
+to directly generate samples from an arbitrary \gls[hyper=false]{pdf} without a dependence on the dimension of the input parameter space.
+These samples, in turn, are useful for estimating various iquantities involving integration exemplified above.
 
 %----------------------------------------------------
 \subsection{Motivation}\label{sub:bc_mcmc_motivation}
@@ -53,3 +99,5 @@
 % AIES Algorithm
 
 % Implementation
+
+% Possible problem and Why not
