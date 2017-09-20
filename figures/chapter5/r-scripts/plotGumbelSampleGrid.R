@@ -43,8 +43,10 @@ cex_ttl_shift <- 3.25   # Shift of the axis title from the axis
 
 n_samples <- 5000 # Number of samples
 # Define the particular case --------------------------------------------------
-x <- seq(-25, 25, 1.0)
-y <- seq(-25, 25, 1.0)
+delta <- 50
+
+x <- seq(-25, 25, length.out = delta + 1)
+y <- seq(-25, 25, length.out = delta + 1)
 
 mu1 <- 5
 sig1 <- 1.25
@@ -87,9 +89,9 @@ plot(0, 0, type = "n",
 for (i in 1:length(x))
 {
   lines(c(x[i], x[i]), c(y[1], y[length(y)]),
-        lwd = 0.1, col = rgb(0, 0, 0, 0.25))
+        lwd = 0.2, col = rgb(0, 0, 0, 0.45))
   lines(c(x[1], x[length(x)]), c(y[i], y[i]),
-        lwd = 0.1, col = rgb(0, 0, 0, 0.25))
+        lwd = 0.2, col = rgb(0, 0, 0, 0.45))
 }
 
 # Put the points
