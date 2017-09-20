@@ -62,9 +62,9 @@ Although in the context of Bayesian data analysis such an arbitrary \gls[hyper=f
 the problem of generating sample from an arbitrary \gls[hyper=false]{pdf} is quite general.
 As such, in the following discussion, a generic notation for an arbitrary \gls[hyper=false]{pdf} $p(\bm{x})$ is used instead of $p(\bm{x}|\mathbf{y})$.
 
-%--------------------------------------------------------------------------------------
-\subsection{Motivation: a Monte Carlo Method Perspective}\label{sub:bc_mcmc_motivation}
-%--------------------------------------------------------------------------------------
+%----------------------------------------------------
+\subsection{Motivation}\label{sub:bc_mcmc_motivation}
+%----------------------------------------------------
 
 % Introductory Paragraph
 Consider the following problem: Given a \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^+$,
@@ -141,28 +141,31 @@ Fig.~\ref{fig:ch5_plot_gumbel_illustration} shows the contour plot of the joint 
 {../figures/chapter5/figures/plotGumbelIllustration_1}
 {../figures/chapter5/figures/plotGumbelIllustration_2}
 
-
 % Grid Approach
-A straightforward approach to generate samples from a given multivariate density is by first discretizing the input parameter space of the density function and evaluate the density at the discretized points.
+A straightforward approach to generate samples from a given multivariate density is done by first discretizing the input parameter space of the density function and evaluate the density at the discretized points.
 \marginpar{Discretized grid approach}
-Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{x_i\}_{i=1}^{I}$ with $I$ the number of discretized points, such that.
-At the discretized levels, each value of $\bm{x}_i$ has a probability $p(\bm{x}_i) = p^*(\bm{x}_i) / \sum_i p^*(\bm{x}_i)$. 
-Afterward, sample values can be generated using probability proportional to the values of the density at the discretized points. 
+Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{\bm{x}_i\}_{i=1}^{I}$ with $I$ the number of discretized points.
+At the discretized levels, each value of $\bm{x}_i$ is associated with the probability $p(\bm{x}_i) = p^*(\bm{x}_i) / \sum_i p^*(\bm{x}_i)$.
+These pairs constitute a complete discrete probability distributions.
+Generating samples from such a discrete probability distribution is simple in modern computing environment \cite{Mackay2005}.
 
+% The example
 Fig.~\ref{fig:ch5_plot_gumbel_sample_grid} illustrates this procedure for the example given above.
-First, the input parameter space is windowed in $\mathbf{X}\in[-25,25]^2$ before being discretized in $\Delta = 40$ levels.
+First, the input parameter space is windowed in $\mathbf{X}\in[-25,25]^2$ before being discretized in $\Delta = 50$ levels.
 \marginpar{Discretized grid approach illustrated}
 This results in $(\Delta + 1)^2 = 2'601$ discretized points at which the density is evaluated (Fig.~\ref{fig:ch5_plot_gumbel_sample_grid_1}).
 Next, the density values are taken to be the probability for each of the $2'601$ discretized points.
-Together they constitute a complete discrete probability distribution.
-Generating samples from such a discrete probability distribution is straightforward in modern computing environment.
+Together they make up a complete discrete probability distribution from which samples can be readily generated.
+
+% The figure explained
 Fig.~\ref{fig:ch5_plot_gumbel_sample_grid_1} shows $5'000$ samples generated from the discrete distribution.
-Darker points indicate that the values have been sampled multiple times following the actual underlying \gls[hyper=false]{pdf} (the contour of the analytical joint density is overlaid to serve as a guide). 
+Darker points indicate that the values have been sampled multiple times following the actual underlying \gls[hyper=false]{pdf}.
+The contour of the analytical joint density is overlaid to serve as a guide. 
 Figs.~\ref{fig:ch5_plot_gumbel_sample_grid_2} and~\ref{fig:ch5_plot_gumbel_sample_grid_3} show the histograms for each of the marginals.
 The figure shows that the generated samples are indeed approximately distributed as the given \gls[hyper=false]{pdf}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_gumbel_sample_grid},
-			           maincaption={Sampling from a multivariate density by discretizing the input parameter space in grids. The input parameter space is windowed and discretized into $\Delta = 40$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms approximately follows the shape of the analytical marginal density.},
+			           maincaption={Sampling from a multivariate density by discretizing the input parameter space in grids. The input parameter space is discretized into $\Delta = 50$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms of the marginals approximately follow the shape of the respective analytical marginal density. The marginal densities have been normalized to match the peak of the histogram.},
 			           mainshortcaption={Sampling from a multivariate density by discretizing the input parameter space in grids.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_gumbel_sample_grid_1},
@@ -179,19 +182,33 @@ The figure shows that the generated samples are indeed approximately distributed
 {../figures/chapter5/figures/plotGumbelSampleGrid_2}
 {../figures/chapter5/figures/plotGumbelSampleGrid_3}
 
-The main issue with the discretized grid approach, straightforward as it is,
+% Problem with Discretized Grid
+The main issue with the discretized grid approach, conceptually simple as it is,
 is the curse of dimensionality similar to the one mentioned in the previous chapters.
 \marginpar{curse of dimensionality}
 The number of density evaluations grows exponentially with the number of dimension.
 As a rule, for a given discretization level $\Delta$ and dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
 
+% In relation to Bayesian data analysis
 In the context of Bayesian data analysis,
-the likelihood function inside the posterior generally can be a complex function.
-In consequence, a very fine discretization level might be required to appropriately capture the function at important regions which are unknown a priori.
+the multidimensional likelihood function inside the posterior generally can be a complex function.
+In consequence, a very fine discretization level might be required to appropriately capture the function behavior at important regions which are unknown a priori.
 On top of that, the computational cost of evaluating the (complex) posterior density becomes nonnegligible.
 As such, except for a very simple likelihood function and/or in a very low dimension,
 grid approach is deemed inapplicable for generating samples from an arbitrary multidimensional density.
+
+% Entry to Markov Chain
+To circumvent these issues,
+a sampling technique based on the theory of stochastic process is widely adopted.
+Specifically, by constructing a Markov chain\footnote{a realization of a Markov process} of the input parameters values,
+the resulting process will eventually becomes stationary and simultaneously converge to any given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
+In other words, the samples generated from the stationary process are distributed according to the given density. 
+Theoretically, this family of techniques would be independent of the dimension of the input parameter space and its convergence are guaranteed.
+
+The next subsection briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
+Afterward,
+a traditional and a more recent methods for constructing a Markov chain for the purpose of \gls[hyper=false]{mc} simulation are introduced. 
 
 %----------------------------------------------
 \subsection{Markov Chain}\label{sub:bc_mcmc_mc}
