@@ -69,6 +69,7 @@ As such, in the following discussion, a generic notation for an arbitrary \gls[h
 % Introductory Paragraph
 Consider the following problem: Given a \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^+$,
 generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from the \gls[hyper=false]{pdf}.
+\marginpar{Problem statement}
 It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant:
 \begin{equation}
 	p(\bm{x}) = \frac{p^*(\bm{x})}{C} \propto p^*(\bm{x})  
@@ -83,11 +84,51 @@ Such samples can then be used, among other things,
 to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
 of any function under the \gls[hyper=false]{pdf}.
 
-% Problem of Posterior Sampling Revisited
+% Why it it difficult to samples
+Generating samples from an arbitrary multidimensional density function is generally a difficult task.
+\marginpar{A correct sampling}
+Intuitively, for a given sample size, correctly generating samples from a density means
+that the sample values have to be distributed proportional to its \gls[hyper=false]{pdf}.
+There should be more samples in the region where the \gls[hyper=false]{pdf} value is high,
+and less in the the region where the \gls[hyper=false]{pdf} value is low.
+For a complex multidimensional density function,
+these locations are not known a priori and might have to be identified exhaustively \cite{Mackay2005}.
+
+% Inverse Transform Sampling and Its Problem
+In a relatively low dimension,
+the most common way of generating sample from a given density is
+by inverse transform sampling coupled with a random number generator.
+\marginpar{Inverse transform sampling}
+The approach requires the quantile function of the \gls[hyper=false]{pdf}.
+To obtain the quantile function,
+the density has to be integrated and its normalizing constant has to be computed.
+Appendix~\ref{app:its} provides a more detail account on the topic.
+Many univariate (and some multivariate) \glspl[hyper=false]{pdf} are widely studied and the analytical solutions to their quantiles are available \cite{Lange2010}.
+Additionally, sampling algorithms readily exist for several multivariate densities due to their special properties (e.g., generating sample from a multivariate normal density in Appendix~\ref{app:mvn_sampling}).
+However, this will not be the case for an arbitrary density function of higher dimension.
+In the absence of an analytical solution,
+the cost of numerically integrating such function might itself be very costly due to the size of the dimension.
+
+% Illustration
+To illustrate this point,
+\marginpar{Illustration}
+consider the following bivariate (unnormalized) density parameterized by location parameters $\mu_1, \mu_2$and scale parameters $\sigma_1, \sigma_2$:
+\begin{equation}
+	\begin{split}
+	& p^*(x_1, x_2) = \frac{\exp{(-(x_1 - \mu_1)/\sigma_1)} \exp{(-(x_2 - \mu_2)/\sigma_2)}}{(1 + \exp{(-(x_1 - \mu_1)/\sigma_1)} + \exp{(-(x_2 - \mu_2)/\sigma_2)})^3} \, \\ 
+	& x_1, x_2 \in \mathbb{R}; \mu_1, \mu_2 \in \mathbb{R};\, \text{and} \, \sigma_1, \sigma_2 \in \mathbb{R}^+
+	\end{split}
+\label{eq:bc_unnormalized_gumbel}
+\end{equation}
+In this simple example,
+the inverse transform sampling works well as the function is relatively easy to integrate in order to obtain the quantile function.
+However, for the sake of illustration, it is assumed here that the quantile function of Eq.~(\ref{eq:bc_unnormalized_gumbel}) and its numerical approximation are not available.
+Fig shows the contour plot of the joint density as well as the marginal density for each of the variate.
+
+
 
 % Grid Approach
-
-% Laplace Approximation
+The most straightforward approach to generate sample from the given density is by discretizing the input parameter space of the density function
 
 %----------------------------------------------
 \subsection{Markov Chain}\label{sub:bc_mcmc_mc}
