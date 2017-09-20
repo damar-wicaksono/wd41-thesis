@@ -1,3 +1,4 @@
+\newpage
 %*******************************************************************
 \section{\glsfirst[hyper=false]{mcmc} Simulation}\label{sec:bc_mcmc}
 %*******************************************************************
@@ -14,47 +15,73 @@ which is defined as
 \begin{equation*}
 	\begin{split}
 	\mathbb{V}[\mathcal{X}_d] & = \mathbb{E}[\mathcal{X}_d^2] - \mathbb{E}^2[\mathcal{X}_d]\\
-	                          & = \int x_d^2 p(\bm{x} | \mathbf{y}) d\bm{x} - \left( \int x_d p(\bm{x} | \mathbf{y}) d\bm{x} \right)^2
+	                          & = \int_{-\infty}^{\infty} x_d^2 p(\bm{x} | \mathbf{y}) d\bm{x} - \left( \int_{-\infty}^{\infty} x_d p(\bm{x} | \mathbf{y}) d\bm{x} \right)^2
 	\end{split}
 %\label{eq:variance_marginalization}
 \end{equation*}
-where the integrations are carried out over the support of $p(\bm{x}|\mathbf{y})$.
+where the integrations are carried out over the support of $p(\bm{x}|\mathbf{y})$, assumed to be on the entire real line.
 An alternative way to summarize the uncertainties of a model parameter is through its $\theta$-quantile $Q^{\theta}_d$,
 which for parameter $x_d$ is defined as
 \begin{equation*}
-	Q^{\theta}_d \, : \, \mathbb{P} (\mathcal{X}_d \leq Q^{\theta}_d) = \int^{Q^{\theta}_d} \int_{\mathbf{X}_{\sim d}} p(x_d, \bm{x}_{\sim d} | \mathbf{y}) d x_d d\bm{x}_{\sim d} = \theta
+	Q^{\theta}_d \, : \, \mathbb{P} (\mathcal{X}_d \leq Q^{\theta}_d) = \int^{Q^{\theta}_d}_{-\infty} \int\limits_{\mathbf{X}_{\sim d}} p(x_d, \bm{x}_{\sim d} | \mathbf{y}) d\bm{x}_{\sim d} d x_d = \theta
 %	\label{eq:quantile_integral}
 \end{equation*}
+Assuming that the support of $p(\bm{x}|\mathbf{y})$ is on the entire real line.
 In this manner,
 the $95\%$ confidence interval of the parameter is written as $Q_d^{0.025} \leq \mathcal{X}_d \leq Q_d^{0.975}$.
 
 Though these summaries might be of interest themselves,
 \marginpar{Posterior uncertainty of the model prediction}
 in an application setting, the model parameters uncertainties are often propagated through the simulation model to obtain the uncertainty in the output (prediction).
-The full distribution of the output uncertainty from a simulation model $y = f(\bm{x})$ is expressed with the following density function
+Hence, the output from a simulation model $y = f(\bm{x})$ is expressed as random variable $\mathcal{Y}$ from a transformation of random variable $\bm{\mathcal{X}}|\mathbf{y}$ by the function $f$
 \begin{equation*}
-	p(y | \mathbf{y}) = \int f(\bm{x}) p(\bm{x}|\mathbf{y}) d\bm{x}
+	\mathcal{Y} = f(\bm{\mathcal{X}} | \mathbf{y})  \, ; \, p_{\bm{\mathcal{X}} | \mathbf{y}} (\bm{x}) = p(\bm{x}| \mathbf{y})  
 \end{equation*}
-As before, the uncertainties in the output can then be represented with various statistics,
-many of which also involve additional integration operation.
+where the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}} | \mathbf{y}$ is the posterior density $p(\bm{x}| \mathbf{y})$.
+The actual \gls[hyper=false]{pdf} of $\mathcal{Y}$ follows the rule of transformation of random variable
+and it represents the uncertainty in the output due to the uncertainty in the input parameter conditioned on the data.
+This uncertainty can also be summarized with various statistics and, as before, many of which involve integration operation.
+For instance, the variance of the output, is written as
+\begin{equation*}
+	\mathbb{V}[\mathcal{Y}] = \int_{-\infty}^{\infty} f^2(\bm{x}) p(\bm{x} | \mathbf{y}) d\bm{x} - \left( \int_{-\infty}^{\infty} f(\bm{x}) p(\bm{x} | \mathbf{y}) d\bm{x} \right)^2
+\end{equation*}
 
-The posterior density $p(\bm{x}|\mathbf{y})$, however, is often a highly multidimensional function and 
-the performance of numerical integration is usually worsened with an increasing number of dimensions of the input parameter space.
+The posterior density $p(\bm{x}|\mathbf{y})$ and the function $f(\bm{x})$, however, are in practice highly multidimensional functions and 
+the performance of numerical integration is typically worsened with an increasing number of dimensions of the input parameter space.
 \marginpar{Challenges in dealing with posterior density}
 At the same time,
-conducting \gls[hyper=false]{mc} simulation for estimating the integral (such was done in Chapter~\ref{ch:gsa}) is not straightforward.
+conducting \gls[hyper=false]{mc} simulation for estimating the integrals (such was done in Chapter~\ref{ch:gsa}) is not straightforward in this case.
 The multiplication of likelihood and prior density will, in general, yield an arbitrary posterior density not available in a closed-form expression.
-As a result, generating independent samples from the posterior density for the \gls[hyper=false]{mc} estimation becomes a difficult task.
+As a result, generating independent samples from the posterior density required for the \gls[hyper=false]{mc} estimation becomes a difficult task.
 
 This section presents a simulation approach, the so-called \gls[hyper=false]{mcmc} simulation,
-to directly generate samples from an arbitrary \gls[hyper=false]{pdf} without a dependence on the dimension of the input parameter space.
-These samples, in turn, are useful for estimating various iquantities involving integration exemplified above.
+to directly generate samples from an arbitrary \gls[hyper=false]{pdf}. 
+These samples, in turn, are useful for estimating various quantities given as examples above independent on the dimension of the input parameter space.
 
-%----------------------------------------------------
-\subsection{Motivation}\label{sub:bc_mcmc_motivation}
-%----------------------------------------------------
+Although in the context of Bayesian data analysis such an arbitrary \gls[hyper=false]{pdf} of interest is the posterior \gls[hyper=false]{pdf},
+the problem of generating sample from an arbitrary \gls[hyper=false]{pdf} is quite general.
+As such, in the following discussion, a generic notation for an arbitrary \gls[hyper=false]{pdf} $p(\bm{x})$ is used instead of $p(\bm{x}|\mathbf{y})$.
+
+%--------------------------------------------------------------------------------------
+\subsection{Motivation: a Monte Carlo Method Perspective}\label{sub:bc_mcmc_motivation}
+%--------------------------------------------------------------------------------------
 
 % Introductory Paragraph
+Consider the following problem: Given a \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}^+$,
+generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from the \gls[hyper=false]{pdf}.
+It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant:
+\begin{equation}
+	p(\bm{x}) = \frac{p^*(\bm{x})}{C} \propto p^*(\bm{x})  
+\label{eq:bc_prop_post}
+\end{equation}
+The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
+\begin{equation}
+	C = \int p^*(\bm{x}) d\bm{x}  \Rightarrow \int p(\bm{x}) d\bm{x} = 1.0
+\label{eq:bc_prop_const}
+\end{equation}
+Such samples can then be used, among other things,
+to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
+of any function under the \gls[hyper=false]{pdf}.
 
 % Problem of Posterior Sampling Revisited
 
@@ -65,7 +92,13 @@ These samples, in turn, are useful for estimating various iquantities involving 
 %----------------------------------------------
 \subsection{Markov Chain}\label{sub:bc_mcmc_mc}
 %----------------------------------------------
-
+%once more the posterior \gls[hyper=false]{pdf} of the model parameters conditioned on the observed data.
+%Strictly speaking such a \gls[hyper=false]{pdf} will also be conditioned on a selected data-generating process model $\mathcal{M}$, i.e., $p(\bm{x}|\mathbf{y},\mathcal{M})$.
+%However, in the following discussion, this conditioning is implicitly assumed and removed from the notation yielding
+%\begin{equation}
+%	p(\bm{x} | \mathbf{y}) = \frac{p(\bm{y} = \mathbf{y} | \bm{x}) p(\bm{x})}{\int p(\mathbf{y} | \bm{x}) p(\bm{x}) d\bm{x}}
+%\label{eq:pdf_posterior}
+%\end{equation}
 % Introductory paragraph (Why Markov Chain)
 
 % Markov Chain Definition
