@@ -61,7 +61,6 @@ for(i in 1:2)
 }
 legend_expressions <- parse(text=legend_labels) # use parse for expression inp.
 
-
 # Make the plots --------------------------------------------------------------
 pdf(otpfullnames[1], family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
