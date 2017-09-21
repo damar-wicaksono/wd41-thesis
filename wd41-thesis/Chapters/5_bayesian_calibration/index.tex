@@ -3,10 +3,10 @@
 %*************************************************************************************************************************************************
 
 % Link paragraph
-In Chapter 3, a sensitivity analysis method was employed to understand better the inputs/outputs relationship in a computer simulation model where its inputs were considered uncertain.
+In Chapter~\ref{ch:gsa}, a sensitivity analysis method was employed to understand better the inputs/outputs relationship in a computer simulation model where its inputs were considered uncertain.
 The method was also able to reduce the size of the problem by screening out non-influential inputs.
 Chapter~\ref{ch:gp_metamodel} then developed a fast approximation to evaluate the output at any given input, in anticipation to the high cost of a calibration approach of this chapter.
-The respective methods were exemplified by their application to a \gls[hyper=false]{trace} reflood simulation model whose inputs were uncertain, as assumed in Chapter~2.
+The respective methods were exemplified by their application to a \gls[hyper=false]{trace} reflood simulation model whose inputs were uncertain, as assumed in Chapter~\ref{ch:trace_reflood}.
 
 % Focus paragraph
 This chapter deals with a statistical framework for calibrating the inputs of a simulation model.
@@ -21,11 +21,11 @@ Section~\ref{sec:bc_statistical_framework} first elaborates the framework furthe
 while Section~\ref{sec:bc_modular_bayes} outlines a practical modularized approach for conducting the calibration.
 Each module represents a model for the data-generating processes involved: the computer simulation model, the experimental data, and the model discrepancy.
 Those are the ingredients in the formulation of the posterior density.
-The posterior density is often a highly multi-dimensional function.
-As a probability density, it involves normalizing factor that requires a multi-dimensional integration across the input parameter space.
+The posterior density is often a complex highly multi-dimensional function, which makes it difficult to work with.
 Section~\ref{sec:bc_mcmc} presents a simulation method to circumvent this integration.
 A \glsfirst[hyper=false]{mcmc} simulation directly generates representative samples from the posterior density.
 These samples can be used to approximate the posterior density or for uncertainty propagation.
+Important aspects of constructing a Markov chain are presented in Section~\ref{sec:bc_mcmc_practical_aspects}.
 Section~\ref{sec:bc_application_to_feba} then discusses the application of the approach to the \gls[hyper=false]{feba} \gls[hyper=false]{trace} reflood simulation model to constrain the prior uncertainty range of the model parameters based on the available experimental data.
 Different types of output - data pairs are used and their ability to constrain the range is investigated.
 The resulting posterior uncertainty, derived from one set of experimental condition, is verified by propagating it on the other \gls[hyper=false]{feba} tests.
