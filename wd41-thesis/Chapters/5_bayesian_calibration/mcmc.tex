@@ -146,7 +146,7 @@ A straightforward approach to generate samples from a given multivariate density
 \marginpar{Discretized grid approach}
 discretizing the input parameter space of the density function and evaluate the density at the discretized points.
 Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{\bm{x}_i\}_{i=1}^{I}$ with $I$ the number of discretized points.
-At the discretized levels, the probability for each value of $\bm{x}_i$ is approximated by $p(\bm{x}_i) = p^*(\bm{x}_i) / \sum_i p^*(\bm{x}_i)$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in $p$.)}.
+At the discretized levels, the probability for each value of $\bm{x}_i$ is approximated by $p(\bm{x}_i) = p^*(\bm{x}_i) / \sum_i p^*(\bm{x}_i)$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in computing $p$.)}.
 The pairs constitute a complete discrete probability distributions.
 Generating samples from such a probability distribution is straightforward in a modern computing environment \cite{Mackay2005}.
 
@@ -201,10 +201,12 @@ grid approach is deemed inapplicable for generating samples from an arbitrary mu
 % Entry to Markov Chain
 To circumvent these issues,
 a sampling technique based on the theory of stochastic process is widely adopted.
+\marginpar{Markov Chain Monte Carlo}
 Specifically, by constructing a Markov chain of the input parameters values,
-the resulting process will eventually becomes stationary and simultaneously converge to any given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
-In other words, the samples generated from the stationary process are distributed according to the given density. 
-Theoretically, this family of techniques would be independent of the dimension of the input parameter space and its convergence are guaranteed.
+the resulting process will eventually converge to a stationary distribution which coincides with the given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
+In other words, the samples generated from the stationary distribution of the process are distributed according to the given density.
+Generating samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
+Theoretically, this family of techniques would be independent of the dimension of the input parameter space and its convergence is guaranteed.
 
 The following briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
 Then,
@@ -220,9 +222,35 @@ a method to construct a Markov chain for the purpose of \gls[hyper=false]{mc} si
 %	p(\bm{x} | \mathbf{y}) = \frac{p(\bm{y} = \mathbf{y} | \bm{x}) p(\bm{x})}{\int p(\mathbf{y} | \bm{x}) p(\bm{x}) d\bm{x}}
 %\label{eq:pdf_posterior}
 %\end{equation}
+
 % Introductory paragraph (Why Markov Chain)
+Markov chain is an example of a \emph{discrete-time} stochastic process.
+Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}, i \in I\}$ where $I$ is an index set.
+\marginpar{A stochastic process}
+The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is countable.
+Moreover, the term \emph{time} is used by convention but by no means it is exclusively referred to the physical time.
+In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}. 
 
 % Markov Chain Definition
+Specifically, Markov chain with state space $\mathcal{S} \subseteq \mathbf{X}$ is defined as a sequence of random variables $\{\mathcal{X}^{(i)}, i \geq 0\}$,
+\emph{such that the conditional probability $\mathcal{X}^{(i+1)}$ follows the Markov property}.
+\marginpar{Markov chain}
+That is,
+\begin{equation}
+  \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}, \mathcal{X}^{(i-1)}, \cdots, \mathcal{X}^{(0)}) = \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)})
+\label{eq:markov_property}
+\end{equation}
+In other words, the future value depends only on the present value \cite{Geyer2011}.
+The indices represents successive step or iteration.
+
+% Specification and Ingredients
+A Markov chain is fully specified by its joint probability
+\begin{equation}
+  \mathbb{P}(\mathcal{X}^{(i+1)}, \mathcal{X}^{(i)}, \ldots, \mathcal{X}^{(0)}) = \mathbb{P}(\mathcal{X}^{(0)} \cdot \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}) \cdot \ldots \cdot \mathbb{P}(\mathcal{X}^{(0)} \cdot
+\label{eq:markov_property}
+\end{equation}
+
+% An example of Markov chain
 
 % Theorem, Markov Chain and Stationary Distribution
 
@@ -233,6 +261,26 @@ a method to construct a Markov chain for the purpose of \gls[hyper=false]{mc} si
 % Introductory Paragraph
 
 % Metropolis-Hastings Algorithm
+Algorithm~\ref{alg:metropolis_hastings}
+
+\begin{algorithm}
+\caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate $R$ samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$}
+\label{alg:metropolis_hastings}
+\begin{algorithmic}
+  \REQUIRE $R > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
+  \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
+  \FOR{$r=1$ to $R$}
+    \STATE sample $\bm{x}^*$ from $q(\bm{x})$
+    \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(r-1)})} \times \frac{q(\bm{x}^{(r-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(r-1)})}, 1.0\right)$
+    \STATE sample $u$ from $\mathcal{U}[0,1]$
+    \IF{$u < \alpha$}
+      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^*$
+    \ELSE
+      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^{(r-1)}$
+    \ENDIF
+  \ENDFOR
+\end{algorithmic}
+\end{algorithm}
 
 % Simple Example
 
@@ -250,7 +298,26 @@ a method to construct a Markov chain for the purpose of \gls[hyper=false]{mc} si
 
 % Ensemble Sampler
 
-% AIES Algorithm
+% AIES Algorithm\begin{algorithm}
+
+\begin{algorithm}
+\caption[Affine-Invariant Ensemble Sample]{Affine-Invariant Ensemble Sampler \\ Generate $R$ samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$}
+\label{alg:aies}
+\begin{algorithmic}
+  \REQUIRE $R > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
+  \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
+  \FOR{$r=1$ to $R$}
+    \STATE sample $\bm{x}^*$ from $q(\bm{x})$
+    \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(r-1)})} \times \frac{q(\bm{x}^{(r-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(r-1)})}, 1.0\right)$
+    \STATE sample $u$ from $\mathcal{U}[0,1]$
+    \IF{$u < \alpha$}
+      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^*$
+    \ELSE
+      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^{(r-1)}$
+    \ENDIF
+  \ENDFOR
+\end{algorithmic}
+\end{algorithm}
 
 % Implementation
 
