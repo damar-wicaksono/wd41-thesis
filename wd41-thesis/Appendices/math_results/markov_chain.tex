@@ -83,16 +83,16 @@ The Markov chain is graphically represented in Fig.~\ref{fig:app_markov_chain}.
 % Irreducible Chain
 A Markov chain is said to be \emph{irreducible} if each state in the state space $\mathcal{S}$ can be reached eventually from any other state.
 \marginpar{Irreducibility}
-Irreducibility is a property of the transition probability matrix $P$ (i.e., irreducible transition probability matrix).
+Irreducibility is a property of the transition probability matrix $P$ (i.e., having an irreducible transition probability matrix).
 Formally,
 \begin{equation}
 	\forall x, y \in \mathcal{S}, \, \exists n \geq 0 \,\, \text{for which} \,\, p_{x,y}^{(n)} > 0
 \label{eq:app_irreducibility}
 \end{equation}
-Based on this definition the transition matrix of Eq.~(\ref{eq:app_transition_probability_matrix}) is not irreducible as the state of being \emph{Dead} does not allow transition to any of two other states.
+Based on this definition the transition matrix of Eq.~(\ref{eq:app_transition_probability_matrix}) is not irreducible as the state of being \emph{Dead} does not allow transition to any of the two other states.
 An example of irreducible chain is given in a graphical representation of Fig.~\ref{fig:app_markov_chain_irreducible}.
 Note that while state $B$ is not directly connected to state $A$,
-the state can eventually be reached from state $B$ through the connection of state $C$.
+the state can eventually be reached from state $B$ through the connection of state $C$ (in this case, $n$ is equal to $2$.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/markov_chain_irreducible.pdf}
@@ -101,6 +101,21 @@ the state can eventually be reached from state $B$ through the connection of sta
 \end{figure}
 
 % Period of a Chain and Aperiodicity
+A period of a state $x \in \mathcal{S}$ denoted as $d_x$ is defined for each state in the chain as follow,
+\marginpar{period of a state}
+\begin{equation}
+	d_x = \text{GCD}\,\,\{n: p_{x,x}^{(n)} > 0, n > 0\} \forall x \in \mathcal{S}
+\label{eq:app_markov_chain_period}
+\end{equation}
+where $\text{GCD}$ stands for the \emph{Greatest Common Divisor} of the set.
+In other words, it is the minimum number of transition for any given state to return to the state.
+
+In an arbitrary discrete-state Markov chain, different states might have different periods.
+\marginpar{periodic, aperiodic chain}
+A state is called \emph{aperiodic} if its period is equal to $1$ and it is called \emph{periodic} otherwise.
+If a chain has the same period $d > 1$ for each of its states then the chain is called \emph{periodic} (see Fig.~\ref{fig:app_markov_chain_periodic} for a periodic chain with period $3$).
+A periodic chain exhibits a non-stochastic behavior in their dynamic.
+On the contrary, a chain having the same period of $1$ for each of its states is called a \emph{aperiodic} chain (see Fig.~\ref{fig:app_markov_chain_aperiodic} for an example of a aperiodic chain).
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:app_markov_chain_periodicity},
                   maincaption={Examples of periodic and aperiodic chains. (Left) an example of a periodic $3$-state Markov chain. In this case, all states have the the same period of $3$ steps. (Right) an example of aperiodic $3$-state Markov chain, that is all states are aperiodic.},%
