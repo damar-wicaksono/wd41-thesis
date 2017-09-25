@@ -1,3 +1,72 @@
 %--------------------------------------------------
 \section{Inverse Transform Sampling}\label{app:its}
 %--------------------------------------------------
+
+% Introductory Paragraph
+The inverse transform sampling provides a simple approach to generate samples of a univariate non-uniform random variable.
+The following justification of the method is adapted from the proposition that can be found in (pp. 432, \cite{Lange2010}).
+Here, it is assumed that the (pseudo)-random number generator for a uniform variable $\mathcal{U} \sim \text{unif}(0,1)$ is readily accessible.
+
+% Inverse Transform Sampling
+Let $\mathcal{X}$ be a random variable with distribution function $F(x)$ where $F:x \in \mathbf{X} \mapsto [0,1]$ and a non-decreasing function. Then:
+\begin{itemize}
+	\item If $F(x)$ continuous then $F(\mathcal{X}) \sim \text{unif}(0,1)$
+	\item For non-continuous $F(x)$ the condition $\mathbb{P}(F(\mathcal{X}) \leq t) \leq t, \, \forall t \in [0,1]$ holds nevertheless.
+	\item If $F^{-1}(y) = \text{inf} \, \{x: F(x) \geq y, 0 < y < 1\}$ and if $\mathcal{U} \sim \text{unif}[0,1]$ then
+	\begin{equation}
+		F^{-1}(\mathcal{U}) \sim \mathcal{X}
+	\label{eq:app_its}
+	\end{equation}
+	where $F^{-1}$ the inverse of $F$ is called the \emph{quantile} function of $\mathcal{X}$.
+\end{itemize}
+The proof of these propositions can be found in \cite{Lange2010}.
+What is important here is that a non-uniform random variable is distributed as a transformed uniform random variable and the transformation is done through the quantile function of the non-uniform random variable.
+This provides a basis for generating samples of a non-uniform random variable given in Algorithm~\ref{alg:inverse_transform_sampling}.
+The method requires the quantile function $F^{-1}(x)$ and a uniform random generator $\mathcal{U} \sim \text{unif}[0,1]$.
+ 
+% Algorithm
+\begin{algorithm}
+\caption[Inverse Transform Sampling]{Inverse Transform Sampling \\ Generate $N$ samples of $\mathcal{X}$ given $F^{-1}(x)$ and $\mathcal{U} \sim \text{unif}[0,1]$}
+\label{alg:inverse_transform_sampling}
+\begin{algorithmic}
+  \REQUIRE $N > 0$, $F^{-1}(x)$, and $\mathcal{U}$
+  \FOR{$n = 1$ to $N$}
+    \STATE sample $u$ from $\mathcal{U}$
+    \STATE $x^{(n)} \leftarrow F^{-1}(u)$
+  \ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+% Example
+As an illustrative example of this method, consider the problem of generating samples from a long-tail distribution called the Gumbel distribution parameterized by location parameter $x_o$ and scale parameter $\beta$ \cite{Oliveira2014},
+\begin{equation}
+	\begin{split}
+		& \mathcal{X} \sim \text{Gumbel}(x_o, \beta) \, ; \, x_o \in \mathbb{R}, \beta \in \mathbb{R}_{\geq 0} \\
+		& p(x) = \frac{1}{\beta} \exp{\left[-(z + \exp{[-z]})\right]}\\
+		& F(x) = \exp{[-\exp{[-z]}]} \\
+		& z = \frac{x - x_o}{\beta} \, ; \, x \in \mathbb{R} \\
+		& F^{-1}(u) = x_o - \beta\ln{(\ln{\frac{1}{u}})} \, ; \, u \in [0,1] \\
+	\end{split}
+\label{eq:app_gumbel_distribution}
+\end{equation}
+To generate samples from the above distribution, first generate $N$ samples from a uniform distribution and then transform the sampled values using $F^{-1}$.
+The resulting transformed values are samples distributed as the specified Gumbel distribution.
+Fig.~\ref{fig:app_plot_inverse_transform_sampling} illustrates this procedure and its result for $x_0 = 0.0$ and $\beta = 10.0$. 
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:app_plot_inverse_transform_sampling},
+                  maincaption={Illustration of inverse transform sampling for the density given in Eq.(\ref{eq:app_gumbel_distribution}). First, samples from uniform random variable $\mathcal{U}\sim \text{unif}(0,1)$ are generated. The transformation of the uniform samples by $F^{-1}$ (Left) will then yield samples distributed as required (Right). The analytical density have been normalized to match the peak of the histogram.},%
+									mainshortcaption={Illustration of inverse transform sampling.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:app_plot_inverse_transform_sampling_1},
+                  leftcaption={Distribution function},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:app_plot_inverse_transform_sampling_2},
+                  rightcaption={Sample histogram ($N = 1'000$)},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotInverseTransformSampling_1}
+{../figures/chapter5/figures/plotInverseTransformSampling_2}
+
+ 
