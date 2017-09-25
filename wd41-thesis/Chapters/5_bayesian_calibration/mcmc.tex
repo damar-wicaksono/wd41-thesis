@@ -95,7 +95,7 @@ For a complex multidimensional density function,
 these locations are not known a priori and might have to be identified exhaustively \cite{Mackay2005}.
 
 % Inverse Transform Sampling and Its Problem
-In a relatively low dimension,
+In one dimension,
 the most common way of generating sample from a given density is
 by inverse transform sampling coupled with a random number generator.
 \marginpar{Inverse transform sampling}
@@ -103,11 +103,10 @@ The approach requires the quantile function of the \gls[hyper=false]{pdf}.
 To obtain the quantile function,
 the density has to be integrated and its normalizing constant has to be computed.
 Appendix~\ref{app:its} provides a more detail account on the topic.
-Many univariate (and some multivariate) \glspl[hyper=false]{pdf} are widely studied and the analytical solutions to their quantiles are available \cite{Lange2010}.
-Additionally, sampling algorithms exist for several multivariate densities due to their special properties (e.g., generating sample from a multivariate normal density in Appendix~\ref{app:mvn_sampling}).
-However, this will not be the case for an arbitrary density function of higher dimension.
-In the absence of an analytical solution,
-the cost of numerically integrating such function might itself be very costly due to the high dimension.
+Many univariate random variables are widely studied and the analytical solutions to their quantile functions are available \cite{Lange2010}.
+However, the method is not extendable to distributions of higher dimension.
+Additionally, though sampling algorithms exist for several multivariate densities (notably, the multivariate normal density in Appendix~\ref{app:mvn_sampling}),
+this will not be the case for an arbitrary density function of higher dimension.
 
 % Illustration
 To illustrate this point,
@@ -120,9 +119,6 @@ consider the following bivariate (unnormalized) density parameterized by locatio
 	\end{split}
 \label{eq:bc_unnormalized_gumbel}
 \end{equation}
-In this simple example,
-the inverse transform sampling works well as the function is relatively easy to integrate in order to obtain the quantile function.
-However, for the sake of illustration, it is assumed here that the quantile function of Eq.~(\ref{eq:bc_unnormalized_gumbel}) and its numerical approximation are not available.
 Fig.~\ref{fig:ch5_plot_gumbel_illustration} shows the contour plot of the joint density as well as the marginal density for each of the variate.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_gumbel_illustration},
@@ -226,33 +222,63 @@ a method to construct a Markov chain for the purpose of \gls[hyper=false]{mc} si
 % Introductory paragraph (Why Markov Chain)
 Markov chain is an example of a \emph{discrete-time} stochastic process.
 Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}, i \in I\}$ where $I$ is an index set.
-\marginpar{A stochastic process}
-The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is countable.
+\marginpar{A discrete-time  stochastic process}
+The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is restricted to being discrete.
 Moreover, the term \emph{time} is used by convention but by no means it is exclusively referred to the physical time.
 In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}. 
 
 % Markov Chain Definition
-Specifically, Markov chain with state space $\mathcal{S} \subseteq \mathbf{X}$ is defined as a sequence of random variables $\{\mathcal{X}^{(i)}, i \geq 0\}$,
-\emph{such that the conditional probability $\mathcal{X}^{(i+1)}$ follows the Markov property}.
+Specifically, Markov chain with state space $\mathcal{S} \subseteq \mathbf{X} \subseteq \mathbb{R}^D$ is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}, i \geq 0\}$ where the indices represents successive time, step, or iteration,
+\emph{such that the conditional probability distribution $\bm{\mathcal{X}}^{(i+1)}$ follows the Markov assumption}.
 \marginpar{Markov chain}
 That is,
 \begin{equation}
-  \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}, \mathcal{X}^{(i-1)}, \cdots, \mathcal{X}^{(0)}) = \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)})
+  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i-1)}, \ldots, \bm{\mathcal{X}}^{(0)}) = \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)})
 \label{eq:markov_property}
 \end{equation}
-In other words, the future value depends only on the present value \cite{Geyer2011}.
-The indices represents successive step or iteration.
+Put differently, the future value depends on the past only through the present value \cite{Geyer2011} and Sokal.
 
-% Specification and Ingredients
-A Markov chain is fully specified by its joint probability
+% Specification and Ingredients, Initial Distribution and Transition Kernel
+A Markov chain is fully specified by its joint probability distribution,
 \begin{equation}
-  \mathbb{P}(\mathcal{X}^{(i+1)}, \mathcal{X}^{(i)}, \ldots, \mathcal{X}^{(0)}) = \mathbb{P}(\mathcal{X}^{(0)} \cdot \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}) \cdot \ldots \cdot \mathbb{P}(\mathcal{X}^{(0)} \cdot
-\label{eq:markov_property}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)}, \bm{\mathcal{X}}^{(i)}, \ldots, \bm{\mathcal{X}}^{(0)}) = \mathbb{P}(\bm{\mathcal{X}}^{(0)}) \cdot \mathbb{P}(\bm{\mathcal{X}}^{(1)} | \bm{\mathcal{X}}^{(0)}) \cdot \ldots \cdot \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}) \cdot
+\label{eq:markov_chain_joint_probability}
 \end{equation}
+This joint probability, in turn, consists of two main components:
+\begin{itemize}
+	\item The \emph{initial distribution} of $\bm{\mathcal{X}}^{(0)}$. This distribution is the marginal probability distribution of $\bm{\mathcal{X}}^{(0)}$.
+	
+	\item The \emph{transition probability kernel} $T(\bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i+1)})$.
+	This kernel is equivalent to the conditional distribution of $\bm{\mathcal{X}}^{(i+1)}$ given $\bm{\mathcal{X}}^{(i)}$. That is,
+\begin{equation}
+  \bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}, \ldots, \bm{\mathcal{X}}^{(0)} = \bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)} \sim T(\bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i+1)})
+\label{eq:markov_chain_transition_kernel}
+\end{equation}
+	such that,
+	\begin{equation}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} \in B | \bm{\mathcal{X}}^{(i)} = \bm{x}^{(i)}) = \int_B T(\bm{x}^{(i)}, \bm{x}) d\bm{x} \, ; \, B \in \mathcal{S}
+\label{eq:markov_chain_transition_probability}
+\end{equation}
+	In the continous-state Markov chain, this distribution is referred to as the \emph{transition kernel}.
 
-% An example of Markov chain
+\end{itemize}
 
-% Theorem, Markov Chain and Stationary Distribution
+% Stationary Distribution, Irreducibility
+Central to the application of Markov chain for generating samples are the notion of stationary distribution of a Markov chain.
+Stationary distribution is an important concept in the practical application.
+
+% Convergence Theorem
+	It is often assumed in practice that the transition probability is stationary such that it does not depend on $i$.
+
+% Ergodic Theorem
+
+% Limits and Ergodic Theorem, Markov Chain and Stationary Distribution
+The theorem of Markov chain convergence states that if this exist.
+The theorem is put in more detail in Appendix~\ref{app:markov_chain}.
+It is suffice to say here that the goal of Markov chain monte carlo is to construct a chain through some transition probability such that its stationary distribution is the target density.
+
+% Reference to the appendix
+
 
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
