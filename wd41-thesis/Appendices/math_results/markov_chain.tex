@@ -78,9 +78,21 @@ The Markov chain is graphically represented in Fig.~\ref{fig:app_markov_chain}.
 	\label{fig:app_markov_chain}
 \end{figure}
 
-% Initial and Marginal Distribution at n-th transition
+% Marginal Distribution at n-th transition
 
 % Irreducible Chain
+A Markov chain is said to be \emph{irreducible} if each state in the state space $\mathcal{S}$ can be reached eventually from any other state.
+\marginpar{Irreducibility}
+Irreducibility is a property of the transition probability matrix $P$ (i.e., irreducible transition probability matrix).
+Formally,
+\begin{equation}
+	\forall x, y \in \mathcal{S}, \, \exists n \geq 0 \,\, \text{for which} \,\, p_{x,y}^{(n)} > 0
+\label{eq:app_irreducibility}
+\end{equation}
+Based on this definition the transition matrix of Eq.~(\ref{eq:app_transition_probability_matrix}) is not irreducible as the state of being \emph{Dead} does not allow transition to any of two other states.
+An example of irreducible chain is given in a graphical representation of Fig.~\ref{fig:app_markov_chain_irreducible}.
+Note that while state $B$ is not directly connected to state $A$,
+the state can eventually be reached from state $B$ through the connection of state $C$.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/markov_chain_irreducible.pdf}
