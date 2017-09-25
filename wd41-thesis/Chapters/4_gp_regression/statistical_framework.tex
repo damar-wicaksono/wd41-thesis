@@ -17,7 +17,7 @@ As before, the domain $\bm{X}$ is often rescaled such that $\bm{x} \in [0,1]^D$.
 
 To evaluate $f$ at any given $\bm{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
 \marginpar{emulator, surrogate model, and metamodel} 
-Unfortunately, the true underlying function $f(\circ)$ that produces $y_i$ itself might be too complex and expensive to evaluate.
+Unfortunately, the true underlying function $f(\circ)$ that produces $y$ itself might be too complex and expensive to evaluate.
 As such, the response surface of the function has to be reconstructed or estimated based only on the small training data set before the prediction is made.
 The estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
 Although simpler, such an approximation should capture the most, if not all, important aspects of the inputs/outputs relationship of the true underlying function.

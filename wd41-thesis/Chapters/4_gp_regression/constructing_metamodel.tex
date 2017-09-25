@@ -26,17 +26,17 @@ In practice, with a constraint on computational budget, the amount of actual cod
 The objective is then to select the limited points more judiciously to obtain as much information about the model as possible with as few points as possible \cite{Simpson2001a,Fang2006}.  
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_grid_approach},
-			           maincaption={Grid approach to select training points becomes prohibitively expensive for high-dimensional problem. Shown here is grid in 2-dimensional input parameter space and the code is supposed to be evaluated at each vertex. In larger-dimension, the problem is worsened with requirement of $N = \Delta^{D}$ code runs, where $\Delta$ is the discretization level assumed uniform for all parameters and $D$ is the number of parameters.},
+			           maincaption={Grid approach to select training points becomes prohibitively expensive for high-dimensional problem. Shown here is grid in 2-dimensional input parameter space and the code is supposed to be evaluated at each vertex. In larger-dimension, the problem is worsened with requirement of $N = (\Delta+1)^{D}$ code runs, where $\Delta$ is the discretization level assumed uniform for all parameters and $D$ is the number of parameters.},
 			           mainshortcaption={Grid approach to select training points},%
 			           leftopt={width=0.28\textwidth},
 			           leftlabel={fig:plot_grid_approach_1},
-			           leftcaption={$\Delta = 5, N = 25$},
+			           leftcaption={$\Delta = 5, N = 36$},
 			           midopt={width=0.28\textwidth},
 			           midlabel={fig:plot_grid_approach_2},
-			           midcaption={$\Delta = 10, N = 100$},
+			           midcaption={$\Delta = 10, N = 121$},
 			           rightopt={width=0.28\textwidth},
 			           rightlabel={fig:plot_grid_approach_3},
-			           rightcaption={$\Delta = 20, N = 400$},
+			           rightcaption={$\Delta = 20, N = 441$},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter4/figures/plotGridApproach_1}
@@ -118,7 +118,7 @@ Though it potentially leads to a more efficient design (fewer samples required o
 %--------------------------------------------------------
 
 % Introductory
-In most metamodeling applications, the values of the hyper-parameters for a selected \gls[hyper=false]{gp} metamodel are not known a priori.
+In most metamodeling applications, the values of the hyper-param\-eters for a selected \gls[hyper=false]{gp} metamodel are not known a priori.
 The parameter estimation process, a term interchangeably used with \emph{fitting}, \emph{training}, and \emph{learning}, 
 applies mathematical techniques to a set of training data to estimate the values of the hyper-parameters \cite{Kleijnen2000}.
 In the following it is assumed that a particular correlation function has been selected and that the mean function $\mu(\circ)$ is known,

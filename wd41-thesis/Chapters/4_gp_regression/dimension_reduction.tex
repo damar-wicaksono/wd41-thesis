@@ -67,8 +67,8 @@ The raw outputs of the training runs are first concatenated row-wise resulting i
 				\rule[.5ex]{2.5em}{0.4pt}	& \mathbf{y}_n	&	\rule[.5ex]{2.5em}{0.4pt} \\
 																	& \vdots	&
 			\end{pmatrix} \\
-		\mathbf{y}_n & = [\text{y}_{n,1}, \cdots, \text{y}_{n,p}, \cdots, \text{y}_{n,P}] \\
-		             & = [y(\bm{x}_n)_1, \cdots, y(\bm{x}_n)_p, \cdots, y(\bm{x}_n)_P]
+		\mathbf{y}_n & = [\text{y}_{n,1}, \ldots, \text{y}_{n,p}, \ldots, \text{y}_{n,P}] \\
+		             & = [y(\bm{x}_n)_1,  \ldots, y(\bm{x}_n)_p,  \ldots, y(\bm{x}_n)_P]
 	\end{split}
 \label{eq:raw_output}
 \end{equation}
@@ -86,7 +86,7 @@ The sample mean of the raw outputs is used to substitute the mean in the \gls[hy
 The sample mean is obtained by taking the column-wise average of Eq.~(\ref{eq:raw_output}),
 \begin{equation}
 	\begin{split}
-		\bar{\mathbf{y}} & = [\bar{\text{y}}_1, \cdots, \bar{\text{y}}_p, \cdots, \bar{\text{y}}_P] \\
+		\bar{\mathbf{y}} & = [\bar{\text{y}}_1, \ldots, \bar{\text{y}}_p, \ldots, \bar{\text{y}}_P] \\
 		\bar{\text{y}}_p & = \frac{1}{N} \sum_{n=1}^{N} y(\mathbf{x}_n)_{p} \\
 	\end{split}
 \label{eq:sample_mean}
@@ -166,7 +166,7 @@ In the context of regression of PC scores used later in metamodeling, the latter
 % Dimension Reduction
 Dimension reduction takes place when only a small numbers of \glspl[hyper=false]{pc} are kept.
 \marginpar{Dimension Reduction}
-That is, only the first $Q$ columns of $\mathbf{V}^*$ are retained with $Q << P$.
+That is, only the first $Q$ columns of $\mathbf{V}^*$ are retained with $Q \ll P$.
 Such selection is justified by a certain amount of partial variance explained by those few first $Q$ principal components.
 In the illustration of Fig.~\ref{fig:pca_illustrate},
 the dimension reduction can be carried out by simply using the first principal component (horizontal axis of Fig.~\ref{fig:pca_transformed}) to describe the data set.
@@ -174,7 +174,7 @@ the dimension reduction can be carried out by simply using the first principal c
 Back to the formulation of \gls[hyper=false]{lmc},
 the matrix $\boldsymbol{\Phi}$ in Eq.~(\ref{eq:lmc}) is substituted by the set of empirical orthogonal basis functions obtained from the first $Q$ \gls[hyper=false]{pc} loadings of the data set, and is defined as
 \begin{equation}
-	\boldsymbol{\Phi} = (\mathbf{v}^*_1, \cdots, \mathbf{v}^*_q, \cdots, \mathbf{v}^*_Q)
+	\boldsymbol{\Phi} = (\mathbf{v}^*_1, \ldots, \mathbf{v}^*_q, \ldots, \mathbf{v}^*_Q)
 \label{eq:pc_reduction}
 \end{equation}
 where $\mathbf{v}^*_q$ is the $P$-dimensional column-vector taken from the $q$-th column of matrix $\mathbf{V}^*$;
@@ -200,17 +200,17 @@ The other elements in the equation are described below.
 $\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
 Specifically, $\boldsymbol{\Phi}^*_Q$ is,
 \begin{equation}
-		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\phi}^*_1, \boldsymbol{\phi}^*_2, \cdots, \boldsymbol{\phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \cdots, \mathbf{v}^*_Q) ; \, Q << P
+		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\phi}^*_1, \boldsymbol{\phi}^*_2, \ldots, \boldsymbol{\phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \ldots, \mathbf{v}^*_Q) ; \, Q \ll P
 \label{eq:retained_pc}
 \end{equation}
 where $\mathbf{v}^*_i$ is the $P$-dimensional column vector of the $i$-th PC loading taken from Eq.(~\ref{eq:pc_reduction}).
 
 % The Standardized PC Scores, a Gaussian process
 $\bm{\mathit{w}}^*$ is the $Q$-dimensional vector of standardized PC scores for each of the retained PC loading,
-modeled as a set of univariate, independent, zero-mean \gls[hyper=false]{gp},
+modeled as a set of univariate, independent, zero-mean \glspl[hyper=false]{gp},
 \begin{equation}
 		\begin{split}
-			\bm{\mathit{w}}^* & = [\mathit{w}^*_1, \mathit{w}^*_2, \cdots, \mathit{w}^*_Q] ; \, Q < P \\
+			\bm{\mathit{w}}^* & = [\mathit{w}^*_1, \mathit{w}^*_2, \ldots, \mathit{w}^*_Q] ; \, Q < P \\
 			 \mathit{w}^*_i (\circ) & \sim \mathcal{GP}(0, \sigma_i^2 R_i(\circ, \circ)) 
 		\end{split}
 \label{eq:retained_pc_scores}
