@@ -38,9 +38,10 @@ The specification consists of three main components:
 	\marginpar{Initial distribution}
 	This is the (marginal) probability distribution of $\mathcal{X}^{(0)}$ (or the marginal distribution of the chain at $i = 0$). That is,
 	\begin{equation}
-		\mathbb{P}(\mathcal{X}^{(0)} = x_d) = \pi^{(0)}_d \,\,\, \forall d
+		\mathbb{P}(\mathcal{X}^{(0)} = x_d) = \pi^{(0)}_d \,\,\, d = 1, \ldots, D
 	\label{eq:markov_chain_initial_distribution}
 	\end{equation}
+	In discrete-state Markov chain, the distribution can be expressed as a $D$-dimensional vector.
 	
 	\item The \emph{transition probability matrix} $P$, an $D \times D$ with elements $p_{x,y} \geq 0.0$ and $\sum_y p_{x,y} = 1.0$.
 	\marginpar{Transition probability}
@@ -51,7 +52,7 @@ The specification consists of three main components:
 	\end{equation}
 	Transition probability matrix is said to be \emph{stationary} if it does not depend on a particular step $i$.
 	\marginpar{Stationary transition probability}
-	For all practical purposes, most \gls[hyper=false]{mcmc} algorithms rely on a stationary transition probability \cite{Geyer2011}.
+	In practice, most \gls[hyper=false]{mcmc} algorithms rely on a stationary transition probability \cite{Geyer2011}.
 \end{itemize}
 
 % Example of Chain
@@ -73,12 +74,42 @@ As an example of a discrete-state Markov chain, consider a $3$-state Markov chai
 The Markov chain is graphically represented in Fig.~\ref{fig:app_markov_chain}.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/markov_chain.pdf}
+	\includegraphics[width=0.9\textwidth]{../figures/chapter5/figures/markov_chain.pdf}
 	\caption[Illustration of a $3$-State Markov Chain]{An illustration of a $3$-State Markov chain with the transition probability given by the matrix $P$ in Eq.~(\ref{eq:app_transition_probability_matrix}).}
 	\label{fig:app_markov_chain}
 \end{figure}
 
 % Marginal Distribution at n-th transition
+The probability A transition from state $x$ to $y$ in one step is given by,
+\begin{equation}
+	\mathbb{P}(\mathcal{X}^{(i+1)} = y) = \sum_{x \in S} \mathbb{P}(\mathcal{X}^{(i+1)} = y | \mathcal{X}^{(i)} = x) \cdot \mathbb{P}(\mathcal{X}^{(i)} = x)
+\label{eq:app_markov_chain_one_step}
+\end{equation}
+Thus, given those three components, the marginal probability distribution at any given step can be defined.
+\marginpar{Marginal distribution of state at step $n$}
+Furthermore, the expression can be written in compact form as follows.
+For instance $1$-step transition from initial distribution $\pi^{(0)}$ by transition probability matrix $P$ yield the distribution,
+\begin{equation}
+	\pi^{(1)} = \pi^{(0)} P
+\label{eq:app_markov_chain_one_step}
+\end{equation}
+Where $\pi^{(1)}$ is the probality distribution of states at step $1$.
+In general,
+\begin{equation}
+	\begin{split}
+		\pi^{(2)} & = \pi^{(1)} P \\
+		          & \vdots \\
+		\pi^{(n)} & = \pi^{(n-1)} P \\
+		          & = \pi^{(0)} P^n\\
+	\end{split}
+\label{eq:app_markov_chain_one_step}
+\end{equation}
+where the $n$-th power of $P$ is called the $n$-step transition probability matrix.
+\marginpar{$n$-step transition probability}
+In other words, the state at step $n$ is distributed as the $n$-times transition of the initial distribution.
+Moreover, due to the stationarity of the transition probability,
+this result also holds for an $n$-step transition of a distribution at any starting point,
+that is $\pi^{(i+n)} \sim \pi^{(i)} P^{(n)}$.  
 
 % Irreducible Chain
 A Markov chain is said to be \emph{irreducible} if each state in the state space $\mathcal{S}$ can be reached eventually from any other state.
@@ -92,7 +123,7 @@ Formally,
 Based on this definition the transition matrix of Eq.~(\ref{eq:app_transition_probability_matrix}) is not irreducible as the state of being \emph{Dead} does not allow transition to any of the two other states.
 An example of irreducible chain is given in a graphical representation of Fig.~\ref{fig:app_markov_chain_irreducible}.
 Note that while state $B$ is not directly connected to state $A$,
-the state can eventually be reached from state $B$ through the connection of state $C$ (in this case, $n$ is equal to $2$.
+the state can eventually be reached from state $B$ through the connection of state $C$ (in this case, $n$ is equal to $2$).
 \begin{figure}[bth]
 	\centering
 	\includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/markov_chain_irreducible.pdf}
@@ -104,7 +135,7 @@ the state can eventually be reached from state $B$ through the connection of sta
 A period of a state $x \in \mathcal{S}$ denoted as $d_x$ is defined for each state in the chain as follow,
 \marginpar{period of a state}
 \begin{equation}
-	d_x = \text{GCD}\,\,\{n: p_{x,x}^{(n)} > 0, n > 0\} \forall x \in \mathcal{S}
+	d_x = \text{GCD}\,\,\{n: p_{x,x}^{(n)} > 0, n > 0\} \,\, \forall x \in \mathcal{S}
 \label{eq:app_markov_chain_period}
 \end{equation}
 where $\text{GCD}$ stands for the \emph{Greatest Common Divisor} of the set.
