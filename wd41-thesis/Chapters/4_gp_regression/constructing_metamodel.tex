@@ -138,7 +138,7 @@ such that its \gls[hyper=false]{pdf} is of the form
 The term above is called the \emph{likelihood} function.
 The slight change of perspective from a conditional density function to a common function is due to the fact that the data is already observed \cite{Ulrych2001}.
 For compactness, the $N \times N$ correlation matrix between outputs at the training points $R(\mathbf{DM}, \mathbf{DM})$ is written simply as $\mathbf{R}$;
-and the $N \times M$ basis function matrix at the training points $\mathbf{f}(\mathbf{DM})$ as $\mathbf{F}$.
+and the $N$-dimensional vector of the mean value at the training points as $\boldsymbol{\mu}$.
 Finally, it is also implied in the formulation that the chosen \gls[hyper=false]{gp} is fully specified, through its hyper-parameterization $\boldsymbol{\Psi}$ such that the notation $\mathcal{Y}(\mathbf{x})$ is removed from the expression.
 The hyper-parameters in $\boldsymbol{\Psi}$, in turn, include $\sigma^2$ and other hyper-parameters related to the correlation kernel function $\mathbf{R}$\footnote{e.g., for Gaussian kernel there is one hyper-parameter $\theta$ for each input while for power-exponential kernel there are two hyper-parameters, $p$ and $\theta$, for each input}.
 
