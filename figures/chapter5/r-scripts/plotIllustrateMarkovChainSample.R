@@ -89,6 +89,8 @@ corr_matrix_prop <- matrix(c(1, 0, 0, 1), nrow = 2)
 # Markov Chain simulation
 mcmc <- mcmc_sample(n_samples, c(-1.0, -10.0), 2.0 * corr_matrix_prop)
 
+delta <- 50
+
 x <- seq(-25, 25, length.out = delta + 1)
 y <- seq(-25, 25, length.out = delta + 1)
 
@@ -160,7 +162,7 @@ rest <- hist(mcmc[,1], freq = T, add = T, breaks = 30)
 # Plot the analytical marginal
 x <- seq(-10, 20, 0.1)
 y <- univ_log(x, mu1, sig1)
-lines(x, y / max(y) * max(rest$counts), lwd = 1.0)
+lines(x, y / max(y) * max(rest$counts), lwd = 1.5)
 
 # Set Axis, Ticks and Labels
 # x-axis
@@ -199,7 +201,7 @@ rest <- hist(mcmc[,2], freq = T, add = T, breaks = 30)
 # Plot the analytical marginal
 x <- seq(-25, 25, 0.1)
 y <- univ_log(seq(-25, 25, 0.1), mu2, sig2)
-lines(x, y / max(y) * max(rest$counts), lwd = 1.0)
+lines(x, y / max(y) * max(rest$counts), lwd = 1.5)
 
 # Set Axis, Ticks and Labels
 # x-axis
