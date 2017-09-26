@@ -210,8 +210,7 @@ Having estimated the hyper-parameters, the Kriging predictor is expressed as,
 	\hat{m}_{SK}(\mathbf{x}_o) =  \mu(\mathbf{x}_o) + \mathbf{r}^T_{o,\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \boldsymbol{\mu})
 \label{eq:sk_predictor_ml}
 \end{equation}
-As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $\mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ is written simply as $\mathbf{r}_o$;
-and the $M \times 1$ basis function vector at the test point $\mathbf{f}(\mathbf{x}_o)$ as $\mathbf{f}_o$.
+As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $\mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ is written simply as $\mathbf{r}_o$.
 The subscript $\hat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ which implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
 
 The variance associated with the predictor is expressed as
