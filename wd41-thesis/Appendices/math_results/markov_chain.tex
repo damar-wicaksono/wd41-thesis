@@ -2,6 +2,15 @@
 \section{Markov Chain}\label{app:markov_chain}
 %*********************************************
 
+This section of the appendix provides some of the most necessary concepts of Markov chain stochastic process,
+especially in relation to its application for Monte Carlo simulation (i.e., \gls[hyper=false]{mcmc}).
+The associated theorems are presented without proof though the list of references are provided.
+Many of the concepts are introduced first, and some are exclusively, for the discrete-state Markov chain.
+It provides a more intuitive entry to the theory of Markov chain through matrix notation and a graphical representation.
+A generalization to the continuous-state Markov chain will then be attempted,
+though many important equivalent theorems are difficult to even state without the prerequisite notions involving measure theory.
+In such cases, references will be provided. 
+
 %-------------------------------------------------
 \subsection{Discrete-State}\label{app:mc_discrete}
 %-------------------------------------------------
@@ -15,10 +24,10 @@ That is,
   \mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}, \mathcal{X}^{(i-1)}, \ldots, \mathcal{X}^{(0)} = \mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}
 \label{eq:markov_property}
 \end{equation}
-Put differently, the future value depends on the past only through the present value \cite{Geyer2011} and Sokal.
+Put differently, the future value depends on the past only through the present value \cite{Geyer2011,Sokal1997}.
 
 % Ingredients
-A discrete-state Markov chain is fully defined by its joint probability (cite Sokal).
+A discrete-state Markov chain is fully defined by its joint probability \cite{Sokal1997}.
 \begin{equation}
 	\begin{split}
   \mathbb{P}(\mathcal{X}^{(i+1)} & = x^{(i+1)}, \mathcal{X}^{(i)} = x^{(i)}, \ldots, \mathcal{X}^{(0)} = x^{(0)}) = \\
@@ -30,11 +39,11 @@ A discrete-state Markov chain is fully defined by its joint probability (cite So
 The specification consists of three main components:
 \begin{itemize}
 
-	\item The state space $\mathcal{S}$, all the possible outcomes of the random variables $\{\mathcal{X}^{(i)}\}$.
+	\item The \emph{state space} $\mathcal{S}$, all the possible outcomes of the random variables $\{\mathcal{X}^{(i)}\}$.
 	\marginpar{Discrete state space}
 	The state space considered here is discrete with $D$ elements, $\mathcal{S} = \{x_1, x_2, \ldots, x_D \}$.
 	
-	\item The initial probability distribution $\pi^{(0)}$.
+	\item The \emph{initial} probability distribution $\pi^{(0)}$.
 	\marginpar{Initial distribution}
 	This is the (marginal) probability distribution of $\mathcal{X}^{(0)}$ (or the marginal distribution of the chain at $i = 0$). That is,
 	\begin{equation}
@@ -50,8 +59,8 @@ The specification consists of three main components:
 		p_{x,y} = \mathbb{P}(\mathcal{X}^{(i+1)} = y | \mathcal{X}^{(i)} = x) \,\,\, \forall x,y \in \mathcal{S}
 	\label{eq:markov_chain_transition_matrix_element}
 	\end{equation}
-	Transition probability matrix is said to be \emph{stationary} if it does not depend on a particular step $i$.
 	\marginpar{Stationary transition probability}
+	Transition probability matrix is said to be \emph{stationary} if it does not depend on a particular step $i$.
 	In practice, most \gls[hyper=false]{mcmc} algorithms rely on a stationary transition probability \cite{Geyer2011}.
 \end{itemize}
 
@@ -79,7 +88,7 @@ The Markov chain is graphically represented in Fig.~\ref{fig:app_markov_chain} u
 	\label{fig:app_markov_chain}
 \end{figure}
 
-% Marginal Distribution at n-th transition, !!!Citation Needed!!!
+% Marginal Distribution at n-th transition
 The probability A transition from state $x$ to $y$ in one step is given by,
 \begin{equation}
 	\mathbb{P}(\mathcal{X}^{(i+1)} = y) = \sum_{x \in S} \mathbb{P}(\mathcal{X}^{(i+1)} = y | \mathcal{X}^{(i)} = x) \cdot \mathbb{P}(\mathcal{X}^{(i)} = x)
@@ -93,7 +102,7 @@ For instance $1$-step transition from initial distribution $\pi^{(0)}$ by transi
 	\pi^{(1)} = \pi^{(0)} P
 \label{eq:app_markov_chain_one_step}
 \end{equation}
-Where $\pi^{(1)}$ is the probality distribution of states at step $1$.
+Where $\pi^{(1)}$ is the probability distribution of states at step $1$.
 In general,
 \begin{equation}
 	\begin{split}
@@ -104,15 +113,15 @@ In general,
 	\end{split}
 \label{eq:app_markov_chain_one_step}
 \end{equation}
-where the $n$-th power of $P$ is called the $n$-step transition probability matrix.
+where the $n$-th power of $P$ is called the $n$-step transition probability matrix \cite{Sokal1997}.
 \marginpar{$n$-step transition probability}
 In other words, the state at step $n$ is distributed as the $n$-times transition of the initial distribution.
 Moreover, due to the stationarity of the transition probability,
 this result also holds for an $n$-step transition of a distribution at any starting point,
-that is $\pi^{(i+n)} \sim \pi^{(i)} P^{(n)}$.  
+that is $\pi^{(i+n)} \thicksim \pi^{(i)} P^{(n)}$.  
 
-% Irreducible Chain, !!!Citation Needed!!!
-A Markov chain is said to be \emph{irreducible} if each state in the state space $\mathcal{S}$ can be reached eventually from any other state.
+% Irreducible Chain
+A Markov chain is said to be \emph{irreducible} if each state in the state space $\mathcal{S}$ can be reached eventually from any other state \cite{Robert2004,Sargent2017}.
 \marginpar{Irreducibility}
 Irreducibility is a property of the transition probability matrix $P$ (i.e., having an irreducible transition probability matrix).
 Formally,
@@ -131,8 +140,8 @@ the state can eventually be reached from state $B$ through the connection of sta
 	\label{fig:app_markov_chain_irreducible}
 \end{figure}
 
-% Period of a Chain and Aperiodicity, !!!Citation Needed!!!
-A period of a state $x \in \mathcal{S}$ denoted as $d_x$ is defined for each state in the chain as follow,
+% Period of a Chain and Aperiodicity
+A period of a state $x \in \mathcal{S}$ denoted as $d_x$ is defined for each state in the chain as follow \cite{Sokal1997},
 \marginpar{period of a state}
 \begin{equation}
 	d_x = \text{GCD}\,\,\{n: p_{x,x}^{(n)} > 0, n > 0\} \,\, \forall x \in \mathcal{S}
@@ -164,8 +173,8 @@ On the contrary, a chain having the same period of $1$ for each of its states is
 {../figures/chapter5/figures/markov_chain_periodic}
 {../figures/chapter5/figures/markov_chain_aperiodic}
 
-% Stationary Distribution, !!!Citation Needed!!!
-Some distribution are \emph{stationary} with respect to a transition probability matrix.
+% Stationary Distribution
+Some distributions are \emph{stationary} with respect to a transition probability matrix \cite{Sokal1997,Robert2004,Sargent2017}.
 \marginpar{Stationary distribution}
 Specifically, $\pi^*$ is \emph{stationary for} $P$ if,
 \begin{equation}
@@ -175,6 +184,7 @@ Specifically, $\pi^*$ is \emph{stationary for} $P$ if,
 Put differently, the distribution is \emph{invariant} under transition.
 Consequently, if stationary distribution exists,
 once the chain reaches the stationary distribution, it will remain there and the chain itself becomes stationary. 
+\marginpar{Stationary Markov chain}
 Stationary distribution need not exist for a given $P$,
 but in the application of \gls[hyper=false]{mcmc} algorithms,
 the existence of stationary distribution is guaranteed \cite{Geyer2011}.
@@ -193,7 +203,7 @@ For this transition, the distribution $\pi = [0.0, 0.0, 1.0]$ is stationary with
 Stating that the stationary distribution is being dead, eventually and definitely.
 
 % Markov Chain Convergence
-The notions of irreducibility, aperiodicity, and stationarity are cobbled together to arrive at an important result in the discrete-state Markov chain and it is stated here without proof (citation needed).
+The notions of irreducibility, aperiodicity, and stationarity are cobbled together to arrive at an important result in the discrete-state Markov chain and it is stated here without proof.
 \marginpar{Fundamental theorem of Markov chain}
 Let $P$ be a transition probability matrix, irreducible and aperiodic, then $P$ has exactly one stationary distribution $\pi^*$ and for any initial distribution $\pi^{(0)}$
 \begin{equation}
@@ -203,12 +213,41 @@ Let $P$ be a transition probability matrix, irreducible and aperiodic, then $P$ 
 That is, the chain converges \emph{in distribution} to the stationary distribution regardless its initial distribution.
 The theorem also indicates the existence of a \emph{limiting distribution} $\lim_{t \rightarrow \infty} \pi^{(0)}P^t$.
 
-% MCMC Algorithm
-The theorem justifies the use of Markov chain to generate samples for Monte Carlo application from an arbitrary distribution of interest.
-\marginpar{Markov Chain Monte Carlo}
-This is what \gls[hyper=false]{mcmc} algorithms do.
-In such an algorithm the task is to come up with transition probability such that the limiting distribution of the Markov chain, over many iterations, converges to the distribution of interest (the so-called \emph{target} distribution).
-Stated differently, the stationary distribution of the Markov chain is aimed to be the distribution of interest.
+% Ergodic Theorem and convergence in probability
+\marginpar{Ergodic theorem}
+Furthermore, under the above condition,
+\begin{equation}
+	\lim_{t \rightarrow \infty} \sum_{i=1}^{T} \mathbb{I}_{\{\mathcal{X}^{(i)} = x\}} = \pi_{x} \,\,\,\, \forall x \in \mathcal{S}
+\label{eq:app_markov_chain_ergodic_theorem}
+\end{equation}
+where $\mathbb{I}$ is the indicator function where it is $1.0$ if the condition in the subscript holds, and $0$ otherwise.
+In other words, the chain converges \emph{in probability} for each of the states.
+These theorems provide justification of using samples generated from a Markov chain (whose properties stated above) as samples for Monte Carlo calculation.
+For proofs of these theorems, refer to \cite{Robert2004}.
+
+% Detailed Balance Condition
+In generating samples from a target distribution, 
+\marginpar{Detailed balance condition}
+the engineering is done somewhat in reverse (``Given a density/distribution, construct $P$'').
+Thus it is worthwhile to note the \emph{detailed balance} condition which is a central condition for an \gls[hyper=false]{mcmc} algorithm.
+A Markov chain with transition probability matrix $P$ satisfies the detailed balance condition if there exists a probability distribution $\pi$ such that,
+\begin{equation}
+  p_{x,y} \pi_x = p_{y,x} \pi_y \,\,\,\, \forall x,y \in \mathcal{S}
+\label{eq:app_markov_chain_detailed_balance}
+\end{equation}
+\marginpar{Reversible chain}
+As a result, the chain is said to be \emph{reversible}.
+Formally,
+\begin{equation}
+  \mathcal{X}^{(i+1)} | \mathcal{X}^{(i)} = x \, \thicksim \, \mathcal{X}^{(i)} | \mathcal{X}^{(i+1)} = x \,\,\,\, \forall x \in \mathcal{S}
+\label{eq:app_markov_chain_reversibility}
+\end{equation}
+A reversible chain is a stationary chain.
+Consequently, in an \gls[hyper=false]{mcmc} algorithm,
+if the transition probability satisfies the detailed balance condition with respect to the target distribution, 
+it ensures the reversibility of the process and ultimately the stationarity of the chain.
+Finally, imposing the conditions of irreducibility and aperiodicity, the stationary distribution of the chain converges to the target distribution.
+For proof of this theorem see \cite{Kelly1978,Robert2004}.
 
 %-----------------------------------------------------
 \subsection{Continuous-State}\label{app:mc_continuous}
@@ -223,4 +262,10 @@ Stated differently, the stationary distribution of the Markov chain is aimed to 
 % Ergodic Theorem
 
 % Some difficulty
+% MCMC Algorithm
+The theorem justifies the use of Markov chain to generate samples for Monte Carlo application from an arbitrary distribution of interest.
+\marginpar{Markov Chain Monte Carlo}
+This is what \gls[hyper=false]{mcmc} algorithms do.
+In such an algorithm the task is to come up with transition probability such that the limiting distribution of the Markov chain, over many iterations, converges to the distribution of interest (the so-called \emph{target} distribution).
+Stated differently, the stationary distribution of the Markov chain is aimed to be the distribution of interest.
 
