@@ -438,6 +438,8 @@ Algorithm~\ref{alg:metropolis_hastings}
 % this thesis adopted a relatively new algorithm based on ensemble sampler
 % The main idea introduced above hold though
 
+%The points is for the chain to spend time in the parameter space in proportion to its probability.
+%
 %---------------------------------------------------------------------
 \subsection{Affine-Invariant Ensemble Sampler}\label{sub:bc_mcmc_aies}
 %---------------------------------------------------------------------
@@ -453,21 +455,25 @@ Algorithm~\ref{alg:metropolis_hastings}
 % AIES Algorithm\begin{algorithm}
 
 \begin{algorithm}
-\caption[Affine-Invariant Ensemble Sample]{Affine-Invariant Ensemble Sampler \\ Generate $R$ samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$}
+\caption[Affine-Invariance Ensemble Sampler (Strectch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate $R = L * (T + 1)$ samples from $p(\bm{x}) \propto p^*(\bm{x})$}
 \label{alg:aies}
 \begin{algorithmic}
-  \REQUIRE $R > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
-  \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
-  \FOR{$r=1$ to $R$}
-    \STATE sample $\bm{x}^*$ from $q(\bm{x})$
-    \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(r-1)})} \times \frac{q(\bm{x}^{(r-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(r-1)})}, 1.0\right)$
-    \STATE sample $u$ from $\mathcal{U}[0,1]$
-    \IF{$u < \alpha$}
-      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^*$
-    \ELSE
-      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^{(r-1)}$
-    \ENDIF
-  \ENDFOR
+  \REQUIRE $T > 0$, $L \geq T + 1$, $p^*(\bm{x})$, and $q (z)$
+		\STATE $\vec{\bm{x}}^{(0)} = [\bm{x}^{(0)}_1, \ldots, \bm{x}^{(0)}_L] \leftarrow \vec{\bm{x}}_0 \, ; \, \forall \vec{\bm{x}}_0 \in \mathbf{X}^L$
+		\FOR{$t=1$ to $T$}
+			\FOR{$l=1$ to $L$}
+				\STATE pick randomly $\bm{x}_j$ from $\vec{\bm{x}}^{(t-1)}_{\sim l}$
+				\STATE sample $z$ from $q(z)$
+				\STATE $\bm{x}^* \leftarrow \bm{x}_j + z (\bm{x}^{(t-1)}_l - \bm{x}_j)$
+				\STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}_l)} \times z^{D-1}, 1.0\right)$
+			\STATE sample $u$ from $\mathcal{U}[0,1]$
+			\IF{$u < \alpha$}
+				\STATE $\bm{x}^{(t)}_l \leftarrow \bm{x}^*$
+			\ELSE
+				\STATE $\bm{x}^{(t)}_l \leftarrow \bm{x}^{(t-1)}_l$
+			\ENDIF
+			\ENDFOR
+		\ENDFOR
 \end{algorithmic}
 \end{algorithm}
 
