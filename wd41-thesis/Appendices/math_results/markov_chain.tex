@@ -47,7 +47,7 @@ The specification consists of three main components:
 	\marginpar{Initial distribution}
 	This is the (marginal) probability distribution of $\mathcal{X}^{(0)}$ (or the marginal distribution of the chain at $i = 0$). That is,
 	\begin{equation}
-		\mathbb{P}(\mathcal{X}^{(0)} = x_d) = \pi^{(0)}_d \,\,\, d = 1, \ldots, D
+		\mathbb{P}(\mathcal{X}^{(0)} = x) = \pi^{(0)}_x \,\,\, \forall x \in  \mathcal{S}
 	\label{eq:markov_chain_initial_distribution}
 	\end{equation}
 	In discrete-state Markov chain, the distribution can be expressed as a $D$-dimensional vector.
@@ -203,7 +203,7 @@ For this transition, the distribution $\pi = [0.0, 0.0, 1.0]$ is stationary with
 Stating that the stationary distribution is being dead, eventually and definitely.
 
 % Markov Chain Convergence
-The notions of irreducibility, aperiodicity, and stationarity are cobbled together to arrive at an important result in the discrete-state Markov chain and it is stated here without proof.
+The notions of irreducibility, aperiodicity, and stationarity are cobbled together to arrive at an important result in the discrete-state Markov chain and it is stated here without proof \cite{Sargent2017}.
 \marginpar{Fundamental theorem of Markov chain}
 Let $P$ be a transition probability matrix, irreducible and aperiodic, then $P$ has exactly one stationary distribution $\pi^*$ and for any initial distribution $\pi^{(0)}$
 \begin{equation}
