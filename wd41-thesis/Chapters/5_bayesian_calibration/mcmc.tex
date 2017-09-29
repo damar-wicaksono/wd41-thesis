@@ -313,19 +313,19 @@ and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the 
 Algorithm~\ref{alg:metropolis_hastings}
 
 \begin{algorithm}
-\caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate $R$ samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$}
+\caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$ in $I$ iterations}
 \label{alg:metropolis_hastings}
 \begin{algorithmic}
-  \REQUIRE $R > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
+  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
   \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
-  \FOR{$r=1$ to $R$}
+  \FOR{$i = 1$ to $I$}
     \STATE sample $\bm{x}^*$ from $q(\bm{x})$
-    \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(r-1)})} \times \frac{q(\bm{x}^{(r-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(r-1)})}, 1.0\right)$
+    \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)$
     \STATE sample $u$ from $\mathcal{U}[0,1]$
     \IF{$u < \alpha$}
-      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^*$
+      \STATE $\bm{x}^{(i)} \leftarrow \bm{x}^*$
     \ELSE
-      \STATE $\bm{x}^{(r)} \leftarrow \bm{x}^{(r-1)}$
+      \STATE $\bm{x}^{(i)} \leftarrow \bm{x}^{(i-1)}$
     \ENDIF
   \ENDFOR
 \end{algorithmic}
@@ -433,6 +433,11 @@ Algorithm~\ref{alg:metropolis_hastings}
 
 % Different Samplers out there
 
+% Entry to AIES
+% Instead of delving into some particular improvements on the Metropolis,
+% this thesis adopted a relatively new algorithm based on ensemble sampler
+% The main idea introduced above hold though
+
 %The points is for the chain to spend time in the parameter space in proportion to its probability.
 %
 %---------------------------------------------------------------------
@@ -446,11 +451,29 @@ Algorithm~\ref{alg:metropolis_hastings}
 % Affine-Invariant
 
 % Ensemble Sampler
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:ch5_aies_stretch},
+			           maincaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional parameter space.},
+			           mainshortcaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional parameter space.},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:ch5_aies_stretch_1},
+			           leftcaption={A walker in an ensemble of complementary walkers},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:ch5_aies_stretch_2},
+			           midcaption={A complementary walker is randomly selected},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:ch5_aies_stretch_3},
+			           rightcaption={A move is proposed},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter5/figures/aies_stretch_1}
+{../figures/chapter5/figures/aies_stretch_2}
+{../figures/chapter5/figures/aies_stretch_3}
 
 % AIES Algorithm\begin{algorithm}
 
 \begin{algorithm}
-\caption[Affine-Invariance Ensemble Sampler (Strectch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate $R = L * (T + 1)$ samples from $p(\bm{x}) \propto p^*(\bm{x})$}
+\caption[Affine-Invariance Ensemble Sampler (Strectch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ using $L$ walkers in $I$ iterations}
 \label{alg:aies}
 \begin{algorithmic}
   \REQUIRE $T > 0$, $L \geq T + 1$, $p^*(\bm{x})$, and $q (z)$
@@ -460,7 +483,7 @@ Algorithm~\ref{alg:metropolis_hastings}
 				\STATE pick randomly $\bm{x}_j$ from $\vec{\bm{x}}^{(t-1)}_{\sim l}$
 				\STATE sample $z$ from $q(z)$
 				\STATE $\bm{x}^* \leftarrow \bm{x}_j + z (\bm{x}^{(t-1)}_l - \bm{x}_j)$
-				\STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}_l)} \times z^{D-1}, 1.0\right)$
+				\STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(t+1)}_l)} \times z^{D-1}, 1.0\right)$
 			\STATE sample $u$ from $\mathcal{U}[0,1]$
 			\IF{$u < \alpha$}
 				\STATE $\bm{x}^{(t)}_l \leftarrow \bm{x}^*$
@@ -472,6 +495,62 @@ Algorithm~\ref{alg:metropolis_hastings}
 \end{algorithmic}
 \end{algorithm}
 
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_illustrate_markov_chain_small_step},
+                  maincaption={Convergence issue due to an under-dispersed proposal density.},%
+									mainshortcaption={Convergence issue due to an under-dispersed proposal density. The marginal densities have been normalized to match the peak of the histogram.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_aies_walker_ensemble_1},
+                  leftcaption={Trace plot of all walkers},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch5_plot_aies_walker_running_stats_1},
+                  rightcaption={Running empirical mean and standard deviation of the samples},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotAIESWalkerEnsemble_1}
+{../figures/chapter5/figures/plotAIESWalkerRunningStats_1}
+
 % Implementation
+
+
+% Running Example
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_aies_walker_2},
+                  maincaption={Convergence issue due to an under-dispersed proposal density.},%
+									mainshortcaption={Convergence issue due to an under-dispersed proposal density. The marginal densities have been normalized to match the peak of the histogram.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_aies_walker_ensemble_2},
+                  leftcaption={Trace plot of all walkers},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch5_plot_aies_walker_running_stats_2},
+                  rightcaption={Running empirical mean and standard deviation of the samples},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotAIESWalkerEnsemble_2}
+{../figures/chapter5/figures/plotAIESWalkerRunningStats_2}
+
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:ch5_plot_aies_walker_samples},
+			           maincaption={Results of samples generated by \gls[hyper=false]{aies}. After $500$ iterations of an ensemble of $100$ walkers (for a total $50'000$ target density evaluations), the samples resembles the actual shape of the distribution both as a joint distribution (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
+			           mainshortcaption={Results of samples generated by \gls[hyper=false]{aies} for the target density given in the example.},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:ch5_plot_aies_walker_samples_1},
+			           leftcaption={Joint samples},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:ch5_plot_aies_walker_samples_2},
+			           midcaption={Marginal of $x_1$},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:ch5_plot_aies_walker_samples_3},
+			           rightcaption={Marginal of $x_2$},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter5/figures/plotAIESWalkerSamples_1}
+{../figures/chapter5/figures/plotAIESWalkerSamples_2}
+{../figures/chapter5/figures/plotAIESWalkerSamples_3}
+
 
 % Possible problem and Why not
