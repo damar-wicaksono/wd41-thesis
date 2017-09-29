@@ -8,7 +8,6 @@
 #
 # Custom function -------------------------------------------------------------
 # Bivariate logistics distribution by Gumbel
-
 biv_log <- function(xx, mu1, mu2, sig1, sig2)
 {
   dens <- (exp(-1 * (xx[1] - mu1) / sig1) * exp(-1 * (xx[2] - mu2) / sig2)) /
