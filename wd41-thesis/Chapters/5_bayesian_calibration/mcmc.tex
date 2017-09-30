@@ -202,11 +202,11 @@ Specifically, by constructing a Markov chain of the input parameters values,
 the resulting process will eventually converge to a stationary distribution which coincides with the given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
 In other words, the samples generated from the stationary distribution of the process are distributed according to the given density.
 Generating samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
-Theoretically, this family of techniques would be independent of the dimension of the input parameter space and its convergence is guaranteed.
+Theoretically, this family of techniques would have less severe dependence to the dimension of the input parameter space and its convergence is guaranteed.
 
 The following briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
 Then,
-a method to construct a Markov chain for the purpose of \gls[hyper=false]{mc} simulation are introduced. 
+two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc} simulation are introduced. 
 
 %----------------------------------------------
 \subsection{Markov Chain}\label{sub:bc_mcmc_mc}
@@ -279,7 +279,6 @@ It is suffice to say here that the goal of Markov chain monte carlo is to constr
 
 % Reference to the appendix
 
-
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
 %------------------------------------------------------------
@@ -302,21 +301,32 @@ This, in essence, is the objective of \gls[hyper=false]{mcmc} algorithms as defi
 
 % Metropolis-Hastings Algorithm, Origin
 One might think that the task of constructing a Markov transition kernel would be difficult,
-especially considering wide range of possible target density which might call for different classes of transition kernels.
+especially considering wide range of possible target distribution which might call for different classes of transition kernels.
 \marginpar{Metropolis-Hastings algorithms, origin}
-However, there exists a class of algorithms for generating Markov chain that guarantees its convergence (in distribution) to \emph{any} target density as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
-The Metropolis-Hastings algorithms and its various extensions remains the most universal class of algorithms to generate such Markov chain \cite{Robert2010}. 
+However, there exists a class of algorithms for generating Markov chain that guarantees its convergence (in distribution) to \emph{any} target distribution as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
+The Metropolis-Hastings algorithm and its various extensions remains the most universal class of algorithms to generate such Markov chain \cite{Robert2010}. 
 The method was first applied for a statistical mechanics problem by Metropolis et al. \cite{Metropolis1953}\footnote{There is apparently a controversy surrounding the attribution of the algorithm solely to Metropolis, especially when his role was claimed to be nothing more ``other than providing computer time'' \cite{Gubernatis2005}.}
 and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the best of the author's knowledge, no controversy here.}.
 
-% Metropolis-Hastings Algorithm, Continued
-Algorithm~\ref{alg:metropolis_hastings}
-
+% Metropolis-Hastings Algorithm, In essence
+The \gls[hyper=false]{mh} algorithm prescribes two main components for constructing transition kernel of a Markov chain that converges to the target distribution: a \emph{proposal probability density} $q(\bm{x}^*|\bm{x})$ and an \emph{acceptance probability} $\alpha$.
+\marginpar{Metropolis-Hastings algorithm, proposal density and acceptance probability}
+The proposal probability density is responsible for generating a proposal or candidate move $\bm{x}^*$ for the Markov chain at each iteration and it is in general a density conditional on the previous state.
+This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such the Gaussian or uniform densities.
+This proposal move, in turn, will be accepted with a probability,
+\begin{equation}
+	\alpha = \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)
+\label{eq:ch5_acceptance_probability}
+\end{equation}
+If the proposed move is rejected, then the chain remains at its current state for the given iteration.
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Appendix~\ref{app:markov_chain}) for any valid proposal probability distribution which, in turn, guarantees the stationarity of the process \cite{Chib1995} .
+The steps are repeated multiple times until the required length of the chain (i.e., the number of samples) is met.
+Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a Markov chain by \gls[hyper=false]{mh} algorithm.
 \begin{algorithm}
-\caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x})$ in $I$ iterations}
+\caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x}^* | \bm{x})$ in $I$ iterations}
 \label{alg:metropolis_hastings}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q (\bm{x})$
+  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q (\bm{x}^* | \bm{x}^{(i-1)})$
   \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
   \FOR{$i = 1$ to $I$}
     \STATE sample $\bm{x}^*$ from $q(\bm{x})$
