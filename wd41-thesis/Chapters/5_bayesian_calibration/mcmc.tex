@@ -284,19 +284,18 @@ It is suffice to say here that the goal of Markov chain monte carlo is to constr
 %------------------------------------------------------------
 
 % Introductory Paragraph
-Consider once more the problem set up at the beginning of the section:
+Consider once more the problem set up at the start of the section:
 \marginpar{The objective revisited}
-Given a target probability density $p(\bm{x})$,
-known at least up to a proportionality constant, $p(\bm{x}) \propto p^*\bm{x}$, 
-generate samples (i.e., realizations) from the density.
+Generate samples from a target probability distribution with a density $p(\bm{x})$,
+known at least up to a proportionality constant, $p(\bm{x}) \propto p^*(\bm{x})$.
 
 % Markov Chain Monte Carlo
 Acknowledging the fundamental theorem of Markov Chain (see Appendix~\ref{app:markov_chain}),
-the task is then to construct a Markov transition kernel such that the target density $p^*$ becomes the
+the task is then to construct a Markov transition kernel such that the target density $p$ becomes the
 stationary distribution of the Markov chain.
 \marginpar{MCMC algorithms}
 Thereafter, based on such kernel, generate a realization of the chain (i.e., \emph{simulate}) long enough for the limiting distribution of the chain is reached and it converges to the target density $p$.
-As a result, the samples generated from the realization of the chain converges, in distribution, to the target density; a simulation of the chain is a simulation of $p$.
+As a result, the samples generated from the realization of the chain converges, in distribution, to the target density.
 This, in essence, is the objective of \gls[hyper=false]{mcmc} algorithms as defined in \cite{Robert2004}.
 
 % Metropolis-Hastings Algorithm, Origin
@@ -313,7 +312,6 @@ The \gls[hyper=false]{mh} algorithm prescribes two main components for construct
 \marginpar{Metropolis-Hastings algorithm, proposal density}
 The proposal probability density is responsible for generating a proposal or candidate move $\bm{x}^*$ for the Markov chain at each iteration and it is in general a density conditional on the previous state.
 This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such the Gaussian or uniform densities.
-
 This proposal move, in turn, will be accepted with a probability,
 \begin{equation}
 	\alpha = \text{min} \left(\frac{p(\bm{x}^*)}{p(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)
@@ -321,9 +319,9 @@ This proposal move, in turn, will be accepted with a probability,
 \end{equation}
 \marginpar{Metropolis-Hastings algorithm, acceptance probability}
 Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
-and $q(\bm{x}^{(i-1)} | \bm{x}^*)$ ($q(\bm{x}^* | \bm{x}^{(i-1)})$) are the value of the proposal density at the previous state (proposed state) conditional on the value of the proposed state (previous state).
-Note from the ratio, the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the density up to that constant $p^*$ is required (Eq.~(\ref{eq:bc_prop_post})). 
-The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Appendix~\ref{app:markov_chain}) for any valid proposal probability distribution which, in turn, guarantees the stationarity of the process \cite{Chib1995} .
+and $q(\bm{x}^{(i-1)} | \bm{x}^*)$ ($q(\bm{x}^* | \bm{x}^{(i-1)})$) are the value of the proposal density at the previous (proposed) state conditional on the value of the proposed (previous) state.
+Notice from the ratio, the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the density up to that constant $p^*$ is required. 
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Appendix~\ref{app:markov_chain}) for any valid proposal probability distribution. This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
 
 If the proposed move is accepted it becomes the current state of the chain,
 otherwise the chain remains at its current state for the given iteration.
@@ -352,34 +350,43 @@ Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a 
 % Random Walk Markov Chain
 In the original paper of Metropolis et al.,
 the proposal distribution was chosen to be a symmetric distribution such that $q(\bm{x}^* | \bm{x}^{(i-1)}) = q(\bm{x}^{(i-1)} | \bm{x}^*)$.
-\marginpar{Random walk Metropolis-Hastings}
-As a result the terms associated with the proposal density in the acceptance probability cancel each other.
-Consequently, any proposal move that yields an ``improvement'' on the target density evaluation will be accepted, otherwise it will be only be accepted according to the acceptance probability. 
-This particularly simple \gls[hyper=false]{mh} algorithm results in \emph{random walk} Markov chain
-and as such it is termed the \emph{random walk} \gls[hyper=false]{mh}\cite{Robert2010}.  
+\marginpar{Random walk \gls[hyper=false]{mh} algorithm}
+As a result the terms associated with the proposal density in Eq.~(\ref{eq:ch5_acceptance_probability}) cancel each other.
+Consequently, any proposed move that yields an ``improvement'' on the target density evaluation will be accepted, otherwise it will only be accepted according to its acceptance probability. 
+This particularly simple \gls[hyper=false]{mh} algorithm results in a \emph{random walk} Markov chain
+and it is termed the \emph{random walk} \gls[hyper=false]{mh} \cite{Robert2010}.  
 
 % Application on the Simple Running Example
-To illustrate the application of the \gls[hyper=false]{mh}, particularly the random walk \gls[hyper=false]{mh}, for generating samples from an arbitrary target distribution,
-consider again the sample in Eq.~(\ref{eq:bc_unnormalized_gumbel}) used before.
-\marginpar{Random walk Metropolis-Hastings algorithm, illustrated}
-For this example, the proposal distribution is chosen to be the bivariate normal $\mathcal{N}_2(\bm{0.0}, \bm{2.0})$ with identical mean ($\bm{0.0}$) and variance ($\bm{2.0}$) for both $x_1$ and $x_2$.
+To illustrate the application of the \gls[hyper=false]{mh}, particularly the random walk \gls[hyper=false]{mh},
+\marginpar{Random walk \gls[hyper=false]{mh} algorithm, illustrated}
+for generating samples from an arbitrary target distribution,
+consider again the example of generating samples from the density given in Eq.~(\ref{eq:bc_unnormalized_gumbel}).
+For this example, the proposal distribution is chosen to be an independent bivariate normal with the variance of $2.0$ for both $x_1$ and $x_2$.
 The initial state of the chain $\bm{x}^{(0)}$ is set to be at the origin.
 
 % Proposing Move
 The first three iterations of the random walk \gls[hyper=false]{mh} algorithm is illustrated in Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration}.
+At the first iteration (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_1}),
+a proposed move is drawn from the bivariate normal distribution (centered at the origin).
+The proposed move brings the state closer to the center of the target density, thus it is accepted (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_2}).
+A new proposal move is generated from the bivariate normal centered at the newly accepted move.
+This time, because the proposed move moves farther away from the center of the target density, it is rejected.
+The chain remains at the current state and a new proposal move is drawn (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_3}).
+Note that this kind of proposed move will not always be rejected outright but is subjected to chance based on the acceptance probability.
+
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain_iteration},
-			           maincaption={Illustration of iterations in Markov Chain simulation by random walk Metropolis-Hastings algorithm to sample the density given in Eq.~(\ref{eq:bc_unnormalized_gumbel}). Plots shown here are the first three iterations. The proposal density is a bivariate normal distribution with $\sigma^2 = 2.0$. At each iteration, the candidate point is drawn from the normal distribution centered at the current value while keeping the covariance structure constant.},
+			           maincaption={Illustration of the first three iterations in Markov Chain simulation by random walk \gls[hyper=false]{mh} algorithm to sample the density given in Eq.~(\ref{eq:bc_unnormalized_gumbel}) whose contours showed in solid lines. The proposal density is an independent bivariate normal distribution with $\sigma^2 = 2.0$ whose contours showed in dashed lines, centered at current state.},
 			           mainshortcaption={Illustration of iterations in Markov Chain simulation by random walk Metropolis-Hastings algorithm.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_illustrate_markov_chain_iteration_1},
 			           leftcaption={Iteration $1$},
 			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_illustrate_markov_chain_iteration_2},
-			           midcaption={Iteration $2$, previous candidate accepted},
+			           midcaption={Iteration $2$},
 			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_illustrate_markov_chain_iteration_3},
-			           rightcaption={Iteration $3$, previous candidate rejected and stay put},
+			           rightcaption={Iteration $3$},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter5/figures/plotIllustrateMarkovChainIteration_1}
@@ -387,6 +394,8 @@ The first three iterations of the random walk \gls[hyper=false]{mh} algorithm is
 {../figures/chapter5/figures/plotIllustrateMarkovChainIteration_3}
 
 % Traversing the Target Density and Trace Plot
+These iterations are then repeated for a total of $5'000$ times yielding $5'000$ samples from the target distribution.
+Fig.~\ref{fig:ch5_plot_illustrate_markov_chain}
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain},
 			           maincaption={Illustration of Markov Chain simulation to generate samples from a target density given in the example. (Left) The chain traverses the input parameter space. For each iteration, probability of accepting a move depends on the target density. (Center and Right) The trace plots for each parameter. The proposal density used in this illustration is a symmetric bivariate normal distribution (i.e., with correlation equals to $0$).},
