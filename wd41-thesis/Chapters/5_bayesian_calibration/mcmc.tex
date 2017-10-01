@@ -359,9 +359,14 @@ This particularly simple \gls[hyper=false]{mh} algorithm results in \emph{random
 and as such it is termed the \emph{random walk} \gls[hyper=false]{mh}\cite{Robert2010}.  
 
 % Application on the Simple Running Example
-To illustrate the application of the \gls[hyper=false]{mh}, particularly the random walk \gls[hyper=false]{mh}, from generating samples from an arbitrary target distribution,
+To illustrate the application of the \gls[hyper=false]{mh}, particularly the random walk \gls[hyper=false]{mh}, for generating samples from an arbitrary target distribution,
 consider again the sample in Eq.~(\ref{eq:bc_unnormalized_gumbel}) used before.
+\marginpar{Random walk Metropolis-Hastings algorithm, illustrated}
+For this example, the proposal distribution is chosen to be the bivariate normal $\mathcal{N}_2(\bm{0.0}, \bm{2.0})$ with identical mean ($\bm{0.0}$) and variance ($\bm{2.0}$) for both $x_1$ and $x_2$.
+The initial state of the chain $\bm{x}^{(0)}$ is set to be at the origin.
+
 % Proposing Move
+The first three iterations of the random walk \gls[hyper=false]{mh} algorithm is illustrated in Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain_iteration},
 			           maincaption={Illustration of iterations in Markov Chain simulation by random walk Metropolis-Hastings algorithm to sample the density given in Eq.~(\ref{eq:bc_unnormalized_gumbel}). Plots shown here are the first three iterations. The proposal density is a bivariate normal distribution with $\sigma^2 = 2.0$. At each iteration, the candidate point is drawn from the normal distribution centered at the current value while keeping the covariance structure constant.},
