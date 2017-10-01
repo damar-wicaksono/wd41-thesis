@@ -295,8 +295,8 @@ Acknowledging the fundamental theorem of Markov Chain (see Appendix~\ref{app:mar
 the task is then to construct a Markov transition kernel such that the target density $p^*$ becomes the
 stationary distribution of the Markov chain.
 \marginpar{MCMC algorithms}
-Thereafter, based on such kernel, generate a realization of the chain (i.e., \emph{simulate}) long enough for the limiting distribution of the chain is reached and it converges to the target density $p^*$.
-As a result, the samples generated from the realization of the chain converges, in distribution, to the target density; a simulation of the chain is a simulation of $p^*$.
+Thereafter, based on such kernel, generate a realization of the chain (i.e., \emph{simulate}) long enough for the limiting distribution of the chain is reached and it converges to the target density $p$.
+As a result, the samples generated from the realization of the chain converges, in distribution, to the target density; a simulation of the chain is a simulation of $p$.
 This, in essence, is the objective of \gls[hyper=false]{mcmc} algorithms as defined in \cite{Robert2004}.
 
 % Metropolis-Hastings Algorithm, Origin
@@ -310,26 +310,34 @@ and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the 
 
 % Metropolis-Hastings Algorithm, In essence
 The \gls[hyper=false]{mh} algorithm prescribes two main components for constructing transition kernel of a Markov chain that converges to the target distribution: a \emph{proposal probability density} $q(\bm{x}^*|\bm{x})$ and an \emph{acceptance probability} $\alpha$.
-\marginpar{Metropolis-Hastings algorithm, proposal density and acceptance probability}
+\marginpar{Metropolis-Hastings algorithm, proposal density}
 The proposal probability density is responsible for generating a proposal or candidate move $\bm{x}^*$ for the Markov chain at each iteration and it is in general a density conditional on the previous state.
 This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such the Gaussian or uniform densities.
+
 This proposal move, in turn, will be accepted with a probability,
 \begin{equation}
-	\alpha = \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)
+	\alpha = \text{min} \left(\frac{p(\bm{x}^*)}{p(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)
 \label{eq:ch5_acceptance_probability}
 \end{equation}
-If the proposed move is rejected, then the chain remains at its current state for the given iteration.
+\marginpar{Metropolis-Hastings algorithm, acceptance probability}
+Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
+and $q(\bm{x}^{(i-1)} | \bm{x}^*)$ ($q(\bm{x}^* | \bm{x}^{(i-1)})$) are the value of the proposal density at the previous state (proposed state) conditional on the value of the proposed state (previous state).
+Note from the ratio, the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the density up to that constant $p^*$ is required (Eq.~(\ref{eq:bc_prop_post})). 
 The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Appendix~\ref{app:markov_chain}) for any valid proposal probability distribution which, in turn, guarantees the stationarity of the process \cite{Chib1995} .
-The steps are repeated multiple times until the required length of the chain (i.e., the number of samples) is met.
+
+If the proposed move is accepted it becomes the current state of the chain,
+otherwise the chain remains at its current state for the given iteration.
+To generate a Markov chain of certain length (i.e., certain number of samples),
+the steps are repeated multiple times until the required length of the chain is met.
 Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a Markov chain by \gls[hyper=false]{mh} algorithm.
 \begin{algorithm}
 \caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x}^* | \bm{x})$ in $I$ iterations}
 \label{alg:metropolis_hastings}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q (\bm{x}^* | \bm{x}^{(i-1)})$
+  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q(\bm{x}^* | \bm{x}^{(i-1)})$
   \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
   \FOR{$i = 1$ to $I$}
-    \STATE sample $\bm{x}^*$ from $q(\bm{x})$
+    \STATE sample $\bm{x}^*$ from $q(\bm{x} | \bm{x}^{(i-1)})$
     \STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(i-1)})} \times \frac{q(\bm{x}^{(i-1)} | \bm{x}^*)}{q(\bm{x}^* | \bm{x}^{(i-1)})}, 1.0\right)$
     \STATE sample $u$ from $\mathcal{U}[0,1]$
     \IF{$u < \alpha$}
@@ -342,8 +350,17 @@ Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a 
 \end{algorithm}
 
 % Random Walk Markov Chain
+In the original paper of Metropolis et al.,
+the proposal distribution was chosen to be a symmetric distribution such that $q(\bm{x}^* | \bm{x}^{(i-1)}) = q(\bm{x}^{(i-1)} | \bm{x}^*)$.
+\marginpar{Random walk Metropolis-Hastings}
+As a result the terms associated with the proposal density in the acceptance probability cancel each other.
+Consequently, any proposal move that yields an ``improvement'' on the target density evaluation will be accepted, otherwise it will be only be accepted according to the acceptance probability. 
+This particularly simple \gls[hyper=false]{mh} algorithm results in \emph{random walk} Markov chain
+and as such it is termed the \emph{random walk} \gls[hyper=false]{mh}\cite{Robert2010}.  
 
 % Application on the Simple Running Example
+To illustrate the application of the \gls[hyper=false]{mh}, particularly the random walk \gls[hyper=false]{mh}, from generating samples from an arbitrary target distribution,
+consider again the sample in Eq.~(\ref{eq:bc_unnormalized_gumbel}) used before.
 % Proposing Move
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain_iteration},
