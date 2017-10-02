@@ -584,13 +584,13 @@ a proposal move is made on one walker at a time and it follows an affine transfo
 where $\bm{x}_l^*$ is the proposal move for the walker $l$ at the current iteration;
 $\bm{x}_l^{(i-1)}$ is the walker to be updated (i.e., walker $l$ at the previous state $(i-1)$);
 $\bm{x}_j$ is the \emph{complementary walker}, randomly selected from the complementary ensembles of $\vec{\bm{x}}^{(i-1)}_{\sim l}$;
-and $z$ is a scalar proposal step size, randomly generated from \cite{Goodman2010,Allison2013},
+and $z$ is a scalar proposal step size, randomly generated from \cite{Goodman2010},
 \begin{equation}
 	g(z) \propto z^{-0.5}, \,\,\,\, z \in [a^{-1}, a]
 \label{eq:ch5_step_size_distribution}
 \end{equation}
 where $a$ is a free positive parameter,
-and where the value of $2.0$ is widely used as default for many applications \cite{Goodman2010,Hou2012,Foreman-Mackey2013,Akeret2013}.
+and where the value of $2.0$ is widely used as default for many applications \cite{Goodman2010,Hou2012,Allison2013,Foreman-Mackey2013,Akeret2013}.
 
 % Stretch-Move, Illustrated
 Fig.~\ref{fig:ch5_aies_stretch} illustrates how a move is proposed in stretch-move for a single walker in an ensemble of $10$ walkers, in a $2$-dimensional state space.
