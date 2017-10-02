@@ -515,9 +515,9 @@ The algorithm has the potential of requiring minimal tuning to any given particu
 The main ideas of the above (i.e., proposed move and its acceptance probability), however,
 remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 
-%---------------------------------------------------------------------
-\subsection{Affine-Invariant Ensemble Sampler}\label{sub:bc_mcmc_aies}
-%---------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\subsection{Affine-Invariant Ensemble Sampler (AIES)}\label{sub:bc_mcmc_aies}
+%----------------------------------------------------------------------------
 
 % Introductory Paragraph
 %The points is for the chain to spend time in the parameter space in proportion to its probability.
@@ -525,8 +525,33 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 % Affine-Invariant Ensemble Sampler, Motivation
 
 % Ensemble Sampler
+\gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
+\marginpar{Ensemble sampler}
+An ensemble $\vec{\bm{\mathcal{X}}}$ is a collection of $L$ random variables $\{\bm{\mathcal{X}}_{l}\}_{l = 1}^{L}$ called \emph{walkers}, each of which is in $\mathbb{R}^D$, that is $\bm{\mathcal{X}}_{l} = [\mathcal{X}_{l,1}, \mathcal{X}_{l,2}, \ldots, \mathcal{X}_{l, D}]$.
+The ensemble of $L$ walkers are independent to each other with respect to the target distribution $p (\circ)$.
+Specifically,
+\begin{equation}
+	p(\vec{\bm{x}}) = p(\bm{x}_1) \cdot p(\bm{x}_2) \ldots \cdot p(\bm{x}_L) 
+\label{eq:ch5_ensemble_independence}
+\end{equation}
+A Markov chain of an ensemble, in turn, is a sequence of ensembles, $\{\vec{\bm{\mathcal{X}}}^{(i)}\}$ for $i \geq 0$ that follows the Markov property while preserving the condition in Eq.~(\ref{eq:ch5_ensemble_independence}).
+Consequently, the Markov property lies on the state space of the ensemble\footnote{if each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}
+and the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
 
-% Affine-Invariant
+% Affine Transformation
+In \gls[hyper=false]{aies}, the transition between states of an ensemble is conducted by carrying out an affine transformation to the ensemble.
+\marginpar{Affine Transformation}
+The transition (thus the transformation) is carried out at the level of individual walkers.
+In other words, an affine transformation $f_a$ is defined such that, 
+\begin{equation}
+	\begin{split}
+		 & f_a: \vec{\bm{\mathcal{X}}} \mapsto \vec{\bm{\mathcal{Y}}} = M \vec{\bm{\mathcal{X}}} + b \\
+		 & \vec{\bm{\mathcal{Y}}} = [M \mathcal{X}_{l,1} + b, M \mathcal{X}_{l,2} + b, \ldots, M \mathcal{X}_{l, D} + b]
+	\end{split}
+\label{eq:ch5_affine_transformation}
+\end{equation}
+
+% Affine Invariance
 
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_aies_stretch},
@@ -547,8 +572,7 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 {../figures/chapter5/figures/aies_stretch_2}
 {../figures/chapter5/figures/aies_stretch_3}
 
-% AIES Algorithm\begin{algorithm}
-
+% AIES Algorithm (Stretch Move)
 \begin{algorithm}
 \caption[Affine-Invariance Ensemble Sampler (Strectch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ using $L$ walkers in $I$ iterations}
 \label{alg:aies}
@@ -571,6 +595,10 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 		\ENDFOR
 \end{algorithmic}
 \end{algorithm}
+
+% Proposal Move and Acceptance Probability
+
+% Intuition
 
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_illustrate_markov_chain_small_step},
