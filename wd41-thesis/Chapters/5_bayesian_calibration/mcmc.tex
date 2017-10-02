@@ -519,10 +519,16 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 \subsection{Affine-Invariant Ensemble Sampler (AIES)}\label{sub:bc_mcmc_aies}
 %----------------------------------------------------------------------------
 
-% Introductory Paragraph
-%The points is for the chain to spend time in the parameter space in proportion to its probability.
+% Introductory Paragraph and main motivation
+\Glsfirst[hyper=false]{aies} is an \gls[hyper=false]{mcmc} algorithm proposed by Goodman and Weare \cite{Goodman2010}.
+Its main motivation is exactly where the previous section left off: the difficulty in tuning or adapting \gls[hyper=false]{mh} algorithm applicable to wide class of target distribution.
+The situation is typically worsened for a highly correlated distribution of high dimension where some of the length scales of the target distribution are very small forcing an adaptive algorithm to spend majority of its time tuning the scale of the proposal distribution,
+eventually resulting in high overhead computational cost of adaptation \cite{Foreman-Mackey2013}.
 
-% Affine-Invariant Ensemble Sampler, Motivation
+Through some affine transformations,
+a target distribution with a highly skewed aspect ratio can be made less skewed and thus less awkward to be sampled from.
+By ensuring the algorithm to be affine-invariance, the performance of the algorithm would then be equal under all affine transformation of the target distribution.
+Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{sampler of many particles}, as opposed to a sampler of \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the above \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (as will be explained further below).
 
 % Ensemble Sampler
 \gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
@@ -534,6 +540,8 @@ Specifically,
 	p(\vec{\bm{x}}) = p(\bm{x}_1) \cdot p(\bm{x}_2) \ldots \cdot p(\bm{x}_L) 
 \label{eq:ch5_ensemble_independence}
 \end{equation}
+Eq.~\ref{eq:ch5_ensemble_independence} implies that the target distribution is being independently sampled by $L$ walkers.
+
 A Markov chain of an ensemble, in turn, is a sequence of ensembles, $\{\vec{\bm{\mathcal{X}}}^{(i)}\}$ for $i \geq 0$ that follows the Markov property while preserving the condition in Eq.~(\ref{eq:ch5_ensemble_independence}).
 Consequently, the Markov property lies on the state space of the ensemble\footnote{if each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}
 and the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
@@ -541,7 +549,7 @@ and the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not 
 % Affine Transformation
 In \gls[hyper=false]{aies}, the transition between states of an ensemble is conducted by carrying out an affine transformation to the ensemble.
 \marginpar{Affine Transformation}
-The transition (thus the transformation) is carried out at the level of individual walkers.
+The transition (thus the transformation) is carried out at the level of individual walkers one at a time.
 In other words, an affine transformation $f_a$ is defined such that, 
 \begin{equation}
 	\begin{split}
@@ -584,10 +592,10 @@ a proposal move is made on one walker at a time and it follows an affine transfo
 where $\bm{x}_l^*$ is the proposal move for the walker $l$ at the current iteration;
 $\bm{x}_l^{(i-1)}$ is the walker to be updated (i.e., walker $l$ at the previous state $(i-1)$);
 $\bm{x}_j$ is the \emph{complementary walker}, randomly selected from the complementary ensembles of $\vec{\bm{x}}^{(i-1)}_{\sim l}$;
-and $z$ is a scalar proposal step size, randomly generated from \cite{Goodman2010},
+and $z$ is the scaler of the transformation (i.e., the \emph{stretcher}), randomly generated from,
 \begin{equation}
 	g(z) \propto z^{-0.5}, \,\,\,\, z \in [a^{-1}, a]
-\label{eq:ch5_step_size_distribution}
+\label{eq:ch5_scaler_distribution}
 \end{equation}
 where $a$ is a free positive parameter,
 and where the value of $2.0$ is widely used as default for many applications \cite{Goodman2010,Hou2012,Allison2013,Foreman-Mackey2013,Akeret2013}.
@@ -598,7 +606,7 @@ Fig.~\ref{fig:ch5_aies_stretch} illustrates how a move is proposed in stretch-mo
 First, a walker in the ensemble will be updated while the rest of the walkers becomes its complementary walkers (Fig.~\ref{fig:ch5_aies_stretch_1}).
 Secondly, a complementary walker is randomly selected among the ensemble of complementary walkers (Fig.~\ref{fig:ch5_aies_stretch_2}).
 Thirdly and finally,
-a proposal step size is randomly generated according to $q$ and a proposed move is made according to Eq. (Fig.~\ref{fig:ch5_aies_stretch_3}).
+a proposal scaler is randomly generated according to $q$ and a proposed move is made according to Eq. (Fig.~\ref{fig:ch5_aies_stretch_3}).
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_aies_stretch},
 			           maincaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional state space.},
@@ -655,6 +663,7 @@ Algorithm~\ref{alg:aies} summarizes the steps in the stretch-move \gls[hyper=fal
 \end{algorithm}
 
 % Intuition
+This is because the evolution of an ensemble across the state space inherently carried more information (more than an evolution of single chain in ) on the landscape of the target distribution for each of the state space dimensions.
 
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_illustrate_markov_chain_small_step},
