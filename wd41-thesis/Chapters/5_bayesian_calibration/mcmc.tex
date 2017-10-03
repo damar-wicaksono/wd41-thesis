@@ -185,6 +185,7 @@ is the curse of dimensionality similar to the one mentioned in the previous chap
 The number of density evaluations grows exponentially with the number of dimension.
 As a rule, for a given discretization level $\Delta$ and dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
+Furthermore, many of the evaluations are seemingly wasteful because they are located far away from the center of the distributions.
 
 % In relation to Bayesian data analysis
 In the context of Bayesian data analysis,
@@ -521,14 +522,15 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 
 % Introductory Paragraph and main motivation
 \Glsfirst[hyper=false]{aies} is an \gls[hyper=false]{mcmc} algorithm proposed by Goodman and Weare \cite{Goodman2010}.
+\marginpar{AIES, motivation}
 Its main motivation is exactly where the previous section left off: the difficulty in tuning or adapting \gls[hyper=false]{mh} algorithm applicable to wide class of target distribution.
 The situation is typically worsened for a highly correlated distribution of high dimension where some of the length scales of the target distribution are very small forcing an adaptive algorithm to spend majority of its time tuning the scale of the proposal distribution,
 eventually resulting in high overhead computational cost of adaptation \cite{Foreman-Mackey2013}.
 
 Through some affine transformations,
-a target distribution with a highly skewed aspect ratio can be made less skewed and thus less awkward to be sampled from.
-By ensuring the algorithm to be affine-invariance, the performance of the algorithm would then be equal under all affine transformation of the target distribution.
-Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{sampler of many particles}, as opposed to a sampler of \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the above \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (as will be explained further below).
+a target distribution with a highly skewed aspect ratio can be made less skewed and thus less awkward to be sampled from \cite{Huijser2015}.
+By ensuring the algorithm to be affine-invariance, the performance of the algorithm would then be equal under all affine transformations of the target distribution.
+Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{sampler of many particles}, as opposed to a sampler of \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
 
 % Ensemble Sampler
 \gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
@@ -552,19 +554,32 @@ In \gls[hyper=false]{aies}, the transition between states of an ensemble is cond
 The transition (thus the transformation) is carried out at the level of individual walkers one at a time.
 In other words, an affine transformation $f_a$ is defined such that, 
 \begin{equation}
+	f_a: \mathcal{X} \mapsto \mathcal{Y} = M \mathcal{X} + b
+\label{eq:ch5_affine_transformation_single}
+\end{equation}
+where $M$ and $b$ are scalars.
+When applied to an ensemble,
+\begin{equation}
 	\begin{split}
-		 & f_a: \vec{\bm{\mathcal{X}}} \mapsto \vec{\bm{\mathcal{Y}}} = M \vec{\bm{\mathcal{X}}} + b \\
-		 & \vec{\bm{\mathcal{Y}}} = [M \bm{\mathcal{X}}_1 + b, M \bm{\mathcal{X}}_2 + b, \ldots, M \bm{\mathcal{X}}_L + b]
+		 & f_a: \vec{\bm{\mathcal{X}}} \mapsto \vec{\bm{\mathcal{Y}}} = \mathbf{M} \vec{\bm{\mathcal{X}}} + \bm{b} \\
+		 & \vec{\bm{\mathcal{Y}}} = [\mathbf{M} \bm{\mathcal{X}}_1 + \bm{b}, \mathbf{M} \bm{\mathcal{X}}_2 + \bm{b}, \ldots, \mathbf{M} \bm{\mathcal{X}}_L + \bm{b}]
 	\end{split}
 \label{eq:ch5_affine_transformation}
 \end{equation}
+where $\mathbf{M}$ is now a $D \times D$ invertible matrix;
+and $\bm{b}$ is a $D$-dimensional vector.
 In the context of \gls[hyper=false]{mcmc} simulation,
 $\vec{\bm{\mathcal{Y}}}$ would represent the proposal move of the chain transition whose acceptance is subject to chance as will be discussed further below.
 
 % Affine Invariance
+An ensemble \gls[hyper=false]{mcmc} algorithm is called \emph{affine-invariance} if the performance .
+Specifically, let $f_a$ 
+In less technical
+
 
 % AIES Algorithm (Stretch Move)
 One particular implementation of an \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} algorithm is the so-called \emph{stretch-move} \cite{Goodman2010,Foreman-Mackey2013}.
+\marginpar{AIES, stretch-move}
 As mentioned, the transition between iterations of an ensemble starts at the level of individual walkers.
 That is, the update is carried out one walker at a time and for stretch-move it proceeds as follows.
 
@@ -662,13 +677,31 @@ Algorithm~\ref{alg:aies} summarizes the steps in the stretch-move \gls[hyper=fal
 \end{algorithmic}
 \end{algorithm}
 
-% Intuition
-This is because the evolution of an ensemble across the state space inherently carried more information (more than an evolution of single chain in ) on the landscape of the target distribution for each of the state space dimensions.
+% Running Example
+To illustrate the application of the \gls[hyper=false]{aies} algorithm
+\marginpar{\gls[hyper=false]{aies} algorithm, illustrated}
+for generating samples from an arbitrary target distribution,
+consider again the example of generating samples from the density given in Eq.~(\ref{eq:bc_unnormalized_gumbel}).
+The number of walkers is set to be $100$ and the algorithm is run for $500$ iterations.
+In other words, there is $50'000$ target density evaluations, $1/10$ the number of evaluations for the illustration of the \gls[hyper=false]{mh} algorithm before.
+The initial state of the chain $\vec{\bm{x}}^{(0)}$ is set to be at the origin for all walkers.
 
+% Traversing the Target Density and Trace Plot
+Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} presents the evolution of each individual walker traversing the state space of variable $x_1$.
+\marginpar{ensemble samples, trace plot}
+As mentioned, the Markov property of an ensemble is not guaranteed at individual.
+Thus it is more appropriate to graphically diagnose the chain by plotting all the individual walkers.
+It is shown here that after an obvious initial phase,
+the ensemble seems to converge and stays around particular region of the state space.
+The width of the darker region, indicating region of the state space visited more often,
+show the dispersion of the variable. 
+Indeed this is confirmed by plotting the running empirical mean and standard deviation of the ensemble (Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_2}).
+The values $5.0$ and $2.3$ shown in the plot are the analytical mean and standard deviation of $x_1$, respectively.
+Although not shown here, the behavior of the  $x_2$ is similar.
 \normdoublefigure[pos=tbhp,
-                  mainlabel={fig:ch5_plot_illustrate_markov_chain_small_step},
-                  maincaption={Convergence issue due to an under-dispersed proposal density.},%
-									mainshortcaption={Convergence issue due to an under-dispersed proposal density. The marginal densities have been normalized to match the peak of the histogram.},
+                  mainlabel={fig:ch5_plot_aies_walker_ensemble},
+                  maincaption={Trace plots of individual walkers and the running mean and standard deviation for $x_1$.},%
+									mainshortcaption={.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:ch5_plot_aies_walker_ensemble_1},
                   leftcaption={Trace plot of all walkers},
@@ -683,26 +716,30 @@ This is because the evolution of an ensemble across the state space inherently c
 {../figures/chapter5/figures/plotAIESWalkerRunningStats_1}
 
 % Implementation
-
-
-% Running Example
-\normdoublefigure[pos=tbhp,
-                  mainlabel={fig:ch5_plot_aies_walker_2},
-                  maincaption={Convergence issue due to an under-dispersed proposal density.},%
-									mainshortcaption={Convergence issue due to an under-dispersed proposal density. The marginal densities have been normalized to match the peak of the histogram.},
-                  leftopt={width=0.45\textwidth},
-                  leftlabel={fig:ch5_plot_aies_walker_ensemble_2},
-                  leftcaption={Trace plot of all walkers},
+%\normdoublefigure[pos=tbhp,
+%                  mainlabel={fig:ch5_plot_aies_walker_2},
+%                  maincaption={Convergence issue due to an under-dispersed proposal density.},%
+%									mainshortcaption={Convergence issue due to an under-dispersed proposal density. The marginal densities have been normalized to match the peak of the histogram.},
+%                  leftopt={width=0.45\textwidth},
+%                  leftlabel={fig:ch5_plot_aies_walker_ensemble_2},
+%                  leftcaption={Trace plot of all walkers},
                   %leftshortcaption={},%
-                  rightopt={width=0.45\textwidth},
-                  rightlabel={fig:ch5_plot_aies_walker_running_stats_2},
-                  rightcaption={Running empirical mean and standard deviation of the samples},
+%                  rightopt={width=0.45\textwidth},
+%                 rightlabel={fig:ch5_plot_aies_walker_running_stats_2},
+%                  rightcaption={Running empirical mean and standard deviation of the samples},
                   %rightshortcaption={},
                   %spacing={\hfill}
-                 ]
-{../figures/chapter5/figures/plotAIESWalkerEnsemble_2}
-{../figures/chapter5/figures/plotAIESWalkerRunningStats_2}
+%                 ]
+%{../figures/chapter5/figures/plotAIESWalkerEnsemble_2}
+%{../figures/chapter5/figures/plotAIESWalkerRunningStats_2}
 
+% Marginal Distribution
+After the iterations are completed, the resulting samples should be distributed according to the target distribution.
+\marginpar{ensemble samples, marginal}
+Fig.~\ref{fig:ch5_plot_aies_walker_samples} shows that the resulting samples are distributed according to the target distribution both as a joint as well as its marginal.
+Shown here are the samples with the aforementioned ``initialization phase'' removed from the final tally.
+It was estimated from the plot to last for about $100$ iterations.
+Thus the final number of samples presented below is $(500-100)\times100=40'000$ samples. 
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_aies_walker_samples},
 			           maincaption={Results of samples generated by \gls[hyper=false]{aies}. After $500$ iterations of an ensemble of $100$ walkers (for a total $50'000$ target density evaluations), the samples resembles the actual shape of the distribution both as a joint distribution (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
@@ -722,5 +759,28 @@ This is because the evolution of an ensemble across the state space inherently c
 {../figures/chapter5/figures/plotAIESWalkerSamples_2}
 {../figures/chapter5/figures/plotAIESWalkerSamples_3}
 
+% intuition Possible problem and Why not
+The \gls[hyper=false]{aies} algorithm requires minimal tuning to generate samples from a arbitrary target distribution.
+The intuition behind this is that instead of trying to come up and then adapt the proposal distribution during the iteration (possibly with several associated tuning parameters),
+a proposal move relies on the information carried by the previous positions of the complementary ensemble.
+With a large number of walkers, thus with larger computational cost per iteration, more information will automatically be available per iteration regarding the landscape of the distribution.
+And although the parameter $a$ in Eq.~(\ref{eq:ch5_scaler_distribution}) is one potential tuning parameter,
+most applications work well with the value of $2.0$.
+As such, the algorithm required mainly the decision on the number of walkers $L$ and total number of iterations $I$ (these two yields the total number of target density evaluations $L \times I$).
 
-% Possible problem and Why not
+% Possible problems
+Depending on how the ensemble is distributed at the beginning, however,
+might cause a relatively long ``initialization phase'' noted above (compared to the total length of the iterations).
+\marginpar{\gls[hyper=false]{aies}, possible problems}
+This is especially the case if the chain starts at very atypical value of the distribution.
+Having a large ensemble implies a larger ``inertia'' for each of them to move and settle to a more typical region of the state space.
+The algorithm is also recently reported to scale worse in the number of dimensions and will eventually fail in a high dimension with $D \geq 50$ either by a very slow convergence or, more importantly, by a biased convergence (i.e., it converges to a wrong value) \cite{Carpenter2017,Huijser2015}.
+The number of dimensions concerned in this thesis, however, is still far below the above value. 
+
+% Entry to practical aspects
+There are two important issues not discussed in the illustrations above, namely the initialization bias and the required length of the chain.
+Despite the minimal tuning, these are still important to be addressed for the \gls[hyper=false]{aies} sampler.
+For instance, the ``initialization phase'' obviously present in the \gls[hyper=false]{aies} above, needs to be detected and removed lest they would bias the final samples.
+Furthermore, how long the chain needs to be generated are important to address for any \gls[hyper=false]{mcmc} algorithm.
+In turn, these issues are closely related to the error of an \gls[hyper=false]{mcmc} estimate.
+A more rigorous treatment of these issues is the subject of the next section.
