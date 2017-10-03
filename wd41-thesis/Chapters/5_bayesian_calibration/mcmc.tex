@@ -558,7 +558,7 @@ In other words, an affine transformation $f_a$ is defined such that,
 \label{eq:ch5_affine_transformation_single}
 \end{equation}
 where $M$ and $b$ are scalars.
-When applied to an ensemble,
+When applied to an ensemble of multivariate random variables $\bm{\mathcal{X}}$,
 \begin{equation}
 	\begin{split}
 		 & f_a: \vec{\bm{\mathcal{X}}} \mapsto \vec{\bm{\mathcal{Y}}} = \mathbf{M} \vec{\bm{\mathcal{X}}} + \bm{b} \\
@@ -572,10 +572,25 @@ In the context of \gls[hyper=false]{mcmc} simulation,
 $\vec{\bm{\mathcal{Y}}}$ would represent the proposal move of the chain transition whose acceptance is subject to chance as will be discussed further below.
 
 % Affine Invariance
-An ensemble \gls[hyper=false]{mcmc} algorithm is called \emph{affine-invariance} if the performance .
-Specifically, let $f_a$ 
-In less technical
-
+Suppose $\bm{\mathcal{X}}$ is a multivariate random variable with a state space $\mathbf{X} \subseteq \mathbb{R}^D$ and has a multivariate \gls[hyper=false]{pdf} $p$.
+Let $\bm{\mathcal{Y}} = \mathbf{M} \bm{\mathcal{X}} + \bm{b}$,
+then the \gls[hyper=false]{pdf} of $\bm{\mathcal{Y}}$, according to the change of variables rule \cite{Siegrist2017}, is given by
+\begin{equation}
+	g(\bm{y}) = \frac{1}{|\text{det}\,\mathbf{M}|} p(\mathbf{M}^{-1} (\bm{y} - \bm{b})) = \frac{1}{|\text{det} \,\mathbf{M}|} p(\bm{x}) \propto p(\bm{x})
+\label{eq:ch5_random_variable_linear_transformation}
+\end{equation}
+In other words, barring a proportionality constant, $\bm{\mathcal{Y}}$ is the distributed the same way as $\bm{\mathcal{X}}$.
+An ensemble \gls[hyper=false]{mcmc} algorithm is called \emph{affine-invariant} if the transition kernel of the algorithm follows the same transformation:
+\marginpar{Affine-invariant algorithm}
+\begin{equation}
+	T(\vec{\bm{y}}, \vec{\bm{y}}^*) = C_{\mathbf{M},\bm{b}} T(\vec{\bm{x}}, \vec{\bm{x}}^*)
+\label{eq:ch5_affine_invariance}
+\end{equation}
+where $T(\vec{\bm{y}}, \vec{\bm{y}}^*)$ is the transition kernel of the transformed variable;
+$T(\vec{\bm{y}}, \vec{\bm{y}}^*)$ is the transition kernel of the original variable;
+and $C_{\mathbf{M},\bm{b}}$ is the normalizing constant of the transition kernel, independent of the variable. 
+This implies that the algorithm sees no different between sampling the transformed variables or the original variables.
+An affine-invariant algorithm thus guarantee that it requires no modification under any affine transformation of the variables \cite{Goodman2010,Hou2012,Foreman-Mackey2013}.
 
 % AIES Algorithm (Stretch Move)
 One particular implementation of an \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} algorithm is the so-called \emph{stretch-move} \cite{Goodman2010,Foreman-Mackey2013}.
