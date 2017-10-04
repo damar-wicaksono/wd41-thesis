@@ -204,10 +204,12 @@ a sampling technique based on the theory of stochastic process is widely adopted
 Specifically, by constructing a Markov chain of the input parameters values,
 the resulting process will eventually converge to a stationary distribution which coincides with the given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
 In other words, the samples generated from the stationary distribution of the process are distributed according to the given density.
+% Add something about being directed toward typical set of the distribution
 Generating samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
 Theoretically, this family of techniques would have less severe dependence to the dimension of the state space and its convergence is guaranteed.
 
 The following briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
+% Explain continuous state in relation with discrete state
 Then,
 two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc} simulation are introduced. 
 
@@ -224,14 +226,14 @@ two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc}
 
 % Introductory paragraph (Why Markov Chain)
 Markov chain is an example of a \emph{discrete-time} stochastic process.
-Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}, i \in I\}$ where $I$ is an index set.
+Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}; i \in I\}$ where $I$ is an index set.
 \marginpar{A discrete-time  stochastic process}
 The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is restricted to being discrete.
 Moreover, the term \emph{time} is used by convention but by no means it is exclusively referred to the physical time.
 In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}. 
 
 % Markov Chain Definition
-Specifically, Markov chain with state space $\mathcal{S} \subseteq \mathbf{X} \subseteq \mathbb{R}^D$ is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}, i \geq 0\}$ where the indices represents successive time, step, or iteration,
+Specifically, a \emph{continuous-state} Markov chain with state space $\mathbf{X} \subseteq \mathbb{R}^D$ is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}; i \geq 0\}$ where the indices represents successive time, step, or iteration,
 \emph{such that the conditional probability distribution $\bm{\mathcal{X}}^{(i+1)}$ follows the Markov assumption}.
 \marginpar{Markov chain}
 That is,
@@ -537,11 +539,12 @@ Finally, implementing such a transformation to an ensemble sampler\footnote{\emp
 % Ensemble Sampler
 \gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
 \marginpar{Ensemble sampler}
-An ensemble $\vec{\bm{\mathcal{X}}}$ is a collection of $L$ random variables $\{\bm{\mathcal{X}}_{l}\}_{l = 1}^{L}$ called \emph{walkers}, each of which is in $\mathbb{R}^D$, that is $\bm{\mathcal{X}}_{l} = [\mathcal{X}_{l,1}, \mathcal{X}_{l,2}, \ldots, \mathcal{X}_{l, D}]$.
+An ensemble $\vec{\bm{\mathcal{X}}}$ is a collection of $L$ random variables $\{\bm{\mathcal{X}}_{l}\}_{l = 1}^{L}$ called \emph{walkers}, each of which is in $\mathbb{R}^D$.
+That is, $\bm{\mathcal{X}}_{l} = [\mathcal{X}_{l,1}, \mathcal{X}_{l,2}, \ldots, \mathcal{X}_{l, D}]$.
 The ensemble of $L$ walkers are independent to each other with respect to the target distribution $p (\circ)$.
 Specifically,
 \begin{equation}
-	p(\vec{\bm{x}}) = p(\bm{x}_1) \cdot p(\bm{x}_2) \ldots \cdot p(\bm{x}_L) 
+	p(\vec{\bm{x}}) = p(\bm{x}_1) \cdot p(\bm{x}_2) \cdot \ldots \cdot p(\bm{x}_L) 
 \label{eq:ch5_ensemble_independence}
 \end{equation}
 Eq.~\ref{eq:ch5_ensemble_independence} implies that the target distribution is being independently sampled by $L$ walkers.
