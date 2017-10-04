@@ -84,7 +84,7 @@ Such samples can then be used, among other things,
 to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
 of any function under the \gls[hyper=false]{pdf}.
 Note that in the rest of the section, the term model input parameter space $\mathbf{X}$ is replaced by the term \emph{state space}, the range of possible values of the random variable $\bm{\mathcal{X}}$;
-A more appropriate term in the context of generic problem of generating samples from a distribution, 
+A more appropriate term in the context of generic problem of generating samples from a distribution.
 
 % Why it it difficult to samples
 Generating samples from an arbitrary multidimensional density function is generally a difficult task.
@@ -187,7 +187,11 @@ is the curse of dimensionality similar to the one mentioned in the previous chap
 The number of density evaluations grows exponentially with the number of dimension.
 As a rule, for a given discretization level $\Delta$ and dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
-Furthermore, many of the evaluations are seemingly wasteful because they are located far away from the center of the distributions.
+
+% Typical set
+Furthermore, many of the evaluations are seemingly wasteful because they are located far away from the center of the distributions; they are not part of the \emph{typical set} of the distribution.
+This is especially important when evaluating integrals with respect to this density,
+where many points in the discretized density potentially contribute close to nothing in the integration\footnote{Strictly speaking, a \emph{typical set} is a mathematical notion \cite{Mackay2005}. Loosely speaking, however, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated. Moving away from the mode of the density reduce the density value while increasing the amount of volume.}.
 
 % In relation to Bayesian data analysis
 In the context of Bayesian data analysis,
@@ -205,6 +209,7 @@ Specifically, by constructing a Markov chain of the input parameters values,
 the resulting process will eventually converge to a stationary distribution which coincides with the given \gls[hyper=false]{pdf} (i.e., \emph{target density}).
 In other words, the samples generated from the stationary distribution of the process are distributed according to the given density.
 % Add something about being directed toward typical set of the distribution
+The
 Generating samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
 Theoretically, this family of techniques would have less severe dependence to the dimension of the state space and its convergence is guaranteed.
 
