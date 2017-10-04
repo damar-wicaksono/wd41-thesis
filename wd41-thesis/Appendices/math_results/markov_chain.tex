@@ -16,7 +16,7 @@ In such cases, references will be provided.
 %-------------------------------------------------
 
 % Markov Chain
-Markov chain on a discrete-state space $\mathcal{S}$ is defined as a sequence of random variables $\{\mathcal{X}^{(i)}, i \geq 0\}$ where the indices represents successive time, step, or iteration,
+A Markov chain on a discrete-state space $\mathcal{S}$ is defined as a sequence of random variables $\{\mathcal{X}^{(i)}; i \geq 0\}$ where the indices represents successive time, step, or iteration,
 \emph{such that the conditional probability distribution of $\mathcal{X}^{(i+1)}$ follows the Markov assumption}.
 \marginpar{Markov chain}
 That is,
@@ -31,7 +31,7 @@ A discrete-state Markov chain is fully defined by its joint probability \cite{So
 \begin{equation}
 	\begin{split}
   \mathbb{P}(\mathcal{X}^{(i+1)} & = x^{(i+1)}, \mathcal{X}^{(i)} = x^{(i)}, \ldots, \mathcal{X}^{(0)} = x^{(0)}) = \\
-	& \mathbb{P}(\mathcal{X}^{(0)} = x^{(0)}) \cdot \mathbb{P}(\mathcal{X}^{(1)} = x^{(i+1)} | \mathcal{X}^{(0)} = x^{(i+1)}) \cdot \ldots \\
+	& \mathbb{P}(\mathcal{X}^{(0)} = x^{(0)}) \cdot \mathbb{P}(\mathcal{X}^{(1)}) = x^{(i+1)} | \mathcal{X}^{(0)} = x^{(i+1)}) \cdot \ldots \\
 	& \cdot \mathbb{P}(\mathcal{X}^{(i+1)} | \mathcal{X}^{(i)}) \cdot
 	\end{split}
 \label{eq:markov_chain_joint_probability}

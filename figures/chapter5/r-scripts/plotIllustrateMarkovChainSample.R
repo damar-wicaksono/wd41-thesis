@@ -151,7 +151,7 @@ pdf(otpfullnames[2], family = "CM Roman",
 par(mfrow = c(1, 1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
 plot(0, 0, type = "n",
-     xlim = c(-10, 20), ylim = c(0, 10000),
+     xlim = c(-10, 20), ylim = c(0, n_samples / 5),
      axes = FALSE,
      ylab = "", xlab = "",
      xaxt = "n", yaxt = "n")
@@ -190,7 +190,7 @@ pdf(otpfullnames[3], family = "CM Roman",
 par(mfrow = c(1, 1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
 plot(0, 0, type = "n",
-     xlim = c(-25, 25), ylim = c(0, 10000),
+     xlim = c(-25, 25), ylim = c(0, n_samples / 5),
      axes = FALSE,
      ylab = "", xlab = "",
      xaxt = "n", yaxt = "n")

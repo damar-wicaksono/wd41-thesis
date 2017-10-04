@@ -153,7 +153,7 @@ pdf(otpfullnames[2], family = "CM Roman",
 par(mfrow = c(1, 1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
 plot(0, 0, type = "n",
-     xlim = c(0, 50000), ylim = c(-10, 20),
+     xlim = c(0, n_samples), ylim = c(-10, 20),
      axes = FALSE,
      ylab = "", xlab = "",
      xaxt = "n", yaxt = "n")
@@ -164,7 +164,7 @@ lines(mcmc[,1])
 # Set Axis, Ticks and Labels
 # x-axis
 axis(side = 1, lwd = 1.5,
-     at = seq(0, 50000, by = 10000),
+     at = seq(0, n_samples, by = n_samples / 5),
      labels = c("0", "1", "2", "3", "4", "5"),
      mgp = c(3, cex_lab_shift, 0),
      tcl = tck_len, cex.axis = cex_axis)
@@ -188,7 +188,7 @@ pdf(otpfullnames[3], family = "CM Roman",
 par(mfrow = c(1, 1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
 plot(0, 0, type = "n",
-     xlim = c(0, 50000), ylim = c(-25, 25),
+     xlim = c(0, n_samples), ylim = c(-25, 25),
      axes = FALSE,
      ylab = "", xlab = "",
      xaxt = "n", yaxt = "n")
@@ -199,7 +199,7 @@ lines(mcmc[,2])
 # Set Axis, Ticks and Labels
 # x-axis
 axis(side = 1, lwd = 1.5,
-     at = seq(0, 50000, by = 10000),
+     at = seq(0, n_samples, by = n_samples / 5),
      labels = c("0", "1", "2", "3", "4", "5"),
      mgp = c(3, cex_lab_shift, 0),
      tcl = tck_len, cex.axis = cex_axis)
