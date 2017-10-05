@@ -190,7 +190,7 @@ the number of density evaluations is $(\Delta+1)^D$.
 
 % Problem with Discretized Grid, typical set
 Moreover, many of the evaluations on the grid exemplified above are potentially wasteful for carrying out an integration over the density.
-Assuming a well-behaved function of interest under the integral, some regions of the state space will contribute more to the integration than the others.
+Assuming a well-behaved function of interest inside the integral, some regions of the state space will contribute more to the integration than the others.
 \marginpar{Integration over a density, typical set}
 In fact, this ``region of space where it matters'' is related to the mathematical notion of \emph{typical set} of a distribution \cite{Mackay2005}.
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
@@ -239,7 +239,7 @@ two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc}
 % Introductory paragraph (Why Markov Chain)
 Markov chain is an example of a \emph{discrete-time} stochastic process.
 Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}; i \in I\}$ where $I$ is an index set.
-\marginpar{A discrete-time  stochastic process}
+\marginpar{Discrete-time  stochastic process}
 The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is restricted to being discrete.
 Moreover, the term \emph{time} is used by convention but by no means it is exclusively referred to the physical time.
 In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}. 
