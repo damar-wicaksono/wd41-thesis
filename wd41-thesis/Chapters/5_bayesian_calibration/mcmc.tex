@@ -196,7 +196,7 @@ In fact, this ``region of space where it matters'' is related to the mathematica
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
 Although there is pretty good idea where this typical set is located for the example above (the region around the center of the density),
-in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there is not\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce the density value while increasing the amount of volume.
+in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there will not be\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce the density value while increasing the amount of volume.
 In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality previously mentioned.}.
 Having samples that is representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}. 
 
@@ -289,7 +289,7 @@ The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the 
 \label{eq:ch5_markov_chain_transition}
 \end{equation}
 where $\pi^{(i)}(\bm{x}')$ is the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}}^{(i)}$.
-The rightmost definition signifies that the integration of the density function with the transition kernel is taken as an operator on the density function $\pi^{(i-1)}$ resulting in $\pi^{(i)}$ (cite Stracksy).
+The rightmost definition signifies that the integration of the density function with the transition kernel is taken as an operator on the density function $\pi^{(i-1)}$ resulting in $\pi^{(i)}$ \cite{Stachurski2009,Sargent2017}.
 As such, given the initial distribution of the chain $\bm{\mathcal{X}}^{(0)}$ and the transition kernel $T$,
 the distributions of all the other Markov chain iterations are determined by repeating the integration for each successive iterations.
 This, in terms of the transition operator,
@@ -302,20 +302,41 @@ This, in terms of the transition operator,
 \end{equation}
 
 % Stationary Distribution
+A density $\pi^*$ is said to be \emph{stationary} with respect to a transition kernel $T$ if the density is invariant under transition.
+\marginpar{Stationary density}
+Specifically,
+\begin{equation}
+	(\pi^*T)(\bm{x}) = \pi^*(\bm{x})
+\label{eq:ch5_markov_chain_stationary_density}
+\end{equation} 
+In other words, once the chain reaches the stationary density, it will stay there and the chain itself becomes stationary.
 
-% Convergence (Existence and Uniqueness)
+% Convergence (Existence, Uniqueness, and Convergence)
+The notion of stationary density of a Markov chain is central to the application of Markov chain for generating samples from an arbitrary probability density.
+\marginpar{Fundamental theorem of Markov chain}
+Under certain conditions\footnote{Specifically: irreducible, aperiodic, and Harris recurrent (see Appendix~\ref{app:markov_chain}).} for the transition kernel $T$, a stationary density exists, it is unique and the \emph{limiting density} of the stochastic process,
+\begin{equation}
+	\lim_{i \rightarrow \infty} |(\pi T^i) - \pi^*| = 0, \,\,\,\, \forall \pi \in \mathbf{D}
+\label{eq:ch5_markov_chain_limiting_density}
+\end{equation}
+where $\mathbf{D}$ is the set of all possible densities on $\mathbf{X}$.
+It implies that regardless of the starting density, some transition kernels will converge to a unique stationary density.
+This in turn, is of practical importance when the transition kernel in a \gls[hyper=false]{mcmc} algorithm was design such that the given target density is the stationary density.
+This statement of the existence, the uniqueness, and the convergence of a stationary density is the \emph{fundamental theorem} of Markov chain \cite{Robert2004,Stachurski2009}.
 
 % Ergodicity (Rate of Convergence)
+Another important results in relation to the application of Markov chain for \gls[hyper=false]{mc}
+\marginpar{Ergodic theorem}
+simulation is the \emph{ergodic theorem} which states that for a given realization $\{\bm{x}^{(i)}\}$ of a Markov chain $\{\bm{\mathcal{X}}^{(i)}\}$ with a stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}_{< \infty}$, it holds that
+\begin{equation}
+	\lim_{I \rightarrow \infty} \frac{1}{I} \sum_{i = 1}^{I} f(\bm{x}^{(i)}) = \mathbb{E}_{\pi^*}[f(\bm{\mathcal{X}})] = \int_\mathbf{X} f(\bm{x}) \pi^*(\bm{x}) d\bm{x} 
+\label{eq:ch5_markov_chain_ergodic_theorem}
+\end{equation}
+The ergodic theorem is the equivalence of the Law of Large Number for \gls[hyper=false]{mcmc} \cite{Robert2004,Sargent2017}.
+This asymptotic result provides a justification for using a samples generated from a Markov chain (of certain conditions) for estimating integral in a more conventional \gls[hyper=false]{mc} simulation.
 
 % Central Limit Theorem (Limiting Behavior)
 
-% Stationary Distribution, Irreducibility
-Central to the application of Markov chain for generating samples from an arbitrary probability density is the notion of stationary distribution of a Markov chain.
-
-% Convergence Theorem
-	It is often assumed in practice that the transition probability is stationary such that it does not depend on $i$.
-
-% Ergodic Theorem
 
 % Limits and Ergodic Theorem, Markov Chain and Stationary Distribution
 The theorem of Markov chain convergence states that if this exist.
