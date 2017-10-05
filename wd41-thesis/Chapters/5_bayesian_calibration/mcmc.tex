@@ -245,7 +245,7 @@ Moreover, the term \emph{time} is used by convention but by no means it is exclu
 In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}.
 
 % Markov Chain Definition
-Specifically, a \emph{continuous-state} Markov chain on state space $\mathbf{X} \subseteq \mathbb{R}^D$, $D$ being the dimension of the state space, is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}; i \geq 0\}$ where the indices represents successive state, time, step, or iteration,
+Specifically, a \emph{continuous-state} Markov chain on state space $\mathbf{X} \subseteq \mathbb{R}^D$, $D$ being the dimension of the state space, is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}; i \geq 0\}$ where the indices represents successive time, steps, or iterations,
 \emph{such that the conditional probability of $\bm{\mathcal{X}}^{(i)}$ given the previous iterations follows the Markov assumption}.
 \marginpar{Markov chain}
 That is,
@@ -261,7 +261,7 @@ Put differently, the future value depends on the past only through the present v
 % Specification and Ingredients, Initial Distribution and Transition Kernel
 A Markov chain is fully specified by three components:
 \begin{itemize}
-  \item The \emph{state space} $\mathbf{X} \subseteq \mathbb{R}^D$, the values in which the random variables $\bm{\mathcal{X}}^{(i)}$ take on.
+  \item The \emph{state space} $\mathbf{X} \subseteq \mathbb{R}^D$, the set of values in which the random variables $\bm{\mathcal{X}}^{(i)}$ take on.
 	
   \item The \emph{initial distribution} of $\bm{\mathcal{X}}^{(0)}$, given by the density $\pi^{(0)} = \pi^{(0)}(\bm{x})$.
 	
@@ -283,13 +283,13 @@ A Markov chain is fully specified by three components:
 \end{itemize}
 
 % Transition Between Iterations
-The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, are given by the transition probability kernel $T$ and the density function of the previous iteration $\pi^{(i-1)}$.
+The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, are given by the transition probability kernel $T$ operated on the density function of the previous iteration $\pi^{(i-1)}$ as follows,
 \begin{equation}
   \pi^{(i)}(\bm{x}') = \int_\mathbf{X} \pi^{(i-1)}(\bm{x}) T(\bm{x}, \bm{x}') d\bm{x} \equiv (\pi^{(i-1)}T)(\bm{x}')
 \label{eq:ch5_markov_chain_transition}
 \end{equation}
 where $\pi^{(i)}(\bm{x}')$ is the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}}^{(i)}$.
-The rightmost definition signifies that the integration of the density function with the transition kernel is written as an operator on the density function $\pi^{(i-1)}$ resulting in  $\pi^{(i)}$ (cite Stracksy).
+The rightmost definition signifies that the integration of the density function with the transition kernel is taken as an operator on the density function $\pi^{(i-1)}$ resulting in $\pi^{(i)}$ (cite Stracksy).
 As such, given the initial distribution of the chain $\bm{\mathcal{X}}^{(0)}$ and the transition kernel $T$,
 the distributions of all the other Markov chain iterations are determined by repeating the integration for each successive iterations.
 This, in terms of the transition operator,
