@@ -283,10 +283,17 @@ A Markov chain is fully specified by three components:
 \end{itemize}
 
 % Transition Between Iterations
+The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, are given by the transition probability kernel $T$ and the density function of the previous iteration $\pi^{(i-1)}$.
+\begin{equation}
+  \pi^{(i)}(\bm{x}') = \int_\mathbf{X} T(\bm{x}, \bm{x}') \pi^{(i-1)}(\bm{x}) d\bm{x} 
+\label{eq:ch5_markov_chain_transition}
+\end{equation}
+where $\pi^{(i)}(\bm{x}')$ is the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}}^{(i)}$.
+As such, given the initial distribution of the chain $\bm{\mathcal{X}}^{(0)}$ and the transition kernel $T$,
+the distributions of all the other Markov chain iterations are determined by repeating the integration for each successive iterations.
 
 % Stationary Distribution, Irreducibility
-Central to the application of Markov chain for generating samples are the notion of stationary distribution of a Markov chain.
-Stationary distribution is an important concept in the practical application.
+Central to the application of Markov chain for generating samples from an arbitrary probability density is the notion of stationary distribution of a Markov chain.
 
 % Convergence Theorem
 	It is often assumed in practice that the transition probability is stationary such that it does not depend on $i$.
