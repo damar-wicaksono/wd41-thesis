@@ -197,7 +197,7 @@ Loosely speaking, it can be thought of as the region of state space where the pr
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
 Although there is pretty good idea where this typical set is located for the example above (the region around the center of the density),
 in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there is not\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce the density value while increasing the amount of volume.
-In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is another example of the curse of dimensionality previously mentioned.}.
+In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality previously mentioned.}.
 Having samples that is representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}. 
 
 % In relation to Bayesian data analysis
@@ -238,47 +238,51 @@ two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc}
 
 % Introductory paragraph (Why Markov Chain)
 Markov chain is an example of a \emph{discrete-time} stochastic process.
-Recall from Chapter~\ref{ch:gp_metamodel} that stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}; i \in I\}$ where $I$ is an index set.
-\marginpar{Discrete-time  stochastic process}
+Recall that from Chapter~\ref{ch:gp_metamodel}, a stochastic process is a collection of random variables $\{\mathcal{X}^{(i)}; i \in I\}$ where $I$ is an index set.
+\marginpar{Discrete-time stochastic process}
 The term \emph{discrete-time} refers to the fact that the possible values of the index set $I$ is restricted to being discrete.
 Moreover, the term \emph{time} is used by convention but by no means it is exclusively referred to the physical time.
-In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}. 
+In this thesis, a more fitting alternative term would be \emph{step} or \emph{iteration}.
 
 % Markov Chain Definition
-Specifically, a \emph{continuous-state} Markov chain with state space $\mathbf{X} \subseteq \mathbb{R}^D$ is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}; i \geq 0\}$ where the indices represents successive time, step, or iteration,
-\emph{such that the conditional probability distribution $\bm{\mathcal{X}}^{(i+1)}$ follows the Markov assumption}.
+Specifically, a \emph{continuous-state} Markov chain on state space $\mathbf{X} \subseteq \mathbb{R}^D$, $D$ being the dimension of the state space, is defined as a sequence of random variables $\{\bm{\mathcal{X}}^{(i)}; i \geq 0\}$ where the indices represents successive state, time, step, or iteration,
+\emph{such that the conditional probability of $\bm{\mathcal{X}}^{(i)}$ given the previous iterations follows the Markov assumption}.
 \marginpar{Markov chain}
 That is,
 \begin{equation}
-  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i-1)}, \ldots, \bm{\mathcal{X}}^{(0)}) = \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)})
+  \begin{split}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} & | \bm{\mathcal{X}}^{(i-1)} = \bm{x}^{(i-1)}, \ldots, \bm{\mathcal{X}}^{(0)} = \bm{x}^{(0)}) = \\
+  & \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}^{(i-1)}), \,\,\,\, \mathbf{A} \subseteq \mathbf{X}
+  \end{split}
 \label{eq:markov_property}
 \end{equation}
-Put differently, the future value depends on the past only through the present value \cite{Geyer2011} and Sokal.
+Put differently, the future value depends on the past only through the present value \cite{Geyer2011,Sokal1997}.
 
 % Specification and Ingredients, Initial Distribution and Transition Kernel
-A Markov chain is fully specified by its joint probability distribution,
-\begin{equation}
-  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)}, \bm{\mathcal{X}}^{(i)}, \ldots, \bm{\mathcal{X}}^{(0)}) = \mathbb{P}(\bm{\mathcal{X}}^{(0)}) \cdot \mathbb{P}(\bm{\mathcal{X}}^{(1)} | \bm{\mathcal{X}}^{(0)}) \cdot \ldots \cdot \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}) \cdot
-\label{eq:markov_chain_joint_probability}
-\end{equation}
-This joint probability, in turn, consists of two main components:
+A Markov chain is fully specified by three components:
 \begin{itemize}
-	\item The \emph{initial distribution} of $\bm{\mathcal{X}}^{(0)}$. This distribution is the marginal probability distribution of $\bm{\mathcal{X}}^{(0)}$.
+  \item The \emph{state space} $\mathbf{X} \subseteq \mathbb{R}^D$, the values in which the random variables $\bm{\mathcal{X}}^{(i)}$ take on.
 	
-	\item The \emph{transition probability kernel} $T(\bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i+1)})$.
-	This kernel is equivalent to the conditional distribution of $\bm{\mathcal{X}}^{(i+1)}$ given $\bm{\mathcal{X}}^{(i)}$. That is,
-\begin{equation}
-  \bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)}, \ldots, \bm{\mathcal{X}}^{(0)} = \bm{\mathcal{X}}^{(i+1)} | \bm{\mathcal{X}}^{(i)} \sim T(\bm{\mathcal{X}}^{(i)}, \bm{\mathcal{X}}^{(i+1)})
-\label{eq:markov_chain_transition_kernel}
-\end{equation}
-	such that,
+  \item The \emph{initial distribution} of $\bm{\mathcal{X}}^{(0)}$, given by the density $\pi^{(0)} = \pi^{(0)}(\bm{x})$.
+	
+	\item The \emph{transition probability kernel} $T(\bm{x}, \bm{x}')$ a function $T: \mathbf{X} \times \mathbf{X} \mapsto \mathbb{R}$.
+    For any given $\bm{x}$, $T(\bm{x},\circ)$ defines the conditional probability density of $\bm{\mathcal{X}}^{(i)}$ given $\bm{\mathcal{X}}^{(i-1)} = \bm{x}$ with the following properties:
+  \begin{equation}
+    \begin{split}
+      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall x,y \in \mathbf{X} \\
+      & \int_{\mathbf{X}} T(\bm{x}, \bm{x}') d\bm{x} = 1, \,\,\, \forall \bm{x} \in \mathbf{X}\\
+    \end{split}
+  \label{eq:ch5_markov_chain_transition_kernel}
+  \end{equation}
+	As $T(\bm{x}, \circ)$ is a \gls[hyper=false]{pdf}, then for any given $\bm{x}$ it also follows that,
 	\begin{equation}
-  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} \in B | \bm{\mathcal{X}}^{(i)} = \bm{x}^{(i)}) = \int_B T(\bm{x}^{(i)}, \bm{x}) d\bm{x} \, ; \, B \in \mathcal{S}
-\label{eq:markov_chain_transition_probability}
-\end{equation}
-	In the continous-state Markov chain, this distribution is referred to as the \emph{transition kernel}.
+    \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \int_\mathbf{A} T(\bm{x}, \bm{x}') d\bm{x}' \, ; \, \mathbf{A} \subseteq \mathbf{X}
+  \label{eq:markov_chain_transition_probability}
+  \end{equation}
 
 \end{itemize}
+
+% Transition Between Iterations
 
 % Stationary Distribution, Irreducibility
 Central to the application of Markov chain for generating samples are the notion of stationary distribution of a Markov chain.
