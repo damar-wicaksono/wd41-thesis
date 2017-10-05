@@ -285,12 +285,29 @@ A Markov chain is fully specified by three components:
 % Transition Between Iterations
 The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, are given by the transition probability kernel $T$ and the density function of the previous iteration $\pi^{(i-1)}$.
 \begin{equation}
-  \pi^{(i)}(\bm{x}') = \int_\mathbf{X} T(\bm{x}, \bm{x}') \pi^{(i-1)}(\bm{x}) d\bm{x} 
+  \pi^{(i)}(\bm{x}') = \int_\mathbf{X} \pi^{(i-1)}(\bm{x}) T(\bm{x}, \bm{x}') d\bm{x} \equiv (\pi^{(i-1)}T)(\bm{x}')
 \label{eq:ch5_markov_chain_transition}
 \end{equation}
 where $\pi^{(i)}(\bm{x}')$ is the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}}^{(i)}$.
+The rightmost definition signifies that the integration of the density function with the transition kernel is written as an operator on the density function $\pi^{(i-1)}$ resulting in  $\pi^{(i)}$ (cite Stracksy).
 As such, given the initial distribution of the chain $\bm{\mathcal{X}}^{(0)}$ and the transition kernel $T$,
 the distributions of all the other Markov chain iterations are determined by repeating the integration for each successive iterations.
+This, in terms of the transition operator,
+\begin{equation}
+	\begin{split}
+		\pi^{(i)}(\bm{x}) & = (\pi^{(0)}T^i)(\bm{x}) \\
+		                  & \equiv \idotsint\limits_\mathbf{X} \pi^{(0)}(\bm{x}^{(0)}) T(\bm{x}^{(0)}, \bm{x}^{(1)}) \ldots T(\bm{x}^{(i-1)}, \bm{x}) d\bm{x}^{(0)} \ldots d\bm{x}^{(i-1)}
+	\end{split}
+\label{eq:ch5_markov_chain_multiple_transitions}
+\end{equation}
+
+% Stationary Distribution
+
+% Convergence (Existence and Uniqueness)
+
+% Ergodicity (Rate of Convergence)
+
+% Central Limit Theorem (Limiting Behavior)
 
 % Stationary Distribution, Irreducibility
 Central to the application of Markov chain for generating samples from an arbitrary probability density is the notion of stationary distribution of a Markov chain.
