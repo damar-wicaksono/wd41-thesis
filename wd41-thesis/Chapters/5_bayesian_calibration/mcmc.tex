@@ -251,12 +251,12 @@ Specifically, a \emph{continuous-state} Markov chain on state space $\mathbf{X} 
 That is,
 \begin{equation}
   \begin{split}
-  \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} & | \bm{\mathcal{X}}^{(i-1)} = \bm{x}^{(i-1)}, \ldots, \bm{\mathcal{X}}^{(0)} = \bm{x}^{(0)}) = \\
-  & \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}^{(i-1)}), \,\,\,\, \mathbf{A} \subseteq \mathbf{X}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} \in \mathbf{A} & | \bm{\mathcal{X}}^{(i)} = \bm{x}^{(i)}, \ldots, \bm{\mathcal{X}}^{(0)} = \bm{x}^{(0)}) = \\
+  & \mathbb{P}(\bm{\mathcal{X}}^{(i+1)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i)} = \bm{x}^{(i)}), \,\,\,\, \mathbf{A} \subseteq \mathbf{X}
   \end{split}
 \label{eq:markov_property}
 \end{equation}
-Put differently, the future value depends on the past only through the present value \cite{Geyer2011,Sokal1997}.
+Put differently, the present value depends on the preceding values only through the present \cite{Geyer2011,Sokal1997}.
 
 % Specification and Ingredients, Initial Distribution and Transition Kernel
 A Markov chain is fully specified by three components:
@@ -265,7 +265,7 @@ A Markov chain is fully specified by three components:
 	
   \item The \emph{initial distribution} of $\bm{\mathcal{X}}^{(0)}$, given by the density $\pi^{(0)} = \pi^{(0)}(\bm{x})$.
 	
-	\item The \emph{transition probability kernel} $T(\bm{x}, \bm{x}')$ a function $T: \mathbf{X} \times \mathbf{X} \mapsto \mathbb{R}$.
+	\item The \emph{transition probability kernel (density)} $T(\bm{x}, \bm{x}')$ a function $T: \mathbf{X} \times \mathbf{X} \mapsto \mathbb{R}$.
     For any given $\bm{x}$, $T(\bm{x},\circ)$ defines the conditional probability density of $\bm{\mathcal{X}}^{(i)}$ given $\bm{\mathcal{X}}^{(i-1)} = \bm{x}$ with the following properties:
   \begin{equation}
     \begin{split}
@@ -276,7 +276,7 @@ A Markov chain is fully specified by three components:
   \end{equation}
 	As $T(\bm{x}, \circ)$ is a \gls[hyper=false]{pdf}, then for any given $\bm{x}$ it also follows that,
 	\begin{equation}
-    \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \int_\mathbf{A} T(\bm{x}, \bm{x}') \, d\bm{x}' \, ; \, \mathbf{A} \subseteq \mathbf{X}
+    \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \int_\mathbf{A} T(\bm{x}, \bm{x}') \, d\bm{x}' \, ; \, \mathbf{A} \subset \mathbf{X}
   \label{eq:markov_chain_transition_probability}
   \end{equation}
 
@@ -341,9 +341,9 @@ This asymptotic result provides a justification for using samples generated from
 % Central Limit Theorem (Limiting Behavior)
 It is argued in \cite{Robert2004} that although the previous two theorems provide the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
-it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation.
+it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation.
 And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
-The theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ under certain conditions\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic.}
+The theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ under certain conditions\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic.\label{foot:bc_ergodicity}.}
 and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
 \begin{equation}
   \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma^2}{I}\right)
@@ -356,7 +356,28 @@ The theorem provides a basis for estimating the error of an estimate computed by
 Though similar to that of \gls[hyper=false]{mc} standard error \cite{Owen2013}, it is important to note that successive realizations of the Markov chain are not, by construction, independent and identically distributed.
 The consequence of this will be revisited when the topic of analyzing samples of a Markov chain is discussed in Section~\ref{sec:bc_mcmc_practical_aspects}.
 
-% Entry to MCMC
+% Entry to MCMC, Detailed Balance Condition
+In generating samples from a target density, 
+\marginpar{Detailed balance condition}
+the engineering is done somewhat in reverse: ``Given a density $\pi$, construct $T$ such that its stationary density $\pi^*$ converges to $\pi$''.
+Thus it is worthwhile to note the \emph{detailed balance} condition which is a central condition for an \gls[hyper=false]{mcmc} algorithm.
+A Markov chain with transition kernel density $T(\circ,\circ)$ satisfies the detailed balance condition if there exists a probability density $\pi$ such that,
+\begin{equation}
+  \pi(\bm{x}) \, T(\bm{x}, \bm{x}')  = \pi(\bm{x}') \, T(\bm{x}', \bm{x}) \,\,\,\, \forall \, \bm{x},\bm{x}' \in \mathbf{X}
+\label{eq:ch5_markov_chain_detailed_balance}
+\end{equation}
+\marginpar{Reversible Markov chain}
+As a result, the chain is said to be \emph{reversible}.
+Formally, for $\mathbf{A} \subset \mathbf{X}$,
+\begin{equation}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A} | \bm{\mathcal{X}}^{(i+1)} = \bm{x}) \,\,\,\, \forall \bm{x} \in \mathbf{X}
+\label{eq:ch5_markov_chain_reversibility}
+\end{equation}
+A reversible chain is a stationary chain \cite{Robert2004}.
+Consequently, in an \gls[hyper=false]{mcmc} algorithm,
+if the transition probability satisfies the detailed balance condition with respect to the target distribution, 
+it ensures the reversibility of the process and ultimately the stationarity of the chain.
+Finally, by imposing additional condition\footnote{Namely, ergodicity (see Footnote~\ref{foot:bc_ergodicity}).}, the stationary distribution of the chain converges to the target distribution.
 
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
@@ -369,7 +390,7 @@ Generate samples from a target probability distribution with a density $p(\bm{x}
 known at least up to a proportionality constant, $p(\bm{x}) \propto p^*(\bm{x})$.
 
 % Markov Chain Monte Carlo
-Acknowledging the fundamental theorem of Markov Chain (see Appendix~\ref{app:markov_chain}),
+By acknowledging the theorems above,
 the task is then to construct a Markov transition kernel such that the target density $p$ becomes the
 stationary distribution of the Markov chain.
 \marginpar{MCMC algorithms}
@@ -400,7 +421,7 @@ This proposal move, in turn, will be accepted with a probability,
 Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
 and $q(\bm{x}^{(i-1)} | \bm{x}^*)$ ($q(\bm{x}^* | \bm{x}^{(i-1)})$) is the value of the proposal density at the previous (proposed) state conditional on the value of the proposed (previous) state.
 Notice from the ratio, the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the density up to that constant $p^*$ is required. 
-The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Appendix~\ref{app:markov_chain}) for any valid proposal probability distribution. This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution. This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
 
 If the proposal move is accepted it becomes the current state of the chain,
 otherwise the chain remains at its current state for the given iteration.
