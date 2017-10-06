@@ -2,20 +2,45 @@
 \section{Statistical Framework}\label{sec:bc_statistical_framework}
 %******************************************************************
 
+% Introductory Paragraph, Traditional Model Calibration and Its Implication
+Consider a computer simulation of 
+\begin{equation}
+    y^{Exp.}(\bm{x}_c) = y^T (\bm{x}_c) + \epsilon
+\label{eq:bc_computer_model}
+\end{equation}
+where $y^{Exp.}(\bm{x}_c)$
+
+
 % Model calibration, definition and its classical sense
 Model calibration refers to the process of inferring model parameters values based on the difference between observed/measured data and model output (8).
 \marginpar{Model calibration}
 Inference implies that the parameter values are not necessarily observable as in the case of reflood model parameters presented in this study.
 Calibration, in traditional sense, then proceed to identify a set of model parameters values that best fits the available data (9).
 
+
 % Complication in model calibration
+
+% Statistical Calibration
+
+% Statistical Calibration of KOH
 
 % Bayes' theorem revisited
 
 % Citation 8: van Oijen
 % Citation 9: Campbell
 % KOH Approach, the chapter's notational convention
+\begin{equation}
+    y^T(\bm{x}_c) = y^M (\bm{x}_c, \bm{\hat{x}}_m) + \delta(\bm{x}_c)
+\label{eq:bc_koh_true_model}
+\end{equation}
 
+% KOH Approach, the chapter's notational convention
+\begin{equation}
+    y^{Exp.}(\bm{x}_c) = y^T (\bm{x}_c) + \epsilon
+\label{eq:bc_koh_true_measured}
+\end{equation}
+
+% Control and Model Parameters
 % Simulator and Model discrepancy
 
 % The meaning of true parameters
