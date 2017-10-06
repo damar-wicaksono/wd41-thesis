@@ -2,14 +2,47 @@
 \section{Statistical Framework}\label{sec:bc_statistical_framework}
 %******************************************************************
 
-% Introductory Paragraph, Traditional Model Calibration and Its Implication
-Consider a computer simulation of 
+% Introductory Paragraph
+The calibration framework in this thesis is in line with the seminal work of Kennedy and O'Hagan \cite{Kennedy2001} which is widely adapted in the applied literature \cite{Bayarri2007,Higdon2008,Arendt2012,Reichert2012}.
+\marginpar{Calibration framework}
+Meanwhile its explicit formulation uses a notation adapted from different sources \cite{Kennedy2001,Santner2003,Reichert2012}.
+Let $y_E$ be the experimental observation of a variable,
+then its relationship to the true value $y_T$ is given by
 \begin{equation}
-    y^{Exp.}(\bm{x}_c) = y^T (\bm{x}_c) + \epsilon
-\label{eq:bc_computer_model}
+    y_E(\bm{x}_c; \boldsymbol{\Lambda}) = y_T (\bm{x}_c; \boldsymbol{\Lambda}) + \epsilon
+\label{eq:bc_observation_true}
 \end{equation}
-where $y^{Exp.}(\bm{x}_c)$
+where $\epsilon$ is an observation error.
+The true value, in turn, is linked to the prediction made by a computer simulator of a physical model $y_M$,
+\begin{equation}
+    y_T(\bm{x}_c; \boldsymbol{\Lambda}) = y_M (\bm{x}_c, \bm{x}_m; \boldsymbol{\Lambda}) + \delta (\bm{x}_c; \boldsymbol{\Lambda})
+\label{eq:bc_true_simulation}
+\end{equation}
+That is, apart from the \emph{model bias} $\delta$, the simulator prediction is potentially a valid representation of the true value.
+Finally, combining the two relationships yields,
+\begin{equation}
+    y_E(\bm{x}_c; \boldsymbol{\Lambda}) = y_M (\bm{x}_c, \bm{x}_m; \boldsymbol{\Lambda}) + \delta (\bm{x}_c; \boldsymbol{\Lambda}) + \epsilon
+\label{eq:bc_observation_true}
+\end{equation}
+These representations are parametrized by \emph{control} parameters $\bm{x}_c$,
+\emph{model} parameters $\bm{x}_m$, and an \emph{observation (experimental) layout} $\boldsymbol{\Lambda}$.
 
+% Parameterization, Model parameters vs Control variables
+Departing from the previous chapters, this chapter categorically distinguishes two types of input parameters: the control and model parameters.
+The control 
+
+% Observation layout
+and $\boldsymbol{\Lambda}$ is the experimental layout, an index set.
+Following Reichert, the notion of layout defines the different type of outputs as well as their location and instance, such that a long vectors for model prediction and experimental data can be constructed.
+For instance, the observation layout $\boldsymbol{\Lambda} = \{(A,t_1), (B,t_1), (A, t_2)\}$ might be used to signify model output/experimental data of variable $A$ at time $t_1$, variable $B$ at time $t_1$, and variable $A$ at time $t_2$.
+The vector $\bm{y}^{(\lambda)}_M$ and $\bm{y}^{(\lambda)}_M$ for $\lambda \in \boldsymbol{\Lambda}$ will refer to the model prediction and experimental data using the index set, respectively.
+The distinction between $\bm{x}_c$ and $\bm{x}_c$ is conceptual follow.
+
+% Goal of Calibration
+The goal of calibration, in classical sense (citation needed), is to obtain the best value of $\bm{x}_c$ base on the available experimental data $y$.
+This is done through an optimization procedure with respect to some error measures between predicted value and experimental data, such that the difference is consistent with the measurement error.
+
+% Statistical Calibration of Kennedy and O'Hagan
 
 % Model calibration, definition and its classical sense
 Model calibration refers to the process of inferring model parameters values based on the difference between observed/measured data and model output (8).
