@@ -148,7 +148,7 @@ The simple Kriging model has several interesting features:
 				The weights depends on the correlation function $R(\circ,\circ)$, the design of training points $\mathbf{DM}$, and the distance between the test point and the training points.
 
 	% Interpolant
-	\item The variance collapses at the training points, that is plugging-in $\mathbf{x}_i \in DM$ into Eq.(\ref{eq:variance_sk}) will yield $s^2_{SK}(\mathbf{x}_i) = 0, \forall i$.
+	\item The variance collapses at the training points, that is plugging-in $\mathbf{x}_i \in \mathbf{DM}$ into Eq.(\ref{eq:variance_sk}) will yield $s^2_{SK}(\mathbf{x}_i) = 0, \forall i$.
 				\marginpar{Kriging as an interpolant}
 	      As such, the Kriging predictor is also an \emph{interpolant}, which exactly fits the observed data (i.e., deterministic code output at the training inputs).
 				See Fig.~\ref{fig:plot_bayesian_perspective_3} for an illustration.
