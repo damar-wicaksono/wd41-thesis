@@ -210,13 +210,13 @@ Having samples that is representative of a typical set is a particularly challen
 
 % Entry to Markov Chain
 To circumvent these issues,
-a sampling technique based on the theory of stochastic process is widely adopted.
+a sampling technique based on the theory of stochastic process is adopted \cite{Tierney1994,Brooks1998a}.
 \marginpar{Markov Chain Monte Carlo}
 Specifically, by constructing a Markov chain of the input parameters values,
 the resulting process will eventually converge to a stationary distribution which coincides with the distribution according to the given density (i.e., \emph{target density}).
 Instead of blindly evaluating the density at every corner of the state space, such a Markov chain will be directed to explore the typical set of the distribution.
+As such, this family of techniques potentially has less severe dependence to the dimension of the state space.
 Generating such samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
-%Theoretically, this family of techniques would have less severe dependence to the dimension of the state space and its convergence is guaranteed.
 
 The following briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
 Markov chain (in continuous state space) as well as some important related concepts and theorems are first presented, without proof and in somewhat lax manner.
