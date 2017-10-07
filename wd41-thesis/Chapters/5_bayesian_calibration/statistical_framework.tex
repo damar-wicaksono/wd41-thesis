@@ -9,34 +9,34 @@ Meanwhile its explicit formulation uses a notation adapted from different source
 Let $y_E$ be the experimental observation of a variable,
 then its relationship to the true value $y_T$ is given by
 \begin{equation}
-    y_E(\bm{x}_c; \boldsymbol{\Lambda}) = y_T (\bm{x}_c; \boldsymbol{\Lambda}) + \epsilon
+    y_E(\bm{x}_c; \lambda) = y_T (\bm{x}_c; \lambda) + \epsilon
 \label{eq:bc_observation_true}
 \end{equation}
 where $\epsilon$ is an observation error.
 The true value, in turn, is linked to the prediction made by a computer simulator of a physical model $y_M$,
 \begin{equation}
-    y_T(\bm{x}_c; \boldsymbol{\Lambda}) = y_M (\bm{x}_c, \bm{x}_m; \boldsymbol{\Lambda}) + \delta (\bm{x}_c; \boldsymbol{\Lambda})
+    y_T(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \bm{x}_m; \lambda) + \delta (\bm{x}_c; \lambda)
 \label{eq:bc_true_simulation}
 \end{equation}
 That is, apart from the \emph{model bias} $\delta$, the simulator prediction is potentially a valid representation of the true value.
 Finally, combining the two relationships yields,
 \begin{equation}
-    y_E(\bm{x}_c; \boldsymbol{\Lambda}) = y_M (\bm{x}_c, \bm{x}_m; \boldsymbol{\Lambda}) + \delta (\bm{x}_c; \boldsymbol{\Lambda}) + \epsilon
+    y_E(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \bm{x}_m; \lambda) + \delta (\bm{x}_c; \lambda) + \epsilon
 \label{eq:bc_observation_true}
 \end{equation}
 These representations are parametrized by \emph{control} parameters $\bm{x}_c$,
-\emph{model} parameters $\bm{x}_m$, and an \emph{observation (experimental) layout} $\boldsymbol{\Lambda}$.
+\emph{model} parameters $\bm{x}_m$, and an element of an \emph{observation layout} $\lambda$.
 
 % Parameterization, Model parameters vs Control variables
 Departing from the previous chapters, this chapter categorically distinguishes two types of input parameters: the control and model parameters.
 The control 
 
 % Observation layout
-and $\boldsymbol{\Lambda}$ is the experimental layout, an index set.
-Following Reichert, the notion of layout defines the different type of outputs as well as their location and instance, such that a long vectors for model prediction and experimental data can be constructed.
+An observation layout $\boldsymbol{\Lambda}$ is an index set and it defines which of the different types of variable being observed (or predicted) as well as their locations and instances.
+\marginpar{Observation layout}
+In this manner, long vectors for model prediction and experimental data can be constructed \cite{Reichert2012}.
 For instance, the observation layout $\boldsymbol{\Lambda} = \{(A,t_1), (B,t_1), (A, t_2)\}$ might be used to signify model output/experimental data of variable $A$ at time $t_1$, variable $B$ at time $t_1$, and variable $A$ at time $t_2$.
-The vector $\bm{y}^{(\lambda)}_M$ and $\bm{y}^{(\lambda)}_M$ for $\lambda \in \boldsymbol{\Lambda}$ will refer to the model prediction and experimental data using the index set, respectively.
-The distinction between $\bm{x}_c$ and $\bm{x}_c$ is conceptual follow.
+The vectors $\bm{y}_M(\circ;\lambda)$ and $\bm{y}_E(\circ;\lambda)$ for $\lambda \in \boldsymbol{\Lambda}$ then refer to the model prediction and experimental data given by the index set, respectively.
 
 % Goal of Calibration
 The goal of calibration, in classical sense (citation needed), is to obtain the best value of $\bm{x}_c$ base on the available experimental data $y$.
