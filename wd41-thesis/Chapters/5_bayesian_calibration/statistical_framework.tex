@@ -15,21 +15,27 @@ then its relationship to the true value $y_T$ is given by
 where $\epsilon$ is an observation error.
 The true value, in turn, is linked to the prediction made by a computer simulator of a physical model $y_M$,
 \begin{equation}
-    y_T(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \bm{x}_m; \lambda) + \delta (\bm{x}_c; \lambda)
+    y_T(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) + \delta (\bm{x}_c; \lambda)
 \label{eq:bc_true_simulation}
 \end{equation}
 That is, apart from the \emph{model bias} $\delta$, the simulator prediction is potentially a valid representation of the true value.
 Finally, combining the two relationships yields,
 \begin{equation}
-    y_E(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \bm{x}_m; \lambda) + \delta (\bm{x}_c; \lambda) + \epsilon
+    y_E(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) + \delta (\bm{x}_c; \lambda) + \epsilon
 \label{eq:bc_observation_true}
 \end{equation}
-These representations are parametrized by \emph{control} parameters $\bm{x}_c$,
-\emph{model} parameters $\bm{x}_m$, and an element of an \emph{observation layout} $\lambda$.
+These representations are parametrized by \emph{controllable} parameters $\bm{x}_c$,
+the best values of \emph{model} parameters $\hat{\bm{x}}_m$, and an element of an \emph{observation layout} $\lambda$.
 
 % Parameterization, Model parameters vs Control variables
-Departing from the previous chapters, this chapter categorically distinguishes two types of input parameters: the control and model parameters.
-The control 
+Departing from the previous chapters, this chapter categorically distinguishes two types of input parameters: a controllable input parameter $x_c$ and a model input parameter $x_m$.
+\marginpar{Controllable inputs}
+A controllable input parameter (also known as design variable) is an input that, in the context of controlled experiment, can be controlled by the experimenter.
+Its value is often varied in the physical experiment either to investigate the system behavior under the change or to find the setting that gives the best system performance. 
+Being controllable implies that the input can be observed and it has an equivalence in the actual physical experiment.
+An example of such input is the parameters related to boundary conditions of an experiment.
+
+The model input parameters, on the other hand, refer to parameters that are observable and often only exist in the parametrization of the model inside the simulator.
 
 % Observation layout
 An observation layout $\boldsymbol{\Lambda}$ is an index set and it defines which of the different types of variable being observed (or predicted) as well as their locations and instances.
