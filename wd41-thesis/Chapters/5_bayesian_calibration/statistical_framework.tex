@@ -45,14 +45,15 @@ An example of such parameters is the parameters related to boundary conditions o
 
 % Parametrization, Model Parameter
 Model parameters refer to parameters that are specific to a particular parametrization of the model in the simulator.
+As such, they only appear in the term $y_M$ of Eq.~(\ref{eq:bc_observation_true}).
 \marginpar{Model parameters}
 Model parameters might or might not have a physical meaning.
 The former is in the sense that the parameters have interpretation in the context of the physical model in which the parameters reside, while the latter is in the sense that the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become proxy of missing physics in the model).
-The parameters are referred to as \emph{physical parameters} in the case that they do have physical meaning,
-and as \emph{tuning parameters} otherwise.
+The parameters are referred to as \emph{physical parameters} in the former,
+and as \emph{tuning parameters} in the latter.
 In the following, however, such a distinction is largely conceptual.
 Generally the values of these parameters are unknown and they not directly observable with respect to the experiment.
-Indeed, the generic goal of model calibration is to obtain the best value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data.
+Indeed, the goal of model calibration is to obtain the best value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data.
 Contrary to the controllable variables, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
 
 
