@@ -6,7 +6,7 @@
 The calibration framework in this thesis is in line with the seminal work of Kennedy and O'Hagan \cite{Kennedy2001} which is widely adapted in the applied literature \cite{Bayarri2007,Higdon2008,Arendt2012,Reichert2012}.
 \marginpar{Calibration framework}
 Meanwhile its explicit formulation uses a notation adapted from different sources \cite{Kennedy2001,Santner2003,Reichert2012}.
-Let $y_E$ be the experimental observation of a variable,
+Let $y_E$ be the experimental observation of a \glsfirst[hyper=false]{qoi},
 then its relationship to the true value $y_T$ is given by
 \begin{equation}
     y_E(\bm{x}_c; \lambda) = y_T (\bm{x}_c; \lambda) + \epsilon
@@ -18,8 +18,9 @@ The true value, in turn, is linked to the prediction made by a computer simulato
     y_T(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) + \delta (\bm{x}_c; \lambda)
 \label{eq:bc_true_simulation}
 \end{equation}
-That is, apart from the \emph{model bias} $\delta$, the simulator prediction is potentially a valid representation of the true value.
-Finally, combining the two relationships yields,
+where $\delta$ is the \emph{model bias}, defined as the difference between the true value and the simulator prediction.
+This term, if any, represents the discrepancy in the prediction due to missing physics, numerical approximation, etc. 
+Combining the two relationships yields,
 \begin{equation}
     y_E(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) + \delta (\bm{x}_c; \lambda) + \epsilon
 \label{eq:bc_observation_true}
@@ -28,16 +29,16 @@ These representations are parametrized by \emph{controllable} parameters $\bm{x}
 the best value of \emph{model} parameters $\hat{\bm{x}}_m$, and an element of an \emph{observation layout} $\lambda$.
 
 % Parametrization, Observation layout
-An observation layout $\boldsymbol{\Lambda}$ is an index set and it defines which of the different types of variable being observed (or predicted) as well as their locations and instances.
+An observation layout, denoted by $\boldsymbol{\Lambda}$, is an index set and it defines which of the different types of \gls[hyper=false]{qoi} being observed (or predicted) as well as their locations and time points.
 \marginpar{Observation layout}
-In this manner, long vectors for model prediction and experimental data can be constructed \cite{Reichert2012}.
-For instance, the observation layout $\boldsymbol{\Lambda} = \{(A,t_1), (B,t_1), (A, t_2)\}$ might be used to signify model output/experimental data of variable $A$ at time $t_1$, variable $B$ at time $t_1$, and variable $A$ at time $t_2$.
+In this manner, multivariate \glspl[hyper=false]{qoi} can be represented using long vectors \cite{Reichert2012}.
+For instance, the observation layout $\boldsymbol{\Lambda} = \{(A,t_1), (B,t_1), (A, t_2)\}$ might be used to signify  \glspl[hyper=false]{qoi} (observed or predicted) of type $A$ at time $t_1$, type $B$ at time $t_1$, and type $A$ at time $t_2$.
 The vectors $\bm{y}_M(\circ;\lambda)$ and $\bm{y}_E(\circ;\lambda)$ for $\lambda \in \boldsymbol{\Lambda}$ then refer to the model prediction and experimental data given by the index set, respectively.
 
 % Parameterization, Controllable Parameter
 Departing from the previous chapters, this chapter categorically distinguishes two types of input parameters: controllable variables $\bm{x}_c$ and model parameters $\bm{x}_m$.
 \marginpar{Controllable variables}
-Controllable variables (also known as design variables) are parameters that, in the context of a controlled experiment, can be controlled by the experimenter.
+Controllable variables (also known as design variables) are parameters that, in the context of a controlled experiment, can be varied by the experimenter.
 Being controllable also implies that the parameters can be observed and they have equivalence in the actual physical experiment.
 In the physical experiment, their values are often varied either to investigate the system behavior under the change or to find the setting that gives the best system performance.
 Likewise, in the application of the simulator, controllable variables are varied by an analyst depending on the particular situation of the application.
@@ -48,54 +49,25 @@ Model parameters refer to parameters that are specific to a particular parametri
 As such, they only appear in the term $y_M$ of Eq.~(\ref{eq:bc_observation_true}).
 \marginpar{Model parameters}
 Model parameters might or might not have a physical meaning.
-The former is in the sense that the parameters have interpretation in the context of the physical model in which the parameters reside, while the latter is in the sense that the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become proxy of missing physics in the model).
+The former is in the sense that the parameters have interpretation outside the context of the physical model in which the parameters reside, while the latter is in the sense that the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become a measure for model inadequacy of a particular model).
 The parameters are referred to as \emph{physical parameters} in the former,
 and as \emph{tuning parameters} in the latter.
-In the following, however, such a distinction is largely conceptual.
-Generally the values of these parameters are unknown and they not directly observable with respect to the experiment.
-Indeed, the goal of model calibration is to obtain the best value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data.
+In the following, however, such a distinction is largely conceptual;
+these parameters are in practice not known a priori and not directly observable with respect to the experiment.
+Indeed, the generic goal of model calibration is to obtain the optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$.
 Contrary to the controllable variables, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
-
+Note, however, these two types of parameters are considered simply as input parameters when running the simulator, i.e., $\bm{x} = \{\bm{x}_c, \bm{x}_m\}$.
 
 % Goal of Calibration
-The goal of calibration, in classical sense (citation needed), is to obtain the best value of $\bm{x}_c$ base on the available experimental data $y$.
-This is done through an optimization procedure with respect to some error measures between predicted value and experimental data, such that the difference is consistent with the measurement error.
+The formulation given in Eq.~(\ref{eq:bc_observation_true}) contains two unknowns, namely the optimal value of the model parameters $\hat{\bm{x}}_m$ as well as the model bias $\delta$.
+\marginpar{Statistical calibration}
+In Bayesian framework, any unknown is considered \emph{uncertain} and assigned a prior probability distribution.
+Furthermore, there are other terms that might also not be perfectly known, such as the controllable variable $\bm{x}_m$ or the observation error term $\epsilon$. 
+Within the framework, these can also be given prior probability distributions to quantify their initial uncertainties.
+The goal of calibration is then to update the prior uncertainties on the model parameters based on a comparison between experimental data and simulator prediction.
 
-% Statistical Calibration of Kennedy and O'Hagan
+% Bayesian Data Analysis
 
-% Model calibration, definition and its classical sense
-Model calibration refers to the process of inferring model parameters values based on the difference between observed/measured data and model output (8).
-\marginpar{Model calibration}
-Inference implies that the parameter values are not necessarily observable as in the case of reflood model parameters presented in this study.
-Calibration, in traditional sense, then proceed to identify a set of model parameters values that best fits the available data (9).
-
-
-% Complication in model calibration
-
-% Statistical Calibration
-
-% Statistical Calibration of KOH
-
-% Bayes' theorem revisited
-
-% Citation 8: van Oijen
-% Citation 9: Campbell
-% KOH Approach, the chapter's notational convention
-\begin{equation}
-    y^T(\bm{x}_c) = y^M (\bm{x}_c, \bm{\hat{x}}_m) + \delta(\bm{x}_c)
-\label{eq:bc_koh_true_model}
-\end{equation}
-
-% KOH Approach, the chapter's notational convention
-\begin{equation}
-    y^{Exp.}(\bm{x}_c) = y^T (\bm{x}_c) + \epsilon
-\label{eq:bc_koh_true_measured}
-\end{equation}
-
-% Control and Model Parameters
-% Simulator and Model discrepancy
-
-% The meaning of true parameters
 
 % The essence of Bayesian Data Analysis:
 % 1. Set up full probabilistic model
