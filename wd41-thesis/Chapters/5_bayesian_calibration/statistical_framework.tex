@@ -5,7 +5,7 @@
 % Introductory Paragraph
 The calibration framework in this thesis is in line with the seminal work of Kennedy and O'Hagan \cite{Kennedy2001} which is widely adapted in the applied literature \cite{Bayarri2007,Higdon2008,Arendt2012,Reichert2012}.
 \marginpar{Calibration framework}
-Meanwhile its explicit formulation uses a notation adapted from different sources \cite{Kennedy2001,Santner2003,Reichert2012}.
+Meanwhile, its explicit formulation uses a notation adapted from different sources \cite{Kennedy2001,Santner2003,Reichert2012}.
 Let $y_E$ be the experimental observation of a \glsfirst[hyper=false]{qoi},
 then its relationship to the true value $y_T$ is given by
 \begin{equation}
@@ -19,6 +19,7 @@ The true value, in turn, is linked to the prediction made by a computer simulato
 \label{eq:bc_true_simulation}
 \end{equation}
 where $\delta$ is the \emph{model bias}, defined as the difference between the true value and the simulator prediction.
+\marginpar{Model bias}
 This term, if any, represents the discrepancy in the prediction due to missing physics, numerical approximation, etc. 
 Combining the two relationships yields,
 \begin{equation}
@@ -41,7 +42,7 @@ Departing from the previous chapters, this chapter categorically distinguishes t
 Controllable variables (also known as design variables) are parameters that, in the context of a controlled experiment, can be varied by the experimenter.
 Being controllable also implies that the parameters can be observed and they have equivalence in the actual physical experiment.
 In the physical experiment, their values are often varied either to investigate the system behavior under the change or to find the setting that gives the best system performance.
-Likewise, in the application of the simulator, controllable variables are varied by an analyst depending on the particular situation of the application.
+Likewise, in the simulator, controllable variables are varied by an analyst depending on the particular situation of the simulation.
 An example of such parameters is the parameters related to boundary conditions of an experiment.
 
 % Parametrization, Model Parameter
@@ -52,21 +53,32 @@ Model parameters might or might not have a physical meaning.
 The former is in the sense that the parameters have interpretation outside the context of the physical model in which the parameters reside, while the latter is in the sense that the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become a measure for model inadequacy of a particular model).
 The parameters are referred to as \emph{physical parameters} in the former,
 and as \emph{tuning parameters} in the latter.
-In the following, however, such a distinction is largely conceptual;
+In the following, however, such a distinction is merely conceptual;
 these parameters are in practice not known a priori and not directly observable with respect to the experiment.
 Indeed, the generic goal of model calibration is to obtain the optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$.
 Contrary to the controllable variables, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
-Note, however, these two types of parameters are considered simply as input parameters when running the simulator, i.e., $\bm{x} = \{\bm{x}_c, \bm{x}_m\}$.
+%Note, however, these two types of parameters are considered simply as input parameters when running the simulator, i.e., $\bm{x} = \{\bm{x}_c, \bm{x}_m\}$.
 
 % Goal of Calibration
-The formulation given in Eq.~(\ref{eq:bc_observation_true}) contains two unknowns, namely the optimal value of the model parameters $\hat{\bm{x}}_m$ as well as the model bias $\delta$.
-\marginpar{Statistical calibration}
-In Bayesian framework, any unknown is considered \emph{uncertain} and assigned a prior probability distribution.
-Furthermore, there are other terms that might also not be perfectly known, such as the controllable variable $\bm{x}_m$ or the observation error term $\epsilon$. 
-Within the framework, these can also be given prior probability distributions to quantify their initial uncertainties.
+The formulation given in Eq.~(\ref{eq:bc_observation_true}) contains two unknowns, namely the optimal value of the model parameters $\hat{\bm{x}}_m$ and the model bias $\delta$.
+\marginpar{Bayesian statistical calibration}
+In the Bayesian statistical framework, any unknown is considered \emph{uncertain} and assigned a prior probability distribution.
+This prior probability assignment also applies for other terms that might also not be perfectly known, such as the controllable variable $\bm{x}_m$ or the observation error $\epsilon$. 
 The goal of calibration is then to update the prior uncertainties on the model parameters based on a comparison between experimental data and simulator prediction.
+As such, the calibration process becomes a Bayesian inference.
+Consequently, the process takes into account multiple sources of uncertainty in the result. 
+This, in turn, provides a hedge against \emph{overfitting}, where the calibrated parameters are overly specific to the data used for the calibration and not applicable in a different setting of controllable variables.
 
 % Bayesian Data Analysis
+Two steps are involved in conducting a Bayesian inference.
+\marginpar{Bayesian inference}
+The first is a formulation of a full probability model for all the terms in Eq.~(\ref{eq:bc_observation_true}).
+In essence, the model represents a data-generating process of the observed experimental data,
+incorporating the elements of Eq.~(\ref{eq:bc_observation_true}) into it.
+An approach to formulate a full probability model is presented in Section~\ref{sec:bc_modular_bayes}.
+The full probability model is then conditioned on the given experimental data to obtain an updated (\emph{posterior}) probability distribution of the model parameters.
+Dealing with a high-dimensional arbitrary probability distribution is difficult and most of the computations involving  posterior distribution resort to directly generating samples from it. 
+Indeed, the computation of (and involving) the posterior distribution is the second step of the inference and it is presented in Section~\ref{sec:bc_mcmc}.
 
 
 % The essence of Bayesian Data Analysis:
