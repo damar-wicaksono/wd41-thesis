@@ -18,7 +18,7 @@ The true value, in turn, is linked to the prediction made by a computer simulato
     y_T(\bm{x}_c; \lambda) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) + \delta (\bm{x}_c; \lambda)
 \label{eq:bc_true_simulation}
 \end{equation}
-where $\delta$ is the \emph{model bias}, defined as the difference between the true value and the simulator prediction.
+where $\delta$ is the \emph{model bias}, defined as the difference between the true value and the simulator prediction made by using $\hat{\bm{x}}_m$, the best value of the model parameters.
 \marginpar{Model bias}
 This term, if any, represents the discrepancy in the prediction due to missing physics, numerical approximation, etc. 
 Combining the two relationships yields,
