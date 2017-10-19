@@ -3,10 +3,10 @@
 %*********************************************************
 
 % Introductory paragraph
-In a simulation of a physical system, complementary to the observed (measured) data and simulator prediction, it is also assumed here that there exists true process, true response, true controllable inputs, and true model parameters. 
+In a simulation of a physical system, complementary to the observed (measured) data and simulator prediction, it is also assumed here that there exists true process, true response, and true model parameters. 
 The relationships among these elements are illustrated in Fig.~\ref{fig:ch5_hm_error_model}.
 The goal of model calibration is, broadly speaking, to learn the true (but unknown) model parameters such that the agreement between simulator prediction and observed data is improved.
-In practice, however, observed data on the true controllable inputs and true response are finite and often imprecise.
+In practice, however, observed data on the true response are finite and often imprecise.
 Moreover, the computer simulator that simulates the true underlying process is an approximation that might contain an unknown systematic bias.
 All of these constitute sources of uncertainty in the estimation (i.e., calibration) of the model parameters based on experimental data.
 A more robust calibration procedure requires accounting for the aforementioned sources of uncertainty.
@@ -19,8 +19,8 @@ Bayesian framework provides a consistent approach for such calibration while sim
 \end{figure}
 
 % Bayesian framework
-Consider once more the additive formulation of the model calibration problem given in Eq.~(\ref{eq:bc_observation_true}).
-The Bayesian framework for model calibration begins by constructing a probabilistic model of $y_E$. 
+The relationships between these sources of uncertainties can be expressed additively as it was given in Eq.~(\ref{eq:bc_observation_true}).
+The Bayesian framework for model calibration then begins by constructing a probabilistic model of $y_E$. 
 That is, it aims at formulating the data generating process $\mathcal{Y}_E(\bm{x}_c;\lambda)$.
 This model implies that the experimental data $y_E$ taken at particular $\bm{x}_c$ observed at $\lambda$ is a realization of a stochastic process.
 Furthermore, this probabilistic modeling entails casting any \emph{uncertain} element in Eq.~(\ref{eq:bc_observation_true}) either as random variable or stochastic process.
