@@ -3,49 +3,95 @@
 %**************************************************************************
 
 % Introductory paragraph
-In a simulation of a physical system, complementary to the observed (measured) data and simulator prediction, it is also assumed here that there exists true process, true response, and true model parameters. 
-The relationships among these elements are illustrated in Fig.~\ref{fig:ch5_hm_error_model}.
-In practice, however, observed data on the true response are finite and often imprecise.
-Moreover, the computer simulator that simulates the true underlying process is an approximation that might contain an unknown systematic bias.
-All of these constitute sources of uncertainty in the estimation (i.e., calibration) of the model parameters based on experimental data.
-A more robust calibration procedure requires accounting for the aforementioned sources of uncertainty.
-Bayesian framework provides a consistent approach for such calibration while simultaneously taking into account multiple sources of uncertainty.
-
-% Bayesian framework
-The relationships between these sources of uncertainties can be expressed additively as it was given in Eq.~(\ref{eq:bc_observation_true}).
-The Bayesian framework for model calibration then begins by constructing a probabilistic model of $y_E$. 
-That is, it aims at formulating the data generating process $\mathcal{Y}_E(\bm{x}_c;\lambda)$.
-This model implies that the experimental data $y_E$ taken at particular $\bm{x}_c$ observed at $\lambda$ is a realization of a stochastic process.
+Consider once more the additive formulation of the calibration problem given in Eq.~(\ref{eq:bc_observation_true}).
+The Bayesian framework for model calibration begins by constructing a probabilistic model of $y_E$. 
+That is, it aims at formulating the data generating process $\mathcal{Y}_E(\bm{x}_c; \bm{\lambda})$.
+This model implies that the experimental data $y_E$ taken at particular $\bm{x}_c$ observed at $\bm{\lambda}$ is a realization of a stochastic process.
 Furthermore, this probabilistic modeling entails casting any \emph{uncertain} element in Eq.~(\ref{eq:bc_observation_true}) either as random variable or stochastic process.
 
-% Likelihood
-As such, 
+%---------------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Simulator}\label{sub:bc_modular_simulator}
+%---------------------------------------------------------------------------------
+
+% Probability Model for Simulator
+First, considering a priori that the best model parameters $\hat{\bm{x}}_m$ is uncertain,
+the simulator $y_M$ can be casted as a random function (i.e., stochastic process) $\mathcal{Y}_M (\circ)$ as follows
 \begin{equation}
-    \begin{split}
-        \mathcal{Y}_M & \equiv \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \lambda) \thicksim  p(y_m | \bm{x}_c, \hat{\bm{x}}_m; \lambda) \\
-        (\mathcal{Y}_T - \mathcal{Y}_M) & \equiv \mathcal{D}(\bm{x}_c; \lambda) \thicksim p(\delta | \psi_{\delta}, \bm{x}_c; \lambda) \\
-        (\mathcal{Y}_E - \mathcal{Y}_T) & \equiv \mathcal{E}_y(\lambda) \thicksim p(\epsilon_y | \psi_{\epsilon_y}; \lambda) \\
-    \end{split}
-\label{eq:bc_additive_formulation}
+          \mathcal{Y}_M \equiv \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  p(y_m | \bm{\psi}_{m}, \bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda})
+\label{eq:bc_data_generating_simulator}
+\end{equation}
+The specification of the probability density for the simulator at particular values of $\bm{x}_c$, $\hat{\bm{x}}_m$, and $\bm{\lambda}$ might require additional parametrization by a set of hyper-parameters $\bm{\psi}_{m}$.
+In that case, the specification will be conditional on $\bm{\psi}_{m}$.
+
+% Gaussian Process
+
+% Modular Approach
+
+%-----------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Model Bias}\label{sub:bc_modular_bias}
+%-----------------------------------------------------------------------------
+
+% Probability Model for Model Discrepancy
+Second, the unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
+\begin{equation}
+        (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
+\label{eq:bc_data_generating_bias}
+\end{equation}
+where $\bm{\psi}_{\delta}$ is the (hyper-) parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
+
+Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001}.
+
+% Gaussian Process
+
+% Modular Approach
+
+%------------------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
+%------------------------------------------------------------------------------------
+
+% Probability Model for Experimental Data
+Finally, 
+\begin{equation}
+        (\mathcal{Y}_E - \mathcal{Y}_T) \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon_y | \psi_{\epsilon_y}; \lambda)
+\label{eq:bc_data_generating_exp}
 \end{equation}
 
-% Data Generating Process
-Under the additive formulation, the data generating process for $\mathcal{Y}_E$ can be obtained by adding all the three terms above.
+
+% The Likelihood
+In the following,
+the three constituents of the above formulation are elaborated further before the posterior of the model parameters are finally formulated.
+
+%-----------------------------------------------------------------------------
+\subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
+%-----------------------------------------------------------------------------
+
+Summarizing the above discussions,
+\begin{equation}
+    \begin{split}
+        \mathcal{Y}_M & \equiv \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  p(y_m | \bm{\psi}_{m}, \bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \\
+        (\mathcal{Y}_T - \mathcal{Y}_M) & \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda}) \\
+        (\mathcal{Y}_E - \mathcal{Y}_T) & \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \bm{\psi}_{\epsilon}; \bm{\lambda}) \\
+    \end{split}
+\label{eq:bc_data_generating_models}
+\end{equation}
+The actual forms of the densities in Eqs.~(\ref{eq:bc_data_generating_simulator}~--~\ref{eq:bc_data_generating_exp}) above are at this point unimportant and suppose that they are already given,
+then, under the additive formulation, the data generating process for $\mathcal{Y}_E$ can be obtained by adding all the three terms above.
 Assuming those three terms are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms,
 \begin{equation}
-  p(y_E) = (p(y_M | \bm{x}_c, \hat{\bm{x}}_m; \lambda) * p(\delta | \bm{x}_c, \psi_{\delta}; \lambda) * p(\epsilon_y | \psi_{\epsilon_y}; \lambda))(y_E)
+  \begin{split}
+  p(y_E | \bm{\psi}_{m}, \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c ; \bm{\lambda}) = & (p(y_M | \bm{\psi}_{m}, \hat{\bm{x}}_m, \bm{x}_c; \lambda) * \ldots \\
+           & p(\delta | \bm{\psi}_{\delta}, \bm{x}_c, ; \bm{\lambda}) * p(\epsilon | \psi_{\epsilon}; \bm{\lambda}))(y_E)
+  \end{split}
 \label{eq:bc_additive_convolution}
 \end{equation}
 where $*$ is the symbol for the convolution operation.
 
-% The Likelihood
-Given the experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observed at $\lambda$, the likelihood function is then defined as follows
+Given the experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observed at $\bm{\lambda}$,
+the likelihood function is then defined as follows
 \begin{equation}
-  \mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \mathbf{y}, \mathbf{x}_c, \lambda) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y} ; \lambda)
+  \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon} ; \bm{\lambda})
 \label{eq:bc_likelihood}
 \end{equation}
-For conciseness, 
-it is always implicitly assumed in the following that a likelihood function is always defined for given data and controllable inputs such that the notation $\mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \lambda)$ is sufficient.
 
 % Full probability model
 Following Bayes' theorem, the probability of the model parameters $\bm{x}_m$
@@ -58,19 +104,3 @@ where the denominator is defined as,
 	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \lambda) = \int \mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \mathbf{y}, \mathbf{x}_c, \lambda) \cdot p(\hat{\bm{x}}_m) \cdot p(\psi_{\epsilon_y}) \cdot p(\psi_{\delta}) d\psi_{\epsilon_y} d\psi_\delta
 \label{eq:}
 \end{equation}
-
-%-----------------------------------------------------
-\subsection{Simulator}\label{sub:bc_modular_simulator}
-%-----------------------------------------------------
-
-%-------------------------------------------------
-\subsection{Model Bias}\label{sub:bc_modular_bias}
-%-------------------------------------------------
-
-%--------------------------------------------------------
-\subsection{Experimental Data}\label{sub:bc_modular_data}
-%--------------------------------------------------------
-
-%-----------------------------------------------------------------------------
-\subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
-%-----------------------------------------------------------------------------
