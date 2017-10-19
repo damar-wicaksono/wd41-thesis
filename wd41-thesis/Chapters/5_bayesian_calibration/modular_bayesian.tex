@@ -1,22 +1,15 @@
-%*********************************************************
-\section{Bayesian Calibration}\label{sec:bc_modular_bayes}
-%*********************************************************
+%**************************************************************************
+\section{Bayesian Formulation of Calibration Problem}\label{sec:bc_modular}
+%**************************************************************************
 
 % Introductory paragraph
 In a simulation of a physical system, complementary to the observed (measured) data and simulator prediction, it is also assumed here that there exists true process, true response, and true model parameters. 
 The relationships among these elements are illustrated in Fig.~\ref{fig:ch5_hm_error_model}.
-The goal of model calibration is, broadly speaking, to learn the true (but unknown) model parameters such that the agreement between simulator prediction and observed data is improved.
 In practice, however, observed data on the true response are finite and often imprecise.
 Moreover, the computer simulator that simulates the true underlying process is an approximation that might contain an unknown systematic bias.
 All of these constitute sources of uncertainty in the estimation (i.e., calibration) of the model parameters based on experimental data.
 A more robust calibration procedure requires accounting for the aforementioned sources of uncertainty.
 Bayesian framework provides a consistent approach for such calibration while simultaneously taking into account multiple sources of uncertainty.
-\begin{figure}[bth]	
-	\centering
-	\includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/HMErrorModel}
-	\caption[Relationships between sources of uncertainty in a model calibration.]{Sources of uncertainty and their relationships in a model calibration (adapted from \cite{Huard2006}).}
-	\label{fig:ch5_hm_error_model}
-\end{figure}
 
 % Bayesian framework
 The relationships between these sources of uncertainties can be expressed additively as it was given in Eq.~(\ref{eq:bc_observation_true}).
@@ -65,3 +58,19 @@ where the denominator is defined as,
 	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \lambda) = \int \mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \mathbf{y}, \mathbf{x}_c, \lambda) \cdot p(\hat{\bm{x}}_m) \cdot p(\psi_{\epsilon_y}) \cdot p(\psi_{\delta}) d\psi_{\epsilon_y} d\psi_\delta
 \label{eq:}
 \end{equation}
+
+%-----------------------------------------------------
+\subsection{Simulator}\label{sub:bc_modular_simulator}
+%-----------------------------------------------------
+
+%-------------------------------------------------
+\subsection{Model Bias}\label{sub:bc_modular_bias}
+%-------------------------------------------------
+
+%--------------------------------------------------------
+\subsection{Experimental Data}\label{sub:bc_modular_data}
+%--------------------------------------------------------
+
+%-----------------------------------------------------------------------------
+\subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
+%-----------------------------------------------------------------------------
