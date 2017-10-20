@@ -82,41 +82,54 @@ $\mathcal{D} (\circ)$ for $\bm{x}_c \in \mathbf{X}_C \subseteq \mathbb{R}^{D_c}$
 %------------------------------------------------------------------------------------
 
 % Introductory paragraph
-Now recall the relationship between the true system response and its observation through a measurement (Eq.~(\ref{eq:bc_observation_true}))
+Now recall the relationship between the true system response and its observation through a measurement (Eq.~(\ref{eq:bc_observation_true})),
 \begin{equation*}
     y_E(\bm{x}_c; \boldsymbol{\lambda}) = y_T (\bm{x}_c; \boldsymbol{\lambda}) + \epsilon
 \end{equation*}
-The observation error term $\epsilon$ represents any possible error during the measurement process, either from the precision of the instrument or other residual variability of the experiment\footnote{This, in turn, might be due to stochastic nature of the process (irreducible) or unrecognized}.
+The observation error term $\epsilon$ represents any possible error during the measurement process, either from the imprecision of the instrument or any other residual variability of the experiment.
+\marginpar{Observation error, possible origins}
+This variability, in turn, might be due to the inherently stochastic nature of the physical process (irreducible) or unrecognized and uncontrolled variables (reducible) \cite{Kennedy2001}.
+
+% Generic Formulation
+Because this term is considered unknown, a stochastic process is defined on the observation layout,
 \begin{equation}
-        (\mathcal{Y}_E - \mathcal{Y}_T) \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon_y | \psi_{\epsilon_y}; \lambda)
+        \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \psi_{\epsilon}; \bm{\lambda})
 \label{eq:bc_data_generating_exp}
 \end{equation}
-where $\bm{\psi}_{\epsilon_y}$
- 
-The distribution of the observation error is often assumed as a Gaussian distribution in the applied literature \cite{Wikle1998,Wikle2001,Kennedy2001,Bayarri2007,Arhonditsis2008}
-\begin{equation}
-        \mathcal{E} \thicksim \mathcal{N}(0, \sigma_{obs}^2(\bm{\lambda}))
-\label{eq:bc_data_generating_exp_gaussian}
-\end{equation}
-where the variance of the observation error $\sigma_{obs}^2$ depends on the element of the observation layout $\bm{\lambda}$.
+where $\bm{\psi}_{\epsilon}$ is the parametrization of the \gls[hyper=false]{pdf} describing the observation error $\bm{\lambda}$.
 That is, it depends on which response is observed, as well as where and when it is observed.
 
-% Some comments on the assumption of normality
-Eq.~(\ref{eq:bc_data_generating_exp_gaussian}) implies that the observation is taken without bias and the error is independent (but need not be identically distributed) Gaussian random variable.
-Although it is possible to incorporate more complicated structures on the specification of the observation error,
-the above assumption is the most popular.
+% Independence assumption and its justification
+An important assumption made on the distribution of the observation error is that it is independent conditional on the true value of the system response.
+\marginpar{Conditional independence}
+One can argue that the measurement data points taken from a spatio-temporal physical process would have (perhaps complicated) correlation structure among them.
+But intuitively, as argued in \cite{Wikle2001}, this structure becomes much simplified once the true value is known;
+it can mainly be attributed to the residual variability and instrument precision with a simpler description.
+The true system response itself is already separately formulated in terms of the simulator prediction and a model bias term (Eq.~(\ref{eq:bc_true_simulation})).
+As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent) is sufficient \cite{Wikle2001}.
+At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias and observation error based on the data alone.
 
-% Justification
-Indeed, one can argue that the data points taken from a spatio-temporal physical process would have complicated correlation structure.
-However, assuming that the terms in Eq.~\ref{eq:bc_true_simulation} are independent, 
-However, the formulation of Eq.~\ref{eq:bc_true_simulation} implicitly assumed that the probability is conditional on the true value. $\epsilon$ is simply the residual variation.
+% Gaussian Assumption, some comments
+The particular distribution of the observation error is often assumed to be a Gaussian distribution in the
+\marginpar{Gaussian observation error}
+applied literature \cite{Wikle1998,Wikle2001,Kennedy2001,Bayarri2007,Arhonditsis2008},
+\begin{equation}
+        \mathcal{E} \thicksim \mathcal{N}(0, \sigma_{obs}^2(\bm{\lambda}))
+\label{eq:bc_data_generating_exp_gaussian_1}
+\end{equation}
+or equivalently following the conditional independence assumption explained above,
 \begin{equation}
   \mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c; \boldsymbol{\lambda}) \thicksim \mathcal{N}(y_T(\bm{x}_c; \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
-\label{eq:bc_true_observation}
+\label{eq:bc_data_generating_exp_gaussian_2}
 \end{equation}
-That is, conditional on the true value, the measurement is independent.
-The true system response itself is already separately formulated in terms of the simulator and a model bias (Eq.~(\ref{eq:bc_true_simulation})).
-As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent Gaussian) attributed to mainly the residual variability and instrument precision is sufficient \cite{Wikle2001}.
+where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and the only hyper-parameter of this observation error specification.
+The value of the variance depends on the element of the observation layout $\bm{\lambda}$.
+Eq.~(\ref{eq:bc_data_generating_exp_gaussian_1}) implies that the observation is taken without bias and the error is independent (but need not be identically distributed) Gaussian random variable.
+
+%However, assuming that the terms in Eq.~\ref{eq:bc_true_simulation} are independent, 
+%the equation also implies that the probability of the observed data is conditionally independent on the true value.
+
+%That is, knowing the true value of the system response, the error of the observed value is independent.
 
 %---------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Simulator}\label{sub:bc_modular_simulator}
@@ -126,7 +139,7 @@ As such, any possible complicated structure of the error (either bias or correla
 For a deterministic simulator $y_M$,
 the probabilistic modeling of the bias term $\delta$ and the observation error term $\epsilon$ are enough to formulate a probabilistic model for the experimental observation $\mathcal{Y}_E$.
 However, following the development taken in Chapter~\ref{ch:gp_metamodel},
-a \glsfirst[hyper=false]{gp} can be used to represent a deterministic simulator using an explicit formulation of a stochastic process.
+a \glsfirst[hyper=false]{gp} can also be used to represent a deterministic simulator using an explicit formulation of a stochastic process.
 The prediction made by the simulator at particular values of $\bm{x}_c$, $\hat{\bm{x}}_m$, and $\bm{\lambda}$ is then given by,
 \begin{equation}
           \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  \mathcal{N}(m(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}), s^2(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}))
