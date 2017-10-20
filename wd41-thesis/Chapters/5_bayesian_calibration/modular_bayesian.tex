@@ -3,63 +3,144 @@
 %**************************************************************************
 
 % Introductory paragraph
-Consider once more the additive formulation of the calibration problem given in Eq.~(\ref{eq:bc_observation_true}).
-The Bayesian framework for model calibration begins by constructing a probabilistic model of $y_E$. 
+The Bayesian framework for model calibration begins by constructing a probabilistic model of $y_E$ given in an additive formulation of Eq.~(\ref{eq:bc_observation_true}). 
 That is, it aims at formulating the data generating process $\mathcal{Y}_E(\bm{x}_c; \bm{\lambda})$.
 This model implies that the experimental data $y_E$ taken at particular $\bm{x}_c$ observed at $\bm{\lambda}$ is a realization of a stochastic process.
 Furthermore, this probabilistic modeling entails casting any \emph{uncertain} element in Eq.~(\ref{eq:bc_observation_true}) either as random variable or stochastic process.
-
-%---------------------------------------------------------------------------------
-\subsection{Probabilistic Model for the Simulator}\label{sub:bc_modular_simulator}
-%---------------------------------------------------------------------------------
-
-% Probability Model for Simulator
-First, considering a priori that the best model parameters $\hat{\bm{x}}_m$ is uncertain,
-the simulator $y_M$ can be casted as a random function (i.e., stochastic process) $\mathcal{Y}_M (\circ)$ as follows
-\begin{equation}
-          \mathcal{Y}_M \equiv \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  p(y_m | \bm{\psi}_{m}, \bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda})
-\label{eq:bc_data_generating_simulator}
-\end{equation}
-The specification of the probability density for the simulator at particular values of $\bm{x}_c$, $\hat{\bm{x}}_m$, and $\bm{\lambda}$ might require additional parametrization by a set of hyper-parameters $\bm{\psi}_{m}$.
-In that case, the specification will be conditional on $\bm{\psi}_{m}$.
-
-% Gaussian Process
-
-% Modular Approach
 
 %-----------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Model Bias}\label{sub:bc_modular_bias}
 %-----------------------------------------------------------------------------
 
+% Introductory Paragraph
+Recall the relationship between the true system response and its prediction by a simulator (Eq.~(\ref{eq:bc_true_simulation})) rearranged below:
+\begin{equation*}
+    \delta (\bm{x}_c; \boldsymbol{\lambda}) = y_T(\bm{x}_c; \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m; \boldsymbol{\lambda})
+\end{equation*}
+where the prediction $y_M$ is made using the best but unknown value of the model parameters.
+As such, the model bias function $\delta$ represents a possible systematic difference between the true system response and the simulator prediction that still remains, even from using a simulator with the \emph{best} set of model parameter values.
+Note that, strictly speaking, there is a dependence of $\hat{\bm{x}}_m$ on $\delta$, but this dependence is suppress from the notation; $\hat{\bm{x}}_m$, though unknown, should in principle be a unique set of values valid for all $\bm{x}_c$ \cite{Bayarri2007,Arendt2012}.
+
+% Why bias, unbiased model
+Incorporating bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
+Overfitting can be seen in two different ways
+Fig.~\ref{fig:ch5_plot_illustrate_bias_1} illustrates a calibration of a computer simulator without the presence of bias, but with a single uncertain model parameter.
+As can be seen, a range of the model parameter values can be principle be constrained 
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_illustrate_bias},
+                  maincaption={Illustration of predictions made by computer simulator with and without bias, both with a single uncertain model parameter. Crosses are the observed data along with the associated uncertainty taken at different controllable inputs $x$. Bold lines are the simulator prediction using the maximum and minimum of the uncertain model parameter, while thin lines are the prediction with varying values of the model parameter.},%
+									mainshortcaption={.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_illustrate_bias_1},
+                  leftcaption={Model without bias and with uncertain model parameter.},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch5_plot_illustrate_bias_2},
+                  rightcaption={Model with biasa and with uncertain model parameter.},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotIllustrateBias_1.pdf}
+{../figures/chapter5/figures/plotIllustrateBias_2.pdf}
+
+% Why bias
+On the other hand
+
+% Physical Parameter vs. Tuning Parameter, some philosophical issue
+The distinction between physical and tuning parameters for the model parameter might have some impact philosophical impact on the two problem before.
+In the calibration of a physical parameter based on experimental data,
+it is often understood that the calibrated value will in principle be taken as the ``true'' value of that parameter.
+Such ``true'' value of the physical parameter can then be used even outside the context of the model where it resides.
+
+% Constructive Path
+One might argue that if a model is known to be biased it simply requires more effort to correct the bias by putting more physics.
+But this is often impractical for a large complex simulator.
+
+% However, as argued in to insist the model has to be perfect is not very constructive.
+
+
 % Probability Model for Model Discrepancy
-Second, the unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
+The unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
 \begin{equation}
         (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
 \label{eq:bc_data_generating_bias}
 \end{equation}
-where $\bm{\psi}_{\delta}$ is the (hyper-) parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
+where $\bm{\psi}_{\delta}$ is the parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
 
-Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001}.
+Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001} and it is widely adapted in.
 
-% Gaussian Process
+% Gaussian Process for Model Discrepancy
+$\mathcal{D} (\circ)$ for $\bm{x}_c \in \mathbf{X}_C \subseteq \mathbb{R}^{D_c}$
+\begin{equation}
+        \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim \mathcal{GP}(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
+\label{eq:bc_data_generating_bias_gp}
+\end{equation}
 
-% Modular Approach
 
 %------------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
 %------------------------------------------------------------------------------------
 
-% Probability Model for Experimental Data
-Finally, 
+% Introductory paragraph
+Now recall the relationship between the true system response and its observation through a measurement (Eq.~(\ref{eq:bc_observation_true}))
+\begin{equation*}
+    y_E(\bm{x}_c; \boldsymbol{\lambda}) = y_T (\bm{x}_c; \boldsymbol{\lambda}) + \epsilon
+\end{equation*}
+The observation error term $\epsilon$ represents any possible error during the measurement process, either from the precision of the instrument or other residual variability of the experiment\footnote{This, in turn, might be due to stochastic nature of the process (irreducible) or unrecognized}.
 \begin{equation}
         (\mathcal{Y}_E - \mathcal{Y}_T) \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon_y | \psi_{\epsilon_y}; \lambda)
 \label{eq:bc_data_generating_exp}
 \end{equation}
+where $\bm{\psi}_{\epsilon_y}$
+ 
+The distribution of the observation error is often assumed as a Gaussian distribution in the applied literature \cite{Wikle1998,Wikle2001,Kennedy2001,Bayarri2007,Arhonditsis2008}
+\begin{equation}
+        \mathcal{E} \thicksim \mathcal{N}(0, \sigma_{obs}^2(\bm{\lambda}))
+\label{eq:bc_data_generating_exp_gaussian}
+\end{equation}
+where the variance of the observation error $\sigma_{obs}^2$ depends on the element of the observation layout $\bm{\lambda}$.
+That is, it depends on which response is observed, as well as where and when it is observed.
 
+% Some comments on the assumption of normality
+Eq.~(\ref{eq:bc_data_generating_exp_gaussian}) implies that the observation is taken without bias and the error is independent (but need not be identically distributed) Gaussian random variable.
+Although it is possible to incorporate more complicated structures on the specification of the observation error,
+the above assumption is the most popular.
 
-% The Likelihood
-In the following,
-the three constituents of the above formulation are elaborated further before the posterior of the model parameters are finally formulated.
+% Justification
+Indeed, one can argue that the data points taken from a spatio-temporal physical process would have complicated correlation structure.
+However, assuming that the terms in Eq.~\ref{eq:bc_true_simulation} are independent, 
+However, the formulation of Eq.~\ref{eq:bc_true_simulation} implicitly assumed that the probability is conditional on the true value. $\epsilon$ is simply the residual variation.
+\begin{equation}
+  \mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c; \boldsymbol{\lambda}) \thicksim \mathcal{N}(y_T(\bm{x}_c; \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
+\label{eq:bc_true_observation}
+\end{equation}
+That is, conditional on the true value, the measurement is independent.
+The true system response itself is already separately formulated in terms of the simulator and a model bias (Eq.~(\ref{eq:bc_true_simulation})).
+As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent Gaussian) attributed to mainly the residual variability and instrument precision is sufficient \cite{Wikle2001}.
+
+%---------------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Simulator}\label{sub:bc_modular_simulator}
+%---------------------------------------------------------------------------------
+
+% Introductory paragraph
+For a deterministic simulator $y_M$,
+the probabilistic modeling of the bias term $\delta$ and the observation error term $\epsilon$ are enough to formulate a probabilistic model for the experimental observation $\mathcal{Y}_E$.
+However, following the development taken in Chapter~\ref{ch:gp_metamodel},
+a \glsfirst[hyper=false]{gp} can be used to represent a deterministic simulator using an explicit formulation of a stochastic process.
+The prediction made by the simulator at particular values of $\bm{x}_c$, $\hat{\bm{x}}_m$, and $\bm{\lambda}$ is then given by,
+\begin{equation}
+          \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  \mathcal{N}(m(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}), s^2(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}))
+\label{eq:bc_data_generating_simulator_gp}
+\end{equation}
+where $m$ and $s^2$ is the kriging mean and the kriging variance, respectively (see Section~\ref{sec:gp_metamodeling});
+and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \glsfirst[hyper=false]{gp}.
+
+This step is taken especially if the simulator is computationally expensive to evaluate and only a limited number of simulator runs can be afforded \cite{Kennedy2001,Bayarri2007,Arendt2012}.
+The probability model in Eq.~\ref{eq:bc_data_generating_simulator_gp} then becomes an approximation to the actual simulator (i.e., \gls[hyper=false]{gp} metamodel).
+Furthermore, as explained in the Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
+This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~\ref{eq:bc_data_generating_simulator_gp}, i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
+As such, in this case, the uncertainty has an epistemic interpretation.
+
 
 %-----------------------------------------------------------------------------
 \subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
@@ -104,3 +185,7 @@ where the denominator is defined as,
 	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \lambda) = \int \mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \mathbf{y}, \mathbf{x}_c, \lambda) \cdot p(\hat{\bm{x}}_m) \cdot p(\psi_{\epsilon_y}) \cdot p(\psi_{\delta}) d\psi_{\epsilon_y} d\psi_\delta
 \label{eq:}
 \end{equation}
+
+%---------------------------------------------------------------------------------
+\subsection{Modularization of the Bayesian Framework}\label{sub:bc_modularization}
+%---------------------------------------------------------------------------------
