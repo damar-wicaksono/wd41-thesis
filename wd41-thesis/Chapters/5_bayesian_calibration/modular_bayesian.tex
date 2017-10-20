@@ -126,11 +126,6 @@ where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and the only
 The value of the variance depends on the element of the observation layout $\bm{\lambda}$.
 Eq.~(\ref{eq:bc_data_generating_exp_gaussian_1}) implies that the observation is taken without bias and the error is independent (but need not be identically distributed) Gaussian random variable.
 
-%However, assuming that the terms in Eq.~\ref{eq:bc_true_simulation} are independent, 
-%the equation also implies that the probability of the observed data is conditionally independent on the true value.
-
-%That is, knowing the true value of the system response, the error of the observed value is independent.
-
 %---------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Simulator}\label{sub:bc_modular_simulator}
 %---------------------------------------------------------------------------------
@@ -153,7 +148,6 @@ The probability model in Eq.~\ref{eq:bc_data_generating_simulator_gp} then becom
 Furthermore, as explained in the Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
 This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~\ref{eq:bc_data_generating_simulator_gp}, i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
 As such, in this case, the uncertainty has an epistemic interpretation.
-
 
 %-----------------------------------------------------------------------------
 \subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
