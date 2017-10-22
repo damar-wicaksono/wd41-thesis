@@ -153,46 +153,63 @@ As such, in this case, the uncertainty has an epistemic interpretation.
 \subsection{Posterior of the Model Paramaters}\label{sub:bc_modular_posterior}
 %-----------------------------------------------------------------------------
 
-Summarizing the above discussions,
+% Introductory Paragraph
+Summarizing the above discussions for a deterministic simulator $y_M$,
 \begin{equation}
     \begin{split}
-        \mathcal{Y}_M & \equiv \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  p(y_m | \bm{\psi}_{m}, \bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \\
+				\mathcal{Y}_M & \equiv \mathcal{Y}_M \thicksim p(y_M | \hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda}) = \delta_d (y_M(\hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda})) \\
         (\mathcal{Y}_T - \mathcal{Y}_M) & \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda}) \\
         (\mathcal{Y}_E - \mathcal{Y}_T) & \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \bm{\psi}_{\epsilon}; \bm{\lambda}) \\
     \end{split}
 \label{eq:bc_data_generating_models}
 \end{equation}
-The actual forms of the densities in Eqs.~(\ref{eq:bc_data_generating_simulator}~--~\ref{eq:bc_data_generating_exp}) above are at this point unimportant and suppose that they are already given,
-then, under the additive formulation, the data generating process for $\mathcal{Y}_E$ can be obtained by adding all the three terms above.
-Assuming those three terms are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms,
+where $\delta_d$ is the Dirac delta function indicating that the simulator prediction is exact.
+
+Suppose that the form of the densities in Eq.~\ref{eq:bc_data_generating_models} are already given,
+then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on the right hand side of Eq.~\ref{eq:bc_true_simulation}.
+Assuming that they are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms,
 \begin{equation}
   \begin{split}
-  p(y_E | \bm{\psi}_{m}, \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c ; \bm{\lambda}) = & (p(y_M | \bm{\psi}_{m}, \hat{\bm{x}}_m, \bm{x}_c; \lambda) * \ldots \\
-           & p(\delta | \bm{\psi}_{\delta}, \bm{x}_c, ; \bm{\lambda}) * p(\epsilon | \psi_{\epsilon}; \bm{\lambda}))(y_E)
+  p(y_E | & \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c ; \bm{\lambda}) = \ldots \\
+	& (p(y_M(\hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda})) * p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda}) * p(\epsilon | \bm{\psi}_{\epsilon}; \bm{\lambda}))(y_E)
   \end{split}
 \label{eq:bc_additive_convolution}
 \end{equation}
 where $*$ is the symbol for the convolution operation.
 
-Given the experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observed at $\bm{\lambda}$,
+Given a set of experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observed on an observation layout $\bm{\Lambda}$,
 the likelihood function is then defined as follows
 \begin{equation}
-  \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon} ; \bm{\lambda})
+  \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon} ; \bm{\Lambda})
 \label{eq:bc_likelihood}
 \end{equation}
 
 % Full probability model
-Following Bayes' theorem, the probability of the model parameters $\bm{x}_m$
+Following the Bayes' theorem, the joint posterior probability of the model parameters $\bm{x}_m$ and the hyper-parameters associated with the model bias and the observation error is given as, 
 \begin{equation}
-  p(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y} | \mathbf{y}, \mathbf{x}_c; \lambda) = \frac{\mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \lambda) \cdot p(\hat{\bm{x}}_m) \cdot p(\psi_{\epsilon_y}; \lambda) \cdot p(\psi_{\delta}; \lambda)}{p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \lambda)}
-\label{eq:bc_}
+	\begin{split}
+  p(\hat{\bm{x}}_m, & \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} | \mathbf{y}, \mathbf{x}_c; \bm{\Lambda}) = \ldots \\
+	& \frac{\mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_{\epsilon_y}; \bm{\Lambda}) \cdot p(\bm{\psi}_{\delta}; \bm{\Lambda})}{p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda})}
+	\end{split}
+\label{eq:bc_joint_posterior}
 \end{equation}
-where the denominator is defined as,
+where $p(\hat{\bm{x}}_m)$, $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$, and $p(\bm{\psi}_{\delta}; \bm{\Lambda})$ are the prior probabilities for the model parameters, the model bias hyper-parameters, and the observation error hyper-parameters, respectively.
+The denominator of the Eq.~\ref{eq:bc_joint_posterior} is a normalizing constant with respect to the model parameters and the hyper-parameters such that Eq.~\ref{eq:bc_joint_posterior} is a valid probability density (i.e., integration over the domain yields the value $1.0$).
+As such, it is defined as,
 \begin{equation}
-	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \lambda) = \int \mathcal{L}(\hat{\bm{x}}_m, \psi_\delta, \psi_{\epsilon_y}; \mathbf{y}, \mathbf{x}_c, \lambda) \cdot p(\hat{\bm{x}}_m) \cdot p(\psi_{\epsilon_y}) \cdot p(\psi_{\delta}) d\psi_{\epsilon_y} d\psi_\delta
-\label{eq:}
+	\begin{split}
+	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \\
+	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon; \bm{\Lambda}) \cdot p(\bm{\psi}_\delta; \bm{\Lambda}) \, d\hat{\bm{x}}_{c} d\bm{\psi}_\epsilon d\bm{\psi}_\delta
+	\end{split}
+\label{eq:bc_normalizing_constant}
 \end{equation}
+The specifications of the likelihood and the associated priors completely specify the Bayesian calibration problem of the model parameters.
+
+% Normal Approximation
 
 %---------------------------------------------------------------------------------
 \subsection{Modularization of the Bayesian Framework}\label{sub:bc_modularization}
 %---------------------------------------------------------------------------------
+
+%The actual forms of the densities in 
+%then, under the additive formulation, the data generating process for $\mathcal{Y}_E$ can be obtained by adding all the three terms above.
