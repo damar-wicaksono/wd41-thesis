@@ -111,22 +111,30 @@ Yet, to wait until a better simulator is available before making any prediction 
 % Why model bias might help
 In a Bayesian framework, the statistical description of the model bias term can potentially alleviate the problem overfitting.
 \marginpar{Statistical description of the model bias}
-Because the model parameters and the model bias are not fully identifiable according to Eq.~(\ref{eq:bc_true_simulation}) (they are confounded), 
+Because the model parameters and the model bias are not fully identifiable according to Eq.~(\ref{eq:bc_true_simulation})\footnote{without further prior information, arbitrary $\hat{\bm{x}}_m$ fits the data perfectly well for arbitrary $\delta$. In other words, the two terms are \emph{confounds}.}, 
 having more precise data will not make the uncertainty associated with the calibrated model parameters to collapse (i.e., its distribution becomes degenerate) \cite{Bayarri2007,Brynjarsdottir2014}.
 Whether the calibrated model parameters and the associated uncertainty are applicable for extrapolation outside the calibration domain, however, depends on whether the bias term is modeled properly \cite{Bayarri2007,Arhonditsis2008,Arendt2012,OHagan2013,Brynjarsdottir2014,Ling2014}.
 Thus, such a statistical description of the model bias is not a magic bullet in the calibration of a biased model.
 It does, however, provides additional flexibility in incorporating either prior knowledge or a prior expectation regarding model deficiency.
 %This way, it also provides additional channel for assessing the suitability of the simulator to make prediction.
 
-% Some philosophical issue, not true but aim for applicability
 % Physical Parameter vs. Tuning Parameter, some philosophical issue
-Finally, the discussions above also illustrate the distinction between a physical and a tuning parameter in the interpretation of a model parameter.
-As argued in \cite{OHagan2013,Brynjarsdottir2014}, a physical parameter often have meaning outside the world described by the model such that the notion of.
-In practice, however, considering the prevalence of physics-based simulator it is inappropriate to discuss the presence of true value\cite{Campbell2006,Brynjarsdottir2014}.
+At this point, it is worth revisiting the meaning of calibrated parameters in a simulator with bias.
+In a simulator without bias it is straightforward to justify the calibrated model parameters as the ``true'' parameter values of the specified model.
+If the model is physics-based then the parameters also correspond to a physical parameter.
+As argued in \cite{OHagan2013,Brynjarsdottir2014}, physical parameters often have meaning outside the world described by the model where the parameters currently reside.
+Furthermore, having a true value, such physical parameters would then be generally applicable to extrapolation outside the calibration domain.
 
-A more conciliatory and pragmatic approach to this is through a simple notion of applicability when discussing the uncertainty associated with the calibrated model parameters\footnote{That is, the resulting uncertainty associated with calibrated model parameters is, in the words of Leamer \cite{Saltelli2006}:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
-Regardless of this conceptual distinction, there are uncertainties associated with these parameters especially as the condition at which they are calibrated can be different from the intended use of the simulator (in which the parameters reside).
-Thus, their calibration based on experimental data should be aimed such that the simulator remains applicable when it is applied outside its calibration domain.
+On the contrary, as illustrated in one of the examples above, calibrated model parameters in a simulator with bias act as best-fitting parameters that allow the simulator to fit, in some sense, the calibration data.
+Incorporating model bias term might help in alleviating the problem of overfitting, but a priori arbitrariness of the model bias term confounds with the model parameters itself, making the resulting calibrated model parameters more difficult to interpret \cite{Higdon2004}.
+As such, in practice, it is important to emphasize that calibrated model parameters in a simulator with bias will simply be optimal under particular assumptions (e.g., criteria, model bias term, etc.) \cite{Campbell2006}.
+Ref.~\cite{Brynjarsdottir2014} went further by arguing that such model parameters (tuning) had limited scientific values and would not help in extrapolation domain.
+
+This thesis takes a more conciliatory and pragmatic approach regarding this dichotomy: the distinction is rather irrelevant.
+It is true that if the notion of true parameter values cannot be justified then the model parameters might not have strict physical meaning and may not be of interest in their own right.
+And yet, in a complex physics-based simulator (where possible systematic bias cannot be excluded), many of these model parameters are being used in conditions different from the calibration domain, regardless of the conceptual distinction (e.g., Refs.~\cite{Arendt2012,USNRC2012}).
+Thus, the calibration of model parameters based on the available experimental data should be aimed such that the simulator remains to applicable when it is applied outside its calibration domain\footnote{or more eloquently, the resulting uncertainty associated with calibrated model parameters is, in the words of Leamer \cite{Saltelli2006}:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
+The Bayesian framework, by allowing selection of prior uncertainties both for model parameters and for model bias which eventually results in the associated posterior uncertainties, accomodates this aim of calibration in a flexible manner.
 
 %------------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
