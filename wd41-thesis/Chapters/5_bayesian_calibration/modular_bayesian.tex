@@ -15,11 +15,41 @@ Furthermore, this probabilistic modeling entails casting any \emph{uncertain} el
 % Introductory Paragraph
 Recall the relationship between the true system response and its prediction by a simulator (Eq.~(\ref{eq:bc_true_simulation})) rearranged below:
 \begin{equation*}
-    \delta (\bm{x}_c; \boldsymbol{\lambda}) = y_T(\bm{x}_c; \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m; \boldsymbol{\lambda})
+    \delta (\bm{x}_c, \boldsymbol{\lambda}) = y_T(\bm{x}_c, \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m, \boldsymbol{\lambda})
 \end{equation*}
 where the prediction $y_M$ is made using the best but unknown value of the model parameters.
 As such, the model bias function $\delta$ represents a possible systematic difference between the true system response and the simulator prediction that still remains, even from using a simulator with the \emph{best} set of model parameter values.
 Note that, strictly speaking, there is a dependence of $\hat{\bm{x}}_m$ on $\delta$, but this dependence is suppress from the notation; $\hat{\bm{x}}_m$, though unknown, should in principle be a unique set of values valid for all $\bm{x}_c$ \cite{Bayarri2007,Arendt2012}.
+
+% Probability Model for Model Discrepancy, Gaussian Process for Model Discrepancy
+The unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
+\begin{equation}
+        (\mathcal{Y}_T - y_M(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda})) \equiv \mathcal{D}(\bm{x}_c, \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c, \bm{\lambda})
+\label{eq:bc_data_generating_bias}
+\end{equation}
+where $\bm{\psi}_{\delta}$ is the parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
+Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001}.
+In particular, a stationary \glsfirst[hyper=false]{gp} $\mathcal{D} (\bm{x}_c, \bm{\lambda})$ on $\mathbf{X}_C \subseteq \mathbb{R}^{D_c}$ and on $\bm{\Lambda}$ is used to represent the term.
+That is,
+\begin{equation}
+        \mathcal{D}(\circ, \circ) \thicksim \mathcal{GP}(m_\delta(\circ,\circ; \bm{\psi}_{\delta}), K_\delta((\circ,\circ), (\circ, \circ); \bm{\psi}_{\delta}))
+\label{eq:bc_data_generating_bias_gp}
+\end{equation}
+where $m_\delta$ and $K_\delta$ are the mean function and the covariance function of the \gls[hyper=false]{gp}, respectively;
+and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} for the model bias function (e.g., its covariance kernel, see Chapter~\ref{ch:gp_metamodel}).
+For a selected values of $\bm{x}_c$ and $\bm{\lambda}$, the \gls[hyper=false]{gp} becomes a Gaussian random variable,
+\begin{equation}
+        \mathcal{D}(\bm{x}_c, \bm{\lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_{\delta}), s^2_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_{\delta}))
+\label{eq:bc_data_generating_bias_gp_restricted}
+\end{equation}
+where $s^2_\delta$ is the standard deviation at controllable input $\bm{x}_c$ observed at $\bm{\lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
+Finally, for observations on the complete observation layout $\bm{\Lambda}$, the \gls[hyper=false]{gp} becomes a multivariate Gaussian random variable, taking into account correlations of the bias at different elements of the observation layout,  
+\begin{equation}
+        \mathcal{D}(\bm{x}_c, \bm{\Lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}), \Sigma_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}))
+\label{eq:bc_data_generating_bias_gp_multivariate}
+\end{equation}
+where $\Sigma_\delta$ is the (symmetric) covariance matrix of the bias at controllable input $\bm{x}_c$ observed on $\bm{\Lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
+The size of the matrix is $P \times P$, with $P$ the sum of the number of different combinations of the controllable inputs of interest and the number of elements in the observation layout.
 
 % Why bias, unbiased model
 Incorporating bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
@@ -57,25 +87,6 @@ One might argue that if a model is known to be biased it simply requires more ef
 But this is often impractical for a large complex simulator.
 
 % However, as argued in to insist the model has to be perfect is not very constructive.
-
-
-% Probability Model for Model Discrepancy
-The unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
-\begin{equation}
-        (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
-\label{eq:bc_data_generating_bias}
-\end{equation}
-where $\bm{\psi}_{\delta}$ is the parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
-
-Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001} and it is widely adapted in.
-
-% Gaussian Process for Model Discrepancy
-$\mathcal{D} (\circ)$ for $\bm{x}_c \in \mathbf{X}_C \subseteq \mathbb{R}^{D_c}$
-\begin{equation}
-        \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim \mathcal{GP}(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
-\label{eq:bc_data_generating_bias_gp}
-\end{equation}
-
 
 %------------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
