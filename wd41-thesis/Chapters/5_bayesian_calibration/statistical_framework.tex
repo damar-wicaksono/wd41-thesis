@@ -4,35 +4,36 @@
 
 % Introductory Paragraph
 The calibration framework in this thesis is in line with the seminal work of Kennedy and O'Hagan \cite{Kennedy2001};
-which is widely adapted in the applied literature \cite{Bayarri2007,Higdon2008,Arendt2012,Reichert2012}.
+which is widely adapted in the applied literature \cite{Bayarri2007,Higdon2008,Arendt2012,Reichert2012,Higdon2013}.
 \marginpar{Calibration framework}
 Meanwhile, its explicit formulation uses a set of notations adapted from different sources \cite{Kennedy2001,Santner2003,Huard2006,Reichert2012,Wicaksono2016}.
 Suppose an experiment on a physical system is being conducted and, in parallel to that, a computer simulator of the system is available.
 Let $y_E$ be the experimental observation of the system response (i.e., the \glsfirst[hyper=false]{qoi}) taken at \emph{controllable} inputs $\bm{x}_c$,
 then its relationship to the true \emph{unknown} response value $y_T$ is given by
 \begin{equation}
-    y_E(\bm{x}_c; \boldsymbol{\lambda}) = y_T (\bm{x}_c; \boldsymbol{\lambda}) + \epsilon
+    y_E(\bm{x}_c, \bm{\lambda}) = y_T (\bm{x}_c, \bm{\lambda}) + \epsilon(\bm{\lambda})
 \label{eq:bc_observation_true}
 \end{equation}
 where $\epsilon$ is an observation error;
 and $\boldsymbol{\lambda}$ is an element of an observation layout $\boldsymbol{\Lambda}$ detailed below.
 The true value, in turn, is linked to the prediction made by the computer simulator $y_M$ by
 \begin{equation}
-    y_T(\bm{x}_c; \boldsymbol{\lambda}) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \boldsymbol{\lambda}) + \delta (\bm{x}_c; \boldsymbol{\lambda})
+    y_T(\bm{x}_c, \boldsymbol{\lambda}) = y_M (\bm{x}_c, \hat{\bm{x}}_m, \boldsymbol{\lambda}) + \delta (\bm{x}_c, \boldsymbol{\lambda})
 \label{eq:bc_true_simulation}
 \end{equation}
-where $\delta$ is the \emph{model bias}, defined as the difference between the true value and the simulator prediction made by using $\hat{\bm{x}}_m$, the best (``true'') value of the \emph{model} parameters.
+where $\delta$ is the \emph{model bias}, defined as the difference between the true response value and the simulator prediction made by using $\hat{\bm{x}}_m$, the best (``true'') value of the \emph{model} parameters.
 \marginpar{Model bias}
 This term, if any, represents the discrepancy in the prediction due to missing physics, numerical approximation, etc. 
 Combining the two relationships yields,
 \begin{equation}
-    y_E(\bm{x}_c; \boldsymbol{\lambda}) = y_M (\bm{x}_c, \hat{\bm{x}}_m; \boldsymbol{\lambda}) + \delta (\bm{x}_c; \boldsymbol{\lambda}) + \epsilon
+    y_E(\bm{x}_c, \boldsymbol{\lambda}) = y_M (\bm{x}_c, \hat{\bm{x}}_m, \boldsymbol{\lambda}) + \delta (\bm{x}_c, \boldsymbol{\lambda}) + \epsilon(\bm{\lambda})
 \label{eq:bc_observation_true}
 \end{equation}
 The goal of model calibration is, broadly speaking, to learn the true (but unknown) model parameters such that the agreement between the simulator prediction and the experimental observation is improved \cite{Kennedy2001,Ling2014}.
 \marginpar{Goal of model calibration}
 The parameters involved in the representations above are \emph{controllable} inputs $\bm{x}_c$,
-the best value of \emph{model} parameters $\hat{\bm{x}}_m$, and an element $\boldsymbol{\lambda}$ of an \emph{observation layout} $\boldsymbol{\Lambda}$ and the relationship between elements of Eq.~(\ref{eq:bc_observation_true}) is depicted in Fig.~\ref{fig:ch5_hm_error_model} below.
+the best value of \emph{model} parameters $\hat{\bm{x}}_m$, and an element $\boldsymbol{\lambda}$ of an \emph{observation layout} $\boldsymbol{\Lambda}$.
+The relationship between elements of Eq.~(\ref{eq:bc_observation_true}) is depicted in Fig.~\ref{fig:ch5_hm_error_model} below.
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=0.91\textwidth]{../figures/chapter5/figures/HMErrorModel}
@@ -66,7 +67,8 @@ The parameters are referred to as \emph{physical parameters} in the former case,
 and as \emph{tuning parameters} in the latter.
 In the following, however, such distinction is merely conceptual;
 these parameters are in practice not known a priori and not directly observable with respect to the experiment.
-As mentioned, the generic goal of model calibration is to obtain the optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$.
+As mentioned, the generic goal of model calibration is to obtain an optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$.
+The notion of the \emph{true} parameter value is usually reserved for the optimal value of a physical parameter \cite{OHagan2013} and the term \emph{best} or \emph{best-fitting} parameter value is for a tuning parameter \cite{Bayarri2007}.
 Contrary to the controllable variables, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
 %Note, however, these two types of parameters are considered simply as input parameters when running the simulator, i.e., $\bm{x} = \{\bm{x}_c, \bm{x}_m\}$.
 

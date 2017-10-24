@@ -15,67 +15,118 @@ Furthermore, this probabilistic modeling entails casting any \emph{uncertain} el
 % Introductory Paragraph
 Recall the relationship between the true system response and its prediction by a simulator (Eq.~(\ref{eq:bc_true_simulation})) rearranged below:
 \begin{equation*}
-    \delta (\bm{x}_c; \boldsymbol{\lambda}) = y_T(\bm{x}_c; \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m; \boldsymbol{\lambda})
+    \delta (\bm{x}_c, \boldsymbol{\lambda}) = y_T(\bm{x}_c, \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m, \boldsymbol{\lambda})
 \end{equation*}
 where the prediction $y_M$ is made using the best but unknown value of the model parameters.
 As such, the model bias function $\delta$ represents a possible systematic difference between the true system response and the simulator prediction that still remains, even from using a simulator with the \emph{best} set of model parameter values.
+\marginpar{Model bias, possible origins}
+Possible sources for this bias are missing physics in the constituent physical models, numerical approximations, or any other simplifications presence in the simulator whose effects on the prediction are unknown a priori.
+As such, the bias term tends to be systematic and dependent on the controllable input $\bm{x}_c$ and the observation layout $\boldsymbol{\Lambda}$ \cite{Reichert2012}.
 Note that, strictly speaking, there is a dependence of $\hat{\bm{x}}_m$ on $\delta$, but this dependence is suppress from the notation; $\hat{\bm{x}}_m$, though unknown, should in principle be a unique set of values valid for all $\bm{x}_c$ \cite{Bayarri2007,Arendt2012}.
 
-% Why bias, unbiased model
-Incorporating bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
-Overfitting can be seen in two different ways
-Fig.~\ref{fig:ch5_plot_illustrate_bias_1} illustrates a calibration of a computer simulator without the presence of bias, but with a single uncertain model parameter.
-As can be seen, a range of the model parameter values can be principle be constrained 
-\normdoublefigure[pos=tbhp,
-                  mainlabel={fig:ch5_plot_illustrate_bias},
-                  maincaption={Illustration of predictions made by computer simulator with and without bias, both with a single uncertain model parameter. Crosses are the observed data along with the associated uncertainty taken at different controllable inputs $x$. Bold lines are the simulator prediction using the maximum and minimum of the uncertain model parameter, while thin lines are the prediction with varying values of the model parameter.},%
-									mainshortcaption={.},
-                  leftopt={width=0.45\textwidth},
-                  leftlabel={fig:ch5_plot_illustrate_bias_1},
-                  leftcaption={Model without bias and with uncertain model parameter.},
-                  %leftshortcaption={},%
-                  rightopt={width=0.45\textwidth},
-                  rightlabel={fig:ch5_plot_illustrate_bias_2},
-                  rightcaption={Model with biasa and with uncertain model parameter.},
-                  %rightshortcaption={},
-                  %spacing={\hfill}
-                 ]
-{../figures/chapter5/figures/plotIllustrateBias_1.pdf}
-{../figures/chapter5/figures/plotIllustrateBias_2.pdf}
-
-% Why bias
-On the other hand
-
-% Physical Parameter vs. Tuning Parameter, some philosophical issue
-The distinction between physical and tuning parameters for the model parameter might have some impact philosophical impact on the two problem before.
-In the calibration of a physical parameter based on experimental data,
-it is often understood that the calibrated value will in principle be taken as the ``true'' value of that parameter.
-Such ``true'' value of the physical parameter can then be used even outside the context of the model where it resides.
-
-% Constructive Path
-One might argue that if a model is known to be biased it simply requires more effort to correct the bias by putting more physics.
-But this is often impractical for a large complex simulator.
-
-% However, as argued in to insist the model has to be perfect is not very constructive.
-
-
-% Probability Model for Model Discrepancy
+% Probability Model for Model Discrepancy, Gaussian Process for Model Discrepancy
 The unknown model bias function $\delta$ can be represented as a random function $\mathcal{D} (\circ)$,
 \begin{equation}
-        (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
+        (\mathcal{Y}_T - y_M(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda})) \equiv \mathcal{D}(\bm{x}_c, \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c, \bm{\lambda})
 \label{eq:bc_data_generating_bias}
 \end{equation}
 where $\bm{\psi}_{\delta}$ is the parametrization of the probability density describing the bias at $\bm{x}_c$ and $\bm{\lambda}$.
 
-Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001} and it is widely adapted in.
-
-% Gaussian Process for Model Discrepancy
-$\mathcal{D} (\circ)$ for $\bm{x}_c \in \mathbf{X}_C \subseteq \mathbb{R}^{D_c}$
+Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001}.
+\marginpar{Gaussian process formulation}
+In particular, a stationary \glsfirst[hyper=false]{gp} $\mathcal{D} (\bm{x}_c, \bm{\lambda})$ on $\mathbf{X}_C \subseteq \mathbb{R}^{D_c}$ and on $\bm{\Lambda}$ is used to represent the term.
+That is,
 \begin{equation}
-        \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim \mathcal{GP}(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda})
+        \mathcal{D}(\circ, \circ) \thicksim \mathcal{GP}(m_\delta(\circ,\circ; \bm{\psi}_{\delta}), K_\delta((\circ,\circ), (\circ, \circ); \bm{\psi}_{\delta}))
 \label{eq:bc_data_generating_bias_gp}
 \end{equation}
+where $m_\delta$ and $K_\delta$ are the mean function and the covariance function of the \gls[hyper=false]{gp}, respectively;
+and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} for the model bias function (e.g., its covariance kernel, see Chapter~\ref{ch:gp_metamodel}).
+Under a \gls[hyper=false]{gp} formulation, the notion of \emph{systematic} bias mentioned previously is described statistically in terms of the mean and the covariance \cite{Reichert2012}.
 
+For a selected values of $\bm{x}_c$ and $\bm{\lambda}$, the \gls[hyper=false]{gp} becomes a Gaussian random variable,
+\begin{equation}
+        \mathcal{D}(\bm{x}_c, \bm{\lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_{\delta}), s^2_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_{\delta}))
+\label{eq:bc_data_generating_bias_gp_restricted}
+\end{equation}
+where $s^2_\delta$ is the standard deviation at controllable input $\bm{x}_c$ observed at $\bm{\lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
+Finally, for observations on multiple combinations of the controllable inputs and/or the complete observation layout $\bm{\Lambda}$, the \gls[hyper=false]{gp} becomes a multivariate Gaussian random variable, taking into account correlations of the bias at different elements of the observation layout,  
+\begin{equation}
+        \mathcal{D}(\bm{x}_c, \bm{\Lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}), \Sigma_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}))
+\label{eq:bc_data_generating_bias_gp_multivariate}
+\end{equation}
+where $\Sigma_\delta$ is the (symmetric) covariance matrix of the bias at controllable input $\bm{x}_c$ observed on $\bm{\Lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
+The size of the matrix is $P \times P$, with $P$ the sum of the number of different combinations of the controllable inputs and the number of elements in the observation layout.
+
+% Why bias, unbiased model
+Incorporating bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
+\marginpar{Model without bias, illustrated}
+To illustrate this idea, consider a calibration of a computer simulator without the presence of bias, with a single uncertain model parameter and a single controllable input $x_c$ as shown in Fig.~\ref{fig:ch5_plot_illustrate_bias_1}.
+The thin black lines between the two bounding thick black lines indicate simulator prediction at different values of the model parameter.
+As can be seen, the range of the model parameter values can in principle be constrained to match the observed data (crosses) within the observation uncertainty.
+Furthermore, the range of the model parameters will increasingly become smaller with increasing number of data (such that the associated observation uncertainty becomes increasingly narrow as well).
+In other words, the calibrated model parameter converges to the ``true'' value \cite{Bayarri2007,OHagan2013,Brynjarsdottir2014}.
+This parameter value will be valid for prediction outside the calibration domain (i.e., extrapolation at different values of controllable inputs where no data has been observed).
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_illustrate_bias},
+                  maincaption={Illustration of predictions made by computer simulator with and without bias, both with a single uncertain model parameter and a single controllable input $x_c$. Crosses are the observed data along with the associated uncertainty taken at different controllable inputs $x_c$. Bold lines are the simulator prediction using the maximum and minimum of the uncertain model parameter, thin lines are the prediction with varying values of the model parameter, and dotted lines are the prediction outside the calibration domain.},%
+									mainshortcaption={.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_illustrate_bias_1},
+                  leftcaption={Model without bias and with a single uncertain model parameter.},
+                  rightopt={width=0.45\textwidth},
+                  rightlabel={fig:ch5_plot_illustrate_bias_2},
+                  rightcaption={Model with bias and with a single uncertain model parameter.}
+                 ]
+{../figures/chapter5/figures/plotIllustrateBias_1.pdf}
+{../figures/chapter5/figures/plotIllustrateBias_2.pdf}
+
+% Why bias, biased model
+On the other hand,
+some simulators would have apparent bias such that their predictions would remain inconsistent with the observed data, regardless the choice of the model parameter value (Fig.~\ref{fig:ch5_plot_illustrate_bias_2}).
+\marginpar{Model with bias, illustrated}
+Calibration can still be conducted such that the discrepancy between data and prediction is minimized in some sense (i.e., some kind of \emph{best-fitting} model parameter value).
+The calibrated parameter would be able to predict calibration data well, but not for prediction outside the calibration domain.
+The situation becomes more problematic when more precise data becomes available such that uncertainty associated with the observed data becomes narrower.
+In that situation, the uncertainty associated with the calibrated model parameter will also become narrower up to a point value.
+\marginpar{Overfitting}
+This illustrates the two symptoms of overfitting the model parameter: the calibrated model parameter is \emph{biased} (i.e., with values inapplicable for prediction outside the calibration domain) and the distribution characterizing its uncertainty is \emph{degenerate} (i.e., increasingly sure on the wrong value with higher precision of the observed data).
+The latter symptom is particularly troublesome as it inflates the degree of confidence one has on the prediction.
+
+% Physics-based Simulator
+The situation of a biased model is prevalent in complex physics-based simulators, whose constituent physical models were developed using scientific theory and supported by experimental data.
+\marginpar{Physics-based simulators}
+This approach forms the scientific basis for making prediction, especially in the region outside the calibration domain \cite{Arhonditsis2008}.
+It is hoped that such an approach would be more robust than using purely statistical model of observed data \cite{Bayarri2007,Reichert2012}.
+However, certain degree of simplifications from numerical approximation to ignored physical process due to lack of knowledge are expected to persist.
+Furthermore, the strong scientific foundation and the experimental data support of physical models often only apply to the separate constituent models of a complex simulator \cite{Campbell2006}.
+In practice, the simulator consolidates numerous models to simulate the behavior of a (more) complex system outside the calibration domain.
+As such, it can also be expected that the predictions from such simulators would exhibit certain degree of bias (from the true value) that is unknown a priori.
+
+One might argue that if a model is known to be biased it simply requires more developmental effort to correct the bias by putting additional models for the missing physical processes.
+However, as argued in \cite{Arhonditsis2008,Wulff2007}, this approach might not be the best solution as additional models often require even more model parameters to be calibrated and thus call for even more supporting data that cannot be met.
+Additionally, as noted in \cite{Campbell2006,Bayarri2007,Brynjarsdottir2014}, it is often impractical (or unrealistic) for an analyst to revise the inner workings of a large complex simulator.
+Yet, to wait until a better simulator is available before making any prediction is simply not constructive.
+
+% Why model bias might help
+In a Bayesian framework, the statistical description of the model bias term can potentially alleviate the problem overfitting.
+\marginpar{Statistical description of the model bias}
+Because the model parameters and the model bias are not fully identifiable according to Eq.~(\ref{eq:bc_true_simulation}) (they are confounded), 
+having more precise data will not make the uncertainty associated with the calibrated model parameters to collapse (i.e., its distribution becomes degenerate) \cite{Bayarri2007,Brynjarsdottir2014}.
+Whether the calibrated model parameters and the associated uncertainty are applicable for extrapolation outside the calibration domain, however, depends on whether the bias term is modeled properly \cite{Bayarri2007,Arhonditsis2008,Arendt2012,OHagan2013,Brynjarsdottir2014,Ling2014}.
+Thus, such a statistical description of the model bias is not a magic bullet in the calibration of a biased model.
+It does, however, provides additional flexibility in incorporating either prior knowledge or a prior expectation regarding model deficiency.
+%This way, it also provides additional channel for assessing the suitability of the simulator to make prediction.
+
+% Some philosophical issue, not true but aim for applicability
+% Physical Parameter vs. Tuning Parameter, some philosophical issue
+Finally, the discussions above also illustrate the distinction between a physical and a tuning parameter in the interpretation of a model parameter.
+As argued in \cite{OHagan2013,Brynjarsdottir2014}, a physical parameter often have meaning outside the world described by the model such that the notion of.
+In practice, however, considering the prevalence of physics-based simulator it is inappropriate to discuss the presence of true value\cite{Campbell2006,Brynjarsdottir2014}.
+
+A more conciliatory and pragmatic approach to this is through a simple notion of applicability when discussing the uncertainty associated with the calibrated model parameters\footnote{That is, the resulting uncertainty associated with calibrated model parameters is, in the words of Leamer \cite{Saltelli2006}:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
+Regardless of this conceptual distinction, there are uncertainties associated with these parameters especially as the condition at which they are calibrated can be different from the intended use of the simulator (in which the parameters reside).
+Thus, their calibration based on experimental data should be aimed such that the simulator remains applicable when it is applied outside its calibration domain.
 
 %------------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
@@ -144,9 +195,9 @@ where $m$ and $s^2$ is the kriging mean and the kriging variance, respectively (
 and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} (e.g., its covariance kernel).
 
 This step is taken especially if the simulator is computationally expensive to evaluate and only a limited number of simulator runs can be afforded \cite{Kennedy2001,Bayarri2007,Arendt2012}.
-The probability model in Eq.~\ref{eq:bc_data_generating_simulator_gp} then becomes an approximation to the actual simulator (i.e., \gls[hyper=false]{gp} metamodel).
+The probability model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
 Furthermore, as explained in the Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
-This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~\ref{eq:bc_data_generating_simulator_gp}, i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
+This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
 As such, in this case, the uncertainty has an epistemic interpretation.
 
 %-----------------------------------------------------------------------------
@@ -164,7 +215,7 @@ Summarizing the above discussions for a deterministic simulator $y_M$,
     \end{split}
 \label{eq:bc_data_generating_models}
 \end{equation}
-where $\delta_d$ is the Dirac delta function indicating that the simulator prediction is exact.
+where $\delta_d$ is the Dirac delta function indicating that the simulator prediction is exact (i.e., a \emph{degenerate} density).
 
 Suppose that the form of the densities in Eq.~\ref{eq:bc_data_generating_models} are already given,
 then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on the right hand side of Eq.~\ref{eq:bc_true_simulation}.
@@ -236,18 +287,19 @@ where $p(\hat{\bm{x}}_m)$, $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$, and $p(\bm
 
 The denominator of the Eq.~(\ref{eq:bc_joint_posterior}) is a normalizing constant with respect to the model parameters and the hyper-parameters such that Eq.~(\ref{eq:bc_joint_posterior}) is a valid probability density (i.e., integration over the domain yields the value $1.0$).
 \marginpar{Normalizing constant}
-As such, it is defined as,
+As such, it is defined as a multidimensional integral of the following,
 \begin{equation}
 	\begin{split}
 	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \\
-	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon; \bm{\Lambda}) \cdot p(\bm{\psi}_\delta; \bm{\Lambda}) \, d\hat{\bm{x}}_{c} d\bm{\psi}_\epsilon d\bm{\psi}_\delta
+	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon; \bm{\Lambda}) \cdot p(\bm{\psi}_\delta; \bm{\Lambda}) \, d\hat{\bm{x}}_m d\bm{\psi}_\epsilon d\bm{\psi}_\delta
 	\end{split}
 \label{eq:bc_normalizing_constant}
 \end{equation}
 
-The specifications of the likelihood and the associated priors completely specify the Bayesian statistical calibration framework of the model parameters.
-Besides the model parameters and controllable inputs, this formulation involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_M$ the hyper-parameters for the model bias, the observation error, and the simulator approximation (if apply), respectively.
-In principle, they are now also part of the calibration problem, increasing the size (and complexity) of it.
+The specifications of the likelihood and the associated priors completely specify the Bayesian statistical calibration framework for the model parameters.
+An inference of the model parameters can be made based on the resulting probability model through a simulation method outlined in Section~\ref{sec:bc_mcmc}.
+However, besides the model parameters and controllable inputs, the complete formulation above also involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_M$ the hyper-parameters for the model bias, the observation error, and the simulator approximation (if apply), respectively.
+In principle, they are now also part of the calibration problem, increasing the size (in dimension) and the complexity of it.
 To simplify the problem, a modularized approach is taken in this thesis as briefly explained in the following section.
 
 %---------------------------------------------------------------------------------

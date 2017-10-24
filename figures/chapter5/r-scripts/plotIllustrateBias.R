@@ -44,6 +44,7 @@ plot(0, 0, type = "n",
      ylab = "", xlab = "",
      xaxt = "n", yaxt = "n")
 
+# Add points for the calibration data
 points(x, y_true, pch = 4, lwd = 2)
 
 # Add error bar
@@ -63,7 +64,7 @@ for (i in seq(-2, 3.0, by = 0.25))
 # Set Axis, Ticks and Labels
 # x-axis
 axis(side = 1, at = x, mgp = c(3, cex_lab_shift, 0),
-     tcl = -0.35, cex.axis = cex_axis)
+     tcl = -0.35, cex.axis = cex_axis * 0.7)
 title(xlab = "x", mgp = c(cex_ttl_shift, 0, 0), cex.lab = cex_lab)
 # y-axis
 axis(side = 2, at = c(0, 6), mgp = c(3, cex_lab_shift, 0), tcl = -0.35,
@@ -102,7 +103,7 @@ for (i in seq(-2, 3.0, by = 0.25))
 # Set Axis, Ticks and Labels
 # x-axis
 axis(side = 1, at = x, mgp = c(3, cex_lab_shift, 0),
-     tcl = -0.35, cex.axis = cex_axis)
+     tcl = -0.35, cex.axis = cex_axis * 0.7)
 title(xlab = "x", mgp = c(cex_ttl_shift, 0, 0), cex.lab = cex_lab)
 # y-axis
 axis(side = 2, at = c(0, 6), mgp = c(3, cex_lab_shift, 0), tcl = -0.35,
