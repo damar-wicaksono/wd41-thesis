@@ -62,14 +62,15 @@ Model parameters refer to parameters that are specific to a particular parametri
 As such, they only appear in the term $y_M$ of Eq.~(\ref{eq:bc_observation_true}).
 \marginpar{Model parameters}
 Model parameters might or might not have a physical meaning;
-that is the parameters have interpretation outside the context of the physical model in which the parameters reside, or  the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become a measure for model inadequacy of a particular model).
+that is, the parameters have interpretation outside the context of the physical model in which the parameters reside, or the parameters are simply used to tune the model such that the prediction agrees better with the observed data (thus become a measure for model inadequacy of a particular model).
 The parameters are referred to as \emph{physical parameters} in the former case,
 and as \emph{tuning parameters} in the latter.
 In the following, however, such distinction is merely conceptual;
-these parameters are in practice not known a priori and not directly observable with respect to the experiment.
-As mentioned, the generic goal of model calibration is to obtain an optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$.
-The notion of the \emph{true} parameter value is usually reserved for the optimal value of a physical parameter \cite{OHagan2013} and the term \emph{best} or \emph{best-fitting} parameter value is for a tuning parameter \cite{Bayarri2007}.
-Contrary to the controllable variables, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
+these parameters are in practice not known a priori and not directly observable with respect to the experiment 
+As mentioned, the generic goal of model calibration is to obtain an optimal value of the model parameters $\hat{\bm{x}}_m$ based on a set of experimental data taken at particular values of $\bm{x}_c$ and $\bm{\lambda}$.
+This distinction will be revisited in Section~\ref{sub:bc_modular_bias}.
+The notion of the \emph{true} value is usually reserved for the optimal value of a physical parameter \cite{OHagan2013} and the term \emph{best} or \emph{best-fitting} value is for a tuning parameter \cite{Bayarri2007}.
+Contrary to the controllable inputs, once calibrated, model parameters should in principle be valid for all instances of the simulator application.
 %Note, however, these two types of parameters are considered simply as input parameters when running the simulator, i.e., $\bm{x} = \{\bm{x}_c, \bm{x}_m\}$.
 
 % Goal of Calibration
@@ -86,7 +87,7 @@ Appropriately acknowledging multiple sources of uncertainty in the calibration p
 Two steps are involved in conducting a Bayesian inference.
 \marginpar{Bayesian inference}
 The first is a formulation of a full probability model for all the terms in Eq.~(\ref{eq:bc_observation_true}).
-In essence, the model represents a data-generating process of the observed experimental data,
+In essence, the resulting model represents a data-generating process of the observed experimental data,
 incorporating the elements of Eq.~(\ref{eq:bc_observation_true}) into it.
 An approach to formulate a full probability model is presented in Section~\ref{sec:bc_modular}.
 The full probability model is then conditioned on the given experimental data to obtain an updated (\emph{posterior}) probability distribution of the model parameters.
