@@ -53,9 +53,9 @@ conducting \gls[hyper=false]{mc} simulation for estimating the integrals (as was
 The multiplication of likelihood $p(\mathbf{y}\,|\,\bm{x})$ and prior density $p(\bm{x})$ will, in general, yield an arbitrary posterior density not available in a closed-form expression ready to be sampled from.
 As a result, generating independent samples from the posterior density required for the \gls[hyper=false]{mc} estimation becomes a difficult task.
 
-This section presents a simulation approach, the so-called \gls[hyper=false]{mcmc} simulation,
+This section presents an approach, the so-called \gls[hyper=false]{mcmc} simulation,
 to directly generate samples from an arbitrary \gls[hyper=false]{pdf}. 
-These samples, in turn, are useful for estimating various quantities given as examples above.
+These samples are useful for estimating various quantities given as examples above.
 This technique works with less severe dependence on the dimension of the input parameter space.
 
 Although in the context of Bayesian data analysis the \gls[hyper=false]{pdf} of interest is the posterior \gls[hyper=false]{pdf} \cite{Tierney1994},
@@ -67,8 +67,7 @@ As such, in the following discussion, a generic notation for an arbitrary \gls[h
 %----------------------------------------------------
 
 % Introductory Paragraph
-Consider the following problem: Given a random variable $\bm{\mathcal{X}}$ equipped with the \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}_{\geq 0}$,
-generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from the \gls[hyper=false]{pdf}.
+Consider the following problem: Generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from a random variable $\bm{\mathcal{X}}$, given the \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}_{\geq 0}$.
 \marginpar{Problem statement}
 It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant:
 \begin{equation}
@@ -77,20 +76,23 @@ It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm
 \end{equation}
 The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
 \begin{equation}
-	C = \int p^*(\bm{x}) d\bm{x}  \Rightarrow \int p(\bm{x}) d\bm{x} = 1.0
+	C \; \int p(\bm{x}) d\bm{x} = \int p^*(\bm{x}) d\bm{x}  \Leftrightarrow  C \; (1.0) = \int p^*(\bm{x}) d\bm{x}
 \label{eq:bc_prop_const}
 \end{equation}
+Carrying out the integration of the above can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
+
 Such samples can then be used, among other things,
 to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
 of any function under the \gls[hyper=false]{pdf}.
-Note that in the rest of the section, the term model input parameter space $\mathbf{X}$ is replaced by the term \emph{state space}, the range of possible values of the random variable $\bm{\mathcal{X}}$;
+
+In the rest of the section, the term model input parameter space $\mathbf{X}$ is replaced by the term \emph{state space}, the range of possible values of the random variable $\bm{\mathcal{X}}$;
 A more appropriate term in the context of generic problem of generating samples from a distribution.
 
 % Why it it difficult to samples
 Generating samples from an arbitrary multidimensional density function is generally a difficult task.
 \marginpar{A correct sampling}
 Intuitively, for a given sample size, correctly generating samples from a density means
-that the sample values have to be distributed proportional to its \gls[hyper=false]{pdf}.
+that the sample values have to be distributed proportionally to its \gls[hyper=false]{pdf}.
 There should be more samples in the region where the \gls[hyper=false]{pdf} value is high,
 and less in the the region where the \gls[hyper=false]{pdf} value is low.
 For a complex multidimensional density function,
@@ -107,32 +109,32 @@ the density has to be integrated and its normalizing constant has to be computed
 Appendix~\ref{app:its} provides a more detail account on the topic.
 Many univariate random variables are widely studied and the analytical solutions to their quantile functions are available \cite{Lange2010}.
 However, the method is not extendable to distributions of higher dimension.
-Additionally, though sampling algorithms exist for several multivariate densities (notably, the multivariate normal density in Appendix~\ref{app:mvn_sampling}),
-this will not be the case for an arbitrary density function of higher dimension.
+Additionally, though sampling algorithms exist for several multivariate densities (notably, the multivariate normal density~--~See Appendix~\ref{app:mvn_sampling}),
+this will not be the case for an arbitrary \gls[hyper=false]{pdf} of higher dimension.
 
 % Illustration
 To illustrate this point,
 \marginpar{Illustration}
-consider the following bivariate (unnormalized) density parameterized by location parameters $\mu_1, \mu_2$ and scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
+consider the following unnormalized bivariate density parametrized by location parameters $\mu_1, \mu_2$ and scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
 \begin{equation}
 	\begin{split}
-	& p^*(x_1, x_2) = \frac{\exp{(-(x_1 - \mu_1)/\sigma_1)} \exp{(-(x_2 - \mu_2)/\sigma_2)}}{(1 + \exp{(-(x_1 - \mu_1)/\sigma_1)} + \exp{(-(x_2 - \mu_2)/\sigma_2)})^3} \, \\ 
-	& x_1, x_2 \in \mathbb{R}; \mu_1, \mu_2 \in \mathbb{R};\, \text{and} \, \sigma_1, \sigma_2 \in \mathbb{R}^+
+    & p^*(x_1, x_2) = \frac{\exp{(-(x_1 - \mu_1)/\sigma_1)} \exp{(-(x_2 - \mu_2)/\sigma_2)}}{(1 + \exp{(-(x_1 - \mu_1)/\sigma_1)} + \exp{(-(x_2 - \mu_2)/\sigma_2)})^3} \\ 
+    & x_1, x_2 \in \mathbb{R}; \mu_1, \mu_2 \in \mathbb{R};\, \text{and} \, \sigma_1, \sigma_2 \in \mathbb{R}^+
 	\end{split}
 \label{eq:bc_unnormalized_gumbel}
 \end{equation}
-Fig.~\ref{fig:ch5_plot_gumbel_illustration} shows the contour plot of the joint density as well as the marginal density for each of the variate.
+Fig.~\ref{fig:ch5_plot_gumbel_illustration} shows the contour plot of the joint density as well as the marginal density for each of the variate, for selected range of values of its parameters.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_gumbel_illustration},
                   maincaption={Joint and marginal densities plots of the unnormalized \gls[hyper=false]{pdf} in the example. The parameters used in the example are: $\mu_1 = 5, \mu_2 = 2, \sigma_1 = 1.25$, and $\sigma_2 = 3$.},%
 									mainshortcaption={Joint and marginal densities plots for the unnormalized \gls[hyper=false]{pdf} in the example.},
-                  leftopt={width=0.45\textwidth},
+                  leftopt={width=0.415\textwidth},
                   leftlabel={fig:ch5_plot_gumbel_illustration_1},
-                  leftcaption={Joint density},
+                  leftcaption={Joint density $p^*(x_1, x_2)$},
                   %leftshortcaption={},%
-                  rightopt={width=0.45\textwidth},
+                  rightopt={width=0.415\textwidth},
                   rightlabel={fig:ch5_plot_gumbel_illustration_2},
-                  rightcaption={Marginal density},
+                  rightcaption={Marginal densities $p^*(x_1)$ and $p^*(x_2)$},
                   %rightshortcaption={},
                   %spacing={\hfill}
                  ]
@@ -143,9 +145,9 @@ Fig.~\ref{fig:ch5_plot_gumbel_illustration} shows the contour plot of the joint 
 A straightforward approach to generate samples from a given multivariate density is done by first 
 \marginpar{Discretized grid approach}
 discretizing the state space of the density function and evaluate the density at the discretized points.
-Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{\bm{x}_i\}_{i=1}^{I}$ with $I$ the number of discretized points.
-At the discretized levels, the probability for each value of $\bm{x}_i$ is approximated by $p(\bm{x}_i) = p^*(\bm{x}_i) / \sum_i p^*(\bm{x}_i)$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in computing $p$.)}.
-The pairs constitute a complete discrete probability distributions.
+Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{(x_{1,i}\,,\,x_{2,j});\, i, j = 1, \ldots, I\}$ with $I$ the number of discretized points.
+At the discretized levels, the probability for each value of $(x_{1,i}\,,\,x_{2,j})$ is approximated by $p(x_{1,i}\,,\,x_{2,j})$ $= p^*(x_{1,i}\,,\,x_{2,j}) / \sum_{i,j} p^*(x_{1,i}\,,\,x_{2,j})$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in computing $p$.)}.
+The set $\{p(x_{1,i}\,,\,x_{2,j});\, i,j = 1,\ldots,I)\}$ constitute a complete discrete probability distributions.
 Generating samples from such a probability distribution is straightforward in a modern computing environment \cite{Mackay2005}.
 
 % The example
@@ -195,10 +197,11 @@ Assuming a well-behaved function of interest inside the integral, some regions o
 In fact, this ``region of space where it matters'' is related to the mathematical notion of the \emph{typical set} of a distribution \cite{Mackay2005}.
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
-Although there is pretty good idea where this typical set is located for the example above (the region around the center of the density),
+Although there is good idea where this typical set is located for the example above (the region around the center of the density),
 in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there will not be\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce the density value while increasing the amount of volume.
 In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality previously mentioned.}.
-Having samples that is representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}. 
+Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
+At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would be superior (requires less function evaluations for the same accuracy level) to that of the discretized grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
 
 % In relation to Bayesian data analysis
 %In the context of Bayesian data analysis,
@@ -218,10 +221,10 @@ Instead of blindly evaluating the density at every corner of the state space, su
 As such, this family of techniques potentially has less severe dependence to the dimension of the state space.
 Generating such samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
 
-The following briefly presents the basics of Markov chain and its importance in solving the the problem of generating samples from an arbitrary density.
-Markov chain (in continuous state space) as well as some important related concepts and theorems are first presented, without proof and in somewhat lax manner.
-A more precise statements of these concepts and theorems are difficult without measure theory which for an application purpose of this thesis is irrelevant. 
-Appendix~\ref{app:markov_chain} provides the definitions and illustrations for some of these concepts for a discrete state Markov chain where more intuitive matrix notation and graphical representation are applicable.
+The following briefly presents the basics of Markov chain and its importance in solving the problem of generating samples from an arbitrary \gls[hyper=false]{pdf}.
+Markov chain (in continuous state space) as well as some important related concepts and theorems are first presented, without proof and in a somewhat lax manner.
+A more precise statements of these concepts and theorems are difficult without measure theory which for the purpose of this thesis is irrelevant. 
+Appendix~\ref{app:markov_chain} provides the definitions and illustrations of some of these concepts for a discrete state Markov chain where more intuitive matrix notation and graphical representation are applicable.
 Finally,
 two methods to construct a Markov chain for the purpose of \gls[hyper=false]{mc} simulation are introduced and illustrated.
 
