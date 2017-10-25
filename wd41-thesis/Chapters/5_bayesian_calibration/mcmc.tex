@@ -327,12 +327,10 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 %This asymptotic result provides a justification for using samples generated from a Markov chain (of certain conditions) for estimating integral in a more conventional \gls[hyper=false]{mc} simulation.
 
 % Central Limit Theorem (Limiting Behavior)
-It is argued in \cite{Robert2004} that although the previous two theorems provide the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
+Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
-it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation.
-And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
-The theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ under certain conditions\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic.\label{foot:bc_ergodicity}.}
-and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
+it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
+By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
 \begin{equation}
   \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
@@ -340,6 +338,8 @@ and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
 That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma^2/I$.
 $\sigma^2$ is the variance of the function evaluated under the stationary density of the chain.
 The theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size (assuming that stationarity has been attained).
+
+%And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
 
 Though similar to that of \gls[hyper=false]{mc} standard error \cite{Owen2013}, it is important to note that successive realizations of the Markov chain are not, by construction, independent and identically distributed.
 The consequence of this will be revisited when the topic of analyzing samples of a Markov chain is discussed in Section~\ref{sec:bc_mcmc_diagnostic}.
@@ -365,7 +365,7 @@ A reversible chain is a stationary chain \cite{Robert2004}.
 Consequently, in an \gls[hyper=false]{mcmc} algorithm,
 if the transition probability $T$ satisfies the detailed balance condition with respect to the target distribution $\pi_t$, 
 it ensures the reversibility of the process and ultimately the stationarity of the chain.
-Finally, by imposing additional condition\footnote{Namely, ergodicity (see Footnote~\ref{foot:bc_ergodicity}).}, the stationary distribution of the chain converges to the target distribution.
+Finally, by imposing the conditions\footnote{Idem.}, the stationary distribution of the chain $\pi^*$ converges to the target distribution $\pi_t$.
 
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
