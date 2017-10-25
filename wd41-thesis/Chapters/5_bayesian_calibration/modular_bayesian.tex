@@ -200,7 +200,7 @@ However, following the development taken in Chapter~\ref{ch:gp_metamodel},
 a \glsfirst[hyper=false]{gp} can also be used to represent a deterministic simulator using an explicit formulation of a stochastic process.
 The prediction made by the simulator at particular values of $\bm{x}_c$, $\hat{\bm{x}}_m$, and $\bm{\lambda}$ is then given by,
 \begin{equation}
-	\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim  \mathcal{N}(m(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}), s^2(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}))
+	\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}) \thicksim  \mathcal{N}(m(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda};\bm{\psi}_{m}), s^2(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_{m}))
 \label{eq:bc_data_generating_simulator_gp}
 \end{equation}
 where $m$ and $s^2$ is the kriging mean and the kriging variance, respectively (see Section~\ref{sec:gp_metamodeling});
@@ -221,9 +221,9 @@ Summarizing the above discussions for a deterministic simulator $y_M$,
 \marginpar{Data generating process, general}
 \begin{equation}
     \begin{split}
-				& \mathcal{Y}_M \equiv \mathcal{Y}_M \thicksim p(y_M | \hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda}) = \delta_d (y_M - y_M(\hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda})) \\
-        & (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda}) \\
-        & (\mathcal{Y}_E - \mathcal{Y}_T) \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \bm{\psi}_{\epsilon}; \bm{\lambda}) \\
+				& \mathcal{Y}_M \equiv \mathcal{Y}_M \thicksim p(y_M \,|\, \hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda}) = \delta_d (y_M - y_M(\hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda})) \\
+        & (\mathcal{Y}_T - \mathcal{Y}_M) \equiv \mathcal{D}(\bm{x}_c, \bm{\lambda}) \thicksim p(\delta\,|\,\bm{\psi}_{\delta}, \bm{x}_c, \bm{\lambda}) \\
+        & (\mathcal{Y}_E - \mathcal{Y}_T) \equiv \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon\,|\,\bm{\psi}_{\epsilon}, \bm{\lambda}) \\
     \end{split}
 \label{eq:bc_data_generating_models}
 \end{equation}
@@ -234,8 +234,8 @@ then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on t
 Assuming that they are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms,
 \begin{equation}
   \begin{split}
-  p(y_E | & \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c ; \bm{\lambda}) = \ldots \\
-	& (p(y_M(\hat{\bm{x}}_m, \bm{x}_c; \bm{\lambda})) * p(\delta | \bm{\psi}_{\delta}, \bm{x}_c; \bm{\lambda}) * p(\epsilon | \bm{\psi}_{\epsilon}; \bm{\lambda}))(y_E)
+  p(y_E | & \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda}) = \ldots \\
+	& (p(y_M(\hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda})) * p(\delta\,|\,\bm{\psi}_{\delta}, \bm{x}_c, \bm{\lambda}) * p(\epsilon\,|\,\bm{\psi}_{\epsilon},\bm{\lambda}))(y_E)
   \end{split}
 \label{eq:bc_additive_convolution}
 \end{equation}
@@ -248,8 +248,8 @@ simulator approximation, a normal likelihood for the calibration problem can be 
 \begin{equation}
     \begin{split}
 				& \mathcal{Y}_E = \mathcal{Y}_M + \mathcal{D} + \mathcal{E} \\
-				& \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) \thicksim \mathcal{N}(m_M(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}), s_M^2(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda})) \\
-        & \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c; \bm{\psi}_\delta, \bm{\lambda}), s_\delta^2(\bm{x}_c; \bm{\psi}_\delta, \bm{\lambda})) \\
+				& \mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}) \thicksim \mathcal{N}(m_M(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_{m}), s_M^2(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_{m})) \\
+        & \mathcal{D}(\bm{x}_c; \bm{\lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_\delta), s_\delta^2(\bm{x}_c, \bm{\lambda}; \bm{\psi}_\delta)) \\
         & \mathcal{E}(\boldsymbol{\lambda}) \thicksim \mathcal{N}(0, \sigma_{obs}^2(\bm{\lambda})) \\
     \end{split}
 \label{eq:bc_data_generating_models_gaussian}
@@ -258,8 +258,8 @@ As such, the data generating process $\mathcal{Y}_E$ under Gaussian formulation 
 \begin{equation}
 	\begin{split}
 		& \mathcal{Y}_E \thicksim \mathcal{N}(m_*, s^2_*) \\
-		& m_*(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_m, \bm{\psi}_\delta, \bm{\lambda}) = m_M(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_m, \bm{\lambda}) + m_\delta(\bm{x}_c; \bm{\psi}_\delta, \bm{\lambda}) \\
-		& s^2_*(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_m, \bm{\psi}_\delta, \sigma_{obs}^2, \bm{\lambda}) = s_M^2(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\lambda}) + s_\delta^2(\bm{x}_c; \bm{\psi}_\delta, \bm{\lambda}) + \sigma_{obs}^2(\bm{\lambda})
+		& m_*(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_m, \bm{\psi}_\delta) = m_M(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_m) + m_\delta(\bm{x}_c, \bm{\lambda}; \bm{\psi}_\delta) \\
+		& s^2_*(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_m, \bm{\psi}_\delta, \sigma_{obs}^2) = s_M^2(\bm{x}_c, \hat{\bm{x}}_m, \bm{\lambda}; \bm{\psi}_{m}) + s_\delta^2(\bm{x}_c, \bm{\lambda}; \bm{\psi}_\delta) + \sigma_{obs}^2(\bm{\lambda})
 	\end{split}
 \label{eq:bc_data_model_gaussian}
 \end{equation}
@@ -270,15 +270,15 @@ Given a set of experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observ
 \marginpar{Likelihood function}
 the likelihood function is then defined as follows
 \begin{equation}
-  \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon} ; \bm{\Lambda})
+  \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon}, \bm{\Lambda})
 \label{eq:bc_likelihood}
 \end{equation}
 Under Gaussian formulation, the likelihood function is obtained by using Gaussian density of Eq.~(\ref{eq:bc_data_model_gaussian}) for $p$.
 Note that if the set of experimental data is simultaneously given on the observation layout $\bm{\Lambda}$ then the covariance matrix $\Sigma_*$ is used instead of the standard deviation $s^2_*$,
 \begin{equation}
 	\begin{split}
-	\Sigma_*(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon, \bm{\Lambda}) = & \Sigma_M(\bm{x}_c, \hat{\bm{x}}_m; \bm{\psi}_{m}, \bm{\Lambda}) + \ldots \\ 
-	& \Sigma_\delta(\bm{x}_c; \bm{\psi}_\delta, \bm{\Lambda}) + \Sigma_{obs}(\bm{\psi}_\epsilon; \bm{\Lambda})
+	\Sigma_*(\bm{x}_c, \hat{\bm{x}}_m, \bm{\Lambda}; \bm{\psi}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon) = & \Sigma_M(\bm{x}_c, \hat{\bm{x}}_m, \bm{\Lambda}; \bm{\psi}_{m}) + \ldots \\ 
+	& \Sigma_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_\delta) + \Sigma_{obs}(\bm{\Lambda}; \bm{\psi}_\epsilon)
 	\end{split}
 \label{eq:bc_gaussian_covariance_matrix}
 \end{equation}
@@ -290,8 +290,8 @@ According to the Bayes' theorem, the joint posterior probability of the model pa
 the hyper-parameters associated with the model bias and the observation error is given as, 
 \begin{equation}
 	\begin{split}
-  p(\hat{\bm{x}}_m, & \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} | \mathbf{y}, \mathbf{x}_c; \bm{\Lambda}) = \ldots \\
-	& \frac{\mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_{\epsilon_y}; \bm{\Lambda}) \cdot p(\bm{\psi}_{\delta}; \bm{\Lambda})}{p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda})}
+  p(\hat{\bm{x}}_m, & \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y}\,|\,\mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) = \ldots \\
+	& \frac{\mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_{\epsilon_y}\,|\,\bm{\Lambda}) \cdot p(\bm{\psi}_{\delta}\,|\,\bm{\Lambda})}{p(y_E = \mathbf{y}\,|\,\bm{x}_c = \mathbf{x}_c , \bm{\Lambda})}
 	\end{split}
 \label{eq:bc_joint_posterior}
 \end{equation}
@@ -302,8 +302,8 @@ The denominator of the Eq.~(\ref{eq:bc_joint_posterior}) is a normalizing consta
 As such, it is defined as a multidimensional integral of the following,
 \begin{equation}
 	\begin{split}
-	p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \\
-	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon; \bm{\Lambda}) \cdot p(\bm{\psi}_\delta; \bm{\Lambda}) \, d\hat{\bm{x}}_m d\bm{\psi}_\epsilon d\bm{\psi}_\delta
+	p(y_E = \mathbf{y} \,|\, \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \\
+	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon\,|\,\bm{\Lambda}) \cdot p(\bm{\psi}_\delta\,|\,\bm{\Lambda}) \, d\hat{\bm{x}}_m d\bm{\psi}_\epsilon d\bm{\psi}_\delta
 	\end{split}
 \label{eq:bc_normalizing_constant}
 \end{equation}
