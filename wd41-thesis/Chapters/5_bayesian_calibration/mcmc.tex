@@ -1,4 +1,3 @@
-\newpage
 %************************************************************************************
 \section[MCMC Simulation]{\glsfirst[hyper=false]{mcmc} Simulation}\label{sec:bc_mcmc}
 %************************************************************************************
@@ -332,11 +331,11 @@ Although the previous theorem provides the mathematical foundation for construct
 it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
 By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
 \begin{equation}
-  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma^2}{I}\right)
+  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
 \end{equation}
-That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma^2/I$.
-$\sigma^2$ is the variance of the function evaluated under the stationary density of the chain.
+That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma_f^2/I$.
+$\sigma_f^2$ is the variance of the function evaluated under the stationary density of the chain.
 The theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size (assuming that stationarity has been attained).
 
 %And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
