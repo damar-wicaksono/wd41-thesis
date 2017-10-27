@@ -105,7 +105,7 @@ As such, it can also be expected that the predictions from such simulators would
 
 One might argue that if a model is known to be biased it simply requires more developmental effort to correct the bias by putting additional models for the missing physical processes.
 However, as argued in \cite{Arhonditsis2008,Wulff2007}, this approach might not be the best solution as additional models often require even more model parameters to be calibrated and thus call for even more supporting data that cannot be met.
-Additionally, as noted in \cite{Campbell2006,Bayarri2007,Brynjarsdottir2014}, it is often impractical (or unrealistic) for an analyst to revise the inner workings of a large complex simulator.
+Additionally, as noted in \cite{Campbell2006,Bayarri2007,Brynjarsdottir2014}, it is often impractical (nor realistic) for an analyst to revise the inner workings of a large complex simulator.
 Yet, to wait until a better simulator is available before making any prediction is simply not constructive.
 
 % Why model bias might help
@@ -132,13 +132,13 @@ Incorporating model bias term might help in alleviating the problem of overfitti
 As such, in practice, it is important to emphasize that calibrated model parameters in a simulator with bias will simply be optimal under particular assumptions (e.g., criteria, model bias term, etc.) \cite{Campbell2006}.
 Ref.~\cite{Brynjarsdottir2014} went further by arguing that such model parameters (tuning) had limited scientific values and would not help for extrapolation.
 
-Regarding this dichotomy, the present thesis takes a more pragmatic approach: the distinction is rather irrelevant.
+Regarding this dichotomy, the present thesis takes a more pragmatic view: the distinction is rather irrelevant.
 It is awkward to discuss the true and wrong values of model parameters if the model itself is considered biased (i.e., to a certain extent \emph{wrong}).
 \marginpar{A pragmatic view}
 In such cases, the notion of true parameter values is hard to justify, the model parameters might not have strict physical meaning and may not be of interest in their own right.
 And yet, in a complex physics-based simulator (where possible systematic bias cannot be excluded), many of these model parameters are being used in conditions different from their calibration domain, regardless of the conceptual distinction (e.g., Refs.~\cite{Arendt2012,USNRC2012}).
 Thus, the calibration of model parameters based on the available experimental data should be aimed such that the simulator remains applicable when it is applied outside its calibration domain\footnote{or more eloquently in the words of Leamer \cite{Saltelli2006}, the resulting posterior uncertainty associated with the calibrated model parameters is:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
-The Bayesian framework accommodates this aim of calibration in a flexible manner by taking into account multiple source of uncertainties through selection of prior uncertainties both for model parameters and for model bias which eventually results in the associated posterior uncertainties.
+The Bayesian framework accommodates this aim of calibration in a flexible manner by taking into account multiple sources of uncertainty through selection of prior uncertainties both for model parameters and for model bias which eventually results in the associated posterior uncertainties.
 
 %-----------------------------------------------------------------------------------------
 \subsection{Probabilistic Model for the Observation error}\label{sub:bc_modular_obs_error}
@@ -338,8 +338,10 @@ A lack of identifiability is an example of such an increase in complexity not pr
 Consider first the modularization of the metamodel for the simulator approximation.
 \marginpar{Modularization of the metamodel}
 It is natural to consider the outputs of actual simulator runs (and not the experimental data) to be the basis of metamodel construction.
-Indeed, this what was done in Chapter~\ref{ch:gp_metamodel} where the training of the metamodel (i.e., estimating the hyper-parameters through \glsfirst[hyper=false]{mle}) was separated from the calibration of the model parameters.
-Afterward, the metamodel was only required to accurately predict the simulator outputs for arbitrary inputs (both model parameters and controllable inputs) within a predefined range through an independent validation step (using additional simulator runs).
+Moreover, experimental data tends to be scarce, while the simulator runs would be relatively easier to generate across the range of inputs.
+Indeed, this what was done in Chapter~\ref{ch:gp_metamodel} where the training of the metamodel  was separated from the calibration of the model parameters.
+The training, where the hyper-parameters associated with the metamodel were estimated using \glsfirst[hyper=false]{mle}, was done only on the basis of simulator runs (i.e., the training data).
+Afterward, the metamodel was required to accurately predict the simulator outputs for arbitrary inputs (both model parameters and controllable inputs) within a predefined range via an independent validation step (using additional simulator runs).
 The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept constant during the validation step and the performance of the metamodel was not assessed with respect to the experimental data.  
 
 % How: Modularization of the Model Bias
@@ -348,8 +350,7 @@ The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept c
 Lastly, one of the main sources for estimating the parameters for the observation error model of the experimental data (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
 If those are not available then alternative sources must be consulted.
 \marginpar{Modularization of observation error model}
-For instance, experimentalist would have an idea on the extent of the observation error.
-Often, these figures can be found on the experiment report.
+For instance, experimentalist would have an idea on the extent of the observation error and often, these figures can be found on the experiment report.
 If these are none to be found and point estimate of these parameters cannot be justified, then prior distribution on the parameters should be assigned.
 In this case, many analysis in the applied literature assume prior distribution with different degree of informativeness for the scale parameter (e.g., exponential, half-Cauchy, inverse-Gamma, etc.) \cite{Bayarri2007,Arhonditsis2008,Higdon2008}.
 
