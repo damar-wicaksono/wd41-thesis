@@ -132,17 +132,17 @@ Incorporating model bias term might help in alleviating the problem of overfitti
 As such, in practice, it is important to emphasize that calibrated model parameters in a simulator with bias will simply be optimal under particular assumptions (e.g., criteria, model bias term, etc.) \cite{Campbell2006}.
 Ref.~\cite{Brynjarsdottir2014} went further by arguing that such model parameters (tuning) had limited scientific values and would not help for extrapolation.
 
-Regarding this dicothomy, the present thesis takes a more pragmatic approach: the distinction is rather irrelevant.
+Regarding this dichotomy, the present thesis takes a more pragmatic approach: the distinction is rather irrelevant.
 It is awkward to discuss the true and wrong values of model parameters if the model itself is considered biased (i.e., to a certain extent \emph{wrong}).
 \marginpar{A pragmatic view}
 In such cases, the notion of true parameter values is hard to justify, the model parameters might not have strict physical meaning and may not be of interest in their own right.
 And yet, in a complex physics-based simulator (where possible systematic bias cannot be excluded), many of these model parameters are being used in conditions different from their calibration domain, regardless of the conceptual distinction (e.g., Refs.~\cite{Arendt2012,USNRC2012}).
-Thus, the calibration of model parameters based on the available experimental data should be aimed such that the simulator remains applicable when it is applied outside its calibration domain\footnote{or more eloquently in the words of Leamer \cite{Saltelli2006}, the resulting posterior uncertainty associated with calibrated model parameters is:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
+Thus, the calibration of model parameters based on the available experimental data should be aimed such that the simulator remains applicable when it is applied outside its calibration domain\footnote{or more eloquently in the words of Leamer \cite{Saltelli2006}, the resulting posterior uncertainty associated with the calibrated model parameters is:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
 The Bayesian framework accommodates this aim of calibration in a flexible manner by taking into account multiple source of uncertainties through selection of prior uncertainties both for model parameters and for model bias which eventually results in the associated posterior uncertainties.
 
-%------------------------------------------------------------------------------------
-\subsection{Probabilistic Model for the Experimental Data}\label{sub:bc_modular_data}
-%------------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Observation error}\label{sub:bc_modular_obs_error}
+%-----------------------------------------------------------------------------------------
 
 % Introductory paragraph
 Now recall the relationship between the true system response and its observation through a measurement (Eq.~(\ref{eq:bc_observation_true})),
@@ -345,16 +345,25 @@ The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept c
 % How: Modularization of the Model Bias
 
 % How: Modularization of the Experimental Data
-Lastly, for the observation error, instead of  
+Lastly, one of the main sources for estimating the parameters for the observation error model of the experimental data (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
+If those are not available then alternative sources must be consulted.
+\marginpar{Modularization of observation error model}
+For instance, experimentalist would have an idea on the extent of the observation error.
+Often, these figures can be found on the experiment report.
+If these are none to be found and point estimate of these parameters cannot be justified, then prior distribution on the parameters should be assigned.
+In this case, many analysis in the applied literature assume prior distribution with different degree of informativeness for the scale parameter (e.g., exponential, half-Cauchy, inverse-Gamma, etc.) \cite{Bayarri2007,Arhonditsis2008,Higdon2008}.
 
 % Summary, Closing and Inter-Section Connecting Paragraph Consequence
-The modularization represents a compromise between having a full uncertainty analysis and having a more tractable formulation of the model parameters calibration problem \cite{Kennedy2001}.
-Such a compromise then becomes part of the modeling decision in order to simplify a particular calibration problem:
+The modularization approach represents a series of compromises between having a full uncertainty analysis and having a more tractable formulation of the model parameters calibration problem \cite{Kennedy2001}.
+\marginpar{Modularization, a compromise}
+Such compromises then become part of the modeling decision in order to simplify a particular calibration problem:
 fixing the hyper-parameters associated with the \gls[hyper=false]{gp} metamodel $\bm{\Psi}_m$ at \emph{estimated} values implies that the uncertainty in the simulator approximation is not taken into account completely;
 fixing the hyper-parameters associated with the \gls[hyper=false]{gp} model for the bias term $\bm{\Psi}_\delta$ at \emph{estimated} values implies that the uncertainty in the bias is not taken into account completely;
-and fixing hyper-parameters associated with the Gaussian distribution of the observation error $\bm{\Psi}_\epsilon$ at \emph{estimated} values implies that the uncertainty in the observation error is not taken into account completely.
+and fixing the parameters associated with the Gaussian distribution of the observation error $\bm{\Psi}_\epsilon$ at \emph{estimated} values implies that the uncertainty in the observation error is not taken into account completely.
 
-As such, it is important in the simplified analysis to recognize what is being compromised above and to recognize properly the sources of uncertainty in the calibration at the level of metamodel (i.e., simulator approximation), model bias, and observation error in the first place.
-Indeed as it was reported in Refs.~\cite{Kennedy2001,Liu2005,Bayarri2007,Arendt2012},
-the effect of the additional sources of uncertainty at the level of the hyper-parameters are relatively minor on the calibration results.
-This is due to the fact that the variation in the simulator prediction is largely determined by the uncertainty about the model parameters and the controllable inputs rather than the uncertainty about the hyper-parameters.
+Meanwhile, completely taking into account all sources of uncertainty up to their level of hyper-parameters (and parameters for the observation error model), at the cost of increasing model complexity, might not be necessary.
+\marginpar{Modularization, justification}
+Indeed, as it was reported in Refs.~\cite{Kennedy2001,Liu2005,Bayarri2007,Arendt2012,Reichert2012},
+the effect of the additional sources of uncertainty at that level were relatively minor on the calibration results.
+This is due to the fact that the variation in the simulator prediction is largely determined by the uncertainty about the model parameters and the controllable inputs rather than the uncertainty about the hyper-parameters (and parameters for the observation error model).
+As such, it is more important in the simplified analysis to recognize what is being compromised above and to recognize properly the sources of uncertainty in the calibration at the level of metamodel (i.e., simulator approximation), model bias, and observation error in the first place.
