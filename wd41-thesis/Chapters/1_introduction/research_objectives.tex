@@ -68,13 +68,24 @@ These models are parametrized by either physical parameters or tuning parameters
 Usual practice by the code developer is to calibrate them against some experimental data without any statement of their uncertainties.
 To conform with the framework of statistical uncertainty propagation, uncertainty associated with these parameters are required to be represent in the form of probability distribution.
 The derivation of these distributions will be based on probabilistic modeling and available experimental data.
-There are three specific aims in the present research in accordance to this overall objective.
+In accordance to this overall objective, the present thesis is divided into four sequential phases.
 
-% Aim 1
+% Aim 1 (Global sensitivity analysis)
+First is to investigate whether the current physical model in system code can be identified with the available experimental data from test facilities.
+\glsfirst[hyper=false]{gsa} methodology can be used to assist in identifying which parameters can be calibrated using the available data.
+A test facility might have multiple types of data and although the information content might not be the same for the different types, it might be worthwhile to consider each one of them.
 
-% Aim 2
+% Aim 2 (Statistical Metamodeling)
 
-% Aim 3
+% Aim 3 (Bayesian Calibration)
+Third is to calibrate the physical model parameters against varous relevant experimental data.
+The word \emph{to calibrate} carries a disparaging interpretation related to \emph{to tweak}.
+However, using a Bayesian framework, the aim of calibration is extended to preserve the uncertainty of the parameter estimation.
+Furthermore, in this framework, various sources of uncertainty can be modeled using probability distributions, including the model bias term.
+At the end, the parameters of interest will be either in the form of distributions conditioned on the data or samples generated from such distributions.
+They are the main ingredients in the aforementioned statistical uncertainty analysis (i.e., propagation).
+
+% Aim 4 (Extrapolation)
 
 
 %----------------------------------------
