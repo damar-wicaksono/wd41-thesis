@@ -6,6 +6,30 @@
 \subsection{Statement of the Problem}\label{sub:intro_statement_of_problem}
 %--------------------------------------------------------------------------
 
+% Introductory Paragraph
+The development of closure laws for reflooding described in \cite{Nelson1992,USNRC2012} showed the difficulties and the amount of assumptions used.
+In a nutshell, system code development is an effort to consolidate correlations and mechanistic models, to create a phenomenological-based simulator code that can provide best-estimate results.
+This consolidated effort results in a code that can simulate wide range of transients foreseen in nuclear power plant operation in a best-estimate manner.
+Alas, to come up with a consistent set of closure laws is a great challenge for code developers.
+
+% Closure Laws Difficulty, Conceptual
+The closure laws required to close the two-fluid model pose particularly difficult challenges \cite{Wulff2007}.
+For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from each of the constituents are needed (i.e., the wall, the liquid phase, and the gas phase).
+But measuring temperature of the individual phases in an arbitrary interfacial topology has its own technical difficulties to the extend that no such data exists or available to be implemented in the closure laws.
+Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfacial friction factor, wall friction factor, etc.) were generally carried out in adiabatic conditions.
+As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlation.
+
+% Closure Laws Difficult, Practical
+Furthermore, during the development of a simulator code, programming considerations also came into the picture.
+For robustness, simplification is often required and continuity is enforced.
+Transitionary flow regime between two known (observed) flow regimes for which experimental data is not available is modeled to be the average of the two bounding regimes.
+Different code development, which used different assumptions and experimental database, comes up with different set of closure laws with their own parametrization (see for instance \cite{Nelson1992} for TRAC code and \cite{Bestion1990} for CATHARE code).
+Several authors have expressed their concerns about the uncertainty stemming from the closure laws \cite{Wulff2007,Petruzzi2008a,DAuria2012}.
+
+% an Illustration
+
+% Closing
+
 %--------------------------------------------------
 \subsection{Objectives}\label{sub:intro_objectives}
 %--------------------------------------------------
