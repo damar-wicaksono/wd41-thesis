@@ -8,9 +8,9 @@ That is, it aims at formulating the data generating process $\mathcal{Y}_E(\bm{x
 This model implies that the experimental data $y_E$ taken at particular $\bm{x}_c$ observed at $\bm{\lambda}$ is a realization of a stochastic process.
 Furthermore, this probabilistic modeling entails casting any \emph{uncertain} element in Eq.~(\ref{eq:bc_observation_true}) either as random variable or stochastic process.
 
-%-----------------------------------------------------------------------------
-\subsection{Probabilistic Model for the Model Bias}\label{sub:bc_modular_bias}
-%-----------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+\subsection{Probabilistic Model for the Model Bias Term }\label{sub:bc_modular_bias}
+%-----------------------------------------------------------------------------------
 
 % Introductory Paragraph
 Recall the relationship between the true system response and its prediction by a simulator (Eq.~(\ref{eq:bc_true_simulation})) rearranged below:
@@ -296,7 +296,7 @@ the hyper-parameters associated with the model bias and the observation error is
 	\end{split}
 \label{eq:bc_joint_posterior}
 \end{equation}
-where $p(\hat{\bm{x}}_m)$, $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$, and $p(\bm{\psi}_{\delta}; \bm{\Lambda})$ are the prior probabilities for the model parameters, the model bias hyper-parameters, and the observation error hyper-parameters, respectively.
+where $p(\hat{\bm{x}}_m)$, $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$, and $p(\bm{\psi}_{\delta}; \bm{\Lambda})$ are the prior probabilities for the model parameters, the model bias hyper-parameters, and the observation error parameters, respectively.
 
 The denominator of the Eq.~(\ref{eq:bc_joint_posterior}) is a normalizing constant with respect to the model parameters and the hyper-parameters such that Eq.~(\ref{eq:bc_joint_posterior}) is a valid probability density (i.e., integration over the domain yields the value $1.0$).
 \marginpar{Normalizing constant}
@@ -312,9 +312,9 @@ As such, it is defined as a multidimensional integral of the following,
 % Closing and connection Introductory paragraph
 The specifications of the likelihood and the associated priors completely specify the Bayesian statistical calibration framework for the model parameters.
 The full Bayesian formulation for the model parameters calibration given in Eq.~(\ref{eq:bc_joint_posterior}) involves numerous parameters.
-Besides the model parameters and controllable inputs, the complete formulation above also involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_M$ the hyper-para\-meters for the model bias, the observation error, and the simulator approximation (if apply), respectively.
+Besides the model parameters and controllable inputs, the complete formulation above also involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_M$ the (hyper-)para\-meters for the model bias, the observation error, and the simulator approximation (if apply), respectively.
 By simultaneously calibrating them against experimental data,
-the uncertainties due to the specifications of the model bias, the observation error, and the simulator approximation up to their hyper-parametrization are taken into account (the so-called \emph{full probabilistic} treatment). 
+the uncertainties due to the specifications of the model bias, the observation error, and the simulator approximation up to their (hyper-)parametrization are taken into account.
 In principle, the hyper-parameters are now also part of the calibration problem, increasing the size (in dimension) and the complexity of it.
 Before presenting a simulation method to make inference on the model parameters, in Section~\ref{sec:bc_mcmc}, 
 a modularized approach \cite{Liu2005} to simplify the problem is introduced beforehand in the following, assuming the Gaussian formulation.
@@ -345,6 +345,17 @@ Afterward, the metamodel was required to accurately predict the simulator output
 The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept constant during the validation step and the performance of the metamodel was not assessed with respect to the experimental data.  
 
 % How: Modularization of the Model Bias
+Modularizing the model bias term is more intricate due to inherent confounding between the term and the unknown best model parameters.
+\marginpar{Modularization of the model bias term}
+Model bias is defined as the difference between true response value and the simulator prediction using best, but unknown model parameters (Eq.~(\ref{eq:bc_true_simulation})).
+The model bias itself is unknown (uncertain) a priori.
+As such, without further information, experimental data alone cannot be used to distinguish between the model bias term and the model parameters.
+When \gls[hyper=false]{gp} is used to represent the uncertain model bias, this problem typically becomes worse as it introduces multiple hyper-parameters associated with the \gls[hyper=false]{gp} specification.
+
+Due to this confounding, modularizing the model bias term is commonly carried out such that the hyper-parameters associated with the \gls[hyper=false]{gp} can be fixed prior to the calibration of the model parameters.
+There are no consensus in the literature on how exactly such fixed values of the hyper-parameters are obtained.
+However, Refs.~\cite{Kennedy2001,Bayarri2007,Liu2008,Arendt2012} provide a common theme in the modularization of the model bias term through \gls[hyper=false]{mle} of the hyper-parameters based on fitting the difference between simulator output (evaluated using selected value, or values, from the prior of the model parameters) and the experimental data.
+The particular implementations differ in the selected model parameters values to use and in decision whether some of the initial estimate of the model bias hyper-parameters are still allowed to vary in the downstream analysis.
 
 % How: Modularization of the Experimental Data
 Lastly, one of the main sources for estimating the parameters for the observation error model of the experimental data (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
