@@ -340,7 +340,7 @@ Consider first the modularization of the metamodel for the simulator approximati
 It is natural to consider the outputs of actual simulator runs (and not the experimental data) to be the basis of metamodel construction.
 Moreover, experimental data tends to be scarce, while the simulator runs would be relatively easier to generate across the range of inputs.
 Indeed, this what was done in Chapter~\ref{ch:gp_metamodel} where the training of the metamodel  was separated from the calibration of the model parameters.
-The training, where the hyper-parameters associated with the metamodel were estimated using \glsfirst[hyper=false]{mle}, was done only on the basis of simulator runs (i.e., the training data).
+The training step, where the hyper-parameters associated with the metamodel were estimated using \glsfirst[hyper=false]{mle}, was done only on the basis of simulator runs (i.e., the training data).
 Afterward, the metamodel was required to accurately predict the simulator outputs for arbitrary inputs (both model parameters and controllable inputs) within a predefined range via an independent validation step (using additional simulator runs).
 The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept constant during the validation step and the performance of the metamodel was not assessed with respect to the experimental data.  
 
@@ -354,13 +354,15 @@ When \gls[hyper=false]{gp} is used to represent the uncertain model bias, this p
 
 Due to this confounding, modularizing the model bias term is commonly carried out such that the hyper-parameters associated with the \gls[hyper=false]{gp} can be fixed prior to the calibration of the model parameters.
 There are no consensus in the literature on how exactly such fixed values of the hyper-parameters are obtained.
-However, Refs.~\cite{Kennedy2001,Bayarri2007,Liu2008,Arendt2012} provide a common theme in the modularization of the model bias term through \gls[hyper=false]{mle} of the hyper-parameters based on fitting the difference between simulator output (evaluated using selected value, or values, from the prior of the model parameters) and the experimental data.
-The particular implementations differ in the selected model parameters values to use and in decision whether some of the initial estimate of the model bias hyper-parameters are still allowed to vary in the downstream analysis.
+However, Refs.~\cite{Kennedy2001,Bayarri2007,Liu2008,Arendt2012} provide a common theme in the modularization of the model bias term through \gls[hyper=false]{mle} of the hyper-parameters based on an initial fitting the difference between the simulator prediction (evaluated using selected value, or values, from the prior of the model parameters) and the experimental data.
+Refs.~\cite{Bayarri2007,Liu2008}, for instance, adopt a pragmatic approach where a \gls[hyper=false]{gp} for the model bias term is fitted (and their corresponding hyper-parameters estimated) based on the differences between simulator prediction using the prior mean of the model parameters and the experimental data across controllable inputs and on the observation layout.
+This provides an initial estimate of the bias.
+Afterward, depending on what expectation or assumption are put on the bias term, the estimated associated hyper-parameters can still be allowed to vary in the downstream analysis.
 
 % How: Modularization of the Experimental Data
-Lastly, one of the main sources for estimating the parameters for the observation error model of the experimental data (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
+Lastly, one of the main sources for estimating the parameters of the experimental observation error model (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
 If those are not available then alternative sources must be consulted.
-\marginpar{Modularization of observation error model}
+\marginpar{Modularization of the observation error model}
 For instance, experimentalist would have an idea on the extent of the observation error and often, these figures can be found on the experiment report.
 If these are none to be found and point estimate of these parameters cannot be justified, then prior distribution on the parameters should be assigned.
 In this case, many analysis in the applied literature assume prior distribution with different degree of informativeness for the scale parameter (e.g., exponential, half-Cauchy, inverse-Gamma, etc.) \cite{Bayarri2007,Arhonditsis2008,Higdon2008}.
