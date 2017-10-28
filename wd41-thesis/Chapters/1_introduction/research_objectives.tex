@@ -1,6 +1,6 @@
-%***********************************************************************
-\section{Goals and Scope of the Thesis}\label{sec:intro_goals_and_scope}
-%***********************************************************************
+%*********************************************************************************
+\section{Objectives and Scope of the Thesis}\label{sec:intro_objectives_and_scope}
+%*********************************************************************************
 
 %--------------------------------------------------------------------------
 \subsection{Statement of the Problem}\label{sub:intro_statement_of_problem}
@@ -20,15 +20,33 @@ Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfa
 As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlation.
 
 % Closure Laws Difficult, Practical
-Furthermore, during the development of a simulator code, programming considerations also came into the picture.
+Furthermore, during the development of a simulation code, programming considerations also came into the picture.
 For robustness, simplification is often required and continuity is enforced.
 Transitionary flow regime between two known (observed) flow regimes for which experimental data is not available is modeled to be the average of the two bounding regimes.
 Different code development, which used different assumptions and experimental database, comes up with different set of closure laws with their own parametrization (see for instance \cite{Nelson1992} for TRAC code and \cite{Bestion1990} for CATHARE code).
 Several authors have expressed their concerns about the uncertainty stemming from the closure laws \cite{Wulff2007,Petruzzi2008a,DAuria2012}.
 
 % an Illustration
+As an example of the point given above, consider that in the \gls[hyper=false]{trace} code, after some derivations the interfacial drag coefficient closure law in the inverted slug flow regime $C_{i,\text{IS}}$ is given by,
+\begin{equation*}
+	C_{i,\text{IS}} = \hat{x}_{m,\text{SET}} \times \frac{1}{24} \frac{\rho_g}{\text{La}} \frac{(1-\alpha)}{\alpha^{1.8}} \,\,\,;\,\,\, \hat{x}_{m,\text{SET}} = 0.75 
+\label{eq:intf_drag_isf}
+\end{equation*}
+where $\rho_g$ is the density of the gas phase;
+$\text{La}$ is the Laplace number;
+$\alpha$ is the void fraction;
+and $\hat{x}_{m,\text{SET}}$ is a fitting parameter.
+
+There are several remarks about the closure law given above.
+First, the second term in the right-hand side was derived from experimental data but not directly.
 
 % Closing
+As illustrated above, it is clear that models in thermal-hydraulics system code, to a certain extent, flawed.
+Various experimental programs were carried out to gain better understanding of important phenomena,
+and to validate (and, as noted above, to calibrate) the models.
+Series of the experiments, carried out in \glspl[hyper=false]{setf} were aimed to reproduce limited part of the transient in a selected component following a postulated scenario.
+For example, in the case of reflooding, several facilities existed and data were available (FEBA, PERICLES, etc.).
+But, there has not been an orchestrated effort to incorporate the accumulated data into the calibration process of the physical models, in a systematic way, while acknowledging multiple sources of the uncertainty in the process.
 
 %--------------------------------------------------
 \subsection{Objectives}\label{sub:intro_objectives}
