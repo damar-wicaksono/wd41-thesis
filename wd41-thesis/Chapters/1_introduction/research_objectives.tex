@@ -39,8 +39,18 @@ and $\hat{x}_{m,\text{SET}}$ is a fitting parameter.
 
 There are several remarks about the closure law given above.
 First, the second term in the right-hand side was derived from experimental data but not directly.
+In the inverted slug regime, saturated liquid core breaks up into ligaments.
+These ligaments are \emph{assumed} to take form as prolate ellipsoid.
+The drag coefficient of distorted droplet experimental database is then \emph{assumed}.
+Then to take into account the multi-particle effect, the coefficient is divided by the void fraction $\alpha$ raised to the power of $1.8$ (this, in turn, was taken from experimental data of inertial regime).
+Lastly, the first term of the equation, $\hat{x}_{m,\text{SET}} = 0.75$ was put \emph{to match}, \emph{to calibrate against} the experimental data from the FLECHT-SEASET reflood facility.
+This first term, although clearly \emph{non-physical}, is an important tuning parameter of the model nevertheless.
+Its uncertainty should be considered in uncertainty analysis, especially when reflood is expected to occur.
+Yet, no statement regarding the associated uncertainty is given.
+Several other such terms exist \cite{USNRC2012}. 
 
-% Closing
+
+% Statement of Problem
 As illustrated above, it is clear that models in thermal-hydraulics system code, to a certain extent, flawed.
 Various experimental programs were carried out to gain better understanding of important phenomena,
 and to validate (and, as noted above, to calibrate) the models.
