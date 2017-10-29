@@ -1,6 +1,10 @@
 %*********************************************************************************
 \section{Objectives and Scope of the Thesis}\label{sec:intro_objectives_and_scope}
-%*********************************************************************************
+%********************************************************************************* 
+
+With a larger context provided above,
+this section presents briefly and specifically the statement of the problem,
+followed by the objectives as well as the scope of the present doctoral research.
 
 %--------------------------------------------------------------------------
 \subsection{Statement of the Problem}\label{sub:intro_statement_of_problem}
@@ -8,7 +12,7 @@
 
 % Introductory Paragraph
 The development of closure laws for reflooding described in \cite{Nelson1992,USNRC2012} showed the difficulties and the amount of assumptions used.
-In a nutshell, system code development is an effort to consolidate correlations and mechanistic models, to create a phenomenological-based simulator code that can provide best-estimate results.
+In a nutshell, system code development is an effort to consolidate correlations and mechanistic models, to create a phenomenological-based simulation code that can provide best-estimate results.
 This consolidated effort results in a code that can simulate wide range of transients foreseen in nuclear power plant operation in a best-estimate manner.
 Alas, to come up with a consistent set of closure laws is a great challenge for code developers.
 
@@ -49,7 +53,6 @@ Its uncertainty should be considered in uncertainty analysis, especially when re
 Yet, no statement regarding the associated uncertainty is given.
 Several other such terms exist \cite{USNRC2012}. 
 
-
 % Statement of Problem
 As illustrated above, it is clear that models in thermal-hydraulics system code, to a certain extent, flawed.
 Various experimental programs were carried out to gain better understanding of important phenomena,
@@ -63,38 +66,58 @@ But, there has not been an orchestrated effort to incorporate the accumulated da
 %--------------------------------------------------
 
 % Introductory (Overall Objective)
-The overall objective of the present research is to quantify the uncertainty of physical model parameters implemented in system code in the form of closure laws.
-These models are parametrized by either physical parameters or tuning parameters.
-Usual practice by the code developer is to calibrate them against some experimental data without any statement of their uncertainties.
-To conform with the framework of statistical uncertainty propagation, uncertainty associated with these parameters are required to be represent in the form of probability distribution.
-The derivation of these distributions will be based on probabilistic modeling and available experimental data.
-In accordance to this overall objective, the present thesis is divided into four sequential phases.
+The purpose of the doctoral research is to quantify the uncertainty of physical model parameters
+implemented in a thermal-hydraulics system code.
+The physical models of interest describe the phasic interactions in a complex multiphase flow during a reactor transient, namely heat, mass, and momentum exchanges between vapor, water and structures.
+These models are parametrized by physical or empirical tuning parameters, the values of which are uncertain.
+This results in uncertain code prediction of important safety quantities, such as the evolution of the fuel cladding temperature during a postulated reactor transient.
+
+Adopting probabilistic framework to conform to the statistical uncertainty propagation widely
+adopted in the field of nuclear engineering, the uncertainties in the parameters are represented in
+form of probabilistic density functions or their approximation.
+The derivation of these functions is posed as an inverse statistical problem following Bayesian framework as the parameters themselves are not directly observable.
+The doctoral research thus aims to present a consistent set of strategies in deriving the uncertainty of such model parameters based on experimental data.
+This is done by consolidating and adapting recent developments in the applied statistics literature:
 
 % Aim 1 (Global sensitivity analysis)
-First is to investigate whether the current physical model in system code can be identified with the available experimental data from test facilities.
-\glsfirst[hyper=false]{gsa} methodology can be used to assist in identifying which parameters can be calibrated using the available data.
-A test facility might have multiple types of data and although the information content might not be the same for the different types, it might be worthwhile to consider each one of them.
+\begin{enumerate}
+	\item \emph{to analyze and to better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
+	This is aimed at answering the question whether the current physical model in thermal-hydraulics system code \gls[hyper=false]{trace} can be identified with the available experimental data from test facilities.
+	In other words, how to select important parameters to be inferred.
+	\Glsfirst[hyper=false]{gsa} methodologies can be used to assist in identifying which parameters can be calibrated using the available data.
+	A test facility might have multiple types of data and although the information content might not be the same for the different types, it might be worthwhile to consider each one of them.
+	Finally, for each of the different types,
+	the analysis is also conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
+	By doing so, it is hope that interesting model behavior with respect to its parameters perturbation can be revealed.
 
 % Aim 2 (Statistical Metamodeling)
+	\item \emph{to approximate} the inputs/outputs relationship in a complex computer simulation for a faster evaluation.
+	The step is required as the statistical calibration method adopted in thesis is computationally expensive, requiring numerous code runs in the order of hundreds of thousands and beyond.
+	This approximation is done through a \glsfirst[hyper=false]{gp} metamodel resulting in a statistical metamodel.
+	The highly multivariate nature of the outputs (time- and space-dependent) is dealt by a dimension reduction technique.
+	Build upon the results of previous step, only parameters that are identified to be influential are included in the construction of the metamodel.
 
 % Aim 3 (Bayesian Calibration)
-Third is to calibrate the physical model parameters against varous relevant experimental data.
-The word \emph{to calibrate} carries a disparaging interpretation related to \emph{to tweak}.
-However, using a Bayesian framework, the aim of calibration is extended to preserve the uncertainty of the parameter estimation.
-Furthermore, in this framework, various sources of uncertainty can be modeled using probability distributions, including the model bias term.
-At the end, the parameters of interest will be either in the form of distributions conditioned on the data or samples generated from such distributions.
-They are the main ingredients in the aforementioned statistical uncertainty analysis (i.e., propagation).
+	\item \emph{to statistically calibrate} the physical model parameters against various relevant experimental data.
+	The word \emph{to calibrate} carries a disparaging interpretation related to \emph{to tweak}.
+	However, using a Bayesian statistical framework, the aim of calibration is extended to simultaneously quantify the uncertainty of the parameter estimation.
+	The framework includes various sources of uncertainty which can be modeled using probabilistically, including the model bias term.
+	At the end, the parameters of interest will be either in the form of distributions conditioned on the data or samples generated from such distributions which are useful in the uncertainty analysis of code prediction.
 
 % Aim 4 (Extrapolation)
+	\item \emph{to validate} the statistical calibration results against experimental data set not used in the calibration step.
+	As calibration only conducted using experimental data of limited experimental conditions, it is important, at the minimum, to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena of the same facility in different experimental conditions. 
 
+\end{enumerate}
 
 %----------------------------------------
 \subsection{Scope}\label{sub:intro_scope}
 %----------------------------------------
 
 % Introductory paragraph
-Although the steps taken in this research can be applicable to the analysis and calibration of any system code physical model, the attention will be focused first of all on the models of particular importance during reflooding,
-the so-called \gls[hyper=false]{postchf} flow regimes.
+Although the proposed set of strategies in this research can be applicable to the analysis and calibration of any system code physical model,
+it is illustrated by its application on the models of particular importance during simulation of reflooding,
+i.e., the so-called \gls[hyper=false]{postchf} flow regimes.
 There are several reasons for this emphasis:
 \begin{itemize}
 
@@ -107,12 +130,12 @@ There are several reasons for this emphasis:
 	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into \gls[hyper=false]{trace} code in particular.
 
 % Reason 2
-	\item The models are adequately complex. It is complex that $5$ flow regimes are involved in a single phenomena, transient in nature.
+	\item The models are adequately complex. It is complex that $5$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
 	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on limited set of models.
 	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and (to calibrate) reflood models in system codes.
 
 % Reason 3
-	\item Multiple data of various types (taken with different experimental conditions) are available from experiment within the same facility.
+	\item Multiple data of various types (taken with different experimental conditions) are typically available from experiment within the same facility.
 	As calibration in the present research is conducted using one experimental condition, it is important to validate the resulting calibration result against the data with different experimental condition albeit from the same experimental facility. 
 	Moreover, additional data from another reflooding \glspl[hyper=false]{setf} are also available.
 	This is important for future study of validating the proposed method further and of expanding it to calibration against data from multiple facilities. 
@@ -122,6 +145,9 @@ There are several reasons for this emphasis:
 	
 \end{itemize}
 
+As such, while it is important to acknowledge that reflood simulation and the associated relevant model (or models) are only parts of a large and complex thermal-hydraulics systems code,
+they can provide a representative and relevant illustration on the particulars of analyzing and calibrating a thermal-hydraulics system code using experimental data from \gls[hyper=false]{setf} in general; providing a suitable testing ground for the proposed methods.
+
 % Closing
-Second and lastly, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
+As a final note, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
 The main reason to consider solely this particular code in the present thesis is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss nuclear power plant safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
