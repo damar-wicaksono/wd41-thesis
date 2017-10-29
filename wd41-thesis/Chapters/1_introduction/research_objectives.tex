@@ -96,14 +96,22 @@ They are the main ingredients in the aforementioned statistical uncertainty anal
 Although the steps taken in this research can be applicable to any system code physical model calibration and validation, the attention will be focused on the models of particular importance during reflooding.,
 the so-called \gls[hyper=false]{postchf} flow regimes.
 The reasons for this emphasis are:
+\begin{itemize}
 
-% Reason 1
+	% Reason 1
+	\item Reflooding is an important part in the simulation of \glspl[hyper=false]{npp} transient during \gls[hyper=false]{loca}.
+	Modeling reflooding determines the appropriate representation of the dynamics of heat transfer phenomena during the effort to rewet an uncovered core.
+	Of paramount interest is to estimate the time the rod can be expected to be rewet as well as the maximum temperature reached prior to rewet.
+	Reflood is a transient with highly coupled hydrodynamic-heat-transfer effects and it challenges the assumption made on the implemented closure laws.
+	Indeed several reflood programs conducted in \glspl[hyper=false]{set} existed and were designed to validate reflood models in system code.
+	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into \gls[hyper=false]{trace} code in particular.
 
 % Reason 2
 
 % Reason 3
 
 % Reason 4
+\end{itemize}
 
 % Closing
 Finally, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
