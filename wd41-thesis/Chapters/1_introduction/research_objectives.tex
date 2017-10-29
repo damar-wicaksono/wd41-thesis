@@ -93,9 +93,9 @@ They are the main ingredients in the aforementioned statistical uncertainty anal
 %----------------------------------------
 
 % Introductory paragraph
-Although the steps taken in this research can be applicable to any system code physical model calibration and validation, the attention will be focused on the models of particular importance during reflooding.,
+Although the steps taken in this research can be applicable to the analysis and calibration of any system code physical model, the attention will be focused first of all on the models of particular importance during reflooding,
 the so-called \gls[hyper=false]{postchf} flow regimes.
-The reasons for this emphasis are:
+There are several reasons for this emphasis:
 \begin{itemize}
 
 	% Reason 1
@@ -103,16 +103,25 @@ The reasons for this emphasis are:
 	Modeling reflooding determines the appropriate representation of the dynamics of heat transfer phenomena during the effort to rewet an uncovered core.
 	Of paramount interest is to estimate the time the rod can be expected to be rewet as well as the maximum temperature reached prior to rewet.
 	Reflood is a transient with highly coupled hydrodynamic-heat-transfer effects and it challenges the assumption made on the implemented closure laws.
-	Indeed several reflood programs conducted in \glspl[hyper=false]{set} existed and were designed to validate reflood models in system code.
+	Indeed several reflood experimental programs conducted in \glspl[hyper=false]{setf} existed and were designed to validate reflood models in system code.
 	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into \gls[hyper=false]{trace} code in particular.
 
 % Reason 2
+	\item The models are adequately complex. It is complex that $5$ flow regimes are involved in a single phenomena, transient in nature.
+	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on limited set of models.
+	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and (to calibrate) reflood models in system codes.
 
 % Reason 3
+	\item Multiple data of various types (taken with different experimental conditions) are available from experiment within the same facility.
+	As calibration in the present research is conducted using one experimental condition, it is important to validate the resulting calibration result against the data with different experimental condition albeit from the same experimental facility. 
+	Moreover, additional data from another reflooding \glspl[hyper=false]{setf} are also available.
+	This is important for future study of validating the proposed method further and of expanding it to calibration against data from multiple facilities. 
 
 % Reason 4
+	\item It is the model considered in the \gls[hyper=false]{premium} benchmark, thus there is possibility to compare the results of this research with the results of other participants of the benchmark\footnote{at least qualitatively due to different codes employed by different participants}.
+	
 \end{itemize}
 
 % Closing
-Finally, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
-The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss nuclear power plant safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
+Second and lastly, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
+The main reason to consider solely this particular code in the present thesis is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss nuclear power plant safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
