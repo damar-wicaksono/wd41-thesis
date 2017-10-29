@@ -22,4 +22,41 @@ Thirdly and finally, the modifier \emph{computer} in the definition makes it exp
 This is usually the case for mathematical models that cannot be solved analytically.
 Though this limitation what makes a solution of the model possible in the first place, 
 it also affects the solution and its possible interpretation and thus many computational-related aspects also need to be comprehensively considered.
-\footnote{Beven \cite{Beven2009} articulates this distinction into three levels of model: perceptual model (i.e., theoretical description of some physical phenomena), formal model (i.e., the mathematical description of it), and procedural model  (i.e., computer implementation of the formal model). For many physical system modeling applications, only the procedural model is able to make a quantitative prediction of the system. These distinctions are useful in acknowledging the level of approximation involved in moving from perceptual to procedural model.}
+
+Beven \cite{Beven2009} articulates this distinction into three levels of model: perceptual model (i.e., theoretical description of some physical phenomena), formal model (i.e., the mathematical description of it), and procedural model  (i.e., computer implementation of the formal model). For many physical system modeling applications, only the procedural model is able to make a quantitative prediction of the system. These distinctions are useful in acknowledging the level of approximation involved in moving from perceptual to procedural model.
+
+Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
+And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
+This tendency has invited many critics over the year (citation needed).
+In nuclear science and engineering, for instance, Zuber \cite{Zuber2001} and Wullf \cite{Wulff2007} have long critized the development and the use of multi-fluid model for thermal-hydraulics simulation as high in complexity and in maintenance cost, but low in fidelity and its usefulness.
+
+The goal of computer simulation, complex or otherwise, is to provide prediction.
+The main characteristic (and source of criticism) of using multi-parameter complex model for simulation is that the the relationship between numerous inputs and outputs becomes increasingly opaque.
+The impact of changing one parameter alone, or especially together, on the prediction is hard to disentangle or intuit.
+Furthermore, as appropriate values of inputs might not be fully known, they are often given simply over range of interest containing different possible permissible values.
+It is thus seldom the case that one single simulation is sufficient to provide a reliable answer according to hardly any objective of computer simulation.
+As analytical solution
+
+\gls[hyper=false]{trace}
+
+%---------------------------------------------------------------------------
+\subsection{Thermal-Hydraulics System Codes}\label{sub:intro_th_system_code}
+%---------------------------------------------------------------------------
+
+% Introductory Paragraph
+During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with high-degree of conservatism.
+Conservatism called for the most penalizing modeling assumptions to ensure conservative results, which is far below their regulatory limits.
+This approach, though less realistic, was justified by limited modeling capabilities as well as limited knowledge of the physical process involved during those transients.
+However, it was later found that there are conditions where conservative assumptions do not necessarily lead to conservative (or even physical) predictions.
+
+% An Illustration
+
+% Best-estimate Analysis
+
+% Thermal-Hydraulics System Code
+
+% Two-fluid Model
+
+% Validity of Two Fluid Model
+
+% Closure Laws
