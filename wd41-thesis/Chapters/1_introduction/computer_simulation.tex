@@ -75,7 +75,7 @@ The second is the closure relationships describing the interaction between phase
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/th_system_code}
-	\caption[Generic structure of a thermal-hydraulics (TH) system code]{Generic structure of a \glsfirst[hyper=false]{th} system code. The code and the specific system defined by the input deck define a \emph{simulator} of that system.}
+	\caption[Generic structure of a thermal-hydraulics (TH) system code]{Generic structure of a \glsfirst[hyper=false]{th} system code. The code and the system specified by the input deck define a \emph{simulator} of that system.}
 	\label{fig:ch1_th_system_code}
 \end{figure}
 
@@ -99,7 +99,7 @@ Based on their origin, closure laws can be classified into three categories: ful
 \marginpar{Closure laws origin, fully empirical approach}
 Fully empirical are closure laws developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
 Given comprehensive experimental data, these models tend to be accurate within the range of experimental condition (i.e., its validation domain).
-Moreover, any extrapolation outside of that range can give dubious results.
+On the other hand, any extrapolation outside of that range can give dubious results.
 
 % fully mechanistic
 Fully mechanistic (i.e., \emph{phenomenological}) approach for developing closure laws lies at the other end of the spectrum.
@@ -118,5 +118,5 @@ As such, these parameters become a measure of the inadequacy of the postulated m
 
 % Source of uncertainty
 Any of these approaches proved to be a difficult effort \cite{Barre1990,Nelson1992,Wulff2007} due to various reasons ranging from lack of knowledge of the underlying physical process (with respect to the fully mechanistic modeling) to limitation in the amount of data as well as in measurement instruments (with respect to the fully empirical approach).
-Simplifying assumptions and at times extrapolation have to be made because of that limitations.
-In the end, closure laws in system code are of different origins and they become a major source of uncertainty in the application of \gls[hyper=false]{th} system codes, especially outside its validation domain.
+Simplifying assumptions and extrapolation have to be made because of that limitations.
+In the end, closure laws in system code are of different origins and they become a major source of uncertainty\footnote{defined in this thesis a state of limited knowledge, that is of \emph{epistemic} nature} in the application of \gls[hyper=false]{th} system codes, especially outside its validation domain.
