@@ -66,6 +66,12 @@ The code is designed to be a comprehensive tool capable of simulating realistica
 It was developed using the current best understanding of flow processes expected to happen during the transients.
 
 % Thermal-Hydraulics System Code
+The typical structure of a system code is illustrated in Fig.~\ref{fig:ch1_th_system_code}.
+As can be seen, system code constitutes of several building blocks that can be used to model and simulate wide range of system and conditions.
+The core of system code is a set of balance equations describing the dynamics of the state variables of the fluid.
+To close the system (i.e., to have the same number of equations as the number of unknowns), it has to be complemented by two additional set of constitutive equations.
+The first is the equation of state describing the thermodynamic relation between state variables of a given fluid.
+The second is the closure relationships describing the interaction between phases and each phase to the boundary wall in terms of mass, momentum, and energy. 
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/th_system_code}
@@ -75,6 +81,6 @@ It was developed using the current best understanding of flow processes expected
 
 % Two-fluid Model
 
-% Validity of Two Fluid Model
+% Validity of Two-fluid Model
 
 % Closure Laws
