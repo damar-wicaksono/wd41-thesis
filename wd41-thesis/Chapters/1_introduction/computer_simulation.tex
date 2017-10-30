@@ -80,7 +80,43 @@ The second is the closure relationships describing the interaction between phase
 \end{figure}
 
 % Two-fluid Model
+The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the two-fluid model.
+\marginpar{Two-fluid model}
+This model separately treats the transport phenomena of the two-phases of fluid flow (gas and liquid) resulting in a set of six balance equations (mass, momentum, and energy for each of the two phases).
+The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions which give more realistic picture in a wide range of \gls[hyper=false]{npp} transients.
 
 % Validity of Two-fluid Model
+The validity of the two-fluid model widely implemented in thermal-hydraulics system codes relies on the proper modeling of the transfer terms between phases and each phase with the boundary wall.
+The transfer terms include interfacial drag, interfacial heat transfer, and wall heat transfer.
+In principle, based on different two-phase flow pattern, different phase distribution as well as as different interfacial structure can be observed.
+As a result, each of those transfer terms takes different form with different parameters depending on the pattern of the two-phase flow.
+The transfer terms represent different physical processes taking place at each flow pattern;
+in other words, constitutes the \emph{physical models} of a system code.
 
-% Closure Laws
+% Closure Laws, fully empirical
+These physical models, or the so-called \emph{closure laws}, close the set of balance equations for mass, momentum, and energy of the two phases.
+Based on their origin, closure laws can be classified into three categories: fully empirical, fully mechanistic, and semi-empirical \cite{Bestion2008}.
+\marginpar{Closure laws origin, fully empirical approach}
+Fully empirical are closure laws developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
+Given comprehensive experimental data, these models tend to be accurate within the range of experimental condition (i.e., its validation domain).
+Moreover, any extrapolation outside of that range can give dubious results.
+
+% fully mechanistic
+Fully mechanistic (i.e., \emph{phenomenological}) approach for developing closure laws lies at the other end of the spectrum.
+\marginpar{Fully mechanistic approach}
+Using this approach, a physical mechanism that governs the phenomena of interest is postulated.
+Experimental data plays a role only in validating such a postulated model.
+If the model cannot be supported by the data then a complete revision might be required.
+Mechanistic approach to closure laws modeling provides a scientific basis for prediction outside the validation data (i.e., extrapolation). 
+However, its quality strongly depends on the adequacy of the postulated model and the associated assumptions in the first place.
+
+% semi-empirical approach
+Lastly, the semi-empirical approach combines both of the approach in the sense that mechanistic model is initially developed based on a postulated governing mechanism.
+\marginpar{Semi-empirical approach}
+However, \emph{tuning} parameters are introduced that can be fitted to match the the experimental data.
+As such, these parameters become a measure of the inadequacy of the postulated model in explaining the data due to any missing physical process.
+
+% Source of uncertainty
+Any of these approaches proved to be a difficult effort \cite{Barre1990,Nelson1992,Wulff2007} due to various reasons ranging from lack of knowledge of the underlying physical process (with respect to the fully mechanistic modeling) to limitation in the amount of data as well as in measurement instruments (with respect to the fully empirical approach).
+Simplifying assumptions and at times extrapolation have to be made because of that limitations.
+In the end, closure laws in system code are of different origins and they become a major source of uncertainty in the application of \gls[hyper=false]{th} system codes, especially outside its validation domain.
