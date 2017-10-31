@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171031114714" modified="D:20171031133928"/>
+<info created="D:20171031114714" modified="D:20171031162722"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -893,7 +893,7 @@ h
 400 416 m
 432 416 l
 </path>
-<path matrix="1 0 -0 0.666667 0 176" stroke="black">
+<path matrix="1 0 0 0.666667 0 176" stroke="black">
 592 528 m
 592 516 l
 656 516 l
@@ -955,7 +955,7 @@ h
 576 448 l
 23.991 0 0 23.991 552.009 448 528.018 448 a
 </path>
-<path matrix="1 -0 0 1.04166 -360 21.5399" stroke="0">
+<path matrix="1 0 0 1.04166 -360 21.5399" stroke="0">
 548 432 m
 4 0 0 -4 552 432 556 432 a
 556 344 l
@@ -1236,7 +1236,7 @@ h
 640.437 340.169 m
 612 332 l
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" dash="dash dotted">
+<path matrix="1 0 0 1 -500 -124" stroke="black" dash="dash dotted" pen="heavier">
 632 376 m
 632 316 l
 684 316 l
@@ -1380,7 +1380,7 @@ circuit</text>
 32 492 m
 32 480 l
 </path>
-<path matrix="1 0 0 1 -360 0" stroke="black" dash="dash dotted">
+<path matrix="1 0 0 1 -360 0" stroke="black" dash="dash dotted" pen="fat">
 504 340 m
 512 348 l
 524 336 l
