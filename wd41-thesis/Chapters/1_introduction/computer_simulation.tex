@@ -45,6 +45,7 @@ As analytical solution
 
 % Introductory Paragraph
 During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with high-degree of conservatism.
+\marginpar{Conservative analysis}
 Conservatism called for the most penalizing modeling assumptions to ensure conservative results, which is far below their regulatory limits.
 This approach, though less realistic, was justified by limited modeling capabilities as well as limited knowledge of the physical process involved during those transients.
 However, it was later found that there are conditions where conservative assumptions do not necessarily lead to conservative (or even physical) predictions.
@@ -59,6 +60,7 @@ Both of these are clearly non-conservative and contradicting the initial conserv
 
 % Best-estimate Analysis
 Therefore, a more accurate prediction of two-phase flow transient behavior was deemed necessary for the safety analysis of nuclear power plant under accident conditions.
+\marginpar{Best-estimate analysis}
 As opposed to the conservative analysis, the term for this approach was coined \emph{best-estimate} analysis.
 Such an analysis calls for more physically sound thermal-hydraulics models with more realistic modeling assumptions which at the same time are also backed by experimental data obtained from numerous experimental programs conducted in Separate and Integral Effect Test Facilities.
 With the idea of having more realistic prediction in mind, a best-estimate \gls[hyper=false]{th} system code was developed.
@@ -68,6 +70,7 @@ It was developed using the current best understanding of flow processes expected
 % Thermal-Hydraulics System Code
 The typical structure of a system code is illustrated in Fig.~\ref{fig:ch1_th_system_code}.
 As can be seen, system code constitutes of several building blocks that can be used to model and simulate wide range of system and conditions.
+\marginpar{Thermal-hydraulics system code}
 The core of system code is a set of balance equations describing the dynamics of the state variables of the fluid.
 To close the system (i.e., to have the same number of equations as the number of unknowns), it has to be complemented by two additional set of constitutive equations.
 The first is the equation of state describing the thermodynamic relation between state variables of a given fluid.
@@ -84,17 +87,24 @@ The state-of-the-art model widely implemented in \gls[hyper=false]{th} system co
 \marginpar{Two-fluid model}
 This model separately treats the transport phenomena of the two-phases of fluid flow (gas and liquid) resulting in a set of six balance equations (mass, momentum, and energy for each of the two phases).
 The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions which give more realistic picture in a wide range of \gls[hyper=false]{npp} transients.
+\begin{figure}[bth]	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/chapter1/figures/nodalization}
+	\caption[Generic structure of a thermal-hydraulics (TH) system code]{Generic structure of a \glsfirst[hyper=false]{th} system code. The code and the system specified by the input deck define a \emph{simulator} of that system.}
+	\label{fig:ch1_nodalization}
+\end{figure}
 
 % Validity of Two-fluid Model
 The validity of the two-fluid model widely implemented in thermal-hydraulics system codes relies on the proper modeling of the transfer terms between phases and each phase with the boundary wall.
 The transfer terms include interfacial drag, interfacial heat transfer, and wall heat transfer.
-In principle, based on different two-phase flow pattern, different phase distribution as well as as different interfacial structure can be observed.
+In principle, based on different two-phase flow pattern, different phase distribution and different interfacial structure can be observed.
 As a result, each of those transfer terms takes different form with different parameters depending on the pattern of the two-phase flow.
 The transfer terms represent different physical processes taking place at each flow pattern;
 in other words, constitutes the \emph{physical models} of a system code.
 
 % Closure Laws, fully empirical
 These physical models, or the so-called \emph{closure laws}, close the set of balance equations for mass, momentum, and energy of the two phases.
+\emph{Closure laws}
 Based on their origin, closure laws can be classified into three categories: fully empirical, fully mechanistic, and semi-empirical \cite{Bestion2008}.
 \marginpar{Closure laws origin, fully empirical approach}
 Fully empirical are closure laws developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
