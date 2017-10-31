@@ -22,7 +22,7 @@ This definition highlights three main points.
 First, this definition accentuates the difference between a \emph{model} and its \emph{simulation}.
 Specifically, the former deals with the notion of representation, while the latter deals with the notion of imitation of a behavior.
 Secondly, what makes a model scientific is that it treats physical phenomena, process, or the behavior of a real world system as its subject.
-The model itself is often referred to as physical model.
+The model itself is then referred to as physical model\footnote{Note that this term is referring to the mathematical model of a physical process, and \emph{not} a physical copy of object of interest (vis-à-vis conceptual model). As of October $31$, $2017$ the entry ``physical model'' in Wikipedia refers to the latter.} .
 Thirdly and finally, the modifier \emph{computer} in the definition makes it explicit that digital computer is used to solve whatever mathematical models serve as the representation.
 This is usually the case for mathematical models that cannot be solved analytically.
 Though this limitation what makes a solution of the model possible in the first place, 
@@ -46,15 +46,15 @@ A \emph{simulation} or a \emph{calculation} \cite{Trucano2006} using a code can 
 \marginpar{Simulator}
 As a result, the term \emph{simulator} includes not only the code itself, but also to the particular system of interest being modeled using the code \cite{OHagan2006}.
 
+%-------------------------------------------------------------------------------------------------------------------------------------------
+\subsection[Deterministic Safety Analysis of Nuclear Power Plant]{Deterministic Safety Analysis of Nuclear Power Plant}\label{sub:intro_dsa}
+%-------------------------------------------------------------------------------------------------------------------------------------------
+
 % Goal of simulation and entry to safety analysis
 Scientific codes play a central role in the deterministic safety analysis of an \gls[hyper=false]{npp}.
 
 % Entry to Thermal-Hydraulics Code
 As noted in \cite{DAuria2012}
-
-%--------------------------------------------------------------------------------
-\subsection{Thermal-Hydraulics (TH) System Codes}\label{sub:intro_th_system_code}
-%--------------------------------------------------------------------------------
 
 % Conservative Analysis
 During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with high-degree of conservatism.
@@ -80,6 +80,10 @@ Such an analysis calls for more physically sound thermal-hydraulics models with 
 With the idea of having more realistic prediction in mind, a best-estimate \gls[hyper=false]{th} system code was developed.
 The code is designed to be a comprehensive tool capable of simulating realistically wide range of transients foreseen in \gls[hyper=false]{npp} operation.
 It was developed using the current best understanding of flow processes expected to happen during the transients.
+
+%--------------------------------------------------------------------------------
+\subsection{Thermal-Hydraulics (TH) System Codes}\label{sub:intro_th_system_code}
+%--------------------------------------------------------------------------------
 
 % Thermal-Hydraulics System Code, what and why
 A \gls[hyper=false]{th} system code is a tool to simulate the flow behavior in the reactor coolant system of an entire \gls[hyper=false]{npp} during wide range of transients foreseen in its operation.
@@ -135,11 +139,10 @@ The transfer terms include interfacial drag, interfacial heat transfer, and wall
 In principle, based on different two-phase flow pattern, different phase distribution and different interfacial structure can be observed.
 As a result, each of those transfer terms takes different form with different parameters depending on the pattern of the two-phase flow.
 The transfer terms represent different physical processes taking place at each flow pattern;
-in other words, constitutes the \emph{physical models}\footnote{Note that the term is referring to the mathematical model of a physical process, and \emph{not} a physical copy of object of interest (vis-à-vis conceptual model). As of October $31$, $2017$ the entry ``physical model'' in Wikipedia refers to the latter.} of a system code.
+in other words, constitutes the \emph{physical models} of a system code.
 
 % Closure Laws, fully empirical
 These physical models, or the so-called \emph{closure laws}, close the set of balance equations for mass, momentum, and energy of the two phases.
-\emph{Closure laws}
 Based on their origin, closure laws can be classified into three categories: fully empirical, fully mechanistic, and semi-empirical \cite{Bestion2008}.
 \marginpar{Closure laws origin}
 Fully empirical are closure laws developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
@@ -147,7 +150,7 @@ Based on their derivation, closure laws can be classified into three categories:
 \marginpar{Fully empirical approach}
 Fully empirical laws are developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
 Given comprehensive experimental data, these models tend to be accurate within the range of experimental condition (i.e., its validation domain).
-On the other hand, any extrapolation outside of that range can give dubious results.
+On the other hand, an extrapolation outside of that range can give dubious results.
 
 % fully mechanistic
 Fully mechanistic (i.e., \emph{phenomenological}) approach for developing closure laws lies at the other end of the spectrum.
