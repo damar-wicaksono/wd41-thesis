@@ -101,14 +101,14 @@ This is done by consolidating and adapting recent developments in the applied st
 	\item \emph{to statistically calibrate} the physical model parameters against various relevant experimental data.
 	The word \emph{to calibrate} carries a disparaging interpretation related to \emph{to tweak}.
 	However, using a Bayesian statistical framework, the aim of calibration is extended to simultaneously quantify the uncertainty of the parameter estimation.
-	The framework includes various sources of uncertainty which can be modeled using probabilistically, including the model bias term.
-	At the end, the parameters of interest will be either in the form of distributions conditioned on the data or samples generated from such distributions which are useful in the uncertainty analysis of code prediction.
-
-% Aim 4 (Extrapolation)
-	\item \emph{to validate} the statistical calibration results against experimental data set not used in the calibration step.
-	As calibration only conducted using experimental data of limited experimental conditions, it is important, at the minimum, to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena in the same facility but in different experimental conditions. 
+	The framework includes various sources of uncertainty which can be modeled probabilistically, including the model bias term.
+	At the end, the parameters of interest will be either in the form of distributions conditioned on the data or samples generated from such distributions (i.e., posterior distribution) which are useful in the uncertainty analysis of code prediction.
 
 \end{enumerate}
+
+Finally, as calibration only conducted using experimental data of limited experimental conditions, it is important to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena in the same facility but in different experimental conditions.
+That is to propagate the posterior uncertainty of the parameters and to compare the results against experimental data not used in the calibration step.
+	
 
 %----------------------------------------
 \subsection{Scope}\label{sub:intro_scope}
