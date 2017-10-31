@@ -2,8 +2,12 @@
 \section{Computer Simulation and Safety Analysis of Nuclear Power Plant}\label{sec:intro_computer_simulation}
 %************************************************************************************************************
 
-The ubiquity of computer simulation applications in many fields of science and engineering results in an even more pervasive definitions of the term \textit{scientific computer simulation} itself 
-and other associated terms such as \textit{model} and \textit{simulation}.
+%------------------------------------------------------------------------------------------
+\subsection{Scientific Computer Simulation}\label{sub:intro_scientific_computer_simulation}
+%------------------------------------------------------------------------------------------
+
+% A definition
+The ubiquity of computer simulation applications in many fields of science and engineering results in an even more pervasive definitions of the term \textit{scientific computer simulation} itself and other associated terms such as \textit{model} and \textit{simulation}.
 \marginpar{scientific computer simulation}
 Though most of the definitions in the literature are not necessarily in contradiction to each other, 
 to avoid confusion, this thesis adopts a recent definition proposed by Kaizer et al.\cite{Kaizer2015} quoted below,
@@ -13,6 +17,7 @@ to avoid confusion, this thesis adopts a recent definition proposed by Kaizer et
 	using limited mathematical concepts, symbols, and relations through the exercise or use of scientific computer model.
 \end{quote}
 
+% The definition, explained
 There are three main points highlighted in this definition.
 \marginpar{model, simulation, and computer simulation}
 First, this definition accentuates the difference between a \emph{model} and its \emph{simulation}.
@@ -21,9 +26,10 @@ Secondly, what makes a model scientific is that it treats physical phenomena or 
 Thirdly and finally, the modifier \emph{computer} in the definition makes it explicit that digital computer is used to solve whatever mathematical models serve as the representation.
 This is usually the case for mathematical models that cannot be solved analytically.
 Though this limitation what makes a solution of the model possible in the first place, 
-it also affects the solution and its possible interpretation and thus many computational-related aspects also need to be comprehensively considered.
+it also affects the solution and its possible interpretation and thus many computational-related aspects also often need to be comprehensively considered.
 
-Beven \cite{Beven2009} articulates this distinction into three levels of model: perceptual model (i.e., theoretical description of some physical phenomena), formal model (i.e., the mathematical description of it), and procedural model  (i.e., computer implementation of the formal model). For many physical system modeling applications, only the procedural model is able to make a quantitative prediction of the system. These distinctions are useful in acknowledging the level of approximation involved in moving from perceptual to procedural model.
+% A distincion by Beven
+Beven \cite{Beven2009} articulates this distinction into three levels of a scientific model: perceptual model (i.e., theoretical description of some physical phenomena), formal model (i.e., the mathematical description of it), and procedural model  (i.e., computer implementation of the formal model). For many physical system modeling applications, only the procedural model is able to make a quantitative prediction of the system. These distinctions are useful in acknowledging the level of approximation involved in moving from perceptual to procedural model.
 
 Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
 And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
@@ -108,6 +114,9 @@ These physical models, or the so-called \emph{closure laws}, close the set of ba
 Based on their origin, closure laws can be classified into three categories: fully empirical, fully mechanistic, and semi-empirical \cite{Bestion2008}.
 \marginpar{Closure laws origin, fully empirical approach}
 Fully empirical are closure laws developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
+Based on their derivation, closure laws can be classified into three categories: fully empirical, fully mechanistic, and semi-empirical \cite{Bestion2008}.
+\marginpar{Closure laws origins, fully empirical approach}
+Fully empirical laws are developed based only on the available representative experimental data by correlating transfer terms of interest with observed flow variables.
 Given comprehensive experimental data, these models tend to be accurate within the range of experimental condition (i.e., its validation domain).
 On the other hand, any extrapolation outside of that range can give dubious results.
 
