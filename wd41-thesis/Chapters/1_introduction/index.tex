@@ -2,10 +2,26 @@
 \chapter[Introduction]{Quantifying Uncertainty of Computer Model: Forward and Backward}\label{ch:intro}
 %******************************************************************************************************
 
-% Introductory Paragraph
+% Introductory Paragraphs
+In this opening chapter, some his chapter describes an approach to construct a fast surrogate model (metamodel) that approximates (or emulate) the input/output relationship of an expensive code for faster evaluation at any given input parameters values located in the specified domain.
+As argued in Section~\ref{sub:intro_statistical_metamodeling} this thesis used the one based on Gaussian stochastic process which results in a statistical metamodel. 
+
+% Overview of the chapter
+This opening chapter intends to introduce briefly the importance, the use and the challenges of using system code in simulating thermal-hydraulics behavior of \gls[hyper=false]{npp} in the context of its safety analysis.
+Section~\ref{sec:intro_computer_simulation} 
+It also defines the relevant terms used throughout the thesis.
+The uncertainty analysis is first introduced in Section~\ref{sec:intro_uncertainty_quantification}.
+The section also provides the context of the present doctoral research.
+
+% Objectives, Scope, and Statistical Framework
+Section~\ref{sec:intro_objectives_and_scope} then describes the statement of the problem followed by objectives and scope of the research.
+This thesis proposed a methodology comprises of three sequential steps to analyze a computer model with the overall goal to quantify the uncertainty.
+It consolidates and adapts recent developments of in the applied statistics literature.
+In relation to that, Section~\ref{sec:intro_statistical_framework} provides a broad overview of the research landscape on each of the proposed steps.
+Finally, Section~\ref{sec:intro_thesis_structure} briefly outlines the structure of the thesis.
 
 \input{Chapters/1_introduction/computer_simulation}
 \input{Chapters/1_introduction/uncertainty_quantification}
 \input{Chapters/1_introduction/research_objectives}
 \input{Chapters/1_introduction/statistical_framework}
-\input{Chapters/1_introduction/thesis_overview}
+\input{Chapters/1_introduction/thesis_structure}
