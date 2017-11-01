@@ -2,23 +2,26 @@
 \section{Uncertainty Quantification in Nuclear Engineering Thermal-Hydraulics}\label{sec:intro_uncertainty_quantification}
 %*************************************************************************************************************************
 
-% Complex Simulator
-Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
-And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
-This tendency has invited many critics over the year (citation needed).
-In nuclear science and engineering, for instance, Zuber \cite{Zuber2001} and Wullf \cite{Wulff2007} have long critized the development and the use of multi-fluid model for thermal-hydraulics simulation as high in complexity and in maintenance cost, but low in fidelity and its usefulness.
-
-The goal of computer simulation, complex or otherwise, is to provide prediction.
-The main characteristic (and source of criticism) of using multi-parameter complex model for simulation is that the the relationship between numerous inputs and outputs becomes increasingly opaque.
-The impact of changing one parameter alone, or especially together, on the prediction is hard to disentangle or intuit.
-Furthermore, as appropriate values of inputs might not be fully known, they are often given simply over range of interest containing different possible permissible values.
-It is thus seldom the case that one single simulation is sufficient to provide a reliable answer according to hardly any objective of computer simulation.
-As analytical solution
-
-\gls[hyper=false]{trace}
-
 % Introductory Paragraph
-In making a connection with the notion \emph{simulator}, 
+Before continuing the discussion of uncertainty analysis of code predictions, it will be worthwhile to define some additional terminologies to avoid later confusion.
+
+In making a connection with the notion of simulator \emph{simulator} introduced in Section~\ref{sec:intro_computer_simulation}, 
+recall that from Fig.~\ref{fig:ch1_th_system_code} \emph{input deck} and the code itself are distinct elements.
+Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hydraulics system in a more generic way, as an input/output model.
+\begin{figure}[bth]	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_io}
+	\caption[Simplified illustration of a simulator as an input/output model]{Simplified illustration of a simulator as an input/output model.}
+	\label{fig:ch1_simulator_io}
+\end{figure}
+Indeed input deck defines specific problem (i.e., system) of interest.
+It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
+It may also include the setting for the numerical solver.
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and are part of \emph{controllable inputs} denoted by $\bm{x}_c$. 
+Specifying the input deck, as far as user is concerned, completely defines the problem and the code will solve the conservation equations which output the dynamic state of relevant physical variables $\mathbf{u}(\bm{r}, t)$ (e.g., fluid pressure, temperature, wall temperature, etc.).
+The conservation equations are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
+These closure laws are, in turn, are parametrized with a set of model specific parameters denoted by $\bm{x}_m$.
+This set of parameters are referred to as the \emph{physical model parameters}.
 
 %----------------------------------------------------------------------------------------------
 \subsection{Statistical Uncertainty Analysis}\label{sub:intro_statistical_uncertainty_analysis}
