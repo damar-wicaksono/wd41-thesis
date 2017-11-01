@@ -1,3 +1,4 @@
+\newpage
 %************************************************************************************************************
 \section{Computer Simulation and Safety Analysis of Nuclear Power Plant}\label{sec:intro_computer_simulation}
 %************************************************************************************************************
@@ -38,7 +39,7 @@ Thus, these distinctions are useful in acknowledging the level of approximation 
 % Code
 A computer software that implements scientific models down to the solution algorithms for a particular (field-specific) application is called \emph{scientific code} or simply \emph{code} \cite{Trucano2006}.
 \marginpar{Code}
-Many modern implementation of scientific codes, apart from being possibly field-specific, are designed to be a comprehensive platform which allows for flexibility in modeling various systems ranging from the specifications of geometry, the initial and boundary conditions, and design variables to the settings for discretization scheme and numerical solver.
+Many modern implementation of scientific codes, apart from possibly being field-specific, are designed to be a comprehensive platform which allows for flexibility in modeling various systems ranging from the specifications of geometry, the initial and boundary conditions, and design variables to the settings for discretization scheme and numerical solver.
 Examples of such software are multi-physics simulation platforms, computational fluid dynamics codes, and \gls[hyper=false]{th} system codes.
 
 % Simulator
@@ -46,15 +47,46 @@ A \emph{simulation} or a \emph{calculation} \cite{Trucano2006} using a code can 
 \marginpar{Simulator}
 As a result, the term \emph{simulator} includes not only the code itself, but also to the particular system of interest being modeled using the code \cite{OHagan2006}.
 
-%-------------------------------------------------------------------------------------------------------------------------------------------
-\subsection[Deterministic Safety Analysis of Nuclear Power Plant]{Deterministic Safety Analysis of Nuclear Power Plant}\label{sub:intro_dsa}
-%-------------------------------------------------------------------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------------------------------------------------------
+\subsection[Codes and Safety Analysis of Nuclear Power Plant]{Codes and Safety Analysis of Nuclear Power Plant}\label{sub:intro_dsa}
+%-----------------------------------------------------------------------------------------------------------------------------------
 
 % Goal of simulation and entry to safety analysis
-Scientific codes play a central role in the deterministic safety analysis of an \gls[hyper=false]{npp}.
+Scientific codes play a central role in the deterministic safety analysis of an \gls[hyper=false]{npp},
+a \emph{physics-based} evaluation to demonstrate that a set of \emph{acceptance criteria} are met for all specified postulated transients  
+The acceptance criteria, a set of limits and conditions to ensure the integrity of the safety barrier, is set by regulatory bodies.
 
-% Entry to Thermal-Hydraulics Code
-As noted in \cite{DAuria2012}
+% Deterministic safety analysis
+Such a physics-based evaluation is achieved by the use of codes to predict the response of the plant to a postulated transient.
+\marginpar{Codes in safety analysis of NPP}
+As noted in \cite{IAEA2009,DAuria2012}, there are four distinct but related disciplines associated with the different physical processes involved that are important in the analysis of the plant:
+the neutronics of the core;
+the thermo-mechanics of the structure (including the fuel);
+the radiological analysis of a possible release;
+and, the system thermal-hydraulics of the plant, the subject of the present thesis\footnote{Ref.~\cite{DAuria2012} added one additional key disciplines, namely: reliability analysis. It is excluded in the above listing as it is not technically a discipline of \emph{physics}.}.
+Each of these disciplines (or domain) is, in turn, characterized by a distinct set of governing physics of the process involved and thus analyzed by a distinct code.
+
+% Entry to Conservative vs Best Estimate
+
+% From IAEA
+%Safety analyses are analytical evaluations of physical phenomena occurring
+%at nuclear power plants, made for the purpose of demonstrating that safety
+%requirements, such as the requirement for ensuring the integrity of barriers
+%against the release of radioactive material and various other acceptance criteria,
+%are met for all postulated initiating events that could occur over a broad range of
+%operational states, including different levels of availability of the safety systems.
+%There are two basic types of safety analysis: deterministic safety analysis and
+%probabilistic safety analysis.
+
+%Deterministic safety analyses for a nuclear power plant predict the response
+%to postulated initiating events. A specific set of rules and acceptance criteria is
+%applied. Typically, these should focus on neutronic, thermohydraulic, radiological,
+%thermomechanical and structural aspects, which are often analysed with different
+%computational tools. The computations are usually carried out for predetermined
+%operating modes and operational states, and the events include anticipated
+%transients, postulated accidents, selected beyond design basis accidents and severe
+%accidents with core degradation. The results of computations are spatial and time
+%dependences of various physical variables (e.g. neutron flux; thermal power of the 
 
 % Conservative Analysis
 During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with high-degree of conservatism.
@@ -93,7 +125,7 @@ The simulation of the plant behavior also requires an explicit modeling of the g
 
 % Nodalization
 The coolant circuit of a \gls[hyper=false]{npp} is a complex system.
-This includes the reactor pressure vessel and all its intricate contents; kilometers of interconnecting pipes; scores of valves, pumps, and tanks; as well as numerous special components from steam generator to condenser.
+The system includes the reactor pressure vessel and all its intricate contents; kilometers of interconnecting pipes; scores of valves, pumps, and tanks; as well as numerous special components from steam generator to condenser.
 \marginpar{Nodalization}
 The first major simplification taken for describing the fluid flow in the coolant circuit is by $1$-dimensional \emph{nodalization}.
 Through nodalization, a \gls[hyper=false]{npp} is decomposed into a set of interconnected \emph{nodes} which holds discretized information of fluid flow (see Fig.~\ref{fig:ch1_nodalization}).
