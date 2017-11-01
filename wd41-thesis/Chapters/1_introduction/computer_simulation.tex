@@ -117,7 +117,7 @@ The system includes the reactor pressure vessel and all its intricate contents; 
 The first major simplification taken for describing the fluid flow in the coolant circuit is by $1$-dimensional \emph{nodalization}.
 Through nodalization, a \gls[hyper=false]{npp} is decomposed into a set of interconnected \emph{nodes} which holds discretized information of fluid flow (see Fig.~\ref{fig:ch1_nodalization}).
 As a result, a node becomes the primitive data structure in system code.
-Due to the $1$-dimensional simplification of the flow\footnote{some system codes allows a $3$-dimensional modeling for \emph{selected} components, mainly the reactor pressure vessel where $3$-dimensional effects might be of relevance to safety analysis. However, as of today, no system code supports full $3$-dimensional modeling of all the components in the coolan circuit.}, a node is only characterized by its \emph{fluid cell} (with attributes of length and free volume) and its \emph{faces} (with attributes of flow area, hydraulic diameter, and orientation). 
+Due to the $1$-dimensional simplification of the flow\footnote{some system codes allow a $3$-dimensional modeling for selected components, mainly the reactor pressure vessel where $3$-dimensional effects might be of relevance to safety analysis. However, as of today, no system code supports full $3$-dimensional modeling of all the components in the coolant circuit.}, a node is only characterized by its \emph{fluid cell} (with attributes of length and free volume) and its \emph{faces} (with attributes of flow area, hydraulic diameter, and orientation). 
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/nodalization}
