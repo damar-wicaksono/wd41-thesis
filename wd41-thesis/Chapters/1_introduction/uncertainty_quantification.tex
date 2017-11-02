@@ -38,22 +38,36 @@ Simplifying assumptions, approximations, and expert judgments to some degree are
 
 % Best-estimate, plus uncertainty
 Hence, best-estimate analysis has to be complemented with uncertainty analysis.
+\marginpar{Best-estimate plus uncertainty}
 The ultimate goal of uncertainty analysis is to associate code prediction with its uncertainty.
 These combined quantities are then compared with certain regulator safety limits (e.g., \gls[hyper=false]{pct}) to check whether the limits still fall outside the uncertainty band of the code prediction.
 
 % Source of possible uncertainties
+There are several known sources of uncertainty that render the prediction on $\bm{u}(\mathbf{r},t)$ and its derived quantities uncertain.
+The following are the sources of primary interest in the present research:
+\begin{enumerate}
+	\item 1 
+  \item 2
+  \item 3
+\end{enumerate}
 
-% Statistical uncertainty analysis, Inputs as random variables 
+% Forward uncertainty quantification, Inputs as random variables
+In statistical uncertainty analysis, the controllable inputs and physical model parameters are modeled as random variables ($\bm{\mathcal{X}}_c$ and $\bm{\mathcal{X}}_m$, respectively) equipped with probability distributions.
+\marginpar{Forward uncertainty quantification}
+Then using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and they are used to run the code multiple times.
+Finally, statistics of code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
+In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
+The practice of propagating uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
+\begin{figure}[bth]	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
+	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction. Notice that the simulator has been parametrized by the controllable inputs and physical model parameters, each of which are represented as random variable.}
+	\label{fig:ch1_simulator_uq_forward}
+\end{figure}
 
 % Source of uncertainty, initial and boundary condition
 
 % Source of uncertainty, physical model parameters
-\begin{figure}[bth]	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
-	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction.}
-	\label{fig:ch1_simulator_uq_forward}
-\end{figure}
 
 % Model parameters
 The physical model parameters, however, are conceptually different.
@@ -71,7 +85,7 @@ The conceptual distinction related to model parameters will be revisited in Chap
 % Introductory paragraph, motivation
 The physical model parameters often cannot be measured directly.
 In this situation, in order to estimate their values,
-basic experiments of well-specified conditions are carried out and correlations (models) are fitted based on the experimental data. 
+experiments with well-specified conditions are carried out and correlations (models) are fitted based on the experimental data. 
 Recall that from the discussion of closure laws origin in Section~\ref{sub:intro_th_system_code},
 this can also apply to phenomenological models where free parameters are allowed to be tuned according to match the experimental data.
 Ultimately, the optimal value of the estimated parameter is implemented in the code.
