@@ -14,14 +14,15 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 	\caption[Simplified illustration of a simulator as an input/output model]{Simplified illustration of a simulator as an input/output model.}
 	\label{fig:ch1_simulator_io}
 \end{figure}
+
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and are part of \emph{controllable inputs} denoted by $\bm{x}_c$. 
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$. 
 Specifying the input deck, as far as user is concerned, completely defines the problem and the code will solve the conservation equations which output the dynamic state of relevant physical variables $\mathbf{u}(\bm{r}, t)$ (e.g., fluid pressure, temperature, wall temperature, etc.).
 The conservation equations are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
-These closure laws are, in turn, are parametrized with a set of model specific parameters denoted by $\bm{x}_m$.
-This set of parameters are referred to as the \emph{physical model parameters}.
+These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$.
+This set of parameters is referred to as the \emph{physical model parameters}.
 
 %----------------------------------------------------------------------------------------------
 \subsection{Statistical Uncertainty Analysis}\label{sub:intro_statistical_uncertainty_analysis}
@@ -37,7 +38,7 @@ Simplifying assumptions, approximations, and expert judgments to some degree are
 % Best-estimate, plus uncertainty
 Hence, best-estimate analysis has to be complemented with uncertainty analysis.
 The ultimate goal of uncertainty analysis is to associate code prediction with its uncertainty.
-These combined quantities are then compared with certain regulator safety limits (e.g., \gls[hyper=false]) to check whether the limits still fall outside the uncertainty band of the code prediction.
+These combined quantities are then compared with certain regulator safety limits (e.g., \gls[hyper=false]{pct}) to check whether the limits still fall outside the uncertainty band of the code prediction.
 
 % Source of possible uncertainties
 
