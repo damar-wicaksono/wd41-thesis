@@ -18,7 +18,7 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$.
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, being \emph{controllable} is specifically related to the conditions of a physical experiment which are controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
 These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
  
