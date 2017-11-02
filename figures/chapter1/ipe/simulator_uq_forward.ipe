@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171102160130"/>
+<info created="D:20171101220623" modified="D:20171102170750"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -297,18 +297,22 @@ h
 <text matrix="1 0 0 1 20 -24" transformations="translations" pos="292 644" stroke="black" type="label" width="154.758" height="6.926" depth="1.93" valign="baseline">\bf{Closure Laws, sub-models, etc.}</text>
 <text matrix="1 0 0 1 12 20" transformations="translations" pos="296 644" stroke="black" type="label" width="148.015" height="8.965" depth="2.99" valign="baseline" size="large" style="math">b(\mathbf{u}, \mathbf{x}_c, \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u})\}) = 0</text>
 <text matrix="1 0 0 1 48 -20" transformations="translations" pos="288 624" stroke="black" type="label" width="99.718" height="7.473" depth="2.49" valign="baseline" style="math"> \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u});\, i&gt;0\}</text>
-<text matrix="1 0 0 1 -412 -84" transformations="translations" pos="452 752" stroke="black" type="label" width="17.816" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_c</text>
-<path matrix="1 0 0 1 -132 -4" stroke="black" pen="heavier" arrow="normal/large">
+<text matrix="1 0 0 1 -412 -76" transformations="translations" pos="452 752" stroke="black" type="label" width="17.816" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_c</text>
+<path matrix="1 0 0 1 -132 20" stroke="black" pen="heavier" arrow="normal/large">
 200 660 m
 236 660 l
 </path>
-<text matrix="1 0 0 1 -412 -116" transformations="translations" pos="452 752" stroke="black" type="label" width="23.017" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m</text>
-<text matrix="1 0 0 1 -48 192" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="18.667" depth="13.71" valign="top">\it{uncertain} \\
+<text matrix="1 0 0 1 -412 -124" transformations="translations" pos="452 752" stroke="black" type="label" width="23.017" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m</text>
+<text matrix="1 0 0 1 -48 200" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="18.667" depth="13.71" valign="top">\it{uncertain} \\
 controllable inputs</text>
-<text matrix="1 0 0 1 -48 96" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="18.667" depth="13.71" valign="top">\it{uncertain} \\
+<text matrix="1 0 0 1 -48 88" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="18.667" depth="13.71" valign="top">\it{uncertain} \\
 model parameters</text>
 <text matrix="1 0 0 1 456 108" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="12.701" depth="7.72" valign="top">\it{uncertain} \\
 outputs</text>
 <text matrix="1 0 0 1 -60.1594 -6.71183" transformations="translations" pos="188 648" stroke="black" type="label" width="102.557" height="8.302" depth="0" valign="baseline" size="large">Selected sub-models</text>
+<path matrix="1 0 0 1 -132 -28" stroke="black" pen="heavier" arrow="normal/large">
+200 660 m
+236 660 l
+</path>
 </page>
 </ipe>
