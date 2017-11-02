@@ -18,7 +18,7 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, being \emph{controllable} is specifically related to the conditions of a physical experiment which are controlled by the experimentalist.}.
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, \emph{controllable} inputs corresponds to equivalent parameters in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
 These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
  
@@ -58,7 +58,7 @@ Then using \gls[hyper=false]{mc} technique, samples are generated from their res
 Finally, statistics of code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
 The practice of propagating uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
-\begin{figure}[bth]	
+\begin{figure}[!bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
 	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction. Notice that the simulator has been parametrized by the controllable inputs and physical model parameters, each of which are represented as random variable.}
