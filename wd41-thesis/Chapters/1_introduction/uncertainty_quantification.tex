@@ -51,7 +51,7 @@ These combined quantities are then compared with certain regulator safety limits
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
-	\caption[Simplified illustration of forward uncertainty quantification in a simulator prediction.]{Simplified illustration of forward uncertainty quantification in a simulator prediction.}
+	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction.}
 	\label{fig:ch1_simulator_uq_forward}
 \end{figure}
 
@@ -59,7 +59,27 @@ These combined quantities are then compared with certain regulator safety limits
 \subsection{Inverse Uncertainty Quantification}\label{sub:intro_uq_inverse}
 %--------------------------------------------------------------------------
 
+% Introductory paragraph, motivation
+The physical model parameters often cannot be measured directly.
+To estimate their values, basic experiments of well-specified conditions are carried out and correlations are fitted based on the experimental data. 
+Recall that from the discussion of closure laws origin in Section~\ref{sub:intro_th_system_code},
+this can also apply to phenomenological models where free parameters are allowed to be tuned according to match the experimental data.
+Ultimately, the optimal value of the estimated parameter is implemented in the code.
+As the code is used to simulate multiple phenomena during a transient, additional experiments are carried out in more complex test facilities.
+Finally, based on the data obtained, the models can be validated and calibrated.
+
 % Inverse uncertainty
+To obtain the uncertainty associated with the model parameters obtained in the manner above, the problem can be posed as an inverse problem.
+In this setting, given a set of experimental data $\{\mathbf{D}\}$ with a known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the physical model parameters.
+It is important to acknowledge various sources of uncertainty previously mentioned:
+experimental data and controllable inputs are observed but perhaps there remains residual uncertainty and observation error associated with them;
+and the associated models are also only an approximation of the real physical processes with a possible, but unknown, systematic bias.
+\bigfigure[pos=tbhp,
+           opt={width=1.0\textwidth},
+           label={fig:ch1_simulator_uq_inverse},
+           shortcaption={Simplified flowchart of inverse uncertainty quantification of model parameters.}]
+{../figures/chapter1/figures/simulator_uq_inverse}
+{Simplified flowchart of inverse quantification for model parameters of a simulator.}
 
 % Connection to PREMIUM Benchmark
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
