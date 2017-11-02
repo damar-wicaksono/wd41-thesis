@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171102165936"/>
+<info created="D:20171101220623" modified="D:20171102230728"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -562,12 +562,12 @@ model parameters \\
 </path>
 <text matrix="1 0 0 1 136 -376" transformations="translations" pos="452 752" stroke="black" type="label" width="14.844" height="11.812" depth="0" valign="baseline" size="LARGE" style="math">\mathbf{D}</text>
 <text matrix="1 0 0 1 532 -132.188" transformations="translations" pos="80 528" stroke="black" type="minipage" width="76" height="13.61" depth="8.64" valign="top" size="large">Experimental data</text>
-<text matrix="1 0 0 1 248 -436" transformations="translations" pos="452 752" stroke="black" type="label" width="48.382" height="12.915" depth="4.3" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m\,|\,\mathbf{D}</text>
-<path matrix="1 -0 0 1 312 -340" stroke="black" pen="heavier" arrow="normal/large">
+<text matrix="1 0 0 1 248 -436" transformations="translations" pos="452 752" stroke="black" type="label" width="71.691" height="12.915" depth="4.3" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m\,|\,\mathbf{D}, \mathbf{x}_c</text>
+<path matrix="1 0 0 1 312 -340" stroke="black" pen="heavier" arrow="normal/large">
 200 660 m
 236 660 l
 </path>
-<path matrix="1 -0 0 1.6 20 -195.388" stroke="black" pen="heavier" arrow="normal/large">
+<path matrix="1 0 0 1.6 20 -195.388" stroke="black" pen="heavier" arrow="normal/large">
 576 352 m
 576 332 l
 </path>
