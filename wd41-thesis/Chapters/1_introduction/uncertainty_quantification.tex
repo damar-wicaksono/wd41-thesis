@@ -24,9 +24,9 @@ The conservation equations are closed with additional set of closure laws (and o
 These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$.
 This set of parameters is referred to as the \emph{physical model parameters}.
 
-%----------------------------------------------------------------------------------------------
-\subsection{Statistical Uncertainty Analysis}\label{sub:intro_statistical_uncertainty_analysis}
-%----------------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+\subsection{Forward Uncertainty Quantification}\label{sub:intro_uq_forward}
+%--------------------------------------------------------------------------
 
 % Best-estimate, limitation
 As explained, best-estimate analysis uses more realistic modeling assumptions for analyzing transient behavior of \gls[hyper=false]{npp}.
@@ -48,16 +48,24 @@ These combined quantities are then compared with certain regulator safety limits
 
 % Source of uncertainty, physical model parameters
 
+%--------------------------------------------------------------------------
+\subsection{Inverse Uncertainty Quantification}\label{sub:intro_uq_inverse}
+%--------------------------------------------------------------------------
+
 % Inverse uncertainty
 
 % Connection to PREMIUM Benchmark
+The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
+This led to the \gls[hyper=false]{premium} project.
+Its main goal is to report the state-of-the-art of the available methodologies to quantify the uncertainty in the physical models parameters.
+The following will briefly describe the project and highlight its main findings.
 
-%---------------------------------------------------------------
-\subsection{OECD/NEA PREMIUM Benchmark}\label{sub:intro_premium}
-%---------------------------------------------------------------
+%-------------------------------------------------------------
+\subsection{OECD/NEA PREMIUM project}\label{sub:intro_premium}
+%-------------------------------------------------------------
 
 % Introductory paragraph
-The \gls[hyper=false]{premium} benchmark was an activity launched by the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} in $2012$ and concluded in $2016$ with the aim to advance the methods for quantifying the uncertainties associated with the physical model parameters in \gls[hyper=false]{th} system codes.
+The \gls[hyper=false]{premium} project was an activity launched by the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} in $2012$ and concluded in $2016$ with the aim to advance the methods for quantifying the uncertainties associated with the physical model parameters in \gls[hyper=false]{th} system codes.
 It was the continuation of the previous project \gls[hyper=false]{bemuse}, which concetrated on the propagation and sensitivity analysis of the input uncertainties in large scale simulation (large break \gls[hyper=false]{loca}).
 The main finding of \gls[hyper=false]{bemuse} can be found in \cite{Perez2011}.
 The emphasis of the \gls[hyper=false]{premium} benchmark was placed on the derivation of the model parameters uncertainty and their validation.
