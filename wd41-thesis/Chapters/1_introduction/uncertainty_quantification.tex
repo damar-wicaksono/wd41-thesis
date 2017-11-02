@@ -18,7 +18,7 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$ that define a particular instance in which the simulator is to be used\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
 These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
  
@@ -44,11 +44,25 @@ These combined quantities are then compared with certain regulator safety limits
 
 % Source of possible uncertainties
 There are several known sources of uncertainty that render the prediction on $\bm{u}(\mathbf{r},t)$ and its derived quantities uncertain.
+\marginpar{Sources of uncertainty}
 The following are the sources of primary interest in the present research:
 \begin{enumerate}
-	\item 1 
-  \item 2
-  \item 3
+
+	\item Uncertainty associated with the controllable.
+	In case of a controlled experiment, these controllable inputs are supposed to be observed (and \emph{controlled}).
+	However, such an observation might contain observation error due to instrument imprecision and/or inherent variability. 
+	
+  \item Uncertainty associated with the physical model parameters.
+	The value of the physical model parameters are often not known a priori.
+	As such the uncertainty associated with them are epistemic in nature.
+	They can either be estimated using an experimental data or expert judgment.
+	
+  \item Uncertainty associated with the physical models.
+	The physical models themselves are still approximations, even with perfectly known model parameters.
+	If derived in fully mechanistic manner, it might be the case that some processes are unaccounted for due to inherent complexity and lack of knowledge (i.e., the case of \emph{missing physics}).
+	On the contrary, if derived fully empirically, it might be the case that the models are derived separately for different more elementary processes, while in the applications of the code multiple of such models are used in concert. Despite each being validated, it is fair to question the validity of models used in an ensemble.
+	Any of these tend to cause a systematic bias on the code prediction, the extend of which is unknown and uncertain.
+	As a result, this source of uncertainty is referred to as model \emph{bias}, \emph{inadequacy}, or \emph{discrepancy}.
 \end{enumerate}
 
 % Forward uncertainty quantification, Inputs as random variables
@@ -94,10 +108,10 @@ Finally, based on the data obtained, the models can be validated.
 
 % Inverse uncertainty
 To obtain the uncertainty associated with the model parameters obtained in the manner above, the problem can be posed as an inverse problem.
-In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with a known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the physical model parameters.
+In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the parameters in the physical model used to predict the same quantity as the experimental data.
 It is important here to acknowledge various sources of uncertainty previously mentioned:
 experimental data and controllable inputs are observed but perhaps there remains residual variability and observation error associated with them;
-and the associated models are also only an approximation of the real physical processes with a possible, but unknown, systematic bias.
+and the associated models are also only approximations with a possible, but unknown, systematic bias.
 
 % Bayesian framework
 In a probabilistic setting, a natural way to make an inference of unobserved parameters based on observed data is through the Bayes' theorem,
@@ -106,7 +120,7 @@ In a probabilistic setting, a natural way to make an inference of unobserved par
 \end{equation*}
 where the left-hand side of the equation signifies the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
 The right-hand side constitutes of the likelihood function $p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c)$ (probability of observing data given the parameters), the prior of the model parameters $p(\bm{x}_m)$ (the initial state of knowledge regarding the parameters values before observing the data),
-while the denominator signifies a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain then a prior probability can be put on them as well.}.
+while the denominator signifies a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as in the case of variability, then a prior probability can be put on them as well.}.
 Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the inverse quantification described above.
 \bigfigure[pos=tbhp,
            opt={width=1.0\textwidth},
@@ -114,6 +128,11 @@ Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the in
            shortcaption={Simplified flowchart of inverse uncertainty quantification of model parameters.}]
 {../figures/chapter1/figures/simulator_uq_inverse}
 {Simplified flowchart of inverse quantification for model parameters of a simulator.}
+
+The formulation and computation of the posterior above can be seen as a calibration exercise.
+That is, it seeks to adjust the model parameters such that it is consistent with the observed data (i.e., calibration data) under the assumed likelihood and the prior.
+However, instead of a single value (or values in case of multiple parameters), the resulting posterior is a \gls[hyper=false]{pdf}, conditioned on the observed data.
+This posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data set.
 
 % Connection to PREMIUM Benchmark
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
