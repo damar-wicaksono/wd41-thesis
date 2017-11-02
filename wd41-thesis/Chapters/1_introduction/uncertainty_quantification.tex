@@ -55,18 +55,28 @@ These combined quantities are then compared with certain regulator safety limits
 	\label{fig:ch1_simulator_uq_forward}
 \end{figure}
 
+% Model parameters
+The physical model parameters, however, are conceptually different.
+\marginpar{Model parameters}
+The physical models referred to in this thesis are usually represented either in the form of correlation or phenomenological (mechanistic) model.
+The parameters associated with these models are derived from experimental data.
+They can either represent physically meaningful quantities (e.g., reaction rate coefficient) or not (i.e., a tuning parameter).
+In either way, there are uncertainties associated with these parameters especially as the conditions of their intended use is making prediction can be (at times, very) different than the conditions of their derivation.
+The conceptual distinction related to model parameters will be revisited in Chapter~\ref{ch:bayesian_calibration}.
+
 %--------------------------------------------------------------------------
 \subsection{Inverse Uncertainty Quantification}\label{sub:intro_uq_inverse}
 %--------------------------------------------------------------------------
 
 % Introductory paragraph, motivation
 The physical model parameters often cannot be measured directly.
-To estimate their values, basic experiments of well-specified conditions are carried out and correlations are fitted based on the experimental data. 
+In this situation, in order to estimate their values,
+basic experiments of well-specified conditions are carried out and correlations (models) are fitted based on the experimental data. 
 Recall that from the discussion of closure laws origin in Section~\ref{sub:intro_th_system_code},
 this can also apply to phenomenological models where free parameters are allowed to be tuned according to match the experimental data.
 Ultimately, the optimal value of the estimated parameter is implemented in the code.
-As the code is used to simulate multiple phenomena during a transient, additional experiments are carried out in more complex test facilities.
-Finally, based on the data obtained, the models can be validated and calibrated.
+As the code is used to simulate multiple phenomena during a transient, additional experiments are carried out in larger, more complex test facilities.
+Finally, based on the data obtained, the models can be validated.
 
 % Inverse uncertainty
 To obtain the uncertainty associated with the model parameters obtained in the manner above, the problem can be posed as an inverse problem.
