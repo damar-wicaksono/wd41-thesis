@@ -5,7 +5,7 @@
 % Introductory Paragraph
 Before continuing the discussion of uncertainty analysis of code predictions, it will be worthwhile to define some additional terminologies to avoid later confusion.
 
-In making a connection with the notion of simulator \emph{simulator} introduced in Section~\ref{sec:intro_computer_simulation}, 
+In making a connection with the notion of \emph{simulator} introduced in Section~\ref{sec:intro_computer_simulation}, 
 recall that from Fig.~\ref{fig:ch1_th_system_code} an \emph{input deck} is distinct from the code itself.
 Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hydraulics system in a more generic way, as an input/output model.
 \begin{figure}[bth]	
@@ -18,7 +18,7 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, \emph{controllable} inputs corresponds to equivalent parameters in a physical experiment which can be controlled by the experimentalist.}.
+Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$\footnote{later on, \emph{controllable} inputs corresponds to the equivalent parameters in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
 These closure laws are, in turn, parametrized with a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
  
@@ -33,7 +33,7 @@ In practice, these raw simulation outputs are further post-processed to obtain t
 As explained, best-estimate analysis uses more realistic modeling assumptions for analyzing transient behavior of \gls[hyper=false]{npp}.
 It attempts as realistically as possible to describe the behavior of the relevant physical processes occur during the plant transient.
 And yet, even the best available understanding of the physical process is still limited.
-Understanding of complex phenomena might not yet adequate and data support for some processes can be very limited.
+Understanding of complex phenomena might not yet adequate and data support for some processes can be very limited.s
 Simplifying assumptions, approximations, and expert judgments to some degree are unavoidable and still required to have a complete analysis.
 
 % Best-estimate, plus uncertainty
