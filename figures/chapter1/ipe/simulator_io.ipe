@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171102103955"/>
+<info created="D:20171101220623" modified="D:20171102160137"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -256,10 +256,10 @@ h
 <view layers="alpha" active="alpha"/>
 <text layer="alpha" matrix="1 0 0 1 0 -28" transformations="translations" pos="264 708" stroke="black" type="label" width="139.786" height="8.307" depth="2.32" valign="baseline" size="large">\bf{Conservation Equations}</text>
 <text matrix="1 0 0 1 -32 16" transformations="translations" pos="112 688" stroke="black" type="label" width="79.543" height="9.962" depth="2.79" valign="baseline" size="Large">\bf{Input Deck}</text>
-<text matrix="1 0 0 1 -96 32" transformations="translations" pos="188 648" stroke="black" type="label" width="50.481" height="8.174" depth="2.32" valign="baseline" size="large">Geometry</text>
-<text matrix="1 0 0 1 -112 12" transformations="translations" pos="188 648" stroke="black" type="label" width="90.132" height="8.302" depth="0" valign="baseline" size="large">Initial Conditions</text>
-<text matrix="1 0 0 1 -124 -8" transformations="translations" pos="188 648" stroke="black" type="label" width="109.481" height="8.307" depth="2.32" valign="baseline" size="large">Boundary Conditions</text>
-<text matrix="1 0 0 1 -120 -28" transformations="translations" pos="188 648" stroke="black" type="label" width="102.557" height="8.302" depth="0" valign="baseline" size="large">Selected sub-models</text>
+<text matrix="1 0 0 1 -96 36" transformations="translations" pos="188 648" stroke="black" type="label" width="50.481" height="8.174" depth="2.32" valign="baseline" size="large">Geometry</text>
+<text matrix="1 0 0 1 -112 20" transformations="translations" pos="188 648" stroke="black" type="label" width="86.88" height="8.302" depth="0" valign="baseline" size="large">Initial conditions</text>
+<text matrix="1 0 0 1 -124 4" transformations="translations" pos="188 648" stroke="black" type="label" width="106.23" height="8.307" depth="2.32" valign="baseline" size="large">Boundary conditions</text>
+<text matrix="1 0 0 1 -128 -13.753" transformations="translations" pos="188 648" stroke="black" type="label" width="114.584" height="8.307" depth="2.32" valign="baseline" size="large">Material specifications</text>
 <path matrix="1.15625 0 0 1.18519 -20.75 -133.333" stroke="black">
 56 720 m
 56 612 l
@@ -274,7 +274,7 @@ h
 408 736 l
 h
 </path>
-<text matrix="1 0 0 1 -136 -48" transformations="translations" pos="188 648" stroke="black" type="label" width="133.379" height="8.307" depth="2.32" valign="baseline" size="large">Other Controllable Inputs</text>
+<text matrix="1 0 0 1 -136 -48.943" transformations="translations" pos="188 648" stroke="black" type="label" width="129.156" height="8.307" depth="2.32" valign="baseline" size="large">Other controllable inputs</text>
 <path matrix="1 0 0 1.23077 40 -171.077" stroke="black">
 204 724 m
 204 620 l
@@ -296,9 +296,10 @@ h
 200 660 m
 236 660 l
 </path>
-<text matrix="1 0 -0 1.16243 164 -94.369" transformations="translations" pos="112 688" stroke="black" type="label" width="122.049" height="9.962" depth="2.79" valign="baseline" size="Large">\bf{TH System Code}</text>
+<text matrix="1 0 0 1.16243 164 -94.369" transformations="translations" pos="112 688" stroke="black" type="label" width="122.049" height="9.962" depth="2.79" valign="baseline" size="Large">\bf{TH System Code}</text>
 <text matrix="1 0 0 1 -28 -24" transformations="translations" pos="292 644" stroke="black" type="label" width="154.758" height="6.926" depth="1.93" valign="baseline">\bf{Closure Laws, sub-models, etc.}</text>
 <text matrix="1 0 0 1 -36 20" transformations="translations" pos="296 644" stroke="black" type="label" width="148.015" height="8.965" depth="2.99" valign="baseline" size="large" style="math">b(\mathbf{u}, \mathbf{x}_c, \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u})\}) = 0</text>
 <text matrix="1 0 0 1 0 -20" transformations="translations" pos="288 624" stroke="black" type="label" width="99.718" height="7.473" depth="2.49" valign="baseline" style="math"> \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u});\, i&gt;0\}</text>
+<text matrix="1 0 0 1 -124 -32" transformations="translations" pos="188 648" stroke="black" type="label" width="102.557" height="8.302" depth="0" valign="baseline" size="large">Selected sub-models</text>
 </page>
 </ipe>
