@@ -159,24 +159,35 @@ From this point of view, the approach uses the experimental data to better infor
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
 This led to the \gls[hyper=false]{premium} project.
 Its main goal is to report the state-of-the-art of the available methodologies to quantify the uncertainty in the physical models parameters.
-The following will briefly describe the project and highlight its main findings.
+The following will briefly describe the project and highlight the main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi}.
 
 %-------------------------------------------------------------
 \subsection{OECD/NEA PREMIUM project}\label{sub:intro_premium}
 %-------------------------------------------------------------
 
 % Introductory paragraph
-The \gls[hyper=false]{premium} project was an activity launched by the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} in $2012$ and concluded in $2016$ with the aim to advance the methods for quantifying the uncertainties associated with the physical model parameters in \gls[hyper=false]{th} system codes.
+The \gls[hyper=false]{premium} project was an activity launched by the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} with the aim to advance the methods for quantifying the uncertainties associated with the physical model parameters in \gls[hyper=false]{th} system codes.
 It was the continuation of the previous project \gls[hyper=false]{bemuse}, which concetrated on the propagation and sensitivity analysis of the input uncertainties in large scale simulation (large break \gls[hyper=false]{loca}).
 The main finding of \gls[hyper=false]{bemuse} can be found in \cite{Perez2011}.
 The emphasis of the \gls[hyper=false]{premium} benchmark was placed on the derivation of the model parameters uncertainty and their validation.
 
 % Scope of the Project
-The scope of the project was limited to the physical models in system code to simulate bottom reflood phenomena.
+The scope of the project was limited to the simulation of the phenomenon of core reflood and quenching under conditions representative of a \gls[hyper=false]{pwr} large break \gls[hyper=false]{loca}.
 Experimental data from two \glspl[hyper=false]{setf} was made available for the purpose of uncertainty quantification of the model parameters as well as validation.
 For the model parameters uncertainty quantification, the data from the \gls[hyper=false]{feba} reflood facility was used.
 Although, the experimental data were taken at several controllable inputs (i.e., boundary conditions) in practice calibration was conducted using only one.
 The derive uncertainties were then propagated and compared with the experimental data from other experimental runs of \gls[hyper=false]{feba} and from another reflood facility (PERICLES).
-Thus the main goal of the project followed the approach of statistical uncertainty analysis explained above.
+Thus the main goal of the project followed the approach of statistical uncertainty analyses explained above.
 
-% Main Findings
+% Phase
+Sixteen organizations from $11$ different countries participated in the $4$-year project ($2012$--$2016$) using $6$ different \gls[hyper=false]{th} system codes.
+Each participant employing a chosen simulation code and methodology had to contribute to the $5$ following phases of the benchmark:
+\begin{enumerate}
+	\item Phase 1: Description of the selected simulation code and methodology.
+  \item Phase 2: Identification of the uncertain parameters that are most relevant to \gls[hyper=false]{pwr} \gls[hyper=false]{loca} reflooding simulations.
+  \item Phase 3: Quantification of the uncertainties if the parameters, using available data from the \gls[hyper=false]{feba} experiment.
+  \item Phase 4: Propagation of the quantified uncertainties as part of a blind benchmark exercise based on data from the PERICLES experiment.
+  \item Phase 5: Contribution to the analysis and synthesis of the benchmark results.
+\end{enumerate}
+
+% Lesssons learned
