@@ -71,7 +71,7 @@ In statistical uncertainty analysis, the controllable inputs and physical model 
 Then using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and they are used to run the code multiple times.
 Finally, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
-The practice of propagating uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
+The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
 \begin{figure}[!bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
@@ -151,5 +151,11 @@ The main finding of \gls[hyper=false]{bemuse} can be found in \cite{Perez2011}.
 The emphasis of the \gls[hyper=false]{premium} benchmark was placed on the derivation of the model parameters uncertainty and their validation.
 
 % Scope of the Project
+The scope of the project was limited to the physical models in system code to simulate bottom reflood phenomena.
+Experimental data from two \glspl[hyper=false]{setf} was made available for the purpose of uncertainty quantification of the model parameters as well as validation.
+For the model parameters uncertainty quantification, the data from the \gls[hyper=false]{feba} reflood facility was used.
+Although, the experimental data were taken at several controllable inputs (i.e., boundary conditions) in practice calibration was conducted using only one.
+The derive uncertainties were then propagated and compared with the experimental data from other experimental runs of \gls[hyper=false]{feba} and from another reflood facility (PERICLES).
+Thus the main goal of the project followed the approach of statistical uncertainty analysis explained above.
 
 % Main Findings
