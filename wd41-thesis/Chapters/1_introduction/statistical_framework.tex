@@ -18,6 +18,7 @@ It seeks to quantify the importance of each model input parameter on the output.
 
 % Classifications
 Various classifications exist in the literature to categorize \gls[hyper=false]{sa} techniques \cite{Frey2002, Ionescu-Bujor2004, Cacuci2004, Saltelli2008, Iooss2015}.
+\marginpar{Classifications}
 In the review by Ionescu-Bujor and Cacuci \cite{Ionescu-Bujor2004, Cacuci2004}, 
 \gls[hyper=false]{sa} techniques are classified with respect to their scope (local vs. global) and to their framework (deterministic vs. statistical).
 In the review of \gls[hyper=false]{sa} methods by Iooss and Lemaître \cite{Iooss2015}, 
@@ -25,34 +26,30 @@ and the work by Saltelli et al. \cite{Saltelli2008} and by Santner et al. \cite{
 the statistical framework is implicitly assumed deriving ideas from design of experiment, 
 and the classification is based on the parameter space of interest (local vs. global).
 
+% Local sensitivity analysis
 Local analysis is based on calculating the effect on the model output of small perturbations around a nominal parameter value. 
 \marginpar{local sensitivity analysis}
 Often the perturbation is done one parameter at a time thus approximating the first-order partial derivative of the model output with respect to the perturbed parameter. 
 The derivative can be computed through efficient adjoint formulation \cite{Cacuci2003,Cacuci2010} capable of handling large number of parameters.
 
-Besides being numerically efficient, 
-sensitivity coefficients obtained from local deterministic sensitivity analysis have the advantage of being intuitive in their interpretation, 
-irrespective of the method employed \cite{Razavi2015}. 
+% Local sensitivity analysis, advantages
+Besides being numerically efficient, sensitivity coefficients obtained from local deterministic sensitivity analysis have the advantage of being intuitive in their interpretation, irrespective of the method employed \cite{Razavi2015}.
 The intuitiveness stems from the aforementioned equivalence to the derivative of the output with respect to each parameter \cite{Ionescu-Bujor2004} around a specifically defined point (i.e., nominal parameter values). 
-Thus the coefficients can be readily compared over different modeled systems, 
-independently of the range of parameters variations.
+Thus the coefficients can be readily compared over different modeled systems, independently of the range of parameters variations.
 
+% Global sensitivity analysis
 The global analysis, on the other hand, 
 \marginpar{global sensitivity analysis}
-seeks to explore the input parameters space across its range of variation 
-and then quantify the input parameter importance based on a characterization of the resulting output response surface. 
-In global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, 
-the characterization is aimed at the identification of the system’s critical points (e.g., maxima, minima, saddle points, etc.). 
-In statistical global methods \cite{Saltelli2008, Saltelli2004, Saltelli2006}, 
-the characterization is aimed at measuring the dispersion of the output based on variance \cite{Sobol2001,Cukier1978}, 
-correlation \cite{Helton1993}, or elementary effects \cite{Morris1991}.
+seeks to explore the input parameters space across its range of variation and then quantify the input parameter importance based on a characterization of the resulting output response surface. 
+In global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, the characterization is aimed at the identification of the system’s critical points (e.g., maxima, minima, saddle points, etc.). 
+In statistical global methods \cite{Saltelli2008, Saltelli2004, Saltelli2006}, the characterization is aimed at measuring the dispersion of the output based on variance \cite{Sobol2001,Cukier1978}, correlation \cite{Helton1993}, or elementary effects \cite{Morris1991}.
 
-Due to the different characterizations, 
-the global statistical framework can potentially give spurious results not comparable to the results from local method 
-as there is no unique definition of sensitivity coefficient provided by different global methods \cite{Razavi2015}. 
-In some cases, different methods can give different and inconsistent parameters importance ranking \cite{Saltelli2008,Saltelli2004}. 
+% Global sensitivity analysis, difficulty
+Due to the different characterizations, the global statistical framework can potentially give spurious results not comparable to the results from local method as there is no unique definition of sensitivity coefficient provided by different global methods \cite{Razavi2015}. 
+In some cases, different methods can give different and inconsistent parameters importance ranking \cite{Saltelli2008,Saltelli2004}.
 Furthermore, the result of the analysis can be highly dependent to the assumed input parameters probability distribution and/or their range of variation \cite{Cacuci2004,Cacuci2010}.
 
+% Global sensitivity analysis, advantages
 Yet, despite the aforementioned shortcomings, 
 \marginpar{global statistical sensitivity analysis}
 the global statistical framework has three particular attractive features relevant to the present study. 
@@ -155,10 +152,3 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 
 % Recent development in nuclear engineering application
 \lipsum[1]
-
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=0.85\textwidth]{../figures/methodologicalRoadmap/methodologicalRoadmap.pdf}
-	\caption{Methodological Roadmap of the Thesis}
-	\label{fig:methodological_roadmap}
-\end{sidewaysfigure}
