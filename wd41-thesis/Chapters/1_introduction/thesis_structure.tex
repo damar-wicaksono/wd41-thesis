@@ -1,29 +1,33 @@
+\newpage
 %------------------------------------------------------------------
 \section{Structure of the Thesis}\label{sec:intro_thesis_structure}
 %------------------------------------------------------------------
 
-This doctoral thesis is organized into seven chapters.
-The $3$ statistical frameworks introduced in the previous section, 
-bookended by a review of the concerned physical model and an independent validation study, 
-becomes the central part of the thesis.
+This doctoral thesis is organized into six chapters.
+The description and the application on a thermal-hydraulics simulation of the three statistical approaches introduced in the previous section, preceded by brief review on the selected physical models, constitute the main chapters of the present thesis (see Fig.~\ref{fig:ch1_methodological_roadmap}).
+They are bookended by an introductory chapter (this chapter) and a concluding chapter.
+\begin{figure}[bth]	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/chapter1/figures/methodological_roadmap}
+	\caption[The structure of thesis.]{The structure of the thesis, its main chapters.}
+	\label{fig:ch1_methodological_roadmap}
+\end{figure}
 
-\textsc{Chapter 1}
+\textsc{Chapter~\ref{ch:trace_reflood}} gives an overview of the system thermal-hydraulics code \gls[hyper=false]{trace} with an emphasis on its reflood phenomena modeling and simulation.
+The chapter also introduces the reflood experiment at the \gls[hyper=false]{feba} facility which serves as the experimental basis of this work.
+The chapter includes the selection of initial parameters relevant for reflood simulation and the propagation of their uncertainties on the code prediction.
 
-\textsc{Chapter 2}
+\textsc{Chapter~\ref{ch:gsa}} provides the application of statistical sensitivity analysis method for the reflood model.
 
-\textsc{Chapter 3}
+\textsc{Chapter~\ref{ch:gp_metamodel}}
 
-\textsc{Chapter 4}
+\textsc{Chapter~\ref{ch:bayesian_calibration}}
 
-\textsc{Chapter 5}
+\textsc{Chapter~\ref{ch:conclusions}}
 
-\textsc{Chapter 6}
-
-Following this introduction, 
-the second chapter gives an overview of the system thermal-hydraulics code TRACE with an emphasis on its reflood phenomena modeling and simulation.
-The chapter also introduces the reflood experiment at the \gls{feba} facility which serves as the experimental basis of this work
-as well as its model in TRACE code.
-Referring to the first part of the methodology in Fig~.\ref{fig:methodological_roadmap}, 
-the chapter includes the selection of initial parameters relevant for reflood simulation and the propagation of their uncertainties on the code prediction.
-
-Chapter~\ref{ch:gsa} provides the application of statistical sensitivity analysis method for the reflood model.
+%\begin{sidewaysfigure}
+%	\centering
+%	\includegraphics[width=0.85\textwidth]{../figures/methodologicalRoadmap/methodologicalRoadmap.pdf}
+%	\caption{Methodological Roadmap of the Thesis}
+%	\label{fig:methodological_roadmap}
+%\end{sidewaysfigure}
