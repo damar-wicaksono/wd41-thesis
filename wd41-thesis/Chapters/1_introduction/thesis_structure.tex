@@ -4,7 +4,9 @@
 %------------------------------------------------------------------
 
 This doctoral thesis is organized into six chapters.
-The description and the application on a thermal-hydraulics simulation of the three statistical approaches introduced in the previous section, preceded by brief review on the selected physical models, constitute the main chapters of the present thesis (see Fig.~\ref{fig:ch1_methodological_roadmap}).
+The description and the application on a thermal-hydraulics simulation of the three statistical approaches introduced before,
+preceded by a brief review on the \gls[hyper=false]{th} system code \gls[hyper=false]{trace} as well as the selected phenomenon of interest and the associated physical models,
+constitute the main chapters of the present thesis (see Fig.~\ref{fig:ch1_methodological_roadmap}).
 They are bookended by an introductory chapter (this chapter) and a concluding chapter.
 \begin{figure}[bth]	
 	\centering
@@ -25,7 +27,10 @@ The second idea is to reduce the dimensionality of the input parameters space th
 The third and final idea is to investigate, quantitatively, the effect of variation of parameters on the overall time-dependent output variation through variance decomposition.
 The presented methods are then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} and the results are discussed. 
 
-\textsc{Chapter~\ref{ch:gp_metamodel}} presents the method for model approximation adopted in this thesis.
+\textsc{Chapter~\ref{ch:gp_metamodel}} presents an approach to construct a fast surrogate model that approximates the inputs/outputs relationship of a computationally expensive simulator.
+A minimum theoretical foundation of the method is first introduced, before moving on to describing an approach adapting the method for dealing with highly multivariate output via dimension reduction.
+Afterward, the application of the method to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} is presented and discussed.
+In the end, a metamodel of the \gls[hyper=false]{trace} model is constructed and validated in anticipation of the high cost of the calibration approach presented in the following chapter.
 
 \textsc{Chapter~\ref{ch:bayesian_calibration}}
 
