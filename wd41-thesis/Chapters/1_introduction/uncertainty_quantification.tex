@@ -18,6 +18,7 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 Indeed input deck defines specific problem (i.e., system) of interest.
 It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
+\marginpar{Controllable inputs and model parameters}
 Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$ that define a particular instance in which the simulator is to be used\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
 These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
@@ -34,7 +35,7 @@ In practice, these raw simulation outputs are further post-processed to obtain t
 As explained, best-estimate analysis uses more realistic modeling assumptions for analyzing transient behavior of \gls[hyper=false]{npp}.
 It attempts as realistically as possible to describe the behavior of the relevant physical processes occur during the plant transient.
 And yet, even the best available understanding of the physical process is still limited.
-Understanding of complex phenomena might not yet adequate and data support for some processes can be very limited.s
+Understanding of complex phenomena might not yet adequate and data support for some processes can be very limited.
 Simplifying assumptions, approximations, and expert judgments to some degree are unavoidable and still required to have a complete analysis.
 
 % Best-estimate, plus uncertainty
