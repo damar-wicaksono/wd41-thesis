@@ -14,12 +14,18 @@ They are bookended by an introductory chapter (this chapter) and a concluding ch
 \end{figure}
 
 \textsc{Chapter~\ref{ch:trace_reflood}} gives an overview of the system thermal-hydraulics code \gls[hyper=false]{trace} with an emphasis on its reflood phenomena modeling and simulation.
-The chapter also introduces the reflood experiment at the \gls[hyper=false]{feba} facility which serves as the experimental basis of this work.
+The chapter also introduces the reflood experiment at the \gls[hyper=false]{feba} facility which serves as the experimental basis of this work followed by its modeling in \gls[hyper=false]{trace} code.
+This model becomes the running example in the three subsequent chapters to which the proposed methods are applied.
 The chapter includes the selection of initial parameters relevant for reflood simulation and the propagation of their uncertainties on the code prediction.
 
-\textsc{Chapter~\ref{ch:gsa}} provides the application of statistical sensitivity analysis method for the reflood model.
+\textsc{Chapter~\ref{ch:gsa}} introduces the \gls[hyper=false]{gsa} analysis methods adopted in this thesis with three key underlying ideas.
+The first is to reduce the dimensionality of the code output space.
+As the output of the simulation is time-dependent, dimension reduction is carried out while trying to preserve the interpretability of the results.
+The second idea is to reduce the dimensionality of the input parameters space through parameter screening.
+The third and final idea is to investigate, quantitatively, the effect of variation of parameters on the overall time-dependent output variation through variance decomposition.
+The presented methods are then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} and the results are discussed. 
 
-\textsc{Chapter~\ref{ch:gp_metamodel}}
+\textsc{Chapter~\ref{ch:gp_metamodel}} presents the method for model approximation adopted in this thesis.
 
 \textsc{Chapter~\ref{ch:bayesian_calibration}}
 
