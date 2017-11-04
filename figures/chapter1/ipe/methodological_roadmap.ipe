@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171104112139"/>
+<info created="D:20171101220623" modified="D:20171104211037"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -762,7 +762,7 @@ Gaussian Process \\
 Metamodel</text>
 <text matrix="1 0 0 1 272 188" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="17.825" depth="12.86" valign="top" size="Large">\textbf{Chapter 3} \\
 Global Sensitivity Analysis</text>
-<text matrix="1 0 0 1 272 80" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="17.825" depth="12.86" valign="top" size="Large">\textbf{Chapter 6} \\
+<text matrix="1 0 0 1 272 80" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="17.825" depth="12.86" valign="top" size="Large">\textbf{Chapter 5} \\
 Bayesian Calibration</text>
 <text matrix="1 0 0 1 108 320" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="25.388" depth="20.44" valign="top" size="Large">\textbf{Chapter 2} \\
 Forward Model and \\
