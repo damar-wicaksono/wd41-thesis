@@ -1,3 +1,26 @@
 %**************************************************************************************************************************************
 \section[\texttt{gsa-module}]{\texttt{gsa-module}: Python3 Implementation of Global Sensitivity Analysis Methods}\label{app:gsa_module}
 %**************************************************************************************************************************************
+
+\texttt{gsa-module} is a Python3 package implementing several global sensitivity analysis methods for computer/simulation experiments.
+The implementation is based on a black-box approach where the computer model (or any generic function) is externally implemented to the module itself.
+The module accepts the model outputs and the design of experiment (optional, only for certain methods) and compute the associated sensitivity measures.
+The package also includes routines to generate normalized design of experiment file to be used in the simulation experiment based on several algorithms (such as simple random sampling or latin hypercube) as well as simple routines to post-processed multivariate raw code output such as its maximum, minimum, or average.
+
+The general calculation flow chart involved in using the \texttt{gsa-module} can be seen in the figure below.
+\bigfigure[pos=tbhp,
+           opt={width=0.95\textwidth},
+           label={fig:ch1_trace_simexp},
+           shortcaption={Flowchart of \texttt{trace-simexp}.}]
+{../figures/appendices/gsa-module/gsa_module}
+{Flowchart of \texttt{trace-simexp}.}
+
+\paragraph{Main Features}
+
+\paragraph{Requirements}
+
+\paragraph{Installation}
+
+\paragraph{Documentation}
+
+\paragraph{License}
