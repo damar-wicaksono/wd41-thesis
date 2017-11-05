@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171105030728"/>
+<info created="D:20171101220623" modified="D:20171105191652"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -504,11 +504,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="0.967213 0 0 2.02765 -278.033 -639.152" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="11.667" depth="6.7" valign="top" size="huge">\textbf{Driver Scripts}</text>
-<path matrix="1 0 0 1 0 64" stroke="white" pen="heavier" arrow="normal/normal">
-492 0 m
-528 0 l
-</path>
+<text layer="alpha" matrix="0.967213 0 0 2.02765 -278.033 -607.152" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="11.667" depth="6.7" valign="top" size="huge">\textbf{Driver Scripts}</text>
 <path stroke="black">
 372 572 m
 372 572 l
@@ -516,82 +512,7 @@ h
 372 572 l
 h
 </path>
-<group matrix="1 0 0 1 -48 64">
-<path matrix="1.14286 0 0 1.16667 -78.2861 -63.3347" fill="lightgray">
-128 404 m
-128 308 l
-296 308 l
-296 404 l
-h
-</path>
-<text matrix="1 0 0 1 -72 0" transformations="translations" pos="144 416" stroke="black" type="label" width="97.447" height="10.516" depth="3.83" valign="baseline" size="LARGE">\texttt{Pre-process}</text>
-<text matrix="1 0 0 1 -48 0" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="28.7" depth="23.77" valign="top" size="large">Perturb the \texttt{TRACE} parameters \\
-listed in the list of parameters file \\
-according to the values \\
-specified in the design matrix file</text>
-<text matrix="1 0 0 1 -84 52" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large">$\circ$</text>
-<text matrix="1 0 0 1 -48 -60" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="21.732" depth="16.79" valign="top" size="large">Generate directory structures \\
-that contains spawned \\
-\texttt{TRACE} input decks</text>
-<text matrix="1 0 0 1 -84 -8" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
-<path matrix="1.25 0 0 1.125 -96 -54" stroke="black" pen="fat">
-128 432 m
-128 304 l
-288 304 l
-288 432 l
-h
-</path>
-</group>
-<group matrix="1 0 0 1 -48 64">
-<path matrix="1.14286 0 0 1.20376 401.714 -78.3176" fill="lightgray">
-128 404 m
-128 308 l
-296 308 l
-296 404 l
-h
-</path>
-<text matrix="1 0 0 1 408 0" transformations="translations" pos="144 416" stroke="black" type="label" width="106.305" height="10.516" depth="3.83" valign="baseline" size="LARGE">\texttt{Post-process}</text>
-<text matrix="1 0 0 1 432 -28" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="28.7" depth="23.77" valign="top" size="large">Post-process each \texttt{xtv} files and \\
-extract the variables listed in \\
-the list of graphic variables \\
-into separate \texttt{csv} files</text>
-<text matrix="1 0 0 1 396 24" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
-<path matrix="1.25 0 0 1.125 384 -54" stroke="black" pen="fat">
-128 432 m
-128 304 l
-288 304 l
-288 432 l
-h
-</path>
-</group>
-<group matrix="1 0 0 1 -48 64">
-<path matrix="1.14286 0 0 1.16667 161.714 -63.3333" fill="lightgray">
-128 404 m
-128 308 l
-296 308 l
-296 404 l
-h
-</path>
-<path matrix="1.25 0 0 1.125 144 -54" stroke="black" pen="fat">
-128 432 m
-128 304 l
-288 304 l
-288 432 l
-h
-</path>
-<text matrix="1 0 0 1 168 0" transformations="translations" pos="144 416" stroke="black" type="label" width="62.011" height="10.521" depth="0" valign="baseline" size="LARGE">\texttt{Execute}</text>
-<text matrix="1 0 0 1 192 0" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="15.099" depth="10.14" valign="top" size="large">Submit and manage \texttt{TRACE} jobs \\
-in paraller (as sequential batches) </text>
-<text matrix="1 0 0 1 156 52" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
-<text matrix="1 0 0 1 192 -64" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="21.732" depth="16.79" valign="top" size="large">Generate directory structures \\
-that contains spawned \\
-\texttt{TRACE} input decks</text>
-<text matrix="1 0 0 1 156 -12" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
-<text matrix="1 0 0 1 192 -32" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="14.774" depth="9.8" valign="top" size="large">Convert  \texttt{xtv} to \texttt{dmx} output file \\
-to save disk space</text>
-<text matrix="1 0 0 1 156 20" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
-</group>
-<group matrix="1 0 0 1 12 128.001">
+<group matrix="1 0 0 1 12 160.001">
 <path matrix="1.25 0 0 1.07692 704 112" stroke="black" fill="1">
 32 160 m
 48 156
@@ -634,19 +555,19 @@ h
 </path>
 <text matrix="1 0 0 1 612 152" transformations="translations" pos="140 144" stroke="black" type="label" width="38.265" height="10.672" depth="0" valign="baseline" size="Huge">\texttt{csv}</text>
 </group>
-<path matrix="1 0 0 1 8 64" stroke="black" pen="ultrafat" arrow="normal/large">
+<path matrix="1 0 0 0.75 8 166" stroke="black" pen="ultrafat" arrow="normal/large">
 96 248 m
 96 280 l
 </path>
-<path matrix="1 0 0 1 240 64" stroke="black" pen="ultrafat" arrow="normal/large">
+<path matrix="1 0 0 0.75 256 166" stroke="black" pen="ultrafat" arrow="normal/large">
 96 248 m
 96 280 l
 </path>
-<path matrix="1 0 0 1 464 64" stroke="black" pen="ultrafat" arrow="normal/large">
+<path matrix="1 0 0 0.75 496 166" stroke="black" pen="ultrafat" arrow="normal/large">
 96 248 m
 96 280 l
 </path>
-<path matrix="1 0 0 1 500 96" stroke="black" pen="heavier">
+<path matrix="1 0 0 1 716 128" stroke="black" pen="heavier">
 32 160 m
 48 156
 64 168
@@ -656,9 +577,9 @@ h
 32 208 l
 h
 </path>
-<text matrix="1 0 0 1 412 128" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="14.54" depth="9.57" valign="top" size="Large" style="center">\texttt{exec} \\
+<text matrix="1 0 0 1 628 160" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="15.424" depth="10.45" valign="top" size="Large" style="center">\texttt{postpro} \\
 Info file</text>
-<path matrix="1 0 0 1 716 96" stroke="black" pen="heavier">
+<path matrix="1.25 0 0 1.07692 464 -31.9994" stroke="black" pen="heavier">
 32 160 m
 48 156
 64 168
@@ -668,9 +589,21 @@ Info file</text>
 32 208 l
 h
 </path>
-<text matrix="1 0 0 1 628 128" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="15.424" depth="10.45" valign="top" size="Large" style="center">\texttt{postpro} \\
+<text matrix="1 0 0 1 384 16.0006" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{aptplot}\\
+Executable</text>
+<path matrix="1 0 0 1 288 128" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 200 160" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="14.54" depth="9.57" valign="top" size="Large" style="center">\texttt{prepro} \\
 Info file</text>
-<path matrix="1.25 0 0 1.07692 488 -71.9994" stroke="black" pen="heavier">
+<path matrix="1.25 0 0 1.07692 24 112.001" stroke="black" pen="heavier">
 32 160 m
 48 156
 64 168
@@ -680,57 +613,9 @@ Info file</text>
 32 208 l
 h
 </path>
-<text matrix="1 0 0 1 408 -23.9994" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{aptplot}\\
-Executable</text>
-<path matrix="1.25 0 0 1.07692 256 -72" stroke="black" pen="heavier">
-32 160 m
-48 156
-64 168
-80 168
-96 168 c
-96 208 l
-32 208 l
-h
-</path>
-<text matrix="1 0 0 1 176 -24" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{TRACE}\\
-Executable</text>
-<path matrix="1.25 0 0 1.07692 256 0.00064" stroke="black" pen="heavier">
-32 160 m
-48 156
-64 168
-80 168
-96 168 c
-96 208 l
-32 208 l
-h
-</path>
-<text matrix="1 0 0 1 176 48.0006" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{xtv2dmx}\\
-Executable</text>
-<path matrix="1 0 0 1 272 96" stroke="black" pen="heavier">
-32 160 m
-48 156
-64 168
-80 168
-96 168 c
-96 208 l
-32 208 l
-h
-</path>
-<text matrix="1 0 0 1 184 128" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="14.54" depth="9.57" valign="top" size="Large" style="center">\texttt{prepro} \\
-Info file</text>
-<path matrix="1.25 0 0 1.07692 24 80.0006" stroke="black" pen="heavier">
-32 160 m
-48 156
-64 168
-80 168
-96 168 c
-96 208 l
-32 208 l
-h
-</path>
-<text matrix="1 0 0 1 -56 128.001" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="16.425" depth="11.47" valign="top" size="Large" style="center">List of \\
+<text matrix="1 0 0 1 -56 160.001" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="16.425" depth="11.47" valign="top" size="Large" style="center">List of \\
 Parameters</text>
-<path matrix="1 0 0 1 40 16" stroke="black" pen="heavier">
+<path matrix="1 0 0 1 40 52" stroke="black" pen="heavier">
 32 160 m
 48 156
 64 168
@@ -740,9 +625,9 @@ Parameters</text>
 32 208 l
 h
 </path>
-<text matrix="1 0 0 1 -48 48" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="16.346" depth="11.39" valign="top" size="Large" style="center">Design \\
+<text matrix="1 0 0 1 -48 84" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="16.346" depth="11.39" valign="top" size="Large" style="center">Design \\
 Matrix</text>
-<path matrix="1.25 0 0 1.07692 24 -71.9994" stroke="black" pen="heavier">
+<path matrix="1.25 0 0 1.07692 24 -31.9994" stroke="black" pen="heavier">
 32 160 m
 48 156
 64 168
@@ -752,60 +637,296 @@ Matrix</text>
 32 208 l
 h
 </path>
-<text matrix="1 0 0 1 -56 -23.9994" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="17.746" depth="12.78" valign="top" size="Large" style="center">Base \texttt{TRACE}\\
+<text matrix="1 0 0 1 -56 16.0006" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="17.746" depth="12.78" valign="top" size="Large" style="center">Base \texttt{TRACE}\\
 Input Deck</text>
-<path matrix="1 0 0 1 0 64" stroke="black" pen="ultrafat" arrow="normal/large">
+<path matrix="1 0 0 1 0 96" stroke="black" pen="ultrafat" arrow="normal/large">
 704 368 m
 736 368 l
 </path>
-<path matrix="1.5625 0 0 1.00001 470 15.9981" stroke="black" pen="heavier">
-32 160 m
-48 156
-64 168
-80 168
-96 168 c
-96 208 l
-32 208 l
-h
+<path stroke="black" pen="heavier" arrow="normal/normal">
+696 448 m
+704 448 l
+704 312 l
+740 312 l
 </path>
-<text matrix="1 0 0 1 400 52" transformations="translations" pos="124 168" stroke="black" type="minipage" width="92" height="17.825" depth="12.86" valign="top" size="Large" style="center">List of \\
-Graphic Vars.</text>
-<path matrix="0.909091 0 0 1 19.6364 64" stroke="black" arrow="normal/normal">
-216 352 m
-228 352 l
-228 216 l
-304 216 l
-</path>
-<path matrix="0.894737 0 0 1 48 64" stroke="black" arrow="normal/normal">
-456 352 m
-468 352 l
-468 216 l
-532 216 l
-</path>
-<path matrix="0.846154 0 0 1 107.077 64" stroke="black" arrow="normal/normal">
-696 352 m
-708 352 l
-708 216 l
-748 216 l
-</path>
-<text matrix="0.967213 0 0 2.02765 -278.033 -1087.15" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="24.113" depth="19.16" valign="top" size="huge">\textbf{Inputs and} \\
+<text matrix="0.967213 0 0 2.02765 -278.033 -1047.15" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="24.113" depth="19.16" valign="top" size="huge">\textbf{Inputs and} \\
 \textbf{Auxiliary Files}</text>
 <text matrix="0.967213 0 0 2.02765 361.967 -583.152" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="12.816" depth="7.84" valign="top" size="Huge">\textbf{\texttt{trace-simexp}}</text>
-<path stroke="white" arrow="normal/normal">
+<path matrix="1 0 0 1 0 32" stroke="white" arrow="normal/normal">
 836 524 m
 836 504 l
 </path>
-<path stroke="white" arrow="normal/normal">
+<path matrix="1 0 0 1 0 32" stroke="white" arrow="normal/normal">
 8 372 m
 8 344 l
 </path>
 <path stroke="white" arrow="normal/normal">
+388 588 m
+416 588 l
+</path>
+<path matrix="1 0 0 0.981104 0 10.3432" stroke="black" dash="dashed" pen="heavier">
+56 340 m
+56 124 l
+152 124 l
+152 340 l
+h
+</path>
+<path matrix="1.91667 0 0 0.981481 -288 10.2963" stroke="black" dash="dashed" pen="heavier">
+288 340 m
+288 124 l
+384 124 l
+384 340 l
+h
+</path>
+<path matrix="1.72414 0 0 0.981481 -386.759 10.2963" stroke="black" dash="dashed" pen="heavier">
+512 340 m
+512 124 l
+628 124 l
+628 340 l
+h
+</path>
+<group matrix="1 0 0 1 36 160">
+<path matrix="1 0 0 1 36 48" stroke="white" arrow="normal/normal">
 288 32 m
 320 32 l
 </path>
-<path stroke="white" arrow="normal/normal">
-388 588 m
-416 588 l
+<path matrix="1.25 0 0 1.07692 240 -111.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 236 -115.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 232 -119.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 228 -123.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 148 -76" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="17.229" depth="12.26" valign="top" size="Large" style="center">\texttt{TRACE}\\
+Inputs</text>
+</group>
+<group matrix="1 -0 0 1 64 -80">
+<path matrix="1.25 0 0 1.07692 256 48.0006" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 176 96.0006" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{xtv2dmx}\\
+Executable</text>
+</group>
+<group matrix="1 -0 0 1 -24 -15.9994">
+<path matrix="1.25 0 0 1.07692 256 -16" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 176 32" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{TRACE}\\
+Executable</text>
+</group>
+<group matrix="1 0 0 1 72 -80">
+<path matrix="1.5625 0 0 1.00001 470 63.9981" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 400 100" transformations="translations" pos="124 168" stroke="black" type="minipage" width="92" height="17.825" depth="12.86" valign="top" size="Large" style="center">List of \\
+Graphic Vars.</text>
+</group>
+<group matrix="1 0 0 1 12 0">
+<path matrix="1 0 0 1 296 208" stroke="white" arrow="normal/normal">
+288 32 m
+320 32 l
+</path>
+<path matrix="1.25 0 0 1.07692 500 48.001" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 496 44.001" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 492 40.001" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<path matrix="1.25 0 0 1.07692 488 36.001" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 408 84" transformations="translations" pos="124 168" stroke="black" type="minipage" width="72" height="15.83" depth="10.87" valign="top" size="Large" style="center">\texttt{TRACE}\\
+\texttt{dmx} files</text>
+</group>
+<group matrix="1 0 0 1 20 0">
+<path matrix="1 0 0 1 504 128" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
+</path>
+<text matrix="1 0 0 1 416 160" transformations="translations" pos="124 168" stroke="black" type="minipage" width="56" height="14.54" depth="9.57" valign="top" size="Large" style="center">\texttt{exec} \\
+Info file</text>
+</group>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+216 448 m
+224 448 l
+224 312 l
+288 312 l
+</path>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+224 312 m
+224 240 l
+288 240 l
+</path>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+456 448 m
+464 448 l
+464 312 l
+528 312 l
+</path>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+464 312 m
+464 240 l
+528 240 l
+</path>
+<path matrix="1.14286 0 0 1.16667 -126.286 32.6653" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
+</path>
+<text matrix="1 0 0 1 -120 96" transformations="translations" pos="144 416" stroke="black" type="label" width="97.447" height="10.516" depth="3.83" valign="baseline" size="LARGE">\texttt{Pre-process}</text>
+<text matrix="1 0 0 1 -96 96" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="28.7" depth="23.77" valign="top" size="large">Perturb the \texttt{TRACE} parameters \\
+listed in the list of parameters file \\
+according to the values \\
+specified in the design matrix file</text>
+<text matrix="1 0 0 1 -132 148" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 -96 36" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="21.732" depth="16.79" valign="top" size="large">Generate directory structures \\
+that contains spawned \\
+\texttt{TRACE} input decks</text>
+<text matrix="1 0 0 1 -132 88" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<path matrix="1.25 0 0 1.09375 -144 55.5" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
+</path>
+<path matrix="1.14286 0 0 1.16667 113.714 32.6667" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
+</path>
+<path matrix="1.25 0 0 1.09375 96 55.5" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
+</path>
+<text matrix="1 0 0 1 120 96" transformations="translations" pos="144 416" stroke="black" type="label" width="62.011" height="10.521" depth="0" valign="baseline" size="LARGE">\texttt{Execute}</text>
+<text matrix="1 0 0 1 144 96" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="15.099" depth="10.14" valign="top" size="large">Submit and manage \texttt{TRACE} jobs \\
+in paraller (as sequential batches) </text>
+<text matrix="1 0 0 1 108 148" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 144 32" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="21.732" depth="16.79" valign="top" size="large">Generate directory structures \\
+that contains spawned \\
+\texttt{TRACE} input decks</text>
+<text matrix="1 0 0 1 108 84" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 144 64" transformations="translations" pos="132 400" stroke="black" type="minipage" width="152" height="14.774" depth="9.8" valign="top" size="large">Convert  \texttt{xtv} to \texttt{dmx} output file \\
+to save disk space</text>
+<text matrix="1 0 0 1 108 116" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<path matrix="1.14286 0 0 1.16077 353.714 35.0507" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
+</path>
+<text matrix="1 0 0 1 360 96" transformations="translations" pos="144 416" stroke="black" type="label" width="106.305" height="10.516" depth="3.83" valign="baseline" size="LARGE">\texttt{Post-process}</text>
+<text matrix="1 0 0 1 384 68" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="28.7" depth="23.77" valign="top" size="large">Post-process each \texttt{xtv} files and \\
+extract the variables listed in \\
+the list of graphic variables \\
+into separate \texttt{csv} files</text>
+<text matrix="1 0 0 1 348 120" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<path matrix="1.25 0 0 1.09375 336 55.5" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
 </path>
 </page>
 </ipe>
