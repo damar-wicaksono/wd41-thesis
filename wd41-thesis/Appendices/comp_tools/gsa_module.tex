@@ -17,10 +17,26 @@ The general calculation flow chart involved in using the \texttt{gsa-module} can
 
 \paragraph{Main Features}
 
-\paragraph{Requirements}
+\begin{itemize}
+	\item Capability to generate design of computer experiments using $4$ different methods: \glsfirst[hyper=false]{srs}, \glsfirst[hyper=false]{lhs}, sobol' sequence, and optimized \gls[hyper=false]{lhs} using either command line interface \texttt{gsa\_create\_sample} or the module API via \texttt{import gsa\_module}.
+	\item Sobol' quasi-random number sequence generator is natively implemented in Python3 based on \texttt{C++} implementation of Joe and Kuo \cite{Joe2008}.
+	\item Randomization of the Sobol' quasi-random number using random shift procedure.
+	\item Optimization of the latin hypercube design is done via evolutionary stochastic algorithm (ESE) \cite{Jin2003}.
+	\item Generation of separate test points based on a given design using Hammersley quasi-random sequence \cite{Damblin2013}.
+	\item Capability to generate design of computer experiments for screening analysis (One-at-a-time design), based on the trajectory design \cite{Morris1991} and radial design \cite{Campolongo2011}
+	\item Capability to compute the statistics of elementary effects, standardized or otherwise both for trajectory and radial designs. The statistics (mean, mean of absolute, and standard deviation) are used as the basis of parameter importance ranking.
+	\item Capability to estimate the first-order (main effect) Sobol' sensitivity indices using two different estimators (Saltelli et al. \cite{Saltelli2002} and Janon et al. \cite{Janon2014}).
+	\item Capability to estimate the total effect Sobol' sensitivity indices using two different estimators (Sobol-Homma \cite{Homma1996} and Jansen \cite{Jansen1999}).
+	\item All estimated quantities are equipped with their bootstrap samples.
+\end{itemize}
 
-\paragraph{Installation}
+\paragraph{Requirements, Installation, and Documentation}\mbox{}\\
 
-\paragraph{Documentation}
+The module was developed and tested using the \href{https://www.anaconda.com/distribution/}{Anaconda Python} distribution of Python \texttt{v3.5}. No additional package except the base installation of the distribution is required.
 
-\paragraph{License}
+\texttt{gsa-module} is hosted on \href{https://bitbucket.org/lrs-uq/gsa-module}{BitBucket}.
+Installation instruction and detailed documentation can be found in the project page.
+
+\paragraph{License}\mbox{}\\
+
+The project is licensed under the MIT License.
