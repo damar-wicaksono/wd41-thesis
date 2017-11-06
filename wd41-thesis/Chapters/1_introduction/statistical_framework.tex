@@ -71,6 +71,7 @@ which serves as a measure of the prediction reliability.
 Statistical global sensitivity analysis thus complements the propagation step 
 by addressing the follow-up question on the identification of the most important parameters in driving the prediction uncertainty. 
 
+% Quantity of Interests
 Saltelli et al. \cite{Saltelli2006} emphasized that an analysis using computer simulation 
 \marginpar{choosing model output as the quantity of interest}
 should be focused on the specific question the simulation is required to answer 
@@ -81,6 +82,7 @@ In particular, computer code output often comes in a form of time series.
 In such case, Saltelli et al. \cite{Saltelli2008,Saltelli2004} proposed to derive the relevant QoI from time-dependent output 
 using a predefined scalar function such as the maximum, the minimum, the average, etc. that fits the initial question.
 
+% Function as Model Output
 However, in some cases, the whole course of a transient is of primary interest 
 \marginpar{function as model output}
 such as in assessing the ability of a model to reproduce the overall dynamics of the simulated system. 
@@ -88,35 +90,22 @@ If the attention is focused on the overall change in shape of the time-dependent
 the descriptions provided by the aforementioned scalar functions might be incomplete and overlook important features of the variation. 
 To tackle this problem, Campbell et al. \cite{Campbell2006} proposed to represent the functional (time-dependent) output in a certain basis function expansion 
 and to carry out the sensitivity analysis on the coefficients of the expansion. 
-In accordance to such approach, \gls{fda} popularized by Ramsay and Silverman \cite{Ramsay2005} can be useful to reduce the high dimensionality of time-dependent output.
+In accordance to such approach, \glsfirst[hyper=false]{fda} popularized by Ramsay and Silverman \cite{Ramsay2005} can be useful to reduce the high dimensionality of time-dependent output.
 
 % Recent Development in Nuclear Engineering Application
 Despite these recent developments, 
-\marginpar{recent development in nuclear engineering application}
+\marginpar{more recent development in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
-Notable recent examples related of sensitivity analysis for a time-dependent \gls{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
+Notable recent examples related of sensitivity analysis for a time-dependent \gls[hyper=false]{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
 for reflooding experiment of degraded fuel rods, utilizing adjoint sensitivity method; 
 by Auder et al. \cite{Auder2012} for pressurized thermal shock analysis, 
 utilizing statistical method with emphasis on metamodeling; 
-and by Prošek and Leskovar \cite{Prosek2015} for \gls{lbloca} analysis, 
-utilizing \gls{fftbm} and local sensitivity analysis.
+and by Prošek and Leskovar \cite{Prosek2015} for \gls[hyper=false]{lbloca} analysis, 
+utilizing \gls[hyper=false]{fftbm} and local sensitivity analysis.
 
-\subsection{Bayesian Calibration}
-% Complex Simulator
-Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
-And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
-This tendency has invited many critics over the year (citation needed).
-In nuclear science and engineering, for instance, Zuber \cite{Zuber2001} and Wullf \cite{Wulff2007} have long critized the development and the use of multi-fluid model for thermal-hydraulics simulation as high in complexity and in maintenance cost, but low in fidelity and its usefulness.
-
-The goal of computer simulation, complex or otherwise, is to provide prediction.
-The main characteristic (and source of criticism) of using multi-parameter complex model for simulation is that the the relationship between numerous inputs and outputs becomes increasingly opaque.
-The impact of changing one parameter alone, or especially together, on the prediction is hard to disentangle or intuit.
-Furthermore, as appropriate values of inputs might not be fully known, they are often given simply over range of interest containing different possible permissible values.
-It is thus seldom the case that one single simulation is sufficient to provide a reliable answer according to hardly any objective of computer simulation.
-As analytical solution
-
-
+%------------------------------------------------------------------------------
 \subsection{Statistical Metamodeling}\label{sub:intro_statistical_metamodeling}
+%------------------------------------------------------------------------------
 
 % Why we need metamodel
 
@@ -152,3 +141,20 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 
 % Recent development in nuclear engineering application
 \lipsum[1]
+
+\subsection{Bayesian Calibration}
+% Complex Simulator
+Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
+And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
+This tendency has invited many critics over the year (citation needed).
+In nuclear science and engineering, for instance, Zuber \cite{Zuber2001} and Wullf \cite{Wulff2007} have long critized the development and the use of multi-fluid model for thermal-hydraulics simulation as high in complexity and in maintenance cost, but low in fidelity and its usefulness.
+
+The goal of computer simulation, complex or otherwise, is to provide prediction.
+The main characteristic (and source of criticism) of using multi-parameter complex model for simulation is that the the relationship between numerous inputs and outputs becomes increasingly opaque.
+The impact of changing one parameter alone, or especially together, on the prediction is hard to disentangle or intuit.
+Furthermore, as appropriate values of inputs might not be fully known, they are often given simply over range of interest containing different possible permissible values.
+It is thus seldom the case that one single simulation is sufficient to provide a reliable answer according to hardly any objective of computer simulation.
+As analytical solution
+
+
+

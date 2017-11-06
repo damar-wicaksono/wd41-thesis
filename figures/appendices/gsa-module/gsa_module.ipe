@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171105023226"/>
+<info created="D:20171101220623" modified="D:20171105191500"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -504,195 +504,215 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -236 88" transformations="translations" pos="508 352" stroke="black" type="label" width="289.495" height="17.3" depth="5.15" valign="baseline" size="huge" style="math">f: (\mathbf{x}_c, \mathbf{x}_m) \in \mathbf{R}^D  \mapsto f(z, t) \in {R}^P</text>
-<path matrix="1 0 0 1 0 64" stroke="black" pen="heavier">
-112 480 m
-112 384 l
-208 384 l
-208 480 l
+<text layer="alpha" matrix="0.967213 0 0 2.02765 -278.033 -607.152" transformations="translations" pos="304 576" stroke="black" type="minipage" width="208" height="11.667" depth="6.7" valign="top" size="huge">\textbf{Samples Generation}</text>
+<path matrix="1 0 0 1 0 48" stroke="black">
+372 572 m
+372 572 l
+372 572 l
+372 572 l
 h
 </path>
-<path matrix="1 0 0 1 0 64" stroke="black">
-128 384 m
-128 400 l
-192 400 l
-192 384 l
+<path matrix="1.5 0 0 1 -544 112" stroke="black" pen="ultrafat" arrow="normal/large">
+704 368 m
+736 368 l
 </path>
-<path matrix="1 0 0 0.6 0 217.6" stroke="black">
-112 464 m
-120 400
-176 388
-208 384 c
+<text matrix="0.967213 0 0 2.02765 -278.033 -783.15" transformations="translations" pos="304 576" stroke="black" type="minipage" width="176" height="9.669" depth="4.68" valign="top" size="huge">\textbf{Model Execution}</text>
+<text matrix="0.967213 0 0 2.02765 201.967 -587.152" transformations="translations" pos="304 576" stroke="black" type="minipage" width="132" height="12.816" depth="7.84" valign="top" size="Huge">\textbf{\texttt{gsa-module}}</text>
+<path matrix="1 0 0 1 -116 -148" stroke="white" arrow="normal/normal">
+836 524 m
+836 504 l
 </path>
-<path matrix="1 0 0 1 0 -48" stroke="black" pen="heavier">
-112 480 m
-112 384 l
-208 384 l
-208 480 l
+<path matrix="1 0 0 1 0 48" stroke="white" arrow="normal/normal">
+8 372 m
+8 344 l
+</path>
+<group matrix="1 0 0 1 -652 12.001">
+<path matrix="1.25 0 0 1.07692 704 112" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
 h
 </path>
-<path matrix="1 0 0 1 0 -48" stroke="black">
-128 384 m
-128 400 l
-192 400 l
-192 384 l
-</path>
-<path matrix="1 0 0 0.6 0 105.6" stroke="black">
-112 464 m
-120 400
-176 388
-208 384 c
-</path>
-<path matrix="1 0 0 1.44444 0 -69.3333" stroke="black" pen="heavier" arrow="normal/normal">
-664 336 m
-664 192 l
-</path>
-<path matrix="1.34033 0 0 1 -190.921 60" stroke="black" pen="heavier" arrow="normal/large">
-608 132 m
-464 132 l
-</path>
-<path matrix="1.16 0 0 1 -106.24 64" stroke="black" pen="heavier" arrow="normal/large">
-664 240 m
-464 240 l
-</path>
-<path matrix="1 0 0 1 0 64" stroke="black" pen="heavier">
-208 432 m
-224 432 l
-224 320 l
-208 320 l
-</path>
-<path matrix="0.75 0 0 1 56 64" stroke="black" pen="heavier" arrow="normal/normal">
-224 380 m
-256 380 l
-</path>
-<path matrix="1 0 0 1 228 -380" stroke="black" pen="heavier">
-112 480 m
-112 384 l
-208 384 l
-208 480 l
+<path matrix="1.25 0 0 1.07692 700 108" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
 h
 </path>
-<path matrix="0.916667 0 0 1 5.33333 64" stroke="black" pen="heavier" arrow="normal/normal">
-64 320 m
-64 432 l
-112 432 l
+<path matrix="1.25 0 0 1.07692 696 104" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
-<path matrix="0.979592 0 0 0.972222 3.26531 67.5556" stroke="black" pen="heavier" arrow="normal/normal">
-356 128 m
-160 128 l
-160 272 l
+<path matrix="1.25 0 0 1.07692 692 100" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
-<text matrix="1 0 0 1 -160 -168" transformations="translations" pos="532 352" stroke="black" type="label" width="39.963" height="17.007" depth="0" valign="baseline" size="Huge">\textbf{BC}</text>
-<path matrix="1 0 0 1 -396 -84" stroke="black" fill="lightgray">
-744 144 m
-744 160
-744 160
-744 160
-768 176
-788 164
-788 164
-800 136
-800 108
-800 108
-828 108
-828 108
-828 104
-828 104
-792 104
-792 104
-792 128
-784 144
-784 144
-768 148
-744 144 c
+<text matrix="1 0 0 1 612 152" transformations="translations" pos="140 144" stroke="black" type="label" width="38.265" height="10.672" depth="0" valign="baseline" size="Huge">\texttt{csv}</text>
+</group>
+<path matrix="1.5625 0 0 1.00001 30 291.998" stroke="black" pen="heavier">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
-<path matrix="1 0 0 1 48 64" stroke="black" pen="heavier" arrow="normal/normal">
-304 240 m
-16 240 l
-16 320 l
-60 320 l
+<text matrix="1 0 0 1 -44 328" transformations="translations" pos="124 168" stroke="black" type="minipage" width="92" height="16.346" depth="11.39" valign="top" size="Large" style="center">Driver Script \\
+Executables</text>
+<path matrix="1.21429 0 0 0.497574 136.571 -13.0188" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
 </path>
-<text matrix="1 0 0 1 -168 -56" transformations="translations" pos="532 352" stroke="black" type="label" width="58.468" height="17.007" depth="0" valign="baseline" size="Huge">\textbf{GSA}</text>
-<text matrix="1 0 0 1 112 -168" transformations="translations" pos="532 352" stroke="black" type="label" width="40.967" height="17.007" depth="0" valign="baseline" size="Huge">\textbf{GP}</text>
-<text matrix="1 0 0 1 112 -28" transformations="translations" pos="488 496" stroke="black" type="minipage" width="128" height="22.106" depth="17.15" valign="top" size="huge" style="center">\textbf{Dimension} \\
-\textbf{Reduction}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" pen="heavier" arrow="normal/normal">
-520 384 m
-544 384 l
+<path matrix="1.32411 0 0 0.754032 118.514 -93.7419" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
 </path>
-<text matrix="1 0 0 1 -168 -100" transformations="translations" pos="284 520" stroke="black" type="label" width="90.974" height="8.307" depth="2.32" valign="baseline" size="large">\textit{Model parameters}</text>
-<text matrix="1 0 0 1 108 320" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="25.388" depth="20.44" valign="top" size="Large">\textbf{Chapter 2} \\
-Forward Model and \\
-Initial Parameters Selection</text>
-<path matrix="1 0 0 1 48 64" stroke="black" pen="heavier" arrow="normal/normal">
-520 384 m
-544 384 l
+<text matrix="0.998969 0.0453956 -0.0453956 0.998969 181.686 -177.5" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="21.082" depth="16.14" valign="top" size="LARGE">Sensitivity Analysis \\
+Post-processor Modules</text>
+<text matrix="0.967213 0 0 2.02765 -278.033 -911.15" transformations="translations" pos="304 576" stroke="black" type="minipage" width="240" height="11.667" depth="6.7" valign="top" size="huge">\textbf{Sensitivity Analysis}</text>
+<path matrix="0.900695 0 0 1 27.1222 80" stroke="black" pen="ultrafat" arrow="normal/normal">
+112 192 m
+112 128 l
+272 128 l
 </path>
-<text matrix="1 0 0 1 476 80" transformations="translations" pos="148 96" stroke="black" type="minipage" width="120" height="25.388" depth="20.44" valign="top" size="Large">\textbf{Chapter 4} \\
-Gaussian Process \\
-Metamodel</text>
-<text matrix="1 0 0 1 272 188" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="17.825" depth="12.86" valign="top" size="Large">\textbf{Chapter 3} \\
-Global Sensitivity Analysis</text>
-<text matrix="1 0 0 1 272 80" transformations="translations" pos="148 96" stroke="black" type="minipage" width="172" height="17.825" depth="12.86" valign="top" size="Large">\textbf{Chapter 5} \\
-Bayesian Calibration</text>
-<path stroke="black" pen="heavier" arrow="normal/large">
-392 104 m
-392 176 l
+<path matrix="1.325 0 0 0.75 118.4 44" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
 </path>
-<text matrix="1 0 0 1 0 -16" transformations="translations" pos="448 80" stroke="black" type="minipage" width="84" height="16.425" depth="11.47" valign="top" size="Large">\textit{experimental} \\
-\textit{data}</text>
-<text matrix="1 0 0 1 -328 460" transformations="translations" pos="448 80" stroke="black" type="minipage" width="84" height="14.774" depth="9.8" valign="top" size="large">\textit{Controllable} \\
-\textit{Inputs}</text>
-<text matrix="1 0 0 1 -16 16" transformations="translations" pos="192 284" stroke="black" type="minipage" width="176" height="17.746" depth="12.78" valign="top" size="Large">Parameters Screening \\
-and Variance Decomposition</text>
-<text matrix="1 0 0 1 -16 -96" transformations="translations" pos="192 284" stroke="black" type="minipage" width="176" height="16.425" depth="11.47" valign="top" size="Large">Model Parameters \\
-Posterior</text>
-<text matrix="1 0 0 1 72 0" transformations="translations" pos="304 576" stroke="black" type="minipage" width="352" height="32.029" depth="27.11" valign="top" size="LARGE">\textbf{Bayesian Uncertainty Quantification of} \\
-\textbf{Thermal-Hydraulics System Code Model:} \\
-Main Chapters</text>
-<path matrix="1 0 0 1 32 -4" stroke="white" pen="heavier" arrow="normal/normal">
-16 464 m
-16 428 l
+<text matrix="1 0 0 1 164 -40" transformations="translations" pos="132 400" stroke="black" type="minipage" width="200" height="21.082" depth="16.14" valign="top" size="LARGE">Computer codes launcher \\
+\&amp; Outputs Post-processing</text>
+<group matrix="1 0 0 1 -168 44">
+<path matrix="1.25 0 0 1.07692 704 228.001" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
-<path stroke="white" pen="heavier" arrow="normal/normal">
-492 0 m
-528 0 l
+<text matrix="1 0 0 1 624 280.001" transformations="translations" pos="140 144" stroke="black" type="label" width="38.265" height="10.672" depth="0" valign="baseline" size="Huge">\texttt{csv}</text>
+</group>
+<group matrix="1 0 0 1 0 112">
+<path matrix="1.25 0 0 1.07692 40 -143.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
-<path matrix="0.9375 0 0 1 12 0" stroke="black">
-128 400 m
-144 352
-192 336 c
+<text matrix="1 0 0 1 -40 -91.999" transformations="translations" pos="140 144" stroke="black" type="label" width="38.265" height="10.672" depth="0" valign="baseline" size="Huge">\texttt{csv}</text>
+</group>
+<path matrix="1 0 0 1 0 104" stroke="black" pen="ultrafat" arrow="normal/normal">
+176 72 m
+272 72 l
 </path>
-<path matrix="0.9375 0 0 1 12 112" stroke="black">
-128 400 m
-144 352
-192 336 c
+<path matrix="0.833333 0 0 1 45.3333 408" stroke="black" pen="ultrafat" arrow="normal/normal">
+176 72 m
+272 72 l
 </path>
-<path stroke="black" dash="dotted">
-132 512 m
-132 448 l
+<path matrix="1 0 0 1 0 48" stroke="black" pen="ultrafat" arrow="normal/normal">
+624 384 m
+624 272 l
+512 272 l
 </path>
-<path matrix="1 0 0 1 0 -112" stroke="black" dash="dotted">
-132 512 m
-132 448 l
+<path matrix="1 0 0 1 0 48" stroke="black" pen="ultrafat" arrow="normal/normal">
+272 272 m
+192 272 l
 </path>
-<path stroke="black">
-112 448 m
-132 448
-152 480
-160 480
-168 480
-188 448
-208 448 c
+<path matrix="0.541667 0 0 1 416.667 104" stroke="black" pen="ultrafat" arrow="normal/normal">
+176 72 m
+272 72 l
 </path>
-<path matrix="1 0 0 1 -4 -112" stroke="black">
-112 448 m
-132 448
-152 480
-160 480
-168 480
-188 448
-208 448 c
+<path matrix="1.25 0 0 1.07692 536 -31.999" stroke="black" fill="1">
+32 160 m
+48 156
+64 168
+80 168
+96 168 c
+96 208 l
+32 208 l
+h
 </path>
+<text matrix="1 0 0 1 456 20.001" transformations="translations" pos="140 144" stroke="black" type="label" width="38.265" height="10.672" depth="0" valign="baseline" size="Huge">\texttt{csv}</text>
+<path matrix="1.21429 0 0 1.25 136.571 14.9985" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
+</path>
+<text matrix="1 0 0 1 152 112" transformations="translations" pos="144 416" stroke="black" type="label" width="119.071" height="11.951" depth="3.83" valign="baseline" size="LARGE">\texttt{samples} Module</text>
+<text matrix="1 0 0 1 176 112" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="13.944" depth="8.97" valign="top" size="large">Simple Random Sampling (\texttt{srs}) \\</text>
+<text matrix="1 0 0 1 140 164" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 64" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="15.691" depth="10.72" valign="top" size="large">$L^2$-discrepancy optimized Latin \\
+Hypercube Sampling (\texttt{lhs-opt})</text>
+<text matrix="1 0 0 1 140 116" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<path matrix="1.325 0 0 1.15625 118.4 44.5" stroke="black" pen="fat">
+128 432 m
+128 304 l
+288 304 l
+288 432 l
+h
+</path>
+<text matrix="1 0 0 1 176 88" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="13.944" depth="8.97" valign="top" size="large">Latin Hypercube Sampling (\texttt{lhs}) \\</text>
+<text matrix="1 0 0 1 140 140" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 140 140" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 32" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="8.465" depth="3.49" valign="top" size="large">Sobol&apos; sequence (\texttt{sobol})</text>
+<text matrix="1 0 0 1 140 84" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 16" transformations="translations" pos="132 400" stroke="black" type="minipage" width="200" height="8.465" depth="3.49" valign="top" size="large">Morris factorial sampling (\texttt{morris})</text>
+<text matrix="1 0 0 1 140 68" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 -216" transformations="translations" pos="132 400" stroke="black" type="minipage" width="184" height="8.465" depth="3.49" valign="top" size="large">Morris Screening Method (\texttt{morris})</text>
+<text matrix="1 0 0 1 140 -164" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 -232" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="7.111" depth="2.13" valign="top" size="large">$1$\textsuperscript{st}-order Sobol&apos; indices</text>
+<text matrix="1 0 0 1 140 -180" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<text matrix="1 0 0 1 176 -248" transformations="translations" pos="132 400" stroke="black" type="minipage" width="172" height="6.642" depth="1.66" valign="top" size="large">Total-effect Sobol&apos; indices</text>
+<text matrix="1 0 0 1 140 -196" transformations="translations" pos="156 340" stroke="black" type="label" width="7.173" height="6.376" depth="0" valign="baseline" size="Large" style="math">\circ</text>
+<path matrix="1.21429 0 0 0.414647 136.571 152.484" fill="lightgray">
+128 404 m
+128 308 l
+296 308 l
+296 404 l
+h
+</path>
+<text matrix="1 0 0 1 172 -96" transformations="translations" pos="132 400" stroke="black" type="minipage" width="184" height="7.807" depth="2.82" valign="top" size="large">\textit{Externally implemented}</text>
+<text matrix="0.959431 0.122449 -0.256701 2.01134 433.832 -675.2" transformations="translations" pos="304 576" stroke="black" type="minipage" width="128" height="8.783" depth="3.81" valign="top" size="Large">\textit{Design matrix}</text>
+<text matrix="0.959431 0.122449 -0.256701 2.01134 433.832 -983.2" transformations="translations" pos="304 576" stroke="black" type="minipage" width="148" height="8.783" depth="3.81" valign="top" size="Large">\textit{Sensitivity measures}</text>
+<text matrix="0.959431 0.122449 -0.256701 2.01134 -66.168 -1067.2" transformations="translations" pos="304 576" stroke="black" type="minipage" width="128" height="8.783" depth="3.81" valign="top" size="Large">\textit{Design matrix}</text>
 </page>
 </ipe>
