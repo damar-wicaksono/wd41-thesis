@@ -160,7 +160,7 @@ From this point of view, the approach uses the experimental data to better infor
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
 This led to the \gls[hyper=false]{premium} project.
 Its main goal is to report the state-of-the-art of the available methodologies to quantify the uncertainty in the physical models parameters.
-The following will briefly describe the project and highlight the main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi}.
+The following will briefly describe the project and highlight the main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi} \cite{Wicaksono2016a}.
 
 %-------------------------------------------------------------
 \subsection{OECD/NEA PREMIUM project}\label{sub:intro_premium}
@@ -168,7 +168,7 @@ The following will briefly describe the project and highlight the main lessons l
 
 % Introductory paragraph
 The \gls[hyper=false]{premium} project was an activity launched by the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} with the aim to advance the methods for quantifying the uncertainties associated with the physical model parameters in \gls[hyper=false]{th} system codes.
-It was the continuation of the previous project \gls[hyper=false]{bemuse}, which concetrated on the propagation and sensitivity analysis of the input uncertainties in large scale simulation (\gls[hyper=false]{lbloca}).
+It was the continuation of the previous project \gls[hyper=false]{bemuse}, which concentrated on the propagation and sensitivity analysis of the input uncertainties in large scale simulation (\gls[hyper=false]{lbloca}).
 The main finding of \gls[hyper=false]{bemuse} can be found in \cite{Perez2011}.
 The emphasis of the \gls[hyper=false]{premium} benchmark was placed on the derivation of the model parameters uncertainty and their validation.
 
@@ -190,5 +190,26 @@ Each participant employing a chosen simulation code and methodology had to contr
   \item \textsc{Phase 4}: Propagation of the quantified uncertainties as part of a blind benchmark exercise based on data from the PERICLES experiment.
   \item \textsc{Phase 5}: Contribution to the analysis and synthesis of the benchmark results.
 \end{enumerate}
+During the course of the project up to its conclusion, three \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} reports have been published \cite{Kovtonyuk2015, Reventos2016,Sanz2017}.
+Details can be found in the reports.
+The following will describe briefly some of the lessons learned of relevance to the present study.
 
-% Lesssons learned
+% Lessons learned
+\gls[hyper=false]{premium} provided state-of-the-art as of $2015$ on uncertainty quantification methods for \gls[hyper=false]{th} system codes.
+It emphasized methodological issues that are yet to be overcome.
+Some of these issues, such as the identification of important parameters, extrapolation of quantified results, scaling, and nodalization were already raised in the $1994$ review studies on uncertainty methods for \gls[hyper=false]{th} codes sponsored by the European Commission \cite{Forge1994}.
+At the conclusion of \gls[hyper=false]{premium}, these issues are still considered open problems.
+
+% The problem of systematic identification of important parameters
+First, there was an apparent lack of consensus among participants (and thus, the community) for a systematic identification of important parameters in \gls[hyper=false]{th} simulation models.
+\marginpar{Identification of important parameters}
+Guidelines were indeed provided, but each participants eventually came up with their own selection criteria and methodology, some still relied solely on graph comparison of outputs from changing one parameter at a time \cite{Kovtonyuk2015}.
+
+Although complete exclusion of expert judgment is not feasible (nor advised), it is useful to take benefit from the progress made in the computer experiment community.
+For instance, the Morris screening method can be useful in the initial parameter identification and importance ranking process by making the analysis more systematic and robust.
+The method can provide smooth transition from the more familiar one-at-a-time method adopted by most participants.
+Furthermore, there was a valid issue raised by a participant regarding the possibility of \emph{complicated} code response from simultaneous parameters perturbation \cite{Wicaksono2015}.
+This can be interpreted perhaps as parameter interaction in the literature.
+In this case, \gls[hyper=false]{gsa} methods can help in the investigation about its presence. 
+
+Finally, there is a natural reluctance in embracing a more advanced method where 
