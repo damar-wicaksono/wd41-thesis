@@ -237,8 +237,10 @@ observing one additional data set should not render previous results invalid rig
 Thus it remains an open question how to compromise between learning from the new data and preserving what has been learned before.
 
 % The use of metamodel
-Finally, there is a natural reluctance in embracing more advanced methods requiring less assumptions (e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more computational cost (i.e., more code runs).
+Finally, there was a natural reluctance in embracing more advanced methods requiring less assumptions (
+e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more 
 \marginpar{The use of metamodel}
+computational cost (i.e., more code runs) that are available in the recent literature.
 The use of metamodel can help in alleviating such computational restriction\footnote{it is not, however, cost-free as will be explained in more detail in Chapter~\ref{ch:gp_metamodel}.}, insofar that the error incurred by the use of metamodel can be accepted.
 Strictly speaking, the use of metamodel (a fast approximating function of running the code) for uncertainty analysis in nuclear engineering \gls[hyper=false]{th} analysis is not unfamiliar.
 It was initially used for the estimation of \gls[hyper=false]{pct} probability distribution from uncertainty propagation in the context of safety margin evaluation of \gls[hyper=false]{lbloca} scenario \cite{Boyack1990}.
