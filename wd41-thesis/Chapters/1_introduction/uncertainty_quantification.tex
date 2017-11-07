@@ -160,7 +160,7 @@ From this point of view, the approach uses the experimental data to better infor
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
 This led to the \gls[hyper=false]{premium} project.
 Its main goal is to report the state-of-the-art of the available methodologies to quantify the uncertainty in the physical models parameters.
-The following will briefly describe the project and highlight the main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi} \cite{Wicaksono2016a}.
+The following will briefly describe the project and highlight the selected main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi} \cite{Wicaksono2016a}.
 
 %-------------------------------------------------------------
 \subsection{OECD/NEA PREMIUM project}\label{sub:intro_premium}
@@ -192,7 +192,7 @@ Each participant employing a chosen simulation code and methodology had to contr
 \end{enumerate}
 During the course of the project up to its conclusion, three \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} reports have been published \cite{Kovtonyuk2015, Reventos2016,Sanz2017}.
 Details can be found in the reports.
-The following will describe briefly some of the lessons learned of relevance to the present study.
+The following will describe briefly some of the lessons learned from \gls[hyper=false]{premium} of relevance to the present study.
 
 % Lessons learned
 \gls[hyper=false]{premium} provided state-of-the-art as of $2015$ on uncertainty quantification methods for \gls[hyper=false]{th} system codes.
@@ -208,8 +208,38 @@ Guidelines were indeed provided, but each participants eventually came up with t
 Although complete exclusion of expert judgment is not feasible (nor advised), it is useful to take benefit from the progress made in the computer experiment community.
 For instance, the Morris screening method can be useful in the initial parameter identification and importance ranking process by making the analysis more systematic and robust.
 The method can provide smooth transition from the more familiar one-at-a-time method adopted by most participants.
-Furthermore, there was a valid issue raised by a participant regarding the possibility of \emph{complicated} code response from simultaneous parameters perturbation \cite{Wicaksono2015}.
+Furthermore, there was a valid issue raised by a participant regarding the possibility of ``complicated'' code response from simultaneous parameters perturbation \cite{Wicaksono2015}.
 This can be interpreted perhaps as parameter interaction in the literature.
 In this case, \gls[hyper=false]{gsa} methods can help in the investigation about its presence. 
 
-Finally, there is a natural reluctance in embracing a more advanced method where 
+% The problem of calibration and overfitting
+Secondly, there was a slight disagreement between participants regarding the use of \emph{calibrated parameter}.
+This notion stemmed from the use of a Bayesian method (the so-called CIRC\'E \cite{Crecy2001,Reventos2016}, a method based on maximum likelihood approach under linear assumption coupled with normal prior for the parameter) to update the prior distribution of the model parameter such that the resulting posterior distribution yields the closest with the experimental data.
+\marginpar{Calibrated parameter and best-estimate code}
+Furthermore, the nominal value of the model parameter was allowed to shift following the updated central measure of the posterior.
+Such practice of calibration was questioned because the best-estimate code used was, in fact, already calibrated on the basis of larger experimental database over decades of verification and validation (V\&V) activities.
+In other words, the calibration over a very limited set of the \gls[hyper=false]{feba} tests would undermine the built-in (calibrated) models already in place.
+
+That was a valid point of contention.
+The results of applying CIRC\'E were mixed. 
+On one hand the experimental data from the \gls[hyper=false]{feba} experiment allowed CIRC\'E to reduce the initial uncertainty on the parameters and simultaneously improved the nominal case prediction.
+On the other hand, when the updated parameters were used in the uncertainty propagation of a \gls[hyper=false]{feba} test, the narrow uncertainty band on the prediction failed to cover some part of the experimental data.
+Moreover, when the same updated parameters were used in the blind uncertainty propagation for another facility there results were poor: poor nominal case prediction (note that the nominal parameters values were allowed to be updated) and too narrow uncertainty without covering the experimental data \cite{Wicaksono2016a,Sanz2017}.
+
+This indicated a symptom of \emph{overfitting} where the uncertain parameters were calibrated strongly on one data set and thus became very sensitive to a change of data set.
+\marginpar{Overfitting and extrapolation}
+The narrow uncertainty obtained indicates that the calibration procedure converged to a ``wrong'' values and thus was not applicable to extrapolation.
+
+Though Bayesian approach makes sense for parameter calibration, updating its value in light of new data,
+its application might require more examination on the additional sources of uncertainty.
+It also makes sense to acknowledge the extensive (V\&V) activities that serve as the basis of \gls[hyper=false]{th} system codes;
+observing one additional data set should not render previous results invalid right away.
+Thus it remains an open question how to compromise between learning from the new data and preserving what has been learned before.
+
+% The use of metamodel
+Finally, there is a natural reluctance in embracing more advanced methods requiring less assumptions (e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more computational cost (i.e., more code runs).
+\marginpar{The use of metamodel}
+The use of metamodel can help in alleviating such computational restriction\footnote{it is not, however, cost-free as will be explained in more detail in Chapter~\ref{ch:gp_metamodel}.}, insofar that the error incurred by the use of metamodel can be accepted.
+Strictly speaking, the use of metamodel (a fast approximating function of running the code) for uncertainty analysis in nuclear engineering \gls[hyper=false]{th} analysis is not unfamiliar.
+It was initially used for the estimation of \gls[hyper=false]{pct} probability distribution from uncertainty propagation in the context of safety margin evaluation of \gls[hyper=false]{lbloca} scenario \cite{Boyack1990}.
+However, in the context of inverse uncertainty quantification, none of the participant took the benefit of using metamodel and relaxed some of the assumptions in calibration.
