@@ -1,3 +1,4 @@
+\newpage
 %*********************************************************************************
 \section{Objectives and Scope of the Thesis}\label{sec:intro_objectives_and_scope}
 %********************************************************************************* 
@@ -56,9 +57,9 @@ Several other such terms exist \cite{USNRC2012}.
 % Statement of Problem
 As illustrated above, it is clear that models in thermal-hydraulics system code, to a certain extent, flawed.
 Various experimental programs were carried out to gain better understanding of important phenomena,
-and to validate (and, as noted above, to calibrate) the models.
+and to validate (and, as noted, to calibrate) the models.
 Series of the experiments, carried out in \glspl[hyper=false]{setf} with a well-specified boundary conditions were aimed to reproduce limited part of the transient in a selected component following a postulated scenario.
-For example, in the case of reflooding, several facilities existed and data were available (FEBA, PERICLES, etc.).
+For example, in the case of reflooding, several facilities existed and data was gathered (FEBA, PERICLES, etc.).
 But, there has not been an orchestrated effort to incorporate the accumulated data into the calibration process of the physical models, in a systematic way, while acknowledging multiple sources of the uncertainty in the process.
 
 %--------------------------------------------------
@@ -157,13 +158,13 @@ This thesis, however, focuses on the statistical approach for each of the aforem
 The main reasoning for this choice are twofold:
 First, a common motivation, statistical methods tend to require less assumption on the model complexity.
 While they may be more computationally expensive than their non-statistical counterparts,
-they are also easier to set up and subject to less severe dependence on the size of the problem with respect to the number of input parameters.
+they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the size of the problem with respect to the number of input parameters.
 Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be in the represented in terms of probability.
 As mentioned previously, this is to conform with widely accepted practice of statistical uncertainty propagation in nuclear engineering community.  
 The motivations for this choice will become clearer in the subsequent section.
 They will also be elaborated further in their respective chapters.
 
 % Closing
-As a final note, the thermal-hydraulics system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
+As a last note, the \glsfirst[hyper=false]{th} system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
 \marginpar{TRACE code}
-The main reason to consider solely this particular code in the present thesis is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss nuclear power plant safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
+The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss \glspl[hyper=false]{npp} safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
