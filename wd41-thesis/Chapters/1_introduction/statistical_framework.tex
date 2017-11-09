@@ -107,13 +107,42 @@ utilizing \gls[hyper=false]{fftbm} and local sensitivity analysis.
 \subsection{Statistical Metamodeling}\label{sub:intro_statistical_metamodeling}
 %------------------------------------------------------------------------------
 
-% Why we need metamodel
+% Introductory paragraph
+Many tasks involving computer simulation can be boiled down to making prediction.
+\emph{Computer experiment}, an experiment using computer simulation evaluates the output based on different inputs to achieve various objectives.
+\marginpar{Computer experiment}
+In the aforementioned sensitivity analysis, the objective is to identify influential inputs that drives the variation in the outputs of the computer simulator.
+In the forward uncertainty quantification, \gls[hyper=false]{mc} simulation are used to propagate the uncertainty in the inputs to quantify the uncertainty in the simulator prediction using the notion of probability; while in its inverse counterpart, the goal is to identify a region of input parameter space that is consistent with both the observed data and the assumed prior uncertainty of the parameters.
+The latter objective, in turn, is related to \emph{optimization} where the goal is to identify particular value of inputs that maximize a certain objective function as computed by the simulator.
 
-% What is a metamodel
+% The use of metamodel
+The examples of the objectives above are arguably distinct, but they share a common characteristic of involving analyses of outputs from numerous simulator runs.
+An increasingly more complex computer simulator, however, often translates to a long running simulation (i.e., computationally expensive) or requiring vast amount of evaluations due to complexity of relationship between high-dimensional inputs and high-dimensional outputs, or both.
+They, in turn, hinder the analyses and the effort to achieve the aforementioned objectives of computer experiment.
 
-% Gaussian Process, What
+% Why Metamodel
+As a result, having a fast approximating model of a complex simulator is important in conducting a computer experiment and its value was acknowledged by Sacks et al. in their seminal paper \cite{Sacks1989} and formalized further in several textbooks \cite{Santner2003,Fang2006}.
+\marginpar{An approximating model}
+The approximating model, while simpler and much faster to evaluate than the \emph{original} simulator, is designed to capture the dominant features of the inputs/outputs relationship of the original complex simulator \cite{Asher2015}.
+Capturing the dominant features allows the approximating model to be used in lieu the original simulator in the experiment.
+This approximating model in the literature is referred to as \emph{metamodel}, \emph{surrogate model}, \emph{response surface model}, or \emph{emulator}.
 
-% Gaussian Process, Why
+% Broad classification
+In the literature, any of the terms above are used interchangeably though subtle difference exists.
+Thus, it is worthwhile to consider a broad classification of metamodels and metamodeling approach according to the literature.
+\marginpar{Classification}
+Metamodels according to its derivation (i.e., metamodeling) can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
+Reduced order modeling is perhaps familiar in the scientific community where a complex physical model is being simplified through putting more stringent assumption or reducing the numerical resolution while trying to preserve the most important physical processes present in the more complex model.
+\marginpar{Reduced-order model}
+The point kinetics model is an example of a reduced-order model, substituting the more complex $3$-dimensional nodal code;
+and loosely speaking, \gls[hyper=false]{th} system code is a reduced-order model of the more expensive multi-phase computational fluid dynamics code.
+When applicable, reduced-order models can be useful as first approximation as well as didactic tools to build intuition. 
+
+% Response Surface Surrogate
+% Gaussian Process, What, renewed interest due to Machine learning
+Gaussian process The original paper was 
+
+% Gaussian Process, Why and recent popularity due to machine learning
 
 % Gaussian Process, and others
 \gls[hyper=false]{gp} metamodel is by no means the only method to construct a metamodel of a simulator, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
@@ -140,7 +169,6 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 \end{table}
 
 % Recent development in nuclear engineering application
-\lipsum[1]
 
 \subsection{Bayesian Calibration}
 % Complex Simulator
