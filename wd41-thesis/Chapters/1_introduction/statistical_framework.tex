@@ -167,11 +167,11 @@ This idea was borrowed from a spatial interpolation tool in geostatistics (where
 % Gaussian Process, Why
 A \gls[hyper=false]{gp} metamodel is a statistical metamodel.
 It is based on the extension of multivariate Gaussian distribution to a continuous multidimensional input parameter space.
-Under the Bayesian interpretation, the metamodel assumes a prior distribution over a family of functions to describe an unknown (possibly complex) function that underlies the simulator.
+Under the Bayesian interpretation, the metamodel assumes a prior distribution over functions to initially describe an unknown complex function that underlies the simulator.
 The observed data (i.e., design of experiment plus the corresponding outputs) is then used to update the prior and learn more about the true underlying function. 
 Though the simulator itself might be deterministic, the limited size of the observed data renders prediction at arbitrary input not observed \emph{uncertain}.
-This measure of uncertainty makes a \gls[hyper=false]{gp} metamodel a suitable choice to be incorporated into a statistical model calibration framework where multiple sources of uncertainty are taken into account.
-%Thus, this research adopts \gls[hyper=false]{gp} for constructing a metamodel of a \gls[hyper=false]{th} system code model and Chapter~\ref{ch:gp_metamodel} is dedicated for the description.
+This measure of uncertainty makes a \gls[hyper=false]{gp} metamodel an attractive choice to be incorporated into a model calibration framework where multiple sources of uncertainty are considered.
+The present research adopts \gls[hyper=false]{gp} for constructing a metamodel of a \gls[hyper=false]{th} system code model as detailed in Chapter~\ref{ch:gp_metamodel}.
 
 % Gaussian Process, and others
 \gls[hyper=false]{gp} metamodel is by no means the only method to construct a data-driven metamodel, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
@@ -196,7 +196,7 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 		\parnotes
 \end{table}
 
-% Recent development in nuclear engineering application
+% Development in nuclear engineering application
 Metamodel applications have a long history in nuclear engineering analyses due to the complexity of the simulators and the long-understood importance of quantifying the uncertainty in the prediction.
 \marginpar{Developments in nuclear engineering application}
 As such, historically, metamodels (specifically, of type the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
@@ -208,18 +208,33 @@ From the design optimization problem of fuel assembly \cite{Raza2008} and spacer
 \subsection{Bayesian Calibration}\label{sub:intro_bayesian_calibration}
 %----------------------------------------------------------------------
 
-% Complex Simulator
-Granted, a simplicistic model cannot be expected to imitate all the important features of a complex physical phenomenon.
-And yet, there is a tendency of developing and applying overly complex model, with numerous parameters and multiple non-linear relationships, for computer simulation.
-This tendency has invited many critics over the year (citation needed).
-In nuclear science and engineering, for instance, Zuber \cite{Zuber2001} and Wullf \cite{Wulff2007} have long critized the development and the use of multi-fluid model for thermal-hydraulics simulation as high in complexity and in maintenance cost, but low in fidelity and its usefulness.
+% Introductory paragraph
+The objective of model calibration is to increase the agreement between simulation prediction and its corresponding measurement data by adjusting some of the simulator inputs \cite{Campbell2006,Trucano2006}.
+\marginpar{Model calibration, goal and approach}
+Traditionally, calibration closely related to an optimization problem with the objective function of some error measure between simulation prediction and measurement data (e.g., root-mean-square-error).
+However, statistical approach to calibration using a Bayesian framework has become a popular practice in scientific simulation community.
+Instead of minimizing a measure of error, Bayesian framework treats the uncertainty of the inputs probabilistically whose prior probability distribution is updated such that it is consistent with the available, albeit uncertain, measurement data.
+The framework offers flexibility in modeling various sources of uncertainty \cite{Kennedy2001,Kaipio2011}.
 
-The goal of computer simulation, complex or otherwise, is to provide prediction.
-The main characteristic (and source of criticism) of using multi-parameter complex model for simulation is that the the relationship between numerous inputs and outputs becomes increasingly opaque.
-The impact of changing one parameter alone, or especially together, on the prediction is hard to disentangle or intuit.
-Furthermore, as appropriate values of inputs might not be fully known, they are often given simply over range of interest containing different possible permissible values.
-It is thus seldom the case that one single simulation is sufficient to provide a reliable answer according to hardly any objective of computer simulation.
-As analytical solution
+% Bayesian Calibration
+Bayesian framework for the calibration of computer simulation model was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
+\marginpar{Bayesian framework, Kennedy and O'Hagan approach}
+The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters along with the associated uncertainty taking into account different sources of uncertainty based on the observed data.
+The distinct idea of it, however, is acknowledging that a systematic bias between a physics-based simulator and reality might be present.
+Yet, the magnitude and sign of this systematic bias are often not known a priori.
+At the same time, if not modeled properly its presence can overfit the calibration of the model parameters.
+That is, the calibrated model parameters will be overly sensitive to the calibration data and thus not applicable for prediction.
+As such, Kennedy and O'Hagan proposed to model the unknown bias term probabilistically by putting a prior over functions to be updated simultaneously by the observed data.
+The proposed prior over function is a \gls[hyper=false]{gp}.
+Finally, acknowledging that computational cost of numerous simulator runs might not be negligible, the approach embedded the use of \gls[hyper=false]{gp} metamodel (termed \emph{emulator}) to substitute the original simulator. 
+Due to its popularity, and while extension and improvement exist \cite{Bayarri2007,Higdon2008,Arendt2012}, the term \emph{KOH approach} becomes synonymous to this particular approach of computer model calibration \cite{Trucano2006,Hall2011,Ling2014}.
+It is adapted here in the present research to deal with the particular problem posed in \gls[hyper=false]{premium} benchmark that itself represents typical problem in the nuclear engineering \gls[hyper=false]{th} analysis.
+
+% Bayesian data analysis
+
+
+% Development in nuclear engineering application
+
 
 
 
