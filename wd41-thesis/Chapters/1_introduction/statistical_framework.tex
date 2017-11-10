@@ -117,42 +117,58 @@ The latter objective, in turn, is related to \emph{optimization} where the goal 
 
 % The use of metamodel
 The examples of the objectives above are arguably distinct, but they share a common characteristic of involving analyses of outputs from numerous simulator runs.
-An increasingly more complex computer simulator, however, often translates to a long running simulation (i.e., computationally expensive) or requiring vast amount of evaluations due to complexity of relationship between high-dimensional inputs and high-dimensional outputs, or both.
+\marginpar{Complex simulator, expensive simulator}
+An increasingly more realistic and complex computer simulator, however, often translates to a long running simulation (i.e., computationally expensive) or requiring vast amount of evaluations due to the complexity of relationship between high-dimensional inputs and high-dimensional outputs (e.g., non-linearities, interaction), or both.
 They, in turn, hinder the analyses and the effort to achieve the aforementioned objectives of computer experiment.
 
 % Why Metamodel
-As a result, having a fast approximating model of a complex simulator is important in conducting a computer experiment and its value was acknowledged by Sacks et al. in their seminal paper \cite{Sacks1989} and formalized further in several textbooks \cite{Santner2003,Fang2006}.
+As a result, having a fast approximating model of a complex simulator is beneficial in conducting a computer experiment and its value was acknowledged by Sacks et al. in their seminal paper \cite{Sacks1989} and formalized further in several textbooks \cite{Santner2003,Fang2006}.
 \marginpar{An approximating model}
 The approximating model, while simpler and much faster to evaluate than the \emph{original} simulator, is designed to capture the dominant features of the inputs/outputs relationship of the original complex simulator \cite{Asher2015}.
 Capturing the dominant features allows the approximating model to be used in lieu the original simulator in the experiment.
-This approximating model in the literature is referred to as \emph{metamodel}, \emph{surrogate model}, \emph{response surface model}, or \emph{emulator}.
+This approximating model in the literature is referred to as \emph{metamodel}, \emph{surrogate model}, \emph{response surface model}, \emph{proxy model}, or \emph{emulator}.
 
 % Broad classification
-In the literature, any of the terms above are used interchangeably though subtle difference exists.
-Thus, it is worthwhile to consider a broad classification of metamodels and metamodeling approach according to the literature.
+Nowadays, any of the terms above are used interchangeably and all are used to substitute the original simulator to reduce the computational cost of conducting computer experiment \cite{Simpson2001,Razavi2012,Asher2015}. 
+Subtle difference does exist.
+Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivation (i.e., surrogate modeling) according to the literature.
 \marginpar{Classification}
-Metamodels according to its derivation (i.e., metamodeling) can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
-Reduced order modeling is perhaps more familiar in the scientific community where a complex physical model is being simplified by putting more stringent assumption or reducing the numerical resolution while trying to preserve the most important physical processes present in the more complex model.
+Surrogate models according to their derivation can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
+
+% Reduced order model
+The reduced order models are perhaps more familiar in the scientific community where a complex physical model is being simplified by putting more stringent assumption or reducing the numerical resolution while trying to preserve the most important physical processes present in the more complex model.
 \marginpar{Reduced-order model}
-The point kinetics model is an example of a reduced-order model, substituting the more complex $3$-dimensional nodal code;
+The point neutron kinetics model is an example of a reduced-order model, substituting the more complex $3$-dimensional nodal code;
 and loosely speaking, \gls[hyper=false]{th} system code is a reduced-order model of the more expensive multi-phase computational fluid dynamics code.
 When applicable, reduced-order models can be useful as first approximation as well as didactic tools to build intuition. 
 
 % Response Surface Surrogate
+The response surface surrogates, on the other hand, make no pretext of preserving the underlying physical process of a complex simulator.
+\marginpar{Response surface surrogates}
+It seeks to \emph{emulate} the relationship (i.e., mapping) between inputs and outputs of the simulator.
+The term \emph{metamodel} is used throughout the thesis and exclusively refer to this particular type of surrogate model.
+The workflow of constructing a response surface surrogate typically consists of three steps.
+The first step is to gather the data, that is by running the simulator at limited and selected points across the input parameter space of interest and evaluate its outputs.
+The selection of such points are known as the \emph{design of experiment} \cite{Simpson2001a,Santner2003}.
+The second step is to choose an approximating function that emulates well the relationship between the inputs and outputs and \emph{train} them based on the data.
+Training a surrogate model involves \emph{fitting} the parameters associated with the selected approximating function.
+The function is chosen such that it is simpler and faster to evaluate at arbitrary inputs, relative to the original simulator.
+Finally, a validation step is conducted to assess the quality of the resulting metamodel.
+Variation of this workflow exists, especially whether iteration is carried out \cite{Razavi2012}.
+
 % Gaussian Process, What, renewed interest due to Machine learning
 Gaussian process The original paper was 
 
-% Gaussian Process, Why and recent popularity due to machine learning
+% Gaussian Process, Why
 
 % Gaussian Process, and others
-\gls[hyper=false]{gp} metamodel is by no means the only method to construct a metamodel of a simulator, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
+\gls[hyper=false]{gp} metamodel is by no means the only method to construct a data-driven metamodel of a simulator, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
 \marginpar{Other metamodeling approaches}
-Response Surface Method (RSM), originally developed as a technique in the design and analysis of physical experiments \cite{Box2007}, 
+\emph{Response Surface Method} (RSM), originally developed as a technique in the design and analysis of physical experiments \cite{Box2007}, 
 has a long history of being adapted to the design and analysis of computer experiments \cite{Kerrigan1979,Lucia1982,Faravelli1989,Engel1990}.
 It is mostly based on either linear or quadratic regression (with interaction terms) (see for instance cite \cite{Kleijnen2000}, and more recent reviews \cite{Simpson1998,Simpson2001}).
 In recent times, other methods such as the ones based on artificial neural network \cite{Fonseca2003} and polynomial chaos expansion \cite{Sudret2008,Sudret2012} have also gained traction.
 For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits from Scopus, an online bibliographic database \cite{Elsevier2017}, for the different select metamodeling approaches.
-
 \begin{table}[ht]
     \myfloatalign
     \caption{Number of publications related to different metamodeling approaches based on Scopus web search as of Feb. $14$. $2017$.}
