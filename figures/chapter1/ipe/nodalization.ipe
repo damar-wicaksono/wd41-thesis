@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171031114714" modified="D:20171031162722"/>
+<info created="D:20171031114714" modified="D:20171112183805"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -511,45 +511,37 @@ h
 576 344.528 l
 h
 </path>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1289.68 -1266.44" transformations="translations" pos="436 780" stroke="black" type="label" width="165.406" height="8.965" depth="2.99" valign="baseline" size="large">Safety Injection System (ECCS)</text>
-<path matrix="1 0 0 1 -256.782 248" stroke="black">
+<path matrix="1 0 0 1 -248.451 247.545" stroke="black">
 496 176 m
 496 144 l
 528 144 l
 528 176 l
 h
 </path>
-<path matrix="1 0 0 1 -12.4803 64.0851" fill="black">
+<path matrix="1 -0 0 1 -192 64" fill="black">
 444 184 m
 452 184 l
 448 188 l
 h
 </path>
-<path matrix="1 0 0 1 -12.4803 64.0851" fill="black">
+<path matrix="1 -0 0 1 -192 64" fill="black">
 444 192 m
 452 192 l
 448 188 l
 h
 </path>
-<path matrix="1 0 0 1.00213 -16 63.5743" stroke="black">
+<path matrix="1 -0 0 1.00213 -195.52 63.4892" stroke="black">
 448 240 m
 448 200 l
 456 200 l
 456 240 l
 h
 </path>
-<path matrix="0.663032 0 0 1 108.179 32" stroke="black">
+<path matrix="0.663032 0 0 1 132.179 32" stroke="black">
 416 304 m
 416 296 l
 452 296 l
 452 304 l
-h
-</path>
-<path matrix="0.6 0 0 1 150.4 32" stroke="black">
-456 304 m
-456 296 l
-496 296 l
-496 304 l
 h
 </path>
 <path matrix="0.6 0 0 1 161.6 32" stroke="black">
@@ -624,155 +616,155 @@ h
 560 416 m
 576 416 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 320 368 m
 320 292 l
 328 292 l
 328 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black" fill="black" tiling="falling">
+<path matrix="1 0 0 1 24 -44" stroke="black" fill="black" tiling="falling">
 328 368 m
 328 292 l
 332 292 l
 332 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 336 368 m
 336 292 l
 348 292 l
 348 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black" fill="black" tiling="falling">
+<path matrix="1 0 0 1 24 -44" stroke="black" fill="black" tiling="falling">
 348 368 m
 348 292 l
 352 292 l
 352 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 356 368 m
 356 292 l
 364 292 l
 364 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black" fill="black" tiling="falling">
+<path matrix="1 0 0 1 24 -44" stroke="black" fill="black" tiling="falling">
 364 368 m
 364 292 l
 368 292 l
 368 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 300 368 m
 300 292 l
 316 292 l
 316 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black" fill="black" tiling="falling">
+<path matrix="1 0 0 1 24 -44" stroke="black" fill="black" tiling="falling">
 296 368 m
 296 292 l
 300 292 l
 300 368 l
 h
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 300 304 m
 316 304 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 300 320 m
 316 320 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 300 336 m
 316 336 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 300 352 m
 316 352 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 320 352 m
 328 352 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 320 336 m
 328 336 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 320 320 m
 328 320 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 320 304 m
 328 304 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 336 304 m
 348 304 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 336 320 m
 348 320 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 336 336 m
 348 336 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 336 352 m
 348 352 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 356 352 m
 364 352 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 356 336 m
 364 336 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 356 320 m
 364 320 l
 </path>
-<path matrix="1 0 0 1 0 -44" stroke="black">
+<path matrix="1 0 0 1 24 -44" stroke="black">
 356 304 m
 364 304 l
 </path>
-<path matrix="1 0 0 1 0 -28" stroke="black">
+<path matrix="1 0 0 1 24 -28" stroke="black">
 368 372 m
 36 0 0 36 332 372 296 372 a
 h
 </path>
-<path matrix="1 0 0 1 0 -60" stroke="black">
+<path matrix="1 0 0 1 24 -60" stroke="black">
 368 288 m
 36 0 0 -36 332 288 296 288 a
 h
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 320 336 m
 320 328 l
 368 328 l
 368 336 l
 h
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 296 336 m
 296 328 l
 316 328 l
 316 336 l
 h
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 308 248 m
 308 228 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 320 240 m
 320 232 l
 368 232 l
@@ -794,7 +786,7 @@ h
 400 440 m
 432 440 l
 </path>
-<group matrix="1 0 0 1 48.0346 15.9651">
+<group matrix="1 0 0 1 24.366 15.5099">
 <path matrix="-0.00317198 -0.36556 0.36556 -0.00317198 45.9469 334.116" stroke="black">
 12 0 0 12 56 444 e
 </path>
@@ -921,41 +913,41 @@ h
 592 288 l
 592 324 l
 </path>
-<path matrix="1 0 0 1.05177 -360 17.6375" stroke="black">
+<path matrix="1 0 0 1.05177 -383.669 17.1823" stroke="black">
 560.009 344.528 m
 560.009 432 l
 576 432 l
 576 344.528 l
 h
 </path>
-<path matrix="1.25 0 0 1 -492 32" stroke="black">
+<path matrix="1.25 0 0 1 -515.669 31.5448" stroke="black">
 528 336 m
 544 336 l
 544 320 l
 16 0 0 -16 544 336 528 336 a
 h
 </path>
-<path matrix="1.25 0 0 1 -504 32" stroke="black">
+<path matrix="1.25 0 0 1 -527.669 31.5448" stroke="black">
 576 336 m
 560 336 l
 560 320 l
 16 0 0 16 560 336 576 336 a
 h
 </path>
-<path matrix="1 0 0 1.04545 -360 20.3636" stroke="black">
+<path matrix="1 0 0 1.04545 -383.669 19.9084" stroke="black">
 528 432 m
 528 344 l
 544 344 l
 544 432 l
 h
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 448 m
 576 448 l
 576 448 l
 23.991 0 0 23.991 552.009 448 528.018 448 a
 </path>
-<path matrix="1 0 0 1.04166 -360 21.5399" stroke="0">
+<path matrix="1 0 0 1.04166 -383.669 21.0847" stroke="0">
 548 432 m
 4 0 0 -4 552 432 556 432 a
 556 344 l
@@ -966,113 +958,105 @@ h
 548 344 l
 h
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 432 m
 528.018 448 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 576 432 m
 576 448 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 416 m
 544 416 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 400 m
 544 400 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 384 m
 544 384 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 368 m
 544 368 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 528 352 m
 544 352 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 352 m
 576 352 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 368 m
 576 368 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 384 m
 576 384 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 400 m
 576 400 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 416 m
 576 416 l
 </path>
-<path matrix="1 0 0 1 -360 40" stroke="black">
+<path matrix="1 0 0 1 -383.669 39.5448" stroke="black">
 560 416 m
 576 416 l
 </path>
-<path matrix="1 0 0 1 -360 0" stroke="black">
+<path matrix="1 0 0 1 -383.669 -0.455166" stroke="black">
 508 336 m
 520 348 l
 524 344 l
 512 332 l
 508 336 l
 </path>
-<path matrix="1 0 0 1 -360 0" stroke="black">
+<path matrix="1 0 0 1 -383.669 -0.455166" stroke="black">
 576 344 m
 580 348 l
 592 336 l
 588 332 l
 576 344 l
 </path>
-<path stroke="black">
-248 328 m
-229.859 333.926 l
-</path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 324 240 m
 324 248 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 340 240 m
 340 248 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 360 240 m
 360 248 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 340 228 m
 340 232 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 324 324 m
 324 328 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 340 324 m
 340 328 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 360 324 m
 360 328 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 368 332 m
 384 332 l
 </path>
-<path stroke="black">
-408 332 m
-424 332 l
-</path>
-<path stroke="black">
+<path matrix="2 0 0 1 -464 0" stroke="black">
 448 332 m
 464 332 l
 </path>
@@ -1089,11 +1073,11 @@ h
 589.872 333.872 m
 596 324 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 218.031 346.031 m
 209.549 355.162 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 161.807 346.193 m
 172.902 356.475 l
 </path>
@@ -1124,14 +1108,14 @@ h
 448 352 m
 424.97 352.029 l
 </path>
-<path matrix="1 0 0 0.8 -16 48" stroke="black">
+<path matrix="1 -0 0 0.8 -195.52 47.9149" stroke="black">
 448 240 m
 448 200 l
 456 200 l
 456 240 l
 h
 </path>
-<path stroke="black">
+<path matrix="1 -0 0 1 -179.52 -0.0851" stroke="black">
 428 176 m
 444 176 l
 444 188 l
@@ -1139,54 +1123,50 @@ h
 428 188 l
 428 176 l
 </path>
-<path matrix="1 0 0 1 -164.48 184.085" fill="black">
+<path matrix="1 0 0 1.02125 -148 180.09" fill="black">
 444 184 m
 452 184 l
 448 188 l
 h
 </path>
-<path matrix="1 0 0 1 -164.48 184.085" fill="black">
+<path matrix="1 0 0 0.97875 -148 188.08" fill="black">
 444 192 m
 452 192 l
 448 188 l
 h
 </path>
-<path matrix="1 0 0 1 0 8" stroke="black">
+<path matrix="1 0 0 1 8.33136 7.54483" stroke="black">
 240 376 m
 240 368 l
 272 368 l
 272 376 l
 h
 </path>
-<path matrix="1 0 0 1 0 8" stroke="black">
+<path matrix="1 0 0 1 16 8" stroke="black">
 280 352 m
 280 340 l
 288 340 l
 288 352 l
 h
 </path>
-<path matrix="1 0 0 1 0 8" stroke="black">
+<path matrix="1.66667 0 0 1 -173.333 8" stroke="black">
 272 372 m
 284 372 l
 284 368 l
 </path>
-<path matrix="1 0 0 1 0 8" stroke="black">
+<path matrix="1 0 0 1 16 8" stroke="black">
 284 360 m
 284 352 l
 </path>
-<path stroke="black">
+<path matrix="1 -0 0 1 -179.52 -0.0851" stroke="black">
 436 200 m
 436 208 l
 </path>
-<path stroke="black">
+<path matrix="1 -0 0 1 -179.52 -0.0851" stroke="black">
 436 240 m
 436 248 l
 </path>
-<path stroke="black">
-436 256 m
-436 264 l
-</path>
-<path stroke="black">
+<path matrix="1 0 0 1 -179.669 -0.455166" stroke="black">
 436 304 m
 436 328 l
 </path>
@@ -1195,87 +1175,87 @@ h
 552 524 l
 592 524 l
 </path>
-<path matrix="1 0 0 1 -460 52" stroke="black">
+<path matrix="1 0 0 1 -483.669 51.5448" stroke="black">
 8 0 0 8 596 260 e
 </path>
-<path stroke="black">
+<path matrix="1.5 0 0 1 -120 0" stroke="black">
 272 336 m
 272 328 l
 288 328 l
 288 336 l
 h
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 16 0" stroke="black">
 284 348 m
 284 336 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 288 332 m
 296 332 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 308 328 m
 308 324 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 24 0" stroke="black">
 352 336 m
 352 344 l
 </path>
-<path matrix="0.983282 0.182089 -0.182089 0.983282 -426.394 -237.7" stroke="black">
+<path matrix="0.983282 0.182089 -0.182089 0.983282 -126.394 -245.7" stroke="black">
 640 336 m
 640 352 l
 672 368 l
 672 320 l
 640 336 l
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" arrow="normal/normal">
+<path matrix="1 0 0 1 -200 -132" stroke="black" arrow="normal/normal">
 671.519 348.068 m
 700 356 l
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" rarrow="normal/normal">
+<path matrix="1 0 0 1 -200 -132" stroke="black" rarrow="normal/normal">
 640.437 340.169 m
 612 332 l
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" dash="dash dotted" pen="heavier">
+<path matrix="1 0 0 1 -200 -132" stroke="black" dash="dash dotted" pen="heavier">
 632 376 m
 632 316 l
 684 316 l
 684 376 l
 h
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" pen="fat">
+<path matrix="1 0 0 1 -200 -132" stroke="black" pen="fat">
 667.362 370.512 m
 676.103 323.315 l
 </path>
-<path matrix="1 0 0 1 -500 -124" stroke="black" pen="fat">
+<path matrix="1 0 0 1 -200 -132" stroke="black" pen="fat">
 638.811 348.953 m
 641.724 333.22 l
 </path>
-<text matrix="1 0 0 1 -476 -96" transformations="translations" pos="664 308" stroke="black" type="minipage" width="96" height="23.864" depth="18.92" valign="top">at faces: \\
+<text matrix="1 0 0 1 -176 -104" transformations="translations" pos="664 308" stroke="black" type="minipage" width="96" height="23.864" depth="18.92" valign="top">at faces: \\
 - flow area \\
 - hydraulic diameter \\
 - flow orientation</text>
-<text matrix="1 0 0 1 -510.052 -105.764" transformations="translations" pos="646.997 299.481" stroke="black" type="label" width="14.349" height="5.535" depth="0" valign="baseline" size="footnote">face</text>
-<text matrix="1 0 0 1 -544.957 -196.034" transformations="translations" pos="691.683 425.992" stroke="black" type="minipage" width="24.814" height="11.924" depth="6.95" valign="top">fluid  \\
+<text matrix="1 0 0 1 -210.052 -113.764" transformations="translations" pos="646.997 299.481" stroke="black" type="label" width="14.349" height="5.535" depth="0" valign="baseline" size="footnote">face</text>
+<text matrix="1 0 0 1 -244.957 -204.034" transformations="translations" pos="691.683 425.992" stroke="black" type="minipage" width="24.814" height="11.924" depth="6.95" valign="top">fluid  \\
 cell</text>
-<text matrix="1 0 0 1 -474.164 -35.7045" transformations="translations" pos="664 308" stroke="black" type="minipage" width="62.167" height="17.899" depth="12.93" valign="top">at fluid cell: \\
+<text matrix="1 0 0 1 -174.164 -43.7045" transformations="translations" pos="664 308" stroke="black" type="minipage" width="62.167" height="17.899" depth="12.93" valign="top">at fluid cell: \\
 - length \\
 - volume</text>
 <text matrix="0.903626 1.19727 -1.57985 1.19237 1228.66 -990.133" transformations="translations" pos="436 780" stroke="black" type="label" width="56.219" height="8.169" depth="0" valign="baseline" size="large">Pressurizer</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 985.885 -914.817" transformations="translations" pos="436 780" stroke="black" type="label" width="96.98" height="8.169" depth="0" valign="baseline" size="large">Steam Generator 2</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1138.78 -1240.99" transformations="translations" pos="436 780" stroke="black" type="label" width="61.326" height="6.926" depth="1.93" valign="baseline">Lower plenum</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1157.85 -1067.36" transformations="translations" pos="436 780" stroke="black" type="label" width="25.355" height="8.169" depth="0" valign="baseline" size="large">RPV</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1078.93 -1170.45" transformations="translations" pos="436 780" stroke="black" type="label" width="51.086" height="6.808" depth="0" valign="baseline">Downcomer</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 962.216 -915.272" transformations="translations" pos="436 780" stroke="black" type="label" width="96.98" height="8.169" depth="0" valign="baseline" size="large">Steam Generator 2</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1162.78 -1240.99" transformations="translations" pos="436 780" stroke="black" type="label" width="61.326" height="6.926" depth="1.93" valign="baseline">Lower plenum</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1181.85 -1067.36" transformations="translations" pos="436 780" stroke="black" type="label" width="25.355" height="8.169" depth="0" valign="baseline" size="large">RPV</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1102.93 -1170.45" transformations="translations" pos="436 780" stroke="black" type="label" width="51.086" height="6.808" depth="0" valign="baseline">Downcomer</text>
 <text matrix="0.903626 1.19727 -1.57985 1.19237 1356.5 -911.74" transformations="translations" pos="436 780" stroke="black" type="label" width="96.98" height="8.169" depth="0" valign="baseline" size="large">Steam Generator 1</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1073.37 -1017.92" transformations="translations" pos="436 780" stroke="black" type="label" width="65.679" height="8.302" depth="0" valign="baseline" size="large">Accumulator</text>
-<text matrix="1 0 0 1 64.6288 43.4616" transformations="translations" pos="237.103 310.939" stroke="black" type="label" width="62.294" height="6.926" depth="1.93" valign="baseline">Upper plenum</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1077.03 -1111.1" transformations="translations" pos="436 780" stroke="black" type="label" width="30.726" height="8.174" depth="2.32" valign="baseline" size="large">Pump</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1286 -1205.06" transformations="translations" pos="436 780" stroke="black" type="label" width="27.96" height="8.302" depth="0" valign="baseline" size="large">Valve</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 907.612 -1141.63" transformations="translations" pos="436 780" stroke="black" type="label" width="53.439" height="6.926" depth="1.93" valign="baseline">from hot leg</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1105.37 -1017.92" transformations="translations" pos="436 780" stroke="black" type="label" width="65.679" height="8.302" depth="0" valign="baseline" size="large">Accumulator</text>
+<text matrix="1 0 0 1 88.6288 43.4616" transformations="translations" pos="237.103 310.939" stroke="black" type="label" width="62.294" height="6.926" depth="1.93" valign="baseline">Upper plenum</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1053.36 -1111.56" transformations="translations" pos="436 780" stroke="black" type="label" width="30.726" height="8.174" depth="2.32" valign="baseline" size="large">Pump</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1050 -1205.06" transformations="translations" pos="436 780" stroke="black" type="label" width="27.96" height="8.302" depth="0" valign="baseline" size="large">Valve</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 883.943 -1142.09" transformations="translations" pos="436 780" stroke="black" type="label" width="53.439" height="6.926" depth="1.93" valign="baseline">from hot leg</text>
 <text matrix="0.903626 1.19727 -1.57985 1.19237 1408.97 -1217.52" transformations="translations" pos="436 780" stroke="black" type="label" width="45.385" height="6.926" depth="1.93" valign="baseline">to cold leg</text>
-<text matrix="1 0 0 1 -20 0" transformations="translations" pos="392 292" stroke="black" type="minipage" width="32" height="11.924" depth="6.95" valign="top">Heated \\
+<text matrix="1 0 0 1 4 0" transformations="translations" pos="392 292" stroke="black" type="minipage" width="32" height="11.924" depth="6.95" valign="top">Heated \\
 channels</text>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 137.786 319.798 m
 150.219 333.781 l
 </path>
@@ -1283,11 +1263,7 @@ channels</text>
 595.777 288 m
 595.89 267.999 l
 </path>
-<path stroke="black">
-268.021 334.416 m
-272 334.444 l
-</path>
-<path stroke="black">
+<path matrix="1 0 0 1 8.33136 -0.455166" stroke="black">
 256.005 392 m
 256.164 384 l
 </path>
@@ -1314,26 +1290,26 @@ circuit</text>
 <text matrix="1 0 0 1 -16 80" transformations="translations" pos="672 484" stroke="black" type="minipage" width="48" height="17.498" depth="12.54" valign="top">to \\
 secondary \\
 circuit</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1211.61 -1141.63" transformations="translations" pos="436 780" stroke="black" type="label" width="29.44" height="6.23" depth="1.74" valign="baseline" size="small">Hot leg</text>
-<text matrix="0.903626 1.19727 -1.57985 1.19237 1095.61 -1141.63" transformations="translations" pos="436 780" stroke="black" type="label" width="33.281" height="6.23" depth="1.74" valign="baseline" size="small">Cold leg</text>
-<path matrix="1 0 0 0.799999 -496 77.6006" stroke="black">
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1235.61 -1141.63" transformations="translations" pos="436 780" stroke="black" type="label" width="29.44" height="6.23" depth="1.74" valign="baseline" size="small">Hot leg</text>
+<text matrix="0.903626 1.19727 -1.57985 1.19237 1121.02 -1133.58" transformations="translations" pos="436 780" stroke="black" type="label" width="33.281" height="6.23" depth="1.74" valign="baseline" size="small">Cold leg</text>
+<path matrix="1 0 0 0.799999 -519.669 77.1454" stroke="black">
 592 528 m
 592 516 l
 656 516 l
 656 528 l
 h
 </path>
-<path matrix="1 0 0 0.666667 -496 176" stroke="black">
+<path matrix="1 0 0 0.666667 -519.669 175.545" stroke="black">
 592 528 m
 592 516 l
 656 516 l
 656 528 l
 h
 </path>
-<path matrix="1 0 0 1 -624 0" stroke="black">
+<path matrix="1 0 0 1 -647.669 -0.455166" stroke="black">
 8 0 0 8 696 524 e
 </path>
-<path matrix="1 0 0 1 -624 -28" stroke="black">
+<path matrix="1 0 0 1 -647.669 -28.4552" stroke="black">
 8 0 0 8 696 524 e
 </path>
 <path stroke="black">
@@ -1344,30 +1320,30 @@ h
 656 524 m
 672 524 l
 </path>
-<path matrix="1 0 0 1 16 0" stroke="black">
+<path matrix="1 0 0 1 -7.66864 -0.455166" stroke="black">
 64 524 m
 80 524 l
 </path>
-<path matrix="1 0 0 1 16 0" stroke="black">
+<path matrix="1 0 0 1 -7.66864 -0.455166" stroke="black">
 64 496 m
 80 496 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 160 524 m
 192 524 l
 192 512 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 160 496 m
 169.371 495.944 l
 </path>
-<text matrix="1 0 0 1 -608.172 -0.0961391" transformations="translations" pos="672 484" stroke="black" type="minipage" width="48" height="17.899" depth="12.93" valign="top">from \\
+<text matrix="1 0 0 1 -631.841 -0.551305" transformations="translations" pos="672 484" stroke="black" type="minipage" width="48" height="17.899" depth="12.93" valign="top">from \\
 secondary \\
 circuit</text>
-<text matrix="1 0 0 1 -608.441 81.0211" transformations="translations" pos="672 484" stroke="black" type="minipage" width="48" height="17.498" depth="12.54" valign="top">to \\
+<text matrix="1 0 0 1 -632.11 80.5659" transformations="translations" pos="672 484" stroke="black" type="minipage" width="48" height="17.498" depth="12.54" valign="top">to \\
 secondary \\
 circuit</text>
-<path matrix="1 0 0 1 -500 -124" stroke="black">
+<path matrix="1 0 0 1 -200 -132" stroke="black">
 641.685 333.433 m
 640 324 l
 </path>
@@ -1376,22 +1352,22 @@ circuit</text>
 744 488 l
 744 488 l
 </path>
-<path matrix="1 0 0 1 24 0" stroke="white">
+<path matrix="1 0 0 1 0.331361 -0.455166" stroke="white">
 32 492 m
 32 480 l
 </path>
-<path matrix="1 0 0 1 -360 0" stroke="black" dash="dash dotted" pen="fat">
+<path matrix="1 0 0 1 -383.669 -0.455166" stroke="black" dash="dash dotted" pen="fat">
 504 340 m
 512 348 l
 524 336 l
 516 328 l
 h
 </path>
-<path stroke="white">
+<path matrix="1 0 0 1 300 -8" stroke="white">
 208 160 m
 224 160 l
 </path>
-<path stroke="black" fill="black" tiling="falling">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black" fill="black" tiling="falling">
 184.001 472 m
 184 380 l
 180 380 l
@@ -1402,11 +1378,11 @@ h
 200 472 l
 8 0 0 8 192 472 184 472 a
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 185.859 368 m
 185.859 379.872 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 -23.6686 -0.455166" stroke="black">
 198.264 368 m
 198.135 379.872 l
 </path>
@@ -1524,5 +1500,36 @@ h
 198.264 368 m
 198.135 379.872 l
 </path>
+<path stroke="black" dash="dash dotted" pen="fat">
+504 340 m
+512 348 l
+524 336 l
+516 328 l
+h
+</path>
+<path matrix="0.9691 0 0 0.861626 -16.145 45.7324" stroke="black">
+229.548 333.996 m
+250.472 333.789 l
+</path>
+<path stroke="black">
+256 256 m
+256 264 l
+</path>
+<path matrix="1.5 0 0 1 -156 0" stroke="black">
+272 336 m
+272 328 l
+288 328 l
+288 336 l
+h
+</path>
+<path stroke="black">
+276 332 m
+288 332 l
+</path>
+<path stroke="black">
+252 332 m
+244 332 l
+</path>
+<text matrix="1 0 0 1 72 -52" transformations="translations" pos="100 252" stroke="black" type="minipage" width="68" height="13.164" depth="8.2" valign="top">Safety Injection\\System (ECCS)</text>
 </page>
 </ipe>
