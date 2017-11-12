@@ -217,7 +217,7 @@ Instead of minimizing a measure of error, Bayesian framework treats the uncertai
 The framework offers flexibility in modeling various sources of uncertainty \cite{Kennedy2001,Kaipio2011}.
 
 % Bayesian Calibration
-Bayesian framework for the calibration of computer simulation model was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
+Bayesian framework for the calibration of computer simulation mo\-del was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
 \marginpar{Bayesian framework, Kennedy and O'Hagan approach}
 The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters along with the associated uncertainty taking into account different sources of uncertainty based on the observed data.
 The distinct idea of it, however, is acknowledging that a systematic bias between a physics-based simulator and reality might be present.
@@ -232,11 +232,16 @@ It is adapted here in the present research to deal with the particular problem p
 
 % Bayesian data analysis
 Bayesian framework for model calibration consists of two main steps \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
-The KOH approach for model calibration, in essence, prescribes a probabilistic model for data-generating process of the observed experimental data, incorporating the simulator, the uncertain bias, and the uncertain model parameters into it.
+\marginpar{Steps in Bayesian framework}
+The KOH approach for model calibration, in essence, prescribes a probabilistic model for data-generating process of the observed experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
+\marginpar{Bayesian framework, formulation}
 This probabilistic model is then conditioned on the observed data that results in the (i.e., \emph{likelihood}) function.
 In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
+Extension and modification to the KOH approach includes dealing with high-dimensional output \cite{Higdon2008,Bayarri2007a,Wilkinson2010}, multiple types of output \cite{Arendt2012a}, different choices of the model bias term \cite{Ling2014}, and various simplifications \cite{Arendt2012,Bayarri2007,Goldstein2012}.
 
-Regarding the prior, there is a tendency in the literature \cite{Gelman2013,McElreath2015} to reject the old notion of \emph{Bayesianism} where emphasis is put heavily on the prior distribution of the parameters as \emph{subjective opinion} and the results will always be correct according to that prior.
+% Regarding 
+Regarding the prior, there is a tendency in the literature \cite{Gelman2013,McElreath2015} to reject the old notion of \emph{Bayesianism} where emphasis is put heavily on the prior distribution of the parameters as \emph{subjective opinion} and the results will always be correct relative to that prior.
+\marginpar{On prior distribution}
 On the contrary, the use of prior should be seen in more pragmatic light, as a starting assumption that can be rejected if not appropriate; some motivation for the choice of prior can be even purely numerical \cite{Gelman2002,Gelman2006}.
 Gelman et al.~\cite{Gelman2013} advocates to check the implication of the resulting posterior parameters distribution on the posterior prediction in the sense whether whether the prediction makes sense and useful, but not in the sense of the posterior parameter distribution being \emph{true}.
 
