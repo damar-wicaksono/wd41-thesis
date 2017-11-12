@@ -231,8 +231,20 @@ Due to its popularity, and while extension and improvement exist \cite{Bayarri20
 It is adapted here in the present research to deal with the particular problem posed in \gls[hyper=false]{premium} benchmark that itself represents typical problem in the nuclear engineering \gls[hyper=false]{th} analysis.
 
 % Bayesian data analysis
-Bayesian framework for model calibration (or data analysis in general) consists of two main steps:
-\emph{It is not finished yet, there would be some additional paragraphs on recent development in NE application}.
+Bayesian framework for model calibration consists of two main steps \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
+The KOH approach for model calibration, in essence, prescribes a probabilistic model for data-generating process of the observed experimental data, incorporating the simulator, the uncertain bias, and the uncertain model parameters into it.
+This probabilistic model is then conditioned on the observed data that results in the (i.e., \emph{likelihood}) function.
+In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
+
+Regarding the prior, there is a tendency in the literature \cite{Gelman2013,McElreath2015} to reject the old notion of \emph{Bayesianism} where emphasis is put heavily on the prior distribution of the parameters as \emph{subjective opinion} and the results will always be correct according to that prior.
+On the contrary, the use of prior should be seen in more pragmatic light, as a starting assumption that can be rejected if not appropriate.
+Some motivation for the choice of prior can be even purely numerical. 
+Gelman et al.~\cite{Gelman2013} advocates to check the implication of the resulting posterior parameters distribution on the posterior prediction in the sense whether whether the prediction makes sense and useful, but not in the sense of the posterior parameter distribution being \emph{true}.
+
+% Bayesian Computation 1, Analytical and Early Sampler
+The computation involving the posterior distribution consist the second 
+% Bayesian Computation 2, Advanced Samplers
+
 % Development in nuclear engineering application
 
 
