@@ -28,7 +28,7 @@ and the classification is based on the parameter space of interest (local vs. gl
 
 % Local sensitivity analysis
 Local analysis is based on calculating the effect on the model output of small perturbations around a nominal parameter value. 
-\marginpar{local sensitivity analysis}
+\marginpar{Local sensitivity analysis}
 Often the perturbation is done one parameter at a time thus approximating the first-order partial derivative of the model output with respect to the perturbed parameter. 
 The derivative can be computed through efficient adjoint formulation \cite{Cacuci2003,Cacuci2010} capable of handling large number of parameters.
 
@@ -39,7 +39,7 @@ Thus the coefficients can be readily compared over different modeled systems, in
 
 % Global sensitivity analysis
 The global analysis, on the other hand, 
-\marginpar{global sensitivity analysis}
+\marginpar{Global sensitivity analysis}
 seeks to explore the input parameters space across its range of variation and then quantify the input parameter importance based on a characterization of the resulting output response surface. 
 In global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, the characterization is aimed at the identification of the system’s critical points (e.g., maxima, minima, saddle points, etc.). 
 In statistical global methods \cite{Saltelli2008, Saltelli2004, Saltelli2006}, the characterization is aimed at measuring the dispersion of the output based on variance \cite{Sobol2001,Cukier1978}, correlation \cite{Helton1993}, or elementary effects \cite{Morris1991}.
@@ -51,7 +51,7 @@ Furthermore, the result of the analysis can be highly dependent to the assumed i
 
 % Global sensitivity analysis, advantages
 Yet, despite the aforementioned shortcomings, 
-\marginpar{global statistical sensitivity analysis}
+\marginpar{Global statistical sensitivity analysis}
 the global statistical framework has three particular attractive features relevant to the present study. 
 First, the statistical method for sensitivity analysis is non-intrusive in the sense that minimal or no modification to the original code is required. 
 In other words, the code can be taken as a black box and the analysis is focused on the input/output relationship \cite{Saltelli2008} of the code. 
@@ -73,7 +73,7 @@ by addressing the follow-up question on the identification of the most important
 
 % Quantity of Interests
 Saltelli et al. \cite{Saltelli2006} emphasized that an analysis using computer simulation 
-\marginpar{choosing model output as the quantity of interest}
+\marginpar{Choosing model output as the quantity of interest}
 should be focused on the specific question the simulation is required to answer 
 as opposed to the analysis of each and every individual model output. 
 This is done through judicious choice of representative quantity of interest (QoI) 
@@ -84,7 +84,7 @@ using a predefined scalar function such as the maximum, the minimum, the average
 
 % Function as Model Output
 However, in some cases, the whole course of a transient is of primary interest 
-\marginpar{function as model output}
+\marginpar{Function as model output}
 such as in assessing the ability of a model to reproduce the overall dynamics of the simulated system. 
 If the attention is focused on the overall change in shape of the time-dependent output (a shift in the Y-axis, a delay, a distortion, etc.), 
 the descriptions provided by the aforementioned scalar functions might be incomplete and overlook important features of the variation. 
@@ -94,7 +94,7 @@ In accordance to such approach, \glsfirst[hyper=false]{fda} popularized by Ramsa
 
 % Recent Development in Nuclear Engineering Application
 Despite these recent developments, 
-\marginpar{more recent development in nuclear engineering application}
+\marginpar{More recent development in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
 Notable recent examples related of sensitivity analysis for a time-dependent \gls[hyper=false]{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
 for reflooding experiment of degraded fuel rods, utilizing adjoint sensitivity method; 
@@ -179,7 +179,7 @@ The present research adopts \gls[hyper=false]{gp} for constructing a metamodel o
 \emph{Response Surface Method} (RSM), originally developed as a technique in the design and analysis of physical experiments \cite{Box2007}, 
 has a long history of being adapted to the design and analysis of computer experiments \cite{Kerrigan1979,Lucia1982,Faravelli1989,Engel1990}.
 It is mostly based on either linear or quadratic regression (with interaction terms) (see for instance \cite{Kleijnen2000}, and more recent reviews \cite{Simpson1998,Simpson2001}).
-In recent times, other methods such as the ones based on artificial neural network \cite{Fonseca2003} and polynomial chaos expansion \cite{Sudret2008,Sudret2012} have also gained traction.
+In recent times, other methods such as the ones based on artificial neural network \cite{Fonseca2003} and polynomial chaos expansion (PCE) \cite{Sudret2008,Sudret2012} have also gained traction.
 For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits from Scopus, an online bibliographic database \cite{Elsevier2017}, for the different select metamodeling approaches. Note that the list is not at all exhaustive.
 \begin{table}[ht]
     \myfloatalign
@@ -201,8 +201,8 @@ Metamodel applications have a long history in nuclear engineering analyses due t
 \marginpar{Developments in nuclear engineering application}
 As such, historically, metamodels (specifically, of type the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
 The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenarion, to the uncertainty and sensitivity analyses of severe accident progression \cite{Khatib-Rahbar1989}.
-In the recent times, more advanced metamodels have been applied to more variety of engineering analysis.
-From the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013}.
+In the recent times, more advanced metamodels (e.g., \gls[hyper=false]{gp} metamodel) have been applied to more variety of engineering analysis.
+From the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013} code.
 
 %----------------------------------------------------------------------
 \subsection{Bayesian Calibration}\label{sub:intro_bayesian_calibration}
@@ -231,11 +231,11 @@ Due to its popularity, and while extension and improvement exist \cite{Bayarri20
 It is adapted here in the present research to deal with the particular problem posed in \gls[hyper=false]{premium} benchmark that itself represents typical problem in the nuclear engineering \gls[hyper=false]{th} analysis.
 
 % Bayesian data analysis
-Bayesian framework for model calibration consists of two main steps \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
+Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
 \marginpar{Steps in Bayesian framework}
 The KOH approach for model calibration, in essence, prescribes a probabilistic model for data-generating process of the observed experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
 \marginpar{Bayesian framework, formulation}
-This probabilistic model is then conditioned on the observed data that results in the (i.e., \emph{likelihood}) function.
+This probabilistic model is then conditioned on the observed data that results in the \emph{likelihood} function.
 In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
 Extension and modification to the KOH approach includes dealing with high-dimensional output \cite{Higdon2008,Bayarri2007a,Wilkinson2010}, multiple types of output \cite{Arendt2012a}, different choices of the model bias term \cite{Ling2014}, and various simplifications \cite{Arendt2012,Bayarri2007,Goldstein2012}.
 
