@@ -73,10 +73,22 @@ The following are the sources of primary interest in the present research:
 \end{enumerate}
 
 % Forward uncertainty quantification, Inputs as random variables
-In statistical uncertainty analysis, the controllable inputs and physical model parameters are modeled as random variables ($\bm{\mathcal{X}}_c$ and $\bm{\mathcal{X}}_m$, respectively) equipped with probability distributions.
+In statistical uncertainty analysis, the controllable inputs and physical model parameters are modeled as random variables ($\bm{\mathcal{X}}_c$ and $\bm{\mathcal{X}}_m$, respectively) equipped with \glspl[hyper=false]{pdf}.
 \marginpar{Forward uncertainty quantification}
-Then using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and they are used to run the code multiple times.
-Finally, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
+By transforming the random variable inputs, the simulator output becomes random variable as well
+\begin{equation*}
+	\bm{\mathcal{U}}(\bm{r}, t) = f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t)
+\end{equation*}
+where $f$ represents the simulator as a mathematical function.
+The resulting random code outputs can be summarized by different integral quantities.
+For instance, the mean
+\begin{equation*}
+	\mathbb{E}[f] = \int\limits_{\mathbf{X}_c,\mathbf{X}_m} f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t) \, p(\bm{x}_c, \bm{x}_m) \, d\bm{x}_c \, d\bm{x}_m
+\end{equation*}
+where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
+
+Using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and they are used to run the code multiple times.
+Afterward, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
 The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
 \begin{figure}[!bth]	
