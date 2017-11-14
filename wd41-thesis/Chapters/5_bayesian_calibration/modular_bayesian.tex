@@ -156,10 +156,10 @@ This variability, in turn, might be due to the inherently stochastic nature of t
 % Generic Formulation
 Because this term is considered unknown, a stochastic process is defined on the observation layout,
 \begin{equation}
-        \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \psi_{\epsilon}, \bm{\lambda})
+        \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \bm{\psi}_{\epsilon}, \bm{\lambda})
 \label{eq:bc_data_generating_exp}
 \end{equation}
-where $\bm{\psi}_{\epsilon}$ is the parametrization of the \gls[hyper=false]{pdf} describing the observation error $\bm{\lambda}$.
+where $\bm{\psi}_{\epsilon}$ is the parametrization of the \gls[hyper=false]{pdf} describing the observation error $\epsilon$ at $\bm{\lambda}$.
 That is, it depends on which response is observed, as well as where and when it is observed.
 
 % Independence assumption and its justification
@@ -170,7 +170,7 @@ But intuitively, as argued in \cite{Wikle2001}, this structure becomes much simp
 it can mainly be attributed to the residual variability and instrument precision with a simpler description.
 The true system response itself is already separately formulated in terms of the simulator prediction and a model bias term (Eq.~(\ref{eq:bc_true_simulation})).
 As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent) is sufficient \cite{Wikle2001}.
-At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias and observation error based on the data alone.
+At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias term and observation error based on the data alone.
 
 % Gaussian Assumption, some comments
 The particular distribution of the observation error is often assumed to be a Gaussian in the
@@ -182,7 +182,7 @@ applied literature \cite{Wikle1998,Wikle2001,Kennedy2001,Bayarri2007,Arhonditsis
 \end{equation}
 or equivalently following the conditional independence assumption explained above,
 \begin{equation}
-  \mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c, \boldsymbol{\lambda}) \thicksim \mathcal{N}(y_T(\bm{x}_c, \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
+  \left(\mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c, \boldsymbol{\lambda})\right) \thicksim \mathcal{N}(y_T(\bm{x}_c, \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
 \label{eq:bc_data_generating_exp_gaussian_2}
 \end{equation}
 where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and the only hyper-parameter of this observation error specification.
