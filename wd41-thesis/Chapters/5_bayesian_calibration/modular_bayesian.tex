@@ -207,10 +207,9 @@ where $m$ and $s^2$ is the kriging mean and the kriging variance, respectively (
 and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} (e.g., its covariance kernel).
 
 This step is taken especially if the simulator is computationally expensive to evaluate and only a limited number of simulator runs can be afforded \cite{Kennedy2001,Bayarri2007,Arendt2012}.
-The probability model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
-Furthermore, as explained in the Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
-This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
-As such, in this case, the uncertainty has an epistemic interpretation.
+The probabilistic model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
+Furthermore, as explained in Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
+This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{The statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
 
 %-----------------------------------------------------------------------------
 \subsection{Posterior of the Model Parameters}\label{sub:bc_modular_posterior}
