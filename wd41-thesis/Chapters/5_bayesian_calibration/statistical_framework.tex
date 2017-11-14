@@ -85,10 +85,10 @@ Appropriately acknowledging multiple sources of uncertainty in the calibration p
 % Bayesian Data Analysis
 Two steps are involved in conducting a Bayesian inference.
 \marginpar{Bayesian inference}
-The first is a formulation of a probability model for all the terms in Eq.~(\ref{eq:bc_observation_true}).
+The first is a formulation of a probabilistic model for all the terms in Eq.~(\ref{eq:bc_observation_true}).
 In essence, the resulting model represents a data-generating process of the observed experimental data,
 incorporating the elements of Eq.~(\ref{eq:bc_observation_true}) into it.
-An approach to formulate a probability model is presented in Section~\ref{sec:bc_modular}.
-The probability model is then conditioned on the given experimental data to obtain an updated (\emph{posterior}) probability distribution of the model parameters.
+An approach to formulate a probabilistic model is presented in Section~\ref{sec:bc_modular}.
+The probabilistic model is then conditioned on the given experimental data to obtain an updated (\emph{posterior}) probability distribution of the model parameters.
 Dealing with a high-dimensional arbitrary probability distribution is difficult and most of the computations involving  posterior distribution resort to directly generating samples from it. 
 Indeed, the computation of the posterior distribution or any transformation of it (e.g., mean of a function) is the second step of the inference and is presented in Section~\ref{sec:bc_mcmc}.
