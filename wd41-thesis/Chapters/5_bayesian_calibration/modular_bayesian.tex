@@ -156,10 +156,10 @@ This variability, in turn, might be due to the inherently stochastic nature of t
 % Generic Formulation
 Because this term is considered unknown, a stochastic process is defined on the observation layout,
 \begin{equation}
-        \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \psi_{\epsilon}, \bm{\lambda})
+        \mathcal{E}(\bm{\lambda}) \thicksim p(\epsilon | \bm{\psi}_{\epsilon}, \bm{\lambda})
 \label{eq:bc_data_generating_exp}
 \end{equation}
-where $\bm{\psi}_{\epsilon}$ is the parametrization of the \gls[hyper=false]{pdf} describing the observation error $\bm{\lambda}$.
+where $\bm{\psi}_{\epsilon}$ is the parametrization of the \gls[hyper=false]{pdf} describing the observation error $\epsilon$ at $\bm{\lambda}$.
 That is, it depends on which response is observed, as well as where and when it is observed.
 
 % Independence assumption and its justification
@@ -170,7 +170,7 @@ But intuitively, as argued in \cite{Wikle2001}, this structure becomes much simp
 it can mainly be attributed to the residual variability and instrument precision with a simpler description.
 The true system response itself is already separately formulated in terms of the simulator prediction and a model bias term (Eq.~(\ref{eq:bc_true_simulation})).
 As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent) is sufficient \cite{Wikle2001}.
-At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias and observation error based on the data alone.
+At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias term and observation error based on the data alone.
 
 % Gaussian Assumption, some comments
 The particular distribution of the observation error is often assumed to be a Gaussian in the
@@ -182,7 +182,7 @@ applied literature \cite{Wikle1998,Wikle2001,Kennedy2001,Bayarri2007,Arhonditsis
 \end{equation}
 or equivalently following the conditional independence assumption explained above,
 \begin{equation}
-  \mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c, \boldsymbol{\lambda}) \thicksim \mathcal{N}(y_T(\bm{x}_c, \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
+  \left(\mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c, \boldsymbol{\lambda})\right) \thicksim \mathcal{N}(y_T(\bm{x}_c, \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
 \label{eq:bc_data_generating_exp_gaussian_2}
 \end{equation}
 where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and the only hyper-parameter of this observation error specification.
@@ -207,10 +207,9 @@ where $m$ and $s^2$ is the kriging mean and the kriging variance, respectively (
 and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} (e.g., its covariance kernel).
 
 This step is taken especially if the simulator is computationally expensive to evaluate and only a limited number of simulator runs can be afforded \cite{Kennedy2001,Bayarri2007,Arendt2012}.
-The probability model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
-Furthermore, as explained in the Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
-This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{the statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
-As such, in this case, the uncertainty has an epistemic interpretation.
+The probabilistic model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
+Furthermore, as explained in Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
+This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{The statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
 
 %-----------------------------------------------------------------------------
 \subsection{Posterior of the Model Parameters}\label{sub:bc_modular_posterior}
