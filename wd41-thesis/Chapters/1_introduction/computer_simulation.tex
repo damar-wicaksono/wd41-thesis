@@ -53,13 +53,13 @@ As a result, the terms \emph{computer simulation model} or \emph{simulator} incl
 %-----------------------------------------------------------------------------------------------------------------------------------
 
 % Goal of simulation and entry to safety analysis
-Scientific codes play a central role in the deterministic safety analysis of an \gls[hyper=false]{npp},
-a \emph{physics-based} evaluation of relevant phenomena taking place in the plant during broad range of postulated transients to demonstrate that safety requirements of operation are met \cite{IAEA2009}.
-The demonstration is carried out with respect to acceptance criteria, a set of limits and conditions to ensure the integrity of the safety barrier.
+Scientific codes play a central role in the deterministic safety analysis of an \gls[hyper=false]{npp}.
+They provide a \emph{physics-based} evaluation of relevant phenomena taking place in the plant during a broad range of postulated transients to demonstrate that safety requirements of operation are met \cite{IAEA2009}.
+The demonstration is carried out with respect to acceptance criteria, a set of limits and conditions ensuring the integrity of the safety barriers.
 The criteria are set by regulatory bodies for all operational states of the plant, normal and off-normal.
 
 % Deterministic safety analysis
-The physics-based evaluation, on the other hand, is achieved by the use of scientific codes to predict the response of the plant to a postulated transient scenario.
+The physics-based evaluation is achieved by the use of scientific codes to predict the response of the plant to a postulated transient scenario.
 In other words, it is achieved through simulation.
 \marginpar{Codes in safety analysis of NPP}
 As noted in \cite{IAEA2009,DAuria2012}, there are four distinct but related disciplines associated with the different (spatio-temporal) physical processes involved that are important in the analysis of the plant behavior:
@@ -67,38 +67,38 @@ the neutronics of the core;
 the thermo-mechanics of the fuel and structure;
 the radiological analysis of a possible release;
 and, the system thermal-hydraulics of the plant, the subject of the present thesis\footnote{Ref.~\cite{DAuria2012} added one additional key discipline, namely: reliability analysis. It is excluded in the above listing as it is not technically a discipline of \emph{physics}.}.
-Each of these disciplines (or domain) is, in turn, characterized by a distinct set of governing physics of the process involved and thus often analyzed by a distinct code.
+Each of these disciplines (or domains) is, in turn, characterized by a distinct set of governing physical equations of the process involved and thus often analyzed by a distinct code.
 
 % Entry to Conservative vs Best Estimate
-The connection between the physics-based evaluation and the de\-monstration of safety are established, among other things, by setting the acceptance criteria in terms of limiting physical quantities relevant in  phenomena involved.
-The upper tolerance limit of $1'204\,[^oC]$ for the \glsfirst[hyper=false]{pct} is one such a criteria for \glspl[hyper=false]{lwr} \cite{USNRC2017}.
+The connection between the physics-based evaluation and the de\-monstration of safety is established, among other things, by setting the acceptance criteria in terms of limiting physical quantities relevant for the phenomena involved.
+The upper tolerance limit of $1'204\,[^oC]$ for the \glsfirst[hyper=false]{pct} is one such criteria for \glspl[hyper=false]{lwr} \cite{USNRC2017}.
 Whether the physical quantities associated with a given plant respect such limits is checked through prediction using simulations. 
 Such an analysis based on simulation is conducted using one of two main approaches \cite{IAEA2009} described in the following in the context of system thermal-hydraulics analysis.
 
 % Conservative Analysis
-During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with high-degree of conservatism.
+During the early days of reactor safety analysis, prediction using computer model of \gls[hyper=false]{npp} behavior during transient, off-normal or accident conditions, was approached with a high-degree of conservatism.
 \marginpar{Conservative analysis}
-Conservatism called for the most pessimistic and penalizing modeling assumptions (including the initial and boundary conditions) to ensure conservative results, which is far below their regulatory limits.
+Conservatism called for the most pessimistic and penalizing modeling assumptions (including the initial and boundary conditions) to ensure conservative results, which is far below their (expected) values in reality.
 This approach, though less realistic, was justified by limited modeling capabilities as well as limited knowledge of the physical process involved during those transients.
 However, it was later found that there are conditions where conservative assumptions do not necessarily lead to conservative (or even physical) predictions.
 
 % An Illustration
-As an example of this contradiction, consider the following situation in the analysis of \gls[hyper=false]{loca} as described in \cite{IAEA2009}.
+As an example of this contradiction, consider the following situation in the analysis of a \gls[hyper=false]{loca} as described in \cite{IAEA2009}.
 \marginpar{An illustration}
-Assuming less interfacial shear between liquid and gas phase of the coolant (water) reducing mist flow during \gls[hyper=false]{loca} is conservative in the sense that less heat will be transferred to the coolant flow in the upper region of the core.
+Assuming less interfacial shear between liquid and gas phases of the coolant (water) reduces mist flow during \gls[hyper=false]{loca} and is conservative in the sense that less heat will be transferred to the coolant flow in the upper region of the core.
 This, in turn, penalizes the fuel temperature prediction.
 But this assumption also implies that the time to refill the core is shorter as there will be more liquid retained in the reactor cooling system.
 Furthermore, with less shear, there is less resistance in injecting emergency coolant into the core (condition known as the counter-current flow limitation).
 Both of these are clearly non-conservative and contradicting the initial conservative assumption.
 
 % Best-estimate Analysis
-Therefore, a more accurate prediction of two-phase flow transient behavior was deemed necessary for the safety analysis of nuclear power plant under accident conditions.
+Because of this example and many others \cite{IAEA2009}, a more accurate prediction of two-phase flow transient behavior was deemed necessary for the safety analysis of nuclear power plant under accident conditions.
 \marginpar{Best-estimate analysis}
 As opposed to the conservative analysis, the term for this approach was coined \emph{best-estimate} analysis.
-Such an analysis calls for more physically sound thermal-hydraulics models with more realistic modeling assumptions which at the same time are also backed by experimental data obtained from numerous experimental programs conducted in Separate and Integral Effect Test Facilities.
-With the idea of having more realistic prediction in mind, a best-estimate \gls[hyper=false]{th} system code was developed.
-The code is designed to be a comprehensive tool capable of simulating realistically wide range of transients foreseen in \gls[hyper=false]{npp} operation.
-It was developed using the current best understanding of flow processes expected to happen during the transients.
+Such an analysis calls for more physically sound thermal-hydraulics models with more realistic modeling assumptions, which at the same time are also backed by experimental data obtained from numerous experimental programs conducted in Separate and Integral Effect Test Facilities.
+With the idea of having more realistic prediction in mind, best-estimate \gls[hyper=false]{th} system codes were developed.
+The codes were designed to be comprehensive tools capable of simulating realistically a wide range of transients foreseen in \gls[hyper=false]{npp} operation,
+and were developed using the current best understanding of flow processes expected to happen during the transients.
 
 %--------------------------------------------------------------------------------
 \subsection{Thermal-Hydraulics (TH) System Codes}\label{sub:intro_th_system_code}
