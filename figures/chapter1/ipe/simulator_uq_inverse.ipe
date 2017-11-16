@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171116112434"/>
+<info created="D:20171101220623" modified="D:20171116154427"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -549,7 +549,7 @@ experiment)</text>
 236 660 l
 </path>
 <text matrix="1 0 0 1 -392 -404" transformations="translations" pos="452 752" stroke="black" type="label" width="15.758" height="7.654" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{x}_c</text>
-<path matrix="1 0 0 1 68 -328" stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="1 0 0 1 68 -328" stroke="black" pen="heavier" arrow="normal/large">
 200 660 m
 236 660 l
 </path>
@@ -583,7 +583,7 @@ model parameters \\
 804 304 m
 804 288 l
 </path>
-<path matrix="1 0 0 1.6 22 -263.388" stroke="black" pen="heavier" rarrow="normal/normal">
+<path matrix="1 0 0 1.6 22 -263.388" stroke="black" pen="heavier" rarrow="normal/large">
 576 352 m
 576 332 l
 </path>
