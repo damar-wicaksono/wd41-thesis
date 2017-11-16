@@ -15,8 +15,8 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 	\label{fig:ch1_simulator_io}
 \end{figure}
 
-Indeed input deck defines specific problem (i.e., system) of interest.
-It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involves, as well as initial and boundary conditions.
+Indeed, an input deck defines a specific problem (i.e., system) of interest.
+It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involved, as well as initial and boundary conditions.
 It may also include the setting for the numerical solver.
 \marginpar{Controllable inputs and model parameters}
 Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$ that define a particular instance in which the simulator is to be used\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
@@ -24,8 +24,8 @@ The conservation equations of the code are closed with additional set of closure
 These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
 Note that both the controllable inputs and the physical model parameters are considered by the code simply as \emph{inputs}.
  
-Specifying the input deck, as far as user is concerned, completely defines the problem and the code will solve the conservation equations which output the dynamic state of relevant physical variables $\mathbf{u}(\bm{r}, t)$ (e.g., fluid pressure, temperature, wall temperature, etc.).
-In practice, these raw simulation outputs are further post-processed to obtain the so-called \glspl[hyper=false]{qoi} the are relevant to the problem at hand.
+Specifying the input deck, as far as user is concerned, completely defines the problem and the code will solve the conservation equations $b$ which output the dynamic state of relevant physical variables $\mathbf{u}(\bm{r}, t)$ (e.g., fluid pressure, temperature, wall temperature, etc.). 
+In practice, these ``raw'' outputs are further post-processed to obtain the so-called \glspl[hyper=false]{qoi} the are relevant to the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
 
 %--------------------------------------------------------------------------
 \subsection{Forward Uncertainty Quantification}\label{sub:intro_uq_forward}
@@ -152,7 +152,8 @@ through the Bayes' theorem,
 where the left-hand side of the equation signifies the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
 The right-hand side constitutes of the likelihood function $p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c)$ (probability of observing data given the parameters), the prior of the model parameters $p(\bm{x}_m)$ (the initial state of knowledge regarding the parameters values before observing the data),
 while the denominator signifies a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as in the case of variability, then a prior probability can be put on them as well.}.
-Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the inverse quantification described above.
+The posterior represents the knowledge one has on the model parameters values conditioned on the data under the modeling assumption.
+Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the inverse quantification.
 \bigfigure[pos=tbhp,
            opt={width=1.0\textwidth},
            label={fig:ch1_simulator_uq_inverse},
