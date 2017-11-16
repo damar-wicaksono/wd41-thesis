@@ -72,10 +72,9 @@ The physical models of interest describe the phasic interactions in a complex mu
 These models are parametrized by physical or empirical tuning parameters, the values of which are uncertain.
 This results in uncertain code prediction of important safety quantities, such as the evolution of the fuel cladding temperature during a postulated reactor transient.
 
-Adopting probabilistic framework to conform to the statistical uncertainty propagation widely
-adopted in the field of nuclear engineering, the uncertainties in the parameters are represented in
-form of probabilistic density functions or their approximation.
-The derivation of these functions is posed as an inverse statistical problem following Bayesian framework as the parameters themselves are not directly observable.
+Adopting a probabilistic framework to conform to the statistical uncertainty propagation widely adopted in the field of nuclear engineering,
+the uncertainties in the parameters are represented in form of \glsfirst[hyper=false]{pdf} or their approximations.
+The derivation of these functions is posed as an inverse statistical problem following a Bayesian framework as the parameters themselves are not directly observable.
 Although subjectivity cannot be removed completely from the analysis,
 the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to better inform, in a more objective and transparent manner,
 the uncertainties associated with code model parameters.
@@ -108,7 +107,8 @@ This is done by consolidating and adapting recent developments in the applied st
 
 \end{enumerate}
 
-Finally, as the calibration only conducted using experimental data of limited experimental conditions, it is important to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena in the same facility but in different experimental conditions.
+Finally, as the calibration is only conducted using experimental data in a limited set of experimental conditions,
+it is important to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena in the same facility but in different experimental conditions.
 That is to propagate the posterior uncertainty of the parameters and to compare the results against experimental data not used in the calibration step.
 	
 %----------------------------------------
@@ -116,7 +116,7 @@ That is to propagate the posterior uncertainty of the parameters and to compare 
 %----------------------------------------
 
 % Introductory paragraph
-Although the proposed set of strategies in this research can be applicable to the analysis and calibration of any system code,
+Although the proposed set of strategies in this research can be applicable to the analysis and calibration of any physical model of a system code,
 \marginpar{Simulation of reflooding}
 it is illustrated by its application on the models of particular importance during simulation of reflooding,
 i.e., the so-called \gls[hyper=false]{postchf} flow regimes.
@@ -124,46 +124,47 @@ There are several reasons for this emphasis:
 \begin{itemize}
 
 	% Reason 1
-	\item Reflooding is an important part in the simulation of \glspl[hyper=false]{npp} transient during \gls[hyper=false]{loca}.
+	\item Reflooding is an important part in the simulation of \glspl[hyper=false]{lwr} transient during \gls[hyper=false]{loca}.
 	Modeling reflooding determines the appropriate representation of the dynamics of heat transfer phenomena during the effort to rewet an uncovered core.
-	Of paramount interest is to estimate the time the rod can be expected to be rewet as well as the maximum temperature reached prior to rewet.
+	Of paramount interest is the estimation of the time at which the rod can be expected to be rewet as well as the maximum temperature reached prior to rewet.
 	Reflood is a transient with highly coupled hydrodynamic-heat-transfer effects and it challenges the assumption made on the implemented closure laws.
-	Indeed several reflood experimental programs conducted in \glspl[hyper=false]{setf} existed and were designed to validate reflood models in system code.
-	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into \gls[hyper=false]{trace} code in particular.
+	Indeed, several reflood experimental programs conducted in \glspl[hyper=false]{setf} existed and were designed to validate reflood models in system codes.
+	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into the \gls[hyper=false]{trace} code in particular.
 
 % Reason 2
-	\item The models are adequately complex. It is complex that $5$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
-	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on limited set of models.
+	\item The models are adequately complex.
+  It is complex that $5$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
+	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on a limited set of models.
 	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and (to calibrate) reflood models in system codes.
 
 % Reason 3
-	\item Multiple data of various types, taken with different experimental conditions, are typically available from experiment within the same facility.
-	As calibration in the present research is conducted using one experimental condition, it is important to validate the resulting calibration result against the data with different experimental condition albeit from the same experimental facility. 
-	Moreover, additional data from another reflooding \glspl[hyper=false]{setf} are also available.
-	This is important for future study of validating the proposed method further and of expanding it to calibration against data from multiple facilities. 
+	\item Multiple data of various types (pressure, temperature, etc.), taken with different experimental conditions (flow rate, system pressure, etc.), are typically available from experiment within the same facility.
+	As calibration in the present research is conducted using one experimental condition, it is important to validate the resulting calibration result against the data with different experimental conditions albeit from the same experimental facility. 
+	Moreover, additional data from other reflooding \glspl[hyper=false]{setf} are also available.
+	This is important for validating the proposed method further and expanding it to calibration against data from multiple facilities. 
 
 % Reason 4
 	\item It is the model considered in the \gls[hyper=false]{premium} benchmark. Some of the works in this doctoral research was conducted as part of \gls[hyper=false]{psi} participation to the benchmark.
+  Furthermore, qualitative comparison can be made with the results of other participants.
 	
 \end{itemize}
 
-As such, while it is important to acknowledge that reflood simulation and the associated relevant model (or models) are only parts of a large and complex thermal-hydraulics systems code and its capabilities,
-they can provide a representative and relevant illustration on the particulars of analyzing and calibrating a thermal-hydraulics system code using experimental data from \gls[hyper=false]{setf} in general; providing a suitable testing ground for the proposed methods.
+As such, while it is important to acknowledge that reflood simulation and the associated relevant model (or models) are only parts of a large and complex \gls[hyper=false]{th} system code,
+they can provide a representative and relevant illustration on the particulars of analyzing and calibrating the code using experimental data from \gls[hyper=false]{setf} in general; providing a suitable testing ground for the proposed methods.
 
 % Statistical nature
 The methods and practices of sensitivity analysis, approximation, and calibration of computer model need not be statistical.
 \marginpar{Statistical framework}
 This thesis, however, focuses on the statistical approach for each of the aforementioned steps.
 The main reasoning for this choice are twofold:
-First, a common motivation, statistical methods tend to require less assumption on the model complexity.
+First, statistical methods tend to require less assumption on the model complexity.
 While they may be more computationally expensive than their non-statistical counterparts,
 they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the size of the problem with respect to the number of input parameters.
-Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be in the represented in terms of probability.
-As mentioned previously, this is to conform with widely accepted practice of statistical uncertainty propagation in nuclear engineering community.  
-The motivations for this choice will become clearer in the subsequent section.
-They will also be elaborated further in their respective chapters.
+Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be represented in terms of probability.
+As mentioned previously, this is to conform with the widely accepted practice of statistical uncertainty propagation in the nuclear engineering community.  
+The motivations for this choice will become clearer in the subsequent section and they will also be elaborated further in their respective chapters.
 
 % Closing
 As a last note, the \glsfirst[hyper=false]{th} system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
 \marginpar{TRACE code}
-The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss \glspl[hyper=false]{npp} safety analysis conducted withing the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
+The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss \glspl[hyper=false]{npp} safety analysis conducted within the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
