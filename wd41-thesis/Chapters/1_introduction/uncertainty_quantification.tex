@@ -103,26 +103,27 @@ The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is w
 The forward uncertainty quantification explained above deals with the parametric uncertainty associated with the important parameters of the simulator, both for the controllable inputs and the physical model parameters.
 As a result, representing the inputs of the simulator as random variables is the key in the forward uncertainty quantification of system code.
 
-%--------------------------------------------------------------------------
-\subsection{Inverse Uncertainty Quantification}\label{sub:intro_uq_inverse}
-%--------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------
+\subsection{Inverse (Backward) Uncertainty Quantification}\label{sub:intro_uq_inverse}
+%-------------------------------------------------------------------------------------
 
 % Model parameters
 A lot has been said about the origin of the uncertainty associated with the controllable inputs.
 The physical model parameters, however, are conceptually different.
 \marginpar{Model parameters}
-The physical models referred to in this thesis are usually represented either in the form of correlation, phenomenological (mechanistic) model, or a mixed between the two extremes (see Section~\ref{sub:intro_th_system_code}).
+The physical models referred to in this thesis are usually represented either in the form of correlation, phenomenological model, or a mixed between the two extremes (see Section~\ref{sub:intro_th_system_code}).
 The parameters associated with the models can either represent physically meaningful quantities or not (This distinction will be revisited in Chapter~\ref{ch:bayesian_calibration}).
-At this level, the uncertainty on these parameters depends on their origin or the approach used in the derivation.
+The uncertainty on these parameters depends on the parameters origin.
+For instance, in an empirical model the model parameters are the curve-fitting parameters and its uncertainty can be associated with the dispersion of the data.
 
 % Representativity for NPP application
-However it is worth considering that many of such models, be it empirical or mechanistic, were originally derived based on simplified systems (simplified geometry or limited flow conditions) \cite{Bestion2008}.
+However, it is worth considering that many such models, be it empirical or mechanistic, were originally derived based on simple systems that did not, strictly speaking, reflect the flow conditions in an \gls[hyper=false]{lwr} (e.g., heated tube vs. rod bundle, low pressure vs. high pressure, etc.) \cite{Bestion2008}.
 \marginpar{Separate Effect Test Facilities}
-Consequently, to reflect more on the conditions of the reactor transient to be simulated,
-experiment with well-specified conditions is conducted at \glspl[hyper=false]{setf}, facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012}.
+Thus, to reflect more on the conditions of flow in the reactor transient to be simulated,
+experiments with well-specified conditions are conducted at \glspl[hyper=false]{setf}, facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012}.
 
-The data is then used to assess the corresponding model (and possibly multiple models).
-In the assessment against data from \glspl[hyper=false]{setf},
+The data sets from \glspl[hyper=false]{setf} are then used to assess the corresponding model (and possibly multiple models).
+In the assessment,
 some parameters in the models are adjusted to match the experimental data \cite{Barre1990}.
 \marginpar{Calibration against Separate Effect Test Facilities}
 Alternatively, additional free parameters can also be introduced in the models to serve the same purpose \cite{Bestion2008}.
@@ -130,29 +131,28 @@ That is, the parameters are tuning parameters and become measures of the models 
 Ultimately, some kind of optimal values for the parameters are estimated and implemented in the code.
 
 % Origin of uncertainty
-In light of this, it can be argued that the uncertainty associated with such parameters stems from the fact that the calibration was conducted only on selected data set obtained from a selected \gls[hyper=false]{setf}.
-Different \glspl[hyper=false]{setf} for the same phenomena exist, covering wide range of flow configurations and experimental boundary conditions.
-It is fair to ask whether the calibrated value will hold if the calibration were to be conducted in other \gls[hyper=false]{setf} for the same phenomena.
+In light of this, it can be argued that the uncertainty associated with such parameters stems from the fact that the calibration was conducted only on limit set of data obtained from a selected \gls[hyper=false]{setf}.
+Different \glspl[hyper=false]{setf} for the same phenomena exist, covering wide ranges of flow configurations and experimental boundary conditions.
+It is fair to ask whether the calibrated value will hold if the calibration were to be conducted in other \glspl[hyper=false]{setf} for the same phenomena.
+Additionally, as tuning parameters, expert-judgment is also often used to estimate the uncertainty, measuring the degree of expected model performance through how much the model parameter is allowed to vary.
 
 % Inverse uncertainty
-To derive the uncertainty associated with the model parameters obtained in the manner above,
+To derive the uncertainty associated with the model parameters obtained described above,
 the problem can be posed as an inverse problem.
 \marginpar{An inverse problem}
 In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the \emph{unobserved} parameters in the physical model used to predict the same quantity as the experimental data.
-To avoid excessive bias to the calibration data, it is important here to acknowledge various sources of uncertainty previously mentioned:
-experimental data and controllable inputs are observed but perhaps there remains residual variability and observation error associated with them;
-and the associated models are also only approximations with a possible, but unknown, systematic bias.
+To avoid excessive bias to the calibration data, it is important here to acknowledge the observation errors of the observed experimental data and the controllable inputs, and the possible systematic bias of the associated models.
 
 % Bayesian framework
-In a probabilistic setting, a natural way to make an inference of unobserved parameters based on observed data is
+In a probabilistic setting, a way to make an inference of unobserved parameters based on observed data is
 \marginpar{Inverse uncertainty quantification}
 through the Bayes' theorem,
 \begin{equation*}
 	p(\bm{x}_m\,|\,\{\mathbf{D}\},\mathbf{x}_c) = \frac{p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c) \cdot p(\bm{x}_m)}{\int p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c) \cdot p(\bm{x}_m)\,d\bm{x}_m}
 \end{equation*}
-where the left-hand side of the equation signifies the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
+where the left-hand side of the equation is the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
 The right-hand side constitutes of the likelihood function $p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c)$ (probability of observing data given the parameters), the prior of the model parameters $p(\bm{x}_m)$ (the initial state of knowledge regarding the parameters values before observing the data),
-while the denominator signifies a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as in the case of variability, then a prior probability can be put on them as well.}.
+while the denominator is a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as in the case of variability, then a prior probability can be put on them as well.}.
 The posterior represents the knowledge one has on the model parameters values conditioned on the data under the modeling assumption.
 Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the inverse quantification.
 \bigfigure[pos=tbhp,
@@ -166,14 +166,13 @@ The formulation and computation of the posterior above can be seen as a calibrat
 That is, it seeks to adjust the model parameters such that it is consistent with the observed data (i.e., calibration data) under the assumed likelihood and the prior.
 \marginpar{Statistical calibration}
 However, instead of obtaining a single estimated value (or values in case of multiple parameters), the resulting posterior is a \gls[hyper=false]{pdf}, conditioned on the observed data.
-This posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data set.
-Note that, as tuning parameters, expert-judgment is often used to estimate the uncertainty on the parameters, measuring the degree of expected model performance through how much the model parameter is allowed to vary.
-From this point of view, the approach uses the experimental data to better inform the prior expectation (or belief) about the model parameters values.
+In relation to the aforementioned expert-judgment for the estimating the parameters uncertainty, the approach uses the experimental data to better inform the prior expectation about the model parameters values.
+The posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data set.
 
 % Connection to PREMIUM Benchmark
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.
 This led to the \gls[hyper=false]{premium} project.
-Its main goal is to report the state-of-the-art of the available methodologies to quantify the uncertainty in the physical models parameters.
+Its main goal is to report the state-of-the-art methodologies to quantify the uncertainty in the physical models parameters.
 The following will briefly describe the project and highlight the selected main lessons learned from the author's perspective through his participation on behalf of the \glsfirst[hyper=false]{psi} \cite{Wicaksono2016a}.
 
 %-------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171101220623" modified="D:20171103180509"/>
+<info created="D:20171101220623" modified="D:20171116112434"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -539,20 +539,21 @@ h
 <text matrix="1 0 0 1 40 -360" transformations="translations" pos="292 644" stroke="black" type="label" width="154.758" height="6.926" depth="1.93" valign="baseline">\bf{Closure Laws, sub-models, etc.}</text>
 <text matrix="1 0 0 1 32 -316" transformations="translations" pos="296 644" stroke="black" type="label" width="148.015" height="8.965" depth="2.99" valign="baseline" size="large" style="math">b(\mathbf{u}, \mathbf{x}_c, \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u})\}) = 0</text>
 <text matrix="1 0 0 1 68 -356" transformations="translations" pos="288 624" stroke="black" type="label" width="99.718" height="7.473" depth="2.49" valign="baseline" style="math"> \{\mathcal{M}_i(\mathbf{x}_c, \mathbf{x}_m, \mathbf{u});\, i&gt;0\}</text>
-<text matrix="-0.470991 0.882138 -0.882138 -0.470991 535.448 586.112" transformations="translations" pos="80 528" stroke="black" type="minipage" width="64" height="21.555" depth="16.6" valign="top" size="large">uncertain \\
-controllable inputs</text>
+<text matrix="-0.470991 0.882138 -0.882138 -0.470991 519.448 582.112" transformations="translations" pos="80 528" stroke="black" type="minipage" width="112" height="22.066" depth="17.12" valign="top" size="large">controllable inputs \\
+(with respect to an \\
+experiment)</text>
 <text matrix="1 0 0 1 498 -212" transformations="translations" pos="80 528" stroke="black" type="minipage" width="52" height="6.642" depth="1.66" valign="top" size="large">Likelihood</text>
 <text matrix="1 0 0 1 -40.1594 -338.712" transformations="translations" pos="188 648" stroke="black" type="label" width="102.557" height="8.302" depth="0" valign="baseline" size="large">Selected sub-models</text>
 <path matrix="1 0 0 1 -116 -308" stroke="black" pen="heavier" arrow="normal/large">
 200 660 m
 236 660 l
 </path>
-<text matrix="1 0 0 1 -392 -404" transformations="translations" pos="452 752" stroke="black" type="label" width="17.816" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_c</text>
+<text matrix="1 0 0 1 -392 -404" transformations="translations" pos="452 752" stroke="black" type="label" width="15.758" height="7.654" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{x}_c</text>
 <path matrix="1 0 0 1 68 -328" stroke="black" pen="heavier" arrow="normal/normal">
 200 660 m
 236 660 l
 </path>
-<text matrix="1 0 0 1 -48 -238.58" transformations="translations" pos="80 528" stroke="black" type="minipage" width="92" height="21.889" depth="16.93" valign="top" size="large">uncertain \\
+<text matrix="1 0 0 1 -64 -238.58" transformations="translations" pos="80 528" stroke="black" type="minipage" width="104" height="21.889" depth="16.93" valign="top" size="large">uncertain \\
 model parameters \\
 (prior)</text>
 <text matrix="1 0 0 1 -400 -450.58" transformations="translations" pos="452 752" stroke="black" type="label" width="23.017" height="11.766" depth="2.58" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m</text>
@@ -563,11 +564,11 @@ model parameters \\
 <text matrix="1 0 0 1 138 -364" transformations="translations" pos="452 752" stroke="black" type="label" width="14.844" height="11.812" depth="0" valign="baseline" size="LARGE" style="math">\mathbf{D}</text>
 <text matrix="1 0 0 1 534 -120.188" transformations="translations" pos="80 528" stroke="black" type="minipage" width="76" height="13.61" depth="8.64" valign="top" size="large">Experimental data</text>
 <text matrix="1 0 0 1 250 -424" transformations="translations" pos="452 752" stroke="black" type="label" width="48.382" height="12.915" depth="4.3" valign="baseline" size="LARGE" style="math">\mathbf{\mathcal{X}}_m\,|\,\mathbf{D}</text>
-<path matrix="1 -0 0 1 314 -328" stroke="black" pen="heavier" arrow="normal/large">
+<path matrix="1 0 0 1 314 -328" stroke="black" pen="heavier" arrow="normal/large">
 200 660 m
 236 660 l
 </path>
-<path matrix="1 -0 0 1.6 22 -183.388" stroke="black" pen="heavier" arrow="normal/large">
+<path matrix="1 0 0 1.6 22 -183.388" stroke="black" pen="heavier" arrow="normal/large">
 576 352 m
 576 332 l
 </path>
