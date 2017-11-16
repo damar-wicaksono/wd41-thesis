@@ -147,7 +147,7 @@ The first is the equation of state describing the thermodynamic relation between
 The second is the closure relationships describing the interaction between phases and each phase to the boundary wall in terms of mass, momentum, and energy. 
 
 % Two-fluid Model
-The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the two-fluid model.
+The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the \emph{two-fluid model}.
 \marginpar{Two-fluid model}
 This model separately treats the transport phenomena of the two-phases of fluid flow (gas and liquid) resulting in a set of six balance equations (mass, momentum, and energy for each of the two phases).
 The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions which give more realistic pictures in a wide range of \gls[hyper=false]{npp} transients.
@@ -185,5 +185,5 @@ As such, these parameters become a measure of the inadequacy of the postulated m
 
 % Source of uncertainty
 Any of these approaches proved to be a difficult effort \cite{Barre1990,Nelson1992,Wulff2007} due to various reasons ranging from lack of knowledge of the underlying physical process (with respect to the fully mechanistic modeling) to limitation in the amount of data as well as in measurement instruments (with respect to the fully empirical approach).
-Simplifying assumptions and extrapolations have to be made because of these limitations.
+Simplifying assumptions and extrapolations are made because of these limitations.
 In the end, closure laws in system codes are of mixed origins and they become a major source of uncertainty\footnote{defined in this thesis a state of limited knowledge, that is of \emph{epistemic} nature.} in the application of \gls[hyper=false]{th} system codes, especially when used outside their validation domains.
