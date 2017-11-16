@@ -3,9 +3,11 @@
 %********************************************************************************************************************************************************************
 
 % Introductory paragraph
-The set of strategies above, for sensitivity analysis, for model approximation, and for calibration constitutes a consolidated statistical framework for quantifying the uncertainty in model parameters of a \gls[hyper=false]{th} system code proposed in this thesis.
+The set of strategies above, for sensitivity analysis, model approximation, and calibration presented above constitutes a consolidated statistical framework that will be used in this thesis for quantifying the uncertainty in model parameters of a \gls[hyper=false]{th} system code.
 In the following a broad, and by no means exhaustive, overview on the research landscape from the literature on each of the elements of the proposed strategy.
- 
+For each of these elements, the overview presented below first reiterates its main motivation followed by its generic classification and the steps involved before briefly summarizing its applications in the nuclear engineering \gls[hyper=false]{th} analysis, both in the past and more recent times.
+As will be outlined in Section~\ref{sec:intro_thesis_structure}, three main chapters of the thesis will be dedicated for each of the proposed strategies detailing the selected methods further as well as presenting their application on a \gls[hyper=false]{trace} model.
+
 %--------------------------------------------------------------------------
 \subsection[Sensitivity Analysis]{Sensitivity Analysis}\label{sub:intro_sa}
 %--------------------------------------------------------------------------
@@ -239,7 +241,7 @@ This probabilistic model is then conditioned on the observed data that results i
 In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
 Extension and modification to the KOH approach includes dealing with high-dimensional output \cite{Higdon2008,Bayarri2007a,Wilkinson2010}, multiple types of output \cite{Arendt2012a}, different choices of the model bias term \cite{Ling2014}, and various simplifications \cite{Arendt2012,Bayarri2007,Goldstein2012}.
 
-% Regarding 
+% Regarding prior
 Regarding the choice for the prior distribution, there is a tendency in the modern literature \cite{Gelman2013,McElreath2015} to move away from the notion of \emph{Bayesianism} where emphasis is put heavily on the prior distribution of the parameters as \emph{subjective opinion} and the results will always be true (i.e., coherent) relative to that prior.
 \marginpar{On prior distribution}
 On the contrary, the use of prior should be seen in more pragmatic light, that is, as a starting assumption that can be changed if not appropriate.
@@ -259,24 +261,23 @@ In the approximation, the distribution of the posterior is approximated as a nor
 The mean corresponds to the maximum of the posterior density function, while the variance of the distribution is approximated as the function of the second derivative of the posterior around the mean (i.e., its curvature).
 Multidimensionality of the posterior distribution is taken into account by using the Hessian matrix.
 The approximation works well if the posterior distribution is approximately normal (i.e., unimodal, bell-shaped, linearly correlated).
-%The approximation is often used in the modern practice of Bayesian data analysis to initialize a more advanced algorithm.
 
 % Bayesian Computation 2, Early Samplers
-To deal with more generic formulation of the posterior distribution, modern approach to Bayesian computation involves random simulation to directly generate samples from the posterior.
-\marginpar{MCMC samplers, classical}
-This can be seen as an extension of simulation method for estimating integral quantities (the \glsfirst[hyper=false]{mc} simulation), for the case of a complicated sampling distribution not easily sampled from.
+To deal with more generic formulations of the posterior distribution, modern approach to Bayesian computation involves random simulation to directly generate samples from the posterior.
+\marginpar{MCMC, classical samplers}
+This can be seen as an extension of the simulation method for estimating integral quantities (the \glsfirst[hyper=false]{mc} simulation), for the case of a complicated sampling distribution not easily sampled from.
 The idea of \gls[hyper=false]{mc} simulation dates back to the $1940$ for solving the problems in neutron transport \cite{Metropolis1949} and statistical mechanics \cite{Metropolis1953}.
-In the latter, generation of a \emph{Markov Chain} by \gls[hyper=false]{mc} simulation paved a way to a generic simulation method applicable with any kind of probability distribution; thus the origin of \gls[hyper=false]{mcmc} simulation.
-Later on, its usage for data analysis in general and Bayesian data analysis in particular were revived in the $1970$s and the early $1980$s by the generalization of the algorithm by Hastings \cite{Hastings1970} (i.e., the \gls[hyper=false]{mh} algorithm) and by the invention of a computationally efficient sampler and its application for image reconstruction problem by Geman and Geman \cite{Geman1984} (i.e., the Gibbs sampler).
+In the latter, generation of a \emph{Markov chain} by \gls[hyper=false]{mc} simulation paved a way to a generic simulation method applicable to generate samples from any kind of probability distribution; thus the origin of \gls[hyper=false]{mcmc} simulation.
+Later on, its usage for data analysis in general and Bayesian data analysis in particular were revived in the $1970$s and the early $1980$s by the generalization of the simulation algorithm by Hastings \cite{Hastings1970} (i.e., the \gls[hyper=false]{mh} algorithm) and by the invention of a computationally efficient sampler and its application for image reconstruction problem by Geman and Geman \cite{Geman1984} (i.e., the Gibbs sampler).
 
 % Bayesian Computation 3, Advanced Samplers
 Nowadays, \gls[hyper=false]{mcmc} sampler is the backbone of Bayesian computation \cite{Allison2013,Geyer2011,Gelman2013}.
-\marginpar{MCMC samplers, modern}
+\marginpar{MCMC, modern samplers}
 Loosely speaking, its improvement and modern implementations can be broadly classified into three different families: adaptive \gls[hyper=false]{mh} samplers (e.g., \cite{Andrieu2008}), Hamiltonian \gls[hyper=false]{mc} samplers \cite{Neal2011}, and ensemble samplers \cite{Goodman2010}.
 Adaptive \gls[hyper=false]{mh} sampler deals with the adaptation of the algorithm to achieve faster convergence.
 Hamiltonian \gls[hyper=false]{mc} sampler simulates the movement of a particle in the parameter space as described by the posterior distribution according to Hamiltonian dynamic.
-Finally, ensemble sampler uses multiple particles that move together in the input parameter space each of them moves according to the position of the others.
-Ensemble sampler has a particularly simple implementation, is easily parallelized , and requires minimal tuning \cite{Foreman-Mackey2013}.
+Finally, ensemble sampler uses multiple particles that move together in the input parameter space each of them moving according to the position of the others.
+Ensemble sampler has a particularly simple implementation, is easily parallelized, and requires minimal tuning \cite{Foreman-Mackey2013}.
 Chapter~\ref{ch:bayesian_calibration} describes in more detail the basics of \gls[hyper=false]{mh} and ensemble samplers.
 
 % Development in nuclear engineering application
