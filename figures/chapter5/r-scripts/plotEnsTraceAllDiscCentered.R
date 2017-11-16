@@ -17,17 +17,18 @@ source("./r-scripts/plot_ensemble.R")
 otpfullname <- "./figures/plotEnsTracePlotAllDiscCentered.pdf"
 
 # Input filename
-ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
+ens_tidy_fullname <- "216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1-tidy_df.Rds"
 
 # Burnin for this case (always change accordingly)
-burnin <- 760
+n_walker <- 1000
 
 # Graphic variables
+set.seed(345230)
 fig_size <- c(18, 9)
 
 # Read tidy data ------------------------------------------------------------
 
-saveRDS(ens_tidy, "216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1-tidy_df.Rds")
+ens_tidy <- readRDS(ens_tidy_fullname)
 
 # Create dummy for the plot limit ---------------------------------------------
 ddummy <- data.frame(walker = c(), param = c(), iter = c(), value = c())
@@ -39,9 +40,19 @@ for (i in 1:8)
                                      value = prior_ranges[[i]]))
 }
 
+# 1000 curves is a bit too large for plotting, so we just do some selections
+subset_walker <- sample(1:n_walker, size = 125, replace = F)
+subset_ens_tidy <- subset(ens_tidy, walker == 1)
+for (i in 2:length(subset_walker))
+{
+  subset_ens_tidy <- rbind(subset_ens_tidy,
+                           subset(ens_tidy, walker == subset_walker[i]))
+}
+
 # Make the  plot --------------------------------------------------------------
-p <- ggplot(data = ens_tidy, aes(x = iter, y = value, group = walker))
-p <- p + geom_line(alpha = 1.0)
+p <- ggplot(data = subset_ens_tidy,
+            aes(x = iter, y = value, group = walker))
+p <- p + geom_line(alpha = 0.2)
 p <- p + geom_blank(data = ddummy, aes(x = iter, y = value))
 p <- p + theme_bw()
 p <- p + facet_wrap(~param, scales = "free_y", ncol = 4)
@@ -56,11 +67,11 @@ p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.text.y = element_text(size = 18))
 p <- p + theme(axis.title.y = element_text(vjust = 1.5, size = 24),
                axis.title.x = element_text(vjust = -0.5, size = 24))
-p
 
 # Make the plot ---------------------------------------------------------------
 pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 print(p)
 dev.off()
-embed_fonts(otpfullname, outfile=otpfullname)
+# Embedding font makes the alpha behave strangely
+# embed_fonts(otpfullname, outfile=otpfullname)
