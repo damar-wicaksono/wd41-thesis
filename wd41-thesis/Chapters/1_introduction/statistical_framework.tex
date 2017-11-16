@@ -3,7 +3,7 @@
 %********************************************************************************************************************************************************************
 
 % Introductory paragraph
-The set of strategies above, for sensitivity analysis, model approximation, and calibration presented above constitutes a consolidated statistical framework that will be used in this thesis for quantifying the uncertainty in model parameters of a \gls[hyper=false]{th} system code.
+The set of strategies for sensitivity analysis, model approximation, and calibration presented above constitutes a consolidated statistical framework that will be used in this thesis for quantifying the uncertainty in model parameters of a \gls[hyper=false]{th} system code.
 In the following a broad, and by no means exhaustive, overview on the research landscape from the literature on each of the elements of the proposed strategy.
 For each of these elements, the overview presented below first reiterates its main motivation followed by its generic classification and the steps involved before briefly summarizing its applications in the nuclear engineering \gls[hyper=false]{th} analysis, both in the past and more recent times.
 As will be outlined in Section~\ref{sec:intro_thesis_structure}, three main chapters of the thesis will be dedicated for each of the proposed strategies detailing the selected methods further as well as presenting their application on a \gls[hyper=false]{trace} model.
@@ -113,25 +113,25 @@ utilizing \gls[hyper=false]{fftbm} and local sensitivity analysis.
 Many tasks involving computer simulation can be boiled down to making prediction.
 \emph{Computer experiment}, an experiment using computer simulation evaluates the output based on different inputs to achieve various objectives.
 \marginpar{Computer experiment}
-In the aforementioned sensitivity analysis, the objective is to identify influential inputs that drives the variation in the outputs of the computer simulator.
+In the aforementioned sensitivity analysis, the objective is to identify the influential inputs that drives the variation in the outputs of the computer simulator.
 In the forward uncertainty quantification, \gls[hyper=false]{mc} simulation are used to propagate the uncertainty in the inputs to quantify the uncertainty in the simulator prediction using the notion of probability; while in its inverse counterpart, the goal is to identify a region of input parameter space that is consistent with both the observed data and the assumed prior uncertainty of the parameters.
 The latter objective, in turn, is related to \emph{optimization} where the goal is to identify particular value of inputs that maximize a certain objective function as computed by the simulator.
 
 % The use of metamodel
 The examples of the objectives above are arguably distinct, but they share a common characteristic of involving analyses of outputs from numerous simulator runs.
 \marginpar{Complex simulator, expensive simulator}
-An increasingly more realistic and complex computer simulator, however, often translates to a long running simulation (i.e., computationally expensive) or requiring vast amount of evaluations due to the complexity of relationship between high-dimensional inputs and high-dimensional outputs (e.g., non-linearities, interaction), or both.
-They, in turn, hinder the analyses and the effort to achieve the aforementioned objectives of computer experiment.
+An increasingly more realistic and complex computer simulator, however, often translates into a long running simulation (i.e., computationally expensive) and may have to be evaluated large number of times due to the complexity of the relationship between high-dimensional inputs and high-dimensional outputs (e.g., non-linearities, interaction).
+The high computational cost hinders the analyses and the effort to achieve the aforementioned objectives of computer experiment.
 
 % Why Metamodel
 As a result, having a fast approximating model of a complex simulator is beneficial in conducting a computer experiment and its value was acknowledged by Sacks et al. in their seminal paper \cite{Sacks1989} and formalized further in several textbooks \cite{Santner2003,Fang2006}.
 \marginpar{An approximating model}
 The approximating model, while simpler and much faster to evaluate than the \emph{original} simulator, is designed to capture the dominant features of the inputs/outputs relationship of the original complex simulator \cite{Asher2015}.
-Capturing the dominant features allows the approximating model to be used in lieu the original simulator in the experiment.
+Capturing the dominant features allows the approximating model to be used in lieu of the original simulator in the experiment.
 This approximating model in the literature is referred to as \emph{metamodel}, \emph{surrogate model}, \emph{response surface model}, \emph{proxy model}, or \emph{emulator}.
 
 % Broad classification
-Nowadays, any of the terms above are used interchangeably and all are used to substitute the original simulator to reduce the computational cost of conducting computer experiment \cite{Simpson2001,Razavi2012,Asher2015}. 
+Nowadays, any of the terms above are used interchangeably and all are used to substitute the original simulator to reduce the computational cost of conducting computer experiments \cite{Simpson2001,Razavi2012,Asher2015}. 
 Subtle difference does exist.
 Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivation (i.e., surrogate modeling) according to the literature.
 \marginpar{Classification}
@@ -142,7 +142,7 @@ The reduced order models are perhaps more familiar in the scientific community w
 \marginpar{Reduced-order model}
 The point neutron kinetics model is an example of a reduced-order model, substituting the more complex $3$-dimensional nodal code.
 A \gls[hyper=false]{th} system code is also a reduced-order model of the more expensive multi-phase computational fluid dynamics code.
-When applicable, reduced-order models can be useful as first approximation and didactic tools to build intuition. 
+When applicable, reduced-order models can be useful as first approximations and didactic tools to build intuition. 
 
 % Response Surface Surrogate
 The response surface surrogates, on the other hand, make no pretense of preserving the underlying physical process modeled in a complex simulator.
@@ -152,7 +152,7 @@ The term \emph{metamodel} is used throughout the thesis and exclusively refer to
 The workflow of constructing a response surface surrogate typically consists of three steps.
 The first step is to gather the data, that is by running the simulator at limited and selected points across the input parameter space of interest and evaluate its outputs.
 The selection of such points are known as the \emph{design of experiment} \cite{Simpson2001a,Santner2003}.
-The second step is to choose an approximating function that emulates well the relationship between the inputs and outputs and \emph{train} them based on the data.
+The second step is to choose an approximating function that emulates well the relationship between the inputs and outputs and \emph{train} this function based on the data.
 Training a surrogate model involves \emph{fitting} the parameters associated with the selected approximating function.
 The function is chosen such that it is simpler and faster to evaluate at arbitrary inputs, relative to the original simulator.
 Finally, a validation step is conducted to assess the quality of the resulting metamodel.
@@ -161,7 +161,7 @@ Variation of this workflow exists, especially whether iteration is carried out \
 % Gaussian Process, What, Renewed interest due to Machine learning
 The surrogate model introduced in the papers of Sacks et al. \cite{Sacks1989,Sacks1989a} were \gls[hyper=false]{gp} metamodel.
 \marginpar{Gaussian process metamodel}
-The metamodel was constructed as a tool to interpolate between observed data, that is, between the inputs and outputs of actual simulator runs simulator.
+The metamodel was constructed as a tool to interpolate between observed data, that is, between the inputs and outputs of actual simulator runs.
 Once constructed the output at any arbitrary input point can be predicted faster using the metamodel.
 This idea was borrowed from a spatial interpolation tool in geostatistics (where the inputs were spatial coordinates) developed by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. 
 \gls[hyper=false]{gp} metamodel is arguably the most popular approach to metamodeling and it enjoys a renewed interest due to its application for machine learning \cite{Rasmussen2006}.
@@ -169,11 +169,11 @@ This idea was borrowed from a spatial interpolation tool in geostatistics (where
 % Gaussian Process, Why
 A \gls[hyper=false]{gp} metamodel is a statistical metamodel.
 It is based on the extension of multivariate Gaussian distribution to a continuous multidimensional input parameter space.
-Under the Bayesian interpretation, the metamodel assumes a prior distribution over functions to initially describe an unknown complex function that underlies the simulator.
+Under the Bayesian interpretation, the metamodel assumes a prior probability distribution over functions (i.e., probability distribution whose each realization is a function) to initially describe an unknown complex function that underlies the simulator.
 The observed data (i.e., design of experiment plus the corresponding outputs) is then used to update the prior and learn more about the true underlying function. 
-Though the simulator itself might be deterministic, the limited size of the observed data renders prediction at arbitrary input not observed \emph{uncertain}.
+Though the simulator itself might be deterministic, the limited size of the observed data renders prediction at arbitrary non-observed input \emph{uncertain}.
 This measure of uncertainty makes a \gls[hyper=false]{gp} metamodel an attractive choice to be incorporated into a model calibration framework where multiple sources of uncertainty are considered.
-The present research adopts \gls[hyper=false]{gp} for constructing a metamodel of a \gls[hyper=false]{th} system code model as detailed in Chapter~\ref{ch:gp_metamodel}.
+This research adopts \gls[hyper=false]{gp} for constructing a metamodel of a \gls[hyper=false]{th} system code model as detailed in Chapter~\ref{ch:gp_metamodel}.
 
 % Gaussian Process, and others
 \gls[hyper=false]{gp} metamodel is by no means the only method to construct a data-driven metamodel, though it can be considered as the most popular choice in the literature (Table~\ref{tab:metamodel_in_literature}).
@@ -201,10 +201,10 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 % Development in nuclear engineering application
 Metamodel applications have a long history in nuclear engineering analyses due to the complexity of the simulators and the long-understood importance of quantifying the uncertainty in the prediction.
 \marginpar{Developments in nuclear engineering application}
-As such, historically, metamodels (specifically, of type the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
-The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenarion, to the uncertainty and sensitivity analyses of severe accident progression \cite{Khatib-Rahbar1989}.
-In the recent times, more advanced metamodels (e.g., \gls[hyper=false]{gp} metamodel) have been applied to more variety of engineering analysis.
-From the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013} code.
+As such, historically, metamodels (specifically, the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
+The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenario, to the uncertainty and sensitivity analyses of severe accident progression \cite{Khatib-Rahbar1989}.
+In recent times, more advanced metamodels (e.g., \gls[hyper=false]{gp} metamodel) have been applied to more diverse engineering analysis;
+from the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013} code.
 
 %----------------------------------------------------------------------
 \subsection{Bayesian Calibration}\label{sub:intro_bayesian_calibration}
@@ -213,51 +213,54 @@ From the design optimization problem of fuel assembly \cite{Raza2008} and spacer
 % Introductory paragraph
 The objective of model calibration is to increase the agreement between simulation prediction and its corresponding measurement data by adjusting some of the simulator inputs \cite{Campbell2006a,Trucano2006}.
 \marginpar{Model calibration, goal and approach}
-Traditionally, calibration closely related to an optimization problem with the objective function of some error measure between simulation prediction and measurement data (e.g., root-mean-square-error).
+Traditionally, calibration is closely related to an optimization problem of an objective function measuring the error between simulation predictions and measurement data (e.g., root-mean-square-error).
 However, statistical approach to calibration using a Bayesian framework has become a popular practice in scientific simulation community.
-Instead of minimizing a measure of error, Bayesian framework treats the uncertainty of the inputs probabilistically whose prior probability distribution is updated such that it is consistent with the available, albeit uncertain, measurement data.
+Instead of minimizing a measure of error, Bayesian framework treats the uncertainty of the inputs probabilistically and update their prior probability distributions based on the available, albeit uncertain, measurement data.
 The framework offers flexibility in modeling various sources of uncertainty \cite{Kennedy2001,Kaipio2011}.
 
 % Bayesian Calibration
 Bayesian framework for the calibration of computer simulation mo\-del was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
 \marginpar{Bayesian framework, Kennedy and O'Hagan approach}
 The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters along with the associated uncertainty taking into account different sources of uncertainty based on the observed data.
-The distinct idea of it, however, is acknowledging that a systematic bias between a physics-based simulator and reality might be present.
+The distinct idea is to acknowledge that a systematic bias between a physics-based simulator and reality might be present.
 Yet, the magnitude and sign of this systematic bias are often not known a priori.
-At the same time, if not modeled properly its presence can overfit the calibration of the model parameters.
+At the same time, if the bias is not modeled properly, the calibration process might overfit the model parameters.
 That is, the calibrated model parameters will be overly sensitive to the calibration data and thus not applicable for prediction.
-As such, Kennedy and O'Hagan proposed to model the unknown bias term probabilistically by putting a prior over functions to be updated simultaneously by the observed data.
-The proposed prior over function is a \gls[hyper=false]{gp}.
-Finally, acknowledging that computational cost of numerous simulator runs might not be negligible, the approach embedded the use of \gls[hyper=false]{gp} metamodel (termed \emph{emulator}) to substitute the original simulator. 
-Due to its popularity, and while extension and improvement exist \cite{Bayarri2007,Higdon2008,Arendt2012}, the term \emph{KOH approach} becomes synonymous to this particular approach of computer model calibration \cite{Trucano2006,Hall2011,Ling2014}.
-It is adapted here to deal with the particular problem posed in \gls[hyper=false]{premium} benchmark that itself represents typical problem in the nuclear engineering \gls[hyper=false]{th} analysis, as detailed in Chapter~\ref{ch:bayesian_calibration}.
+As such, Kennedy and O'Hagan proposed to model the unknown bias term probabilistically by putting a prior probability distribution on the bias term to be updated simultaneously with that of the model parameters, by using the observed data.
+The proposed prior distribution is a \gls[hyper=false]{gp}.
+Due to its popularity, the term \emph{KOH approach} becomes synonymous to this particular approach of computer model calibration \cite{Trucano2006,Hall2011,Ling2014}.
+It is adapted here to deal with the particular problem posed in the \gls[hyper=false]{premium} benchmark that itself represents a typical problem the nuclear engineering \gls[hyper=false]{th} analysis, as detailed in Chapter~\ref{ch:bayesian_calibration}.
+
+%Finally, acknowledging that computational cost of numerous simulator runs might not be negligible, the approach embedded the use of \gls[hyper=false]{gp} metamodel (termed \emph{emulator}) to substitute the original simulator. 
+% and while extension and improvement exist \cite{Bayarri2007,Higdon2008,Arendt2012},
 
 % Bayesian data analysis
 Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
 \marginpar{Steps in Bayesian framework}
-The KOH approach for model calibration, in essence, prescribes a probabilistic model for data-generating process of the observed experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
+Regarding the first aspect, the KOH approach for model calibration, in essence, prescribes a probabilistic model for the data-generating process of the experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
 \marginpar{Bayesian framework, formulation}
-This probabilistic model is then conditioned on the observed data that results in the likelihood function.
-In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
+The formulation will eventually results in a posterior probability distribution of the model parameters as presented in Section~\ref{sub:intro_uq_inverse}.
+%This probabilistic model is then conditioned on the observed data that results in the likelihood function.
+%In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
 Extension and modification to the KOH approach includes dealing with high-dimensional output \cite{Higdon2008,Bayarri2007a,Wilkinson2010}, multiple types of output \cite{Arendt2012a}, different choices of the model bias term \cite{Ling2014}, and various simplifications \cite{Arendt2012,Bayarri2007,Goldstein2012}.
 
 % Regarding prior
-Regarding the choice for the prior distribution, there is a tendency in the modern literature \cite{Gelman2013,McElreath2015} to move away from the notion of \emph{Bayesianism} where emphasis is put heavily on the prior distribution of the parameters as \emph{subjective opinion} and the results will always be true (i.e., coherent) relative to that prior.
+Regarding the choice for the prior distribution, there is a tendency in the modern literature \cite{Gelman2013,McElreath2015} to move away from the notion of \emph{Bayesianism} which emphasize on specifying the correct prior (if not the \emph{true} prior altogether) so as to guarantee that the resulting posterior will always be true relative to that prior.
 \marginpar{On prior distribution}
-On the contrary, the use of prior should be seen in more pragmatic light, that is, as a starting assumption that can be changed if not appropriate.
-In the current practice, the choice for prior can be provisional, especially for parameters associated with the probabilistic model (not the simulator itself) \cite{Gelman2002,Gelman2006}.
-Gelman et al.~\cite{Gelman2013} advocates to check the implication of the resulting posterior parameters distribution on the posterior prediction in the sense whether the prediction makes sense and useful, but not in the sense whether the posterior parameter distribution is \emph{true}.
+In a more modern practice of Bayesian statistics, the use of prior is seen in more pragmatic light; as a starting assumption that can be changed if not appropriate.
+The choice for prior can be provisional, especially for parameters associated with the probabilistic model (not the simulator itself) \cite{Gelman2002,Gelman2006}.
+Gelman et al.~\cite{Gelman2013} advocates to check if the resulting parameters posterior distributions and the prediction using them make sense and are useful, rather than to check whether the posterior parameter distribution is \emph{true}.
 
 % Bayesian Computation 1, Analytical and Early Sampler
 The second aspect of the Bayesian framework is related to the computations involving the posterior distribution of the model parameters.
 \marginpar{Bayesian framework, computation}
 The formulated posterior distribution in practical problems is multidimensional.
-Numerically integrating the posterior derive \glspl[hyper=false]{qoi} might not be efficient.
+Numerically integrating the posterior distribution to summarize a given \gls[hyper=false]{qoi} (see Section~\ref{sub:intro_uq_forward}) might not be efficient.
 Traditionally, maximum a posteriori estimates (or maximum likelihood, if the prior is non-informative) is often used to describe each of the posterior model parameter value in a single number.
 \marginpar{Semi analytical approach}
 It simply requires the maximization of the posterior density function (i.e., its mode).
-An extension to this, giving description of the shape of the posterior, is done by the so-called \emph{Laplace's approximation} or the \emph{normal approximation} \cite{Mackay2005,Sivia2012,Gelman2013,McElreath2015}.
-In the approximation, the distribution of the posterior is approximated as a normal distribution. 
+An extension of this, giving description of the shape of the posterior, is done by the so-called \emph{Laplace's approximation} or the \emph{normal approximation} \cite{Mackay2005,Sivia2012,Gelman2013,McElreath2015}.
+In this approximation, the distribution of the posterior is approximated as a normal distribution. 
 The mean corresponds to the maximum of the posterior density function, while the variance of the distribution is approximated as the function of the second derivative of the posterior around the mean (i.e., its curvature).
 Multidimensionality of the posterior distribution is taken into account by using the Hessian matrix.
 The approximation works well if the posterior distribution is approximately normal (i.e., unimodal, bell-shaped, linearly correlated).
