@@ -81,10 +81,10 @@ By transforming the random variable inputs, the simulator output becomes random 
 	\bm{\mathcal{U}}(\bm{r}, t) = f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t)
 \end{equation*}
 where $f$ represents the simulator as a mathematical function.
-The resulting random code outputs can be summarized by different integral quantities.
-For instance, the mean
+The \gls[hyper=false]{qoi} related to the random code outputs can be summarized by different integral quantities.
+For instance, the mean of a \gls[hyper=false]{qoi} given by function $g$ is
 \begin{equation*}
-	\mathbb{E}[f] = \int\limits_{\mathbf{X}_c,\mathbf{X}_m} f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t) \, p(\bm{x}_c, \bm{x}_m) \, d\bm{x}_c \, d\bm{x}_m
+	\mathbb{E}[g] = \int\limits_{\mathbf{X}_c,\mathbf{X}_m} g(f(\bm{x}_c, \bm{x}_m;\bm{r}, t)) \, p(\bm{x}_c, \bm{x}_m) \, d\bm{x}_c \, d\bm{x}_m
 \end{equation*}
 where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
 
