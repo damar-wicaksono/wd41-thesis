@@ -92,14 +92,14 @@ p <- p + facet_wrap(~stat, scales = "free_y", ncol = 4)
 p <- p + geom_vline(xintercept = burnin, linetype = 1)
 
 # Set axis labels and font size
-p <- p + labs(y = "Normalized Parameter Value",
+p <- p + labs(y = "Normalized Value",
               x = "Number of Iterations")
 p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"))
 p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.ticks.x = element_line(size = 1),
                axis.text.x = element_text(size = 16, angle = 30, hjust = 1),
                axis.text.y = element_text(size = 18))
-p <- p + theme(axis.title.y = element_text(vjust = 1.5, size = 18),
+p <- p + theme(axis.title.y = element_text(vjust = 1.5, size = 20),
                axis.title.x = element_text(vjust = -0.5, size = 24))
 
 # Make the plot ---------------------------------------------------------------
