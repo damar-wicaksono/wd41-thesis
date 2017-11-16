@@ -33,16 +33,16 @@ In practice, these ``raw'' outputs are further post-processed to obtain the so-c
 
 % Best-estimate, limitation
 As explained, best-estimate analysis uses more realistic modeling assumptions for analyzing transient behavior of \gls[hyper=false]{npp}.
-It attempts as realistically as possible to describe the behavior of the relevant physical processes occur during the plant transient.
+It attempts as realistically as possible to describe the behaviors of the relevant physical processes that occur during the plant transient.
 And yet, even the best available understanding of the physical process is still limited.
-Understanding of complex phenomena might not yet adequate and data support for some processes can be very limited.
+Understanding of complex phenomena might not yet be adequate and data support for some processes can be very limited.
 Simplifying assumptions, approximations, and expert judgments to some degree are unavoidable and still required to have a complete analysis.
 
 % Best-estimate, plus uncertainty
 Hence, best-estimate analysis has to be complemented with uncertainty analysis.
 \marginpar{Best-estimate plus uncertainty}
 The ultimate goal of uncertainty analysis is to associate code prediction with its uncertainty.
-These combined quantities are then compared with certain regulator safety limits (e.g., \gls[hyper=false]{pct}) to check whether the limits still fall outside the uncertainty band of the code prediction.
+These combined quantities are then compared with certain safety limits (e.g., \gls[hyper=false]{pct}) to check whether the limits still fall outside the uncertainty band of the code prediction.
 
 % Source of possible uncertainties
 There are several known sources of uncertainty that render the prediction on $\bm{u}(\mathbf{r},t)$ and its derived quantities uncertain.
@@ -51,12 +51,12 @@ The following are the sources of primary interest in the present research:
 \begin{enumerate}
 
 	\item \emph{Uncertainty associated with the controllable inputs}.
-	In case of a controlled experiment, these controllable inputs are supposed to be observed (and \emph{controlled}).
-	However, such an observation might contain observation error due to instrument imprecision and/or inherent variability. 
-	In the case of simulation of a real accident scenario in a plant,
-  some conditions of the plant parameters prior the accident scenario (the initial conditions) can also be measured.
-  Furthermore, in such a scenario, controllable inputs may also include parameters that are part of the assumptions underpinning the deterministic safety analysis (i.e., conservative vs. best-estimate).
-  This includes the boundary conditions, ranging from the availability of safety features to the constraints on their performance \cite{IAEA2002}.
+	In the case of a controlled experiment, these controllable inputs are supposed to be observed (and \emph{controlled}).
+	However, such an observation might contain errors due to instrument imprecision and/or inherent variability. 
+	When simulating a real accident scenario in a plant,
+  some conditions of the plant parameters prior to the accident scenario (its initial conditions) can also be measured.
+  In such a scenario, controllable inputs may also include parameters that are part of the assumptions underpinning the deterministic safety analysis (i.e., conservative vs. best-estimate).
+  That is, it includes the degree of pessimism in the (assumed) boundary conditions, ranging from the availability of safety features to the constraints on their performance \cite{IAEA2002}.
 
   \item \emph{Uncertainty associated with the physical model parameters}.
 	The value of the physical model parameters are often not known a priori.
@@ -65,9 +65,10 @@ The following are the sources of primary interest in the present research:
 	
   \item \emph{Uncertainty associated with the physical models}.
 	The physical models themselves are still approximations, even with perfectly known model parameters.
-	If derived in fully mechanistic manner, it might be the case that some processes are unaccounted for due to inherent complexity and lack of knowledge (i.e., the case of \emph{missing physics}).
-	On the contrary, if derived fully empirically, it might be the case that the models are derived separately for different more elementary processes, while in the applications of the code multiple of such models are used in concert. Despite each being validated, it is fair to question the validity of models used in an ensemble.
-	Any of these tend to cause a systematic bias on the code prediction, the extend of which is unknown and uncertain.
+	If derived in a fully mechanistic manner, some important processes might be unaccounted for due to the inherent complexity and lack of knowledge (i.e., the case of \emph{missing physics}).
+	On the contrary, if derived fully empirically, models might be derived separately from different elementary processes, while in the applications of the code multiple of such models are used in concert.
+	Despite each being validated, it is fair to question the validity of models used in an ensemble.
+	Any of the two points tends to cause a systematic bias on the code prediction, the extend of which is unknown and uncertain.
 	As a result, this source of uncertainty is referred to as model \emph{bias}, \emph{inadequacy}, or \emph{discrepancy}.
 
 \end{enumerate}
@@ -87,20 +88,20 @@ For instance, the mean
 \end{equation*}
 where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
 
-Using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and they are used to run the code multiple times.
+Using \gls[hyper=false]{mc} technique, samples are generated from their respective distributions and are used to run the code multiple times.
 Afterward, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
 The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Glaeser2008}.
 \begin{figure}[!bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_uq_forward}
-	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction. Notice that the simulator has been parametrized by the controllable inputs and physical model parameters, each of which are represented as random variable.}
+	\caption[Simplified flowchart of forward uncertainty quantification of a simulator prediction.]{Simplified flowchart of forward uncertainty quantification of a simulator prediction. Notice that the simulator has been parametrized by the controllable inputs and physical model parameters, each of which are represented as a random variable.}
 	\label{fig:ch1_simulator_uq_forward}
 \end{figure}
 
 % Source of uncertainty, initial and boundary condition
 The forward uncertainty quantification explained above deals with the parametric uncertainty associated with the important parameters of the simulator, both for the controllable inputs and the physical model parameters.
-As a result, representing the  as random variables is the key in the forward uncertainty quantification of system code.
+As a result, representing the inputs of the simulator as random variables is the key in the forward uncertainty quantification of system code.
 
 %--------------------------------------------------------------------------
 \subsection{Inverse Uncertainty Quantification}\label{sub:intro_uq_inverse}
