@@ -200,16 +200,16 @@ Each participant employing a chosen simulation code and methodology had to contr
 \begin{enumerate}
 	\item \textsc{Phase 1}: Description of the selected simulation code and methodology.
   \item \textsc{Phase 2}: Identification of the uncertain parameters that are most relevant to \gls[hyper=false]{pwr} \gls[hyper=false]{loca} reflooding simulations.
-  \item \textsc{Phase 3}: Quantification of the uncertainties if the parameters, using available data from the \gls[hyper=false]{feba} experiment.
+  \item \textsc{Phase 3}: Quantification of the uncertainties in the parameters, using available data from the \gls[hyper=false]{feba} experiment.
   \item \textsc{Phase 4}: Propagation of the quantified uncertainties as part of a blind benchmark exercise based on data from the PERICLES experiment.
   \item \textsc{Phase 5}: Contribution to the analysis and synthesis of the benchmark results.
 \end{enumerate}
 During the course of the project up to its conclusion, three \gls[hyper=false]{oecd}/\gls[hyper=false]{nea} reports have been published \cite{Kovtonyuk2015, Reventos2016,Sanz2017}.
 Details can be found in the reports.
-The following will describe briefly some of the lessons learned from \gls[hyper=false]{premium} of relevance to the present study.
+The following will describe briefly some of the lessons learned from \gls[hyper=false]{premium} that of relevance to the present study.
 
 % Lessons learned
-\gls[hyper=false]{premium} provided state-of-the-art as of $2015$ on uncertainty quantification methods for \gls[hyper=false]{th} system codes.
+\gls[hyper=false]{premium} provided state-of-the-art (as of $2015$) uncertainty quantification methods for \gls[hyper=false]{th} system codes.
 It emphasized methodological issues that are yet to be overcome.
 Some of these issues, such as the identification of important parameters, extrapolation of quantified results, scaling, and nodalization were already raised in the $1994$ review studies on uncertainty methods for \gls[hyper=false]{th} codes sponsored by the European Commission \cite{Forge1994}.
 At the conclusion of \gls[hyper=false]{premium}, these issues are still considered open problems.
@@ -228,7 +228,7 @@ In this case, \gls[hyper=false]{gsa} methods can help in the investigation about
 
 % The problem of calibration and overfitting
 Secondly, there was a slight disagreement between participants regarding the use of \emph{calibrated parameter}.
-This notion stemmed from the use of a Bayesian method (the so-called CIRC\'E \cite{Crecy2001,Reventos2016}, a method based on maximum likelihood approach under linear assumption coupled with normal prior for the parameter) to update the prior distribution of the model parameter such that the resulting posterior distribution yields the closest with the experimental data.
+This notion stemmed from the use of a Bayesian method (the so-called CIRC\'E \cite{Crecy2001,Reventos2016}, a method based on maximum likelihood approach under linear assumption coupled with normal prior for the parameter) to update the prior distribution of the model parameter such that the resulting posterior distribution yields the closest agreement with the experimental data.
 \marginpar{Calibrated parameter and best-estimate code}
 Furthermore, the nominal value of the model parameter was allowed to shift following the updated central measure of the posterior.
 Such practice of calibration was questioned because the best-estimate code used was, in fact, already calibrated on the basis of larger experimental database over decades of verification and validation (V\&V) activities.
@@ -246,14 +246,13 @@ The narrow uncertainty obtained indicates that the calibration procedure converg
 
 While the Bayesian approach makes sense for parameter calibration, updating its value in light of new data,
 its application might require more examination on the additional sources of uncertainty.
-It also makes sense to acknowledge the extensive (V\&V) activities that serve as the basis of \gls[hyper=false]{th} system codes;
+It also makes sense to acknowledge the extensive V\&V activities that serve as the basis of \gls[hyper=false]{th} system codes;
 observing one additional data set should not render previous results invalid right away.
 Thus it remains an open question how to compromise between learning from the new data and preserving what has been learned before.
 
 % The use of metamodel
-Finally, there is a natural reluctance among the participants to embrace more advanced methods requiring less assumptions (e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more computational cost (i.e., more code runs).
+Finally, there is a natural reluctance among the participants to embrace more advanced methods requiring less assumptions (e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more computational cost (i.e., more code runs) that are available in the recent literature.
 \marginpar{The use of metamodel}
-computational cost (i.e., more code runs) that are available in the recent literature.
 The use of metamodel can help in alleviating such computational restriction\footnote{it is not, however, cost-free as will be explained in more detail in Chapter~\ref{ch:gp_metamodel}.}, insofar that the error incurred by the use of metamodel can be accepted.
 Strictly speaking, the community is not unfamiliar with the use of metamodel (a fast approximating function as a substitute of running the code) for uncertainty analysis, especially in the context of uncertainty propagation\footnote{It was initially used for the estimation of \gls[hyper=false]{pct} probability distribution from uncertainty propagation in the context of safety margin evaluation of \gls[hyper=false]{lbloca} scenario \cite{Boyack1990}.}.
 However, in the context of inverse uncertainty quantification, none of the participant took the benefit of using metamodel and relaxed some of the assumptions in calibration.
