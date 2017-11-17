@@ -223,7 +223,7 @@ Bayesian framework for the calibration of computer simulation mo\-del was popula
 \marginpar{Bayesian framework, Kennedy and O'Hagan approach}
 The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters along with the associated uncertainty taking into account different sources of uncertainty based on the observed data.
 The distinct idea is to acknowledge that a systematic bias between a physics-based simulator and reality might be present.
-Yet, the magnitude and sign of this systematic bias are often not known a priori.
+Yet, the magnitude and the sign of this systematic bias are often not known a priori.
 At the same time, if the bias is not modeled properly, the calibration process might overfit the model parameters.
 That is, the calibrated model parameters will be overly sensitive to the calibration data and thus not applicable for prediction.
 As such, Kennedy and O'Hagan proposed to model the unknown bias term probabilistically by putting a prior probability distribution on the bias term to be updated simultaneously with that of the model parameters, by using the observed data.
@@ -256,7 +256,7 @@ The second aspect of the Bayesian framework is related to the computations invol
 \marginpar{Bayesian framework, computation}
 The formulated posterior distribution in practical problems is multidimensional.
 Numerically integrating the posterior distribution to summarize a given \gls[hyper=false]{qoi} (see Section~\ref{sub:intro_uq_forward}) might not be efficient.
-Traditionally, maximum a posteriori estimates (or maximum likelihood, if the prior is non-informative) is often used to describe each of the posterior model parameter value in a single number.
+Traditionally, maximum a posteriori estimates (or maximum likelihood, if the prior is non-informative) is often used to describe each of the posterior model parameter values using a single number.
 \marginpar{Semi analytical approach}
 It simply requires the maximization of the posterior density function (i.e., its mode).
 An extension of this, giving description of the shape of the posterior, is done by the so-called \emph{Laplace's approximation} or the \emph{normal approximation} \cite{Mackay2005,Sivia2012,Gelman2013,McElreath2015}.
