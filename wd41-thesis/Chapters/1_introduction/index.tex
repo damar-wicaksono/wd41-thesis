@@ -6,10 +6,24 @@
 \begin{quote}
 	``All models are wrong but some are useful -- George Box''
 \end{quote}
-Perhaps. The quote by Box perhaps succinctly describes has been long used as.
-The role of experimental data in informing the prior uncertainty.
-Although indeed thermal-hydraulics co their use remains central in the .
-There are reasons to be optimistic.
+It is perhaps convenient to use, at least half of it, the quote by Box as an excuse if a modeling exercise goes awry.
+But engineers are constructive bunch, as they are pragmatic, so they often focus on the second part of the statement and try to do better.
+Some would argue that to make the model useful is to make the model less wrong, a very difficult task.
+Some others would start by making an effort assessing whether the ``wrong'' model is useful, can ever be useful, or can be made useful without any direct improvement to the model.
+The two views are not in contradictory, although the latter is arguably more humble.
+This thesis is an effort in line with the latter view.
+
+% Second part of the introductory paragraph
+By many measures, \gls[hyper=false]{th} system codes for simulating coolant system behavior of a \gls[hyper=false]{npp} are an achievement.
+Their development, by the best and the brightest, includes decades of verification and validation activities supported by numerous experimental facilities, small and large scales.
+Many of the current understanding of physical phenomena in \gls[hyper=false]{npp} transient are established during that period.
+Yet, their prediction can still be off when compared against experimental data.
+The efforts to minimize this difference by developing high-fidelity physical models coupled with high-resolution numerical algorithms are always on-going and are indispensable moving forward.
+
+% Third part of the introductory paragraph
+At the same time, simulations are being continuously used to make decision, from optimal system design to safety margin evaluation for reactor licensing, 
+As such, it is important to acknowledge the uncertainties associated with the predictions for robust decision-making on the basis of the predictions. 
+Thus, independently to the efforts of improving the code, uncertainty quantification of the codes is an important part of the codes applications; it is the main topic of this thesis.
 
 % Overview of the chapter
 This opening chapter intends to introduce briefly the importance, the use and the challenges of using system code for simulating \gls[hyper=false]{th} behavior of \gls[hyper=false]{npp} in the context of its safety analysis.
@@ -23,6 +37,7 @@ It consolidates and adapts recent developments of in the applied statistics lite
 In relation to that, Section~\ref{sec:intro_statistical_framework} provides a broad, and by no means exhaustive, overview of the research landscape on each of the proposed steps.
 Finally, Section~\ref{sec:intro_thesis_structure} concludes the chapter by outlining the structure of the thesis.
 
+% The contents of the chapter
 \input{Chapters/1_introduction/computer_simulation}
 \input{Chapters/1_introduction/uncertainty_quantification}
 \input{Chapters/1_introduction/research_objectives}

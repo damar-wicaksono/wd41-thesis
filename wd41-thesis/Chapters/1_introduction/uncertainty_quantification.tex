@@ -81,10 +81,10 @@ By transforming the random variable inputs, the simulator output becomes random 
 	\bm{\mathcal{U}}(\bm{r}, t) = f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t)
 \end{equation*}
 where $f$ represents the simulator as a mathematical function.
-The resulting random code outputs can be summarized by different integral quantities.
-For instance, the mean
+The \gls[hyper=false]{qoi} related to the random code outputs can be summarized by different integral quantities.
+For instance, the mean of a \gls[hyper=false]{qoi} given by function $g$ is
 \begin{equation*}
-	\mathbb{E}[f] = \int\limits_{\mathbf{X}_c,\mathbf{X}_m} f(\bm{\mathcal{X}}_c, \bm{\mathcal{X}}_m;\bm{r}, t) \, p(\bm{x}_c, \bm{x}_m) \, d\bm{x}_c \, d\bm{x}_m
+	\mathbb{E}[g] = \int\limits_{\mathbf{X}_c,\mathbf{X}_m} g(f(\bm{x}_c, \bm{x}_m;\bm{r}, t)) \, p(\bm{x}_c, \bm{x}_m) \, d\bm{x}_c \, d\bm{x}_m
 \end{equation*}
 where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
 
@@ -252,6 +252,6 @@ Thus it remains an open question how to compromise between learning from the new
 % The use of metamodel
 Finally, there is a natural reluctance among the participants to embrace more advanced methods requiring less assumptions (e.g., normal prior of the parameters, linearity between outputs and parameters, etc.) but with more computational cost (i.e., more code runs) that are available in the recent literature.
 \marginpar{The use of metamodel}
-The use of metamodel can help in alleviating such computational restriction\footnote{it is not, however, cost-free as will be explained in more detail in Chapter~\ref{ch:gp_metamodel}.}, insofar that the error incurred by the use of metamodel can be accepted.
+The use of metamodel can help in alleviating such computational restriction\footnote{It is not, however, cost-free as will be explained in more detail in Chapter~\ref{ch:gp_metamodel}.}, insofar that the error incurred by the use of metamodel can be accepted.
 Strictly speaking, the community is not unfamiliar with the use of metamodel (a fast approximating function as a substitute of running the code) for uncertainty analysis, especially in the context of uncertainty propagation\footnote{It was initially used for the estimation of \gls[hyper=false]{pct} probability distribution from uncertainty propagation in the context of safety margin evaluation of \gls[hyper=false]{lbloca} scenario \cite{Boyack1990}.}.
 However, in the context of inverse uncertainty quantification, none of the participant took the benefit of using metamodel and relaxed some of the assumptions in calibration.
