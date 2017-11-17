@@ -91,6 +91,7 @@ This is done by consolidating and adapting recent developments in the applied st
 	Finally, for each of the different types,
 	the analysis is also conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
 	By doing so, it is hoped that interesting model behavior with respect to its parameters perturbation can be revealed.
+  
   Section~\ref{sub:intro_sa} provides an overview on the wide range of \gls[hyper=false]{sa} methods from the applied literature,
   while Chapter~\ref{ch:gsa} presents the details on the selected \gls[hyper=false]{sa} methods and their application to a \gls[hyper=false]{trace} model.
 
@@ -100,6 +101,7 @@ This is done by consolidating and adapting recent developments in the applied st
 	This approximation is done through a \glsfirst[hyper=false]{gp} metamodel resulting in a statistical metamodel.
 	The highly multivariate nature of the outputs (time- and space-dependent) is dealt by a dimension reduction technique.
 	Build upon the results of the previous step, only parameters that are identified to be influential are included in the construction of the metamodel.
+  
   In the subsequent section (Section~\ref{sub:intro_statistical_metamodeling}), a broad overview on metamodeling in the literature is first introduced;
   later on, in Chapter~\ref{ch:gp_metamodel}, the details and the application of \glsfirst[hyper=false]{gp} metamodel to a \gls[hyper=false]{trace} model are presented.
 
@@ -109,6 +111,7 @@ This is done by consolidating and adapting recent developments in the applied st
 	However, using a Bayesian statistical framework, the aim of calibration is extended to simultaneously quantify the uncertainty of the parameter estimation.
 	The framework includes various sources of uncertainty, which can be modeled probabilistically, including the model bias term.
 	At the end, the parameters of interest will either be given in the form of posterior \glspl[hyper=false]{pdf} conditioned on the data or samples generated from such distributions to conform with the practice of statistical uncertainty propagation widely adopted in the field of nuclear engineering.
+  
   The practice of Bayesian calibration of computer model from the literature is provided in Section~\ref{sub:intro_bayesian_calibration}.
   Chapter~\ref{ch:bayesian_calibration} is then dedicated to the details of formulating a Bayesian calibration problem for model parameters, ways to solving it, and an application of it to a \gls[hyper=false]{trace} model.
 
