@@ -69,24 +69,23 @@ As such, in the following discussion, a generic notation for an arbitrary \gls[h
 % Introductory Paragraph
 Consider the following problem: Generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from a random variable $\bm{\mathcal{X}}$, given the \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}_{\geq 0}$.
 \marginpar{Problem statement}
-It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant:
+It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant.
+That is,
 \begin{equation}
-	p(\bm{x}) = \frac{p^*(\bm{x})}{C} \propto p^*(\bm{x})  
+	p^*(\bm{x}) = {C} \, p(\bm{x})  
 \label{eq:bc_prop_post}
 \end{equation}
 The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
-\begin{equation}
-	C \; \int p(\bm{x}) d\bm{x} = \int p^*(\bm{x}) d\bm{x}  \Leftrightarrow  C \; (1.0) = \int p^*(\bm{x}) d\bm{x}
-\label{eq:bc_prop_const}
-\end{equation}
-Carrying out the integration of the above can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
+$\int p(\bm{x}) d\bm{x} = 1 \Leftrightarrow C = \int p^*(\bm{x}) d\bm{x}$
+Carrying out the integration of $p^*$ can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
+Therefore, generating a set of samples simply by knowing $p^*$ instead of $p$ is advantageous.
 
-Such samples can then be used, among other things,
+The generated samples can then be used, among other things,
 to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
 of any function under the \gls[hyper=false]{pdf}.
 
 In the rest of the section, the term model input parameter space $\mathbf{X}$ is replaced by the term \emph{state space}, the range of possible values of the random variable $\bm{\mathcal{X}}$;
-A more appropriate term in the context of generic problem of generating samples from a distribution.
+a more appropriate term in the context of generic problem of generating samples from a distribution.
 
 % Why it it difficult to samples
 Generating samples from an arbitrary multidimensional density function is generally a difficult task.
@@ -113,9 +112,9 @@ Additionally, though sampling algorithms exist for several multivariate densitie
 this will not be the case for an arbitrary \gls[hyper=false]{pdf} of higher dimension.
 
 % Illustration
-To illustrate this point,
+To illustrate the difficulty to generate samples from an arbitrate multivariate probability distribution,
 \marginpar{Illustration}
-consider the following unnormalized bivariate \gls[hyper=false]{pdf} parametrized by location parameters $\mu_1, \mu_2$ and scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
+consider the following unnormalized bivariate \gls[hyper=false]{pdf} parametrized by the location parameters $\mu_1, \mu_2$ and the scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
 \begin{equation}
 	\begin{split}
     & p^*(x_1, x_2) = \frac{\exp{(-(x_1 - \mu_1)/\sigma_1)} \exp{(-(x_2 - \mu_2)/\sigma_2)}}{(1 + \exp{(-(x_1 - \mu_1)/\sigma_1)} + \exp{(-(x_2 - \mu_2)/\sigma_2)})^3} \\ 
@@ -165,7 +164,7 @@ Figs.~\ref{fig:ch5_plot_gumbel_sample_grid_2} and~\ref{fig:ch5_plot_gumbel_sampl
 The figure shows that the generated samples are indeed approximately distributed as the given \gls[hyper=false]{pdf}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_gumbel_sample_grid},
-			           maincaption={Sampling from a multivariate density by discretizing the state space in grids. The state space is discretized into $\Delta = 50$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms of the marginals approximately follow the shape of the respective analytical marginal density. The marginal densities have been normalized to match the peak of the histogram.},
+			           maincaption={Sampling from a multivariate density by discretizing the state space in grids. Each dimension of the state space is discretized into $\Delta = 50$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms of the marginals approximately follow the shape of the respective analytical marginal density. The marginal densities have been normalized to match the peak of the histogram.},
 			           mainshortcaption={Sampling from a multivariate density by discretizing the state space in grids.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_gumbel_sample_grid_1},
@@ -187,7 +186,7 @@ The main issue with the discretized grid approach, conceptually simple as it is,
 is the curse of dimensionality similar to the one mentioned in the previous chapters.
 \marginpar{curse of dimensionality}
 The number of density evaluations grows exponentially with the number of dimension.
-As a rule, for a given discretization level $\Delta$ and dimension $D$,
+As a rule, for a given discretization level $\Delta$ and a given dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
 
 % Problem with Discretized Grid, typical set
@@ -197,11 +196,11 @@ Assuming a well-behaved function of interest inside the integral, some regions o
 In fact, this ``region of space where it matters'' is related to the mathematical notion of the \emph{typical set} of a distribution \cite{Mackay2005}.
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
-Although there is good idea where this typical set is located for the example above (the region around the center of the density),
-in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there will not be\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce its value while increasing the amount of volume.
+Although the location of the typical set for the example above is rather trivial (the region around the center of the density),
+it will not be the case for an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density)\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce its value while increasing the amount of volume.
 In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality.}.
 Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
-At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would be potentially be more efficient, requiring less function evaluations for the same accuracy level, to that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
+At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would potentially be more efficient, requiring less function evaluations for the same accuracy level, than that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
 
 % Entry to Markov Chain
 To circumvent these issues,
