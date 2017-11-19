@@ -3,7 +3,7 @@
 %************************************************************************************
 
 % Introductory Paragraph
-The formulation of the Bayesian calibration of a computer model presented above results in a joint posterior \gls[hyper=false]{pdf} for all the parameters involved in the resulting probability model $p(\bm{x}\,|\,\mathbf{y})$ (Section~\ref{sub:bc_modular_posterior}).
+The formulation of the Bayesian calibration of a computer model presented above results in a joint posterior \gls[hyper=false]{pdf} for all the parameters involved in the resulting probability model $p(\bm{x}\,|\,\mathbf{y})$ (Eq.~(\ref{eq:bc_joint_posterior}) in Section~\ref{sub:bc_modular_posterior}).
 \marginpar{Posterior uncertainty of the model parameters}
 This density contains all the information (and consequently, the uncertainties) regarding the model parameters conditioned on the observed data and the assumed data-generating process.
 The uncertainties associated with the model parameters can then be represented using different summary statistics, many of which involve integration.
@@ -18,7 +18,8 @@ which is defined as
 	\end{split}
 %\label{eq:variance_marginalization}
 \end{equation*}
-where $\bm{x} = \{x_d, \bm{x}_{\sim d}\}$ and the integrations are carried out over the domain $\mathbf{X}$.
+where $\bm{x} = \{x_d, \bm{x}_{\sim d}\}$ stands for the the set of model parameters $\bm{x}_m$ in Section~\ref{sec:bc_statistical_framework} and~\ref{sec:bc_modular};
+and the integrations are carried out over the domain $\mathbf{X}$.
 An alternative way to summarize the uncertainties of a model parameter is through its $\theta$-quantile $Q^{\theta}_d$,
 which for parameter $x_d$ is defined as
 \begin{equation*}
