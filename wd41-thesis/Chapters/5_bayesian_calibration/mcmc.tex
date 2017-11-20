@@ -375,7 +375,7 @@ Finally, by imposing the conditions (see Footnote~$9$), the stationary distribut
 Consider once more the problem set up at the start of the section:
 \marginpar{The objective revisited}
 Generate samples from a target probability distribution with a density $p(\bm{x})$,
-known at least up to a proportionality constant, $p(\bm{x}) \propto p^*(\bm{x})$.
+known up to a proportionality constant (Eq.~(\ref{eq:bc_prop_post})).
 
 % Markov Chain Monte Carlo
 By acknowledging the theorems above,
@@ -390,7 +390,7 @@ This, in essence, is the objective of \gls[hyper=false]{mcmc} algorithms as defi
 One might think that the task of constructing a Markov transition kernel would be difficult,
 especially considering the wide range of possible target distributions which might call for different classes of transition kernels.
 \marginpar{Metropolis-Hastings algorithm, origin}
-However, there exists a class of algorithms for generating Markov chain that guarantees its convergence (in distribution) to \emph{any} target distribution as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
+However, there exists a class of algorithms for generating Markov chains that guarantees its convergence (in distribution) to \emph{any} target distribution as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
 The Metropolis-Hastings algorithm and its various extensions remains the most universal class of algorithms to generate such Markov chains \cite{Robert2010}. 
 The method was first applied for a statistical mechanics problem by Metropolis et al. \cite{Metropolis1953}\footnote{There is apparently a controversy surrounding the attribution of the algorithm solely to Metropolis, especially when his role was claimed to be nothing more ``other than providing computer time'' \cite{Gubernatis2005}.}
 and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the best of the author's knowledge, no controversy here.}.
@@ -399,7 +399,7 @@ and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the 
 The \gls[hyper=false]{mh} algorithm prescribes two main components for constructing transition kernels of a Markov chain that converges to the target distribution: a \emph{proposal probability density} $q(\bm{x}^*|\bm{x})$ and an \emph{acceptance probability} $\alpha$.
 \marginpar{Metropolis-Hastings algorithm, proposal density}
 The proposal probability density is responsible for generating a proposal transition or candidate move $\bm{x}^*$ for the Markov chain at each iteration and it is in general a density conditional on the previous state.
-This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such the Gaussian or uniform densities.
+This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such as the Gaussian or uniform densities.
 This proposal move, in turn, will be accepted with a probability,
 \begin{equation}
   \begin{split}
@@ -411,9 +411,10 @@ This proposal move, in turn, will be accepted with a probability,
 \marginpar{Metropolis-Hastings algorithm, acceptance probability}
 Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
 and $q(\bm{x}^{(i-1)}\,|\,\bm{x}^*)$ ($q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$) is the value of the proposal density at the previous (proposed) state conditional on the value of the proposed (previous) state.
-Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_post}) cancels out and only the unnormalized density up to that constant $p^*$ is required.
+Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_post}) cancels out and only the unnormalized density $p^*$ is required.
 As such, the potentially difficult multidimensional integral in Eq.~(\ref{eq:bc_prop_post}) has been dispensed with by this formulation.
-The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution and it guarantees the stationarity of the process \cite{Chib1995}.
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution.
+This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
 
 If the proposal move is accepted it becomes the current state of the chain,
 otherwise the chain remains at its current state for the given iteration.
@@ -424,7 +425,7 @@ Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a 
 \caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x}^*\,|\,\bm{x})$ in $I$ iterations}
 \label{alg:metropolis_hastings}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$
+  \footnotesize{\REQUIRE $I > 0$, $p^*(\bm{x})$, and $q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$}
   \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
   \FOR{$i = 1$ to $I$}
     \STATE sample $\bm{x}^*$ from $q(\bm{x}\,|\,\bm{x}^{(i-1)})$
@@ -461,7 +462,7 @@ The first three iterations of the random walk \gls[hyper=false]{mh} algorithm ar
 At the first iteration (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_1}),
 a proposal move is drawn from the bivariate normal distribution (centered at the origin).
 The proposal move brings the state closer to the center of the target density, thus it is accepted (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_2}).
-A new proposal move is generated from the bivariate normal centered at the newly accepted move.
+A new proposal move is generated from the bivariate normal centered at the newly accepted state.
 This time, because the proposal move moves farther away from the center of the target density, it is rejected.
 The chain remains at the current state and a new proposal move is drawn (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_3}).
 Note that this kind of proposal move will not always be rejected outright but is subject to chance based on the acceptance probability.
@@ -524,7 +525,7 @@ Note that, in practice, the correct distribution of the resulting samples cannot
 The whole point of generating samples via \gls[hyper=false]{mcmc} simulation is exactly because such  arbitrary high-dimensional distributions are hard to characterize.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain_sample},
-			           maincaption={Results of samples generated by a Markov chain simulation for the target density given in the example. After $50'000$ iterations, the samples resembles the actual shape of the distribution both as a joint (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
+			           maincaption={Results of samples generated by a Markov chain simulation for the target density given in the example. After $50'000$ iterations, the samples resemble the actual shape of the distribution both as a joint (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
 			           mainshortcaption={Results of samples generated by a Markov chain simulation for the target density given in the example.},%
 			           leftopt={width=0.28\textwidth},
 			           leftlabel={fig:ch5_plot_illustrate_markov_chain_sample_1},
@@ -569,7 +570,7 @@ For the same length of the chain as before ($50'000$), the resulting distributio
 {../figures/chapter5/figures/plotIllustrateMarkovChainLargeStep_2}
 
 % Under-dispersed step
-Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step} shows the behavior of the chain in the case of too small variance parameter for the proposal distribution, in comparison to the scale of the target density.
+Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step} shows the behavior of the chain in the case of a variance parameter for the proposal distribution that is too small, in comparison to the scale of the target density.
 \marginpar{Under-dispersed proposal distribution}
 In this case, any proposal move around the previously accepted state would almost always be accepted and the chain traverses the state space very slowly (see Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step_1}).
 Consequently, the resulting samples from the chain (with the same length of $50'000$ samples in this example) would not be representative of the target distribution as illustrated in Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step_2}.
@@ -595,7 +596,7 @@ But this convergence would not be attained for a Markov chain of a practical len
 % Adaptive Sampler
 In fact, the optimal choice of the scale parameters for the proposal distribution is closely related to the characteristic length scale of the target distribution \cite{Mackay2005}.
 \marginpar{Tuning and adaptive \gls[hyper=false]{mh} algorithms}
-Unfortunately, in practice, there would be little information, if any, on the characteristic length scale for each parameter of a given density.
+In practice, there would be little information, if any, on the characteristic length scale for each parameter of a given density.
 As such, some tuning is required regarding the proposal distribution.
 This is the main motivation for the development of various \emph{adaptive} \gls[hyper=false]{mh} algorithms.
 In such algorithms, the proposal distribution (and thus the transition kernels) are adapted during the iteration to optimize the performance of the algorithm \cite{Robert2010}.
@@ -604,8 +605,7 @@ In such algorithms, the proposal distribution (and thus the transition kernels) 
 Instead of delving into any of the particular improvements on the \gls[hyper=false]{mh} algorithm (such as through the adaptive schemes)\footnote{Ref.~\cite{Andrieu2008} provides an overview of adaptive \gls[hyper=false]{mc} algorithms, while Refs.~\cite{Haario2001,Haario2006,Griffin2011} are examples of adaptive algorithms.},
 this thesis adopted a relatively new \gls[hyper=false]{mcmc} algorithm based on an \emph{ensemble} Markov chain.
 The algorithm has the potential of requiring minimal tuning to any given particular problem.
-The main ideas presented the above (i.e., proposal move and its acceptance probability), however,
-remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
+The main ideas presented above (i.e., proposal move and its acceptance probability) remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 
 %----------------------------------------------------------------------------
 \subsection{Affine-Invariant Ensemble Sampler (AIES)}\label{sub:bc_mcmc_aies}
@@ -619,9 +619,9 @@ The situation is typically worsened for a highly correlated distribution of high
 eventually resulting in a high overhead computational cost for adaptation \cite{Foreman-Mackey2013}.
 
 Through an affine transformations (to be defined further below),
-a target distribution with a highly skewed aspect ratio\footnote{loosely defined as the ratio between different characteristic length scales of different dimensions.} can be made less skewed and thus easier to be sampled from \cite{Huijser2015}.
+a target distribution with a highly skewed aspect ratio\footnote{Loosely defined as the ratio between different characteristic length scales of different dimensions.} can be made less skewed and thus easier to be sampled from \cite{Huijser2015}.
 By ensuring the algorithm to be affine-invariant, the performance of the algorithm would then be equal under all affine transformations of the target distribution.
-Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{sampler of many particles} creating many paths, as opposed to a sampler of a \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
+Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{Sampler of many particles} creating many paths, as opposed to a sampler of a \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
 
 % Ensemble Sampler
 \gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
@@ -637,7 +637,7 @@ Specifically,
 Eq.~\ref{eq:ch5_ensemble_independence} implies that the target distribution is being independently sampled by $L$ walkers.
 
 A Markov chain of an ensemble, in turn, is a sequence of ensembles, $\{\vec{\bm{\mathcal{X}}}^{(i)}\}$ for $i \geq 0$ that follows the Markov property while preserving the condition in Eq.~(\ref{eq:ch5_ensemble_independence}).
-Consequently, the Markov property lies on the state space of the ensemble\footnote{if each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}, while the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
+Consequently, the Markov property lies on the state space of the ensemble\footnote{If each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}, while the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
 
 % Affine Transformation
 In \gls[hyper=false]{aies}, the transition between states of an ensemble is conducted by carrying out an affine transformation to the ensemble.
@@ -728,13 +728,13 @@ a proposal scaler is randomly generated according to $g$ and a proposed move is 
 								 mainlabel={fig:ch5_aies_stretch},
 			           maincaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional state space.},
 			           mainshortcaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional state space.},%
-			           leftopt={width=0.275\textwidth},
+			           leftopt={width=0.25\textwidth},
 			           leftlabel={fig:ch5_aies_stretch_1},
 			           leftcaption={A walker in an ensemble of complementary walkers},
-			           midopt={width=0.275\textwidth},
+			           midopt={width=0.25\textwidth},
 			           midlabel={fig:ch5_aies_stretch_2},
 			           midcaption={A complementary walker is randomly selected},
-			           rightopt={width=0.275\textwidth},
+			           rightopt={width=0.25\textwidth},
 			           rightlabel={fig:ch5_aies_stretch_3},
 			           rightcaption={A move is proposed},
 			           spacing={},
@@ -760,7 +760,7 @@ Algorithm~\ref{alg:aies} summarizes the steps in the stretch-move \gls[hyper=fal
 \caption[Affine-Invariance Ensemble Sampler (Stretch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ using $L$ walkers in $I$ iterations.}
 \label{alg:aies}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $L \geq I + 1$, $p^*(\bm{x})$, and $q (z)$
+  \footnotesize{\REQUIRE $I > 0$, $L \geq I + 1$, $p^*(\bm{x})$, and $q (z)$}
 		\STATE $\vec{\bm{x}}^{(0)} = [\bm{x}^{(0)}_1, \ldots, \bm{x}^{(0)}_L] \leftarrow \vec{\bm{x}}_0 \, ; \, \forall \vec{\bm{x}}_0 \in \mathbf{X}^L$
 		\FOR{$i = 1$ to $I$}
 			\FOR{$l = 1$ to $L$}
@@ -789,28 +789,28 @@ In other words, there is $50'000$ target density evaluations.
 The initial state of the chain $\vec{\bm{x}}^{(0)}$ is set to be at the origin for all walkers.
 
 % Traversing the Target Density and Trace Plot
-Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} presents the evolution of each individual walker traversing the state space of variable $x_1$.
+Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} shows the evolution of each individual walker traversing the state space of variable $x_1$.
 \marginpar{ensemble samples, trace plot}
-As mentioned, the Markov property of an ensemble is not guaranteed at the level of each individual walker.
-Thus it is more appropriate to graphically diagnose the chain by plotting all the individual walkers together.
+The Markov property of an ensemble is not guaranteed for each individual walker.
+Thus it is more suitable to graphically diagnose the chain by plotting all the individual walkers together.
 It is shown here that after an obvious initial phase,
-the ensemble seems to converge and to stay around a particular region of the state space (i.e., its typical set).
+the ensemble seems to converge and to stay around a particular region of the state space.
 The width of the darker region, indicating region of the state space visited more often,
-show the dispersion of the variable. 
-Indeed this is confirmed by plotting the running empirical mean and standard deviation of the ensemble (Fig.~\ref{fig:ch5_plot_aies_walker_running_stats_1}).
+shows the dispersion of the variable. 
+This is confirmed by plotting the running empirical mean and standard deviation of the ensemble (Fig.~\ref{fig:ch5_plot_aies_walker_running_stats_1}).
 The values $5.0$ and $2.3$ shown in the plot are the analytical mean and standard deviation of $x_1$, respectively.
-Although not shown here, the behavior of $x_2$ is similar.
+Though not shown, $x_2$ has a similar behavior.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_aies_walker_ensemble},
                   maincaption={Trace plots of individual walkers and the running mean and standard deviation for $x_1$.},%
 									mainshortcaption={.},
-                  leftopt={width=0.45\textwidth},
+                  leftopt={width=0.425\textwidth},
                   leftlabel={fig:ch5_plot_aies_walker_ensemble_1},
                   leftcaption={Trace plot of all walkers},
                   %leftshortcaption={},%
-                  rightopt={width=0.45\textwidth},
+                  rightopt={width=0.425\textwidth},
                   rightlabel={fig:ch5_plot_aies_walker_running_stats_1},
-                  rightcaption={Running empirical mean and standard deviation of the samples},
+                  rightcaption={Running empirical mean and standard deviation},
                   %rightshortcaption={},
                   %spacing={\hfill}
                  ]
