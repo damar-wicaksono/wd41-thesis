@@ -72,7 +72,7 @@ Consider the following problem: Generate a set of samples $\{\bm{x}_n\}_{n=1}^N$
 It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant.
 That is,
 \begin{equation}
-	p^*(\bm{x}) = {C} \, p(\bm{x})  
+	p^*(\bm{x}) = {C} \, p(\bm{x})
 \label{eq:bc_prop_post}
 \end{equation}
 The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
@@ -256,7 +256,7 @@ A Markov chain is fully specified by three components:
     For any given $\bm{x}$, $T(\bm{x},\circ)$ defines the conditional probability density of $\bm{\mathcal{X}}^{(i)}$ given $\bm{\mathcal{X}}^{(i-1)} = \bm{x}$ with the following properties:
   \begin{equation}
     \begin{split}
-      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall x, \bm{x}' \in \mathbf{X} \\
+      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall \bm{x}, \bm{x}' \in \mathbf{X} \\
       & \int_{\mathbf{X}} T(\bm{x}, \bm{x}') \, d\bm{x} = 1, \,\,\, \forall \bm{x} \in \mathbf{X}\\
     \end{split}
   \label{eq:ch5_markov_chain_transition_kernel}
@@ -270,7 +270,7 @@ A Markov chain is fully specified by three components:
 \end{itemize}
 
 % Transition Between Iterations
-The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, is given by the transition probability kernel $T$ operated on the density function of the previous iteration $\pi^{(i-1)}$ such that,
+The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, is given by the transition probability kernel $T$ operated on the density function of the previous iteration $\pi^{(i-1)}$ such that,
 \begin{equation}
   \pi^{(i)}(\bm{x}') = \int_\mathbf{X} \pi^{(i-1)}(\bm{x}) \, T(\bm{x}, \bm{x}') \, d\bm{x} \equiv (\pi^{(i-1)}T)(\bm{x}')
 \label{eq:ch5_markov_chain_transition}
@@ -301,7 +301,7 @@ In other words, once the chain reaches the stationary density, it will stay ther
 % Convergence (Existence, Uniqueness, and Convergence)
 The notion of stationary density of a Markov chain is central to the application of Markov chain for generating samples from an arbitrary probability density.
 \marginpar{Fundamental theorem of Markov chain}
-Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}). for the transition kernel $T$, a stationary density $\pi^*$ exists, it is unique and is the \emph{limiting density} of the stochastic process, such that
+Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}). for the transition kernel $T$, a stationary density $\pi^*$ exists, is unique and is the \emph{limiting density} of the stochastic process, such that
 \begin{equation}
 	\lim_{i \rightarrow \infty} \,\, |(\pi T^i) - \pi^*| = 0, \,\,\,\, \forall \pi \in \mathbf{D}
 \label{eq:ch5_markov_chain_limiting_density}
@@ -329,14 +329,15 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
 it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
-By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
+By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
 \begin{equation}
   \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
 \end{equation}
 That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma_f^2/I$.
 $\sigma_f^2$ is the variance of the function evaluated under the stationary density of the chain.
-The theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size (assuming that stationarity has been attained).
+The theorem implies that for a long enough chain (assuming that the stationarity has been attained), the sample path $\{\bm{x}^{(i)}\}_{i=1}^I$ can be used to estimate the function $f$ integrated along the target \gls[hyper=false]{pdf} $\pi^*$ (e.g., the \glspl[hyper=false]{qoi} in the opening of this section) through the the sample mean of $f$ evaluated at the points of the sample path.
+Finally, the theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size.
 
 %And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
 
@@ -364,7 +365,7 @@ A reversible chain is a stationary chain \cite{Robert2004}.
 Consequently, in an \gls[hyper=false]{mcmc} algorithm,
 if the transition probability $T$ satisfies the detailed balance condition with respect to the target distribution $\pi_t$, 
 it ensures the reversibility of the process and ultimately the stationarity of the chain.
-Finally, by imposing the conditions\footnote{Idem.}, the stationary distribution of the chain $\pi^*$ converges to the target distribution $\pi_t$.
+Finally, by imposing the conditions (see Footnote~$9$), the stationary distribution of the chain $\pi^*$ converges to the target distribution $\pi_t$ and the quantities of interest exemplified in the opening of this section can be estimated.
 
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
@@ -410,9 +411,9 @@ This proposal move, in turn, will be accepted with a probability,
 \marginpar{Metropolis-Hastings algorithm, acceptance probability}
 Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
 and $q(\bm{x}^{(i-1)}\,|\,\bm{x}^*)$ ($q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$) is the value of the proposal density at the previous (proposed) state conditional on the value of the proposed (previous) state.
-Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the unnormalized density up to that constant $p^*$ is required.
-As such, the potentially difficult multidimensional integral in Eq.~(\ref{eq:bc_prop_const}) has been dispensed with by this formulation.
-The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution. This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
+Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_post}) cancels out and only the unnormalized density up to that constant $p^*$ is required.
+As such, the potentially difficult multidimensional integral in Eq.~(\ref{eq:bc_prop_post}) has been dispensed with by this formulation.
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution and it guarantees the stationarity of the process \cite{Chib1995}.
 
 If the proposal move is accepted it becomes the current state of the chain,
 otherwise the chain remains at its current state for the given iteration.
