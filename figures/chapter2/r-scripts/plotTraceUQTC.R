@@ -6,12 +6,8 @@
 # author    : WD41, LRS/EPFL/PSI
 # date      : Nov. 2017
 #
-# Read data -------------------------------------------------------------------
-trc_uq_df <- readRDS(rds_tidy_fullname)[[1]]
-trc_exp_df <- readRDS(rds_tidy_fullname)[[2]]
-
 # Make the plot ---------------------------------------------------------------
-p <- ggplot(data = trc_uq_df, aes(x = time, y = mid_run))
+p <- ggplot(data = trc_uq_df, aes(x = time, y = nom_run))
 p <- p + facet_wrap(~ax_locs, ncol = 4)
 p <- p + geom_ribbon(aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "gray", alpha = alpha)
@@ -23,6 +19,8 @@ p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
 p <- p + theme_bw()
 p <- p + labs(x = "Time [s]",
               y = "Clad Temperature [K]")
+p <- p + ggtitle(plot_title)
+p <- p + theme(plot.title = element_text(size = 20, face = "bold"))
 p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"))
 p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.ticks.x = element_line(size = 1),
@@ -36,3 +34,4 @@ pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 print(p)
 dev.off()
+embed_fonts(otpfullname, outfile = otpfullname)
