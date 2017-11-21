@@ -3,21 +3,21 @@
 %------------------------------------------------------------------------------------------------
 
 % Introductory Paragraph, Why Gaussian
-Gaussian random vector is a vector with random elements that are \emph{jointly} Gaussian.
-That is, the random variables have a \gls[hyper=false]{mvn} distribution. 
+A Gaussian random vector is a vector with random elements that are \emph{jointly} Gaussian.
+That is, the random variables have a multivariate normal (\gls[hyper=false]{mvn}) distribution. 
 It is the most widely studied and applied multivariate random variable.
 There are a couple of reasons for this.
 From a practical viewpoint, the \gls[hyper=false]{mvn} distribution is tractable and its special properties are well known \cite{Jensen2014}.
-From an epistemological viewpoint, a variable modeled as \gls[hyper=false]{mvn} distribution is a particular way of quantifying uncertainty about that variable.
+From an epistemological viewpoint, modeling a variable as \gls[hyper=false]{mvn} distribution is a particular way of quantifying uncertainty about that variable.
 Specifically, if only the mean and variance are of interest then the \gls[hyper=false]{mvn} distribution is the most consistent and parsimonious distribution to describe the variable \cite{McElreath2015}.
 This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
 
 A $D$-dimensional random vector $\bm{\mathcal{Z}}$ whose elements are random variables, $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \cdots, \mathcal{Z}_D] \in \mathbb{R}^D$, 
-is said to have an \gls[hyper=false]{mvn} distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma} \in S_{++}^D$,
+is said to have an \gls[hyper=false]{mvn} distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^D$ and variance-covariance matrix $\boldsymbol{\Sigma}$,
 \marginpar{multivariate normal distribution}
 if its joint probability density function is given by,
 \begin{equation}
-	p(\mathbf{z};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{2\pi^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{z}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{z}-\boldsymbol{\mu})\right]}
+	p(\mathbf{z};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{(2\pi)^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{z}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{z}-\boldsymbol{\mu})\right]}
 	\label{eq:gaussian_joint_density}
 \end{equation}
 The joint distribution of a Gaussian random vector is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. 
@@ -91,10 +91,10 @@ So for instance,
 \end{equation*}
 
 % Marginal Distribution of Gaussian Random Vector
-The marginal density of both $\bm{\mathcal{Z}}_A$ and $\bm{\mathcal{Z}}_B$ follows an \gls[hyper=false]{mvn} distribution given by,
+The marginal density of $\bm{\mathcal{Z}}_A$ follows an \gls[hyper=false]{mvn} distribution given by,
 \marginpar{Gaussian identity: marginal density}
 \begin{equation}
-		p(\mathbf{z}_A) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]}
+		p(\mathbf{z}_A) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_A)\right]}
 \label{eq:gaussian_marginal}
 \end{equation}
 The results are analogous for the marginal of $\bm{\mathcal{Z}}_B$, $p(\mathbf{z}_B)$ of which all the subscripts $A$ is replaced by $B$.
@@ -104,8 +104,8 @@ The conditional density of $\bm{\mathcal{Z}}_A$ conditioned on $\bm{\mathcal{Z}}
 \marginpar{Gaussian identity: conditional density}
 \begin{equation}
 	\begin{split}
-		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{2\pi^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_B)\right]} \\
-		& \boldsymbol{\mu}_A = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{A,B} \boldsymbol{\Sigma}^{-1}_{B,B} \left(\mathbf{x}_B - \boldsymbol{\mu}_B \right) \\
+		& p(\mathbf{z}_A|\mathbf{z}_B) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma^*_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A^*)^T\boldsymbol{\Sigma^{-1*}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_A^*)\right]} \\
+		& \boldsymbol{\mu}_A^* = \boldsymbol{\mu}_A + \boldsymbol{\Sigma}_{A,B} \boldsymbol{\Sigma}^{-1}_{B,B} \left(\mathbf{x}_B - \boldsymbol{\mu}_B \right) \\
 		& \boldsymbol{\Sigma}^*_{A,A} = \boldsymbol{\Sigma}_{A,A} - \boldsymbol{\Sigma}_{A,B} \boldsymbol{\Sigma}^{-1}_{B,B} \boldsymbol{\Sigma}^T_{A,B} 
 	\end{split}
 \label{eq:gaussian_conditional}

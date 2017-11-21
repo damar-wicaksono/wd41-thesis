@@ -1,108 +1,116 @@
+%********************************************************************
 \section{Variance Decomposition}\label{sec:sa_variance_decomposition}
+%********************************************************************
 
 Variance-based methods for global sensitivity analysis use variance as the basis to define a measure of input parameter influence on the overall output variation \cite{Cacuci2004}.
 In a statistical framework of sensitivity and uncertainty analysis, 
 this choice is natural because variance (or standard deviation) is often used as a measure of dispersion or variability in the model prediction \cite{Saltelli2008}.
-A measure of such dispersion, in turn, indicates the precision of the prediction due to variations in the input parameters.
+The  dispersion, in turn, can measure the level precision of the prediction when the input parameters are considered uncertain.
 
-In this section, a method to decompose the output variance into the contributions from the input variances is presented.
-Afterward, two sensitivity measures based on the decomposition and a method for their estimation are introduced.
+This section first presents a method to decompose the model output variance into the contributions from the individual variances of the inputs.
+Then, two sensitivity measures based on the decomposition are introduced and a method for their estimations is presented.
 
+%--------------------------------------------------------------------
 \subsection{High-Dimensional Model Representation}\label{sub:sa_hdmr}
+%--------------------------------------------------------------------
 
-Consider once more a mathematical model $f: \mathbf{x} \in [0,1]^D \mapsto y = f(\mathbf{x}) \in \mathbb{R}$.
-The high-dimensional model representation (HDMR) of $f(\mathbf{x})$ is a linear combination of functions with increasing dimensionality \cite{Li2001},
+Consider once more a mathematical model $f: \bm{x} \in [0,1]^D \mapsto y = f(\bm{x}) \in \mathbb{R}$.
+The high-dimensional model representation (HDMR) of $f(\bm{x})$ is a linear combination of functions with increasing dimensionality up to the dimension of $\bm{x}$ \cite{Li2001},
 \begin{equation}
 	\begin{split}
-		f(\mathbf{x}) = f_o & + \sum_{d=1,2, \cdots, D} f_d(x_d) + \sum_{1\leq d < e \leq D} f_{d,e} (x_d, x_e) + \cdots  \\
+		f(\bm{x}) = f_o & + \sum_{d_1 = 1}^{D} f_d(x_d) + \sum_{1 \leq d_1 < d_2 \leq D} f_{d_1,d_2} (x_{d_1}, x_{d_2}) + \cdots  \\
 	                      & + f_{1,2,\cdots,D} (x_1, x_2, \cdots, x_D)
 	\end{split}
 \label{eq:sa_hdmr}
 \end{equation}
-where $f_o$ is a constant. 
-The representation in Eq.~(\ref{eq:sa_hdmr}) is unique given the following condition \cite{Sobol2001}:
+where $f_o$ is a constant.
+The representation in Eq.~(\ref{eq:sa_hdmr}) is unique if the following condition \cite{Sobol2001}
 \begin{equation}
-  \begin{split}
-    \int_{0}^{1} & f_{i1, i2, \cdots is}(x_{i1}, x_{i2}, \cdots, x_{is}) d_{x_{im}} = 0  \\
-                 & \text{for}\quad m = 1,2,\cdots,s;\quad 1\leq i_1 < i_2 < \cdots < i_s \leq D; \\
-                 & \text{and}\quad \forall s \in {1,\cdots,D}
-   \end{split}
+    \int_{0}^{1} f_{d_1, d_2, \cdots d_i}(x_{d_1}, x_{d_2}, \cdots, x_{d_i}) d_{x_{d_m}} = 0 \,;
+		\, \text{for}\quad m = 1,2,\cdots,i
 \label{eq:sa_unicity}
 \end{equation}
+is verified for all $i \in {1, \cdots, D}$ and 
+any corresponding ordered combination of dimensions $1 \leq d_1 < d_2 < \cdots < d_i \leq D$ of the input parameter space.
 
-Assume now that $\mathbf{X}$ is a random vector of independent and uniform random variables over a unit hypercube
-$\{\Omega = \mathbf{x} | 0 \leq x_i  \leq 1; i = 1,\cdots, D\}$ such that
+Assume now that $\bm{\mathcal{X}}$ is a random vector of independent and uniform random variables over a unit hypercube
+$\{\Omega = \bm{x} \, | \, 0 \leq x_i  \leq 1; i = 1,\cdots, D\}$ such that
 \begin{equation}
-	Y = f(\mathbf{X})
+	\mathcal{Y} = f(\bm{\mathcal{X}})
 \label{eq:sa_random_function}
 \end{equation}
-where $Y$ is a random variable, resulting from the transformation of the random vector $\mathbf{X}$ by the function $f$.
+where $\mathcal{Y}$ is a random variable, resulting from the transformation of the random vector $\bm{\mathcal{X}}$ by the function $f$.
 Using Eq.~(\ref{eq:sa_unicity}) to express each term in Eq.~(\ref{eq:sa_hdmr}), it follows that
 \begin{equation}
 	\begin{split}
-		f_o & = \mathbb{E}[Y] \\
-	  f_d(x_d) & = \mathbb{E}_{\sim d}[Y|X_d] - \mathbb{E}[Y]\\
-    f_{d,e}(x_d,x_e) & = \mathbb{E}_{\sim d,e} [Y|X_d, X_e] - \mathbb{E}_{\sim d}[Y|X_d] - \mathbb{E}_{\sim e}[Y|X_e] - \mathbb{E}[Y] 
+		f_o & = \mathbb{E}[\mathcal{Y}] \\
+	  f_{d_1}(x_{d_1}) & = \mathbb{E}_{\sim d_1}[\mathcal{Y}|\mathcal{X}_{d_1}] - \mathbb{E}[\mathcal{Y}]\\
+    f_{d_1,d_2}(x_{d_1},x_{d_2}) & = \mathbb{E}_{\sim d_1,d_2} [\mathcal{Y}|\mathcal{X}_{d_1}, \mathcal{X}_{d_2}] \\
+																 & - \mathbb{E}_{\sim d_1}[\mathcal{Y}|\mathcal{X}_{d_1}] - \mathbb{E}_{\sim d_2}[\mathcal{Y}|\mathcal{X}_{d_2}] - \mathbb{E}[\mathcal{Y}] 
 	\end{split}
 \label{eq:sa_conditional_expectation}
 \end{equation}
 
 The same follows for higher-order terms in the decomposition. 
-In Eq.~(\ref{eq:sa_conditional_expectation}), $\mathbb{E}_{\sim e} [Y|X_e]$ corresponds to the conditional expectation operator,
-and the $\sim\circ$ in the subscript means that the integration over the parameter space is carried out over all parameters except the specified parameter in the subscript.
-For instance, $\mathbb{E}_{\sim 1} [Y|X_1]$ refers to the conditional mean of $Y$ given $X_1$, and the integration is carried out for all possible values of parameters in $\mathbf{x}$ except $x_1$.
-Note that because $X_1$ is a random variable, the expectation conditioned on it is also a random variable.
+In Eq.~(\ref{eq:sa_conditional_expectation}),
+$\mathbb{E}_{\sim \circ} [\circ|\circ]$ is a conditional expectation operator,
+where the subscript symbol $\sim\circ$ means that integration on the parameter space is carried out over all parameters except the one(s) in the subscript.
+For instance, $\mathbb{E}_{\sim 1} [\mathcal{Y}|\mathcal{X}_1]$ refers to the conditional mean of $\mathcal{Y}$ given $\mathcal{X}_1$, and the integration is carried out for all possible values of parameters in $\mathbf{x}$ except $x_1$.
+Note that because $\mathcal{X}_1$ is a random variable, the expectation conditioned on it is also a random variable.
 
-Assuming that $f$ is a square integrable function, applying the variance operator on $Y$ results is
+Assuming that $f$ is square integrable, applying the variance operator on $\mathcal{Y}$ results in
 \begin{equation}
 	\begin{split}
-		\mathbb{V}[Y] = \sum_{d=1}^{D} \mathbb{V}[f_d (x_D)] & + \sum_{1 \leq d < e \leq D} \mathbb{V} [f_{d,e} (x_d, x_e)] + \cdots \\
+		\mathbb{V}[\mathcal{Y}] = \sum_{d_1=1}^{D} \mathbb{V}[f_{d_1} (x_{d_1})] & + \sum_{1 \leq d_1 < d_2 \leq D} \mathbb{V} [f_{d_1,d_2} (x_{d_1}, x_{d_2})] + \cdots \\
 	                                                       & + \mathbb{V} [f_{1,2,\cdots,D} (x_1, x_2, \cdots, x_D)]
 		\end{split}
 \label{eq:sa_variance_decomposition}
 \end{equation}
 
+%------------------------------------------------------------------
 \subsection{Sobol' Sensitivity Indices}\label{sub:sa_sobol_indices}
+%------------------------------------------------------------------
 
 Division by $\mathbb{V}[Y]$ aptly normalizes Eq.~(\ref{eq:sa_variance_decomposition}):
 \begin{equation}
-  1 = \sum_{d = 1}^{D} S_d + \sum_{1 \leq d < e \leq D} S_{d,e} + \cdots + S_{1,2,\cdots,D}
+  1 = \sum_{d_1 = 1}^{D} S_{d_1} + \sum_{1 \leq d_1 < d_2 \leq D} S_{d_1,d_2} + \cdots + S_{1,2,\cdots,D}
 \label{eq:sa_normalized_variance}
 \end{equation}
-
-The Sobol' main-effect sensitivity index $S_d$ is defined as,
+where Sobol' main-effect sensitivity index $S_d$ is defined as,
 \marginpar{the main-effect index}
 \begin{equation}
-  S_d = \frac{\mathbb{V}_d [\mathbb{E}_{\sim d} [Y|X_d]]}{\mathbb{V}[Y]}
+  S_d = \frac{\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]]}{\mathbb{V}[\mathcal{Y}]}
 \label{eq:sa_main_effect_index}
 \end{equation}
 The numerator is the variance of the conditional expectation,
-and the index is a global sensitivity measure interpreted as the amount of variance reduction in the model output if the parameter $X_d$ is fixed (i.e., its variance is reduced to zero).
+and the index is a global sensitivity measure interpreted as the amount of variance reduction in the model output if the parameter $\mathcal{X}_d$ is fixed (i.e., its variance is reduced to zero).
 The main-effect sensitivity index is also known in the literature as the \emph{first-order} sensitivity index 
-as it captures only the effect of a single parameter variation on the model output without considering any interaction with other parameters \cite{Saltelli2002}.
+as it captures only the effect of a single parameter variation on the model output considering \emph{no interaction} with other parameters \cite{Saltelli2002}.
 
 A closely related sensitivity index proposed by Homma and Saltelli \cite{Homma1996} is the Sobol' total-effect index defined as,
 \marginpar{the total-effect index}
 \begin{equation}
   \begin{split}
-    ST_{d} & = \frac{\mathbb{E}_{\sim d}[\mathbb{V}_{d}[Y|\mathbf{X}_{\sim d}]]}{\mathbb{V}[Y]}
-           & = \frac{\mathbb{V}[Y] - \mathbb{V}_{\sim d}\left[\mathbb{E}_{d}\left[Y|\mathbf{X}_{\sim d}\right]\right]}{\mathbb{V}[Y]} \\
-           & = 1 - \frac{\mathbb{V}_{\sim d}[\mathbb{E}_{d}[Y|\mathbf{X}_{\sim d}]}{\mathbb{V}[Y]}
+    ST_{d} = \frac{\mathbb{E}_{\sim d}[\mathbb{V}_{d}[\mathcal{Y}|\bm{\mathcal{X}}_{\sim d}]]}{\mathbb{V}[\mathcal{Y}]}
+           & = \frac{\mathbb{V}[\mathcal{Y}] - \mathbb{V}_{\sim d}\left[\mathbb{E}_{d}\left[\mathcal{Y}|\bm{\mathcal{X}}_{\sim d}\right]\right]}{\mathbb{V}[\mathcal{Y}]} \\
+           & = 1 - \frac{\mathbb{V}_{\sim d}[\mathbb{E}_{d}[\mathcal{Y}|\bm{\mathcal{X}}_{\sim d}]}{\mathbb{V}[\mathcal{Y}]}
   \end{split}
 \label{eq:sa_total_effect_index}
 \end{equation}
-The index, also a global sensitivity measure, can be interpreted as the amount of variance left in the output if the values of all input parameters, 
-\emph{except} $x_d$, can be fixed.
+The index, also a global sensitivity measure, can be interpreted as the amount of variance left in the output if the values of all input parameters, \emph{except} $\mathcal{X}_d$, can be fixed.
+In other words, the total-effect index measures the contribution to the output variance of parameter $\mathcal{X}_d$, including all variance caused by its interactions, of any order, with any other parameters.
 
-These two sensitivity measures can be related to the objectives of global SA for model assessment as proposed by Saltelli et al \cite{Saltelli2004,Saltelli2008}.
+These two sensitivity measures can serve the objectives of global SA for model assessment as proposed by Saltelli et al \cite{Saltelli2004,Saltelli2008}.
 \marginpar{parameter prioritization objective}
 The main-effect index is relevant to parameter prioritization in the context of identifying the most influential parameter 
 since fixing a parameter with the highest index value would, \emph{on average}, lead to 
 the greatest reduction in the output variation.
 
-The total-effect index, on the other hand, is relevant to parameter fixing (or screening) in the context of identifying the least influential set of parameters since fixing any parameter that has a very small 
+The total-effect index, on the other hand, is relevant to parameter fixing (or \emph{screening}) in the context of identifying the least influential set of parameters since fixing any parameter that has a very small 
 \marginpar{parameter screening objective}
 total-effect index value would not lead to significant reduction in the output variation.
 The use of the total-effect index to identify which parameter can be fixed or excluded is similar to that of the elementary effect statistics of the Morris method, 
-albeit more exact but also more expensive to compute.
-And finally, the difference between the two indices of a given parameter (Eqs.~(\ref{eq:sa_total_effect_index}) and (\ref{eq:sa_main_effect_index})) is used to quantify the amount of all interactions involving that parameters in the model output.
+albeit more exact.
+
+Finally, the difference between the two indices of a given input parameter, i.e., $ST_d - S_d$, 
+is used to quantify the amount of all interactions involving that parameter in the model output.

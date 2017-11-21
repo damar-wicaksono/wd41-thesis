@@ -4,26 +4,26 @@
 
 This section reviews the basics of \gls[hyper=false]{gp}.
 The connection between the stochastic process and multivariate Gaussian random variable (Gaussian random vector) is first established.
-Appendix~\ref{app:probability} gives some the basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities, 
+Appendix~\ref{app:probability} gives some basic concepts of multivariate random variable such as joint, marginal, and conditional probabilities, 
 while Appendix~\ref{app:gaussian_vector} gives more detail account on Gaussian random vector (\gls[hyper=false]{mvn}).
 
 \subsection[From Multivariate Gaussian to Gaussian Process]{From Multivariate Gaussian to Gaussian Process}\label{sub:gp_mvn}
 
 % Illustration of Joint, Marginal, and Conditional
-To illustrate the notions of joint, marginal, and conditional distributions, an example of a bivariate random variable, a random vector $Z = [Z_1, Z_2] \in \mathbb{R}^2$ is given.
+To illustrate the notions of joint, marginal, and conditional distributions, an example of a bivariate random variable, a random vector $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \mathcal{Z}_2] \in \mathbb{R}^2$ is given.
 \marginpar{random vector, an example}
 It has the following mean vector and variance-covariance matrix, respectively,
 \begin{equation}
 	\begin{split}
 		\begin{pmatrix}
-			Z_1 \\
-			Z_2
+			\mathcal{Z}_1 \\
+			\mathcal{Z}_2
 		\end{pmatrix} & \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \\
 		 \boldsymbol{\mu} & = [0, 0]^T \\
 		  \boldsymbol{\Sigma} = 
 				\begin{pmatrix}
-					\mathbf{V}[\mathbf{Z}_1]                & \text{Cov}[\mathbf{Z}_1, \mathbf{Z}_2]\\
-					\text{Cov}[\mathbf{Z}_2, \mathbf{Z}_1]  & \mathbf{V}[\mathbf{Z}_2]\\
+					\mathbb{V}[\mathcal{Z}_1]                 & \text{Cov}[\mathcal{Z}_1, \mathcal{Z}_2]\\
+					\text{Cov}[\mathcal{Z}_2, \mathcal{Z}_1]  & \mathbb{V}[\mathcal{Z}_2]\\
 			\end{pmatrix} & =
 			\begin{pmatrix}
 					0.5       & -0.265165\\
@@ -32,11 +32,11 @@ It has the following mean vector and variance-covariance matrix, respectively,
 	\end{split}
 \label{eq:ex_bivariate}
 \end{equation}
-The joint, marginal, and conditional probability distributions of random vector $\mathbf{Z}$ are illustrated in Fig.~\ref{fig:plot_bivariate_normal}.
+The joint, marginal, and conditional \glspl[hyper=false]{pdf} of random vector $\bm{\mathcal{Z}}$ are illustrated in Fig.~\ref{fig:plot_bivariate_normal}.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.50]{../figures/chapter4/figures/plotBivariateNormal.pdf}
-	\caption[Illustration of a bivariate Gaussian distribution]{An illustration of bivariate Gaussian distribution of random vector $Z = [Z_1, Z_2]$ having marginal means of $0.0$ and variances of $0.5$ and $0.25$, respectively and with covariance of $-0.265165$. The solid ellipsoids indicate the contour of joint density of random vector $[Z_1, Z_2]$. The two solid curves at the $x$- and $y$-axes indicate the marginal densities of $Z_1$ and $Z_2$, respectively. The dotted curve shows the conditional density of random variable $Z_1$ given $z_2 = 0.35$, while the dashed curve shows the conditional density of $Z_2$ given $z_1 = 0.75$.}
+	\caption[Illustration of a bivariate Gaussian distribution]{An illustration of bivariate Gaussian distribution of random vector $\bm{\mathcal{Z}} = [\mathcal{Z}_1, \mathcal{Z}_2] \in \mathbb{R}^2$ having marginal means of $0.0$ and variances of $0.5$ and $0.25$, respectively and with covariance of $-0.265165$. The solid ellipsoids indicate the contour of joint \gls[hyper=false]{pdf} of random vector $[\mathcal{Z}_1, \mathcal{Z}_2]$. The two solid curves at the $x$- and $y$-axes indicate the marginal \gls[hyper=false]{pdf} of $\mathcal{Z}_1$ and $\mathcal{Z}_2$, respectively. The dotted curve shows the conditional density of random variable $\mathcal{Z}_1$ given $z_2 = 0.35$, while the dashed curve shows the conditional density of $\mathcal{Z}_2$ given $z_1 = 0.75$.}
 	\label{fig:plot_bivariate_normal}
 \end{figure}
 
@@ -59,14 +59,14 @@ From the figure, conditioning shifts the mean and reduces the variance of the re
 % From Multivariate to Infinite Variate
 \gls[hyper=false]{gp} can often be thought simply as a generalization of finite multivariate Gaussian random variable into an infinite multivariate one.
 \marginpar{An entry to Gaussian Process}
-To illustrate this idea, the marginal and conditional distributions of a 15-variate \gls[hyper=false]{mvn} distribution is plotted with the random variables at one common axis ($x$) while the range of values of the variables are plotted in another axis ($y$).
+To illustrate this idea, the marginal and conditional distributions of a 15-variate \gls[hyper=false]{mvn} distribution are plotted with the random variables at one common axis ($x$) while the range of values of the variables are plotted in another axis ($y$).
 This is practically an extension to the bivariate case exemplified before.
 The origin of the underlying $15 \times 15$ covariance matrix is at the moment unimportant, but what the matrix does is defining how the variables are correlated to each other.
 Fig.~\ref{fig:plot_mvn_vars} shows the depiction.
 Fig.~\ref{fig:plot_mvn_vars_1} shows the marginal distributions of random variables $z_1$ to $z_{15}$.
 Suppose the variables $z_2, z_4, z_7, z_9, z_{12},$ and $z_{14}$ is observed (Fig.~\ref{fig:plot_mvn_vars_2}).
 Now Fig.~\ref{fig:plot_mvn_vars_3} shows the conditional distribution of the non-observed variables (the rest).
-As can be seen, the conditional probability of the non-observed random variables are shifted and their standard deviation are reduced.
+As can be seen, the conditional probability of the non-observed random variables are shifted (from the zero-mean unconditional distribution) and their standard deviation are reduced.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_mvn_vars},
 			           maincaption={A 15-variate \gls[hyper=false]{mvn} random variable $\bm{\mathcal{Z}}$. Prior to observing data, the mean and variance of each variable correspond to the marginal mean (in this case $0$) and variance. Conditioning on the observed data shifts the mean and reduces the variance. Illustration is adapted from \cite{Roberts2012}.},
@@ -88,7 +88,7 @@ As can be seen, the conditional probability of the non-observed random variables
 
 % Closing Sentence
 Gaussian stochastic generalizes this procedure beyond this $15$-variate Gaussian random variable to an arbitrary number of variables at arbitrary locations in the real line.
-It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more of a smooth function.
+It is easy to imagine that the shape of both marginals and conditionals will become smoother and smoother with increasing number of random variables in the $x$-axis, thus resembling more and more a smooth function.
 In fact, it is one of the interpretations of Gaussian process: a distribution over functions \cite{OHagan2006}. 
 
 %---------------------------------------------
@@ -99,7 +99,7 @@ In fact, it is one of the interpretations of Gaussian process: a distribution ov
 Gaussian stochastic process is a particular class of \emph{stochastic} or \emph{random process}.
 \marginpar{Stochastic process}
 Stochastic process is a collection of random variables, each of which are often indexed with certain underlying rules or ordering.
-To be precise, a stochastic process is a set of random variables $\mathbf{Y} = \{Y_i, i \in I\}$, where $I$ is an index set, 
+To be precise, a stochastic process is a set of random variables $\bm{\mathcal{Y}} = \{\mathcal{Y}_i, i \in I\}$, where $I$ is an index set, 
 and it is defined on a probability space $(\Omega, \mathcal{F}, \mathbb{P})$, 
 where $\Omega$, $\mathcal{F}$, and $\mathbb{P}$ are the sample space, the set of events, and the assigned probability to the event, respectively \cite{Syski2014}.
 
@@ -112,14 +112,14 @@ And finally, in the metamodeling application, the random variables are collectio
 
 % Gaussian stochastic process
 \emph{Gaussian stochastic process} (GP, or Gaussian Random Field GRF) is defined as a collection of random variables, 
-\emph{arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
+\emph{any arbitrary number of which is a multivariate Gaussian random variable} \cite{Rasmussen2006, Debicki2014}.
 \marginpar{Gaussian process}
-To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $Y(\circ)$ at various possible input $\mathbf{x}$ in the domain $\mathcal{X} \subseteq \mathbb{R}^D$.
-Specifically, $Y(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the random vector $\left[Y(\mathbf{x}_1), Y(\mathbf{x}_2), \cdots, Y(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
+To establish the connection with the notion of \emph{random function}, the collection of the above random variables refers to the collection of values of a random function $\mathcal{Y}(\circ)$ at various possible input $\mathbf{x}$ in the domain $\mathbf{X} \subseteq \mathbb{R}^D$.
+Specifically, $\mathcal{Y}(\mathbf{x}), \, \text{for} \, \mathbf{x} \in \mathbf{X} \subseteq \mathbb{R}^D$ is a \emph{Gaussian process} if and only if for any choice from the finite set of input $\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_L ; \, L \geq 1\}$, the random vector $\left[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)\right]$ is a multivariate Gaussian random variable \cite{Santner2003}.
 
 % Basic notation
-A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead mean vector and covariance matrix.
-A \gls[hyper=false]{gp} $Y$ on $\mathcal{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
+A \gls[hyper=false]{gp} is fully specified by its mean and covariance functions, instead of a mean vector and a covariance matrix.
+A \gls[hyper=false]{gp} $\mathcal{Y}(\mathbf{x})$ on $\mathbf{X} \subseteq \mathbb{R}^D$ with a given mean function $m$ and covariance $K$ is denoted as
 \begin{equation}
 	\mathcal{Y}(\mathbf{x}) \sim \mathcal{GP} \left(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}^*) \right)
 \label{eq:gp_notation}
@@ -141,7 +141,7 @@ The covariance function of a Gaussian process $Y(\mathbf{x})$, on the other hand
 \label{eq:gp_cov_functions}
 \end{equation}
 Notice that while the covariance function describes the covariance between pair of random function values, 
-it is defined only as a function of the two inputs differentiating them.
+it is defined only as a function of the two inputs, $\mathbf{x}_i$ and $\mathbf{x}_j$.
 Covariance function is also sometimes referred to as the \emph{covariance kernel} function as it defines the elements of the covariance matrix (see example below).
 As such, not all functions of the pair of inputs $\mathbf{x}_i, \mathbf{x}_j$ are a \emph{valid} covariance function, but only the ones that yield a valid variance-covariance matrix given by condition in Eq.~(\ref{eq:covariance_matrix}). 
 
@@ -149,7 +149,7 @@ As such, not all functions of the pair of inputs $\mathbf{x}_i, \mathbf{x}_j$ ar
 Finally, the process variance is defined as the covariance between two random function values at the same input,
 \marginpar{Process variance}
 \begin{equation}
-	K(\mathbf{x}_i, \mathbf{x}_i) = \text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_i)] = \mathbb{V}[Y(\mathbf{x}_i)]
+	K(\mathbf{x}_i, \mathbf{x}_i) = \text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_i)] = \mathbb{V}[\mathcal{Y}(\mathbf{x}_i)]
 \label{eq:process_variance}
 \end{equation}
 
@@ -158,7 +158,7 @@ For a given finite $L$, a \gls[hyper=false]{gp} is reduced to a Gaussian random 
 \begin{equation}
 	\begin{split}
 		& [\mathcal{Y}(\mathbf{x}_i)] \sim \mathcal{N}_L(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \quad ; \, i = 1, 2, \cdots, L \\
-		& \boldsymbol{\mu} = [m(\mathbf{x}_1), m(\mathbf{x}_2), \cdots, (\mathbf{x}_L)]^T \\
+		& \boldsymbol{\mu} = [m(\mathbf{x}_1), m(\mathbf{x}_2), \cdots, m(\mathbf{x}_L)]^T \\
 		  & \boldsymbol{\Sigma} = 
 				\begin{pmatrix}
 					\mathbb{V}[\mathcal{Y}(\mathbf{x}_1)]  & \cdots & \text{Cov}[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_L)]\\
@@ -196,8 +196,8 @@ For the present example, $x$ is chosen to be uniformly distributed $\{-2 + 0.2 \
 By specifying these locations, the $21$-variates Gaussian random variable can be constructed using Eq.~(\ref{eq:gp_to_mvn}) with the elements of variance-covariance matrix computed by the formula in Eq.~(\ref{eq:gp_example}) for all pairs of inputs.
 Sampling from such a distribution can be done using algorithm outlined in Appendix~.\ref{app:mvn_sampling}.
 Examples of $5$ realizations from the \gls[hyper=false]{gp} are shown in Fig~\ref{fig:plot_random_function_1}.
-A realization of a \gls[hyper=false]{gp} on a select input locations is also called a \emph{trajectory} or a \emph{sample path} of the process \cite{Santner2003}.
-In this thesis the term \emph{sample path} will be used interchangeable with the term realization of a \gls[hyper=false]{gp}.
+A realization of a \gls[hyper=false]{gp} on selected input locations is also called a \emph{trajectory} or a \emph{sample path} of the process \cite{Santner2003}.
+In this thesis the term \emph{sample path} will be used interchangeably with the term realization of a \gls[hyper=false]{gp}.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:plot_random_function},
                   maincaption={Five realizations (sample paths) of a Gaussian process specified in Eq.~(\ref{eq:gp_example}) at $x_i = \{-2 + 0.2 \times i\}_{i=0}^{20}$. Shaded area indicates the area enveloped by twice standard deviation of the process (or $95\%$ probability region). In the right panel, the sample paths are drawn conditional on $6$ observed values (cross symbols).},%
@@ -227,27 +227,27 @@ Observe that the standard deviations of the observed variables are zero and the 
 An assumption for a class of stochastic process commonly made for convenience is \emph{stationarity}.
 \marginpar{strongly stationary process}
 A stochastic process $Y(\circ)$ is called \emph{strictly/strongly stationary} if and only if for any finite set of inputs $\{\mathbf{x}_1, \mathbf{x}_2,$
-$\cdots, \mathbf{x}_L\} \in \mathcal{X} \subseteq \mathbb{R}^D$ with $L \leq 1$, 
+$\cdots, \mathbf{x}_L\} \in \mathbf{X} \subseteq \mathbb{R}^D$ with $L \geq 1$, 
 and for $\mathbf{h} \in \mathbb{R}^D$ such that $\{(\mathbf{x}_1 + \mathbf{h}),$ 
-$(\mathbf{x}_2 + \mathbf{h}), \cdots, (\mathbf{x}_L + \mathbf{h})\} \in \mathcal{X}$, the distribution of random vector $[Y(\mathbf{x}_1 + \mathbf{h}), $
-$Y(\mathbf{x}_2 + \mathbf{h}), \cdots, Y(\mathbf{x}_L + \mathbf{h})]$ is \emph{the same as} the distribution of random vector $[Y(\mathbf{x}_1 + \mathbf{h}), Y(\mathbf{x}_2 + \mathbf{h}), \cdots, Y(\mathbf{x}_L + \mathbf{h})]$ \cite{Santner2003, Bachoc2013}.
+$(\mathbf{x}_2 + \mathbf{h}), \cdots, (\mathbf{x}_L + \mathbf{h})\} \in \mathbf{X}$, the distribution of random vector $[\mathcal{Y}(\mathbf{x}_1 + \mathbf{h}), $
+$\mathcal{Y}(\mathbf{x}_2 + \mathbf{h}), \cdots, \mathcal{Y}(\mathbf{x}_L + \mathbf{h})]$ is \emph{the same as} the distribution of random vector $[\mathcal{Y}(\mathbf{x}_1), \mathcal{Y}(\mathbf{x}_2), \cdots, \mathcal{Y}(\mathbf{x}_L)]$ \cite{Santner2003, Bachoc2013}.
 In other words, the process is invariant under translation.
 
 % Weakly Stationary
-The \emph{weakly stationary process} used stronger assumption than the strongly stationary process.
+The \emph{weakly stationary process} used additional weaker assumption than the strongly stationary process.
 \marginpar{weakly stationary process}
 A stochastic process $Y(\circ)$ is called \emph{weakly stationary} if and only if
 the first two moments of the process are constant.
 As such, the weakly stationary process is also referred to as \emph{second-order stationary process}.
 
 % Stationary, Isotropic Covariance Function
-As mentioned, a \gls[hyper=false]{gp} is fully defined by its mean and covariance functions.
+However, as mentioned before, a \gls[hyper=false]{gp} is fully defined by its mean and covariance functions.
 \marginpar{stationary, isotropic covariance function}
-Therefore, if two \glspl[hyper=false]{gp} have the same mean and covariance functions defined over the same domain then the two process have exactly the same same distribution and are the same process.
-Furthermore, for the case of \gls[hyper=false]{gp}, the notions of strongly stationary and weakly stationary coincide.
+Therefore, if two \glspl[hyper=false]{gp} have the same mean and covariance functions defined over the same domain then the two processes have exactly the same distribution and are the same process.
+For the case of \gls[hyper=false]{gp}, the notions of strongly stationary and weakly stationary coincide.
 This implies that a stationary \gls[hyper=false]{gp} has a constant mean and a constant variance, as well as a covariance function that satisfies the condition of being invariant under translation as follows,
 \begin{equation}
-	\text{Cov}[Y(\mathbf{x}_i), Y(\mathbf{x}_j)] = \text{Cov}[Y(\mathbf{x}_i + \mathbf{h}), Y(\mathbf{x}_j + \mathbf{h})] = K (\mathbf{x}_i - \mathbf{x}_j)
+	\text{Cov}[\mathcal{Y}(\mathbf{x}_i), \mathcal{Y}(\mathbf{x}_j)] = \text{Cov}[\mathcal{Y}(\mathbf{x}_i + \mathbf{h}), \mathcal{Y}(\mathbf{x}_j + \mathbf{h})] = K (\mathbf{x}_i - \mathbf{x}_j)
 \label{eq:stationary_covariance}
 \end{equation}
 In stationary \gls[hyper=false]{gp}, the covariance of random function values between two input points is only determined by the \emph{distance} between the two inputs and the covariance function is called \emph{stationary, isotropic covariance function} \cite{Rasmussen2006}. 
@@ -262,7 +262,9 @@ Moreover, the stationary process remains important to study as they serve as bui
 For instance, the stationarity assumption can be relaxed simply by considering non-constant mean function as proposed in  \cite{Marrel2008,Ginsbourger2009}, while keeping the covariance part stationary.
 Another alternative is to consider multiple stationary covariance functions defined for each partitioned region of the whole input parameter space as proposed in \cite{Gramacy2008}.
 
+%---------------------------------------------------------------
 \subsection{Covariance Kernel Function}\label{sub:gp_covariance}
+%---------------------------------------------------------------
 
 Covariance kernel function determines the covariation structure of dependent data.
 This, in turn, determines the behavior (or shape) of the sample path of the outputs between input points.
@@ -271,13 +273,13 @@ For a stationary covariance function, it is more convenient to separate the cons
 	K (\mathbf{x}_i, \mathbf{x}_j) = \sigma^2 R(\mathbf{x}_i, \mathbf{x}_j) 
 	\label{eq:cov_function}
 \end{equation}
-where $R$, the correlation kernel function, is defined such that $\forall \, \mathbf{x}_i, \mathbf{x}_j \in \chi \subseteq \mathbb{R}^D$;
+where $R$, the correlation kernel function, is defined such that $\mathbf{x}_i, \mathbf{x}_j \in \mathbf{X} \subseteq \mathbb{R}^D \, \forall \, i, j $;
 and $\sigma^2$ is the aforementioned stochastic process variance, which determines the scale of variation magnitude of the output space.
 
 % Continuity and Differentiability of Stochastic Process
 In the following, three different types of stationary correlation kernel functions are presented. 
 These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
-\marginpar{one-dimensional correlation kernel, $r$}.
+\marginpar{one-dimensional correlation kernel, $r$}
 At first, only $1$-dimensional kernel functions denoted by $r(x_i, x_j)$ are described.
 Afterward, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\mathbf{x}_i, \mathbf{x}_j)$ by means of tensor product.
 
@@ -309,12 +311,12 @@ Obviously, for smaller $\theta$ the correlation between two inputs drops more qu
 \end{figure}
 
 The range parameter of a Gaussian kernel determines the range over which the distance between two input locations affects the output correlation.
-To be precise, the notion how similar (or dissimilar) two input locations is defined relative to the characteristic length-scale.
+To be precise, the notion of how similar (or dissimilar) two input locations are is defined relative to the characteristic length-scale.
 With a very short range, the output of random functions becomes easily uncorrelated except for a very close (similar) inputs.
 The realization of the process, therefore, will exhibit more erratic behavior in short range as it allows for more abrupt changes over shorter distance and less dependent of the neighboring values.
 On the other hand, with a longer range, the output of random function tends to be highly correlated except for very different input values and thus the realization will exhibit more rigid pattern.
-Gaussian kernel, however, always produces smooth realization. That is, two input points that have a zero separation on the limit are both continuous and differentiable 
-(see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
+Gaussian kernel, however, always produces smooth realization.
+That is, two input points that have a zero separation on are both continuous and differentiable (see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
 The Gaussian kernel is widely applied in the metamodeling literature and almost become a default choice for the correlation kernel \cite{Kennedy2006},
 though as mentioned in \cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly select design points).
 
@@ -350,8 +352,8 @@ The Gaussian correlation kernel belongs to a wider class of $2$-parameter kernel
 
 The parameter $\theta$ remains the range parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
 \marginpar{shape parameter}
-Specifically, the shape parameter $p$ determines the differentiability of the process at the origin (citation needed).
-Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm.
+Specifically, the shape parameter $p$ determines the differentiability of the process at the origin \cite{Abrahamsen1997}.
+Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm ($|\mathbf{x}_i - \mathbf{x}_j|$).
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp},
 			           maincaption={Examples of power exponential kernel functions for different values of shape parameter $p$ and range parameter $\theta$ as function of $L_1$ norm.},
@@ -371,7 +373,7 @@ Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponent
 {../figures/chapter4/figures/plotCorrFunPowExp_2}
 {../figures/chapter4/figures/plotCorrFunPowExp_3}
 
-Although, strictly speaking, only when $p = 2$ that the power-exponential correlation is differentiable at the origin (thus guarantee the smoothness of the realization),
+Although, strictly speaking, only when $p = 2$ the power-exponential correlation is differentiable at the origin (thus guarantee the smoothness of the realization),
 the shape parameter does dictate the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp_realizations},
@@ -392,7 +394,7 @@ the shape parameter does dictate the apparent roughness of the sample path drawn
 {../figures/chapter4/figures/plotCorrFunPowExpRealizations_2}
 {../figures/chapter4/figures/plotCorrFunPowExpRealizations_3}
 
-It is argued in \cite{Marrel2008} that the power-exponential kernel function is an appropriate choice in metamodeling application due to its flexibility of representing different shape with respective to its regularity and differentiability mainly controlled through the additional parameter $p$.
+It is argued in \cite{Marrel2008} that the power-exponential kernel function is an appropriate choice in metamodeling application due to its flexibility of representing different shape with respect to its regularity and differentiability mainly controlled through the additional parameter $p$.
 \marginpar{exponential kernel}
 For instance, Gaussian correlation kernel is a special case of the power-exponential kernel when $p$ equals to 2. 
 Another special case is when $p = 1$ which is called the \emph{exponential} kernel.
@@ -409,13 +411,13 @@ where positive $\nu$ and $\theta$ are the correlation kernel parameters;
 $\Gamma(\circ)$ is the Gamma function;
 and $K_\nu (\circ)$ is the modified Bessel function of order $\nu$.
 In the literature, the value of $\nu$ is often restricted to half integer $\nu = n + \frac{1}{2}; n \in {0,1,\cdots}$,
-because the resulting modified Bessel function can be written simply as a finite series given by
+because in that case the resulting modified Bessel function can be written simply as a finite series given by
 \begin{equation}
 	K_\nu(t) = \exp{-t} \sqrt{\frac{\pi}{2t}} \sum_{k = 0}^{n} \frac{(n+k)!}{k! (n-k)} \frac{1}{(2t)^k}
 \label{eq:modified_bessel}
 \end{equation}
 
-The Mat\'ern class is considered more flexible than the power-exponential kernel because \emph{shape} parameter $\nu$ directly controls the number of differentiability of the process \cite{Stein1989}\footnote{that was not the case for power-exponential kernel because, strictly speaking, the process in only differentiable at $p = 2$ (and in fact, infinitely differentiable).}.
+The Mat\'ern class is considered more flexible than the power-expo\-nential kernel because the \emph{shape} parameter $\nu$ directly controls the number of differentiability of the process \cite{Stein1989}\footnote{that was not the case for power-exponential kernel because, strictly speaking, the process in only differentiable at $p = 2$ (and in fact, infinitely differentiable).}.
 \marginpar{shape parameter $\nu$}
 However, it was argued in \cite{Rasmussen2006}, that for machine learning application (i.e., regression and classification) only $\nu = 3/2$ (once differentiable) and $\nu = 5/2$ (twice differentiable) are of practical interest.
 This is due to the fact that for $\nu < 3/2$ the process becomes too rough\footnote{in fact, it reduces to the exponential correlation function},
@@ -441,7 +443,7 @@ Example plots of the Mat\'ern kernel with different shape and range parameters a
                   leftcaption={},
                   %leftshortcaption={},%
                   rightopt={width=0.45\textwidth},%width=0.45\textwidth},
-                  rightlabel={fig:plot_corrfun_matern},
+                  rightlabel={fig:plot_corrfun_matern_2},
                   rightcaption={},
                   %rightshortcaption={},
                   %spacing={\hfill}
@@ -453,7 +455,7 @@ Examples realizations drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel wi
 As expected, the realizations from Mat\'ern kernel with $\nu = 5/2$ is smoother than the ones from $\nu = 3/2$.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:plot_corrfun_matern_realizations},
-                  maincaption={Example of sample paths drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel for different range and shape parameters. One realization is drawn from each combinations of the parameters.},%
+                  maincaption={Example of sample paths drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel for different range and shape parameters. One realization is drawn from each combination of the parameters.},%
 									mainshortcaption={Sample paths drawn from \glspl[hyper=false]{gp} with Mat\'ern kernel functions},
                   leftopt={width=0.45\textwidth},%width=0.45\textwidth},
                   leftlabel={fig:plot_corrfun_matern_realizations_1},
@@ -485,8 +487,8 @@ the tensor product with the same correlation function for each input dimension i
 and, by far, the most popular approach in the applied metamodeling literature to date \cite{Roustant2012,Sacks1989,Sacks1989a,Santner2003,Currin1991,Marrel2008,Bachoc2014,Kennedy2006,Jones2009}.
 
 Fig.~\ref{fig:random_surfaces} shows two examples of realizations of random surface drawn from a multidimensional \gls[hyper=false]{gp} with the same process variance ($\sigma^2 = 10.0$) but with two different correlation kernels.
-On the left is an example of a realization drawn from the \gls[hyper=false]{gp} using Gaussian correlation kernel function with relatively the characteristic length scale in $y$-direction is four times the scale in $x$-direction.
-On the right is an example of a realization drawn from the \gls[hyper=false]{gp} using Mat\'ern correlation kernel function.
+On the left is an example of a realization drawn from the \gls[hyper=false]{gp} using two Gaussian correlation kernel functions in which the characteristic length scale in the $y$-direction is four times the scale in then $x$-direction.
+On the right is an example of a realization drawn from the \gls[hyper=false]{gp} using Mat\'ern correlation kernel functions.
 For this case, the shape parameter is three times larger in the $x$-direction than in the $y$-direction.
 As such, for both cases, the surface appears less smooth in one of the direction.
 \bigdoublefigure[pos=tbhp,
@@ -503,17 +505,19 @@ As such, for both cases, the surface appears less smooth in one of the direction
 {../figures/chapter4/figures/plotRandomSurface_1}
 {../figures/chapter4/figures/plotRandomSurface_2}
 
+%----------------------------
 \subsection{Process Variance}
+%----------------------------
 
-For stationary \gls[hyper=false]{gp}, the shape of sample path is determined solely by the form of the correlation.
-The role of process variance according to Eq.~(\ref{eq:cov_function}) is to determine the scale of magnitude of output variation. 
-Fig.~\ref{fig:plot_process_variance} gives an illustration of realizations drawn from a set of \glspl[hyper=false]{gp} with the same kernel correlation function (i.e., Gaussian kernel with $\theta = 1.0$), 
+For stationary \gls[hyper=false]{gp}, the shape of the sample path is determined solely by the form of the correlation.
+The role of the process variance according to Eq.~(\ref{eq:cov_function}) is to determine the scale of the magnitude of the output variation. 
+Fig.~\ref{fig:plot_process_variance} gives an illustration of the realizations drawn from a set of \glspl[hyper=false]{gp} with the same kernel correlation function (i.e., Gaussian kernel with $\theta = 1.0$), 
 but with different values of process variance.
-As it can be seen, the visible features of the realizations remain the very similar to each other.
+As it can be seen, the visible features of the realizations remain very similar to each other.
 What has changed, however, is the scale of the variation in the output space.  
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_process_variance},
-			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of process variance. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$.},
+			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of process variance. The plotting range of the $y$-axis for each panel is set to $\pm \, 3 \times \sigma$.},
 			           mainshortcaption={Effect of different process variance values on GP realization},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_process_variance_1},
@@ -539,7 +543,7 @@ Strictly speaking, incorporating other than a constant mean function to the spec
 But as the known mean function can always be removed from the formulation (i.e., by \emph{centering}), the process, especially with respect to its correlation function, can still be considered stationary.
 Fig.~\ref{fig:plot_mean_function_unconditional} shows several realizations drawn from $3$ \glspl[hyper=false]{gp} having the same covariance kernel, but with three different mean functions.
 As it can be seen, the process are centered differently for the $3$ \glspl[hyper=false]{gp}. 
-The choice of mean function determines the behavior of the conditional process (where it is constrained by the observed data) in the region far away from the available data.
+The choice of the mean function determines the behavior of the conditional process (where it is constrained by the observed data) in the region far away from the available data.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_mean_function_unconditional},
 			           maincaption={The effect of using three different mean functions (in dashed lines) on the realization of \gls[hyper=false]{gp} having the same covariance kernel (Gaussian). The scales in the axes are arbitrary.},
@@ -559,7 +563,7 @@ The choice of mean function determines the behavior of the conditional process (
 {../figures/chapter4/figures/plotMeanFunctionUnconditional_2}
 {../figures/chapter4/figures/plotMeanFunctionUnconditional_3}
 
-The use of mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose \cite{Ginsbourger2009,Roberts2012}.
+The use of the mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose \cite{Ginsbourger2009,Roberts2012}.
 However, without a very specific knowledge of how a process is expected to behave, it is difficult to completely specify a justifiable mean a priori.
 Indeed, it was argued in \cite{Currin1991} that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
 This eventually leads to the most generic formulation.

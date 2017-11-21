@@ -25,7 +25,7 @@ cex_ttl_shift <- 4.25   # Shift of the axis title from the axis
 
 # Illustrative Case Parameters
 thetas <- c(0.1, 0.5, 2.5)      # Characteristic length scale
-pow_fac <- c(0.1, 0.5, 2.0)     # The power factor
+pow_fac <- c(0.1, 1.0, 2.0)     # The power factor
 n_sim <- 3                      # Number of realizations
 
 # Construct DiceKriging covariance structure ----------------------------------

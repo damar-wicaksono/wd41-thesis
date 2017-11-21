@@ -5,7 +5,7 @@
 % Kriging Model, Drift and Bias
 To formalize the use of \gls[hyper=false]{gp} in the metamodeling of a simulator, 
 consider once again regression problem of predicting the output at an arbitrary input $f(\mathbf{x}_o) ; \, \mathbf{x}_o \notin \mathbf{DM}$ given $\{(\mathbf{DM}, \mathbf{y})\}$;
-where $f$, $\mathbf{DM}$, $\mathbf{y}$ are the function representing the simulator, the design matrix, and training output, respectively.
+where $f$, $\mathbf{DM}$, and $\mathbf{y}$ are the function representing the simulator, the design matrix, and the training output, respectively.
 A \gls[hyper=false]{gp} metamodel makes the prediction as
 \begin{equation}
 	\mathcal{Y} (\mathbf{x_o}) = \mu (\mathbf{x_o}) + \mathcal{Z} (\mathbf{x_o})
@@ -13,18 +13,18 @@ A \gls[hyper=false]{gp} metamodel makes the prediction as
 \end{equation}
 The equation above, the \emph{Kriging} model, consists of two components:
 \begin{itemize}
-	\item The \emph{mean/drift/trend} term, $\mu: \mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$,
+	\item The \emph{mean/drift/trend} term, $\mu: \mathbf{x} \in \mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$,
 	is a deterministic function.
 	The choice of the trend term distinguishes different classes of Kriging model.
-	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified up to its coefficients (if any).
+	\emph{Simple Kriging} (SK), refers to a class of Kriging whose arbitrary trend function is fully specified.
 	\emph{Universal Kriging} (UK), on the other hand, is a class of Kriging where a general polynomial model is assumed, but its coefficients are unknown \cite{Koehler1996,Ginsbourger2009,Marrel2008},
 	\begin{equation}
 		\mu(\mathbf{x}) = \sum_{j=0}^{J} \beta_j h_j(\mathbf{x})
 	\label{eq:trend_polynomial}
 	\end{equation}
-	where $h_j$ is a set of polynomials basis function; and $\beta_j$ is the associated coefficients.
-	\emph{Ordinary Kriging} (OK) is a special case of UK where the trend is set as an unknown constant ($h_0(\mathbf{x}) = 1;\,J = 0$). 
-	\item The \emph{bias} or \emph{residual} term, a stochastic process. 
+	where $h_j$ is a set of polynomials basis function; and $\beta_j$ is the associated unknown coefficients.
+	\emph{Ordinary Kriging} (OK) is a special case of UK where the trend is set as an unknown constant ($h_0(\mathbf{x}) = 1;\,J = 0$).
+	\item The \emph{bias} or \emph{residual} term, is a stochastic process.
 		In particular, it is modeled using a zero-mean, stationary Gaussian stochastic process,
 		\begin{equation}
 			\mathcal{Z}(\mathbf{x}) \sim \mathcal{GP}(0, \sigma^2 R(\mathbf{x},\mathbf{x}^*))
@@ -32,7 +32,7 @@ The equation above, the \emph{Kriging} model, consists of two components:
 		\end{equation}
 		where $\sigma^2$ and $R$ are the process variance and a stationary correlation function (such as the ones presented in Section~\ref{sub:gp_covariance}), respectively.
 		The residuals, being modeled as a \gls[hyper=false]{gp}, are correlated and this correlation is a function of inputs.
-		As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix is specified explicitly by a parametric function \cite{Martin2005}.
+		As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix are specified explicitly by a parametric function \cite{Martin2005}.
 		Note that the predictor in Eq.~(\ref{eq:kriging_model}) becomes a stochastic process due to this bias term.
 \end{itemize}
 
@@ -41,16 +41,16 @@ According to the above, a \gls[hyper=false]{gp} metamodel thus contains several 
 \marginpar{hyper-parameters}
 This term is used to distinguish them from the parameter associated with the original simulation model which is referred to as the model parameter or simply as the parameter.
 The hyper-parameters of a \gls[hyper=false]{gp} metamodel are the ones associated with the chosen trend function (Eq.~\ref{eq:trend_polynomial});
-the ones associated with select correlation functions (Section~\ref{sub:gp_covariance}); and the process variance $\sigma^2$.
-The total number of hyper-parameters depends on the number of model parameters as well as the select structure of mean and correlation functions.
+the ones associated with the selected correlation functions (Section~\ref{sub:gp_covariance}); and the process variance $\sigma^2$.
+The total number of hyper-parameters depends on the number of model parameters as well as the selected structure of mean and correlation functions.
 For instance, for a $D$-parameter simulation model represented by a \gls[hyper=false]{gp} metamodel with linear first-order mean and power-exponential correlation function (Eq.~(\ref{eq:powexp_kernel})), the total number of the hyper-para\-meters $\boldsymbol{\Psi} = (\boldsymbol{\beta}, \sigma^2, \boldsymbol{\theta}, \mathbf{p})$ is $3D + 2$; while for the same model represented by a \gls[hyper=false]{gp} metamodel with a constant mean and Gaussian correlation functions (Eq.~(\ref{eq:gaussian_kernel})), the total number of hyper-parameters $\boldsymbol{\Psi} = (\mu, \sigma^2, \boldsymbol{\theta})$ is $D + 2$.
 %while the same model 
 
 % Two classes of Kriging Model
-As mentioned, two classes of Kriging models can be distinguished depending on what is specified on the trend term: 
+As mentioned earlier, two classes of Kriging models can be distinguished depending on what is specified on the trend term: 
 \emph{Simple Kriging} and \emph{Universal Kriging}. 
 Simple Kriging is the simpler case where all the hyper-parameters involved are known.
-In that case the prediction of output at an arbitrary input location is straightforward.
+In that case the prediction of the output at an arbitrary input location is straightforward.
 
 Following the formulation above, 
 \marginpar{simple Kriging}
@@ -90,9 +90,9 @@ where
 				\end{bmatrix}
 		\label{eq:training_correlation_matrix}
 		\end{equation}
-	\item $\mathbf{R}(\mathbf{DM}, \mathbf{x}_o) = \mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point,
+	\item $\mathbf{R}(\mathbf{DM}, \mathbf{x}_o) = \mathbf{R}(\mathbf{x}_o, \mathbf{DM})^T$ is the $N \times 1$ vector of correlation between outputs at the training points and the output at the test point,
 			\begin{equation}
-				\mathbf{R}(\mathbf{x}_o, \mathbf{DM}) = \mathbf{R}(\mathbf{DM}, \mathbf{x}_o) =  [R(\mathbf{x}_o, \mathbf{x}_1), \cdots, R(\mathbf{x}_o, \mathbf{x}_N)]^T
+				\mathbf{R}(\mathbf{DM}, \mathbf{x}_o) = \mathbf{R}(\mathbf{x}_o, \mathbf{DM})^T =  [R(\mathbf{x}_o, \mathbf{x}_1), \cdots, R(\mathbf{x}_o, \mathbf{x}_N)]^T
 			\label{eq:training_test_correlation}
 			\end{equation}
 		\item $\mathbf{R}(\mathbf{x}_o, \mathbf{x}_o)$ is the correlation of the output at the test input with itself. By definition this correlation is equal to $1$.
@@ -104,9 +104,9 @@ then the output at the test input $\mathcal{Y}(\mathbf{x}_o)$ \emph{given	} the 
 $y_N)^T$ is a conditional Gaussian random variable,
 \begin{equation}
 	\mathcal{Y}(\mathbf{x}_o) | \mathcal{Y}(\mathbf{DM}) = \{y_i\}_{i=1}^N \sim \mathcal{N} \left( m_{SK}(\mathbf{x}_o), s^2_{SK}(\mathbf{x})\right)
-\label{eq:joint_training_test}
+\label{eq:conditional_training_test}
 \end{equation}
-where $\mu_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution, respectively.
+where $m_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution, respectively.
 They are also often referred to as the \emph{simple Kriging mean} and \emph{simple Kriging variance}, respectively.
 
 % Kriging Predictor, the mean
@@ -168,10 +168,10 @@ All of these eventually results in an even more complex metamodel.
 
 The literature, however, is split on the usefulness of adding a mean function in the metamodel formulation.
 \marginpar{Simple vs. Ordinary vs. Universal Kriging}
-\cite{Martin2005} reported that Kriging with complex trend function gave a better prediction performance for the $2$-dimensional non-linear test problem used in the article,
+Ref.~\cite{Martin2005} reported that Kriging with complex trend function gave a better prediction performance for the $2$-dimensional non-linear test problem used in the article,
 while \cite{Marrel2008} argued that using mean function of one-degree polynomial allows for a global (i.e., extrapolatory) non-stationary model which did not affect the metamodel performance on the test function.
 On the other hand, \cite{Journel1989} noted that adding a mean function within the Universal Kriging framework affects the prediction in the extrapolatory situation, while any formulation yielded the same performace in the interpolatory situation.
-\cite{Ginsbourger2009} concurred with the conclusion and further warned that in high-dimensional problem with small training samples size, 
+Ref.~\cite{Ginsbourger2009} concurred with the conclusion and further warned that in high-dimensional problem with small training samples size, 
 all problems tend to be extrapolatory and a misspecification of the mean function bears the risk of large error in the prediction.
 The studies in \cite{Currin1991,Chen2016} provided less convincing results of using mean functions and thus suggested the use of either zero or constant mean function for simplicity.
 %\cite{Chen2016} further suggested that the use of mean function might be detrimental due to increase in computational effort either through increase in required training samples or required iteration in the maximum likelihood estimation.

@@ -121,7 +121,7 @@ title(xlab = "t", ylab = "y(t)", mgp = c(1.25,1,0))
 #legend(0.0, 7, legend = "Mean (Cross-Sectional)", lty = 2, lwd = 3,
 #       bty = "n")
 for(i in 1:n) lines(t, eval.fd(t, y2_smooth$fd)[,i], col = rgb(0, 0, 0, 0.15))
-lines(t, eval.fd(t, mean.fd(y2_smooth$fd)), lty = 2, lwd = 3)
+lines(t, eval.fd(t, mean.fd(y2_smooth$fd)), lty = 1, lwd = 3)
 
 #
 plot(0, 0, xlim = c(-0.025, 1.025), ylim = range(y), type = "n",

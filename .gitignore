@@ -182,4 +182,8 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
-.Rproj.user
+<<<<<<< HEAD
+
+# RStudio project
+*/.Rproj.user
+

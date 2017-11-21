@@ -1,0 +1,57 @@
+%***********************************************************************
+\section{Convergence of the Sobol' Indices}\label{app:sobol_convergence}
+%***********************************************************************
+
+% TRACE plot of total effect indices estimation
+The convergence of the Sobol' indices' estimator can be investigated from their evolutions as functions of the number of samples.
+Shown in Fig.~\ref{fig:ch3_plot_running_indices} is the evolution (trace plot) of the estimated main-effect indices with the maximum cladding temperature as the \gls[hyper=false]{qoi}.
+The Saltelli et al. estimator performs poorly compared to the Janon et al. estimator for this particular output.
+This means that a larger number of samples are required to obtain a stable ranking.
+\normfigure[pos=tbhp,
+           opt={width=1.0\textwidth},
+           label={fig:ch3_plot_running_indices},
+           shortcaption={Trace plot of the main-effect sensitivity indices estimations.}]
+{../figures/chapter3/figures/plotRunningIndices}
+{Evolution of the main-effect sensitivity indices for all input paramters using two different estimators as a function of the number of Sobol' sequence samples. The \gls[hyper=false]{qoi} is the maximum cladding temperature}
+
+% Uncertainty in the estimation
+If the main purpose of the \gls[hyper=false]{sa} is simply to rank the parameter importance with respect to a particular \gls[hyper=false]{qoi},
+then the Janon et al. estimator visibly requires fewer samples and the ranking can be reliably constructed.
+However, the apparent stabilization of the indices' estimator is not sufficient to establish a robust estimate of the indices since \gls[hyper=false]{mc} estimation entails uncertainty due to finite number of samples.
+Such uncertainty needs to be addressed for all the estimates.
+
+% Empirical convergence study
+In this work, an empirical convergence study was established using three different sample sizes ($250$; $500$; $1000$),
+and for each size, the $95\%$ \gls[hyper=false]{ci} length (the difference between the upper and lower bounds) is determined using the bootstrap technique \cite{Efron1986} using $10'000$ replications.
+The results are shown if Fig.~\ref{fig:ch3_plot_convergence_maxtemp} for the maximum cladding temperature as the \gls[hyper=false]{qoi}.
+Note that the comparisons between \gls[hyper=false]{ci} lengths of different estimates can be made directly as the Sobol' index itself is dimensionless.
+As can be seen, with respect to this \gls[hyper=false]{qoi}, the Janon et al. estimator is further confirmed as the more efficient estimator.
+The uncertainty of indices estimated by the Saltelli et al. estimator is still high for numbers of samples in the range of thousands.
+The efficiency of the Saltelli et al. estimator is also found to be more sensitive to the choice of estimand (i.e., Sobol' index of a given input parameter). 
+\normfigure[pos=tbhp,
+	         opt={width=1.0\textwidth},
+           label={fig:ch3_plot_convergence_maxtemp},
+           shortcaption={Convergence of the Sobol' main effect indices estimators w.r.t maximum cladding temperature.}]
+{../figures/chapter3/figures/plotConvergenceMaxTemp}
+{The $95\%$ percentile boostrapped CI length as a function of the number of samples for five selected estimated Sobol' main-effect indices, with respect to the maximum cladding temperature using two different estimators. The lines shown are the regression through the origin lines.}
+
+% Difference in output results in different convergence
+However, further investigation also revealed that the efficiency of an estimator depended on the \gls[hyper=false]{qoi} in a more complex manner than initially considered.
+As can be seen in Fig.~\ref{fig:ch3_plot_convergence_pc1score}, where the first principal component scores were taken as the \gls[hyper=false]{qoi}, both estimators were found to be comparable,
+with the Saltelli et al. estimator being even slightly more efficient.
+And as before, the Janon et al. estimator shows less sensitivity to the choice of estimand in its convergence as compared to the Saltelli et al. estimator.
+\normfigure[pos=!tbhp,
+					 opt={width=1.0\textwidth},
+           label={fig:ch3_plot_convergence_pc1score},
+           shortcaption={Convergence of the Sobol' main effect indices estimators w.r.t first principal component.}]
+{../figures/chapter3/figures/plotConvergencePC1Score}
+{The $95\%$ percentile boostrapped CI length as a function of the number of samples for five selected estimated Sobol' main-effect indices, with respect to the first principal component using two different estimators. The lines shown are the regression through the origin lines.}
+
+% The use of convergence study
+The convergence analysis plots shown in Figs.~\ref{fig:ch3_plot_convergence_maxtemp} and \ref{fig:ch3_plot_convergence_pc1score} can be useful in the planning of the simulation experiments.
+As can be inferred from both figures, the \gls[hyper=false]{ci} length of a given estimator depends on the \gls[hyper=false]{qoi}, the estimand, the estimator used, and the number of samples.
+The regression lines also indicate the projection of the reduction in the \gls[hyper=false]{ci} length with increasing number of samples.
+
+% Total-effect Indices convergence
+As for the total-effect indices, the results obtained using the Jansen's estimator confirmed the good efficiency of the estimator,
+reaching below $10\%$ \gls[hyper=false]{ci} length for $1'000$ \gls[hyper=false]{mc} samples across all \gls[hyper=false]{qoi}.
