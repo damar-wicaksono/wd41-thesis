@@ -11,7 +11,7 @@ trc_uq_df <- readRDS(rds_tidy_fullname)[[1]]
 trc_exp_df <- readRDS(rds_tidy_fullname)[[2]]
 
 # Make the plot ---------------------------------------------------------------
-p <- ggplot(data = trc_uq_df, aes(x = time, y = mid_run))
+p <- ggplot(data = trc_uq_df, aes(x = time, y = nom_run))
 p <- p + geom_ribbon(aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "gray", alpha = alpha)
 p <- p + geom_line()
