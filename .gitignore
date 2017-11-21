@@ -183,3 +183,7 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 .Rproj.user
+
+./figures/data-support/results-compiled
+./figures/data-support/postpro
+*.RDs
