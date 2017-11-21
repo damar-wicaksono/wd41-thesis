@@ -27,20 +27,26 @@ n_t_trc <- length(trc_runs$time)
 n_t_exp <- length(trc_runs$exp_data[[3]][,1])
 lb_pct <- (100 - opt$percentile) / 2 / 100
 ub_pct <- lb_pct + opt$percentile / 100
+mid_idx <- 500
 
 # Create tidy data, TC --------------------------------------------------------
 #  Read Trace Runs
-ub_run <- numeric(n_t_trc)
-lb_run <- numeric(n_t_trc)
-mid_run <- numeric(n_t_trc)
+ub_run <- numeric(n_t_trc)    # Upper uncertainty bound
+lb_run <- numeric(n_t_trc)    # Lower uncertainty bound
+mid_run <- numeric(n_t_trc)   # Middle Run
+nom_run <- numeric(n_t_trc)   # Nominal Run
+
 for (t_idx in 1:n_t_trc)
 {
   lb_run[t_idx] <- quantile(trc_runs$replicates[t_idx,,13], probs = c(lb_pct))
   ub_run[t_idx] <- quantile(trc_runs$replicates[t_idx,,13], probs = c(ub_pct))
-  mid_run[t_idx]  <- trc_runs$nominal[t_idx,13]
+  mid_run[t_idx] <- sort(trc_runs$replicates[t_idx,,13])[mid_idx] 
+  nom_run[t_idx] <- trc_runs$nominal[t_idx,13]
 }
+
 trc_uq_co_df <- data.frame(time = trc_runs$time,
                            mid_run = mid_run,
+                           nom_run = nom_run,
                            ub_run = ub_run,
                            lb_run = lb_run)
 
