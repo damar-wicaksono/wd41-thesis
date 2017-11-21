@@ -230,7 +230,7 @@ where $\delta_d$ is the Dirac delta function indicating that the simulator predi
 
 Suppose that the form of the densities in Eq.~\ref{eq:bc_data_generating_models} are already given,
 then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on the right hand side of Eq.~\ref{eq:bc_true_simulation}.
-Assuming that they are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms,
+Assuming that they are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms \cite{Siegrist2017},
 \begin{equation}
   \begin{split}
   p(y_E | & \bm{\psi}_{\delta}, \bm{\psi}_{\epsilon}, \hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda}) = \ldots \\
@@ -273,7 +273,7 @@ the likelihood function is then defined as follows
   \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon}, \bm{\Lambda})
 \label{eq:bc_likelihood}
 \end{equation}
-Under Gaussian formulation, the likelihood function is obtained by using Gaussian density of Eq.~(\ref{eq:bc_data_model_gaussian}) for $p$.
+Under Gaussian formulation, the likelihood function is obtained by using the Gaussian density of Eq.~(\ref{eq:bc_data_model_gaussian}) for $p$.
 Note that if the set of experimental data is simultaneously given on the observation layout $\bm{\Lambda}$ then the covariance matrix $\Sigma_*$ is used instead of the standard deviation $s^2_*$,
 \begin{equation}
 	\begin{split}
@@ -282,7 +282,7 @@ Note that if the set of experimental data is simultaneously given on the observa
 	\end{split}
 \label{eq:bc_gaussian_covariance_matrix}
 \end{equation}
-where $\Sigma_M$, $\Sigma_\delta$, and $\Sigma_{obs}$ are the $P \times P$ covariance matrices of the observation under their respective parametric kernels, with $P$ the dimension of the experimental data.
+where $\Sigma_M$, $\Sigma_\delta$, and $\Sigma_{obs}$ are the $P \times P$ covariance matrices of the simulator approximation, the model bias term, and the observation error, with $P$ the dimension of the experimental data.
 
 % Full probability model
 According to the Bayes' theorem, the joint posterior probability of the model parameters $\bm{x}_m$ and
@@ -291,11 +291,11 @@ the hyper-parameters associated with the model bias and the observation error is
 \begin{equation}
 	\begin{split}
   p(\hat{\bm{x}}_m, & \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y}\,|\,\mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) = \ldots \\
-	& \frac{\mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_{\epsilon_y}\,|\,\bm{\Lambda}) \cdot p(\bm{\psi}_{\delta}\,|\,\bm{\Lambda})}{p(y_E = \mathbf{y}\,|\,\bm{x}_c = \mathbf{x}_c , \bm{\Lambda})}
+	& \frac{\mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon_y} ; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_{\delta}\,|\,\bm{\Lambda}) \cdot p(\bm{\psi}_{\epsilon_y}\,|\,\bm{\Lambda})}{p(y_E = \mathbf{y}\,|\,\bm{x}_c = \mathbf{x}_c , \bm{\Lambda})}
 	\end{split}
 \label{eq:bc_joint_posterior}
 \end{equation}
-where $p(\hat{\bm{x}}_m)$, $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$, and $p(\bm{\psi}_{\delta}; \bm{\Lambda})$ are the prior probabilities for the model parameters, the model bias hyper-parameters, and the observation error parameters, respectively.
+where $p(\hat{\bm{x}}_m)$, $p(\bm{\psi}_{\delta}; \bm{\Lambda})$, and $p(\psi_{\bm{\epsilon}_y}; \bm{\Lambda})$ are the prior probabilities for the model parameters, the model bias hyper-parameters, and the observation error parameters, respectively.
 
 The denominator of the Eq.~(\ref{eq:bc_joint_posterior}) is a normalizing constant with respect to the model parameters and the hyper-parameters such that Eq.~(\ref{eq:bc_joint_posterior}) is a valid probability density (i.e., integration over the domain yields the value $1.0$).
 \marginpar{Normalizing constant}
@@ -311,7 +311,7 @@ As such, it is defined as a multidimensional integral of the following,
 % Closing and connection Introductory paragraph
 The specifications of the likelihood and the associated priors completely specify the Bayesian statistical calibration framework for the model parameters.
 The full Bayesian formulation for the model parameters calibration given in Eq.~(\ref{eq:bc_joint_posterior}) involves numerous parameters.
-Besides the model parameters and controllable inputs, the complete formulation above also involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_M$ the (hyper-)para\-meters for the model bias, the observation error, and the simulator approximation (if apply), respectively.
+Besides the model parameters and controllable inputs, the complete formulation above also involves additional parameters associated with the statistical models: $\bm{\psi}_\delta$, $\bm{\psi}_{obs}$, and $\bm{\psi}_m$ the (hyper-)para\-meters for the model bias, the observation error, and the simulator approximation, respectively.
 By simultaneously calibrating them against experimental data,
 the uncertainties due to the specifications of the model bias, the observation error, and the simulator approximation up to their (hyper-)parametrization are taken into account.
 In principle, the hyper-parameters are now also part of the calibration problem, increasing the size (in dimension) and the complexity of it.
