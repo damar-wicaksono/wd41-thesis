@@ -34,7 +34,6 @@ source("./r-scripts/inf_score.R")
 trc_prior_df <- readRDS(opt$prior)[[1]]
 trc_post_df <- readRDS(opt$posterior)[[1]]
 trc_exp_df <- readRDS(opt$prior)[[2]]
-#trc_post_df <- readRDS(rds_tidy_posterior_fullname)[[1]]
 
 prior_filename <- strsplit(opt$posterior, "/")[[1]]
 prior_filename <- prior_filename[length(prior_filename)]
