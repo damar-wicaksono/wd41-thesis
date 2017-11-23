@@ -36,15 +36,16 @@ calibinfo_df1$output_type <- factor(calibinfo_df1$output_type,
                                     levels = c("TC", "DP", "CO"),
                                     ordered = T)
 
-revalue(calibinfo_df1$case_name, c("mcmcAllDiscCentered" = "MCMC w/ Bias term",
-                                   "mcmcAllDiscCenteredInd" = "MCMC w/ Bias term, Ind.",
-                                   "mcmcAllDiscCenteredNoParam8" = "MCMC w/ Bias term excl. dffbVIHTC",
-                                   "mcmcAllDiscCenteredNoParam8Ind" = "MCMC w/ Bias term excl. dffbVIHTC, Ind.",
-                                   "mcmcAllNoDiscNoBC" = "MCMC w/o Bias term",
-                                   "mcmcAllNoDiscNoBCInd" = "MCMC w/o Bias term, Ind.",
-                                   "mcmcTCDiscCentered" = "MCMC w/ Bias term, TC Only",
-                                   "mcmcDPDiscCentered" = "MCMC w/ Bias term, DP Only",
-                                   "mcmcCODiscCentered" = "MCMC w/ Bias term, CO Only"))
+calibinfo_df1$case_name <- revalue(calibinfo_df1$case_name,
+                                   c("mcmcAllDiscCentered" = "MCMC w/ Bias term",
+                                     "mcmcAllDiscCenteredInd" = "MCMC w/ Bias term, Ind.",
+                                     "mcmcAllDiscCenteredNoParam8" = "MCMC w/ Bias term excl. dffbVIHTC",
+                                     "mcmcAllDiscCenteredNoParam8Ind" = "MCMC w/ Bias term excl. dffbVIHTC, Ind.",
+                                     "mcmcAllNoDiscNoBC" = "MCMC w/o Bias term",
+                                     "mcmcAllNoDiscNoBCInd" = "MCMC w/o Bias term, Ind.",
+                                     "mcmcTCDiscCentered" = "MCMC w/ Bias term, TC Only",
+                                     "mcmcDPDiscCentered" = "MCMC w/ Bias term, DP Only",
+                                     "mcmcCODiscCentered" = "MCMC w/ Bias term, CO Only"))
 
 # Make the plot ---------------------------------------------------------------
 p <- ggplot(data = calibinfo_df1,
