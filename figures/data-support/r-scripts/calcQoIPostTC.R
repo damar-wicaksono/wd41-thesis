@@ -35,44 +35,45 @@ trc_prior_df <- readRDS(opt$prior)[[1]]
 trc_post_df <- readRDS(opt$posterior)[[1]]
 trc_exp_df <- readRDS(opt$prior)[[2]]
 
-prior_filename <- strsplit(opt$posterior, "/")[[1]]
-prior_filename <- prior_filename[length(prior_filename)]
-feba_test <- gsub("\\D", "", strsplit(prior_filename, "-")[[1]][1])
-case_name <- strsplit(strsplit(prior_filename, "-")[[1]][3], "_")[[1]][1]
+posterior_filename <- strsplit(opt$posterior, "/")[[1]]
+posterior_filename <- posterior_filename[length(posterior_filename)]
+feba_test <- gsub("\\D", "", strsplit(posterior_filename, "-")[[1]][1])
+case_name <- strsplit(strsplit(posterior_filename, "-")[[1]][3], "_")[[1]][1]
 
 # Compute QoIs ----------------------------------------------------------------
-
 ax_locs <- unique(trc_prior_df$ax_locs)
-t_exp_idx <- (unique(trc_exp_df$time)[-1] * 10)
 
-inf_scores <- numeric(length(ax_locs)*length(t_exp_idx))
-cal_scores_prior <- numeric(length(ax_locs)*length(t_exp_idx))
-cal_scores <- numeric(length(ax_locs)*length(t_exp_idx))
-rmse <- numeric(length(ax_locs)*length(t_exp_idx))
+inf_scores <- c()
+cal_scores <- c()
+rmse <- c()
 
-ax_loc <- ax_locs[8]
-k <- 1
 for (ax_loc in ax_locs)
 {
   # Loop over axial location
   trc_prior_ax <- subset(trc_prior_df, ax_locs == ax_loc)[-1,]
   trc_post_ax <- subset(trc_post_df, ax_locs == ax_loc)[-1,]
   trc_exp_ax <- subset(trc_exp_df, ax_locs == ax_loc)[-1,]
+  # Compute the Experimental Time Index up to quench only
+  t_exp_idx <- trc_exp_ax$time[1:which.min(diff(trc_exp_ax$exp_data))] * 10
   for (i in 1:length(t_exp_idx))
   {
     # Loop over time points
-    inf_scores[k] <- inf_score(lb_ref = trc_prior_ax[t_exp_idx[i],]$lb_run,
-                               ub_ref = trc_prior_ax[t_exp_idx[i],]$ub_run,
-                               lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
-                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run)
-    cal_scores[k] <- cal_score(exp_val = trc_exp_ax$exp_data[i],
-                               ref_val = trc_post_ax[t_exp_idx[i],]$mid_run,
-                               lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
-                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run)
-    rmse[k] <- (trc_exp_ax$exp_data[i] - trc_post_ax[t_exp_idx[i],]$mid_run)^2
-    k <- k + 1
+    inf_scores <- c(inf_scores,
+                    inf_score(lb_ref = trc_prior_ax[t_exp_idx[i],]$lb_run,
+                              ub_ref = trc_prior_ax[t_exp_idx[i],]$ub_run,
+                              lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
+                              ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
+    cal_scores <- c(cal_scores,
+                    cal_score(exp_val = trc_exp_ax$exp_data[i],
+                              ref_val = trc_post_ax[t_exp_idx[i],]$mid_run,
+                              lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
+                              ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
+    rmse <- c(rmse,
+              (trc_exp_ax$exp_data[i] - trc_post_ax[t_exp_idx[i],]$mid_run)^2)
   }
 }
+
+inf_scores[inf_scores < 0] <- 0 # Force negative informativeness to zero
 
 qoi_post <- data.frame(feba_test = feba_test,
                        case_name = case_name,

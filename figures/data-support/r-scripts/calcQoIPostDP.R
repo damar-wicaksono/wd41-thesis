@@ -35,22 +35,19 @@ trc_prior_df <- readRDS(opt$prior)[[1]]
 trc_post_df <- readRDS(opt$posterior)[[1]]
 trc_exp_df <- readRDS(opt$prior)[[2]]
 
-prior_filename <- strsplit(opt$posterior, "/")[[1]]
-prior_filename <- prior_filename[length(prior_filename)]
-feba_test <- gsub("\\D", "", strsplit(prior_filename, "-")[[1]][1])
-case_name <- strsplit(strsplit(prior_filename, "-")[[1]][3], "_")[[1]][1]
+posterior_filename <- strsplit(opt$posterior, "/")[[1]]
+posterior_filename <- posterior_filename[length(posterior_filename)]
+feba_test <- gsub("\\D", "", strsplit(posterior_filename, "-")[[1]][1])
+case_name <- strsplit(strsplit(posterior_filename, "-")[[1]][3], "_")[[1]][1]
 
 # Compute QoIs ----------------------------------------------------------------
-
 ax_locs <- unique(trc_prior_df$ax_locs)
 t_exp_idx <- (unique(trc_exp_df$time)[-1] * 10)
 
 inf_scores <- numeric(length(ax_locs)*length(t_exp_idx))
-cal_scores_prior <- numeric(length(ax_locs)*length(t_exp_idx))
 cal_scores <- numeric(length(ax_locs)*length(t_exp_idx))
 rmse <- numeric(length(ax_locs)*length(t_exp_idx))
 
-ax_loc <- ax_locs[8]
 k <- 1
 for (ax_loc in ax_locs)
 {
@@ -74,6 +71,8 @@ for (ax_loc in ax_locs)
   }
 }
 
+inf_scores[inf_scores < 0] <- 0 # Force negative informativeness to zero
+
 qoi_post <- data.frame(feba_test = feba_test,
                        case_name = case_name,
                        output_type = "DP",
@@ -82,5 +81,4 @@ qoi_post <- data.frame(feba_test = feba_test,
                        rmse = sqrt(mean(rmse)))
 
 # Save the file ---------------------------------------------------------------
-#saveRDS(qoi_post, opt$output)
-print(qoi_post)
+saveRDS(qoi_post, opt$output)

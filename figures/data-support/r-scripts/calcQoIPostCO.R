@@ -35,10 +35,10 @@ trc_prior_df <- readRDS(opt$prior)[[1]]
 trc_post_df <- readRDS(opt$posterior)[[1]]
 trc_exp_df <- readRDS(opt$prior)[[2]]
 
-prior_filename <- strsplit(opt$posterior, "/")[[1]]
-prior_filename <- prior_filename[length(prior_filename)]
-feba_test <- gsub("\\D", "", strsplit(prior_filename, "-")[[1]][1])
-case_name <- strsplit(strsplit(prior_filename, "-")[[1]][3], "_")[[1]][1]
+posterior_filename <- strsplit(opt$posterior, "/")[[1]]
+posterior_filename <- posterior_filename[length(posterior_filename)]
+feba_test <- gsub("\\D", "", strsplit(posterior_filename, "-")[[1]][1])
+case_name <- strsplit(strsplit(posterior_filename, "-")[[1]][3], "_")[[1]][1]
 
 # Compute QoIs ----------------------------------------------------------------
 lte_10_idx <- which(trc_exp_df$exp_data<10)
@@ -64,6 +64,8 @@ for (i in 1:length(t_exp_idx))
   rmse[i] <- (trc_exp_df$exp_data[i] - trc_post_df[t_exp_idx[i],]$mid_run)^2
 }
 
+inf_scores[inf_scores < 0] <- 0 # Force negative informativeness to zero
+
 qoi_post <- data.frame(feba_test = feba_test,
                        case_name = case_name,
                        output_type = "CO",
@@ -72,5 +74,4 @@ qoi_post <- data.frame(feba_test = feba_test,
                        rmse = sqrt(mean(rmse)))
 
 # Save the file ---------------------------------------------------------------
-#saveRDS(qoi_post, opt$output)
-print(qoi_post)
+saveRDS(qoi_post, opt$output)
