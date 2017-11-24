@@ -58,7 +58,17 @@ trc_uq_co_df <- data.frame(time = trc_runs$time,
                            lb_run = lb_run)
 
 # Read experimental data
+n_t_exp <- length(trc_runs$exp_data[[3]][,1])
+mse <- numeric(n_t_exp)
+t_exp_idx <- trc_runs$exp_data[[3]][,1] * 10 + 1
+for (j in 1:n_t_exp)
+{
+  mse[j] <- mean((trc_runs$replicates[t_exp_idx[j],,13] -
+                    trc_runs$exp_data[[3]][j,2])^2)
+}
+
 trc_exp_df <- data.frame(time = trc_runs$exp_data[[3]][,1],
+                         mse = mse,
                          exp_data = trc_runs$exp_data[[3]][,2])
 
 # Save file ------------------

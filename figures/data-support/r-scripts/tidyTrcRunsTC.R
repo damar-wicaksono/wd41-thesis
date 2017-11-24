@@ -78,8 +78,16 @@ for (i in 1:length(ax_locs_tc))
 trc_exp_df <- data.frame(time = c(), exp_data = c(), ax_locs = c())
 for (i in 1:length(ax_locs_tc))
 {
+  mse <- numeric(n_t_exp)
+  t_exp_idx <- trc_runs$exp_data[[1]][,1] * 10 + 1
+  for (j in 1:n_t_exp)
+  {
+    mse[j] <- mean((trc_runs$replicates[t_exp_idx[j],,i] -
+                      (trc_runs$exp_data[[1]][j,i+1] + 273.15))^2)
+  }
   trc_exp_df <- rbind(trc_exp_df,
                       data.frame(time = trc_runs$exp_data[[1]][,1],
+                                 mse = mse,
                                  exp_data = trc_runs$exp_data[[1]][,i+1] + 273.15,
                                  ax_locs = rep(ax_locs_tc[i], n_t_exp)))
 }
