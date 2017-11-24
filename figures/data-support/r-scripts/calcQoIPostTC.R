@@ -65,7 +65,7 @@ for (ax_loc in ax_locs)
                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
     cal_scores <- c(cal_scores,
                     cal_score(exp_val = trc_exp_ax$exp_data[i],
-                              ref_val = trc_post_ax[t_exp_idx[i],]$mid_run,
+                              ref_val = trc_post_ax[t_exp_idx[i],]$map_run,
                               lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
     rmse <- c(rmse,

@@ -58,7 +58,7 @@ for (i in 1:length(t_exp_idx))
                              lb_val = trc_post_df[t_exp_idx[i],]$lb_run,
                              ub_val = trc_post_df[t_exp_idx[i],]$ub_run)
   cal_scores[i] <- cal_score(exp_val = trc_exp_df[-1,]$exp_data[i],
-                             ref_val = trc_post_df[t_exp_idx[i],]$mid_run,
+                             ref_val = trc_post_df[t_exp_idx[i],]$map_run,
                              lb_val = trc_post_df[t_exp_idx[i],]$lb_run,
                              ub_val = trc_post_df[t_exp_idx[i],]$ub_run)
   rmse[i] <- (trc_exp_df$exp_data[i] - trc_post_df[t_exp_idx[i],]$mid_run)^2
