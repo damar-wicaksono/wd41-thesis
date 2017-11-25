@@ -123,11 +123,11 @@ That is to propagate the posterior uncertainty of the parameters and to compare 
 %----------------------------------------
 
 % Introductory paragraph
-Although the proposed set of strategies in this research can be applicable to the analysis and calibration of any physical model of a system code,
+Although the proposed set of strategies in this PhD research work can be applicable to the analysis and calibration of any physical model of a system code,
 \marginpar{Simulation of reflooding}
 it is illustrated by its application on the models of particular importance during simulation of reflooding,
 i.e., the so-called \gls[hyper=false]{postchf} flow regimes.
-There are several reasons for this emphasis:
+There are several reasons for this emphasis as recognized by the \gls[hyper=false]{bemuse} and \gls[hyper=false]{premium} projects (see Section\ref{sub:intro_premium}):
 \begin{itemize}
 
 	% Reason 1
@@ -135,8 +135,8 @@ There are several reasons for this emphasis:
 	Modeling reflooding determines the appropriate representation of the dynamics of heat transfer phenomena during the effort to rewet an uncovered core.
 	Of paramount interest is the estimation of the time at which the rod can be expected to be rewet as well as the maximum temperature reached prior to rewet.
 	Reflood is a transient with highly coupled hydro\-dynamic-heat-transfer effects and it challenges the assumption made on the implemented closure laws.
-	Indeed, several reflood experimental programs conducted in \glspl[hyper=false]{setf} existed and were designed to validate reflood models in system codes.
-	Unfortunately, no orchestrated effort was done so far to consolidate the generated data in general and into the \gls[hyper=false]{trace} code in particular.
+	Indeed, several reflood experimental programs conducted in \glspl[hyper=false]{setf} exist.
+	Unfortunately, no orchestrated effort was made so far to consolidate the generated data in general and into the \gls[hyper=false]{trace} code in particular.
 
 % Reason 2
 	\item The models are adequately complex.
@@ -146,13 +146,9 @@ There are several reasons for this emphasis:
 
 % Reason 3
 	\item Multiple data of various types (pressure, temperature, etc.), taken with different experimental conditions (flow rate, system pressure, etc.), are typically available from experiment within the same facility.
-	As calibration in the present research is conducted using one experimental condition, it is important to validate the resulting calibration result against the data with different experimental conditions albeit from the same experimental facility. 
+	As calibration in the present research is conducted using one experimental condition, it is important to validate the calibration results against the data with different experimental conditions albeit from the same experimental facility. 
 	Moreover, additional data from other reflooding \glspl[hyper=false]{setf} are also available.
 	This is important for validating the proposed method further and expanding it to calibration against data from multiple facilities.
-
-% Reason 4
-	\item It is the model considered in the \gls[hyper=false]{premium} benchmark. Some of the works in this doctoral research was conducted as part of \gls[hyper=false]{psi} participation to the benchmark.
-  Furthermore, qualitative comparison can be made with the results of other participants.
 	
 \end{itemize}
 
@@ -164,14 +160,14 @@ The methods and practices of sensitivity analysis, approximation, and calibratio
 \marginpar{Statistical framework}
 This thesis, however, focuses on the statistical approach for each of the aforementioned steps.
 The main reasoning for this choice are twofold:
-First, statistical methods tend to require less assumption on the model complexity.
+First, statistical methods tend to require fewer assumption on the model complexity.
 While they may be more computationally expensive than their non-statistical counterparts,
-they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the size of the problem with respect to the number of input parameters.
+they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the number of input parameters.
 Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be represented in terms of probability.
 As mentioned previously, this is to conform with the widely accepted practice of statistical uncertainty propagation in the nuclear engineering community.  
-The motivations for this choice will become clearer in the subsequent section and they will also be elaborated further in their respective chapters.
+The motivations for this choice will become clearer in the next section and will also be elaborated further in this thesis.
 
 % Closing
 As a last note, the \glsfirst[hyper=false]{th} system code considered in this thesis is the \glsfirst[hyper=false]{trace} code developed by the \glsfirst[hyper=false]{usnrc}.
 \marginpar{TRACE code}
-The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the purpose of Swiss \glspl[hyper=false]{npp} safety analysis conducted within the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
+The main reason to consider solely this particular code is the fact that \gls[hyper=false]{trace} is the thermal-hydraulics system code used for the safety analysis of the Swiss \glspl[hyper=false]{npp} conducted within the \glsfirst[hyper=false]{stars} program \cite{PSI2017} at the \glsfirst[hyper=false]{psi}.
