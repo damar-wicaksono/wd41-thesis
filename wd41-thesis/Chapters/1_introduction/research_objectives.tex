@@ -2,7 +2,7 @@
 \section{Objectives and Scope of the Thesis}\label{sec:intro_objectives_and_scope}
 %********************************************************************************* 
 
-With a larger context provided above,
+With the larger context provided above,
 this section presents briefly and specifically the statement of the problem,
 followed by the objectives as well as the scope of the present doctoral research.
 
@@ -11,14 +11,13 @@ followed by the objectives as well as the scope of the present doctoral research
 %--------------------------------------------------------------------------
 
 % Introductory Paragraph
-The development of closure laws for reflooding described in \cite{Nelson1992,USNRC2012} showed the difficulties and the amount of assumptions used.
-In a nutshell, system code development is an effort to consolidate correlations and mechanistic models, to create a phenomenological-based simulation code that can provide best-estimate results.
+System code development is an effort to consolidate correlations and mechanistic models to create a phenomenological-based simulation code that can provide best-estimate results.
 This consolidated effort results in a code that can simulate a wide range of transients foreseen in nuclear power plant operation in a best-estimate manner.
 Alas, to come up with a consistent set of closure laws is a great challenge for code developers.
 
 % Closure Laws Difficulty, Conceptual
 The closure laws required to close the two-fluid model pose particularly difficult challenges \cite{Wulff2007}.
-For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from each of the constituents are needed (i.e., the wall, the liquid phase, and the gas phase).
+For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from the wall, the liquid and gas phases are needed.
 But measuring temperature of the individual phases in an arbitrary interfacial topology has its own technical difficulties to the extend that no such data is available to be implemented in the closure laws.
 Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfacial friction factor, wall friction factor, etc.) were generally carried out in adiabatic conditions.
 As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlation.
@@ -26,7 +25,7 @@ As a result, this excludes the coupling of any heat transfer phenomena between t
 % Closure Laws Difficult, Practical
 Furthermore, during the development of a simulation code, programming considerations also came into the picture.
 For robustness, simplification is often required and continuity is enforced.
-Transitionary flow regime between two known (observed) flow regimes for which experimental data is not available is modeled to be the average of the two bounding regimes.
+Transitionary flow regime for which data is not available is often modeled to be the average of the two known bounding regimes.
 Different code developments, which used different assumptions and experimental databases, come up with different set of closure laws with their own parametrization (see for instance \cite{Nelson1992} for TRAC code and \cite{Bestion1990} for CATHARE code).
 Several authors have expressed their concerns about the uncertainty stemming from the closure laws \cite{Wulff2007,Petruzzi2008a,DAuria2012}.
 
@@ -42,7 +41,7 @@ $\alpha$ is the void fraction;
 and $\hat{x}_{m,\text{SET}}$ is a fitting parameter.
 
 There are several remarks that can be made about the closure law given above.
-First, the second term in the right-hand side was derived from experimental data but not directly.
+First, the second term in the right-hand side was derived from experimental data but based on several simplifying assumptions.
 In the inverted slug regime, saturated liquid core breaks up into ligaments.
 These ligaments are \emph{assumed} to take form as prolate ellipsoid.
 The drag coefficient is then taken from the experimental database of coefficient for distorted droplet.
@@ -51,13 +50,13 @@ Lastly, the first term of the equation, $\hat{x}_{m,\text{SET}} = 0.75$ was adde
 This first term, although clearly \emph{non-physical} in nature, is nevertheless an important tuning parameter of the model.
 Its uncertainty should be considered in uncertainty analysis, especially when reflood is expected to occur.
 Yet, no statement regarding the associated uncertainty is given.
-Several other such terms exist \cite{USNRC2012}. 
+Similar adjustment on several other closure laws exists \cite{USNRC2012}. 
 
 % Statement of Problem
 As illustrated above, it is clear that models in thermal-hydraulics system code are, to a certain extent, limited.
-Various experimental programs were carried out to gain better understanding of important phenomena,
+Various experimental programs were carried out to better understand the important phenomena,
 and to validate (and, as noted, to calibrate) the models.
-Series of the experiments, carried out in \glspl[hyper=false]{setf} with well-specified boundary conditions were aimed to reproduce limited part of the transient in a selected component following a postulated scenario.
+Series of experiments, carried out in \glspl[hyper=false]{setf} with well-specified boundary conditions were aimed to reproduce limited part of the transient in a selected component following a postulated scenario.
 For example, in the case of reflooding, several facilities existed and data was gathered (FEBA, PERICLES, etc.).
 But, there has not been an orchestrated effort to incorporate the accumulated data into the calibration process of the physical models, in a systematic way, while acknowledging the multiple sources of uncertainty in the process.
 
