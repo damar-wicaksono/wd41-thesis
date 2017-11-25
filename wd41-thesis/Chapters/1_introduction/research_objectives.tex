@@ -67,61 +67,56 @@ But, there has not been an orchestrated effort to incorporate the accumulated da
 % Introductory (Overall Objective)
 The purpose of this research is to quantify the uncertainty of physical model parameters implemented in a \gls[hyper=false]{th} system code.
 The physical models of interest describe the phasic interactions in a complex multiphase flow during a reactor transient, namely heat, mass, and momentum exchanges between vapor, liquid and structures.
-These models are parametrized by physical or empirical tuning parameters, the values of which are uncertain.
-This results in uncertain code prediction of important safety quantities, such as the evolution of the fuel cladding temperature during a postulated reactor transient.
+These models are parametrized by physical or empirical parameters, the values of which are uncertain.
+This results in uncertain code predictions of important safety quantities, such as the evolution of the fuel cladding temperature during a postulated reactor transient.
 
 Adopting a probabilistic framework to conform to the statistical uncertainty propagation widely adopted in the field of nuclear engineering,
-the uncertainties in the parameters are represented in form of \glsfirst[hyper=false]{pdf} or their approximations.
+the uncertainties in the parameters are represented as probability density functions (PDFs) or their approximations.
 The derivation of these functions is posed as an inverse statistical problem following a Bayesian framework as the parameters themselves are not directly observable.
 Although subjectivity cannot be removed completely from the analysis,
-the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to better inform, in a more objective and transparent manner,
-the uncertainties associated with code model parameters.
-This is done by consolidating and adapting recent developments in the applied statistics literature:
+the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to inform in a more objective and transparent manner
+the uncertainties associated with the model parameters.
+This is done in three steps by consolidating and adapting recent developments in the applied statistics literature:
 
 % Aim 1 (Global sensitivity analysis)
 \begin{enumerate}
-	\item \emph{to analyze and to better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
+	\item \emph{Analyze and better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
 	\Glsfirst[hyper=false]{sa}, in particular \Glsfirst[hyper=false]{gsa}, methods can be used to assist in identifying which of the model parameters can be calibrated using the available data.
-  An uncertainty analysis often starts with large list of input parameters that might and might not be relevant (i.e., influential) to the simulation at hand.
-  A screening method can be used to reduce the number of the initial input parameters to a limited set of only the influential ones.
-  Afterward, a variance decomposition method is employed to quantitatively analyze the contribution of the influential parameters uncertainty on the prediction uncertainty.
-	As a test facility might have multiple types of data (cladding temperature, pressure drop, etc.), it might be worthwhile to consider each one of them; 
-  although the information content might not be the same for the different types.
-	Finally, for each of the different types,
+  An uncertainty analysis often starts a with large list of input parameters that may and may not be relevant (i.e., influential) to the simulation at hand.
+  A screening method can be used to remove the least influential parameters from the list.
+  Afterward, a variance decomposition method is employed to quantitatively analyze the contribution of the remaining influential parameters uncertainty on the prediction uncertainty.
+	Multiple types of data can be measured during experiments in a test facility (e.g., cladding temperature, pressure drop, etc.), it might be worthwhile to consider each one of them.
+  Finally, for each of the different types,
 	the analysis is also conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
 	By doing so, it is hoped that interesting model behavior with respect to its parameters perturbation can be revealed.
   
-  Section~\ref{sub:intro_sa} provides an overview on the wide range of \gls[hyper=false]{sa} methods from the applied literature,
-  while Chapter~\ref{ch:gsa} presents the details on the selected \gls[hyper=false]{sa} methods and their application to a \gls[hyper=false]{trace} model.
+  Section~\ref{sub:intro_sa} provides an overview of the wide range of \gls[hyper=false]{sa} methods from the applied literature,
+  while Chapter~\ref{ch:gsa} presents the details of the selected \gls[hyper=false]{sa} methods and their applications to a \gls[hyper=false]{trace} model.
 
 % Aim 2 (Statistical Metamodeling)
-	\item \emph{to approximate} the inputs/outputs relationship of a complex computer simulation for a faster evaluation.
+	\item \emph{Approximate} the inputs/outputs relationship of a complex computer simulation for a faster evaluation.
 	The step is required as the statistical calibration method adopted in this thesis is computationally expensive (requiring numerous code runs in the order of hundreds of thousands and beyond).
 	This approximation is done through a \glsfirst[hyper=false]{gp} metamodel resulting in a statistical metamodel.
 	The highly multivariate nature of the outputs (time- and space-dependent) is dealt by a dimension reduction technique.
 	Build upon the results of the previous step, only parameters that are identified to be influential are included in the construction of the metamodel.
   
-  In the subsequent section (Section~\ref{sub:intro_statistical_metamodeling}), a broad overview on metamodeling in the literature is first introduced;
-  later on, in Chapter~\ref{ch:gp_metamodel}, the details and the application of \glsfirst[hyper=false]{gp} metamodel to a \gls[hyper=false]{trace} model are presented.
+  Section (Section~\ref{sub:intro_statistical_metamodeling}) introduces a broad overview on metamodeling in the literature and Chapter~\ref{ch:gp_metamodel} presents the details and the application of \glsfirst[hyper=false]{gp} metamodel to a \gls[hyper=false]{trace} model.
 
 % Aim 3 (Bayesian Calibration)
-	\item \emph{to calibrate} the physical model parameters against various relevant experimental data.
+	\item \emph{Calibrate} the physical model parameters against various relevant experimental data.
 	The word \emph{calibrate} carries a disparaging interpretation related to \emph{tweaking}.
 	However, using a Bayesian statistical framework, the aim of calibration is extended to simultaneously quantify the uncertainty of the parameter estimation.
 	The framework includes various sources of uncertainty, which can be modeled probabilistically, including the model bias term.
 	At the end, the parameters of interest will either be given in the form of posterior \glspl[hyper=false]{pdf} conditioned on the data or samples generated from such distributions to conform with the practice of statistical uncertainty propagation widely adopted in the field of nuclear engineering.
   
-  The practice of Bayesian calibration of computer model from the literature is provided in Section~\ref{sub:intro_bayesian_calibration}.
-  Chapter~\ref{ch:bayesian_calibration} is then dedicated to the details of formulating a Bayesian calibration problem for model parameters, ways to solving it, and an application of it to a \gls[hyper=false]{trace} model.
+  Section~\ref{sub:intro_bayesian_calibration} provides the practice of Bayesian calibration of computer model from the literature.
+  Chapter~\ref{ch:bayesian_calibration} the details the formulation of a Bayesian calibration problem for model parameters, the ways to solving it, and an application of it to a \gls[hyper=false]{trace} model.
 
 \end{enumerate}
 
 Finally, as the calibration is only conducted using experimental data in a limited set of experimental conditions,
 it is important to validate the proposed methods by demonstrating the applicability of the results to the simulation of the phenomena in the same facility but in different experimental conditions.
 That is to propagate the posterior uncertainty of the parameters and to compare the results against experimental data not used in the calibration step.
-
-	%This is aimed at answering the question whether the current physical model in thermal-hydraulics system code \gls[hyper=false]{trace} can be identified with the available experimental data from test facilities.
-	%In other words, how to select important parameters to be inferred.
 	
 %----------------------------------------
 \subsection{Scope}\label{sub:intro_scope}
