@@ -108,18 +108,19 @@ utilizing \gls[hyper=false]{fftbm} and local sensitivity analysis.
 %------------------------------------------------------------------------------
 
 % Introductory paragraph
-Many tasks involving computer simulation can be boiled down to making prediction.
-\emph{Computer experiment}, an experiment using computer simulation evaluates the output based on different inputs to achieve various objectives.
+Many tasks involving computer simulations can be boiled down to making predictions.
+A \emph{computer experiment}, an experiment using computer simulations, evaluates the output based on different inputs to achieve various objectives.
 \marginpar{Computer experiment}
 In the aforementioned sensitivity analysis, the objective is to identify the influential inputs that drives the variation in the outputs of the computer simulator.
-In the forward uncertainty quantification, \gls[hyper=false]{mc} simulation are used to propagate the uncertainty in the inputs to quantify the uncertainty in the simulator prediction using the notion of probability; while in its inverse counterpart, the goal is to identify a region of input parameter space that is consistent with both the observed data and the assumed prior uncertainty of the parameters.
+In the forward uncertainty quantification, \gls[hyper=false]{mc} simulation are used to propagate the uncertainty of the inputs to quantify the uncertainty of the simulator prediction using the notion of probability;
+while in its inverse counterpart, the goal is to identify a region of the input parameter space that is consistent with both the observed data and the assumed prior uncertainty of the inputs.
 The latter objective, in turn, is related to \emph{optimization} where the goal is to identify particular value of inputs that maximize a certain objective function as computed by the simulator.
 
 % The use of metamodel
-The examples of the objectives above are arguably distinct, but they share a common characteristic of involving analyses of outputs from numerous simulator runs.
+The objectives above are arguably distinct, but they share a common characteristic of involving analyses of outputs from numerous simulator runs.
 \marginpar{Complex simulator, expensive simulator}
-An increasingly more realistic and complex computer simulator, however, often translates into a long running simulation (i.e., computationally expensive) and may have to be evaluated large number of times due to the complexity of the relationship between high-dimensional inputs and high-dimensional outputs (e.g., non-linearities, interaction).
-The high computational cost hinders the analyses and the effort to achieve the aforementioned objectives of computer experiment.
+An increasingly more realistic and complex computer simulator, however, often translates into a long running simulation and may have to be evaluated a large number of times due to the complexity of the relationship between high-dimensional inputs and high-dimensional outputs (e.g., non-linearities, interactions).
+The high computational cost hinders the analysis and the effort to achieve the aforementioned objectives of computer experiment.
 
 % Why Metamodel
 As a result, having a fast approximating model of a complex simulator is beneficial in conducting a computer experiment and its value was acknowledged by Sacks et al. in their seminal paper \cite{Sacks1989} and formalized further in several textbooks \cite{Santner2003,Fang2006}.
@@ -130,13 +131,13 @@ This approximating model in the literature is referred to as \emph{metamodel}, \
 
 % Broad classification
 Nowadays, any of the terms above are used interchangeably and all are used to substitute the original simulator to reduce the computational cost of conducting computer experiments \cite{Simpson2001,Razavi2012,Asher2015}. 
-Subtle difference does exist.
-Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivation (i.e., surrogate modeling) according to the literature.
+Subtle differences do exist.
+Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivations (i.e., surrogate modeling) according to the literature.
 \marginpar{Classification}
-Surrogate models according to their derivation can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
+Surrogate models according to their derivations can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
 
 % Reduced order model
-The reduced order models are perhaps more familiar in the scientific community where a complex physical model is being simplified by putting more stringent assumption or reducing the numerical resolution while trying to preserve the most important physical processes present in the more complex model.
+The reduced order models are perhaps more familiar in the scientific community where a complex physical model is being simplified by putting more stringent assumptions or reducing the numerical resolution while trying to preserve the most important physical processes present in the more complex model.
 \marginpar{Reduced-order model}
 The point neutron kinetics model is an example of a reduced-order model, substituting the more complex $3$-dimensional nodal code.
 A \gls[hyper=false]{th} system code is also a reduced-order model of the more expensive multi-phase computational fluid dynamics code.
@@ -147,27 +148,27 @@ The response surface surrogates, on the other hand, make no pretense of preservi
 \marginpar{Response surface surrogates}
 It seeks to \emph{emulate} the relationship (i.e., \emph{mapping}) between inputs and outputs of the simulator.
 The term \emph{metamodel} is used throughout the thesis and exclusively refer to this particular type of surrogate model.
-The workflow of constructing a response surface surrogate typically consists of three steps.
+The workflow of constructing a response surface surrogate consists of three steps.
 The first step is to gather the data, that is by running the simulator at limited and selected points across the input parameter space of interest and evaluate its outputs.
 The selection of such points are known as the \emph{design of experiment} \cite{Simpson2001a,Santner2003}.
 The second step is to choose an approximating function that emulates well the relationship between the inputs and outputs and \emph{train} this function based on the data.
 Training a surrogate model involves \emph{fitting} the parameters associated with the selected approximating function.
 The function is chosen such that it is simpler and faster to evaluate at arbitrary inputs, relative to the original simulator.
 Finally, a validation step is conducted to assess the quality of the resulting metamodel.
-Variation of this workflow exists, especially whether iteration is carried out \cite{Razavi2012}.
+These are a typical workflow of constructing a metamodel, though variation exists \cite{Razavi2012}.
 
 % Gaussian Process, What, Renewed interest due to Machine learning
 The surrogate model introduced in the papers of Sacks et al. \cite{Sacks1989,Sacks1989a} were \gls[hyper=false]{gp} metamodel.
 \marginpar{Gaussian process metamodel}
 The metamodel was constructed as a tool to interpolate between observed data, that is, between the inputs and outputs of actual simulator runs.
 Once constructed the output at any arbitrary input point can be predicted faster using the metamodel.
-This idea was borrowed from a spatial interpolation tool in geostatistics (where the inputs were spatial coordinates) developed by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}. 
+This idea was borrowed from a spatial interpolation tool in geostatistics (where the inputs were spatial coordinates) developed by Krige dating back to the 1950s \cite{Krige1951} and formalized by Matheron in the 1960s \cite{Matheron1963}.
 \gls[hyper=false]{gp} metamodel is arguably the most popular approach to metamodeling and it enjoys a renewed interest due to its application for machine learning \cite{Rasmussen2006}.
 
 % Gaussian Process, Why
 A \gls[hyper=false]{gp} metamodel is a statistical metamodel.
 It is based on the extension of multivariate Gaussian distribution to a continuous multidimensional input parameter space.
-Under the Bayesian interpretation, the metamodel assumes a prior probability distribution over functions (i.e., probability distribution whose each realization is a function) to initially describe an unknown complex function that underlies the simulator.
+Under the Bayesian interpretation, the metamodel assumes a prior probability distribution over functions (i.e., a probability distribution of which each realization is a function) to initially describe an unknown complex function that underlies the simulator.
 The observed data (i.e., design of experiment plus the corresponding outputs) is then used to update the prior and learn more about the true underlying function. 
 Though the simulator itself might be deterministic, the limited size of the observed data renders prediction at arbitrary non-observed input \emph{uncertain}.
 This measure of uncertainty makes a \gls[hyper=false]{gp} metamodel an attractive choice to be incorporated into a model calibration framework where multiple sources of uncertainty are considered.
@@ -180,7 +181,8 @@ This research adopts \gls[hyper=false]{gp} for constructing a metamodel of a \gl
 has a long history of being adapted to the design and analysis of computer experiments \cite{Kerrigan1979,Lucia1982,Faravelli1989,Engel1990}.
 It is mostly based on either linear or quadratic regression (with interaction terms) (see for instance \cite{Kleijnen2000}, and more recent reviews \cite{Simpson1998,Simpson2001}).
 In recent times, other methods such as the ones based on artificial neural network \cite{Fonseca2003} and polynomial chaos expansion (PCE) \cite{Sudret2008,Sudret2012} have also gained traction.
-For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits from Scopus, an online bibliographic database \cite{Elsevier2017}, for the different select metamodeling approaches. Note that the list is not at all exhaustive.
+For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits from Scopus, an online bibliographic database \cite{Elsevier2017}, for the different selected metamodeling approaches.
+Note that the list is not at all exhaustive.
 \begin{table}[ht]
     \myfloatalign
     \caption{Number of publications related to different metamodeling approaches based on Scopus web search as of Feb. $14$. $2017$.}
@@ -197,10 +199,10 @@ For comparison, Table~\ref{tab:metamodel_in_literature} shows the search hits fr
 \end{table}
 
 % Development in nuclear engineering application
-Metamodel applications have a long history in nuclear engineering analyses due to the complexity of the simulators and the long-understood importance of quantifying the uncertainty in the prediction.
+Metamodel applications have a long history in nuclear engineering analyses due to the complexity of the simulators and the long-understood importance of quantifying the uncertainty of the predictions.
 \marginpar{Developments in nuclear engineering application}
 As such, historically, metamodels (specifically, the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
-The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenario, to the uncertainty and sensitivity analyses of severe accident progression \cite{Khatib-Rahbar1989}.
+The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenario, to the uncertainty and sensitivity analyses of severe accident progressions \cite{Khatib-Rahbar1989}.
 In recent times, more advanced metamodels (e.g., \gls[hyper=false]{gp} metamodel) have been applied to more diverse engineering analysis;
 from the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013} code.
 
