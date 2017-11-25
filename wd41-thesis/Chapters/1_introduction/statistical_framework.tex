@@ -24,11 +24,11 @@ In the review by Ionescu-Bujor and Cacuci \cite{Ionescu-Bujor2004, Cacuci2004},
 \gls[hyper=false]{sa} techniques are classified with respect to their scope (local vs. global) and to their framework (deterministic vs. statistical).
 In the review of \gls[hyper=false]{sa} methods by Iooss and Lemaître \cite{Iooss2015}, 
 and the works by Saltelli et al. \cite{Saltelli2008} and by Santner et al. \cite{Santner2003}, 
-the statistical framework is implicitly assumed deriving ideas from design of experiment, 
+the statistical framework is implicitly assumed, 
 and the classification is based on the parameter space of interest (local vs. global).
 
 % Local sensitivity analysis
-Local analysis is based on calculating the effect on the model output of small perturbations around a nominal parameter value. 
+Local analysis is based on calculating the effect on the model output of small perturbations around nominal parameter values. 
 \marginpar{Local sensitivity analysis}
 Often, the perturbation is done one parameter at a time thus approximating the first-order partial derivative of the model output with respect to the perturbed parameter. 
 The derivative can be computed through efficient adjoint formulation \cite{Cacuci2003,Cacuci2010} capable of handling numerous input parameters.
@@ -42,13 +42,13 @@ Thus the coefficients can be readily compared over different modeled systems, in
 Global analysis, on the other hand, 
 \marginpar{Global sensitivity analysis}
 seeks to explore the input parameter space across its range of variation and then quantify the input parameter importance based on a characterization of the resulting output response (hyper-)surface. 
-In global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, the characterization is aimed at the identification of the system’s critical points (e.g., maxima, minima, saddle points, etc.). 
+In the global deterministic framework \cite{Ionescu-Bujor2004,Cacuci2010}, the characterization is aimed at the identification of the critical points of the system (e.g., maxima, minima, saddle points, etc.). 
 In statistical global methods \cite{Saltelli2008, Saltelli2004, Saltelli2006}, the characterization is aimed at measuring the dispersion of the output based on variance \cite{Sobol2001,Cukier1978}, correlation \cite{Helton1993}, or elementary effects \cite{Morris1991}.
 
 % Global sensitivity analysis, difficulty
 Due to the different characterizations, the global statistical framework can potentially give spurious results not comparable to the results from the local method as there is no unique definition of sensitivity coefficient provided by different global methods \cite{Razavi2015}. 
-In some cases, different methods can give different and inconsistent parameters importance ranking \cite{Saltelli2008,Saltelli2004}.
-Furthermore, the result of the analysis can be highly dependent to the assumed input parameters probability distributions and/or their range of variations \cite{Cacuci2004,Cacuci2010}.
+In some cases, different methods can give different and inconsistent parameter importance ranking \cite{Saltelli2008,Saltelli2004}.
+Furthermore, the result of the analysis can be highly dependent to the assumed input parameters probability distributions or their range of variations \cite{Cacuci2004,Cacuci2010}.
 
 % Global sensitivity analysis, advantages
 Yet, despite the aforementioned shortcomings, 
@@ -60,12 +60,11 @@ This is the case especially in comparison to adjoint-based sensitivity \cite{Cac
 provided that the code is designed/modified for adjoint analysis.
 
 Second, no a priori knowledge on the model structure (linearity, additivity, etc.) is required. 
-This is essential in many cases because depending on the model complexity and for large parameters variation,
-the linearity or additivity assumption might not hold.
+This is essential in many cases because depending on the model complexity and for large parameter variations, the linearity or additivity assumption might not hold.
 
 Last, 
 the choice of a statistical framework for sensitivity analysis fits the Monte Carlo (MC)-based uncertainty propagation method widely adopted in nuclear reactor evaluation models \cite{Boyack1990, Nutt2004, Wallis2007, Glaeser2008}. 
-The method prescribes that the uncertain model input and parameters (modeled as random variables) 
+The method prescribes that the uncertain model input parameters (modeled as random variables) 
 should be simultaneously and randomly perturbed across their range of variations. 
 Multiple randomly generated input values are then propagated through the code to quantify the dispersion of the prediction (e.g., peak cladding temperature) 
 which serves as a measure of the prediction reliability. 
@@ -97,7 +96,7 @@ In accordance to such approach, \glsfirst[hyper=false]{fda} popularized by Ramsa
 Despite these recent developments, 
 \marginpar{More recent development in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
-Notable recent examples related of sensitivity analysis for a time-dependent \gls[hyper=false]{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
+Notable recent examples related to sensitivity analysis for a time-dependent \gls[hyper=false]{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
 for reflooding experiment of degraded fuel rods, utilizing adjoint sensitivity method; 
 by Auder et al. \cite{Auder2012} for pressurized thermal shock analysis, 
 utilizing statistical methods with emphasis on metamodeling; 
