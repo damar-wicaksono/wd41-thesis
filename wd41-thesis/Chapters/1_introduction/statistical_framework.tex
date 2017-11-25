@@ -211,44 +211,40 @@ from the design optimization problem of fuel assembly \cite{Raza2008} and spacer
 %----------------------------------------------------------------------
 
 % Introductory paragraph
-The objective of model calibration is to increase the agreement between simulation prediction and its corresponding measurement data by adjusting some of the simulator inputs \cite{Campbell2006a,Trucano2006}.
+The objective of model calibration is to increase the agreement between simulation predictions and measurement data by adjusting some of the simulator inputs \cite{Campbell2006a,Trucano2006}.
 \marginpar{Model calibration, goal and approach}
 Traditionally, calibration is closely related to an optimization problem of an objective function measuring the error between simulation predictions and measurement data (e.g., root-mean-square-error).
-However, statistical approach to calibration using a Bayesian framework has become a popular practice in scientific simulation community.
+However, statistical approach to calibration using a Bayesian framework has become a popular practice in the scientific simulation community.
 Instead of minimizing a measure of error, Bayesian framework treats the uncertainty of the inputs probabilistically and update their prior probability distributions based on the available, albeit uncertain, measurement data.
 The framework offers flexibility in modeling various sources of uncertainty \cite{Kennedy2001,Kaipio2011}.
 
 % Bayesian Calibration
 Bayesian framework for the calibration of computer simulation mo\-del was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
 \marginpar{Bayesian framework, Kennedy and O'Hagan approach}
-The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters along with the associated uncertainty taking into account different sources of uncertainty based on the observed data.
-The distinct idea is to acknowledge that a systematic bias between a physics-based simulator and reality might be present.
-Yet, the magnitude and the sign of this systematic bias are often not known a priori.
-At the same time, if the bias is not modeled properly, the calibration process might overfit the model parameters.
+The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters and their uncertainties by taking into account different sources of uncertainty based on the observed data.
+The distinct idea is to acknowledge that a systematic bias between a physics-based simulator and reality might exist and is often not known a priori.
+If the bias is not modeled properly, the calibration process might overfit the model parameters.
 That is, the calibrated model parameters will be overly sensitive to the calibration data and thus not applicable for prediction.
 As such, Kennedy and O'Hagan proposed to model the unknown bias term probabilistically by putting a prior probability distribution on the bias term to be updated simultaneously with that of the model parameters, by using the observed data.
 The proposed prior distribution is a \gls[hyper=false]{gp}.
-Due to its popularity, the term \emph{KOH approach} becomes synonymous to this particular approach of computer model calibration \cite{Trucano2006,Hall2011,Ling2014}.
-It is adapted here to deal with the particular problem posed in the \gls[hyper=false]{premium} benchmark that itself represents a typical problem the nuclear engineering \gls[hyper=false]{th} analysis, as detailed in Chapter~\ref{ch:bayesian_calibration}.
+Due to its popularity, the term \emph{KOH approach} became synonymous to this particular approach of computer model calibration \cite{Trucano2006,Hall2011,Ling2014}.
+It is adapted here to deal with the particular problem posed in the \gls[hyper=false]{premium} benchmark that itself represents a typical problem in nuclear engineering \gls[hyper=false]{th} analysis, as detailed in Chapter~\ref{ch:bayesian_calibration}.
 
 %Finally, acknowledging that computational cost of numerous simulator runs might not be negligible, the approach embedded the use of \gls[hyper=false]{gp} metamodel (termed \emph{emulator}) to substitute the original simulator. 
 % and while extension and improvement exist \cite{Bayarri2007,Higdon2008,Arendt2012},
 
 % Bayesian data analysis
-Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution, from its summaries to its propagation through some functionals.
+Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution.
 \marginpar{Steps in Bayesian framework}
 Regarding the first aspect, the KOH approach for model calibration, in essence, prescribes a probabilistic model for the data-generating process of the experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
 \marginpar{Bayesian framework, formulation}
 The formulation will eventually results in a posterior probability distribution of the model parameters as presented in Section~\ref{sub:intro_uq_inverse}.
-%This probabilistic model is then conditioned on the observed data that results in the likelihood function.
-%In Bayesian analysis, any involving unknown parameters associated with the probabilistic model is then assigned prior probability distribution and its specification complete the formulation of the posterior distribution for the parameter of interest.
 Extension and modification to the KOH approach includes dealing with high-dimensional output \cite{Higdon2008,Bayarri2007a,Wilkinson2010}, multiple types of output \cite{Arendt2012a}, different choices of the model bias term \cite{Ling2014}, and various simplifications \cite{Arendt2012,Bayarri2007,Goldstein2012}.
 
 % Regarding prior
-Regarding the choice for the prior distribution, there is a tendency in the modern literature \cite{Gelman2013,McElreath2015} to move away from the notion of \emph{Bayesianism} which emphasize on specifying the correct prior (if not the \emph{true} prior altogether) so as to guarantee that the resulting posterior will always be true relative to that prior.
+Regarding the choice for the prior distribution, there is a tendency in the modern literature \cite{Gelman2013,McElreath2015} to move away from the notion of \emph{Bayesianism}, which emphasizes specifying the correct prior (if not the \emph{true} prior altogether) so as to guarantee that the resulting posterior will always be true relative to that prior.
 \marginpar{On prior distribution}
-In a more modern practice of Bayesian statistics, the use of prior is seen in more pragmatic light; as a starting assumption that can be changed if not appropriate.
-The choice for prior can be provisional, especially for parameters associated with the probabilistic model (not the simulator itself) \cite{Gelman2002,Gelman2006}.
+In a more modern practice of Bayesian statistics, the use of prior is seen in a more pragmatic light, i.e., as a starting assumption that can be changed if not appropriate \cite{Gelman2002,Gelman2006}.
 Gelman et al.~\cite{Gelman2013} advocates to check if the resulting parameters posterior distributions and the prediction using them make sense and are useful, rather than to check whether the posterior parameter distribution is \emph{true}.
 
 % Bayesian Computation 1, Analytical and Early Sampler
@@ -256,41 +252,41 @@ The second aspect of the Bayesian framework is related to the computations invol
 \marginpar{Bayesian framework, computation}
 The formulated posterior distribution in practical problems is multidimensional.
 Numerically integrating the posterior distribution to summarize a given \gls[hyper=false]{qoi} (see Section~\ref{sub:intro_uq_forward}) might not be efficient.
-Traditionally, maximum a posteriori estimates (or maximum likelihood, if the prior is non-informative) is often used to describe each of the posterior model parameter values using a single number.
+Traditionally, maximum a posteriori estimates\footnote{or maximum likelihood estimates, if the prior is non-informative} is often used to describe each of the posterior model parameter values using a single number.
 \marginpar{Semi analytical approach}
 It simply requires the maximization of the posterior density function (i.e., its mode).
 An extension of this, giving description of the shape of the posterior, is done by the so-called \emph{Laplace's approximation} or the \emph{normal approximation} \cite{Mackay2005,Sivia2012,Gelman2013,McElreath2015}.
 In this approximation, the distribution of the posterior is approximated as a normal distribution. 
 The mean corresponds to the maximum of the posterior density function, while the variance of the distribution is approximated as the function of the second derivative of the posterior around the mean (i.e., its curvature).
 Multidimensionality of the posterior distribution is taken into account by using the Hessian matrix.
-The approximation works well if the posterior distribution is approximately normal (i.e., unimodal, bell-shaped, linearly correlated).
+The approximation works well if the posterior distribution is approximately normal (i.e., unimodal, bell-shaped, and linearly correlated).
 
 % Bayesian Computation 2, Early Samplers
 To deal with more generic formulations of the posterior distribution, modern approach to Bayesian computation involves random simulation to directly generate samples from the posterior.
 \marginpar{MCMC, classical samplers}
 This can be seen as an extension of the simulation method for estimating integral quantities (the \glsfirst[hyper=false]{mc} simulation), for the case of a complicated sampling distribution not easily sampled from.
 The idea of \gls[hyper=false]{mc} simulation dates back to the $1940$ for solving the problems in neutron transport \cite{Metropolis1949} and statistical mechanics \cite{Metropolis1953}.
-In the latter, generation of a \emph{Markov chain} by \gls[hyper=false]{mc} simulation paved a way to a generic simulation method applicable to generate samples from any kind of probability distribution; thus the origin of \gls[hyper=false]{mcmc} simulation.
-Later on, its usage for data analysis in general and Bayesian data analysis in particular were revived in the $1970$s and the early $1980$s by the generalization of the simulation algorithm by Hastings \cite{Hastings1970} (i.e., the \gls[hyper=false]{mh} algorithm) and by the invention of a computationally efficient sampler and its application for image reconstruction problem by Geman and Geman \cite{Geman1984} (i.e., the Gibbs sampler).
+In the latter, generation of a \emph{Markov chain} by \gls[hyper=false]{mc} simulation paved the way to a generic simulation method applicable to generate samples from any kind of probability distribution; thus the origin of \gls[hyper=false]{mcmc} simulation.
+Later on, its usage for data analysis in general and Bayesian data analysis in particular were revived in the $1970$s and the early $1980$s by the generalization of the simulation algorithm by Hastings \cite{Hastings1970} (i.e., the \gls[hyper=false]{mh} algorithm) and by the invention of a computationally efficient sampler and its application for image reconstruction by Geman and Geman \cite{Geman1984} (i.e., the Gibbs sampler).
 
 % Bayesian Computation 3, Advanced Samplers
 Nowadays, \gls[hyper=false]{mcmc} sampler is the backbone of Bayesian computation \cite{Allison2013,Geyer2011,Gelman2013}.
 \marginpar{MCMC, modern samplers}
 Loosely speaking, its improvement and modern implementations can be broadly classified into three different families: adaptive \gls[hyper=false]{mh} samplers (e.g., \cite{Andrieu2008}), Hamiltonian \gls[hyper=false]{mc} samplers \cite{Neal2011}, and ensemble samplers \cite{Goodman2010}.
 Adaptive \gls[hyper=false]{mh} sampler deals with the adaptation of the algorithm to achieve faster convergence.
-Hamiltonian \gls[hyper=false]{mc} sampler simulates the movement of a particle in the parameter space as described by the posterior distribution according to Hamiltonian dynamic.
+Hamiltonian \gls[hyper=false]{mc} sampler simulates the movement of a particle in the parameter space as described by the posterior distribution according to the Hamiltonian dynamic.
 Finally, ensemble sampler uses multiple particles that move together in the input parameter space each of them moving according to the position of the others.
 Ensemble sampler has a particularly simple implementation, is easily parallelized, and requires minimal tuning \cite{Foreman-Mackey2013}.
 Chapter~\ref{ch:bayesian_calibration} describes in more detail the basics of \gls[hyper=false]{mh} and ensemble samplers.
 
 % Development in nuclear engineering application
-Unlike the forward uncertainty propagation and statistical sensitivity analysis, Bayesian model calibration is relatively recent to be applied in nuclear engineering application \cite{Unal2011}.
+Unlike the forward uncertainty propagation and statistical sensitivity analysis, the use of Bayesian model calibration is relatively new in nuclear engineering applications \cite{Unal2011}.
 \marginpar{Developments in nuclear engineering application}
-Notable early example was the previously mentioned CIRC\'E \cite{Crecy2001} for the calibration of model parameters in a \gls[hyper=false]{th} system code.
-Recent demonstration on the applicability of the method can be found in Ref.~\cite{Freixa2016}.
-More recent examples are more in-line to the KOH approach with additional extension:
-for dealing with high-dimensional output of the same type (i.e., time- and space-dependent) with \cite{Wicaksono2016} or without \cite{Higdon2013,Wu2017} explicit treatment of the model bias; 
-with \cite{Li2017} or without \cite{Heo2018} the use of metamodels.
+A notable early example was the previously mentioned CIRC\'E \cite{Crecy2001} for the calibration of model parameters in a \gls[hyper=false]{th} system code.
+A recent demonstration on the applicability of the method can be found in Ref.~\cite{Freixa2016}.
+More recent examples are in-line to the KOH approach but provide extensions:
+for dealing with high-dimensional output of the same type (i.e., time- and space-dependent) with \cite{Wicaksono2016} or without \cite{Higdon2013,Wu2017} explicit treatment of the model bias, 
+and with \cite{Li2017} or without \cite{Heo2018} the use of metamodels.
 %CIRC\'E assumes a linear relationship between model parameters and the outputs of interest and the difference between predicted value and experimental data is described by first order approximation.
 %It is further assumed that the parameters are normally distributed, before and after calibration.
 %Under these assumptions, a probabilistic model for the difference between predicted value and experimental data can be formulated.
