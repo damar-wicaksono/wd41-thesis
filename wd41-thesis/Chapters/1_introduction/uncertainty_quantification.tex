@@ -3,11 +3,9 @@
 %*************************************************************************************************************************
 
 % Introductory Paragraph
-Before continuing the discussion of uncertainty analysis of code predictions, it will be worthwhile to define some additional terminologies to avoid later confusion.
+Before continuing the discussion of uncertainty analysis of code predictions, this section defines some additional terminologies to avoid later confusion.
 
-In making a connection with the notion of \emph{simulator} introduced in Section~\ref{sec:intro_computer_simulation}, 
-recall that from Fig.~\ref{fig:ch1_th_system_code} an \emph{input deck} is distinct from the code itself.
-Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hydraulics system in a more generic way, as an input/output model.
+The notion of \emph{simulator} introduced in Section~\ref{sec:intro_computer_simulation} is depicted in a more generic way, as an input/output model in Fig.~\ref{fig:ch1_simulator_io}.
 \begin{figure}[bth]	
 	\centering
 	\includegraphics[width=\textwidth]{../figures/chapter1/figures/simulator_io}
@@ -15,17 +13,17 @@ Fig.~\ref{fig:ch1_simulator_io} depicts the notion of simulator of a thermal-hyd
 	\label{fig:ch1_simulator_io}
 \end{figure}
 
-Indeed, an input deck defines a specific problem (i.e., system) of interest.
-It includes the specifications for geometrical configuration (i.e., the nodalization), choice of material and fluid involved, as well as initial and boundary conditions.
-It may also include the setting for the numerical solver.
+The input deck defines a specific problem (i.e., system) of interest and can be seen as the input of \gls[hyper=false]{th} codes.
+It includes the geometrical configuration (i.e., the nodalization), the material and fluid involved, the initial and boundary conditions, and possibly the settings for the numerical solver.
 \marginpar{Controllable inputs and model parameters}
-Some of those specifications (such as the boundary conditions, etc.) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$ that define a particular instance in which the simulator is to be used\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
+Some of these specifications (such as the boundary conditions) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$.
+The simulator is to be run for a given controllable input value\footnote{later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.
-These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which is referred to as the \emph{physical model parameters}.
-Note that both the controllable inputs and the physical model parameters are considered by the code simply as \emph{inputs}.
+These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which are referred to as the \emph{physical model parameters}.
+Both the controllable inputs and the physical model parameters are considered by the code as \emph{inputs}.
  
-Specifying the input deck, as far as user is concerned, completely defines the problem and the code will solve the conservation equations $b$ which output the dynamic state of relevant physical variables $\mathbf{u}(\bm{r}, t)$ (e.g., fluid pressure, temperature, wall temperature, etc.). 
-In practice, these ``raw'' outputs are further post-processed to obtain the so-called \glspl[hyper=false]{qoi} the are relevant to the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
+Specifying the input deck, as far as the user is concerned, completely defines the problem and the code solves the conservation equations $b$ which output the physical variables $\mathbf{u}(\bm{r}, t)$ (where $\bm{r}$ and $t$ denote space and time variables, respectively) associated with the fluid flow and heat structure (e.g., fluid pressure, temperature, wall temperature, etc.).
+These ``raw'' outputs are further post-processed to obtain relevant \glspl[hyper=false]{qoi} of relevance to the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
 
 %--------------------------------------------------------------------------
 \subsection{Forward Uncertainty Quantification}\label{sub:intro_uq_forward}
