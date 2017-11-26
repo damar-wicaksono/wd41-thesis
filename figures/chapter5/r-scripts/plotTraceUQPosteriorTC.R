@@ -17,20 +17,29 @@ trc_exp_df <- readRDS(rds_tidy_prior_fullname)[[2]]
 # Make the plot ---------------------------------------------------------------
 p <- ggplot(data = trc_uq_prior_df, aes(x = time, y = nom_run))
 p <- p + facet_wrap(~ax_locs, ncol = 4)
+# Prior uncertainty bounds
 p <- p + geom_ribbon(aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "darkgray", alpha =1.0)
+# Posterior, independent uncertainty bounds
 p <- p + geom_ribbon(data = trc_uq_post_ind_df,
                      aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "lightgray", alpha = 1.0)
+# Posterior, correlated uncertainty bounds
 p <- p + geom_ribbon(data = trc_uq_post_corr_df,
                      aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "white", alpha = 0.8)
+# Nominal run
 p <- p + geom_line()
+# Posterior, middle run
+p <- p + geom_line(data = trc_uq_post_corr_df,
+                   aes(x = time, y = mid_run),
+                   lty = 2)
+# Experimental data
 p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
                     shape = 4, stroke = 1.0)
-p <- p + theme_bw()
 
 # Set axis labels and font size
+p <- p + theme_bw()
 p <- p + labs(x = "Time [s]",
               y = "Clad Temperature [K]")
 p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"))
