@@ -42,6 +42,8 @@ p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
 p <- p + theme_bw()
 p <- p + labs(x = "Time [s]",
               y = "Clad Temperature [K]")
+p <- p + ggtitle(plot_title)
+p <- p + theme(plot.title = element_text(size = 18, face = "bold"))
 p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"))
 p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.ticks.x = element_line(size = 1),
