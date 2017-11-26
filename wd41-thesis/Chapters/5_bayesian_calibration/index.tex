@@ -12,28 +12,27 @@ The respective methods were exemplified by their application to a \gls[hyper=fal
 This chapter deals with a statistical framework for calibrating the inputs of a simulation model.
 The framework casts the calibration problem as a statistical inverse problem where the initial (prior) uncertainties of the inputs are updated based on available observed data.
 It considers the a priori uncertainties in the inputs and in the experimental data, as well as the possible bias of the model.
-Acknowledging them,
-the inputs uncertainties are then coherently updated via the Bayes' theorem resulting in an updated (posterior) probability density.
+The inputs uncertainties are then coherently updated via the Bayes' theorem resulting in an updated (posterior) probability density.
 The updated uncertainty of the inputs can then be propagated through the simulation model to quantify the prediction uncertainty.
 
 % Overview paragraphs
 Section~\ref{sec:bc_statistical_framework} first presents the statistical framework for the problem of computer model calibration, 
-while Section~\ref{sec:bc_modular} elaborates further the formulation of the calibration problem through a modularized approach.
-Each module represents a model for the data-generating processes involved: the computer simulation model, the experimental data, and the model discrepancy.
-Those are the ingredients in the formulation of the posterior probability density.
+while Section~\ref{sec:bc_modular} elaborates further the formulation of the calibration problem through probabilistic modeling of the data-generating process.
+This results in the formulation of the posterior probability density.
 The posterior density is often a complex highly multi-dimensional function, which makes it difficult to work with.
 Section~\ref{sec:bc_mcmc} presents a simulation method (i.e., \glsfirst[hyper=false]{mcmc} simulation) to directly generates representative samples from the posterior density.
 These samples can be used to approximate the posterior density or for uncertainty propagation.
 Important aspects of analyzing samples of a Markov chain are presented in Section~\ref{sec:bc_mcmc_diagnostic}.
 Section~\ref{sec:bc_application_to_feba} then discusses the application of the approach to the \gls[hyper=false]{feba} \gls[hyper=false]{trace} reflood simulation model to constrain the prior uncertainty range of the model parameters based on the available experimental data.
-To do so, different types of experimental data are used and their ability to constrain the prior range is investigated.
+To do so, different types of experimental data (i.e., cladding temperature, pressure drop, and liquid carryover) are used and their ability to constrain the prior range is investigated.
+The resulting posterior uncertainty, derived from one set of experimental condition, is verified by propagating it on the other \gls[hyper=false]{feba} tests.
 Section~\ref{sec:bc_chapter_summary} concludes the chapter.
 
-%\input{Chapters/5_bayesian_calibration/statistical_framework}
-%\input{Chapters/5_bayesian_calibration/modular_bayesian}
-%\input{Chapters/5_bayesian_calibration/mcmc}
-%\input{Chapters/5_bayesian_calibration/mcmc_practical_aspects}
-%\input{Chapters/5_bayesian_calibration/application_to_feba/index}
-%\input{Chapters/5_bayesian_calibration/chapter_summary}
-
-%The resulting posterior uncertainty, derived from one set of experimental condition, is verified by propagating it on the other \gls[hyper=false]{feba} tests.
+% The contents of the chapter
+\input{Chapters/5_bayesian_calibration/statistical_framework}
+\input{Chapters/5_bayesian_calibration/modular_bayesian}
+\input{Chapters/5_bayesian_calibration/mcmc}
+\input{Chapters/5_bayesian_calibration/mcmc_practical_aspects}
+\input{Chapters/5_bayesian_calibration/application_to_feba/index}
+\input{Chapters/5_bayesian_calibration/chapter_summary}
+%****************************************************************
