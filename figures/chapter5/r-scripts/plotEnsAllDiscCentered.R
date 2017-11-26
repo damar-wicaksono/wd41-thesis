@@ -9,6 +9,10 @@
 # date      : Nov. 2017
 #
 # Load required libraries -----------------------------------------------------
+library(viridis)
+library(rethinking)
+library(hexbin)
+
 source("./r-scripts/multiplot.R")
 source("./r-scripts/plot_ensemble.R")
 
@@ -18,6 +22,7 @@ otpfullname <- "./figures/plotEnsAllDiscCentered.pdf"
 
 # Input filename
 ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
+ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduced\\results\\2000\\216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
 
 # Burnin for this case (always change accordingly)
 burnin <- 760
@@ -29,7 +34,7 @@ fig_size <- c(17, 11)
 pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])
 
-plot_ensemble(ens_rds_fullname,
+p <- plot_ensemble(ens_rds_fullname,
               burnin = burnin,
               param_names = param_names,
               param_ranges = prior_ranges,
