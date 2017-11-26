@@ -27,7 +27,7 @@ ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revi
 ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduced\\results\\2000\\216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-noparam8.Rds"
 
 # Burnin for this case (always change accordingly)
-burnin <-1390
+burnin <- 850
 
 param_names <- c("gridHT", "iafbWHT", "dffbWHT", "iafbIntDr",
                  "dffbIntDr", "dffbWDr", "tQuench")
