@@ -18,6 +18,7 @@ otpfullname <- "./figures/plotEnsTCDiscCentered.pdf"
 
 # Input filename
 ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-tc-1000-2000-fix_bc-fix_scale-unbiased-nobc.Rds"
+ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduced\\results\\2000\\216-ens-tc-1000-2000-fix_bc-fix_scale-unbiased-nobc.Rds"
 
 # Burnin for this case (always change accordingly)
 burnin <- 820
