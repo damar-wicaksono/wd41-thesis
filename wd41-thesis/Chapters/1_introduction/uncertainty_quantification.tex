@@ -22,8 +22,8 @@ The conservation equations of the code are closed with additional set of closure
 These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which are referred to as the \emph{physical model parameters}.
 Both the controllable inputs and the physical model parameters are considered by the code as \emph{inputs}.
  
-Specifying the input deck, as far as the user is concerned, completely defines the problem and the code solves the conservation equations $b$ to estimate the physical variables $\mathbf{u}(\bm{r}, t)$ (where $\bm{r}$ and $t$ denote space and time variables, respectively) associated with the fluid flow and heat structure (e.g., fluid pressure, temperature, wall temperature, etc.).
-These ``raw'' outputs are further post-processed to obtain relevant \glspl[hyper=false]{qoi} of relevance to the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
+Specifying the input deck, as far as the user is concerned, completely defines the problem and the code solves the conservation equations $b$ (as seen in Fig.~\ref{fig:ch1_simulator_io}) to estimate the physical variables $\mathbf{u}(\bm{r}, t)$ (where $\bm{r}$ and $t$ denote space and time variables, respectively) associated with the fluid flow and heat structure (e.g., fluid pressure, temperature, wall temperature, etc.).
+These ``raw'' outputs are further post-processed to obtain relevant \glspl[hyper=false]{qoi} for the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
 
 %--------------------------------------------------------------------------
 \subsection{Forward Uncertainty Quantification}\label{sub:intro_uq_forward}
@@ -32,7 +32,7 @@ These ``raw'' outputs are further post-processed to obtain relevant \glspl[hyper
 % Best-estimate, limitation
 Best-estimate analysis attempts to describe as realistically as possible the behaviors of the physical processes that occur during a plant transient.
 And yet, neither complete understanding nor enough data is always available to adequately simulate these complex physical phenomena.
-Simplifying assumptions, approximations, and expert judgments remain to some degree unavoidable to have a complete analysis.
+Simplifying assumptions, approximations, and expert judgments remain to some degree unavoidable for a complete analysis.
 
 % Best-estimate, plus uncertainty
 Hence, best-estimate analysis has to be complemented with uncertainty analysis.
@@ -43,7 +43,7 @@ These combined quantities are then compared with safety limits (e.g., \gls[hyper
 % Source of possible uncertainties
 There are several known sources of uncertainty that render the prediction on $\bm{u}(\mathbf{r},t)$ and its derived quantities uncertain.
 \marginpar{Sources of uncertainty}
-The the sources of primary interest in the present research are:
+The sources of primary interest in the present research are:
 \begin{enumerate}
 
 	\item \emph{Uncertainty associated with the controllable inputs}.
@@ -83,7 +83,7 @@ For instance, the mean of a \gls[hyper=false]{qoi} given by function $g$ is
 \end{equation*}
 where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
 
-Using \gls[hyper=false]{mc} techniques, samples are generated from their respective distributions and are used to run the code multiple times.
+Using \gls[hyper=false]{mc} techniques, samples are generated from the joint input parameters distribution and are used to run the code multiple times.
 Afterward, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
 The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Wallis2007,Glaeser2008}.
@@ -110,28 +110,26 @@ For instance, in an empirical model the model parameters are the curve-fitting p
 However, many physical models, be it empirical or mechanistic, are originally derived from experiments on simple systems that do not, strictly speaking, reflect the flow conditions in an \gls[hyper=false]{lwr} (e.g., heated tube vs. rod bundle, low pressure vs. high pressure, etc.) \cite{Bestion2008}.
 \marginpar{Separate Effect Test Facilities (SETFs)}
 Thus, to better represent the flow characteristics in reactor transient,
-experiments with well-specified conditions are conducted in \glspl[hyper=false]{setf}.
+experiments with well-specified conditions are conducted in \glspl[hyper=false]{setf}, facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012}.
 
-These are facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012} and their data are used to assess the physical models.
+The data are used to assess the physical models.
 In the assessment,
 \marginpar{Calibration against SETFs}
 some parameters in the models are adjusted to match the experimental data \cite{Barre1990}.
-Alternatively, additional free parameters can also be introduced in the models to serve the same purpose \cite{Bestion2008}.
+Alternatively, additional free parameters can be introduced in the models to serve the same purpose \cite{Bestion2008}.
 That is, the parameters are tuning parameters and become measures of the models inadequacy in reproducing the data.
 Ultimately, optimal values for the parameters are estimated and implemented in the code.
 
 % Origin of uncertainty
 In light of this, it can be argued that the uncertainty associated with the tuning parameters stems from the fact that the calibration was conducted only on limited set of data obtained from selected \glspl[hyper=false]{setf}.
-Different \glspl[hyper=false]{setf} for the same phenomena exist, covering wide ranges of flow configurations and experimental boundary conditions.
-It is fair to ask if the calibrated value will hold if the calibration were to be conducted on other \glspl[hyper=false]{setf} data for the same phenomena.
+As different \glspl[hyper=false]{setf} exist for the same phenomena, it is fair to ask if the calibrated value will hold if the calibration were to be conducted on other \glspl[hyper=false]{setf} data.
 Additionally, as tuning parameters, expert-judgment is also often used to estimate the uncertainty.
 Experts fixed the range of variation of the parameters based on their expectation of the model performance.
 
 % Inverse uncertainty
-To derive the uncertainty associated with the model parameters described above,
-the problem can be posed as an inverse problem.
+To derive the uncertainty associated with the model parameters described above, the problem can be posed as an inverse problem.
 \marginpar{An inverse problem}
-In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the \emph{unobserved} parameters in the physical model used to predict the same quantity as the experimental data.
+In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is to infer the value of the \emph{unobserved} parameters in the physical model used to predict the same quantity as the experimental data.
 To avoid excessive bias to the calibration data, it is important here to acknowledge the observation errors of the experimental data and the controllable inputs, and the possible systematic bias of the associated models.
 
 % Bayesian framework
@@ -158,7 +156,7 @@ That is, it seeks to adjust the model parameters such that the predictions of th
 \marginpar{Statistical calibration}
 However, instead of obtaining a single estimated value (or values in case of multiple parameters), the resulting posterior is a \gls[hyper=false]{pdf}, conditioned on the observed data.
 In relation to the aforementioned expert-judgment for estimating the parameters uncertainty, the approach uses the experimental data to better inform the prior expectation about the model parameters values.
-The posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data set.
+The posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data.
 
 % Connection to PREMIUM Benchmark
 The importance of characterizing the uncertainty in the physical models parameters was acknowledged by the \gls[hyper=false]{wgama} of the \gls[hyper=false]{oecd}/\gls[hyper=false]{nea}.

@@ -17,7 +17,7 @@ Alas, to come up with a consistent set of closure laws is a great challenge for 
 
 % Closure Laws Difficulty, Conceptual
 The closure laws required to close the two-fluid model pose particularly difficult challenges \cite{Wulff2007}.
-For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from the wall, the liquid and gas phases are needed.
+For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from the wall, and the liquid and gas phases are needed.
 But measuring temperature of the individual phases in an arbitrary interfacial topology has its own technical difficulties to the extend that no such data is available to be implemented in the closure laws.
 Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfacial friction factor, wall friction factor, etc.) were generally carried out in adiabatic conditions.
 As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlation.
@@ -81,16 +81,16 @@ This is done in three steps by consolidating and adapting recent developments in
 % Aim 1 (Global sensitivity analysis)
 \begin{enumerate}
 	\item \emph{Analyze and better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
-	\Glsfirst[hyper=false]{sa}, in particular \Glsfirst[hyper=false]{gsa}, methods can be used to assist in identifying which of the model parameters can be calibrated using the available data.
+	\Glsfirst[hyper=false]{sa}, in particular \Glsfirst[hyper=false]{gsa}, methods can be used to assist identifying which of the model parameters can be calibrated using the available data.
   An uncertainty analysis often starts a with large list of input parameters that may and may not be relevant (i.e., influential) to the simulation at hand.
   A screening method can be used to remove the least influential parameters from the list.
   Afterward, a variance decomposition method is employed to quantitatively analyze the contribution of the remaining influential parameters uncertainty on the prediction uncertainty.
 	Multiple types of data can be measured during experiments in a test facility (e.g., cladding temperature, pressure drop, etc.), it might be worthwhile to consider each one of them.
   Finally, for each of the different types,
-	the analysis is also conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
+	the analysis is conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
 	By doing so, it is hoped that interesting model behavior with respect to its parameters perturbation can be revealed.
   
-  Section~\ref{sub:intro_sa} provides an overview of the wide range of \gls[hyper=false]{sa} methods from the applied literature,
+  Section~\ref{sub:intro_sa} provides an overview of the wide range of \gls[hyper=false]{sa} methods in the applied literature,
   while Chapter~\ref{ch:gsa} presents the details of the selected \gls[hyper=false]{sa} methods and their applications to a \gls[hyper=false]{trace} model.
 
 % Aim 2 (Statistical Metamodeling)
@@ -100,7 +100,7 @@ This is done in three steps by consolidating and adapting recent developments in
 	The highly multivariate nature of the outputs (time- and space-dependent) is dealt by a dimension reduction technique.
 	Build upon the results of the previous step, only parameters that are identified to be influential are included in the construction of the metamodel.
   
-  Section (Section~\ref{sub:intro_statistical_metamodeling}) introduces a broad overview on metamodeling in the literature and Chapter~\ref{ch:gp_metamodel} presents the details and the application of \glsfirst[hyper=false]{gp} metamodel to a \gls[hyper=false]{trace} model.
+  Section~\ref{sub:intro_statistical_metamodeling} introduces a broad overview of metamodeling in the literature and Chapter~\ref{ch:gp_metamodel} presents the details and the application of \glsfirst[hyper=false]{gp} metamodel to a \gls[hyper=false]{trace} model.
 
 % Aim 3 (Bayesian Calibration)
 	\item \emph{Calibrate} the physical model parameters against various relevant experimental data.
@@ -160,7 +160,7 @@ The methods and practices of sensitivity analysis, approximation, and calibratio
 \marginpar{Statistical framework}
 This thesis, however, focuses on the statistical approach for each of the aforementioned steps.
 The main reasoning for this choice are twofold:
-First, statistical methods tend to require fewer assumption on the model complexity.
+First, statistical methods tend to require fewer assumptions regarding the model complexity.
 While they may be more computationally expensive than their non-statistical counterparts,
 they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the number of input parameters.
 Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be represented in terms of probability.

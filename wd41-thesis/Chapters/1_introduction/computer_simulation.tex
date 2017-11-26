@@ -20,10 +20,9 @@ This definition highlights three main points.
 \marginpar{model, simulation, scientific simulation, and scientific computer simulation}
 First, this definition accentuates the difference between \emph{model} and \emph{simulation}.
 A model deals with the notion of representation of a system, while a simulation deals with the notion of imitation of a behavior of that system.
-Secondly, a model is said to be scientific when it represents the behavior of a real world system as its subject.
+Secondly, a model is said to be scientific when it represents a real world system as its subject.
 Finally, the modifier \emph{computer} generally implies that the mathematical models cannot be solved analytically and their solutions require a computer.
-Though the associated numerical approximations can affect its solution. 
-Thus many computational-related aspects often need to be considered.
+Because the associated numerical approximations can affect its solution, many computational-related aspects often need to be considered.
 This thesis only deals with computer simulation.
 
 %The model itself is then referred to as physical model\footnote{Note that this term is referring to the mathematical model of a physical process, and \emph{not} a physical copy of object of interest (vis-à-vis conceptual model). As of October $31$, $2017$ the entry ``physical model'' in Wikipedia, the first hit given by Google, refers to the latter \cite{Wikipedia2017}.} .
@@ -38,8 +37,8 @@ Thus, these distinctions are useful in acknowledging the level of approximation 
 % Code
 A computer software that implements scientific models down to the solution algorithms is called a \emph{scientific code} or simply a \emph{code} \cite{Trucano2006}.
 \marginpar{Code}
-Many modern implementation of scientific codes, apart from possibly being specific to a scientific domain, are comprehensive platforms.
-For instance, in the context of \gls[hyper=false]{th} system modeling, such codes allows modeling various attributes of the system ranging from its geometry, initial and boundary conditions, and design variables to the settings for discretization scheme and numerical solver.
+Many modern implementations of scientific codes, apart from possibly being specific to a scientific domain, are comprehensive platforms.
+For instance, in the context of \gls[hyper=false]{th} system modeling, such codes allow modeling various attributes of the system ranging from its geometry, initial and boundary conditions, and design variables to the settings for discretization scheme and numerical solver.
 
 % Simulator
 A \emph{simulation} or a \emph{calculation} \cite{Trucano2006} using a code can only be made on a particular well-specified system, where all the aforementioned attributes (geometry, initial and boundary conditions, etc.) have been completely fixed or specified.
@@ -64,7 +63,7 @@ the neutronics of the core;
 the thermo-mechanics of the fuel and the structure;
 the radiological analysis of a possible release;
 and, the system thermal-hydraulics of the plant, the subject of the present thesis\footnote{Ref.~\cite{DAuria2012} added one additional key discipline, namely: reliability analysis. It is excluded in the above listing as it is not technically a discipline of \emph{physics}.}.
-Each discipline is, in turn, characterized by a distinct set of governing physical equations and often analyzed by a distinct code.
+Each discipline is, in turn, characterized by a distinct set of governing physical equations and that are often solved by a distinct code.
 
 % Entry to Conservative vs Best Estimate
 The \gls[hyper=false]{npp} safety is established, among other things, by setting the acceptance criteria in terms of limiting physical quantities relevant for the phenomena involved.
@@ -81,8 +80,7 @@ However, it was later found that there are conditions for which conservative ass
 % An Illustration
 As an example, consider the analysis for a \gls[hyper=false]{loca} of an \gls[hyper=false]{lwr}.
 \marginpar{An illustration}
-Assuming less interfacial shear between liquid and gas phases of the coolant (water) reduces mist flow and is a conservative assumption because less heat is transferred to the coolant flow in the upper region of the core.
-which penalizes the fuel temperature prediction.
+Assuming less interfacial shear between the liquid and the gas phases of the coolant (water) reduces mist flow and is a conservative assumption because less heat is transferred to the coolant flow in the upper region of the core, which penalizes the fuel temperature prediction.
 But this assumption also reduces that the time to refill the core as more liquid is retained in the reactor cooling system.
 Furthermore, with less shear, there is less resistance in injecting emergency coolant into the core (condition known as the counter-current flow limitation).
 Both effects are clearly not conservative and put into question the conservatism of the prediction \cite{IAEA2009}.
@@ -90,7 +88,7 @@ Both effects are clearly not conservative and put into question the conservatism
 % Best-estimate Analysis
 Because of this example and many others \cite{IAEA2009}, a more accurate prediction of two-phase flow transient behavior under accident conditions was deemed necessary.
 \marginpar{Best-estimate analysis}
-As opposed to the conservative approach, \emph{best-estimate} approach calls for (more) physically sound thermal-hydraulics models with more realistic assumptions, which are backed by experimental data obtained from numerous experimental programs conducted in Separate and Integral Effect Test Facilities.
+As opposed to the conservative approach, \emph{best-estimate} approach calls for (more) physically sound thermal-hydraulics models with more realistic assumptions, which are backed up by experimental data obtained from numerous experimental programs conducted in Separate and Integral Effect Test Facilities.
 In that context, Best-estimate \gls[hyper=false]{th} system codes were developed to provide more realistic predictions.
 The codes were designed to be comprehensive tools capable of simulating realistically a wide range of transients foreseen in \gls[hyper=false]{lwr} operation,
 and were developed using the current best understanding of flow processes expected to happen during the transients.
@@ -107,7 +105,7 @@ The simulation of the plant behavior also requires an explicit modeling of the g
 
 % Nodalization
 The coolant circuit of an \gls[hyper=false]{lwr} is a complex system.
-The system includes the reactor pressure vessel with hundreds of fuel assemblies; kilometers of interconnecting pipes; scores of valves, pumps, and tanks; as well as numerous special components like steam generator and condenser.
+The system includes the reactor pressure vessel with hundreds of fuel assemblies; kilometers of interconnecting pipes; scores of valves, pumps, and tanks; as well as numerous special components like steam generators and condensers.
 \marginpar{Nodalization}
 The first major simplification made for describing the fluid flow in the coolant circuit is to average the fluid on the surface perpendicular to its flow (i.e., \emph{flow area averaging} -- see Chapter~\ref{ch:trace_reflood}). 
 This results in a $1$-dimensional \emph{nodalization} of the circuit.
@@ -140,7 +138,7 @@ The core element of a system code is a set of conservation equations describing 
 The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the \emph{two-fluid model}.
 \marginpar{Two-fluid model}
 This model separately treats the transport phenomena of the two-phases of fluid flow (gas and liquid) resulting in a set of six balance equations (mass, momentum, and energy for each of the two phases).
-The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, giving more realistic pictures in a wide range of transients.
+The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, giving more realistic picture in a wide range of transients.
 %To close the system of equations (i.e., to have the same number of equations as the number of unknowns), it has to be complemented by two additional set of constitutive equations.
 %The first is the equation of state describing the thermodynamic relation between state variables of a given fluid.
 %The second is the closure relationships describing the interaction between phases and each phase to the boundary wall in terms of mass, momentum, and energy. 
@@ -148,8 +146,8 @@ The model can capture phenomena where thermal and mechanical non-equilibrium con
 % Validity of Two-fluid Model
 The validity of the two-fluid model relies on the proper modeling of the transfer terms between phases and between each phase and the boundary walls.
 The transfer terms include interfacial drag, interfacial heat transfer, and wall heat transfer.
-In principle, any two-phase flow pattern exhibits particular phase distributions and interfacial structure.
-As a result, the mathematical expressions of the transfer terms takes different change with the pattern of the two-phase flow.
+In principle, any two-phase flow pattern exhibits particular phase distributions and interfacial structures.
+As a result, the mathematical expressions of the transfer terms change with the pattern of the two-phase flow.
 As the transfer terms represent different physical processes taking place for each flow pattern, they constitute the \emph{physical models} of a system code.
 
 % Closure Laws, fully empirical
@@ -167,7 +165,7 @@ A fully mechanistic (i.e., \emph{phenomenological}) approach for developing clos
 Using this approach, a physical mechanism that governs the phenomena of interest is postulated.
 Experimental data plays a role only in validating such a postulated model.
 If the model cannot be supported by the data then a complete revision might be required.
-Mechanistic approach to closure laws modeling provides a scientific basis for prediction outside the validation data (i.e., extrapolation). 
+Mechanistic approach to closure laws modeling provides a scientific basis for prediction outside the validation data range (i.e., extrapolation). 
 However, its quality strongly depends on the adequacy of the postulated model and the associated assumptions.
 
 % semi-empirical approach
