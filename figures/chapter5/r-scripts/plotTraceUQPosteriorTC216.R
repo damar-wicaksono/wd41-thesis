@@ -22,6 +22,8 @@ rds_tidy_prior_fullname <- paste0(
 
 # Graphic variables
 fig_size <- c(18, 9)
+plot_title <- parse(
+  text = "'FEBA Test No. 216, '*P[sys]*' = 4.1 [bar], Flooding Rate = 3.8 ['*m.s^-1*']'")
 
 # Make the plot ---------------------------------------------------------------
 # w/ Bias
