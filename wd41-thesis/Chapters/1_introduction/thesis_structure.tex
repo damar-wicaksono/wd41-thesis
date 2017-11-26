@@ -1,4 +1,3 @@
-\newpage
 %------------------------------------------------------------------
 \section{Structure of the Thesis}\label{sec:intro_thesis_structure}
 %------------------------------------------------------------------
@@ -17,28 +16,28 @@ They are bookended by an introductory chapter (this chapter) and a concluding ch
 \end{figure}
 
 % Chapter 2
-\textsc{Chapter~\ref{ch:trace_reflood}} gives an overview of the system thermal-hydraulics code \gls[hyper=false]{trace} with an emphasis on its reflood phenomena modeling and simulation.
-The chapter also introduces the reflood experiment at the \gls[hyper=false]{feba} facility which serves as the experimental basis of this work followed by its modeling in \gls[hyper=false]{trace}.
+\textsc{Chapter~\ref{ch:trace_reflood}} gives an overview of the system thermal-hydraulics code \gls[hyper=false]{trace} with an emphasis on its reflood phenomenon modeling and simulation.
+The chapter also introduces the reflood experiment at the \gls[hyper=false]{feba} facility that serves as the experimental basis of this work followed by its modeling in \gls[hyper=false]{trace}.
 This model becomes the running case study in the three subsequent chapters to which the proposed methods are applied.
-The chapter includes the selection of the initial parameters relevant for reflood simulations and the propagation of their uncertainties on the code predictions.
+The chapter includes the selection of the initial parameters relevant for reflood simulations and the propagation of their prior uncertainties on the code predictions.
 
 % Chapter 3
 \textsc{Chapter~\ref{ch:gsa}} introduces the \gls[hyper=false]{gsa} analysis methods adopted in this thesis with three key underlying ideas.
-The first is to reduce the dimensionality of the code output space.
+The first idea is to reduce the dimensionality of the input parameters space through parameter screening,
+while the second is to reduce the dimensionality of the code output space.
 As the output of the simulation is time-dependent, dimension reduction is carried out while trying to preserve the interpretability of the results.
-The second idea is to reduce the dimensionality of the input parameters space through parameter screening.
 The third and final idea is to investigate, quantitatively, the effect of variation of parameters on the overall time-dependent output variation through variance decomposition.
 The presented methods are then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} and the results are discussed. 
 
 % Chapter 4
 \textsc{Chapter~\ref{ch:gp_metamodel}} presents an approach to construct a fast surrogate model that approximates the inputs/outputs relationship of a computationally expensive simulator.
-A minimum theoretical foundation of the method is introduced, before moving on to describing an approach adapting the method for dealing with highly multivariate output via dimension reduction.
+The theoretical minimum of the method is introduced, before adapting the method for dealing with highly multivariate output via dimension reduction.
 Afterward, the application of the method to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} is presented and discussed.
 In the end, a metamodel of the \gls[hyper=false]{trace} model is constructed and validated in anticipation of the high cost of the calibration approach presented in the following chapter.
 
 % Chapter 5
-\textsc{Chapter~\ref{ch:bayesian_calibration}} describes the Bayesian calibration, the last of the main chapters of the thesis.
-The description of the methods are split into two parts, following the convention in the Bayesian data analysis, the formulation part and the computation part.
+\textsc{Chapter~\ref{ch:bayesian_calibration}} describes the Bayesian calibration and is the last of the main chapters of the thesis.
+The description of the methods is split into two parts, following the convention in the Bayesian data analysis, the formulation part and the computation part.
 The formulation of the Bayesian statistical calibration problem (i.e., the posterior) as well as its simplification (the so-called \emph{modularization}) are first introduced.
 The resulting posterior is potentially complex, i.e., a high-dimensional \gls[hyper=false]{pdf} with highly varying ranges in each dimension. 
 Consequently, the computational part is focused on a simulation-based approach called \gls[hyper=false]{mcmc} to directly generate representative samples useful for downstream analysis (e.g., forward propagation).
@@ -54,10 +53,3 @@ Finally, the thesis is concluded.
 % Appendices
 Three parts of appendices are included in the back of the thesis.
 They include the additional results of the thesis not presented in the main chapters, the computational tools developed and used in the context of this thesis, and some useful mathematical results and recipes.
-
-%\begin{sidewaysfigure}
-%	\centering
-%	\includegraphics[width=0.85\textwidth]{../figures/methodologicalRoadmap/methodologicalRoadmap.pdf}
-%	\caption{Methodological Roadmap of the Thesis}
-%	\label{fig:methodological_roadmap}
-%\end{sidewaysfigure}
