@@ -102,37 +102,37 @@ The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is w
 A lot has been said about the origin of the uncertainty associated with the controllable inputs.
 The physical model parameters, however, are conceptually different.
 \marginpar{Model parameters}
-The physical models referred to in this thesis are usually represented either in the form of correlation, phenomenological model, or a mixed between the two extremes (see Section~\ref{sub:intro_th_system_code}).
-The parameters associated with the models can either represent physically meaningful quantities or not (This distinction will be revisited in Chapter~\ref{ch:bayesian_calibration}).
-The uncertainty on these parameters depends on the parameters origin.
-For instance, in an empirical model the model parameters are the curve-fitting parameters and its uncertainty can be associated with the dispersion of the data.
+The physical models referred to in this thesis are usually represented either in the form of correlations, phenomenological models, or a mixed between the two (see Section~\ref{sub:intro_th_system_code}).
+Therefore, the model parameters do not necessarily have a physical meaning (see Chapter~\ref{ch:bayesian_calibration}) and the source of their uncertainties vary with the type of model.
+For instance, in an empirical model the model parameters are the curve-fitting parameters and their uncertainties are observable and can be associated with the dispersion of the data.
 
 % Representativity for NPP application
-However, it is worth considering that many such models, be it empirical or mechanistic, were originally derived based on simple systems that did not, strictly speaking, reflect the flow conditions in an \gls[hyper=false]{lwr} (e.g., heated tube vs. rod bundle, low pressure vs. high pressure, etc.) \cite{Bestion2008}.
+However, many physical models, be it empirical or mechanistic, are originally derived from experiments on simple systems that do not, strictly speaking, reflect the flow conditions in an \gls[hyper=false]{lwr} (e.g., heated tube vs. rod bundle, low pressure vs. high pressure, etc.) \cite{Bestion2008}.
 \marginpar{Separate Effect Test Facilities (SETFs)}
-Thus, to reflect more on the conditions of flow in the reactor transient to be simulated,
-experiments with well-specified conditions are conducted at \glspl[hyper=false]{setf}, facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012}.
+Thus, to better represent the flow characteristics in reactor transient,
+experiments with well-specified conditions are conducted in \glspl[hyper=false]{setf}.
 
-The data sets from \glspl[hyper=false]{setf} are then used to assess the corresponding model (and possibly multiple models).
+These are facilities aimed at reproducing a particular safety-relevant phenomena during transient at a particular part of the reactor \cite{DAuria2012} and their data are used to assess the physical models.
 In the assessment,
 \marginpar{Calibration against SETFs}
 some parameters in the models are adjusted to match the experimental data \cite{Barre1990}.
 Alternatively, additional free parameters can also be introduced in the models to serve the same purpose \cite{Bestion2008}.
 That is, the parameters are tuning parameters and become measures of the models inadequacy in reproducing the data.
-Ultimately, some kind of optimal values for the parameters are estimated and implemented in the code.
+Ultimately, optimal values for the parameters are estimated and implemented in the code.
 
 % Origin of uncertainty
-In light of this, it can be argued that the uncertainty associated with such parameters stems from the fact that the calibration was conducted only on limit set of data obtained from a selected \gls[hyper=false]{setf}.
+In light of this, it can be argued that the uncertainty associated with the tuning parameters stems from the fact that the calibration was conducted only on limited set of data obtained from selected \glspl[hyper=false]{setf}.
 Different \glspl[hyper=false]{setf} for the same phenomena exist, covering wide ranges of flow configurations and experimental boundary conditions.
-It is fair to ask if the calibrated value will hold if the calibration were to be conducted in other \glspl[hyper=false]{setf} for the same phenomena.
-Additionally, as tuning parameters, expert-judgment is also often used to estimate the uncertainty, measuring the degree of expected model performance through how much the model parameter is allowed to vary.
+It is fair to ask if the calibrated value will hold if the calibration were to be conducted on other \glspl[hyper=false]{setf} data for the same phenomena.
+Additionally, as tuning parameters, expert-judgment is also often used to estimate the uncertainty.
+Experts fixed the range of variation of the parameters based on their expectation of the model performance.
 
 % Inverse uncertainty
-To derive the uncertainty associated with the model parameters obtained described above,
+To derive the uncertainty associated with the model parameters described above,
 the problem can be posed as an inverse problem.
 \marginpar{An inverse problem}
 In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is then to infer the value of the \emph{unobserved} parameters in the physical model used to predict the same quantity as the experimental data.
-To avoid excessive bias to the calibration data, it is important here to acknowledge the observation errors of the observed experimental data and the controllable inputs, and the possible systematic bias of the associated models.
+To avoid excessive bias to the calibration data, it is important here to acknowledge the observation errors of the experimental data and the controllable inputs, and the possible systematic bias of the associated models.
 
 % Bayesian framework
 In a probabilistic setting, a way to make an inference of unobserved parameters based on observed data is
@@ -143,7 +143,7 @@ through the Bayes' theorem,
 \end{equation*}
 where the left-hand side of the equation is the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
 The right-hand side constitutes of the likelihood function $p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c)$ (probability of observing data given the parameters), the prior of the model parameters $p(\bm{x}_m)$ (the initial state of knowledge regarding the parameters values before observing the data),
-while the denominator is a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as in the case of variability, then a prior probability can be put on them as well.}.
+while the denominator is a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as due to their inherent variability, then a prior probability can be put on them as well.}.
 The posterior represents the knowledge one has on the model parameters values conditioned on the data under the modeling assumption.
 Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the inverse quantification.
 \bigfigure[pos=tbhp,
@@ -154,10 +154,10 @@ Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the in
 {Simplified flowchart of inverse quantification for model parameters of a simulator.}
 
 The formulation and computation of the posterior above can be seen as a calibration exercise.
-That is, it seeks to adjust the model parameters such that it is consistent with the observed data (i.e., calibration data) under the assumed likelihood and the prior.
+That is, it seeks to adjust the model parameters such that the predictions of the simulator are consistent with the observed data (i.e., calibration data) under the assumed likelihood and the prior.
 \marginpar{Statistical calibration}
 However, instead of obtaining a single estimated value (or values in case of multiple parameters), the resulting posterior is a \gls[hyper=false]{pdf}, conditioned on the observed data.
-In relation to the aforementioned expert-judgment for the estimating the parameters uncertainty, the approach uses the experimental data to better inform the prior expectation about the model parameters values.
+In relation to the aforementioned expert-judgment for estimating the parameters uncertainty, the approach uses the experimental data to better inform the prior expectation about the model parameters values.
 The posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data set.
 
 % Connection to PREMIUM Benchmark
