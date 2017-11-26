@@ -17,6 +17,17 @@ trc_uq_post_corr_df <- readRDS(rds_tidy_corr_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_uq_post_ind_df <- readRDS(rds_tidy_ind_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_exp_df <- readRDS(rds_tidy_prior_fullname)[[2]]
 
+new_ax_locs <- c("Bottom" = "Bottom (z = 0.0 - 1.7 [m])",
+                 "Middle" = "Middle (z = 1.7 - 2.3 [m])",
+                 "Top" = "Top (z = 2.3 - 4.1 [m])",
+                 "Total" = "Total (z = 0.0 - 4.1 [m])")
+
+trc_uq_prior_df$ax_locs <- revalue(trc_uq_prior_df$ax_locs, new_ax_locs)
+trc_uq_post_corr_df$ax_locs <- revalue(trc_uq_post_corr_df$ax_locs,
+                                       new_ax_locs)
+trc_uq_post_ind_df$ax_locs <- revalue(trc_uq_post_ind_df$ax_locs, new_ax_locs)
+trc_exp_df$ax_locs <- revalue(trc_exp_df$ax_locs, new_ax_locs)
+
 # Make the plot ---------------------------------------------------------------
 p <- ggplot(data = trc_uq_prior_df, aes(x = time, y = nom_run / pa_2_bar))
 p <- p + facet_wrap(~ax_locs, ncol = 4)
