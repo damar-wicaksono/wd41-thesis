@@ -22,7 +22,7 @@ The conservation equations of the code are closed with additional set of closure
 These closure laws are, in turn, parametrized by a set of model specific parameters denoted by $\bm{x}_m$ which are referred to as the \emph{physical model parameters}.
 Both the controllable inputs and the physical model parameters are considered by the code as \emph{inputs}.
  
-Specifying the input deck, as far as the user is concerned, completely defines the problem and the code solves the conservation equations $b$ (as seen in Fig.~\ref{fig:ch1_simulator_io}) to estimate the physical variables $\mathbf{u}(\bm{r}, t)$ (where $\bm{r}$ and $t$ denote space and time variables, respectively) associated with the fluid flow and heat structure (e.g., fluid pressure, temperature, wall temperature, etc.).
+Specifying the input deck, as far as the user is concerned, completely defines the problem and the code solves the conservation equations $b$ (Fig.~\ref{fig:ch1_simulator_io}) to estimate the physical variables $\mathbf{u}(\bm{r}, t)$ (where $\bm{r}$ and $t$ denote space and time variables, respectively) associated with the fluid flow and heat structure (e.g., fluid pressure, temperature, wall temperature, etc.).
 These ``raw'' outputs are further post-processed to obtain relevant \glspl[hyper=false]{qoi} for the problem at hand (e.g., max. temperature, max. pressure, onset time, etc.).
 
 %--------------------------------------------------------------------------
