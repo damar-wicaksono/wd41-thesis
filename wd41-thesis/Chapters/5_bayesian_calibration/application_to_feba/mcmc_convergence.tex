@@ -7,7 +7,7 @@ All the calibration schemes explained above were each run for a total of $2'000$
 This will results in a total of $2'000'000$ posterior samples.
 However, these initial samples requires further post-processing to remove the initialization bias and incorrect statistical error estimation due to autocorrelation in the samples.
 In the following, only the results from the calibration with model bias term is discussed.
-The results from other calibration scheme are similar and can be found in the appendix.
+The results from other calibration scheme are similar.
 
 % Trace plots
 Fig.~\ref{fig:ch5_plot_ens_trace_all_disc_centered} shows the trace plots for each of the $8$ model parameters in the calibration with model bias term.
@@ -29,7 +29,7 @@ Note also that the number the length of the burn-in period for an ensemble sampl
 \end{figure}
 
 % Table of autocorrelation times, burn-in
-Although the burn-in period can be inferred directly from the plots in Fig.~\ref{fig:ch5_plot_ens_stat_mcmc}, a slightly more precise criteria can be obtained through the autocorrelation time of the running statistics.
+Although the length of the burn-in period can be inferred directly from the plots in Fig.~\ref{fig:ch5_plot_ens_stat_mcmc}, a slightly more precise criteria can be obtained through the autocorrelation time of the running statistics.
 Table~\ref{tab:ch5_ens_stat_mcmc} summarizes the estimated autocorrelation time for the running statistics and for each of the model parameters.
 As can be seen, the autocorrelation times of the average tend to be longer than the ones of standard deviation. 
 The longest autocorrelation time of all the parameters (shown in the table in bold) becomes the basis for determining the length of burn-in period.
