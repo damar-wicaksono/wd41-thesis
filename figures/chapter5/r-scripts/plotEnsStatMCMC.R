@@ -18,6 +18,7 @@ otpfullname <- "./figures/plotEnsStatMCMC.pdf"
 
 # Input filename
 ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
+ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduced\\results\\2000\\216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
 
 # Burnin for this case (always change accordingly)
 burnin <- 760
