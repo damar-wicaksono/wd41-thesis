@@ -26,6 +26,26 @@ burnin <- 820
 # Graphic variables
 fig_size <- c(17, 11)
 
+param_names <- c("gridHT [-]",
+                 "iafbWHT [-]",
+                 "dffbWHT [-]",
+                 "dffbVIHT [-]",
+                 "iafbIntDr [-]",
+                 "dffbIntDr [-]",
+                 "dffbWDr [-]",
+                 "tQuench [K]")
+
+prior_ranges <- list(c(0.5, 2.0),
+                     c(0.5, 2.0),
+                     c(0.5, 2.0),
+                     c(0.25, 4.0),
+                     c(0.25, 4.0),
+                     c(0.25, 4.0),
+                     c(0.5, 2.0),
+                     c(-50, 50))
+
+nom_params <- c(1, 1, 1, 1,
+                1, 1, 1, 0)
 # Make the plot ---------------------------------------------------------------
 pdf(otpfullname, family = "CM Roman",
     width = fig_size[1], height = fig_size[2])

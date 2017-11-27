@@ -29,8 +29,13 @@ ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduc
 # Burnin for this case (always change accordingly)
 burnin <- 850
 
-param_names <- c("gridHT", "iafbWHT", "dffbWHT", "iafbIntDr",
-                 "dffbIntDr", "dffbWDr", "tQuench")
+param_names <- c("gridHT [-]",
+                 "iafbWHT [-]",
+                 "dffbWHT [-]",
+                 "iafbIntDr [-]",
+                 "dffbIntDr [-]",
+                 "dffbWDr [-]",
+                 "tQuench [K]")
 
 prior_ranges <- list(c(0.5, 2.0),
                      c(0.5, 2.0),
