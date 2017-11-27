@@ -42,7 +42,6 @@ t_exp_idx <- (unique(trc_exp_df$time)[-1] * 10)
 
 inf_scores <- numeric(length(ax_locs)*length(t_exp_idx))
 cal_scores <- numeric(length(ax_locs)*length(t_exp_idx))
-rmse <- numeric(length(ax_locs)*length(t_exp_idx))
 
 cal_scores_prior <- c()
 rmse <- c()
@@ -59,8 +58,6 @@ for (ax_loc in ax_locs)
                                     ref_val = trc_prior_ax[t_exp_idx[i],]$nom_run,
                                     lb_val = trc_prior_ax[t_exp_idx[i],]$lb_run,
                                     ub_val = trc_prior_ax[t_exp_idx[i],]$ub_run))
-    rmse <- c(rmse,
-              (trc_exp_ax$exp_data[i] - trc_prior_ax[t_exp_idx[i],]$mid_run)^2)
   }
 }
 
@@ -69,7 +66,7 @@ qoi_post <- data.frame(feba_test = feba_test,
                        output_type = "DP",
                        inf_score = 0.0,
                        cal_score = mean(cal_scores_prior),
-                       rmse = sqrt(mean(rmse)))
+                       rmse = sqrt(mean(trc_exp_df$mse)))
 
 # Save the file ---------------------------------------------------------------
 saveRDS(qoi_post, opt$output)
