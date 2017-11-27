@@ -86,17 +86,12 @@ for (i in 1:8)
 }
 
 # Make the  plot --------------------------------------------------------------
-ens_tidy_sub <- subset(ens_tidy, iter == 1141)
-sub_idx <- seq(1142,1240,1)
-
-for (i in sub_idx)
-{
-  ens_tidy_sub <- rbind(ens_tidy_sub, subset(ens_tidy, iter == i))
-}
+ens_tidy_sub <- subset(ens_tidy, iter >= 1141)
+ens_tidy_sub <- subset(ens_tidy_sub, walker >= 601)
 
 p <- ggplot(data = ens_tidy_sub,
             aes(x = iter, y = value, group = walker))
-p <- p + geom_line(alpha = 0.25)
+p <- p + geom_line(alpha = 0.55)
 p <- p + geom_blank(data = ddummy, aes(x = iter, y = value))
 p <- p + theme_bw()
 p <- p + facet_wrap(~param, scales = "free_y", ncol = 4)
