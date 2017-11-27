@@ -39,7 +39,6 @@ case_name <- strsplit(strsplit(prior_filename, "-")[[1]][3], "_")[[1]][1]
 # Compute QoIs ----------------------------------------------------------------
 ax_locs <- unique(trc_prior_df$ax_locs)
 cal_scores_prior <- c()
-rmse <- c()
 
 for (ax_loc in ax_locs)
 {
@@ -55,8 +54,8 @@ for (ax_loc in ax_locs)
                                     ref_val = trc_prior_ax[t_exp_idx[i],]$nom_run,
                                     lb_val = trc_prior_ax[t_exp_idx[i],]$lb_run,
                                     ub_val = trc_prior_ax[t_exp_idx[i],]$ub_run))
-    rmse <- c(rmse,
-              (trc_exp_ax$exp_data[i] - trc_prior_ax[t_exp_idx[i],]$nom_run)^2)
+#    rmse <- c(rmse,
+#              (trc_exp_ax$exp_data[i] - trc_prior_ax[t_exp_idx[i],]$nom_run)^2)
   }
 }
 
@@ -65,7 +64,7 @@ qoi_post <- data.frame(feba_test = feba_test,
                        output_type = "TC",
                        inf_score = 0.0,
                        cal_score = mean(cal_scores_prior),
-                       rmse = sqrt(mean(rmse)))
+                       rmse = sqrt(mean(trc_exp_df$mse)))
 
 # Save the file ---------------------------------------------------------------
 saveRDS(qoi_post, opt$output)

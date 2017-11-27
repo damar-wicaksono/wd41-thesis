@@ -33,7 +33,7 @@ source("./r-scripts/inf_score.R")
 # Read data -------------------------------------------------------------------
 trc_prior_df <- readRDS(opt$prior)[[1]]
 trc_post_df <- readRDS(opt$posterior)[[1]]
-trc_exp_df <- readRDS(opt$prior)[[2]]
+trc_exp_df <- readRDS(opt$posterior)[[2]]
 
 posterior_filename <- strsplit(opt$posterior, "/")[[1]]
 posterior_filename <- posterior_filename[length(posterior_filename)]
@@ -45,7 +45,6 @@ ax_locs <- unique(trc_prior_df$ax_locs)
 
 inf_scores <- c()
 cal_scores <- c()
-rmse <- c()
 
 for (ax_loc in ax_locs)
 {
@@ -65,11 +64,9 @@ for (ax_loc in ax_locs)
                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
     cal_scores <- c(cal_scores,
                     cal_score(exp_val = trc_exp_ax$exp_data[i],
-                              ref_val = trc_post_ax[t_exp_idx[i],]$map_run,
+                              ref_val = trc_post_ax[t_exp_idx[i],]$mid_run,
                               lb_val = trc_post_ax[t_exp_idx[i],]$lb_run,
                               ub_val = trc_post_ax[t_exp_idx[i],]$ub_run))
-    rmse <- c(rmse,
-              (trc_exp_ax$exp_data[i] - trc_post_ax[t_exp_idx[i],]$mid_run)^2)
   }
 }
 
@@ -80,7 +77,7 @@ qoi_post <- data.frame(feba_test = feba_test,
                        output_type = "TC",
                        inf_score = mean(inf_scores),
                        cal_score = mean(cal_scores),
-                       rmse = sqrt(mean(rmse)))
+                       rmse = sqrt(mean(trc_exp_df$mse)))
 
 # Save the file ---------------------------------------------------------------
 saveRDS(qoi_post, opt$output)
