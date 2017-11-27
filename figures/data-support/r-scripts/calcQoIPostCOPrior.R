@@ -43,7 +43,6 @@ lte_10 <- c(lte_10_idx,
 t_exp_idx <- (unique(trc_exp_df[lte_10,]$time)[-1] * 10)
 
 cal_scores_prior <- c()
-rmse <- c()
 for (i in 1:length(t_exp_idx))
 {
   # Loop over time points
@@ -52,8 +51,6 @@ for (i in 1:length(t_exp_idx))
                                   ref_val = trc_prior_df[t_exp_idx[i],]$nom_run,
                                   lb_val = trc_prior_df[t_exp_idx[i],]$lb_run,
                                   ub_val = trc_prior_df[t_exp_idx[i],]$ub_run))
-  rmse <- c(rmse,
-            (trc_exp_df$exp_data[i] - trc_prior_df[t_exp_idx[i],]$mid_run)^2)
 }
 
 qoi_post <- data.frame(feba_test = feba_test,
@@ -61,7 +58,7 @@ qoi_post <- data.frame(feba_test = feba_test,
                        output_type = "CO",
                        inf_score = 0.0,
                        cal_score = mean(cal_scores_prior),
-                       rmse = sqrt(mean(rmse)))
+                       rmse = sqrt(mean(trc_exp_df[lte_10,]$mse)))
 
 # Save the file ---------------------------------------------------------------
 saveRDS(qoi_post, opt$output)
