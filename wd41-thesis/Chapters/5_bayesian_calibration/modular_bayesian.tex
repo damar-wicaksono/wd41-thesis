@@ -330,7 +330,7 @@ In a modularized approach, instead of simultaneously calibrating all the paramet
 The main reason for this simplification is the concern that the parameters involved might be poorly identifiable with respect to the experimental data, especially between parameters (and hyper-parameters) in the different modules.
 This, in turn, causes difficulty in making inference about the model parameters \cite{Liu2005}.
 Moreover, there is a computational incentive in limiting the number of hyper-parameters in the calibration.
-Though the simulation method of Section~\ref{sec:bc_mcmc} tends to have less severe dependence on the problem dimension, more parameters often also increases the complexity of the problem that causes the method to converge slowly.
+Though the simulation method of Section~\ref{sec:bc_mcmc} tends to have less severe dependence on the problem dimension, more parameters often also increases the complexity of the problem and causes the method to converge slowly.
 A lack of identifiability is an example of such an increase in complexity not present in the calibration problem of a lower dimension.
  
 % How: Modularization of the Simulator Model
@@ -344,14 +344,14 @@ Afterward, the metamodel was required to accurately predict the simulator output
 The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept constant during the validation step and the performance of the metamodel was not assessed with respect to the experimental data.  
 
 % How: Modularization of the Model Bias
-Modularizing the model bias term is more intricate due to inherent confounding between the term and the unknown best model parameters.
+Modularizing the model bias term is more intricate due to inherent confounding between this term and the unknown best model parameters.
 \marginpar{Modularization of the model bias term}
 Model bias is defined as the difference between true response value and the simulator prediction using best, but unknown model parameters (Eq.~(\ref{eq:bc_true_simulation})).
 The model bias itself is unknown (uncertain) a priori.
 As such, without further information, experimental data alone cannot be used to distinguish between the model bias term and the model parameters.
 When \gls[hyper=false]{gp} is used to represent the uncertain model bias, this problem typically becomes worse as it introduces multiple hyper-parameters associated with the \gls[hyper=false]{gp} specification.
 
-Due to this confounding, modularizing the model bias term is commonly carried out such that the hyper-parameters associated with the \gls[hyper=false]{gp} can be fixed prior to the calibration of the model parameters.
+Due to this confounding, modularizing the model bias term is commonly carried out such that the hyper-parameters associated with the \gls[hyper=false]{gp} of the bias term can be fixed prior to the calibration of the model parameters.
 There are no consensus in the literature on how exactly such fixed values of the hyper-parameters are obtained.
 However, Refs.~\cite{Kennedy2001,Bayarri2007,Liu2008,Arendt2012} provide a common theme in the modularization of the model bias term through \gls[hyper=false]{mle} of the hyper-parameters based on an initial fitting the difference between the simulator prediction (evaluated using selected value, or values, from the prior of the model parameters) and the experimental data.
 Refs.~\cite{Bayarri2007,Liu2008}, for instance, adopt a pragmatic approach where a \gls[hyper=false]{gp} for the model bias term is fitted (and their corresponding hyper-parameters estimated) based on the differences between simulator prediction using the prior mean of the model parameters and the experimental data across controllable inputs and on the observation layout.
@@ -362,8 +362,8 @@ Afterward, depending on what expectation or assumption are put on the bias term,
 Lastly, one of the main sources for estimating the parameters of the experimental observation error model (i.e., the variance under Gaussian formulation) is the replications under the same experimental condition.
 If those are not available then alternative sources must be consulted.
 \marginpar{Modularization of the observation error model}
-For instance, experimentalist would have an idea on the extent of the observation error and often, these figures can be found on the experiment report.
-If these are none to be found and point estimate of these parameters cannot be justified, then prior distribution on the parameters should be assigned.
+For instance, experimentalist would have an idea on the extent of the observation error and often, these figures can be found in the experiment report.
+If these are not to be found and point estimate of these parameters cannot be justified, then prior distribution on the parameters should be assigned.
 In this case, many analysis in the applied literature assume prior distribution with different degree of informativeness for the scale parameter (e.g., exponential, half-Cauchy, inverse-Gamma, etc.) \cite{Bayarri2007,Arhonditsis2008,Higdon2008}.
 
 % Summary, Closing and Inter-Section Connecting Paragraph Consequence
