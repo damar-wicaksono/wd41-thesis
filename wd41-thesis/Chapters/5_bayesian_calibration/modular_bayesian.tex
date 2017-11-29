@@ -60,7 +60,7 @@ The size of the matrix is $P \times P$, with $P$ the sum of the number of differ
 Incorporating a bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
 \marginpar{Model with negligible bias, illustrated}
 To illustrate this idea, consider a calibration process for a simulator whose bias is negligible, with a single uncertain model parameter and a single controllable input $x_c$ as shown in Fig.~\ref{fig:ch5_plot_illustrate_bias_1}.
-The thin black lines between the two bounding thick black lines indicate simulator prediction at different values of the model parameter.
+The thin black lines between the two bounding thick black lines indicate the simulator predictions at different values of the model parameter.
 As can be seen, the range of the model parameter values can in principle be constrained to match the observed data (crosses) within the observation uncertainty.
 Furthermore, the range of the model parameters will increasingly become smaller with increasing number of data (such that the associated observation uncertainty becomes increasingly narrow as well).
 In other words, the calibrated model parameter converges to the ``true'' value \cite{Bayarri2007,OHagan2013,Brynjarsdottir2014}.
@@ -86,7 +86,7 @@ some simulators would have an apparent bias such that their predictions would re
 Calibration can still be conducted such that the discrepancy between data and prediction is minimized in some sense (i.e., some kind of \emph{best-fitting} model parameter value).
 The calibrated parameter would be able to predict calibration data well, but not for prediction outside the calibration domain.
 The situation becomes more problematic when more precise data becomes available such that uncertainty associated with the observed data becomes narrower.
-In that situation, the uncertainty associated with the calibrated model parameter will also become narrower up to a point value.
+In that situation, the uncertainty associated with the calibrated model parameter will also become narrower up to a point value (in this particular example).
 \marginpar{Overfitting}
 This illustrates the two symptoms of overfitting the model parameter: the calibrated model parameter is \emph{biased} (i.e., having a wrong value) and the distribution characterizing its uncertainty is \emph{degenerate} (i.e., increasingly sure on the wrong value with higher precision of the observed data).
 The latter symptom is particularly troublesome as it inflates the degree of confidence one has on the prediction.
@@ -120,7 +120,7 @@ It does, however, provides additional flexibility in incorporating either prior 
 At this point, it is worth revisiting the meaning of calibrated parameters in a simulator with bias.
 In a simulator without bias it is straightforward to justify the calibrated model parameters as the ``true'' parameter values of the specified model.
 \marginpar{physical parameters, ``true'' values}
-If the model is physics-based then the parameters also correspond to a physical parameter.
+If the model is physics-based then the parameters also correspond to physical parameters.
 As argued in \cite{OHagan2013,Brynjarsdottir2014}, physical parameters often have meaning outside the world described by the model where the parameters currently reside.
 Furthermore, having a true value, such physical parameters would be generally applicable to extrapolation outside the calibration domain.
 
@@ -135,7 +135,7 @@ It is awkward to discuss the true and wrong values of model parameters if the mo
 \marginpar{A pragmatic view}
 In such cases, the notion of true parameter values is hard to justify, the model parameters might not have strict physical meaning and may not be of interest in their own right.
 And yet, in a complex physics-based simulator (where possible systematic bias cannot be excluded), many of these model parameters are being used in conditions different from their calibration domain, regardless of the conceptual distinction (e.g., Refs.~\cite{Arendt2012,USNRC2012}).
-Thus, the calibration of model parameters based on the available experimental data should be aimed such at guaranteeing the simulator remains applicable outside its calibration domain\footnote{or more eloquently in the words of Leamer \cite{Saltelli2006}, the resulting posterior uncertainty associated with the calibrated model parameters is:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
+Thus, the calibration of model parameters based on the available experimental data should be aimed at guaranteeing that the simulator remains applicable outside its calibration domain\footnote{or more eloquently in the words of Leamer \cite{Saltelli2006}, the resulting posterior uncertainty associated with the calibrated model parameters is:``...wide enough to be credible and the corresponding interval of inferences is narrow enough to be useful''.}.
 The Bayesian framework accommodates this aim of calibration in a flexible manner by taking into account multiple sources of uncertainty through selection of prior uncertainties both for the model parameters and for the model bias term, which eventually results in the associated posterior uncertainties.
 
 %-----------------------------------------------------------------------------------------
