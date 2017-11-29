@@ -329,14 +329,14 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
 it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite length, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
-By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
+By adding additional conditions on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
 \begin{equation}
   \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{\mathcal{X}}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
 \end{equation}
 That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma_f^2/I$.
 $\sigma_f^2$ is the variance of the function evaluated under the stationary density of the chain.
-The theorem implies that for a long enough chain (assuming that the stationarity has been attained), the sample path $\{\bm{x}^{(i)}\}_{i=1}^I$ can be used to estimate the function $f$ integrated along the target \gls[hyper=false]{pdf} $\pi^*$ (e.g., the \glspl[hyper=false]{qoi} in the opening of this section) through the the sample mean of $f$ evaluated at the points of the sample path.
+The theorem implies that for a long enough chain (assuming that the stationarity has been attained), the function $f$ integrated along the target \gls[hyper=false]{pdf} $\pi^*$ and consequently the \glspl[hyper=false]{qoi} as exemplified in the opening of this section can be estimated with the sample mean of $f$ evaluated at the points of the sample path $\{\bm{x}^{(i)}\}_{i=1}^I$.
 Finally, the theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size.
 
 %And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
