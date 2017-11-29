@@ -1,28 +1,21 @@
-%******************************************************************************************************************************
-\section[Diagnosing Convergence]{Diagnosing Convergence of an \gls[hyper=false]{mcmc} Simulation}\label{sec:bc_mcmc_diagnostic}
-%******************************************************************************************************************************
-
-% With a minimal tuning to deal with in AIES algorithm, we are left with the problem of assessing convergence.
-% In particular two key issues persists
-% The previous discussion spoke rarely about the condition.
-% It was demonstrated, through graphical representations the main idea of convergence in distributin.
-% This section seeks to answer, the following two important questions of Markov chain 
-% For an arbitrary starting distribution, when the chain can be considered stationary
-% It is not to say that these initial part of the chain is not part of the target distribution support.
-% They are, but as a distribution they are heavily biased.
-% Assuming a stationary distribution have been reached, how long the chain should be run to meet certain level of accuracy
+%**********************************************************************************************************
+\section[Diagnosing MCMC Samples]{Diagnosing \gls[hyper=false]{mcmc} Samples}\label{sec:bc_mcmc_diagnostic}
+%**********************************************************************************************************
 
 % Opening paragraph
-Consider once more Eq.~(\ref{eq:ch5_markov_chain_clt}), the central limit theorem (CLT) for the \gls[hyper=false]{mcmc} and repeated below,
+Consider once more Eq.~(\ref{eq:ch5_markov_chain_clt}), the central limit theorem (CLT) for the \gls[hyper=false]{mcmc}.
+Let $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^{I}$ be a stationary Markov chain of length $I$ with a stationary distribution $\pi_t$ (i.e., the target distribution).
+Furthermore, it is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$,
+then the asymptotic error of the estimator follows
 \begin{equation*}
-  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
+  \lim_{I \rightarrow \infty} \,\, \hat{f} - \mathbb{E}_{\pi_t}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \end{equation*}
 Where $\sigma^2_f$ is the variance of a given function $f$ evaluated under the stationary density of the chain.
 As mentioned, by construction, the successive realizations in a Markov chain is not independent.
-Before discussing the implication of this correlation on statistical error of an estimator given above (i.e., $\frac{\sigma^2_f}{I}$ in Section~\ref{sub:sub_mcmc_thinning}, several important concepts are first introduced. 
+Before discussing the implication of this correlation on statistical error of an estimator given above (i.e., $\frac{\sigma^2_f}{I}$) in Section~\ref{sub:bc_mcmc_thinning}, several important concepts are first introduced. 
+Note that the dependence on $\pi_t$ in the discussion below has been implicitly assumed and thus suppressed from the notation.
 
 % Autocovariance
-Let $\{\bm{x}^{(i)}\}_{i=1}^{I}$ is a stationary Markov chain of length $I$ and is used to estimate the expectation of a function $f$ such that $\hat{f} \approx \mathbb{E}[f]$.
 The autocovariance of the function $f$ is defined as the covariation between the function $f$ evaluated using the chain at the iteration $i$ and iteration $j$.
 That is,
 \begin{equation}
@@ -37,6 +30,7 @@ In other words,
 \end{equation}
 where $C_f$ is the autocovariance function of $f$ and $t$, the separation between iterations, is called the \emph{lag} of the covariance function.
 Note that according to the notation above the covariance function $C_f$ is always defined with respect to a given function $f$, as indicated in the subscript.
+Such function includes functions that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ the dimension of the multivariate chain.
 
 % Autocorrelation
 The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance function defined as,
@@ -47,13 +41,39 @@ The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance fu
 where $C_f(0)$ is the lag-$0$ autocovariance and is equal to the process variance $\mathbb{V}[f]$ for a stationary process.
 
 % Some illustration
-Autocovariance (and autocorrelation) measures the strength of the covariance (and correlation) covariance between samples in a Markov chain.
+Autocovariance (and autocorrelation) measures the strength of the covariance (and correlation) between samples in a Markov chain.
 By definition both functions are symmetric about the origin.
-They also tend to decay with increasing lag as illustrated in the figure below for autocorrelation function of three different Markov chains.
+They also tend to decay with increasing lag as illustrated in the figure below for autocorrelation function of three different Markov chains with different autocorrelation functions.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_illustrate_acf},
+                  maincaption={Illustration of autocorrelation functions for three different Markov chains. The Markov chain at the top has the strongest autocorrelation shown as solid line in the right plot. The correlation between samples dies out much longer than the other two chains.},%
+									mainshortcaption={Illustration of autocorrelation functions for three different Markov chains.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_illustrate_acf_1},
+                  leftcaption={Three different Markov chains},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                 rightlabel={fig:ch5_plot_illustrate_acf_2},
+                  rightcaption={Autocorrelation functions as function of lag $t$},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotIllustrateACF_1}
+{../figures/chapter5/figures/plotIllustrateACF_2}
 
 %-----------------------------------------------------------------------------------------------------------------
-\subsection[Initialization Bias and burn-in]{Initialization Bias and Burn-in}\label{sub:bc_mcmc_diagnostic_burnin}
+\subsection[Initialization Bias and Burn-in]{Initialization Bias and Burn-in}\label{sub:bc_mcmc_diagnostic_burnin}
 %-----------------------------------------------------------------------------------------------------------------
+
+% With a minimal tuning to deal with in AIES algorithm, we are left with the problem of assessing convergence.
+% In particular two key issues persists
+% The previous discussion spoke rarely about the condition.
+% It was demonstrated, through graphical representations the main idea of convergence in distributin.
+% This section seeks to answer, the following two important questions of Markov chain 
+% For an arbitrary starting distribution, when the chain can be considered stationary
+% It is not to say that these initial part of the chain is not part of the target distribution support.
+% They are, but as a distribution they are heavily biased.
+% Assuming a stationary distribution have been reached, how long the chain should be run to meet certain level of accuracy
 
 The results above holds for \gls[hyper=false]{mcmc} samples obtained from a stationary chain.
 
@@ -103,8 +123,8 @@ Rearranging the term, the variance of the \gls[hyper=false]{mcmc} estimator $\ha
   \mathbb{V}[\,\hat{f}\,] = \frac{2 \tau_{\text{int},f}}{I} C_f (0) 
 \label{eq:ch5_markov_chain_estimator_variance}
 \end{equation}
-\marginpar{Integrated autocorrelation time}
 where $\tau_{\text{int},f}$, the \emph{integrated autocorrelation time} (or simply autocorrelation time), is defined as,
+\marginpar{Integrated autocorrelation time}
 \begin{equation}
   \tau_{\text{int},f} =  \left( \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t) \right)
 \label{eq:ch5_markov_chain_autocorrelation_time}
@@ -116,14 +136,14 @@ First, the use of Markov chain of length $I$ to estimate the integral of $f$ inf
 In other words, $\sigma^2_f \equiv 2 \tau_{\text{int},f} C_f(0)$.
 Or, equivalently, the number of independent samples required in the computation of the \gls[hyper=false]{mc} sampling variance is only a factor of $\frac{1}{2 \tau_{\text{int},f}}$ of the total \gls[hyper=false]{mcmc} samples $I$.
 In other words, $N \equiv \frac{I}{2 \tau_{\text{int},f}}$ with $N$ the number of independent samples (or \emph{effective sample size}).
-From this latter interpretation, the autocorrelation time refers to the number of iterations required to generate a single independent sample.
+From this latter interpretation, the autocorrelation time refers to the number of \gls[hyper=false]{mcmc} iterations required to generate a single independent sample.
 
 % Autocorrelation time and the length of the chain
 In either interpretation, the statistical error associated with the \gls[hyper=false]{mc} estimation is larger for an estimation using \gls[hyper=false]{mcmc} samples than using independent samples due to the inherent correlation.
 \marginpar{Determining length of a chain}
 Moreover, in the case of \gls[hyper=false]{mcmc}, the autocorrelation time $\tau_{\text{int},f}$ directly affects the statistical error.
 As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error for chain of a given length.
-That is, the (required) relative statistical error of the estimator $\epsilon$ is related to the length of the chain through \cite{Akeret2013},
+That is, the (required) relative statistical error $\epsilon$ of an estimator $\hat{f}$ is related to the length of the chain through \cite{Akeret2013},
 \begin{equation}
   \left(\frac{\mathbb{V}[\hat{f}]}{C_f(0)}\right)^{0.5} = \left(\frac{\mathbb{V}[\hat{f}]}{\mathbb{V}[f]}\right)^{0.5} = \left(\frac{2\tau_{\text{int},f}}{I}\right)^2 \leq \epsilon \Leftrightarrow I \geq \frac{2\tau_{\text{int},f}}{\epsilon^2} 
 \label{eq:ch5_markov_chain_relative_error}
@@ -139,7 +159,8 @@ For an ensemble sampler the number of iterations should be multiplied by the num
 % On thinning
 The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
 \marginpar{On thinning the chain}
-Thinning the chain means that only $1$ \gls[hyper=false]{mcmc} sample is kept for every $k$ iteration, with $k$ an integer.
+Thinning the chain means that only $1$ \gls[hyper=false]{mcmc} sample is kept for every $k$ iterations, with $k$ an integer.
+Often, the integer $k$ is chosen to be close to, or at least the same order of magnitude to, the autocorrelation time $\tau_{\text{int},f}$.
 Historically, thinning is mainly motivated by the limited storage and memory to store all the samples, especially for a long running \gls[hyper=false]{mcmc} simulation.
 As the end purpose of conducting \gls[hyper=false]{mc} estimation requires the use of independent samples, it was argued that by thinning, only samples that matters (i.e., independent) are kept for further analysis.
 
@@ -148,8 +169,8 @@ The argument against thinning is relatively easy to intuit.
 By conducting thinning the autocorrelation in the samples can be reduced thus reducing the statistical error of the estimate.
 At the same time, there would be much smaller number of samples after thinning that often off-set the reduction of the error by a smaller autocorrelation time.
  
-Thinning can be justified for the purpose of estimating the statistical error of an estimate as computed by \gls[hyper=false]{mcmc} samples.
-It is especially useful in the case expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
+Thinning can be justified for the purpose of estimating the statistical error of an estimate using the thinned \gls[hyper=false]{mcmc} samples without the need to estimate $\tau_{\text{int},f}$.
+It can also be useful in the case expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
 That is, if the function $f$ is expensive to evaluate.
 For example, in the context of Bayesian data analysis, the posterior samples obtained via \gls[hyper=false]{mcmc} simulation might need to be propagated through a computationally expensive code for the purpose of forward uncertainty quantification by an ordinary \gls[hyper=false]{mc} simulation.
 In this case, only calculations of a few samples might be afforded and, as required by \gls[hyper=false]{mc} simulation, such selection of samples should be independent of each other which, in turn, can be achieved by thinning the chain first. 
