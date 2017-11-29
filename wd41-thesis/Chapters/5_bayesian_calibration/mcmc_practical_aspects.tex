@@ -30,7 +30,7 @@ In other words,
 \end{equation}
 where $C_f$ is the autocovariance function of $f$ and $t$, the separation between iterations, is called the \emph{lag} of the covariance function.
 Note that according to the notation above the covariance function $C_f$ is always defined with respect to a given function $f$, as indicated in the subscript.
-Such function includes functions that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ the dimension of the multivariate chain.
+Such function includes identity functions that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ the dimension of the multivariate chain.
 
 % Autocorrelation
 The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance function defined as,
@@ -140,6 +140,28 @@ For an ensemble sampler the number of iterations should be multiplied by the num
 \end{equation}
 %Note that the autocorrelation time is associated with a given function $f$ and have to be computed for different choice of $f$.
 
+% Estimating Autocovariance function
+The autocovariance function of $f$ can be estimated from a realization of a Markov chain $\{\bm{\mathbf{x}}^{(i)}\}_{i=1}^{I}$ using the following estimator \cite{Sokal1997,Akeret2013},
+\marginpar{Estimating autocorrelation time}
+\begin{equation}
+  \hat{C}_f (t) =  \frac{1}{I - t} \sum_{t = 1}^{I - t} (f(\mathbf{x}^{(i)}) - \bar{f}) \, (f(\mathbf{x}^{(i+t)}) - \bar{f})
+\label{eq:ch5_markov_chain_autocovariance_function_estimator}
+\end{equation}
+where $\bar{f} = 1/I \sum_{i} f(\mathbf{x}^{(i)})$ is the sample mean of $f$.
+The autocorrelation function estimator follows,
+\begin{equation}
+  \hat{\rho}_f (t) =  \frac{\hat{C}_f(t)}{\hat{C}_f(0)}
+\label{eq:ch5_markov_chain_autocorrelation_function_estimator}
+\end{equation}
+Finally, the estimator for autocorrelation time is given by,
+\begin{equation}
+  \hat{\tau}_{\text{t},f} =  \frac{1}{2} + \sum_{t = 1}^{I} \hat{\rho}_f (t)
+\label{eq:ch5_markov_chain_autocorrelation_time_estimator}
+\end{equation}
+Direct estimation of the autocorrelation time using the above estimator is usually unstable due to the statistical noise associated with large $t$.
+For a large $t$, the data of iterations that are far separated becomes sparser for a reliable estimate of the autocovariance function value. 
+A ``windowing'' method is proposed by \cite{Sokal1997} to stabilize the estimation and is implemented in the routine \texttt{ACOR} \cite{Goodman2009,Foreman-Mackey2014} used in this thesis.
+
 % On thinning
 The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
 \marginpar{On thinning the chain}
@@ -163,16 +185,6 @@ In this case, only calculations of a few samples might be afforded and, as requi
 \subsection[Initialization Bias and Burn-in]{Initialization Bias and Burn-in}\label{sub:bc_mcmc_diagnostic_burnin}
 %-----------------------------------------------------------------------------------------------------------------
 
-% With a minimal tuning to deal with in AIES algorithm, we are left with the problem of assessing convergence.
-% In particular two key issues persists
-% The previous discussion spoke rarely about the condition.
-% It was demonstrated, through graphical representations the main idea of convergence in distributin.
-% This section seeks to answer, the following two important questions of Markov chain 
-% For an arbitrary starting distribution, when the chain can be considered stationary
-% It is not to say that these initial part of the chain is not part of the target distribution support.
-% They are, but as a distribution they are heavily biased.
-% Assuming a stationary distribution have been reached, how long the chain should be run to meet certain level of accuracy
-
 % Opening paragraph, why there is
 The results above hold for \gls[hyper=false]{mcmc} samples obtained from a stationary chain.
 As illustrated in Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1}, starting an \gls[hyper=false]{mcmc} simulation from an arbitrary starting point causes the exploration in a less typical part of the parameter space (as dictated by the posterior \gls[hyper=false]{pdf}).
@@ -189,19 +201,36 @@ Therefore, for a chain of a finite length, it is important to determine the leng
 In a single particle \gls[hyper=false]{mcmc} algorithm determining the burn-in length is less of an issue as the total number of iterations tends to be much larger than this period and the simulation can be extended to wash out that initialization bias.
 
 % Burn-in for ensemble sampler
-On the other hand, in an ensemble sampler, burn-in period might contain much larger biased samples relative to the total number of samples due to the use of multiple walkers within an iteration \cite{Akeret2013}.
+On the other hand, in an ensemble sampler, burn-in period might contain much larger biased samples relative to the total number of samples due to the use of multiple walkers within an iteration \cite{Hou2012,Foreman-Mackey2013,Akeret2013}.
 Multiple walkers can be initialized from low probability region. 
 Furthermore, the number of iterations in an ensemble sampler is relatively shorter than in a single particle sampler (and more expensive).
 As such, determining the length of burn-in period and discarding the associated samples are considered more important for ensemble sampler.
 
 % Burn-in and autocorrelation
+Burn-in period can be associated with the relaxation period of an infinitely long Markov chain \cite{Sokal1997}.
+In that case, the autocorrelation function of Eq.~(\ref{eq:ch5_autocorrelation}) asymptotically decays following exponential law, i.e., $\rho_f(t) \propto \exp{(-t/\tau_\text{exp,f})}$. 
+Thus, the \emph{exponential} autocorrelation time of function $f$ then can be defined as follow,
+\marginpar{Exponential autocorrelation time}
+\begin{equation}
+  \tau_{\text{exp},f} = \limsup\limits_{t\rightarrow\infty} \frac{t}{-\ln{|\rho_f(t)|}} 
+\label{eq:ch5_markov_chain_exponential_autocorrelation_time}
+\end{equation}
+The \emph{exponential} autocorrelation time $\tau_\text{exp}$ of the \gls[hyper=false]{mcmc} simulation then taken to be the maximum autocorrelation time with respect to all functions $f$ of interest.
+The time represents the rate of convergence of a Markov chain to its stationary distribution \cite{Sokal1997}.
+It can be used to determine the number of iterations to discard before the chain can be considered stationary.
 
 % Importance of Burn-in period revisited
+The formal relationship exponential correlation time and stationarity holds only for strictly exponential correlation function which in turn valid for infinitely long chain \cite{Sokal1997}.
+\marginpar{Determining iterations to discard}
+In practice, a conservative multiples of the exponential autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $10$ \cite{Sokal1997}, is used to determine the total number of iterations to discard.
+Generally, the exponential autocorrelation time is different from the integrated autocorrelation time except in the case of exponentially decaying autocorrelation function.
+In practice, once more, they are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
+
 In the end, it is important to acknowledge that burn-in period is a heuristic.
 \marginpar{Burn-in, a heuristic}
 It is useful to avoid initialization bias from a Markov chain of finite length especially in the case of ensemble samplers.
 Moreover, a suspiciously long burn-in period can give an indication of a more serious underlying problem either in the posterior formulation or the sampler.
-It cannot, however, establish the fact that a Markov chain has indeed settled in its stationary (and simultaneously, its target) distribution \cite{Geyer2011}. 
+It cannot, however, establish the fact that a Markov chain has indeed settled in its stationary (and simultaneously, its target) distribution \cite{Sokal1997,Geyer2011}. 
 
 % Why there's burn-in
 The initial transient is mainly because an arbitrary value with low posterior probability is selected to initialize the chain.
