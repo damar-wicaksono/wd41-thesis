@@ -328,10 +328,10 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 % Central Limit Theorem (Limiting Behavior)
 Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
-it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
-By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
+it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite length, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
+By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
 \begin{equation}
-  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
+  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{\mathcal{X}}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
 \end{equation}
 That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma_f^2/I$.
@@ -885,7 +885,7 @@ There are two important issues not discussed in detail in either of the illustra
 These issues are of practical importance for any \gls[hyper=false]{mcmc} algorithm.
 For instance, the ``initialization phase'' obviously presents in the illustration of the \gls[hyper=false]{aies} algorithm is an indication of a particular lack of convergence to stationarity in the initial part of the transient.
 It needs to be detected and removed lest they would bias the estimation using the samples.
-Rigorous proof of stationarity is difficult to obtain in practice and instead, analysis is often based on empirical diagnostic that can only indicate a lack of stationarity.
+Rigorous proof of stationarity is difficult to obtain in practice and instead, analysis is often based on empirical diagnostic with heuristics.
 Afterward,
 the main question will be on how long the chain needs to be generated.
 In turn, these issues are closely related to the error of an \gls[hyper=false]{mcmc} estimate.
