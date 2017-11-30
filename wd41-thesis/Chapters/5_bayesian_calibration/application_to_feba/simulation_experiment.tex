@@ -21,8 +21,28 @@
 % 3. All Output, No Discrepancy
 % 4. 
 
-% Analyzing convergence
+Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration schemes considered in this study.
+\begin{table*}[!htbp]\centering
+\ra{0.9}
+\begin{adjustwidth*}{}{-3cm}
+\caption{Bayesian calibration schemes conducted for the \gls[hyper=false]{trace} reflood model parameters against data from \gls[hyper=false]{feba} test No. $216$.}
+\label{tab:ch5_calibration_schemes}
+\begin{tabular}{@{}clccccrc@{}}\toprule
+\multirow{2}{*}{No.} & \multirow{2}{*}{\shortstack[c]{Calibration Scheme}} 	& \multirow{2}{*}{\shortstack[c]{Model Bias\\Term}}	& \multicolumn{3}{c}{Types of Output} & \phantom{a} & \multirow{2}{*}{\shortstack[c]{Reflood Model\\Parameters \footnotesize{(total number)}}} \\
+																															  \cmidrule{4-6}
+    &                                 					& 						& $TC$				& $DP$     		& $CO$   				&&	\\ \midrule
+1   & \texttt{w/ Bias}	  											& \Checkmark  & \Checkmark  & \Checkmark  & \Checkmark  	&& All \footnotesize{($8$)}          				\\
+2   & \texttt{w/ Bias, TC}     									& \Checkmark  & \Checkmark	&							&          			&& All \footnotesize{($8$)}           			\\
+3   & \texttt{w/ Bias, DP}     									& \Checkmark 	&         		& \Checkmark	&								&& All \footnotesize{($8$)} 								\\
+4   & \texttt{w/ Bias, CO}       								& \Checkmark 	& 						& 						& \Checkmark		&& All \footnotesize{($8$)}           			\\
+5   & \texttt{w/o Bias}               					&          		& \Checkmark  & \Checkmark  & \Checkmark		&& All \footnotesize{($8$)}	          			\\
+6   & \texttt{w/ Bias, no dffbVIHT}             & \Checkmark  & \Checkmark  & \Checkmark  & \Checkmark		&& Excluding \texttt{dffbVIHT} \footnotesize{(7)}\\
+\bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
 
+% Analyzing convergence
 \clearpage
 \begin{sidewaysfigure}
 	\centering
