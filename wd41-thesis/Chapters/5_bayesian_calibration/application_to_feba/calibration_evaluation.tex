@@ -89,10 +89,28 @@ while going from bottom to top indicates the closer the prediction and its uncer
 \end{sidewaysfigure}
 \clearpage
 
-% Comparing Results, additional output
-
 % Comparing Results, calibration scheme
+For the $TC$ output, and except for the \gls[hyper=false]{feba} test No. $216$ (the calibration data), there is an apparent linear relationship between calibration score and informativeness.
+That is the propagation that results in the narrowest uncertainty band (high informativeness) tends to have higher failure in enveloping the experimental data (low calibration score).
+Recall that a failure in enveloping experimental data point is assigned to have a zero calibration score.
+The results of the scheme \texttt{w/o Bias}, in particular, have the lowest calibration score with respect to the $TC$ output while at the same time score high in the informativeness. 
+On the other hand, for the same level of informativeness, the results of the scheme \texttt{w/ Bias, All} have higher calibration scores across all the \gls[hyper=false]{feba} tests.
+
+This relationship does not present with respect to the $DP$ output.
+There the calibration scores for all the calibration schemes fall near the initial calibration score, while having higher informativeness.
+Furthermore, except for the propagation the \gls[hyper=false]{feba} test No. $216$ there is not so much variation in the informativeness; the points tend to cluster together especially in comparison with that of the $TC$.
+
+Finally, most calibration schemes results in much lower calibration score with respect to the $CO$ output, some even fall to zero.
+That is, the resulting uncertainty bands completely fail to envelop a single experimental data points.
+At the same time, the results of the scheme \texttt{w/o Bias} manage to improve the prediction on the output, both in terms of calibration score and informativeness; the results are better compared to that of the prior.
 
 % Comparing Results, correlated vs independent posterior samples
+Considering correlation between the model parameters in the propagation affects the calibration score and the informativeness.
+Taking into account the correlation in the propagation is consistently increasing the informativeness (tightening the uncertainty band) while simultaneously lowering the calibration score across all the \gls[hyper=false]{feba} tests.
+On the contrary, taking the model parameters to be independent of each other deflates the informativeness (widen the uncertainty band) while simultaneously increases the calibration score.
+The effect can be observed across outputs, calibration schemes, and \gls[hyper=false]{feba} tests; though it is especially strong for the scheme \texttt{w/ Bias, All} and for the $TC$ output, while the effect is more marginal for the other schemes and output types.
+
+% Comparing results, different output for FEBA Test 216
 
 % Comparing Results, between FEBA Tests
+Considering
