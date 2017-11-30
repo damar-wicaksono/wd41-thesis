@@ -3,7 +3,11 @@
 %***********************************************************************
 
 % Opening Paragraph
-In the next section the implication of the posterior is further investigated by propagating it through \gls[hyper=false]{trace} simulation of other \gls[hyper=false]{feba} tests. 
+The implication of the model parameters posterior uncertainty on the prediction is investigated by propagating the uncertainty through \gls[hyper=false]{trace} simulations of test No. $216$ (the calibration data) as well as the other five \gls[hyper=false]{feba} tests.
+Samples of size $1'000$ are randomly picked directly from the joint posterior samples and are used to execute \gls[hyper=false]{trace} simulations.
+Furthermore, the uncertainties related to the boundary conditions ($4$ additional parameters, namely \texttt{breakP}, \texttt{fillV}, \texttt{fillT}, and \texttt{pwr}) are also propagated alongside the posterior samples from each calibration scheme.  
+Finally, for comparison purpose and for selected calibration schemes, the uncertainty propagation is also conducted without taking into account the correlation structure of the model parameters posterior uncertainties.
+In other words, only the information from the posterior univariate marginals is used for the propagation and the parameters are considered independent of each other.
 
 % FEBA Test No. 216 Posterior w/ bias term Uncertainty Propagation, TC
 \clearpage
