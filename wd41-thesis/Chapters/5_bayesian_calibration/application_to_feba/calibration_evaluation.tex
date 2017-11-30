@@ -110,12 +110,18 @@ Taking into account the correlation in the propagation is consistently increasin
 On the contrary, taking the model parameters to be independent of each other deflates the informativeness (widen the uncertainty band) while simultaneously increases the calibration score.
 The effect can be observed across outputs, calibration schemes, and \gls[hyper=false]{feba} tests; though it is especially strong for the scheme \texttt{w/ Bias, All} and for the $TC$ output, while the effect is more marginal for the other schemes and output types.
 
-% Comparing results, different output for FEBA Test 216
-
 % Comparing Results, between FEBA Tests
 Comparing the results between different \gls[hyper=false]{feba} tests some interesting observations can be made.
 The informativeness and the calibration score for all the calibration schemes seem to fall relatively at the same position for each of the \gls[hyper=false]{feba} tests.
 Though the calibration scores relative positions varies slightly across different \gls[hyper=false]{feba} tests,
 the maximum informativeness with respect to the $TC$, $DP$, $CO$ outputs are $0.7$, $0.5$, $0.5$, respectively, for all the \gls[hyper=false]{feba} tests.
 This indicates that the uncertainty band in the prediction due to the posterior uncertainties (obtained on the basis of a single test) are relatively insensitive to boundary conditions of the tests.
-Finally, it is only for the $CO$ output \gls[hyper=false]{feba} test No. 218, no calibration scheme (not even \texttt{w/o Bias}) gives an improvement on the calibration score.
+It is only for the $CO$ output \gls[hyper=false]{feba} test No. 218, no calibration scheme (not even \texttt{w/o Bias}) gives an improvement on the calibration score.
+
+% Comparing results, different output for FEBA Test 216
+Lastly, when comparing the effect of using different types of output in the calibration, and only for \gls[hyper=false]{feba} test No. 216, it is shown in the figure that using .
+As expected, using any particular type of output causes the informativeness with respect to the other outputs to be low while using all of the outputs improves the informativeness.
+The increase in informativeness from taking into account multiple type of outputs is not followed by large decrease of calibration score.
+This is especially the case for the $DP$ and $TC$ outputs where the improvement on the informativeness is the significant when different output other than the $DP$ data itself is considered.
+This gives an indication that the model parameters that responsible for the improvement with respect to each output might be different.
+Curiously this is not the case for the $CO$ output as the calibration using only the $CO$ experimental data gives lower informativeness compared to the calibration using the other types of data.
