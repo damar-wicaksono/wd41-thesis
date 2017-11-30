@@ -110,7 +110,7 @@ Rearranging the term, the variance of the \gls[hyper=false]{mcmc} estimator $\ha
 where $\tau_{\text{int},f}$, the \emph{integrated autocorrelation time} (or simply autocorrelation time), is defined as,
 \marginpar{Integrated autocorrelation time}
 \begin{equation}
-  \tau_{\text{int},f} =  \left( \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t) \right)
+  \tau_{\text{int},f} =  \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t)
 \label{eq:ch5_markov_chain_autocorrelation_time}
 \end{equation}
 
@@ -124,7 +124,7 @@ From this latter interpretation, the autocorrelation time refers to the number o
 
 % Autocorrelation time and the length of the chain
 In either interpretation, the statistical error associated with the \gls[hyper=false]{mc} estimation is larger for an estimation using \gls[hyper=false]{mcmc} samples than using independent samples due to the inherent correlation.
-\marginpar{Determining length of a chain}
+\marginpar{Determining the length of a chain}
 Moreover, in the case of \gls[hyper=false]{mcmc}, the autocorrelation time $\tau_{\text{int},f}$ directly affects the statistical error.
 As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error for chain of a given length.
 That is, the (required) relative statistical error $\epsilon$ of an estimator $\hat{f}$ is related to the length of the chain through \cite{Akeret2013},
@@ -158,9 +158,9 @@ Finally, the estimator for autocorrelation time is given by,
   \hat{\tau}_{\text{t},f} =  \frac{1}{2} + \sum_{t = 1}^{I} \hat{\rho}_f (t)
 \label{eq:ch5_markov_chain_autocorrelation_time_estimator}
 \end{equation}
-Direct estimation of the autocorrelation time using the above estimator is usually unstable due to the statistical noise associated with large $t$.
-For a large $t$, the data of iterations that are far separated becomes sparser for a reliable estimate of the autocovariance function value. 
-A ``windowing'' method is proposed by \cite{Sokal1997} to stabilize the estimation and is implemented in the routine \texttt{ACOR} \cite{Goodman2009,Foreman-Mackey2014} used in this thesis.
+Direct estimation of the autocorrelation time using the above estimator is usually unstable due to the statistical noise associated with large lag $t$.
+For a large $t$, the data of iterations that are far separated becomes sparser to have a reliable estimate of the autocovariance function value. 
+A ``windowing'' technique is proposed in \cite{Sokal1997} to stabilize the estimation and is implemented in the routine \texttt{ACOR} \cite{Goodman2009,Foreman-Mackey2014} used in this thesis.
 
 % On thinning
 The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
@@ -221,7 +221,7 @@ It can be used to determine the number of iterations to discard before the chain
 
 % Importance of Burn-in period revisited
 The formal relationship exponential correlation time and stationarity holds only for strictly exponential correlation function which in turn valid for infinitely long chain \cite{Sokal1997}.
-\marginpar{Determining iterations to discard}
+\marginpar{Determining the number of iterations to discard}
 In practice, a conservative multiples of the exponential autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $10$ \cite{Sokal1997}, is used to determine the total number of iterations to discard.
 Generally, the exponential autocorrelation time is different from the integrated autocorrelation time except in the case of exponentially decaying autocorrelation function.
 In practice, once more, they are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
@@ -238,4 +238,4 @@ The initial transient is mainly because an arbitrary value with low posterior pr
 In a simple problem, perhaps it is straightforward to determine a priori a value that lies on high probability region of the posterior.
 This is not the case for a more complex high-dimensional problem and some arbitrary values are often selected instead.
 Thus, some authors \cite{Geyer1992, Akeret2013} proposed instead to tune the initial values such that they are more representative to the posterior \gls[hyper=false]{pdf} and make do without burn-in.
-This tuning, however, entails additional calculations.
+This tuning, however, entails additional preliminary calculations.
