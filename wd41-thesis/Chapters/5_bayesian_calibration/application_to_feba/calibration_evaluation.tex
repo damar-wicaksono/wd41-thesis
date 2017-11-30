@@ -11,7 +11,7 @@ In other words, only the information from the posterior univariate marginals is 
 
 % Explaining the figure
 Figs.~\ref{fig:ch5_plot_trace_uq_post_all_disc_tc_216}, \ref{fig:ch5_plot_trace_uq_post_all_disc_dp_216}, and~\ref{fig:ch5_plot_trace_uq_post_all_disc_co_216} show the propagation of the uncertainties for the clad temperature ($TC$), the pressure drop ($DP$), and the liquid carryover ($CO$) outputs, respectively.
-The model parameters posterior uncertainties used in these figures are the ones obtained from the calibration scheme with model bias term and considering all types of output (i.e., \texttt{w/ Bias} in Table~\ref{tab:ch5_calibration_schemes}). 
+The model parameters posterior uncertainties used in these figures are the ones obtained from the calibration scheme with model bias term and considering all types of output (i.e., \texttt{w/ Bias, All} in Table~\ref{tab:ch5_calibration_schemes}). 
 The uncertainty bands correspond to the symmetric $95\%$ probability of the output uncertainties, i.e., the area between $2.5$-th and $97.5$-th percentiles of the outputs at each time step.
 The dark gray band corresponds to the model parameters prior uncertainties propagation, while the two lighter bands correspond to the posterior uncertainties.
 Two posterior uncertainties propagation results are presented, one (the lighter band) takes into account correlation structure of the posterior samples while the other one does not (i.e., independent samples).
@@ -22,7 +22,7 @@ Finally, solid lines, dashed lines, and crosses correspond to the simulation wit
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.90\textwidth]{../figures/chapter5/figures/plotTraceUQPosteriorAllDiscCenteredTC216}
-		\captionof{figure}[Posterior uncertainty propagation of FEBA Test No. $216$ for the cladding temperature output ($TC$). Calibration with model bias term and considering all types of output.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the cladding temperature output ($TC$) at different axial locations. The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration with model bias term and considering all types of output.}
+		\captionof{figure}[Posterior uncertainty propagation of FEBA Test No. $216$ for the cladding temperature output ($TC$). The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the cladding temperature output ($TC$) at different axial locations. The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration with model bias term and considering all types of output.}
 	\label{fig:ch5_plot_trace_uq_post_all_disc_tc_216}
 \end{sidewaysfigure}
 
@@ -50,7 +50,7 @@ Moreover, all uncertainty bands cover most of the experimental data.
 \bigfigure[pos=tbhp,
            opt={width=1.0\textwidth},
            label={fig:ch5_plot_trace_uq_post_all_disc_dp_216},
-           shortcaption={Posterior uncertainty propagation of FEBA Test No. $216$ for the pressure drop output ($DP$). Calibration with model bias term and considering all types of output.}]
+           shortcaption={Posterior uncertainty propagation of FEBA Test No. $216$ for the pressure drop output ($DP$). The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.}]
 {../figures/chapter5/figures/plotTraceUQPosteriorAllDiscCenteredDP216}
 {Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the pressure drop output ($DP$) at different axial segments. The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.}
 
@@ -62,12 +62,24 @@ As the calibration scheme \texttt{w/ Bias, All} simultaneously takes into accoun
 \begin{figure}[!bth]
     \centering
     \includegraphics[width=0.5\textwidth]{../figures/chapter5/figures/plotTraceUQPosteriorAllDiscCenteredCO216}
-    \caption[Posterior uncertainty propagation of FEBA Test No. $216$ for the liquid carryover output ($CO$). Calibration with model bias term and considering all types of output.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the liquid carryover output ($CO$). The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration scheme \texttt{w/ Bias}.}
+    \caption[Posterior uncertainty propagation of FEBA Test No. $216$ for the liquid carryover output ($CO$). The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the liquid carryover output ($CO$). The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.}
     \label{fig:ch5_plot_trace_uq_post_all_disc_co_216}
 \end{figure}
 
-% Calibration Score vs Informativeness, how to read the plot
-Instead of showing similar plots of the uncertainty propagation for the results of other calibration schemes and for all the other \gls[hyper=false]{feba} tests, Fig.~\ref{fig:ch5_plot_calib_info} summarizes the propagation for the other cases in a single plot using the concept of \emph{calibration score} and \emph{informativeness} previously explained (see Section~\ref{sub:bc_simulation_experiment} and Appendix~\ref{app:calib_info}).
+% Calibration Score vs Informativeness
+Instead of showing similar plots of the uncertainty propagation to present the effect of different posterior samples obtained from different calibration schemes on the other \gls[hyper=false]{feba} tests, Fig.~\ref{fig:ch5_plot_calib_info} is used to summarize the effect on the uncertainty propagation in a single plot using the concepts of \emph{calibration score} and \emph{informativeness} previously explained (see Section~\ref{sub:bc_simulation_experiment} and Appendix~\ref{app:calib_info}).
+The plots like Figs.~\ref{fig:ch5_plot_trace_uq_post_all_disc_tc_216}, \ref{fig:ch5_plot_trace_uq_post_all_disc_dp_216}, and~\ref{fig:ch5_plot_trace_uq_post_all_disc_co_216} for all the other cases corresponding to different \gls[hyper=false]{feba} tests and calibration schemes are available in Appendix~\ref{app:mcmc_evaluation} for reference.
+
+% How to read the plot
+Fig.~\ref{fig:ch5_plot_calib_info} presents the calibration score vs. informativeness for different \gls[hyper=false]{feba} tests, different calibration schemes, and different types of outputs (clad temperature $TC$, pressure drop $DP$, and liquid carryover $CO$).
+In each panel, the vertical lines correspond to the initial informativeness, that is, that of the prior.
+This initial informativeness are taken to be zero uniformly across output types and \gls[hyper=false]{feba} tests as it represents the widest uncertainty band considered.
+The horizontal lines, on the other hand, correspond to the initial calibration score of the prior uncertainty bands and the nominal \gls[hyper=false]{trace} run as its reference simulation value.
+As can be seen the scores are slightly different from test to test and from output type to output type.
+Finally, the results of propagating posterior samples obtained from each calibration scheme to the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model in terms of calibration score and informativeness are plotted.
+In each panel, going from left to right indicates the narrowing of uncertainty band and the increase of informativeness and vice versa;
+while going from bottom to top indicates the closer the prediction and its uncertainty to the experimental data.
+
 \clearpage
 \begin{sidewaysfigure}
 	\centering
@@ -76,7 +88,6 @@ Instead of showing similar plots of the uncertainty propagation for the results 
 	\label{fig:ch5_plot_calib_info}
 \end{sidewaysfigure}
 \clearpage
-
 
 % Comparing Results, additional output
 
