@@ -76,7 +76,7 @@ That is,
 \label{eq:bc_prop_post}
 \end{equation}
 The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
-$\int p(\bm{x}) d\bm{x} = 1 \Leftrightarrow C = \int p^*(\bm{x}) d\bm{x}$
+$\int p(\bm{x}) d\bm{x} = 1 \Leftrightarrow C = \int p^*(\bm{x}) d\bm{x}$.
 Carrying out the integration of $p^*$ can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
 Therefore, generating a set of samples simply by knowing $p^*$ instead of $p$ is advantageous.
 
@@ -98,21 +98,18 @@ For a complex multidimensional density function,
 these locations are not known a priori and might have to be identified exhaustively \cite{Mackay2005}.
 
 % Inverse Transform Sampling and Its Problem
-In one dimension,
-the most common way of generating sample from a given density is
-by inverse transform sampling coupled with a random number generator.
+In one dimension, the most common way of generating sample from a given density is by inverse transform sampling coupled with a random number generator.
 \marginpar{Inverse transform sampling}
 The approach requires the quantile function of the \gls[hyper=false]{pdf}.
-To obtain the quantile function,
-the density has to be integrated and its normalizing constant has to be computed.
+To obtain the quantile function, the density has to be integrated and its normalizing constant has to be computed.
 Appendix~\ref{app:its} provides a more detail account on the topic.
 Many univariate random variables are widely studied and the analytical solutions to their quantile functions are available \cite{Lange2010}.
-However, the method is not extendable to distributions of higher dimension.
+However, the method is not readily extendable to distributions of higher dimension.
 Additionally, though sampling algorithms exist for several multivariate densities (notably, the multivariate normal density~--~See Appendix~\ref{app:mvn_sampling}),
 this will not be the case for an arbitrary \gls[hyper=false]{pdf} of higher dimension.
 
 % Illustration
-To illustrate the difficulty to generate samples from an arbitrate multivariate probability distribution,
+To illustrate the difficulty to generate samples from an arbitrary multivariate probability distribution,
 \marginpar{Illustration}
 consider the following unnormalized bivariate \gls[hyper=false]{pdf} parametrized by the location parameters $\mu_1, \mu_2$ and the scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
 \begin{equation}
@@ -197,8 +194,7 @@ In fact, this ``region of space where it matters'' is related to the mathematica
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
 Although the location of the typical set for the example above is rather trivial (the region around the center of the density),
-it will not be the case for an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density)\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce its value while increasing the amount of volume.
-In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality.}.
+it will not be the case for an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density)\footnote{And in fact, the region around the mode of a distribution becomes less representative of the typical set in high-dimension as it becomes smaller in comparison to other part of the state space where the density value, albeit small, is non-negligible. This is yet another example of the curse of dimensionality.}.
 Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
 At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would potentially be more efficient, requiring less function evaluations for the same accuracy level, than that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
 
