@@ -29,11 +29,24 @@ These calibration results are to be expected according to the sensitivity analys
 For instance, the pressure drop output mainly sensitive to the parameter \texttt{iafbIntDr} can be mainly informed by the pressure drop data as indicated in Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}.
 Meanwhile, the liquid carryover output though sensitive to the variation of the model parameters \texttt{dffbVIHT} and \texttt{dffbIntDr} are overshadowed by the variation due to the boundary condition.
 Thus, as indicated in Fig.~\ref{fig:ch5_plot_ens_co_disc_centered} the constraining power of the liquid carryover data is fairly limited; the posterior uncertainties associated with the important parameters remain wide.
-The results are similar when considering only clad temperature data for the calibration.
 
+% TC Output
+The results are similar when considering only clad temperature data for the calibration.
+The parameters \texttt{gridHT} and \texttt{dffbWallHT} are well constrained by the temperature output data.
+The parameter \texttt{gridHT}, in particular, is constrained only at the upper end of the uncertainty bound.
+It turns out that decreasing the spacer grid heat enhancement below certain value will not decrease the overall heat transfer any longer.
+Thus, below that certain value the enhancement is insensitive with respect to the clad temperature output.
+
+% All Outputs
 By definition, a model parameter that is not sensitive to a simulation output cannot be informed by the experimental data of that output. 
 That is, the parameter is non-identifiable \cite{Hines2014}.  
 And indeed, when considering all types of data, the prior uncertainties of the model parameters was shown to be simultaneously constrained and often even tighter (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}).
+
+% No Constrain
+There are, however, several parameters that simply cannot be constrained by the considered experimental data.
+The uncertainties, especially the lower bounds, of the parameters \texttt{iafbWHT}, \texttt{dffbWDr} and \texttt{tQuench} remain close its initial lower uncertainty bound, while their upper bounds are only marginally smaller than that of the respective prior. 
+These parameters are of marginal importance relative among the selected influential parameters.
+Although it is straightforward to conclude that insensitive parameter cannot be constrained by the experimental data whatsoever, and the most influential ones can be strongly constrained, it stays unclear which among the parameters of intermediate importance as indicated by sensitivity measure of Chapter~\ref{ch:gsa} can be well constrained by the experimental data.
 
 % On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
 
