@@ -138,7 +138,10 @@ For an ensemble sampler the number of iterations should be multiplied by the num
   I \geq \frac{2\,\tau_{\text{int},f}}{\epsilon^2\,L} 
 \label{eq:ch5_markov_chain_relative_error_ensemble}
 \end{equation}
-%Note that the autocorrelation time is associated with a given function $f$ and have to be computed for different choice of $f$.
+Note that the autocorrelation time is associated with a given function $f$ and have to be computed for different choice of $f$.
+For each, autocorrelation time (and the associated statistical error) gives a sense of scale on the length of an \gls[hyper=false]{mcmc} simulation.
+For instance, $10'000$ \gls[hyper=false]{mcmc} iterations are relatively long for a single particle chain having autocorrelation time of $5$ ($\epsilon \approx 3\%)$, but much shorter in comparison for a chain with autocorrelation time of $100$ ($\epsilon \approx 14\%)$.
+In the latter case, in such a relatively short chain, the reliability of the estimation of the autocorrelation time itself can actually become a suspect. 
 
 % Estimating Autocovariance function
 The autocovariance function of $f$ can be estimated from a realization of a Markov chain $\{\bm{\mathbf{x}}^{(i)}\}_{i=1}^{I}$ using the following estimator \cite{Sokal1997,Akeret2013},
