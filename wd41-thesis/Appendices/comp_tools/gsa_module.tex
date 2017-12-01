@@ -1,0 +1,43 @@
+%**************************************************************************************************************************************
+\section[\texttt{gsa-module}]{\texttt{gsa-module}: Python3 Implementation of Global Sensitivity Analysis Methods}\label{app:gsa_module}
+%**************************************************************************************************************************************
+
+\texttt{gsa-module} is a Python3 package implementing several global sensitivity analysis methods for computer/simulation experiments.
+The implementation is based on a black-box approach where the computer model (or any generic function) is externally implemented to the module itself.
+The module accepts the model outputs and the design of experiment (optional, only for certain methods) and compute the associated sensitivity measures.
+The package also includes routines to generate normalized design of experiment file to be used in the simulation experiment based on several algorithms (such as simple random sampling or latin hypercube) as well as simple routines to post-processed multivariate raw code output such as its maximum, minimum, or average.
+
+The general calculation flowchart involved in using the \texttt{gsa-module} can be seen in the figure below.
+\bigfigure[pos=tbhp,
+           opt={width=0.95\textwidth},
+           label={fig:ch1_trace_simexp},
+           shortcaption={Flowchart of \texttt{gsa-module}.}]
+{../figures/appendices/gsa-module/gsa_module}
+{Flowchart of \texttt{gsa-module}.}
+
+\paragraph{Main Features}
+
+\begin{itemize}
+	\item Capability to generate design of computer experiments using $4$ different methods: \glsfirst[hyper=false]{srs}, \glsfirst[hyper=false]{lhs}, sobol' sequence, and optimized \gls[hyper=false]{lhs} using either command line interface \texttt{gsa\_create\_sample} or the module API via \texttt{import gsa\_module}.
+	\item Sobol' quasi-random number sequence generator is natively implemented in Python3 based on \texttt{C++} implementation of Joe and Kuo \cite{Joe2008}.
+	\item Randomization of the Sobol' quasi-random number using random shift procedure.
+	\item Optimization of the latin hypercube design is done via evolutionary stochastic algorithm (ESE) \cite{Jin2003}.
+	\item Generation of separate test points based on a given design using Hammersley quasi-random sequence \cite{Damblin2013}.
+	\item Capability to generate design of computer experiments for screening analysis (One-at-a-time design), based on the trajectory design \cite{Morris1991} and radial design \cite{Campolongo2011}
+	\item Capability to compute the statistics of elementary effects, standardized or otherwise both for trajectory and radial designs. The statistics (mean, mean of absolute, and standard deviation) are used as the basis of parameter importance ranking.
+	\item Capability to estimate the first-order (main effect) Sobol' sensitivity indices using two different estimators (Saltelli et al. \cite{Saltelli2002} and Janon et al. \cite{Janon2014}).
+	\item Capability to estimate the total effect Sobol' sensitivity indices using two different estimators (Sobol-Homma \cite{Homma1996} and Jansen \cite{Jansen1999}).
+	\item All estimated quantities are equipped with their bootstrap samples.
+\end{itemize}
+
+\paragraph{Requirements, Installation, and Documentation}\mbox{}\\
+
+The module was developed and tested using the \href{https://www.anaconda.com/distribution/}{Anaconda Python} distribution of Python \texttt{v3.5}.
+No additional package except the base installation of the distribution is required.
+
+\texttt{gsa-module} is hosted on \href{https://bitbucket.org/lrs-uq/gsa-module}{BitBucket}.
+Installation instruction and detailed documentation can be found in the project page.
+
+\paragraph{License}\mbox{}\\
+
+\texttt{gsa-module} is licensed under the MIT License.

@@ -183,7 +183,10 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # RStudio project
 */.Rproj.user
 
+# Miscellaneous
+wd41-thesis/wd41_thesis\.grk

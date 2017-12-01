@@ -1,0 +1,18 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{A}\relax \glsresetentrylist %
+\glossentry{alpha}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}\glsgroupskip
+\glsgroupheading{G}\relax \glsresetentrylist %
+\glossentry{Gamma}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}\glsgroupskip
+\glsgroupheading{R}\relax \glsresetentrylist %
+\glossentry{r}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\glossentry{rhog}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\glossentry{rhol}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\glossentry{rhos}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\end{theglossary}\glossarypostamble

@@ -1,11 +1,46 @@
-%*************************************************************************************************************
-\chapter[Introduction]{Quantifying Uncertainty of Computer Model: Forward and Backward}\label{ch:introduction}
-%*************************************************************************************************************
+%******************************************************************************************************
+\chapter[Introduction]{Quantifying Uncertainty of Computer Model: Forward and Backward}\label{ch:intro}
+%******************************************************************************************************
 
-%\input{Chapters/1_introduction/computer_simulation}
-%\input{Chapters/1_introduction/computer_experiment}
-%\input{Chapters/1_introduction/uncertainty_quantification}
-%\input{Chapters/1_introduction/premium}
-%\input{Chapters/1_introduction/research_objectives}
+% Introductory Paragraphs
+\begin{quote}
+	``All models are wrong but some are useful'' -- George Box
+\end{quote}
+It is perhaps convenient to use the quote by Box -- at least half of it -- as an excuse if a modeling exercise goes awry.
+But engineers are constructive bunch, as they are pragmatic, so they often focus on the second part of the statement and try to do better.
+Some would argue that to make a model useful is to make a model less wrong, a very difficult task.
+Some others would start by making an effort assessing whether the ``wrong'' model is useful, can ever be useful, or can be made useful without any direct improvement to the model.
+The two views are not contradictory, although the latter is arguably more humble.
+This thesis is an effort in line with the latter view.
+
+% Second part of the introductory paragraph
+By many measures, \gls[hyper=false]{th} system codes for simulating system behavior of a \gls[hyper=false]{npp} are an achievement.
+Their development, by the best and the brightest, includes decades of verification and validation activities supported by numerous experimental facilities, small and large scales.
+Many of the current understanding of physical phenomena in \gls[hyper=false]{npp} transient were established during that period.
+Yet, their predictions can still be off when compared against experimental data.
+The efforts to minimize this difference by developing high-fidelity physical models coupled with high-resolution numerical algorithms are always on-going and are indispensable for moving forward.
+
+% Third part of the introductory paragraph
+At the same time, simulations are being continuously used to make decisions, from optimal system design to safety margin evaluation for reactor licensing.
+For robust decision-making, it is important to acknowledge and determine the uncertainties associated with the predictions.
+Thus, independently of the efforts to improve the code, uncertainty quantification of the code predictions is an important part of the code development; it is the main topic of this thesis.
+
+% Overview of the chapter
+This opening chapter introduces briefly the importance and challenges of using system codes for simulating the \gls[hyper=false]{th} behavior of \glspl[hyper=false]{npp} in the context of their safety analysis.
+Section~\ref{sec:intro_computer_simulation} starts with basic definitions of relevant terms used throughout the thesis before moving on to a brief introduction to safety analysis and \gls[hyper=false]{th} system code.
+Uncertainty analysis of \gls[hyper=false]{th} system codes is first discussed in Section~\ref{sec:intro_uncertainty_quantification}, outlining the background and the context of the doctoral research.
+
+% Objectives, Scope, and Statistical Framework
+Section~\ref{sec:intro_objectives_and_scope} then describes the statement of the problem, the objectives, and the scope of the research.
+This thesis proposed a methodology comprised of sequential steps to analyze a computer model (i.e., \gls[hyper=false]{th} system code) with the overall goal of quantifying the uncertainty associated with the model parameters based on experimental data.
+It consolidates and adapts recent developments in the applied statistics literature.
+In this context, Section~\ref{sec:intro_statistical_framework} provides a broad, but by no means exhaustive, overview of the research landscape on each proposed steps.
+Finally, Section~\ref{sec:intro_thesis_structure} concludes the chapter by outlining the structure of the thesis.
+
+% The contents of the chapter
+\input{Chapters/1_introduction/computer_simulation}
+\input{Chapters/1_introduction/uncertainty_quantification}
+\input{Chapters/1_introduction/research_objectives}
 \input{Chapters/1_introduction/statistical_framework}
-%\input{Chapters/1_introduction/thesis_overview}
+\input{Chapters/1_introduction/thesis_structure}
+%*********************************************************
