@@ -63,23 +63,23 @@ Finally, the posterior range of the calibration scheme without model bias term t
 Additionally, the median posterior value of the parameters are shifted far away from its initial nominal value.
 Most of the initial nominal values are actually fall outside the $95\%$ \glspl[hyper=false]{hpdi} (see Fig.~\ref{fig:ch5_plot_ens_all_nodisc}).
 \begin{sidewaystable}
-\caption{Summary of calibration results. The three numbers in brackets are the minimum, the median, and the maximum parameter values, respectively for the prior distribution; while for all the posteriors they are the lower $95\%$\gls[hyper=false]{hpdi}, the median, and the $95\%$ upper \gls[hyper=false]{hpdi}, respectively.}
+\caption{Summary of calibration results. The three numbers in brackets are the lower $95\%$ credible interval, the median, and the upper $95\%$ credible interval, respectively.}
 \label{tab:ch5_post_param}
 \centering
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 \begin{tabularx}{1.025\textwidth}{@{}ccccccccc@{}}
 \toprule
-\multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multirow{2}{*}{Prior} &    \multicolumn{6}{c}{Posterior Summaries (lower HPDI, median, upper HPDI)} \\
+\multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multirow{2}{*}{Prior} &    \multicolumn{6}{c}{Posterior Summaries} \\
                                            \cmidrule{4-9}
- &  ID                &   Summaries     & \footnotesize{w/ Bias} &  \footnotesize{w/ Bias, TC Only} &  \footnotesize{w/ Bias, DP Only} & \footnotesize{w/ Bias, CO Only} & \footnotesize{w/ Bias, excl. \texttt{dffbVIHTC}} & \footnotesize{w/o Bias}\\ \midrule
-\footnotesize{$1$} & \texttt{gridHT}   &\footnotesize{$[0.50, 1.00,2.00]$}&\footnotesize{$[0.50,0.77,1.14]$} &\footnotesize{$[0.50,0.78,1.21]$}   &\footnotesize{$[0.50,0.92,1.70]$}  &\footnotesize{$[0.50,0.95,1.82]$}  &\footnotesize{$[0.50,0.80,1.14]$}  &\footnotesize{$[0.50,0.94,1.05]$}\\
-\footnotesize{$2$} &\texttt{iafbWHT}   &\footnotesize{$[0.50, 1.00,2.00]$}&\footnotesize{$[0.50,1.00,1.65]$} &\footnotesize{$[0.50,0.92,1.71]$}   &\footnotesize{$[0.50,1.06,1.85]$}  &\footnotesize{$[0.50,0.97,1.84]$}  &\footnotesize{$[0.50,1.02,1.66]$}  &\footnotesize{$[0.50,0.52,1.99]$}\\
-\footnotesize{$3$} &\texttt{dffbWHT}   &\footnotesize{$[0.50, 1.00,2.00]$}&\footnotesize{$[0.52,0.98,1.50]$} &\footnotesize{$[0.50,0.97,1.56]$}   &\footnotesize{$[0.50,0.85,1.77]$}  &\footnotesize{$[0.50,0.95,1.85]$}  &\footnotesize{$[0.57,1.06,1.57]$}  &\footnotesize{$[0.50,0.52,0.66]$}\\
-\footnotesize{$4$} &\texttt{dffbVIHT}  &\footnotesize{$[0.25, 1.00,4.00]$}&\footnotesize{$[0.25,0.83,1.63]$} &\footnotesize{$[0.25,0.90,1.89]$}   &\footnotesize{$[0.25,0.92,2.98]$}  &\footnotesize{$[0.25,0.75,2.63]$}  &\footnotesize{$[0.25,1.00,4.00]$}  &\footnotesize{$[3.50,3.90,4.00]$}\\
-\footnotesize{$5$} &\texttt{iafbIntDr} &\footnotesize{$[0.25, 1.00,4.00]$}&\footnotesize{$[0.61,1.10,1.90]$} &\footnotesize{$[0.25,1.27,3.50]$}   &\footnotesize{$[0.48,1.11,2.62]$}  &\footnotesize{$[0.25,1.03,3.48]$}  &\footnotesize{$[0.65,1.02,1.63]$}  &\footnotesize{$[0.45,0.57,0.69]$}\\
-\footnotesize{$6$} &\texttt{dffIntDr}  &\footnotesize{$[0.25, 1.00,4.00]$}&\footnotesize{$[0.25,0.83,2.18]$} &\footnotesize{$[0.25,0.97,2.90]$}   &\footnotesize{$[0.25,1.17,3.32]$}  &\footnotesize{$[0.25,1.22,3.51]$}  &\footnotesize{$[0.49,1.03,1.80]$}  &\footnotesize{$[0.31,0.96,1.88]$}\\
-\footnotesize{$7$} &\texttt{dffbWDr}   &\footnotesize{$[0.50, 1.00,2.00]$}&\footnotesize{$[0.50,0.94,1.55]$} &\footnotesize{$[0.50,1.01,1.87]$}   &\footnotesize{$[0.50,0.97,1.60]$}  &\footnotesize{$[0.50,1.01,1.87]$}  &\footnotesize{$[0.50,0.92,1.51]$}  &\footnotesize{$[0.50,0.52,0.60]$}\\
-\footnotesize{$8$} &\texttt{tQuench}   &\footnotesize{$[-50.0,0.00,50.0]$}&\footnotesize{$[-50.,-4.6,35.4]$} &\footnotesize{$[-50.0,-7.9,36.9]$}  &\footnotesize{$[-50.0,-3.5,40.3]$} &\footnotesize{$[-49.8,-1.9,44.6]$} &\footnotesize{$[-50.0,-7.7,30.9]$} &\footnotesize{$[-49.5,48.4,50.0]$}\\ 
+                   &  ID               &   Summaries                      & \texttt{w/ Bias, All}            &\texttt{w/ Bias, TC}              &\texttt{w/ Bias, DP}              &\texttt{w/ Bias, CO}               &\texttt{w/ Bias, no dffbVIHTC}     &\texttt{w/o Bias}\\ \midrule
+\footnotesize{$1$} & \texttt{gridHT}   &\footnotesize{$[0.52,1.00,1.93]$} &\footnotesize{$[0.51,0.77,1.18]$} &\footnotesize{$[0.51,0.78,1.28]$} &\footnotesize{$[0.52,0.92,1.82]$} &\footnotesize{$[0.52,0.95,1.91]$}  &\footnotesize{$[0.51,0.80,1.18]$}  &\footnotesize{$[0.50,0.94,1.06]$}\\
+\footnotesize{$2$} &\texttt{iafbWHT}   &\footnotesize{$[0.52,1.00,1.93]$} &\footnotesize{$[0.53,1.00,1.77]$} &\footnotesize{$[0.52,0.92,1.83]$} &\footnotesize{$[0.53,1.06,1.92]$} &\footnotesize{$[0.52,0.97,1.92]$}  &\footnotesize{$[0.53,1.02,1.78]$}  &\footnotesize{$[0.50,0.52,1.99]$}\\
+\footnotesize{$3$} &\texttt{dffbWHT}   &\footnotesize{$[0.52,1.00,1.93]$} &\footnotesize{$[0.58,0.98,1.61]$} &\footnotesize{$[0.56,0.97,1.71]$} &\footnotesize{$[0.51,0.85,1.88]$} &\footnotesize{$[0.52,0.95,1.93]$}  &\footnotesize{$[0.62,1.06,1.64]$}  &\footnotesize{$[0.50,0.52,0.71]$}\\
+\footnotesize{$4$} &\texttt{dffbVIHT}  &\footnotesize{$[0.27,1.00,3.73]$} &\footnotesize{$[0.31,0.83,1.82]$} &\footnotesize{$[0.30,0.90,2.10]$} &\footnotesize{$[0.27,0.92,3.39]$} &\footnotesize{$[0.27,0.75,3.10]$}  &\footnotesize{$[0.27,1.00,3.73]$}  &\footnotesize{$[3.36,3.90,4.00]$}\\
+\footnotesize{$5$} &\texttt{iafbIntDr} &\footnotesize{$[0.27,1.00,3.73]$} &\footnotesize{$[0.69,1.10,2.09]$} &\footnotesize{$[0.36,1.27,3.75]$} &\footnotesize{$[0.61,1.11,3.09]$} &\footnotesize{$[0.27,1.03,3.74]$}  &\footnotesize{$[0.70,1.02,1.76]$}  &\footnotesize{$[0.46,0.57,0.71]$}\\
+\footnotesize{$6$} &\texttt{dffIntDr}  &\footnotesize{$[0.27,1.00,3.73]$} &\footnotesize{$[0.32,0.83,2.56]$} &\footnotesize{$[0.30,0.97,3.33]$} &\footnotesize{$[0.31,1.17,3.62]$} &\footnotesize{$[0.30,1.22,3.74]$}  &\footnotesize{$[0.57,1.03,1.96]$}  &\footnotesize{$[0.39,0.96,2.23]$}\\
+\footnotesize{$7$} &\texttt{dffbWDr}   &\footnotesize{$[0.52,1.00,1.93]$} &\footnotesize{$[0.53,0.94,1.66]$} &\footnotesize{$[0.52,1.01,1.93]$} &\footnotesize{$[0.53,0.97,1.72]$} &\footnotesize{$[0.52,1.01,1.93]$}  &\footnotesize{$[0.52,0.92,1.62]$}  &\footnotesize{$[0.50,0.52,0.62]$}\\
+\footnotesize{$8$} &\texttt{tQuench}   &\footnotesize{$[-47.5,0.00,47.5]$}&\footnotesize{$[-47.0,-4.6,40.5]$}&\footnotesize{$[-47.8,-8.0,42.5]$}&\footnotesize{$[-47.0,-3.5,44.8]$}&\footnotesize{$[-47.6,-1.9,47.2]$} &\footnotesize{$[-47.2,-7.7,36.9]$} &\footnotesize{$[-49.7,48.4,50.0]$}\\ 
 \bottomrule
 \end{tabularx}
 \end{sidewaystable}

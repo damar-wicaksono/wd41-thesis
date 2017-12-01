@@ -54,9 +54,19 @@ ens_samples_rescaled[, k] <- 100 * ens_samples_rescaled[,k] - 50
 
 ens_hpdi <- apply(ens_samples_rescaled, 2, HPDI, prob = 0.95)
 ens_med <- apply(ens_samples_rescaled, 2, median)
+ens_pct <- apply(ens_samples_rescaled, 2, quantile, probs = c(0.025, 0.975))
 
 for (i in 1:8)
 {
-  x <- sprintf("[%.1f,%.1f,%.1f]", ens_hpdi[1,i], ens_med[i], ens_hpdi[2,i])
+  x <- sprintf("[%.2f,%.2f,%.2f]", ens_hpdi[1,i], ens_med[i], ens_hpdi[2,i])
   print(x)
 }
+
+for (i in 1:8)
+{
+  x <- sprintf("[%.2f,%.2f,%.2f]", ens_pct[1,i], ens_med[i], ens_pct[2,i])
+  print(x)
+}
+
+
+length(seq(1, dim(ens_samples)[3], 39)) * 1000
