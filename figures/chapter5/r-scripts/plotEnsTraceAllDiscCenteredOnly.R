@@ -9,12 +9,13 @@
 # date      : Nov. 2017
 #
 # Load required libraries -----------------------------------------------------
+library(ggplot2)
 source("./r-scripts/multiplot.R")
 source("./r-scripts/plot_ensemble.R")
 
 # Global variables ------------------------------------------------------------
 # Output filename
-otpfullname <- "./figures/plotEnsTracePlotAllDiscCentered.pdf"
+otpfullname <- "./figures/plotEnsTraceDiscAllCentered.pdf"
 
 # Input filename
 ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
@@ -85,15 +86,21 @@ for (i in 1:8)
 }
 
 # Make the  plot --------------------------------------------------------------
-p <- ggplot(data = ens_tidy, aes(x = iter, y = value, group = walker))
-p <- p + geom_line(alpha = 1.0)
+ens_tidy_sub <- subset(ens_tidy, iter >= 1141)
+ens_tidy_sub <- subset(ens_tidy_sub, walker >= 601)
+
+p <- ggplot(data = ens_tidy_sub,
+            aes(x = iter, y = value, group = walker))
+p <- p + geom_line(alpha = 0.25)
+#p <- p + geom_point(alpha = 0.15)
 p <- p + geom_blank(data = ddummy, aes(x = iter, y = value))
 p <- p + theme_bw()
 p <- p + facet_wrap(~param, scales = "free_y", ncol = 4)
 
 # Set axis labels and font size
 p <- p + labs(y = "Parameter value",
-              x = "Number of Iterations (after burn-in)")
+              x = "Number of Iterations")
+p <- p + scale_x_continuous(limits = c(1141, 1240))
 p <- p + theme(strip.text.x = element_text(size = 16, face = "bold"))
 p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.ticks.x = element_line(size = 1),
@@ -101,7 +108,6 @@ p <- p + theme(axis.ticks.y = element_line(size = 1),
                axis.text.y = element_text(size = 18))
 p <- p + theme(axis.title.y = element_text(vjust = 1.5, size = 24),
                axis.title.x = element_text(vjust = -0.5, size = 24))
-p
 
 # Make the plot ---------------------------------------------------------------
 pdf(otpfullname, family = "CM Roman",
