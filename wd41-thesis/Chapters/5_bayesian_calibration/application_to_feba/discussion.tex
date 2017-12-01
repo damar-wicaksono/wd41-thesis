@@ -2,5 +2,30 @@
 \subsection{Discussion}\label{sub:bc_discussion}
 %***********************************************
 
-%As explained, by construction, samples from \gls[hyper=false]{mcmc} simulation are not independent.
-%Furthermore, although the collection of walkers in an ensemble sampler should be independent, they are not independent in between iterations.
+% Opening Paragraph, On Convergence
+A series of \gls[hyper=false]{mcmc} simulations was conducted for each of the calibration schemes summarized in Table~\ref{tab:ch5_calibration_schemes}.
+\marginpar{On the convergence of MCMC simulation}
+Two thousands iterations and 1'000 walkers were used in the ensemble sampler generating 2'000'000 samples.
+All simulations were started from the same initial parameters values: the nominal parameters values.
+After post-processing the resulting posterior samples: discarding some of the initial iterations and thinning the samples,
+(serially) independent sample size in the order of tens of thousands was obtained for each calibration scheme. 
+Though the size of independent samples is much smaller than the initial posterior samples, the resulting relative statistical error associated with model parameters estimates is in the order of less than $1\%$.
+Based on the estimated autocorrelation time, before and after burn-in, no indication of lack of convergence during the ensemble iteration was found.
+The autocorrelation time after burn-in was found to be smaller than total number of iterations (see Section~\ref{sub:bc_mcmc_thinning}). 
+
+% On convergence and the length burn-in period
+However, the results also supported the findings of \cite{Hou2012,Foreman-Mackey2013,Akeret2013} regarding the relatively long length of the burn-in period with respect to the total number of ensemble iterations in comparison with the length of the period in a single particle sample.
+\marginpar{The length of burn-in period}
+It is not uncommon to run a single particle \gls[hyper=false]{mcmc} simulation up to $100'000$ iterations (or beyond) for computer model calibration \cite{Wu2017,Wu2018}.
+In such case, the length of burn-in period would be much smaller in comparison with the total number of iterations and thus would be less important to discard (a rule of thumb arguess for discarding at most $20\%$ of the total number of samples \cite{Sokal1997}).
+On the contrary, in the case of ensemble sampler, although the total number of iterations are much smaller, the length of burn-in period was conservatively estimated between $40\%$ to $50\%$ of the total number of iterations\footnote{Note that although the number of iterations in an ensemble sampler is much smaller than in a single particle sampler, the computational cost would be relatively similar in terms of likelihood evaluations as multiple walkers mean that more computations have to be conducted per iteration.}.
+Therefore, determining burn-in period was indeed more important;
+if the samples associated with this initial transient were not discarded, it risked that the model parameters estimates would be heavily biased.
+
+% On the Posterior samples
+The resulting posterior samples, as presented in the corner plots (Figs.\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, \ref{fig:ch5_plot_ens_co_disc_centered}, \ref{fig:ch5_plot_ens_all_disc_centered_noparam8}, and \ref{fig:ch5_plot_ens_all_nodisc}) and as summarized in Table~\ref{tab:ch5_post_param}, indicate different constraining ability of the data on the model parameters initial depending on the calibration scheme.
+
+% On Uncertainty Propagation
+A thousand samples of model parameters values were then taken from the respective pool of independent posterior samples for the purpose of uncertainty propagation on all the \gls[hyper=false]{feba} tests.
+The uncertainty of additional parameters related to boundary conditions were also propagated alongside the posterior unceertainties of the model parameters.
+For comparison purpose, uncertainty propagation was also conducted in which the correlation among model parameters are neglected (i.e., the model parameters were taken to be independent of each other).
