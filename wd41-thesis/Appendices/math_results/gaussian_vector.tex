@@ -8,7 +8,7 @@ That is, the random variables have a multivariate normal (\gls[hyper=false]{mvn}
 It is the most widely studied and applied multivariate random variable.
 There are a couple of reasons for this.
 From a practical viewpoint, the \gls[hyper=false]{mvn} distribution is tractable and its special properties are well known \cite{Jensen2014}.
-From an epistemological viewpoint, modeling a variable as \gls[hyper=false]{mvn} distribution is a particular way of quantifying uncertainty about that variable.
+From an epistemological viewpoint, modeling a variable as a \gls[hyper=false]{mvn} distribution is a particular way of quantifying uncertainty about that variable.
 Specifically, if only the mean and variance are of interest then the \gls[hyper=false]{mvn} distribution is the most consistent and parsimonious distribution to describe the variable \cite{McElreath2015}.
 This section reviews the definition and some of the most important properties of MVN random variable relevant in the present study.
 
@@ -17,11 +17,11 @@ is said to have an \gls[hyper=false]{mvn} distribution with mean vector $\boldsy
 \marginpar{multivariate normal distribution}
 if its joint probability density function is given by,
 \begin{equation}
-	p(\mathbf{z};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{(2\pi)^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\boldsymbol{z}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{z}-\boldsymbol{\mu})\right]}
+	p(\bm{z};\boldsymbol{\mu},\boldsymbol{\Sigma}) = \frac{1}{(2\pi)^{D/2}|\boldsymbol{\Sigma}|^{1/2}} \exp{\left[-\frac{1}{2}(\bm{z}-\boldsymbol{\mu})^T\boldsymbol{\Sigma}^{-1}(\bm{z}-\boldsymbol{\mu})\right]}
 	\label{eq:gaussian_joint_density}
 \end{equation}
 The joint distribution of a Gaussian random vector is parameterized and fully specified by the mean vector $\boldsymbol{\mu}$ and the variance-covariance matrix $\boldsymbol{\Sigma}$. 
-The symbol ``;'' separates the value of the variates $\mathbf{x}$ from the parameters of the distribution. 
+The symbol ``;'' separates the value of the variates $\bm{z}$ from the parameters of the distribution. 
 A $D$-dimensional random vector $\bm{\mathcal{Z}}$ distributed as a joint Gaussian is denoted by,
 \begin{equation}
 	\bm{\mathcal{Z}} \sim \mathcal{N}_D\left(\boldsymbol{\mu}, \boldsymbol{\Sigma}\right)
@@ -37,9 +37,9 @@ The mean vector $\boldsymbol{\mu}$ is defined as,
 where $\mathbb{E}[\circ]$ is the expectation operator, such that $\mathbb{E}[\mathcal{Z}] = \int_z z p(z) dz$.
 
 % Variance-Covariance Matrix
-The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive semi-definite (PSD) $D \times D$ matrices, $S_{++}^D$ defined as,
+The variance-covariance matrix $\boldsymbol{\Sigma}$ is an element in the space of symmetric positive semi-definite (PSD) $D \times D$ matrices $S_{++}^D$, which is defined as
 \begin{equation}
-	S_{++}^D = \{\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}: \boldsymbol{\Sigma} = \boldsymbol{\Sigma}^T, \mathbf{z}^T \boldsymbol{\Sigma} \mathbf{z} \geq 0, \forall \mathbf{z} \in \mathbb{R}^D \textnormal{and } \mathbf{z} \neq 0 \}
+	S_{++}^D = \{\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}: \boldsymbol{\Sigma} = \boldsymbol{\Sigma}^T, \bm{z}^T \boldsymbol{\Sigma} \bm{z} \geq 0, \forall \bm{z} \in \mathbb{R}^D \textnormal{and } \bm{z} \neq 0 \}
 	\label{eq:def_covariance_matrix}
 \end{equation}
 
@@ -57,12 +57,12 @@ while the off-diagonal elements, $\Sigma_{i,j}$, describe the covariation betwee
 \label{eq:covariance_matrix}
 \end{equation}
 where $\mathbb{V} [\circ]$ is the variance operator, such that $\mathbb{V} [\mathcal{Z}] = \mathbb{E}[(\mathcal{Z} - \mathbb{E}[\mathcal{Z}])^2]$;
-and $\text{Cov} [\circ, \circ]$ is the covariance operators, such that $\text{Cov} [\mathcal{Z}, \mathcal{Z}^*] = \mathbb{E}[(\mathcal{Z}-\mathbb{E}[\mathcal{Z}])(\mathcal{Z}^*-\mathbb{E}[\mathcal{Z}^*])]$.
+and $\text{Cov} [\circ, \circ]$ is the covariance operator, such that $\text{Cov} [\mathcal{Z}, \mathcal{Z}^*] = \mathbb{E}[(\mathcal{Z}-\mathbb{E}[\mathcal{Z}])(\mathcal{Z}^*-\mathbb{E}[\mathcal{Z}^*])]$.
 
 % Partitioning Gaussian Random Vector
 Suppose that the $D$-dimensional random vector $\bm{\mathcal{Z}}$ is partitioned into two sub-vectors (disjoint sets) of $D_1$-dimensional random vector $\bm{\mathcal{Z}}_A$ and $D_2$-dimensional random vector $\bm{\mathcal{Z}}_B$, such that $\bm{\mathcal{Z}} = [\bm{\mathcal{Z}}_A, \bm{\mathcal{Z}}_B]$ and $D = D_1 + D_2$ (see Appendix~\ref{app:probability}).
 \marginpar{Gaussian random vector partition}
-Then the Gaussian random vector $[\bm{\mathcal{X}}_A, \bm{\mathcal{Z}}_B]$ is written,
+Then the Gaussian random vector $[\bm{\mathcal{Z}}_A, \bm{\mathcal{Z}}_B]$ is written,
 \begin{equation}
 	\begin{bmatrix}
 		 \bm{\mathcal{Z}}_A \\
@@ -97,7 +97,7 @@ The marginal density of $\bm{\mathcal{Z}}_A$ follows an \gls[hyper=false]{mvn} d
 		p(\mathbf{z}_A) = \frac{1}{(2\pi)^{D_1/2}|\boldsymbol{\Sigma_{A,A}}|^{1/2}} \exp{\left[-\frac{1}{2}(\mathbf{z}_A-\boldsymbol{\mu}_A)^T\boldsymbol{\Sigma^{-1}_{A,A}}(\mathbf{z}_A-\boldsymbol{\mu}_A)\right]}
 \label{eq:gaussian_marginal}
 \end{equation}
-The results are analogous for the marginal of $\bm{\mathcal{Z}}_B$, $p(\mathbf{z}_B)$ of which all the subscripts $A$ is replaced by $B$.
+The results are analogous for the marginal of $\bm{\mathcal{Z}}_B$, $p(\mathbf{z}_B)$ of which all the subscripts $A$ are replaced by $B$.
 
 % Conditional Distribution of Gaussian Random Vector
 The conditional density of $\bm{\mathcal{Z}}_A$ conditioned on $\bm{\mathcal{Z}}_B$, again, also follows an \gls[hyper=false]{mvn} distribution given as,
@@ -110,4 +110,4 @@ The conditional density of $\bm{\mathcal{Z}}_A$ conditioned on $\bm{\mathcal{Z}}
 	\end{split}
 \label{eq:gaussian_conditional}
 \end{equation}
-The results are analogous for the conditional $\bm{\mathcal{Z}}_B$ given $\bm{\mathcal{Z}}_A$, $p(\mathbf{z}_B|\mathbf{z}_A)$ of which all the subscripts $A$ is replaced by $B$, and vice versa.
+The results are analogous for the conditional $\bm{\mathcal{Z}}_B$ given $\bm{\mathcal{Z}}_A$, $p(\mathbf{z}_B|\mathbf{z}_A)$ of which all the subscripts $A$ are replaced by $B$, and vice versa.

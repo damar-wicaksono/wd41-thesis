@@ -18,7 +18,7 @@ otpfullname <- "figures/plotReconstructionErrorCO.pdf"
 trc_valid_path <- "../../../../wd41-thesis.analysis.new/postpro-gp-training/result-compiled"
 trc_valid_filename <- "febaTrans216Ext-febaVars12Influential-lhs_5000_12_valid.Rds"
 
-trc_train_pca_path <- "../../../../wd41-thesis.analysis.new/trace-gp/result-pc/"
+trc_train_pca_path <- "../../../../wd41-thesis.analysis.new/trace-gp/result-pc"
 trc_train_pca_filename <- c(
     "febaTrans216Ext-febaVars12Influential-sobol_1920_12-co-pca.Rds")
 

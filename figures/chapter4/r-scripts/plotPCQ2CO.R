@@ -14,12 +14,17 @@ source("./r-scripts/compileGPError.R")
 # Output filename
 otpfullname <- "./figures/plotPCQ2CO.pdf"
 
-# Current case
+# Input filename
 output_type <- "co"
-data_path <- "../../../../wd41-thesis.analysis.new/trace-gp/result-er"
+n_params <- 12
 feba_case <- "febaTrans216Ext"
 param_file <- "febaVars12Influential"
-n_params <- 12
+# PC Results
+data_path_pc <- "../../../../wd41-thesis.analysis.new/trace-gp/result-pc/"
+pc_filename <- paste0(feba_case, "-", param_file, "-sobol_1920_", n_params, 
+                      "-", output_type, "-pca.Rds")
+# GP Error
+data_path_gp_err <- "../../../../wd41-thesis.analysis.new/trace-gp/result-er"
 
 idx_pc <- c(1, 3, 5)    # Selected PC to present
 
@@ -28,11 +33,13 @@ fig_size <- c(10, 4)             # width, height
 
 # Read Data -------------------------------------------------------------------
 gp_error_df <- compileGPError(
-    output_type, data_path, feba_case, param_file, n_params)
+    output_type, data_path_gp_err, feba_case, param_file, n_params)
+pc_df <- readRDS(paste0(data_path_pc, "/", pc_filename))
 
 # Pre-process Data ------------------------------------------------------------
-str_pc <- paste0("PC", idx_pc)
-str_q2 <- paste0(str_pc, "_Q2")
+exp_var <- round((pc_df$yy_train_var/sum(pc_df$yy_train_var))[idx_pc] * 100, 2)
+str_pc <- paste0("PC", idx_pc, " (", exp_var, "%)")
+str_q2 <- paste0("PC", idx_pc, "_Q2")
     
 gp_error_df_sub <- gp_error_df %>% filter(type == str_q2[1] |
                                           type == str_q2[2] | 
