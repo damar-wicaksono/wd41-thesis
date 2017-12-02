@@ -1,5 +1,5 @@
 #
-# title     : plotTraceUQPosterioTC223.R
+# title     : plotTraceUQPosteriorTC223.R
 # purpose   : R script to create plot of UQ propagation using posterior samples
 #           : for TC output
 #           : FEBA Test No. 223
@@ -22,8 +22,6 @@ rds_tidy_prior_fullname <- paste0(
 
 # Graphic variables
 fig_size <- c(18, 9)
-plot_title <- parse(
-  text = "'FEBA Test No. 223, '*P[sys]*' = 2.2 [bar], Flooding Rate = 3.8 ['*m.s^-1*']'")
 
 # Make the plot ---------------------------------------------------------------
 # w/ Bias
@@ -39,6 +37,9 @@ rds_tidy_ind_fullname <- paste0(
   "../data-support/postpro/disc/centered/all-params/independent/febaTrans",
   feba_test,
   "-febaVars12Influential-mcmcAllDiscCenteredInd_1000_12-tc-tidy.RDs")
+# Add plot title
+plot_title <- parse(
+  text = "'FEBA Test No. 223, '*P[sys]*' = 2.2 [bar], Flooding Rate = 3.8 ['*m.s^-1*'], Calibration scheme w/ Bias, All'")
 # Make the plot
 source("./r-scripts/plotTraceUQPosteriorTC.R")
 
@@ -55,5 +56,28 @@ rds_tidy_ind_fullname <- paste0(
   "../data-support/postpro/nodisc/not-centered/fix-bc/independent/febaTrans",
   feba_test,
   "-febaVars12Influential-mcmcAllNoDiscNoBCInd_1000_12-tc-tidy.RDs")
+# Add plot title
+plot_title <- parse(
+  text = "'FEBA Test No. 223, '*P[sys]*' = 2.2 [bar], Flooding Rate = 3.8 ['*m.s^-1*'], Calibration scheme w/o Bias'")
+# Make the plot
+source("./r-scripts/plotTraceUQPosteriorTC.R")
+
+# w/o Parameter 8 (dffbVIHTC)
+# Output filename
+otpfullname <- paste0(
+  "./figures/plotTraceUQPosteriorAllDiscCenteredNoParam8TC",
+  feba_test, ".pdf")
+# Input filenames, posterior samples, correlated and independent
+rds_tidy_corr_fullname <- paste0(
+  "../data-support/postpro/disc/centered/no-param8/correlated/febaTrans",
+  feba_test,
+  "-febaVars12Influential-mcmcAllDiscCenteredNoParam8_1000_12-tc-tidy.RDs")
+rds_tidy_ind_fullname <- paste0(
+  "../data-support/postpro/disc/centered/no-param8/independent/febaTrans",
+  feba_test,
+  "-febaVars12Influential-mcmcAllDiscCenteredNoParam8Ind_1000_12-tc-tidy.RDs")
+# Add plot title
+plot_title <- parse(
+  text = "'FEBA Test No. 223, '*P[sys]*' = 2.2 [bar], Flooding Rate = 3.8 ['*m.s^-1*'], Calibration scheme w/ Bias, no dffbVIHT'")
 # Make the plot
 source("./r-scripts/plotTraceUQPosteriorTC.R")
