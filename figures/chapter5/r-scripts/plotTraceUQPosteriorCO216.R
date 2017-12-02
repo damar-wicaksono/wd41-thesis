@@ -22,8 +22,8 @@ rds_tidy_prior_fullname <- paste0(
 
 # Graphic variables
 fig_size <- c(5, 5)
-x_lims <- c(0, 250.)
-y_lims <- c(0, 20.0)
+x_lims <- c(0, 240.)
+y_lims <- c(0, 18.0)
 
 # Make the plot ---------------------------------------------------------------
 # w/ Bias
@@ -74,4 +74,3 @@ rds_tidy_ind_fullname <- paste0(
   "-febaVars12Influential-mcmcAllDiscCenteredNoParam8Ind_1000_12-co-tidy.RDs")
 # Make the plot
 source("./r-scripts/plotTraceUQPosteriorCO.R")
-
