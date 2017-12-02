@@ -26,37 +26,51 @@ if the samples associated with this initial transient were not discarded, it ris
 The resulting posterior samples, as presented in the corner plots (Figs.\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, \ref{fig:ch5_plot_ens_co_disc_centered}, \ref{fig:ch5_plot_ens_all_disc_centered_noparam8}, and \ref{fig:ch5_plot_ens_all_nodisc}) and as summarized in Table~\ref{tab:ch5_post_param}, indicate different constraining ability of the data on the model parameters prior uncertainties depending on the calibration scheme.
 Figs.~\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, and \ref{fig:ch5_plot_ens_co_disc_centered} demonstrates the constraining ability of different types of data.
 These calibration results are to be expected according to the sensitivity analysis conducted in Chapter~\ref{ch:gsa}.
-For instance, the pressure drop output mainly sensitive to the parameter \texttt{iafbIntDr} can be mainly informed by the pressure drop data as indicated in Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}.
+For instance, the pressure drop output mainly sensitive to the parameter \texttt{iafbIntDr} can be mainly informed by the pressure drop data as demonstrated in Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}.
 Meanwhile, the liquid carryover output though sensitive to the variation of the model parameters \texttt{dffbVIHT} and \texttt{dffbIntDr} are overshadowed by the variation due to the boundary condition.
 Thus, as indicated in Fig.~\ref{fig:ch5_plot_ens_co_disc_centered} the constraining power of the liquid carryover data is fairly limited; the posterior uncertainties associated with the important parameters remain wide.
 
 % TC Output
-The results are similar when considering only clad temperature data for the calibration.
-The parameters \texttt{gridHT} and \texttt{dffbWallHT} are well constrained by the temperature output data.
+The results are similar when considering only the clad temperature data for the calibration.
+The parameters \texttt{gridHT} and \texttt{dffbWallHT} are well constrained by the temperature data.
 The parameter \texttt{gridHT}, in particular, is constrained only at the upper end of the uncertainty bound.
 It turns out that decreasing the spacer grid heat enhancement below certain value will not decrease the overall heat transfer any longer.
 Thus, below that certain value the enhancement is insensitive with respect to the clad temperature output.
 
 % All Outputs
 By definition, a model parameter that is not sensitive to a simulation output cannot be informed by the experimental data of that output. 
-That is, the parameter is non-identifiable \cite{Hines2014}.  
+That is, the parameter is non-identifiable \cite{Hines2014}.
+\marginpar{Non-identifiability, sensitive parameters}
 And indeed, when considering all types of data, the prior uncertainties of the model parameters was shown to be simultaneously constrained and often even tighter (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}).
+For instance, the parameter \texttt{iabfIntDr} is non-identifiable with respect to the temperature data while the parameter \texttt{dffWallHT} with respect to the pressure drop data.
+Calibration using both experimental data solves the non-identifiability problem for both parameters.
 
 % No Constrain
-There are, however, several parameters that simply cannot be constrained by the considered experimental data.
-The uncertainties, especially the lower bounds, of the parameters \texttt{iafbWHT}, \texttt{dffbWDr} and \texttt{tQuench} remain close its initial lower uncertainty bound, while their upper bounds are only marginally smaller than that of the respective prior. 
-These parameters are of marginal importance relative among the selected influential parameters.
-Although it is straightforward to conclude that insensitive parameter cannot be constrained by the experimental data whatsoever, and the most influential ones can be strongly constrained, it stays unclear which among the parameters of intermediate importance as indicated by sensitivity measure of Chapter~\ref{ch:gsa} can be well constrained by the experimental data.
+There are, however, several parameters that simply could not be constrained by the considered experimental data.
+\marginpar{Non-identifiability, insensitive parameters}
+The uncertainties, especially the lower bounds, of the parameters \texttt{iafbWHT}, \texttt{dffbWDr} and \texttt{tQuench} remained close its initial lower uncertainty bound,
+while their upper bounds were only marginally smaller than that of the respective prior. 
+These parameters were found to be of marginal importance relative among the selected influential parameters.
+Although it is straightforward to conclude that insensitive parameter simply cannot be constrained by the experimental data, and the most influential ones can be strongly constrained, it stays unclear which among the parameters of intermediate importance as indicated by sensitivity measure of Chapter~\ref{ch:gsa} can be well constrained by the experimental data.
 
 % On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
+The calibration results also showed that strong correlation was pres\-ent among the model parameters.
+\marginpar{Non-identifiability, correlation}
+In the case of the calibration against $TC$ data (Fig.~\ref{fig:ch5_plot_ens_tc_disc_centered}), the parameter \texttt{dffbVIHT} was shown to be correlated with multiple parameters, particularly with the parameter \texttt{dffbIntDr}.
+In the case of the calibration against $DP$ data (Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}), the parameters \texttt{iafbWHT} and \texttt{tQuench} were found to be strongly correlated. 
+Considering multiple types of experimental data (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}) did not seem to break these correlations.
+Both cases are examples of another form non-identifiability.
+Though these parameters were sensitive with respect to the outputs as the parameters posterior uncertainties were clearly informed and affected by the calibration process (they did become correlated afterward), 
+the effect of one parameter could be be offset by the change in the other in reproducing the experimental data. 
+As a result, the univariate posterior marginal uncertainties of these parameters remained large.
 
 % On the Posterior samples, no bias
 
 % On Uncertainty Propagation
 A thousand samples of model parameters values were then taken from the respective pool of independent posterior samples for the purpose of uncertainty propagation on all the \gls[hyper=false]{feba} tests.
-The uncertainty of additional parameters related to boundary conditions were also propagated alongside the posterior unceertainties of the model parameters.
+The uncertainty of additional parameters related to boundary conditions were also propagated alongside the posterior uncertainties of the model parameters.
 For comparison purpose, uncertainty propagation was also conducted in which the correlation among model parameters are neglected (i.e., the model parameters were taken to be independent of each other).
-In the following, the discussion is focused on the propagation of posterior uncertainties obtained from three calibration schemes, namely: \texttt{w/ Bias, All}, \texttt{w/o Bias}, and \texttt{w/ Bias, no dffbVIHT}
+In the following, the discussion is focused on the propagation of posterior uncertainties obtained from three calibration schemes, namely: \texttt{w/ Bias, All}, \texttt{w/o Bias}, and \texttt{w/ Bias, no dffbVIHT}.
 
 % On Uncertainty Propagation, Calibration vs. Informativeness
 
