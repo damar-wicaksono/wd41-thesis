@@ -21,7 +21,7 @@ rds_tidy_prior_fullname <- paste0(
   "-febaVars12Influential-srs_1000_12-co-tidy.Rds")
 
 # Graphic variables
-fig_size <- c(4, 4)
+fig_size <- c(5, 5)
 x_lims <- c(0, 250.)
 y_lims <- c(0, 20.0)
 
@@ -57,3 +57,21 @@ rds_tidy_ind_fullname <- paste0(
   "-febaVars12Influential-mcmcAllNoDiscNoBCInd_1000_12-co-tidy.RDs")
 # Make the plot
 source("./r-scripts/plotTraceUQPosteriorCO.R")
+
+# w/o Parameter 8 (dffbVIHTC)
+# Output filename
+otpfullname <- paste0(
+  "./figures/plotTraceUQPosteriorAllDiscCenteredNoParam8CO",
+  feba_test, ".pdf")
+# Input filenames, posterior samples, correlated and independent
+rds_tidy_corr_fullname <- paste0(
+  "../data-support/postpro/disc/centered/no-param8/correlated/febaTrans",
+  feba_test,
+  "-febaVars12Influential-mcmcAllDiscCenteredNoParam8_1000_12-co-tidy.RDs")
+rds_tidy_ind_fullname <- paste0(
+  "../data-support/postpro/disc/centered/no-param8/independent/febaTrans",
+  feba_test,
+  "-febaVars12Influential-mcmcAllDiscCenteredNoParam8Ind_1000_12-co-tidy.RDs")
+# Make the plot
+source("./r-scripts/plotTraceUQPosteriorCO.R")
+
