@@ -64,7 +64,26 @@ Though these parameters were sensitive with respect to the outputs as the parame
 the effect of one parameter could be be offset by the change in the other in reproducing the experimental data. 
 As a result, the univariate posterior marginal uncertainties of these parameters remained large.
 
+% On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
+A possible solution of this problem is by removing an influential parameter that is strongly correlated from the calibration process \cite{Brun2002}.
+\marginpar{Calibration, excluding a correlated parameter}
+Indeed this approach was investigated by conducting the calibration scheme \texttt{w/ Bias, no dffbVIHT} in which the parameter \texttt{dffbVIHT} was excluded from the calibration process.
+The results as presented in Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8} which further constrained the uncertainty of the parameter \texttt{dffbIntDr} that was previously correlated with the excluded parameter.
+Note, however, as the parameter \texttt{dffbVIHT} was not calibrated its uncertainty remained at its prior uncertainty.
+
 % On the Posterior samples, no bias
+The last calibration scheme investigated was the \texttt{w/o Bias} in which no model bias term was incorporated in the calibration process and the only source of uncertainties was the one associated with the reported experimental data.
+\marginpar{Calibration, without model bias term}
+The results as presented in Fig.~\ref{fig:ch5_plot_ens_all_nodisc} showed a peculiar behavior.
+A notable feature was, for many model parameters, the nominal parameters values were found to be outside the respective $95\%$ posterior uncertainty range.
+Recall that the nominal parameters were already calibrated against experimental data from different \glspl[hyper=false]{setf}.
+Therefore, if this results is to be believed then it also implies that the previous calibration results are highly implausible.
+
+Moreover, the posterior samples of the parameters were concentrated either in one corner of the prior uncertainty range or in either sides of it.
+The parameters \texttt{iafbWHT} and \texttt{tQuench}, for instance, were concentrated in both sides of their prior uncertainties;
+while the parameters \texttt{dffbWHT} and \texttt{dffbVIHT} were concentrated in one side of their prior uncertainties.
+Though looked peculiar, the posterior samples were model parameters values that were found to be consistent with the experimental data under the calibration formulation.
+The lack of assumed model bias in the calibration formulation, however, forced the parameters to change dramatically and at times, to the limit of the prior uncertainties, in order to compensate any additional residual discrepancy (beyond the experimental uncertainty) between the simulator predictions and the experimental.
 
 % On Uncertainty Propagation
 A thousand samples of model parameters values were then taken from the respective pool of independent posterior samples for the purpose of uncertainty propagation on all the \gls[hyper=false]{feba} tests.
