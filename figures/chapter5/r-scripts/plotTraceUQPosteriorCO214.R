@@ -22,8 +22,8 @@ rds_tidy_prior_fullname <- paste0(
 
 # Graphic variables
 fig_size <- c(5, 5)
-x_lims <- c(0, 250.)
-y_lims <- c(0, 20.0)
+x_lims <- c(0, 125.)
+y_lims <- c(0, 16.0)
 
 # Make the plot ---------------------------------------------------------------
 # w/ Bias
