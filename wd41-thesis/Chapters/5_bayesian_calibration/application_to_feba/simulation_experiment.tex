@@ -66,6 +66,18 @@ Based on these data points, an observation layout for $TC$ data can be defined,
 where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
 
 % Clad Temperature uncertainty
+The reported experimental uncertainty associated with the clad temperature measurement is $\pm0.5\%$ of the measured value in $[^oC]$.
+In this thesis, this statement of uncertainty is translated to a Gaussian probability distribution such that the uncertainty covers the $99.7\%$ probability (i.e., $3$ sigma levels).
+Let $\mathbf{y_E}$ is the vector of $TC$ data observed at $\boldsymbol{\Lambda}_{TC}$, then the experimental uncertainty is given as,
+\begin{equation}
+	\begin{split}
+		& \mathcal{E}(\boldsymbol{\Lambda}_{TC}) \thicksim \mathcal{N}(0, \Sigma_{TC})\\
+		& \Sigma_{TC} = (\mathbf{I} \frac{0.005}{3} \mathbf{y_E}^T) (\mathbf{I} \frac{0.005}{3} \mathbf{y_E}^T)
+	\end{split}	
+\label{eq:bc_experimenta_uncertainty_feba_tc}
+\end{equation}
+where $\mathbf{I}$ is an identity matrix of size $P$, where $P$ is the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+The $P$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
 
 % Pressure Drop
 The experimental data provided for the pressure drop ($DP$) of the \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
