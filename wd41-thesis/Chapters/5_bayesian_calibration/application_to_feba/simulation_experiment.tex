@@ -30,11 +30,84 @@ These different sets of samples are then analyzed to assess the effect of using 
 Finally, the resulting posterior samples from different schemes are used in forward \gls[hyper=false]{uq} on the \gls[hyper=false]{trace} model of different \gls[hyper=false]{feba} tests (corresponding to different boundary conditions, namely system pressure and reflood rate).
 This final exercise is aimed to assess the implication of the posterior uncertainties from different calibration schemes on (and their applicability for) the prediction under conditions different from the condition of the calibration data.
 
-Each calibration scheme, the \gls[hyper=false]{mcmc} sampler, and a method to evaluate and compare different posterior prediction uncertainties will be detailed further below. 
+In the following, the important terms of Eq.~(\ref{eq:bc_observation_simulation_true}) will be discussed in the context of the present application on the \gls[hyper=false]{trace} model before detailing each calibration scheme.
+Afterward, the \gls[hyper=false]{mcmc} sampler and simulation setting as well as a method to evaluate and compare different posterior prediction uncertainties are presented.
 
 %-------------------------------------------------------------------------------------------
 \subsubsection{Experimental Data and Observation Layout}\label{subsub:bc_observation_layout}
 %-------------------------------------------------------------------------------------------
+
+% Introductory Paragraph
+The experimental data of the \gls[hyper=false]{feba} test No. $216$ used in the present calibration is based on the report provided to the participants of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013}.
+The data in the report, in turn, is based on the digitization of experimental curves on the original report \cite{Ihle1984} and additional review on the associated experimental uncertainties.
+Therefore this were the data used by other participants of the benchmark.
+
+% Clad Temperature
+The experimental data provided for the clad temperature ($TC$) of the \gls[hyper=false]{feba} test No. $216$ consists of $33$ time points for each of the $8$ different axial locations of the thermocouples along the test section.
+\marginpar{Clad temperature ($TC$) data}
+Recall that by convention in the experiment, $TC1$ corresponds to the thermocouple measurement at the top of the test section ($\approx 4.1\,[m]$), while $TC8$ corresponds to the measurement at the bottom of the section ($\approx 0.3\,[m]$).
+
+Due to the strong discontinuity of the clad temperature around the point of quenching, the model bias term cannot be modeled using stationary \gls[hyper=false]{gp} (see Section~\ref{subsub:bc_model_bias}) as it severely violates to the constant variance assumption as function of time and axial location (at the very least, before and after the quenching occurs).
+To keep the simplicity from using the stationary \gls[hyper=false]{gp} formulation, the model bias term is modeled only for the part of transient before quenching occurs.
+Thus the calibration is also conducted using the data prior to quenching.
+This is further justified by the fact that after quenching there is much less relevant variation in the temperature transient.
+
+Because of the different timing of quenching along the test section, the number of data points available for calibration changes per axial location.
+Based on these data points, an observation layout for $TC$ data can be defined,
+\begin{equation}
+	\begin{split}
+		\boldsymbol{\Lambda}_{TC} & = \{(z_1,t_1),(z_1,t_{2}),(z_2,t_1),\ldots,(z_2,t_{7}),\\
+															& \quad\quad (z_3,t_1),\ldots,(z_3,t_{12}),(z_4,t_1),\ldots,(z_4,t_{17}),  \\
+															& \quad\quad (z_5,t_1),\ldots,(z_5,t_{21}),(z_6,t_1),\ldots,(z_6,t_{24}),  \\
+															& \quad\quad (z_7,t_1),\ldots,(z_7,t_{25}),(z_8,t_1),\ldots,(z_8,t_{27})\} \\
+	\end{split}
+\label{eq:bc_observation_layout_feba_tc}
+\end{equation}
+where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+
+% Clad Temperature uncertainty
+
+% Pressure Drop
+The experimental data provided for the pressure drop ($DP$) of the \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
+\marginpar{Pressure drop ($DP$) data}
+Recall that in the experiment, the \emph{bottom} segment corresponds to the segment $0.0 - 1.7\,[m]$, the \emph{middle} to $1.7 - 2.3\,[m]$, the \emph{top} to $z = 2.3 - 4.1\,[m]$, and the \emph{total} to $0.0 - 4.1\,[m]$.
+In the following, the bottom, the middle, the top, and the total segments are simply indices of the $DP$ output; $z_1$, $z_2$, $z_3$, $z_4$, respectively.
+The observation layout for the $DP$ data is then defined as follow,
+\begin{equation}
+		\boldsymbol{\Lambda}_{DP} = \{(z_1,t_1),\ldots,(z_1,t_{18}),(z_2,t_1),\ldots,(z_4,t_{18})\}
+\label{eq:bc_observation_layout_feba_dp}
+\end{equation}
+where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+
+% Pressure drop uncertainty
+
+% Liquid carryover
+Finally, the experimental data provided for the liquid carryover ($CO$) of the \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
+\marginpar{Liquid carryover ($CO$) data}
+However, because the collecting tank was saturated at $10\,[kg]$ only the transient up to that mass is of interest.
+By excluding the data points where the tank has been saturated, only $7$ data points are available for the calibration.
+Based on these data points, the observation layout for the $CO$ data is defined as,
+\begin{equation}
+		\boldsymbol{\Lambda}_{CO}  = \{(t_1),\ldots,(t_{7})\}
+\label{eq:bc_observation_layout_feba_co}
+\end{equation}
+where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+
+% Liquid carryover uncertainty
+
+% Full observation layout
+Finally, the observation layout for each output (data) type can be combined into a single long vector of the full observation layout,
+\marginpar{Full observation layout}
+\begin{equation}
+	\begin{split}
+		\boldsymbol{\Lambda} & = \{(TC, z_1,t_1),\ldots,(TC,z_8,t_{27}),\\
+		                     & \quad\quad (DP,z_1,t_{1}),\ldots,(DP,z_4,t_{18}),\\
+												 & \quad\quad (CO,t_1),\ldots,(CO,t_7)\}\\
+	\end{split}
+\label{eq:bc_observation_layout_feba_full}
+\end{equation}
+That is, by convention here, $\boldsymbol{\Lambda} = \{\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{DP}, \boldsymbol{\Lambda}_{CO}\}$.
+The total number of data points of \gls[hyper=false]{feba} test No. $216$, and the length of the observation layout $\boldsymbol{\Lambda}$, used in the calibration is thus $212$.
 
 %--------------------------------------------------------------------------------------------
 \subsubsection{Gaussian Process Approximation for TRACE Simulation}\label{subsub:bc_gp_trace}
