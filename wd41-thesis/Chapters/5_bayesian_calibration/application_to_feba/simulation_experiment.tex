@@ -149,7 +149,8 @@ The total number of data points of \gls[hyper=false]{feba} test No. $216$, and t
 %--------------------------------------------------------------------------------------------
 
 Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
-The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ of size (see details in Section~\ref{sec:gp_application_to_feba}).
+The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
+Th hyper-parameters of the \gls[hyper=false]{gp} metamodel, after being estimated, are kept constant.
 
 Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ becomes a probabilistic model.
 The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
