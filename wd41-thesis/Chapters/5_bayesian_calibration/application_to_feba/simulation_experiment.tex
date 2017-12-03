@@ -115,6 +115,7 @@ Based on these data points, the observation layout for the $CO$ data is defined 
 \label{eq:bc_observation_layout_feba_co}
 \end{equation}
 where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+The observed data according to the observation layout is denoted $\mathbf{y}_{E,CO}$
 
 % Liquid carryover uncertainty
 A large uncertainty was indicated for the liquid carryover measurement that possibly includes biased measurement as the measured mass in the collecting tank does not always correspond to the liquid carryover \cite{Sanz2017}.
@@ -146,6 +147,55 @@ The total number of data points of \gls[hyper=false]{feba} test No. $216$, and t
 %--------------------------------------------------------------------------------------------
 \subsubsection{Gaussian Process Approximation for TRACE Simulation}\label{subsub:bc_gp_trace}
 %--------------------------------------------------------------------------------------------
+
+Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
+The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ of size (see details in Section~\ref{sec:gp_application_to_feba}).
+
+Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ becomes a probabilistic model.
+The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{M,TC} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,TC} (\bm{x}_o), \Sigma_{M,TC} (\bm{x}_o)) \\
+		& \boldsymbol{\mu}_{M,TC}  = \bar{\mathbf{y}}_{TC} + \boldsymbol{\Phi}^*_{Q,TC} \mathbf{m}_{SK,TC}(\bm{x}_o) \\
+		& \Sigma_{M,TC} = \boldsymbol{\Phi}^*_{Q,TC} \text{diag}(\mathbf{s}^2_{SK,TC}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_{Q,TC} + \boldsymbol{\Phi}^*_{>Q,TC} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q,TC}) \\
+		& \mathbf{m}_{SK,TC} = [m_{SK,TC,1}(\bm{x}_o), m_{SK,TC,2}(\bm{x}_o), \cdots, m_{SK,TC,Q}(\bm{x}_o)] \\
+		& \mathbf{s}^2_{SK,TC} = [s^2_{SK,TC,1}(\bm{x}_o), s^2_{SK,TC,2}(\bm{x}_o), \cdots, s^2_{SK,TC,Q}(\bm{x}_o)]
+	\end{split}
+\label{eq:p_variate_metamodel_tc}
+\end{equation}
+where the notations above follow the convention of Section~\ref{sub:gp_multivariate} and following the development in Section~\ref{sec:gp_application_to_feba}) the number of retained principal components $Q$ for the $TC$ output is selected to be $7$.
+
+Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
+In relation with observation layout of Eq.~(\ref{eq:bc_observation_layout_tc}), not all points in time of the full simulation output have corresponding experimental data.
+As such, the only difference from the previous development is that now the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the mean vector $\bar{\mathbf{y}}_TC$, the eigenvectors $\boldsymbol{\Phi}^*_{Q,TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q,TC}$ such that they contain only the points in time where data are actually observed.
+
+The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\ref{eq:bc_observation_layout_dp})) follows accordingly,
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{M,DP} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,DP} (\bm{x}_o), \Sigma_{M,DP} (\bm{x}_o)) \\
+		& \boldsymbol{\mu}_{M,DP}  = \bar{\mathbf{y}}_{DP} + \boldsymbol{\Phi}^*_{Q,DP} \mathbf{m}_{SK,DP}(\bm{x}_o) \\
+		& \Sigma_{M,DP} = \boldsymbol{\Phi}^*_{Q,DP} \text{diag}(\mathbf{s}^2_{SK,DP}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_{Q,DP} + \boldsymbol{\Phi}^*_{>Q,DP} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q,DP}) \\
+		& \mathbf{m}_{SK,DP} = [m_{SK,DP,1}(\bm{x}_o), m_{SK,DP,2}(\bm{x}_o), \cdots, m_{SK,DP,Q}(\bm{x}_o)] \\
+		& \mathbf{s}^2_{SK,DP} = [s^2_{SK,DP,1}(\bm{x}_o), s^2_{SK,DP,2}(\bm{x}_o), \cdots, s^2_{SK,DP,Q}(\bm{x}_o)]
+	\end{split}
+\label{eq:p_variate_metamodel_dp}
+\end{equation}
+where $Q$ above, the number of retained principal components with respect to the $DP$ output, is taken to be $10$.
+The observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of of the mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q,DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q,DP}$ such that they contain only the relevant points in time.
+
+Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (Eq.~(\ref{eq:bc_observation_layout_co})) for a given input $\bm{x}_o$,
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{M,CO} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,CO} (\bm{x}_o), \Sigma_{M,CO} (\bm{x}_o)) \\
+		& \boldsymbol{\mu}_{M,CO}  = \bar{\mathbf{y}}_{CO} + \boldsymbol{\Phi}^*_{Q,CO} \mathbf{m}_{SK,CO}(\bm{x}_o) \\
+		& \Sigma_{M,CO} = \boldsymbol{\Phi}^*_{Q,CO} \text{diag}(\mathbf{s}^2_{SK,CO}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_{Q,CO} + \boldsymbol{\Phi}^*_{>Q,CO} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q,CO}) \\
+		& \mathbf{m}_{SK,CO} = [m_{SK,CO,1}(\bm{x}_o), m_{SK,CO,2}(\bm{x}_o), \cdots, m_{SK,CO,Q}(\bm{x}_o)] \\
+		& \mathbf{s}^2_{SK,CO} = [s^2_{SK,CO,1}(\bm{x}_o), s^2_{SK,CO,2}(\bm{x}_o), \cdots, s^2_{SK,CO,Q}(\bm{x}_o)]
+	\end{split}
+\label{eq:p_variate_metamodel_co}
+\end{equation}
+where $Q$, the number of retained principal components with respect to the $CO$ output, is taken to be $5$.
+where, similar to the two previous cases, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of of the mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q,CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q,CO}$ such that they contain only the points in time where data are actually observed.
 
 %-----------------------------------------------------------------------
 \subsubsection{Modeling the Model Bias Term}\label{subsub:bc_model_bias}
