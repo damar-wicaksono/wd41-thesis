@@ -9,6 +9,9 @@
 # date      : Nov. 2017
 #
 # Load required libraries -----------------------------------------------------
+library(viridis)
+library(hexbin)
+
 source("./r-scripts/multiplot.R")
 source("./r-scripts/plot_ensemble.R")
 

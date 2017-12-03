@@ -66,8 +66,11 @@ plot_ensemble <- function(ens_rds, burnin, param_names, param_ranges,
         p[[k]] <- p[[k]] + theme(plot.title = element_text(hjust = 0.5,
                                                            size = 14,
                                                            face = "bold"))
+        #p[[k]] <- p[[k]] + geom_vline(
+        #  xintercept = HPDI(ens_samples_rescaled[,i], prob = 0.95))
         p[[k]] <- p[[k]] + geom_vline(
-          xintercept = HPDI(ens_samples_rescaled[,i], prob = 0.95))
+          xintercept = quantile(ens_samples_rescaled[,i],
+                                probs = c(0.025, 0.975)))
         p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
         p[[k]] <- p[[k]] + scale_x_continuous(limits = param_ranges[[i]])
         p[[k]] <- p[[k]] + geom_vline(

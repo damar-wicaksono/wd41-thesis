@@ -11,7 +11,6 @@
 #
 # Load required libraries -----------------------------------------------------
 library(viridis)
-library(rethinking)
 library(hexbin)
 
 source("./r-scripts/multiplot.R")
