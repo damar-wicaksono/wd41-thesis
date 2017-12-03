@@ -2,8 +2,6 @@
 \subsection{Discussion}\label{sub:bc_discussion}
 %***********************************************
 
-\paragraph{On MCMC Convergence}\mbox{}\\
-
 % Opening Paragraph, On Convergence
 A series of \gls[hyper=false]{mcmc} simulations was conducted for each of the calibration schemes summarized in Table~\ref{tab:ch5_calibration_schemes}.
 \marginpar{On the convergence of MCMC simulation}
@@ -24,10 +22,9 @@ On the contrary, in the case of ensemble sampler, although the total number of i
 Therefore, determining burn-in period was indeed more important;
 if the samples associated with this initial transient were not discarded, it risked that the model parameters estimates would be heavily biased.
 
-\paragraph{On the Model Parameters Posterior Uncertainties}\mbox{}\\
-
 % On the Posterior samples, constraining power of data, and using different type of outputs
 The resulting posterior samples, as presented in the corner plots (Figs.\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, \ref{fig:ch5_plot_ens_co_disc_centered}, \ref{fig:ch5_plot_ens_all_disc_centered_noparam8}, and \ref{fig:ch5_plot_ens_all_nodisc}) and as summarized in Table~\ref{tab:ch5_post_param}, indicate different constraining ability of the data on the model parameters prior uncertainties depending on the calibration scheme.
+\marginpar{On the posterior samples}
 Figs.~\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, and \ref{fig:ch5_plot_ens_co_disc_centered} demonstrates the constraining ability of different types of data.
 These calibration results are to be expected according to the sensitivity analysis conducted in Chapter~\ref{ch:gsa}.
 For instance, the pressure drop output mainly sensitive to the parameter \texttt{iafbIntDr} can be mainly informed by the pressure drop data as demonstrated in Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}.
@@ -44,7 +41,7 @@ Thus, below that certain value the enhancement is insensitive with respect to th
 % All Outputs
 By definition, a model parameter that is not sensitive to a simulation output cannot be informed by the experimental data of that output. 
 That is, the parameter is non-identifiable \cite{Hines2014}.
-\marginpar{Non-identifiability, sensitive parameters}
+\marginpar{Non-identifiability, multiple types of data}
 And indeed, when considering all types of data, the prior uncertainties of the model parameters was shown to be simultaneously constrained and often even tighter (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}).
 For instance, the parameter \texttt{iabfIntDr} is non-identifiable with respect to the temperature data while the parameter \texttt{dffWallHT} with respect to the pressure drop data.
 Calibration using both experimental data solves the non-identifiability problem for both parameters.
@@ -64,16 +61,15 @@ In the case of the calibration against $TC$ data (Fig.~\ref{fig:ch5_plot_ens_tc_
 In the case of the calibration against $DP$ data (Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}), the parameters \texttt{iafbWHT} and \texttt{tQuench} were found to be strongly correlated. 
 Considering multiple types of experimental data (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}) did not seem to break these correlations.
 Both cases are examples of another form non-identifiability.
-Though these parameters were sensitive with respect to the outputs as the parameters posterior uncertainties were clearly informed and affected by the calibration process (they did become correlated afterward), 
+Though these parameters were sensitive with respect to the outputs as the parameters posterior uncertainties were clearly informed and affected by the calibration process (they did, after all, become correlated), 
 the effect of one parameter could be be offset by the change in the other in reproducing the experimental data. 
 As a result, the univariate posterior marginal uncertainties of these parameters remained large.
 
 % On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
-A possible solution of this problem is by removing an influential parameter that is strongly correlated from the calibration process \cite{Brun2002}.
+A possible, rather straightforward, solution of this problem is to remove an influential parameter that is strongly correlated from the calibration process \cite{Brun2002} and keeping them at its prior uncertainty.
 \marginpar{Calibration, excluding a correlated parameter}
 Indeed this approach was investigated by conducting the calibration scheme \texttt{w/ Bias, no dffbVIHT} in which the parameter \texttt{dffbVIHT} was excluded from the calibration process.
 The results as presented in Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8} which further constrained the uncertainty of the parameter \texttt{dffbIntDr} that was previously correlated with the excluded parameter.
-Note, however, as the parameter \texttt{dffbVIHT} was not calibrated its uncertainty remained at its prior uncertainty.
 
 % On the Posterior samples, no bias
 The last calibration scheme investigated was the \texttt{w/o Bias} in which no model bias term was incorporated in the calibration process and the only source of uncertainties was the one associated with the reported experimental data.
@@ -87,20 +83,49 @@ Moreover, the posterior samples of the parameters were concentrated either in on
 The parameters \texttt{iafbWHT} and \texttt{tQuench}, for instance, were concentrated in both sides of their prior uncertainties;
 while the parameters \texttt{dffbWHT} and \texttt{dffbVIHT} were concentrated in one side of their prior uncertainties.
 Though looked peculiar, the posterior samples were model parameters values that were found to be consistent with the experimental data under the calibration formulation.
-The lack of assumed model bias in the calibration formulation, however, forced the parameters to change dramatically and at times, to the limit of the prior uncertainties, in order to compensate any additional residual discrepancy (beyond the experimental uncertainty) between the simulator predictions and the experimental.
-
-\paragraph{On the Forward UQ using the Posterior Uncertainties}\mbox{}\\
+The lack of assumed model bias in the calibration formulation did force the parameters to change dramatically and at times, to the limit of the prior uncertainties, in order to compensate any additional residual discrepancy between the simulator predictions and the experimental data, beyond the experimental uncertainty.
 
 % On Uncertainty Propagation
-To investigate the implication of the model parameters posterior uncertainties, obtained from different calibration schemes and on different \gls[hyper=false]{feba} tests, $1'000$ samples of model parameters values were taken from the respective pool of posterior samples and subsequently used in the model parameters uncertainties propagation (i.e., forward \gls[hyper=false]{uq}) of the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
-The uncertainty of additional parameters related to boundary conditions were also propagated alongside the posterior uncertainties of the model parameters.
-For comparison purpose, uncertainty propagation was also conducted in which the correlation among model parameters are neglected (i.e., the model parameters were taken to be independent of each other).
+To investigate the implication of the model parameters posterior uncertainties, obtained from different calibration schemes and on different \gls[hyper=false]{feba} tests, $1'000$ samples of model parameters values were taken from the respective pool of posterior samples and subsequently used in the model parameters uncertainties propagation (i.e., forward \gls[hyper=false]{uq}) through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+The uncertainties of additional parameters related to boundary conditions were also propagated alongside the posterior uncertainties of the model parameters.
+For comparison purpose, uncertainty propagation was also conducted in which the correlation among model parameters was neglected (i.e., the model parameters were taken to be independent of each other).
 In the following, the discussion is focused on the propagation of posterior uncertainties obtained from three calibration schemes, namely: \texttt{w/ Bias, All}, \texttt{w/o Bias}, and \texttt{w/ Bias, no dffbVIHT}.
 
 % On Uncertainty Propagation, Calibration vs. Informativeness
+The notions of informativeness and calibration score were used to summarize the resulting prediction uncertainties associated with different posterior samples on different \gls[hyper=false]{feba} tests.
+\marginpar{On the model parameters posterior uncertainties propagation}
+The usage of these two notions in this thesis were mainly for comparison purpose: an increase in informativeness implied a narrower prediction uncertainty band and vice versa;
+while an increase in calibration score implied a smaller discrepancy between a prediction and its observed data.
+By construction, the calibration score put a high penalty for a failure of an uncertainty band to cover experimental data; it assigned the value of zero.
+
+As it was shown in Fig.~\ref{fig:ch5_plot_calib_info}, all the calibration schemes managed to improve the informativeness of the prediction while simultaneously decreased the calibration score.
+\marginpar{Informativeness vs. calibration score of the posterior prediction uncertainties}
+The tightening of the uncertainty band caused failure in covering some of the experimental data points.
+These points, a portion of the overall reflood transient, often looked very different from the typical \gls[hyper=false]{trace} prediction.
+Consequently, the prediction could not be altered (by altering the model parameters) to cover that portion of the transient without increasing the discrepancy with the experimental data in other part of the transient.
+As such, though the resulting posterior uncertainties resulted in lower calibration scores than the prior, they also resulted in uncertain predictions that have overall smaller discrepancy with the experimental data.
+
+The calibration without considering model bias term often gave the most informative prediction of them all.
+\marginpar{Calibration without model bias term, overfitting}
+On the other hand, it also gave the lowest calibration scores across tests for the $TC$ and $DP$ outputs.
+This indicated a strong overfitting.
+It did, however, give a significant improvement on the prediction of the liquid carryover ($CO$) both in terms of informativeness and calibration score across tests.
+As the nominal \gls[hyper=false]{trace} prediction for the liquid carryover showed a large discrepancy with the experimental data, this improvement implied that the uncertain predictions had been altered significantly from the nominal prediction.
+
+It was also observed that neglecting correlation between parameters had a profound impact on the calibration score and informativeness: it inflated the prediction uncertainty while simultaneously improve the calibration score.
+\marginpar{Correlated parameters, impact}
+The effect of neglecting the correlation on the informativeness and calibration score was particularly striking for the results from the calibration scheme \texttt{w/ Bias, All}.
+This implies that correlation among model parameters is a form of information in the model parameters uncertainties that is specific to the calibration data used.
+It can be argued that in the case of the calibration scheme \texttt{w/ Bias, All}, even with the inclusion of model bias term in the calibration, some parameters in the resulting posterior becomes highly correlated such that it is overfitted to the calibration data.
+It gives prediction with high informativeness while decreasing the calibration score.
+At the same time, for similar informativeness across tests, the prediction using the posterior uncertainties of the calibration scheme \texttt{w/ Bias, All} yield higher calibration score (except for the $CO$ output explained above).
+That is, it is still less overfitted as compared to the calibration without the model bias term.
+
+Finally, removing the most influential correlated parameter (\texttt{dffbVIHT}) from the calibration and keeping its uncertainties at the prior range gave good compromise.
+The resulting prediction uncertainties showed a decent increase in the informativeness and a minor decrease in the calibration score across all tests.
 
 % On Uncertainty Propagation, TC1 FEBA Test 216 Different Calibration Schemes
-The difference between the uncertainty propagation of the posterior uncertainties from the three calibration schemes can mainly be observed on two outputs $TC1$ (the clad temperature at the top of the assembly) and $CO$.
+By looking at the plots similar to Figs.~\ref{fig:ch5_plot_trace_uq_post_all_disc_tc_216}, \ref{fig:ch5_plot_trace_uq_post_all_disc_dp_216}, and \ref{fig:ch5_plot_trace_uq_post_all_disc_co_216} available in the Appendix~\ref{app:mcmc_evaluation}, the difference between the uncertainty propagation of the posterior uncertainties from the three calibration schemes can mainly be observed on two outputs $TC1$ (the clad temperature at the top of the assembly) and $CO$.
 Fig.~\ref{fig:ch5_plot_feba_216_tc1_post} shows the uncertainty propagation results for the $TC1$ output.
 The uncertainty band from the calibration scheme \texttt{w/ Bias, All} (and to a lesser extend the one from the scheme \texttt{w/ Bias, no dffbVIHT}) shows a consistent shape with the nominal \gls[hyper=false]{trace} prediction.
 The band from the scheme \texttt{w/o Bias} is dramatically different (Fig.~\ref{fig:ch5_plot_feba_216_tc1_post_2}); it bears no resemblance whatsoever with the nominal \gls[hyper=false]{trace} prediction.
@@ -157,7 +182,7 @@ As the calibration was conducted with respect to all other outputs of which many
 {../figures/chapter5/figures/plotFEBA216COPost_3}
 
 % Connection with sensitivity analysis
-This is further supported by the sensitivity analysis conducted in the previous chapter where it was shown that the parameter \texttt{dffbVIHT} became increasingly important at the top of the assembly and it was also found to be important for the $CO$ output.
+This is supported by the sensitivity analysis conducted in the previous chapter where it was shown that the parameter \texttt{dffbVIHT} became increasingly important at the top of the assembly and it was also found to be important for the $CO$ output.
 Recall that the parameter \texttt{dffbVIHT} is responsible for the heat transfer between the vapor phase and the interface and it contributes to the variation in the available entrained liquid and droplets being carried away through the top of the assembly.
 These droplets, in turn, is an important heat sink for the cladding.
 Thus, an increase in the heat transfer coefficient enhances the heat transfer at the top of the assembly and accelerate the evaporation of the available droplets (thus the lower clad temperature) while simultaneously decreases the amount of liquid being carried away (thus the slower rate of liquid carryover collection).
