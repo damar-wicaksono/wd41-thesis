@@ -22,7 +22,7 @@ Finally, solid lines, dashed lines, and crosses correspond to the simulation wit
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.90\textwidth]{../figures/chapter5/figures/plotTraceUQPosteriorAllDiscCenteredTC216}
-		\captionof{figure}[Posterior uncertainty propagation of FEBA Test No. $216$ for the cladding temperature output ($TC$). The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the cladding temperature output ($TC$) at different axial locations. The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration with model bias term and considering all types of output.}
+		\captionof{figure}[Posterior uncertainty propagation of FEBA Test No. $216$ for the cladding temperature output ($TC$). The posterior samples are from the calibration scheme \texttt{w/ Bias, All}.]{Uncertainty propagation of the parameters uncertainty of \gls[hyper=false]{feba} Test No. $216$ for the cladding temperature output ($TC$) at different axial locations. The uncertainty bands refer to the symmetric $95\%$ probabilities. Solid lines, dashed lines, and crosses indicate the simulation with the nominal parameters values, the median of the posterior, and the experimental data, respectively. The posterior samples are from the calibration with model bias term and considering all types of output (\texttt{w/ Bias, All}).}
 	\label{fig:ch5_plot_trace_uq_post_all_disc_tc_216}
 \end{sidewaysfigure}
 
@@ -119,9 +119,9 @@ This indicates that the uncertainty band in the prediction due to the posterior 
 It is only for the $CO$ output \gls[hyper=false]{feba} test No. 218, no calibration scheme (not even \texttt{w/o Bias}) gives an improvement on the calibration score.
 
 % Comparing results, different output for FEBA Test 216
-Lastly, when comparing the effect of using different types of output in the calibration, and only for \gls[hyper=false]{feba} test No. 216, it is shown in the figure that using .
-As expected, using any particular type of output causes the informativeness with respect to the other outputs to be low while using all of the outputs improves the informativeness.
-The increase in informativeness from taking into account multiple type of outputs is not followed by large decrease of calibration score.
-This is especially the case for the $DP$ and $TC$ outputs where the improvement on the informativeness is the significant when different output other than the $DP$ data itself is considered.
-This gives an indication that the model parameters that responsible for the improvement with respect to each output might be different.
+Lastly, when comparing the effect of using different types of output in the calibration, and only for \gls[hyper=false]{feba} test No. $216$, it is shown considering all types of outputs increase informativeness in the prediction.
+As expected, using any particular type of output causes the informativeness with respect to the other outputs to be low.
+Moreover, the increase in informativeness from taking into account multiple type of outputs is not followed by large decrease of calibration score.
+This is especially the case for the $DP$ (and $TC$) output where the improvement on the informativeness is significant when compared to the results of calibration using experimental data other than the $DP$ (and $TC$, respectively) itself.
+This gives an indication that the model parameters responsible for the improvement with respect to each output might be different as was previously showed by sensitivity analysis.
 Curiously this is not the case for the $CO$ output as the calibration using only the $CO$ experimental data gives lower informativeness compared to the calibration using the other types of data.
