@@ -64,6 +64,7 @@ Based on these data points, an observation layout for $TC$ data can be defined,
 \label{eq:bc_observation_layout_feba_tc}
 \end{equation}
 where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+The total number of data points associated with $TC$ output is $133$.
 
 % Clad Temperature uncertainty
 The reported experimental uncertainty associated with the clad temperature measurement is $\pm0.5\%$ of the measured value in $[^oC]$.
@@ -72,12 +73,12 @@ Let $\mathbf{y}_{E,TC}$ is the vector of $TC$ data observed at $\boldsymbol{\Lam
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{TC}) \thicksim \mathcal{N}(0, \Sigma_{TC})\\
-		& \Sigma_{TC} = (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T) (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T)
+		& \Sigma_{E,TC} = (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T) (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T)
 	\end{split}	
-\label{eq:bc_experimenta_uncertainty_feba_tc}
+\label{eq:bc_experimental_uncertainty_feba_tc}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $P_1$, where $P_1$ is the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
-The $P_1$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
+where $\mathbf{I}$ is an identity matrix of size $133$, where $133$ is the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+The $133$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
 
 % Pressure Drop
 The experimental data provided for the pressure drop ($DP$) of the \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
@@ -98,7 +99,7 @@ Let $\mathbf{y}_{E,DP}$ is the vector of $DP$ data observed at $\boldsymbol{\Lam
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{DP}) \thicksim \mathcal{N}(0, \Sigma_{DP})\\
-		& \Sigma_{DP} = (\mathbf{I} \frac{0.1}{3} \mathbf{y}{E,DP}^T) (\mathbf{I} \frac{0.1}{3} \mathbf{y}_{E,DP}^T)
+		& \Sigma_{E,DP} = (\mathbf{I} \frac{0.1}{3} \mathbf{y}{E,DP}^T) (\mathbf{I} \frac{0.1}{3} \mathbf{y}_{E,DP}^T)
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_dp}
 \end{equation}
@@ -128,7 +129,7 @@ To cover the reported uncertainty and the possible bias, the reported level is a
 \label{eq:bc_experimental_uncertainty_feba_co}
 \end{equation}
 where $\mathbf{I}$ is an identity matrix of size $P_3$, where $P_3$ is the length of the observation layout $\boldsymbol{\Lambda}_{CO}$ and
-the $\sigma_{CO}$ it the standard deviation of the distribution, taken to be $0.5\,[kg]$.
+the $\sigma_{E,CO}$ it the standard deviation of the distribution, taken to be $0.5\,[kg]$.
 
 % Full observation layout
 Finally, the observation layout for each output (data) type can be combined into a single long vector of the full observation layout,
@@ -169,6 +170,7 @@ where the notations above follow the convention of Section~\ref{sub:gp_multivari
 Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
 In relation with observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
 As such, the only difference from the previous development is that now the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
+The resulting dimension of the Gaussian distribution is thus $133$.
 
 The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\ref{eq:bc_observation_layout_feba_dp})) follows accordingly,
 \begin{equation}
@@ -202,9 +204,62 @@ Lastly, similar to the two previous cases, the observation layout $\boldsymbol{\
 \subsubsection{Modeling the Model Bias Term}\label{subsub:bc_model_bias}
 %-----------------------------------------------------------------------
 
+% Introductory Paragraph
+
+% Model Bias Term
+
+% GP 
+
+% Summary
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{E,TC} | \mathbf{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
+		& \boldsymbol{\mu}_{TC} (\bm{x}_m) = \boldsymbol{\mu}_{M,TC} (\bm{x}_m) + \mathbf{m}_{\delta,TC} \\
+		& \Sigma_{TC} (\bm{x}_m), = \Sigma_{M,TC} (\bm{x}_m) + \Sigma_{\delta,TC} + \Sigma_{E,TC} \\
+	\end{split}
+\label{eq:feba_gp_bias}
+\end{equation}
+
 %-----------------------------------------------------------------------
 \subsubsection{Calibration Schemes}\label{subsub:bc_calibration schemes}
 %-----------------------------------------------------------------------
+
+% Introductory Paragraph
+Defining the elements 
+
+% w/ Bias, TC
+The calibration scheme \texttt{w/ Bias, All} combines the fomulation of the calibration schemes \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO}.
+As such, in the following the latter three calibration schemes are first presented.
+Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~\ref{eq:bc_data_model_gaussian}. 
+That is, the data generating model for the $TC$ data is given as follow,
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{E,TC} | \mathbf{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
+		& \boldsymbol{\mu}_{TC} (\bm{x}_m) = \boldsymbol{\mu}_{M,TC} (\bm{x}_m) + \mathbf{m}_{\delta,TC} \\
+		& \Sigma_{TC} (\bm{x}_m), = \Sigma_{M,TC} (\bm{x}_m) + \Sigma_{\delta,TC} + \Sigma_{E,TC} \\
+	\end{split}
+\label{eq:likelihood_tc}
+\end{equation}
+where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $133$-dimensional mean vector and the $133\times 133$ covariance matrix associated with the $TC$ output/data, respectively.
+The mean vector $\boldsymbol{\mu}_{TC}$, in turn, consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
+The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
+
+The likelihood function is obtained by making the density of the Gaussian distribution given above in terms of its parameterization.
+
+% w/ Bias. DP
+
+% w/ Bias, CO
+
+% w/ Bias, All
+
+% w/o Bias
+
+% w/ Bias, no dffbVIHT 
+
+% Likelihood, Prior, Posterior
 
 % Summary
 Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration schemes considered in this study.
