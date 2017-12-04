@@ -56,7 +56,7 @@ for (i in 1:length(t_exp_idx))
 qoi_post <- data.frame(feba_test = feba_test,
                        case_name = case_name,
                        output_type = "CO",
-                       inf_score = 0.0,
+                       inf_score = 0.5,
                        cal_score = mean(cal_scores_prior),
                        rmse = sqrt(mean(trc_exp_df[lte_10,]$mse)))
 

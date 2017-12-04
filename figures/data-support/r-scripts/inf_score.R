@@ -1,4 +1,4 @@
-#' Compute Calibration Score
+#' Compute Informativeness
 #'
 #' Unlike the original paper, it is assumed here that the reference interval
 #' does not represent complete (rectangular) possibilistic ignorance.
@@ -11,7 +11,7 @@
 #' @param ub_val  Upper bound value
 inf_score <- function(lb_ref, ub_ref, lb_val, ub_val)
 {
-  inf <- ((ub_ref - lb_ref) - (ub_val - lb_val)) / (ub_ref - lb_ref)
+  inf <- 1 - ((ub_val - lb_val)) / 2 / (ub_ref - lb_ref)
 
   return(inf)
 }
