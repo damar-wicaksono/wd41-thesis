@@ -266,23 +266,153 @@ These samples are then further post-processed to remove the initialization bias 
 \subsubsection{Evaluating Calibration Results}\label{subsub:bc_calibration_evaluation}
 %-------------------------------------------------------------------------------------
 
+% Introductory paragraph
+The results of the \gls[hyper=false]{mcmc} simulations are set of samples directly drawn from the respective posteriors.
+These multivariate samples are visually represented as \emph{corner plot} depicting the joint posterior samples as a set of $1$-dimensional (univariate) and $2$-dimensional (bivariate) marginals of the posterior distribution (see Section~\ref{sub:bc_calibration_results}).
+From the univariate marginal of each model parameter posterior uncertainties, the constraining ability of the data and the calibration scheme can be quickly, if not rigorously, assessed.
+From the bivariate marginals, the correlation structure between the model parameters, if any, can be also quickly assessed.
 
-% The statistical calibration framework revisited
+% Forward uncertainty quantification
+To investigate the implication of the different posterior samples on the prediction, simulation campaigns for forward \gls[hyper=false]{uq} (uncertainty propagation) are conducted on the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model, using different model parameters posterior uncertainties. 
+Furthermore, to assess the applicability of posterior uncertainties for the simulation of different conditions from the condition of the calibration experiment, the campaigns are conducted for $5$ additional \gls[hyper=false]{feba} tests.
+In other words, these $5$ additional \gls[hyper=false]{feba} tests becomes the validation data sets.
+Finally, to investigate the effect of correlated model parameters on the prediction, the campaigns are conducted both with and without considering the correlation structure in the posterior samples.
 
-% Observation Layout
+% Forward uncertainty quantification
+The uncertainty propagation campaigns therefore consists of the campaigns on each \gls[hyper=false]{feba} test using model parameters posterior uncertainties derived from different calibration schemes with and without consideration of the correlation among model parameters.
+For each of these campaign, actual \gls[hyper=false]{trace} runs are carried out using $1'000$ posterior samples.
+Instead of having to come up with a closed form representation of the multivariate posterior distributions, and to explicitly model any possible correlation structure, these samples are directly drawn from the pool of posterior samples obtained from different calibration schemes.
+The results of the propagation are represented in series of plots of prediction with the associated uncertainty bands for the three output types ($TC$, $DP$, and $CO$) similar to the ones presented in the result section of Chapter~\ref{ch:trace_reflood}.
+From these plots the different propagation campaign can be compared.
 
-% Modeling the simulator output
+% Calibration
+At the same time, the numerous plots are unwieldy to deal with.
+To circumvent this issue a more quantitative means of aggregating the results of different predictions uncertainties is required.
+Although formal Bayesian approaches are available to assess the quality of the prediction using the model parameters posterior uncertainty\footnote{Formal computer model validation metrics, Bayesian or otherwise, is a research topic in its own right, see for instance the validation metrics proposed in \cite{Rebba2006,Rebba2006a,Jiang2008}. Their application is outside the scope of this thesis.}, this thesis adopts a more pragmatic assessment method based on the possibilistic theory proposed in \cite{Baccou2014}.
 
-% Modeling the discrepancy
+The aim of the method is to quickly compare the applicability of the different posterior uncertainties in making prediction.
+Loosely speaking, the applicability is measured by the width of the prediction uncertainty as well as its coherence (in the most general sense of the word) with experimental data.
+Admittedly, the aim concerns less about the inherent correctness of the posterior uncertainties.
+The method was applied to synthesize the results of different participants in the context of benchmarking, namely \gls[hyper=false]{bemuse} \cite{Baccou2014} and \gls[hyper=false]{premium} \cite{Sanz2017} projects. 
+The method consists of three steps: \emph{information modeling}, \emph{information evaluation}, and \emph{information synthesis}.
+For the comparison purpose in this thesis, only the first two steps above are applied and discussed in the following.
 
-% Likelihood Formulation
+% Information modeling
+In the information modeling, the information in a prediction uncertainty of a \gls[hyper=false]{qoi} $y$ is represented by an interval (lower and upper bounds: $LUB_y$ and $UUB_y$, respectively) and a reference value $y_\text{ref.}$.
+A \emph{source} of information $src$ for a particular \gls[hyper=false]{qoi} $y$ consists of such an interval and, optionally, a reference value.
+A complete ignorance is represented simply by the interval given by $LUB_y$ and $UUB_y$ resulting in a rectangular model,
+\begin{equation}
+		\pi_{src,y} (y) = 
+			\begin{cases}
+				1.0, &  LUB_y \leq y \leq UUB_y \\
+			  0.0, & \text{otherwise}
+	\end{cases}
+\label{eq:calibinfo_rectangular}
+\end{equation}
+where $\pi$ is the possibility measure, whose minimum and maximum are $0.0$ and $1.0$, respectively.
 
-% 
+The presence of a reference value $y_\text{ref.}$ within that intervals allows the triangular model to be defined,
+\begin{equation}
+  \pi_{src,y} (y) = 
+			\begin{cases}
+				\frac{y - LUB}{y_\text{ref.} - LUB}, &  LUB \leq y < y_\text{ref.} \\
+        \frac{UUB - y}{UUB - y_\text{ref.}}, &  y_\text{ref.} \leq y \leq UUB \\
+			  0.0                                , & \text{otherwise}
+	\end{cases}
+\label{eq:calibinfo_triangular}
+\end{equation}
+These two information models are illustrated in Fig.~\ref{fig:ch5_calibinfo_modeling}.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_calibinfo_modeling},
+                  maincaption={Information modeling to represent uncertainty propagation results for a \gls[hyper=false]{qoi} $y$.},%
+									mainshortcaption={Information modeling to represent uncertainty propagation results for a QoI $y$.},
+                  leftopt={width=0.375\textwidth},
+                  leftlabel={fig:ch5_calibinfo_modeling_rectangular},
+                  leftcaption={Rectangular model},
+                  %leftshortcaption={},%
+                  rightopt={width=0.375\textwidth},
+                  rightlabel={fig:ch5_calibinfo_modeling_triangular},
+                  rightcaption={Triangular model},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/calibinfo_rectangular}
+{../figures/chapter5/figures/calibinfo_triangular}
 
-% 
+% Information Evaluation, Informativeness
+The information evaluation part of the method comprises two indices to evaluate the quality of information in a given source.
+\emph{Informativeness}, associated with a source $src$ and a \gls[hyper=false]{qoi} $y$ is defined as,
+\begin{equation}
+  \text{Inf}(src, y) = \frac{|\pi_{i, \text{ign}}| - |\pi_{i, \text{s}}|}{|\pi_{i, \text{ign}}|} = 1 - \frac{1}{2} \frac{UUB - LUB}{UUB_{\text{max.}} - LUB_{\text{min.}}}
+\label{eq:informativeness}
+\end{equation}
+where $|\circ|$ denotes the area under an information model.
+Informativeness measures the precision of the uncertain prediction, regardless the position of the reference value within the bound;
+it takes value between $0.5$ (the widest uncertainty range of a source, the same as the maximum and minimum bounds) and $1.0$ (the narrowest uncertainty range of a source, practically $0$).
+Fig.~\ref{fig:ch5_calibinfo_informativeness} illustrates $\text{Inf}$ calculation.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_calibinfo_informativeness},
+                  maincaption={Informatives of two different information source. Wider uncertainty interval gives lower informativeness, and vice versa. Thus $\text{Inf}(src_1, y) > \text{Inf}(src_2, y)$},%
+									mainshortcaption={Informativeness of two different information sources.},
+                  leftopt={width=0.425\textwidth},
+                  leftlabel={fig:ch5_calibinfo_informativeness_narrow},
+                  leftcaption={Narrower prediction uncertainty},
+                  %leftshortcaption={},%
+                  rightopt={width=0.425\textwidth},
+                  rightlabel={fig:ch5_calibinfo_informativeness_wide},
+                  rightcaption={Wider prediction uncertainty},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/calibinfo_informativeness_narrow}
+{../figures/chapter5/figures/calibinfo_informativeness_wide}
 
-% 
+% Information Evaluation, Calibration Score
+\emph{Calibration score} between a source $src$ and the observed value $y_\text{obs.}$ for a \gls[hyper=false]{qoi} is defined as,
+\begin{equation}
+  \text{Cal}(src, y) = \pi_{src, y}(y_\text{obs.})
+\label{eq:calibration_score}
+\end{equation}
+that is, the calibration score is the possibility of the observed value $y_\text{obs.}$ under the information model of the source $src$.
+It measures the discrepancy between the observed value and uncertain prediction represented by an interval and a reference value.
+Following Eq.~(\ref{eq:calibinfo_triangular}), the score severely penalizes the observed data that falls outside the prediction interval; assigning calibration score of $0.0$.
+The score is at maximum of $1.0$ for $y_\text{obs.} = y_\text{ref.}$.
+It does not, however, takes into account the possible uncertainties associated with $y_\text{obs.}$.
+\bigtriplefigure[pos=tbhp,
+								 mainlabel={fig:ch5_calibinfo_calib},
+			           maincaption={Calibration scores of three different sources with the same observed data $y_\text{obs.}$: $\text{Cal}(src_1, y) > \text{Cal}(src_2, y) > \text{Cal}(src_3, y)$},
+			           mainshortcaption={Calibration scores of three different sources with the same observed data $y_\text{obs.}$.},%
+			           leftopt={width=0.30\textwidth},
+			           leftlabel={fig:ch5_calibinfo_calib1},
+			           leftcaption={$\text{Cal}(src_1, y) \approx 1.0$},
+			           midopt={width=0.30\textwidth},
+			           midlabel={fig:ch5_calibinfo_calib2},
+			           midcaption={$\text{Cal}(src_2, y)$},
+			           rightopt={width=0.30\textwidth},
+			           rightlabel={fig:ch5_calibinfo_calib3},
+			           rightcaption={$\text{Cal}(src_3, y) = 0$},
+			           spacing={},
+			           spacingtwo={}]
+{../figures/chapter5/figures/calibinfo_calib1}
+{../figures/chapter5/figures/calibinfo_calib2}
+{../figures/chapter5/figures/calibinfo_calib3}
 
+% Aggregation
+For multiple outputs $\mathbf{y} = [y_1, \ldots, y_D]$ of the same source, both informativeness and calibration score can be aggregated by,
+\begin{equation}
+  \text{Inf}(src) = \frac{1}{D} \sum_{d=1}^{D} Inf(src, y_d) \quad\quad \text{Cal}(src) = \frac{1}{D} \sum_{d=1}^{D} \text{Cal}(src, y_d)
+\label{eq:calibinfo_aggregate}
+\end{equation}
+
+% From Probabilistic to Possibilistic
+Translating from the Bayesian (probabilistic) framework, the bounds of the prediction interval of the above $LUB$ and $UUB$ can be taken to be two percentiles of the prediction probability distribution that cover a selected probability.
+\marginpar{Application of the method}
+For instance, the criteria used in the present study, selecting a symmetric $95\%$ probability interval implies the $LUB$ and $UUB$ to be the $2.5$-th and $97.5$-th percentiles, respectively.
+The choice is rather arbitrary but as long as the criteria is applied consistently across different prediction uncertainties, the value of the method for comparison is preserved.
+Furthermore, the $LUB_{\text{min.}}$ and $UUB_{\text{max.}}$ are taken to be the the $2.5$-th and $97.5$-th percentiles of the prior prediction distribution and the reference value $y_\text{ref.}$ of the each posterior prediction distribution is taken to be its median value.
+Finally the experimental data is taken to be the observed value $y_\text{obs.}$ without considering the associated uncertainty following the original paper \cite{Baccou2014}.
+Once again, this lack of consideration is less of an issue for comparing between different uncertain prediction.
+ 
 % Analyzing convergence
 \clearpage
 \begin{sidewaysfigure}
