@@ -247,12 +247,12 @@ Therefore, a parallelized implementation of the algorithm would be beneficial in
 % EMCEE and RGW
 The parallelization of the \gls[hyper=false]{aies} sampler was originally developed and implemented in the python package \texttt{emcee} \cite{Foreman-Mackey2013}.
 The main design philosophy of \texttt{emcee} (and its ported \texttt{R} package \texttt{rgw} \cite{Mantz2016} used in this thesis) is that of a \emph{portable} sampler.
-That is, the user simply has to code the posterior formulation (the likelihood and the posterior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{stan}, \texttt{WinBugs}, and \texttt{Jags}. These samplers, however, tends to be faster as they are coded in lower level language (e.g., \texttt{C++}). Also, being older, they have a larger and more diverse user base.}.
+That is, the user simply has to code the posterior formulation (the likelihood and the posterior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{WinBugs} \cite{Lunn2000}, \texttt{Jags} \cite{Plummer2003}, and \texttt{Stan} \cite{Carpenter2017a}. These samplers, however, has more extensive capabilities for conducting a Bayesian data analysis and tends to be faster as they port the specified probabilistic models to a lower level language (e.g., \texttt{C++}). Furthermore, being older, they have a larger and more diverse user base.}.
 
 % Settings used in the simulation
 In the present study, $2'000$ iterations are carried out for an ensemble of $1'000$ walkers.
 The initial state of the ensemble is a tight random scatter around the nominal model parameter values.
-The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization biase) and the required level statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
+The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization bias) and the required level statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
 For the present study, they are assessed after-the-fact and the results is indeed found to be sufficient.
 Meanwhile, there is no clear cut rule for choosing the number of walkers $L$, except to go as large as computational resources allowed \cite{Foreman-Mackey2013}.
 Larger number of walkers requires more computational cost per iteration but yields more independent samples per iteration.
