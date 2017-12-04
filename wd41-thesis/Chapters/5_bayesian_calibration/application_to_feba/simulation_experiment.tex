@@ -150,7 +150,7 @@ The total number of data points of \gls[hyper=false]{feba} test No. $216$, and t
 
 Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
 The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
-Th hyper-parameters of the \gls[hyper=false]{gp} metamodel, after being estimated, are kept constant.
+After being estimated, the hyper-parameters of the \gls[hyper=false]{gp} metamodel are kept constant in the application of the metamodel.
 
 Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ becomes a probabilistic model.
 The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
@@ -232,9 +232,39 @@ Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration sch
 \subsubsection{MCMC Simulation using Ensemble Sampler}\label{subsub:bc_calibration_mcmc}
 %---------------------------------------------------------------------------------------
 
-%-----------------------------------------------------------------------------------------
+% Introductory paragraph
+Different calibration schemes above result in several likelihood functions, each of which when combined with common prior \glspl[hyper=false]{pdf} of the model parameters, yield several posterior \glspl[hyper=false]{pdf} of the model parameters.
+These $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT}) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the respective assumed calibration scheme (or, the error model).
+To characterize the posterior uncertainties of the model parameters, samples are directly generated from the respective posterior \gls[hyper=false]{pdf} by means of \gls[hyper=false]{mcmc} simulation.
+This study opts the use of an ensemble sampler as described in Section~\ref{sub:bc_mcmc_aies} to avoid having dealing with tuning of the simulation.
+
+% Parallel requirement
+Although the use of \gls[hyper=false]{gp} metamodel alleviates the burden of having to run \gls[hyper=false]{trace} directly, evaluating the likelihood function requires an inversion of the covariance matrix.
+The computational cost of matrix inversion is still not negligible, especially considering the expected number of evaluations. 
+Though the Algorithm~\ref{alg:aies} is straightforward to implement in any modern computing environment, it is not readily applicable for using multiple CPU \cite{Foreman-Mackey2013}.
+Therefore, a parallelized implementation of the algorithm would be beneficial in accelerating the \gls[hyper=false]{mcmc} simulations.
+
+% EMCEE and RGW
+The parallelization of the \gls[hyper=false]{aies} sampler was originally developed and implemented in the python package \texttt{emcee} \cite{Foreman-Mackey2013}.
+The main design philosophy of \texttt{emcee} (and its ported \texttt{R} package \texttt{rgw} \cite{Mantz2016} used in this thesis) is that of a \emph{portable} sampler.
+That is, the user simply has to code the posterior formulation (the likelihood and the posterior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{stan}, \texttt{WinBugs}, and \texttt{Jags}. These samplers, however, tends to be faster as they are coded in lower level language (e.g., \texttt{C++}). Also, being older, they have a larger and more diverse user base.}.
+
+% Settings used in the simulation
+In the present study, $2'000$ iterations are carried out for an ensemble of $1'000$ walkers.
+The initial state of the ensemble is a tight random scatter around the nominal model parameter values.
+The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization biase) and the required level statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
+For the present study, they are assessed after-the-fact and the results is indeed found to be sufficient.
+Meanwhile, there is no clear cut rule for choosing the number of walkers $L$, except to go as large as computational resources allowed \cite{Foreman-Mackey2013}.
+Larger number of walkers requires more computational cost per iteration but yields more independent samples per iteration.
+At the same time, larger number of walkers might cause more of the initial iterations to be discarded as more iterations are required to settle the ensemble in the typical region of the posterior distribution.
+A thousand walkers were selected considering the available computational resources at the time of the analysis.
+
+Each \gls[hyper=false]{mcmc} simulation corresponding to different calibration schemes results in $2'000'000$ posterior samples of the model parameters.
+These samples are then further post-processed to remove the initialization bias and to reduce the autocorrelation among successive iterations.
+ 
+%-------------------------------------------------------------------------------------
 \subsubsection{Evaluating Calibration Results}\label{subsub:bc_calibration_evaluation}
-%-----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------
 
 
 % The statistical calibration framework revisited
