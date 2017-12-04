@@ -230,24 +230,22 @@ Defining the elements
 % w/ Bias, TC
 The calibration scheme \texttt{w/ Bias, All} combines the fomulation of the calibration schemes \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO}.
 As such, in the following the latter three calibration schemes are first presented.
-Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~\ref{eq:bc_data_model_gaussian}. 
-That is, the data generating model for the $TC$ data is given as follow,
+Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~(\ref{eq:bc_data_model_gaussian}), but specifically for the $TC$ data generating model.
+That is,
 \begin{equation}
 	\begin{split}
 		& \bm{\mathcal{Y}}_{E,TC} | \mathbf{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
 		& \boldsymbol{\mu}_{TC} (\bm{x}_m) = \boldsymbol{\mu}_{M,TC} (\bm{x}_m) + \mathbf{m}_{\delta,TC} \\
-		& \Sigma_{TC} (\bm{x}_m), = \Sigma_{M,TC} (\bm{x}_m) + \Sigma_{\delta,TC} + \Sigma_{E,TC} \\
+		& \Sigma_{TC} (\bm{x}_m) = \Sigma_{M,TC} (\bm{x}_m) + \Sigma_{\delta,TC} + \Sigma_{E,TC} \\
 	\end{split}
 \label{eq:likelihood_tc}
 \end{equation}
 where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $133$-dimensional mean vector and the $133\times 133$ covariance matrix associated with the $TC$ output/data, respectively.
-The mean vector $\boldsymbol{\mu}_{TC}$, in turn, consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+The mean vector $\boldsymbol{\mu}_{TC}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
 and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
 The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
 the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
 and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
-
-The likelihood function is obtained by making the density of the Gaussian distribution given above in terms of its parameterization.
 
 % w/ Bias. DP
 
@@ -260,6 +258,7 @@ The likelihood function is obtained by making the density of the Gaussian distri
 % w/ Bias, no dffbVIHT 
 
 % Likelihood, Prior, Posterior
+The likelihood function is obtained by making the density of the Gaussian distribution given above in terms of its parameterization.
 
 % Summary
 Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration schemes considered in this study.
@@ -464,7 +463,7 @@ Translating from the Bayesian (probabilistic) framework, the bounds of the predi
 \marginpar{Application of the method}
 For instance, the criteria used in the present study, selecting a symmetric $95\%$ probability interval implies the $LUB$ and $UUB$ to be the $2.5$-th and $97.5$-th percentiles, respectively.
 The choice is rather arbitrary but as long as the criteria is applied consistently across different prediction uncertainties, the value of the method for comparison is preserved.
-Furthermore, the $LUB_{\text{min.}}$ and $UUB_{\text{max.}}$ are taken to be the the $2.5$-th and $97.5$-th percentiles of the prior prediction distribution and the reference value $y_\text{ref.}$ of the each posterior prediction distribution is taken to be its median value.
+Furthermore, the $2.5$-th and $97.5$-th percentiles of the prior prediction distribution are taken to be the $LUB_{\text{min.}}$ and $UUB_{\text{max.}}$ and the reference value $y_\text{ref.}$ is taken to be the median value of each posterior prediction distribution.
 Finally the experimental data is taken to be the observed value $y_\text{obs.}$ without considering the associated uncertainty following the original paper \cite{Baccou2014}.
 Once again, this lack of consideration is less of an issue for comparing between different uncertain prediction.
  
