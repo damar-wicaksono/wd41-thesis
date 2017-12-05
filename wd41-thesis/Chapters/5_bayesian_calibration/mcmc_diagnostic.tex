@@ -5,15 +5,13 @@
 % Opening paragraph
 Consider once more Eq.~(\ref{eq:ch5_markov_chain_clt}), the central limit theorem (CLT) for the \gls[hyper=false]{mcmc}.
 Let $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^{I}$ be a stationary Markov chain of length $I$ with a stationary distribution $\pi_t$ (i.e., the target distribution).
-Furthermore, it is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$,
-then the asymptotic error of the estimator follows
+The chain is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$, as the asymptotic error of the estimator follows as
 \begin{equation*}
   \lim_{I \rightarrow \infty} \,\, \hat{f} - \mathbb{E}_{\pi_t}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \end{equation*}
 Where $\sigma^2_f$ is the variance of a given function $f$ evaluated under the stationary density of the chain.
-As mentioned, by construction, the successive realizations in a Markov chain is not independent.
-Before discussing the implication of this correlation on statistical error of an estimator given above (i.e., $\frac{\sigma^2_f}{I}$) in Section~\ref{sub:bc_mcmc_thinning}, several important concepts are first introduced. 
-Note that the dependence on $\pi_t$ in the discussion below has been implicitly assumed and thus suppressed from the notation.
+As mentioned, by construction, the successive realizations in a Markov chain are not independent.
+Before discussing in Section~\ref{sub:bc_mcmc_thinning} the implication of this correlation on the statistical error $\frac{\sigma^2_f}{I}$, several important concepts are introduced below\footnote{Note that the dependence on $\pi_t$ in the discussion below is implicitly assumed and suppressed from the notation.}.
 
 % Autocovariance
 The autocovariance of the function $f$ is defined as the covariation between the function $f$ evaluated using the chain at the iteration $i$ and iteration $j$.
@@ -28,9 +26,9 @@ In other words,
   \text{Cov}\left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(i+t)}) \right] \equiv C_f(t) 
 \label{eq:ch5_autocovariance_function}
 \end{equation}
-where $C_f$ is the autocovariance function of $f$ and $t$, the separation between iterations, is called the \emph{lag} of the covariance function.
+where $C_f$ is the autocovariance function of $f$ and $t$ is the \emph{lag} of the covariance function.
 Note that according to the notation above the covariance function $C_f$ is always defined with respect to a given function $f$, as indicated in the subscript.
-Such function includes identity functions that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ the dimension of the multivariate chain.
+Such function includes function that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ a dimension of the multivariate chain.
 
 % Autocorrelation
 The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance function defined as,
@@ -43,10 +41,10 @@ where $C_f(0)$ is the lag-$0$ autocovariance and is equal to the process varianc
 % Some illustration
 Autocovariance (and autocorrelation) measures the strength of the covariance (and correlation) between samples in a Markov chain.
 By definition both functions are symmetric about the origin.
-They also tend to decay with increasing lag as illustrated in the figure below for autocorrelation function of three different Markov chains with different autocorrelation functions.
+They also tend to decay with increasing lag as illustrated in the figure below for autocorrelation of three different Markov chains with different autocorrelation.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_illustrate_acf},
-                  maincaption={Illustration of autocorrelation functions for three different Markov chains. The Markov chain at the top has the strongest autocorrelation shown as solid line in the right plot. The correlation between samples dies off much longer than the other two chains.},%
+                  maincaption={Illustration of autocorrelation functions for three different Markov chains. The Markov chain at the top has the strongest autocorrelation shown as solid line in the right plot. The correlation between samples dies off much slower than the other two chains.},%
 									mainshortcaption={Illustration of autocorrelation functions for three different Markov chains.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:ch5_plot_illustrate_acf_1},
