@@ -873,16 +873,15 @@ might cause a relatively long ``initialization phase'' noted above (compared to 
 \marginpar{\gls[hyper=false]{aies} algorithm, possible problems}
 This is especially the case if the chain starts at very atypical values of the distribution.
 Having a large ensemble implies a larger ``inertia'' for each of them to move and settle to a more typical region of the state space.
-The algorithm was also recently reported to badly scale with the number of dimensions and to eventually fail in a high dimension ($D \geq 50$) either by a very slow convergence or, more importantly, by a biased convergence (i.e., it converges to a wrong value) \cite{Carpenter2017,Huijser2015}.
+The algorithm was also recently reported to badly scale with the number of dimensions and to eventually fail in a high dimension ($D \geq 50$) either by a very slow convergence or, more importantly, by a biased convergence (i.e., convergence to a wrong value) \cite{Carpenter2017,Huijser2015}.
 The number of dimensions concerned in this thesis, however, is still far below the value cited above. 
 
 % Entry to practical aspects
 There are two important issues not discussed in detail in either of the illustrations above, namely the convergence and the required length of the chain.
 These issues are of practical importance for any \gls[hyper=false]{mcmc} algorithm.
-For instance, the ``initialization phase'' obviously presents in the illustration of the \gls[hyper=false]{aies} algorithm is an indication of a particular lack of convergence to stationarity in the initial part of the transient.
-It needs to be detected and removed lest they would bias the estimation using the samples.
+For instance, the ``initialization phase'' of the \gls[hyper=false]{aies} algorithm is an indication of a particular lack of convergence to stationarity in the initial part of the chain.
+It needs to be detected and removed lest it would bias the estimation using its samples.
 Rigorous proof of stationarity is difficult to obtain in practice and instead, analysis is often based on empirical diagnostic with heuristics.
 Afterward,
-the main question will be on how long the chain needs to be generated.
-In turn, these issues are closely related to the error of an \gls[hyper=false]{mcmc} estimate.
+the main question is on how long the chain needs to be to obtain a small enough statistical error on the \gls[hyper=false]{mcmc} estimate.
 Analyzing a realization of a Markov chain for Monte Carlo application is the subject of the next section.
