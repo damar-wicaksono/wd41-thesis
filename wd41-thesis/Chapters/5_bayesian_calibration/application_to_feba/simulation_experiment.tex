@@ -229,7 +229,8 @@ Having defined the elements of the generic calibration formula of Eq.~(\ref{eq:b
 the explicit formulation for each calibration scheme introduced in the beginning of this Section can now be presented.
 
 % w/ Bias, TC
-The calibration scheme \texttt{w/ Bias, All} combines the formulation of the calibration schemes \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO}.
+The calibration scheme \texttt{w/ Bias, All} combines the formulation of the calibration schemes \texttt{w/Bias, TC}, \texttt{w/Bias, DP}, and \texttt{w/Bias, CO}.
+\marginpar{\texttt{w/ Bias, TC}}
 As such, in the following the latter three calibration schemes are first presented.
 Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~(\ref{eq:bc_data_model_gaussian}), but specifically for the $TC$ data generating process.
 That is, the process corresponds to the scheme \texttt{w/ Bias, TC},
@@ -250,6 +251,7 @@ and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\r
 
 % w/ Bias. DP
 In a similar manner, the $DP$ data generating process corresponds to the calibration scheme \texttt{w/ Bias, DP} is as follow
+\marginpar{\texttt{w/ Bias, DP}}
 \begin{equation}
 	\begin{split}
 		& \bm{\mathcal{Y}}_{E,DP} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{DP} (\bm{x}_m), \Sigma_{DP} (\bm{x}_m)) \\
@@ -258,32 +260,34 @@ In a similar manner, the $DP$ data generating process corresponds to the calibra
 	\end{split}
 \label{eq:likelihood_dp}
 \end{equation}
-where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $72$-dimensional mean vector and the $72\times 72$ covariance matrix associated with the $TC$ output/data, respectively.
-The mean vector $\boldsymbol{\mu}_{TC}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
-and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
-The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
-the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
-and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
+where $\boldsymbol{\mu}_{DP}$ and $\Sigma_{DP} (\bm{x}_m)$ are the $72$-dimensional mean vector and the $72\times 72$ covariance matrix associated with the $DP$ output/data, respectively.
+The mean vector $\boldsymbol{\mu}_{DP}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,DP}$ (Eq.~(\ref{eq:p_variate_metamodel_dp}));
+and the mean vector of the model bias term $\mathbf{m}_{\delta,DP}$ (Eq.~(\ref{eq:feba_gp_bias})).
+The covariance matrix $\Sigma_{DP} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_dp}));
+the covariance matrix of the model bias term $\Sigma_{\delta,DP}$ (Eq.~(\ref{eq:p_variate_metamodel_dp}));
+and the covariance matrix of the experimental uncertainty for $DP$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_dp})).
 
 % w/ Bias, CO
-Finally, the $CO$ data generating process corresponds to the calibration scheme \texttt{w/ Bias, DP} is,
+Finally, the $CO$ data generating process corresponds to the calibration scheme \texttt{w/ Bias, CO} is,
+\marginpar{\texttt{w/ Bias, CO}}
 \begin{equation}
 	\begin{split}
-		& \bm{\mathcal{Y}}_{E,CO} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
+		& \bm{\mathcal{Y}}_{E,CO} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{CO} (\bm{x}_m), \Sigma_{CO} (\bm{x}_m)) \\
 		& \boldsymbol{\mu}_{CO} (\bm{x}_m) = \boldsymbol{\mu}_{M,CO} (\bm{x}_m) + \mathbf{m}_{\delta,CO} \\
 		& \Sigma_{CO} (\bm{x}_m) = \Sigma_{M,CO} (\bm{x}_m) + \Sigma_{\delta,CO} + \Sigma_{E,CO} \\
 	\end{split}
 \label{eq:likelihood_co}
 \end{equation}
-where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $7$-dimensional mean vector and the $7\times 7$ covariance matrix associated with the $TC$ output/data, respectively.
-The mean vector $\boldsymbol{\mu}_{TC}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+where $\boldsymbol{\mu}_{CO}$ and $\Sigma_{CO} (\bm{x}_m)$ are the $7$-dimensional mean vector and the $7\times 7$ covariance matrix associated with the $CO$ output/data, respectively.
+The mean vector $\boldsymbol{\mu}_{CO}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,CO}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
 and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
-The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
-the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
-and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
+The covariance matrix $\Sigma_{CO} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_co}));
+the covariance matrix of the model bias term $\Sigma_{\delta,CO}$ (Eq.~(\ref{eq:p_variate_metamodel_co}));
+and the covariance matrix of the experimental uncertainty for $CO$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_co})).
 
 % w/ Bias, All
 The data generating processes for $TC$, $DP$, and $CO$ data above are combined to arrive at the process corresponds to the calibration scheme \texttt{w/ Bias, All}.
+\marginpar{\texttt{w/ Bias, All}}
 The main assumption in combining the data generating processes is independence between types of data following \cite{Reichert2012}.
 That is, no a priori relationship between different types of output is assumed.
 This assumption greatly simplifies the problem and thus the joint process becomes a concatenation of the Gaussian random vector 
@@ -313,20 +317,24 @@ Alternatively, due to the same assumption, the density of the joint process is s
 
 % w/o Bias
 The calibration scheme \texttt{w/o Bias} has a similar data generating process to that of the scheme \texttt{w/ Bias, All},
+\marginpar{\texttt{w/o Bias}}
 except that the mean vectors and the covariance matrices of the model bias term for each types of data have been removed from the formulation.
 Specifically, the vectors (covariance matrices) $\mathbf{m}_{\delta,TC}$ ($\Sigma_{\delta,TC}$), $\mathbf{m}_{\delta,DP}$ ($\Sigma_{\delta,DP}$), and $\mathbf{m}_{\delta,CO}$ ($\Sigma_{\delta,CO}$) are removed from Eqs.~(\ref{eq:likelihood_tc}), (\ref{eq:likelihood_dp}), and (\ref{eq:likelihood_co}), respectively.
 
 % w/ Bias, no dffbVIHT
 Lastly, the calibration scheme \texttt{w/ Bias, no dffbVIHT} has the same data generating process as Eq.~(\ref{eq:likelihood_all}), except that the parameter \texttt{dffbVIHT} is not part of $\bm{x}_m$.
+\marginpar{\texttt{w/ Bias, no dffbVIHT}}
 In discussion below, this also implies that the parameter is assigned no prior probability.
 
 % Likelihood, Prior, Posterior
 Given the experimental data $\mathbf{y}_{E,TC}$, $\mathbf{y}_{E,DP}$, and $\mathbf{y}_{E,CO}$ for the $TC$, $DP$, and $CO$ the likelihood functions with respect to each of the calibration schemes above can be defined following Eq.~(\ref{eq:bc_likelihood}).
+\marginpar{Likelihood functions}
 The likelihood is from the Gaussian density (the formula for the density is given in Appendix~\ref{app:gaussian_vector}).
 Note that the model parameters are embedded inside the likelihood function through the mean and the covariance of the \gls[hyper=false]{gp} metamodel prediction.
 
 % Posterior
 The posterior \gls[hyper=false]{pdf} is then formulated by assigning the prior \gls[hyper=false]{pdf} for the $8$ (respectively 7 for the scheme \texttt{w/ Bias, no dffbVIHT}) important reflood model parameters $\bm{x}_m$ from Table~\ref{tab:trace_model_parameter_2}.
+\marginpar{Posterior PDFs}
 The posterior \gls[hyper=false]{pdf} is defined for each of the calibration schemes using the respective likelihood functions.
 For instance, the posterior \gls[hyper=false]{pdf} for the model parameters under the calibration scheme \texttt{w/ Bias, TC} up to a constant is written as,
 \begin{equation}
