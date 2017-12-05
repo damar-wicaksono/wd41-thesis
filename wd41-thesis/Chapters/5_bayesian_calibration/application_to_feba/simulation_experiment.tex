@@ -77,7 +77,7 @@ Let $\mathbf{y}_{E,TC}$ is the vector of $TC$ data observed at $\boldsymbol{\Lam
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_tc}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $133$, where $133$ is the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+where $\mathbf{I}$ is an identity matrix of size $133$, the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
 The $133$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
 
 % Pressure Drop
@@ -103,7 +103,7 @@ Let $\mathbf{y}_{E,DP}$ is the vector of $DP$ data observed at $\boldsymbol{\Lam
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_dp}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $P_2$, where $P_2$ is the length of the observation layout $\boldsymbol{\Lambda}_{DP}$.
+where $\mathbf{I}$ is an identity matrix of size $72$, the length of the observation layout $\boldsymbol{\Lambda}_{DP}$.
 
 % Liquid carryover
 Finally, the experimental data provided for the liquid carryover ($CO$) of the \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
@@ -128,8 +128,8 @@ To cover the reported uncertainty and the possible bias, the reported level is a
 	\end{split}
 \label{eq:bc_experimental_uncertainty_feba_co}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $P_3$, where $P_3$ is the length of the observation layout $\boldsymbol{\Lambda}_{CO}$ and
-the $\sigma_{E,CO}$ it the standard deviation of the distribution, taken to be $0.5\,[kg]$.
+where $\mathbf{I}$ is an identity matrix of size $7$, the length of the observation layout $\boldsymbol{\Lambda}_{CO}$ and
+$\sigma_{E,CO}$ is the standard deviation of the distribution, taken to be $0.5\,[kg]$.
 
 % Full observation layout
 Finally, the observation layout for each output (data) type can be combined into a single long vector of the full observation layout,
@@ -225,16 +225,17 @@ Lastly, similar to the two previous cases, the observation layout $\boldsymbol{\
 %-----------------------------------------------------------------------
 
 % Introductory Paragraph
-Defining the elements 
+Having defined the elements of the generic calibration formula of Eq.~(\ref{eq:bc_observation_simulation_true}) within the context of the present problem,
+the explicit formulation for each calibration scheme introduced in the beginning of this Section can now be presented.
 
 % w/ Bias, TC
-The calibration scheme \texttt{w/ Bias, All} combines the fomulation of the calibration schemes \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO}.
+The calibration scheme \texttt{w/ Bias, All} combines the formulation of the calibration schemes \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO}.
 As such, in the following the latter three calibration schemes are first presented.
-Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~(\ref{eq:bc_data_model_gaussian}), but specifically for the $TC$ data generating model.
-That is,
+Combining the terms of the above according to Eq.~(\ref{eq:bc_observation_simulation_true}) gives similar formulation as Eq.~(\ref{eq:bc_data_model_gaussian}), but specifically for the $TC$ data generating process.
+That is, the process corresponds to the scheme \texttt{w/ Bias, TC},
 \begin{equation}
 	\begin{split}
-		& \bm{\mathcal{Y}}_{E,TC} | \mathbf{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
+		& \bm{\mathcal{Y}}_{E,TC} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
 		& \boldsymbol{\mu}_{TC} (\bm{x}_m) = \boldsymbol{\mu}_{M,TC} (\bm{x}_m) + \mathbf{m}_{\delta,TC} \\
 		& \Sigma_{TC} (\bm{x}_m) = \Sigma_{M,TC} (\bm{x}_m) + \Sigma_{\delta,TC} + \Sigma_{E,TC} \\
 	\end{split}
@@ -248,19 +249,92 @@ the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:
 and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
 
 % w/ Bias. DP
+In a similar manner, the $DP$ data generating process corresponds to the calibration scheme \texttt{w/ Bias, DP} is as follow
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{E,DP} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{DP} (\bm{x}_m), \Sigma_{DP} (\bm{x}_m)) \\
+		& \boldsymbol{\mu}_{DP} (\bm{x}_m) = \boldsymbol{\mu}_{M,DP} (\bm{x}_m) + \mathbf{m}_{\delta,DP} \\
+		& \Sigma_{DP} (\bm{x}_m) = \Sigma_{M,DP} (\bm{x}_m) + \Sigma_{\delta,DP} + \Sigma_{E,DP} \\
+	\end{split}
+\label{eq:likelihood_dp}
+\end{equation}
+where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $72$-dimensional mean vector and the $72\times 72$ covariance matrix associated with the $TC$ output/data, respectively.
+The mean vector $\boldsymbol{\mu}_{TC}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
+The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
 
 % w/ Bias, CO
+Finally, the $CO$ data generating process corresponds to the calibration scheme \texttt{w/ Bias, DP} is,
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{E,CO} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC} (\bm{x}_m), \Sigma_{TC} (\bm{x}_m)) \\
+		& \boldsymbol{\mu}_{CO} (\bm{x}_m) = \boldsymbol{\mu}_{M,CO} (\bm{x}_m) + \mathbf{m}_{\delta,CO} \\
+		& \Sigma_{CO} (\bm{x}_m) = \Sigma_{M,CO} (\bm{x}_m) + \Sigma_{\delta,CO} + \Sigma_{E,CO} \\
+	\end{split}
+\label{eq:likelihood_co}
+\end{equation}
+where $\boldsymbol{\mu}_{TC}$ and $\Sigma_{TC} (\bm{x}_m)$ are the $7$-dimensional mean vector and the $7\times 7$ covariance matrix associated with the $TC$ output/data, respectively.
+The mean vector $\boldsymbol{\mu}_{TC}$ consists of the mean vector of the \gls[hyper=false]{gp} metamodel prediction $\boldsymbol{\mu}_{M,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the mean vector of the model bias term $\mathbf{m}_{\delta,TC}$ (Eq.~(\ref{eq:feba_gp_bias})).
+The covariance matrix $\Sigma_{TC} (\bm{x}_m)$ comprises the covariance matrix of the \gls[hyper=false]{gp} metamodel prediction (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+the covariance matrix of the model bias term $\Sigma_{\delta,TC}$ (Eq.~(\ref{eq:p_variate_metamodel_tc}));
+and the covariance matrix of the experimental uncertainty for $TC$ data (Eq.~(\ref{eq:bc_experimental_uncertainty_feba_tc})).
 
 % w/ Bias, All
+The data generating processes for $TC$, $DP$, and $CO$ data above are combined to arrive at the process corresponds to the calibration scheme \texttt{w/ Bias, All}.
+The main assumption in combining the data generating processes is independence between types of data following \cite{Reichert2012}.
+That is, no a priori relationship between different types of output is assumed.
+This assumption greatly simplifies the problem and thus the joint process becomes a concatenation of the Gaussian random vector 
+\begin{equation}
+	\begin{split}
+		& \bm{\mathcal{Y}}_{E,\{TC,DP,CO\}} | \bm{x}_m \sim \mathcal{N} (\boldsymbol{\mu}_{TC,DP,CP} (\bm{x}_m), \Sigma_{TC,DP,CO} (\bm{x}_m)) \\
+		& \boldsymbol{\mu}_{\{TC,DP,CO\}} (\bm{x}_m) = \left[ \boldsymbol{\mu}_{TC} (\bm{x}_m), \boldsymbol{\mu}_{DP} (\bm{x}_m), \boldsymbol{\mu}_{CO} (\bm{x}_m) \right ] \\
+		& \Sigma_{\{TC,DP,CO\}} (\bm{x}_m) = \text{diag}(\Sigma_{TC} (\bm{x}_m), \Sigma_{DP} (\bm{x}_m), \Sigma_{CO} (\bm{x}_m)) \\
+	\end{split}
+\label{eq:likelihood_all}
+\end{equation}
+where $\boldsymbol{\mu}_{\{TC,DP,CO\}}$ is a $212$-dimensional vector from the concatenation the mean vectors of $TC$, $DP$, and $CO$;
+and $\Sigma_{\{TC,DP,CO\}}$ is the $212 \times 212$ covariance matrix.
+The $\text{diag}$ operated on matrices results in a block diagonal matrix.
+Specifically,
+\begin{equation}
+   \Sigma_{\{TC,DP,CO\}} (\bm{x}_m) =  
+    \begin{pmatrix}
+      \Sigma_{TC} (\bm{x}_m)  & \bm{0}_{133\times72}    & \bm{0}_{133\times7}    \\
+      \bm{0}_{72\times133}    & \Sigma_{DP} (\bm{x}_m)  & \bm{0}_{72\times7}     \\
+      \bm{0}_{7\times133}     & \bm{0}_{7\times72}      & \Sigma_{CO} (\bm{x}_m) \\
+    \end{pmatrix}
+\label{eq:diag_cov_matrix}
+\end{equation} 
+Due to the independence assumption between types of data, zero is assigned for the correlations between types of outputs.
+Alternatively, due to the same assumption, the density of the joint process is simply the multiplication of the constituent processes.
 
 % w/o Bias
+The calibration scheme \texttt{w/o Bias} has a similar data generating process to that of the scheme \texttt{w/ Bias, All},
+except that the mean vectors and the covariance matrices of the model bias term for each types of data have been removed from the formulation.
+Specifically, the vectors (covariance matrices) $\mathbf{m}_{\delta,TC}$ ($\Sigma_{\delta,TC}$), $\mathbf{m}_{\delta,DP}$ ($\Sigma_{\delta,DP}$), and $\mathbf{m}_{\delta,CO}$ ($\Sigma_{\delta,CO}$) are removed from Eqs.~(\ref{eq:likelihood_tc}), (\ref{eq:likelihood_dp}), and (\ref{eq:likelihood_co}), respectively.
 
-% w/ Bias, no dffbVIHT 
+% w/ Bias, no dffbVIHT
+Lastly, the calibration scheme \texttt{w/ Bias, no dffbVIHT} has the same data generating process as Eq.~(\ref{eq:likelihood_all}), except that the parameter \texttt{dffbVIHT} is not part of $\bm{x}_m$.
+In discussion below, this also implies that the parameter is assigned no prior probability.
 
 % Likelihood, Prior, Posterior
-The likelihood function is obtained by making the density of the Gaussian distribution given above in terms of its parameterization.
+Given the experimental data $\mathbf{y}_{E,TC}$, $\mathbf{y}_{E,DP}$, and $\mathbf{y}_{E,CO}$ for the $TC$, $DP$, and $CO$ the likelihood functions with respect to each of the calibration schemes above can be defined following Eq.~(\ref{eq:bc_likelihood}).
+The likelihood is from the Gaussian density (the formula for the density is given in Appendix~\ref{app:gaussian_vector}).
+Note that the model parameters are embedded inside the likelihood function through the mean and the covariance of the \gls[hyper=false]{gp} metamodel prediction.
 
-% Summary
+% Posterior
+The posterior \gls[hyper=false]{pdf} is then formulated by assigning the prior \gls[hyper=false]{pdf} for the $8$ (respectively 7 for the scheme \texttt{w/ Bias, no dffbVIHT}) important reflood model parameters $\bm{x}_m$ from Table~\ref{tab:trace_model_parameter_2}.
+The posterior \gls[hyper=false]{pdf} is defined for each of the calibration schemes using the respective likelihood functions.
+For instance, the posterior \gls[hyper=false]{pdf} for the model parameters under the calibration scheme \texttt{w/ Bias, TC} up to a constant is written as,
+\begin{equation}
+  p_{TC}(\bm{x}_m | \mathbf{y}_{E,TC}) \propto \mathcal{L}_{TC}(\bm{x}_m;\mathbf{y}_{E,TC}) \cdot p(\bm{x}_m)
+\label{eq:feba_posterior}
+\end{equation}
+where the likelihood $\mathcal{L}_{TC}$ is the likelihood function associated with the data generating process in Eq.~(\ref{eq:likelihood_tc}).
+The five other likelihood functions and posterior \glspl[hyper=false]{pdf} are defined similarly.
 Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration schemes considered in this study.
 \begin{table*}[!htbp]\centering
 \ra{0.9}
@@ -301,7 +375,7 @@ Therefore, a parallelized implementation of the algorithm would be beneficial in
 % EMCEE and RGW
 The parallelization of the \gls[hyper=false]{aies} sampler was originally developed and implemented in the python package \texttt{emcee} \cite{Foreman-Mackey2013}.
 The main design philosophy of \texttt{emcee} (and its ported \texttt{R} package \texttt{rgw} \cite{Mantz2016} used in this thesis) is that of a \emph{portable} sampler.
-That is, the user simply has to code the posterior formulation (the likelihood and the posterior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{WinBugs} \cite{Lunn2000}, \texttt{Jags} \cite{Plummer2003}, and \texttt{Stan} \cite{Carpenter2017a}. These samplers, however, has more extensive capabilities for conducting a Bayesian data analysis and tends to be faster as they port the specified probabilistic models to a lower level language (e.g., \texttt{C++}). Furthermore, being older, they have a larger and more diverse user base.}.
+That is, the user simply has to code the posterior formulation (the likelihood and the prior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{WinBugs} \cite{Lunn2000}, \texttt{Jags} \cite{Plummer2003}, and \texttt{Stan} \cite{Carpenter2017a}. These samplers, however, has more extensive capabilities for conducting a Bayesian data analysis and tends to be faster as they port the user-specified probabilistic models to a lower level language (e.g., \texttt{C++}). Furthermore, being older, they have a larger and more diverse user base.}.
 
 % Settings used in the simulation
 In the present study, $2'000$ iterations are carried out for an ensemble of $1'000$ walkers.
@@ -354,7 +428,7 @@ For the comparison purpose in this thesis, only the first two steps above are ap
 % Information modeling
 In the information modeling, the information in a prediction uncertainty of a \gls[hyper=false]{qoi} $y$ is represented by an interval (lower and upper bounds: $LUB_y$ and $UUB_y$, respectively) and a reference value $y_\text{ref.}$.
 A \emph{source} of information $src$ for a particular \gls[hyper=false]{qoi} $y$ consists of such an interval and, optionally, a reference value.
-A complete ignorance is represented simply by the interval given by $LUB_y$ and $UUB_y$ resulting in a rectangular model,
+If only the interval given by $LUB_y$ and $UUB_y$ is supplied then a rectangular model applies,
 \begin{equation}
 		\pi_{src,y} (y) = 
 			\begin{cases}
@@ -364,6 +438,7 @@ A complete ignorance is represented simply by the interval given by $LUB_y$ and 
 \label{eq:calibinfo_rectangular}
 \end{equation}
 where $\pi$ is the possibility measure, whose minimum and maximum are $0.0$ and $1.0$, respectively.
+The rectangular model is used to represent to complete ignorance $\pi_{ign,y}$ in the following.
 
 The presence of a reference value $y_\text{ref.}$ within that intervals allows the triangular model to be defined,
 \begin{equation}
