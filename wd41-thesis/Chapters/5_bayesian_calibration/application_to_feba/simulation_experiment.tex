@@ -397,7 +397,7 @@ These two information models are illustrated in Fig.~\ref{fig:ch5_calibinfo_mode
 The information evaluation part of the method comprises two indices to evaluate the quality of information in a given source.
 \emph{Informativeness}, associated with a source $src$ and a \gls[hyper=false]{qoi} $y$ is defined as,
 \begin{equation}
-  \text{Inf}(src, y) = \frac{|\pi_{i, \text{ign}}| - |\pi_{i, \text{s}}|}{|\pi_{i, \text{ign}}|} = 1 - \frac{1}{2} \frac{UUB - LUB}{UUB_{\text{max.}} - LUB_{\text{min.}}}
+  \text{Inf}(src, y) = \frac{|\pi_{\text{ign}, y}| - |\pi_{\text{src},y}|}{|\pi_{\text{ign},y}|} = 1 - \frac{1}{2} \frac{UUB - LUB}{UUB_{\text{max.}} - LUB_{\text{min.}}}
 \label{eq:informativeness}
 \end{equation}
 where $|\circ|$ denotes the area under an information model.
