@@ -63,8 +63,8 @@ They also tend to decay with increasing lag as illustrated in the figure below f
 \subsection[Autocorrelation in Equilibrium and Thinning]{Autocorrelation in Equilibrium and Thinning}\label{sub:bc_mcmc_thinning}
 %--------------------------------------------------------------------------------------------------------------------------------
 
-Assuming that the stationary chain has been attained the asymptotic results of Eq.~(\ref{eq:ch5_markov_chain_clt}) applies.
-To derive the expression for $\sigma^2_f$ in the equation, consider that the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ for the expected value of $f$ computed by a Markov chain $\{\bm{\mathcal{X}}^{(i)}\}$ of length $I$ is given by,
+Assuming that the stationary chain has been attained, the asymptotic results of Eq.~(\ref{eq:ch5_markov_chain_clt}) applies.
+To derive the expression for $\sigma^2_f$ in the equation, consider that the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ for the expected value of $f$ computed by a Markov chain $\{\bm{\mathcal{X}}^{(i)}\}$ of length $I$ is,
 \begin{equation}
   \mathbb{V}[\,\hat{f}\,] = \mathbb{E}\left[\left(\frac{1}{I} \sum_{i=1}^I \left( f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right)\right)^2 \right]
 \label{eq:ch5_markov_chain_estimate_variance}
@@ -100,17 +100,13 @@ Noting that the covariance function $C_f$ is a symmetric function about zero,
 \label{eq:ch5_markov_chain_estimate_variance_expand}
 \end{equation*}
 where $\rho_f$ is the autocorrelation function of $f$ defined in Eq.~(\ref{eq:ch5_autocorrelation}).
-Rearranging the term, the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ is given by,
-\begin{equation}
-  \mathbb{V}[\,\hat{f}\,] = \frac{2 \tau_{\text{int},f}}{I} C_f (0) 
-\label{eq:ch5_markov_chain_estimator_variance}
-\end{equation}
-where $\tau_{\text{int},f}$, the \emph{integrated autocorrelation time} (or simply autocorrelation time), is defined as,
+Rearranging the term, the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ is,
 \marginpar{Integrated autocorrelation time}
 \begin{equation}
-  \tau_{\text{int},f} =  \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t)
-\label{eq:ch5_markov_chain_autocorrelation_time}
+  \mathbb{V}[\,\hat{f}\,] = \frac{2 \tau_{\text{int},f}}{I} C_f (0) \quad\quad\quad \tau_{\text{int},f} \equiv  \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t)
+\label{eq:ch5_markov_chain_estimator_variance}
 \end{equation}
+where $\tau_{\text{int},f}$ is the \emph{integrated autocorrelation time} (or, in this thesis, simply the autocorrelation time).
 
 In making connection with Eq.~(\ref{eq:ch5_markov_chain_clt}), Eq.~(\ref{eq:ch5_markov_chain_estimator_variance}) can be interpreted in one of two ways.
 \marginpar{Effective sample size}
@@ -121,10 +117,11 @@ In other words, $N \equiv \frac{I}{2 \tau_{\text{int},f}}$ with $N$ the number o
 From this latter interpretation, the autocorrelation time refers to the number of \gls[hyper=false]{mcmc} iterations required to generate a single independent sample.
 
 % Autocorrelation time and the length of the chain
+The autocorrelation time 
 In either interpretation, the statistical error associated with the \gls[hyper=false]{mc} estimation is larger for an estimation using \gls[hyper=false]{mcmc} samples than using independent samples due to the inherent correlation.
 \marginpar{Determining the length of a chain}
 Moreover, in the case of \gls[hyper=false]{mcmc}, the autocorrelation time $\tau_{\text{int},f}$ directly affects the statistical error.
-As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error for chain of a given length.
+As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error of a chain of a given length.
 That is, the (required) relative statistical error $\epsilon$ of an estimator $\hat{f}$ is related to the length of the chain through \cite{Akeret2013},
 \begin{equation}
   \left(\frac{\mathbb{V}[\hat{f}]}{C_f(0)}\right)^{0.5} = \left(\frac{\mathbb{V}[\hat{f}]}{\mathbb{V}[f]}\right)^{0.5} = \left(\frac{2\tau_{\text{int},f}}{I}\right)^2 \leq \epsilon \Leftrightarrow I \geq \frac{2\tau_{\text{int},f}}{\epsilon^2} 
@@ -136,9 +133,8 @@ For an ensemble sampler the number of iterations should be multiplied by the num
   I \geq \frac{2\,\tau_{\text{int},f}}{\epsilon^2\,L} 
 \label{eq:ch5_markov_chain_relative_error_ensemble}
 \end{equation}
-Note that the autocorrelation time is associated with a given function $f$ and have to be computed for different choice of $f$.
-For each, autocorrelation time (and the associated statistical error) gives a sense of scale on the length of an \gls[hyper=false]{mcmc} simulation.
-For instance, $10'000$ \gls[hyper=false]{mcmc} iterations are relatively long for a single particle chain having autocorrelation time of $5$ ($\epsilon \approx 3\%)$, but much shorter in comparison for a chain with autocorrelation time of $100$ ($\epsilon \approx 14\%)$.
+The autocorrelation time gives a measure of the required length of the chain to reach a target statistical error.
+For instance, $10'000$ \gls[hyper=false]{mcmc} iterations are relatively long for a single particle chain having an autocorrelation time of $5$ ($\epsilon \approx 3\%)$, but much shorter in comparison for a chain having an autocorrelation time of $100$ ($\epsilon \approx 14\%)$.
 In the latter case, in such a relatively short chain, the reliability of the estimation of the autocorrelation time itself can actually become a suspect. 
 
 % Estimating Autocovariance function
@@ -164,20 +160,19 @@ For a large $t$, the data of iterations that are far separated becomes sparser t
 A ``windowing'' technique is proposed in \cite{Sokal1997} to stabilize the estimation and is implemented in the routine \texttt{ACOR} \cite{Goodman2009,Foreman-Mackey2014} used in this thesis.
 
 % On thinning
-The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
+The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling of the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
 \marginpar{On thinning the chain}
 Thinning the chain means that only $1$ \gls[hyper=false]{mcmc} sample is kept for every $k$ iterations, with $k$ an integer.
-Often, the integer $k$ is chosen to be close to, or at least the same order of magnitude to, the autocorrelation time $\tau_{\text{int},f}$.
+Often, the integer $k$ is chosen to be close to, or at least the same order of magnitude as, the twice the autocorrelation time $\tau_{\text{int},f}$.
 Historically, thinning is mainly motivated by the limited storage and memory to store all the samples, especially for a long running \gls[hyper=false]{mcmc} simulation.
-As the end purpose of conducting \gls[hyper=false]{mc} estimation requires the use of independent samples, it was argued that by thinning, only samples that matters (i.e., independent) are kept for further analysis.
+As the end purpose of conducting \gls[hyper=false]{mc} estimation requires the use of independent samples, it was argued that by thinning, only samples that matters (i.e., independent) were kept for further analysis.
 
 On the other hand, the practice of thinning is questioned by several authors \cite{Geyer1992,Link2011}.
 The argument against thinning is relatively easy to intuit.
 By conducting thinning the autocorrelation in the samples can be reduced thus reducing the statistical error of the estimate.
-At the same time, there would be much smaller number of samples after thinning that often off-set the reduction of the error by a smaller autocorrelation time.
+At the same time, there can be much smaller number of samples after thinning that often worsen the accuracy of the estimator.
  
-Thinning can be justified for the purpose of estimating the statistical error of an estimate using the thinned \gls[hyper=false]{mcmc} samples without the need to estimate $\tau_{\text{int},f}$.
-It can also be useful in the case expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
+Thinning can be justified in the case expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
 That is, if the function $f$ is expensive to evaluate.
 For example, in the context of Bayesian data analysis, the posterior samples obtained via \gls[hyper=false]{mcmc} simulation might need to be propagated through a computationally expensive code for the purpose of forward uncertainty quantification by an ordinary \gls[hyper=false]{mc} simulation.
 In this case, only calculations of a few samples might be afforded and, as required by \gls[hyper=false]{mc} simulation, such selection of samples should be independent of each other which, in turn, can be achieved by thinning the chain first. 
