@@ -42,7 +42,6 @@ To overcome this issue, the following principles have been followed to select th
 
 Additionally, a common principle, the selected models (and parameters) are to be perturbed by means of perturbation factors (detail below) at the highest-possible level of the structure of these models as coded.
 The level allows, to some extent, for reference uncertainty information obtained from codes other than \gls[hyper=false]{trace} to be used.
-Note that, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed.
 
 % Resulting List of Model Parameters 1
 In accordance to the first selection principle above, a set of $10$ high-level parameters has been selected ($5$ for each flow regime).
@@ -59,29 +58,32 @@ Lastly, from the third principle, the quench temperature parameter in \gls[hyper
 The complete list of the model parameters considered in the present study is given in Table~\ref{tab:trace_model_parameter_2}.
 The total number of initial uncertain parameters considered is thus $27$.
 
-%-----------------------------------------------------------------------------------
-\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
-%-----------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
+\subsection{Perturbation Factors}\label{sub:reflood_parameters_perturbation_factor}
+%----------------------------------------------------------------------------------
 
 % Opening paragraph
+The nominal values of selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of model parameters values can be generated.
+In the case of model parameters, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed of which the uncertainties are to be quantified a posteriori based on experimental data.
 
-The nominal values of selected model parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by their respective perturbation factors.
-These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf}, 
-from which a set of samples of model parameters values can be generated.
-The choice of the distribution is influenced by both the available information and the aim of the analysis.
-As the aim of this particular step is to obtain preliminary (or \emph{prior}) uncertainty of the \gls[hyper=false]{trace} model prediction, 
-uniform (or log-uniform) distributions with reasonable range of variation are deemed sufficient for the model parameters.
-Hence, the \emph{prior uncertainty propagation} step constitutes of generating samples for each model parameter from its prior \gls[hyper=false]{pdf}, 
-carrying out a set of \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model using the sampled parameters, 
-and analyzing the results to quantify the uncertainty of the model prediction.
-
-For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive, multiplicative,} and \emph{substitutive}.
+% Mode of perturbations
+For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
 In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
 In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
 Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
 
-A tool to assist the uncertainty propagation of model parameters in a \gls[hyper=false]{trace} model is developed in the Python programming language.
-This tool, detailed in Appendix~\ref{app:trace_simexp}.
+% trace-simexp
+A tool is developed in the Python programming language to assist in automatically pre-process, execute, and post-process numerous \gls[hyper=false]{trace} simulations of \gls[hyper=false]{feba} experiment based on a set of sampled input parameters values.
+The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
+
+%-----------------------------------------------------------------------------------
+\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
+%-----------------------------------------------------------------------------------
+
+As the aim of this particular step is to obtain preliminary (or \emph{prior}) uncertainty of the \gls[hyper=false]{trace} model prediction, 
+uniform (or log-uniform) distributions with reasonable range of variation are deemed sufficient for the model parameters.
+
 
 As show in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}, the list of perturbation factors involves the perturbation of various model parameters related to:
 \begin{enumerate}
