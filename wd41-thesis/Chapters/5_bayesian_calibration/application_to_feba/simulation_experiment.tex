@@ -4,34 +4,35 @@
 
 % Introductory paragraph
 The application of the Bayesian calibration framework on the \gls[hyper=false]{trace} reflood model parameters against the \gls[hyper=false]{feba} experimental data is based on $6$ different statistical formulations, in the following referred to as \emph{calibration schemes}.
-These schemes are distinguished by their respective assumption:
+These schemes are distinguished by their respective assumptions:
 \begin{itemize}
-	\item \texttt{w/ Bias, All}. The first calibration scheme assumes that the \gls[hyper=false]{trace} model is an imperfect simulator of the reflood phenomena in the the \gls[hyper=false]{feba} experiment.
-		As such it considers a model bias term (as described furter below) in the calibration process. Furthermore, in this scheme, all available types of experimental data are considered.
-		The data includes the clad temperature at different time points and at different axial locations (will be succinctly referred to below as the $TC$ output or data),
-		the pressure drop at different time points and at different axial segments (referred to as the $DP$ output or data),
-		and the collected liquid carryover at different time points (referred to as the $CO$ output or data).
+	\item \texttt{w/ Bias, All}. The first calibration scheme assumes that the \gls[hyper=false]{trace} model is an imperfect simulator of the reflood phenomena in the \gls[hyper=false]{feba} experiment.
+		As such it considers a model \emph{bias} term (as described further below) in the calibration process.
+    Furthermore, in this scheme, \emph{all} available types of experimental data are considered.
+		The data includes the clad temperature measurements at different time points and at different axial locations (will be succinctly referred to below as the $TC$ output or data),
+		the pressure drop measurements at different time points and at different axial segments (referred to as the $DP$ output or data),
+		and the collected liquid carryover measurement at different time points (referred to as the $CO$ output or data).
 		As mentioned, following the results of the previous chapter, only the most influential $8$ reflood model parameters are considered for the calibration. 
-	\item \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO} are three variants of the scheme \texttt{w/ Bias, All} in which only one type of experimental data (respectively, output) is considered at a time for the calibration.
-		The purpose of these schemes is to investigate the effect of using different types of data from the same experiment to constrain the model parameters prior uncertainties.
-		The calibration is still conducted for the $8$ reflood model parameters and by considering the model bias term.
-	\item \texttt{w/o Bias} is conducted to provide a comparison with the calibration. This scheme is similar to the scheme \texttt{w/ Bias, All};
+	\item \texttt{w/ Bias, TC}; \texttt{w/ Bias, DP}; and \texttt{w/ Bias, CO} are three variants of the scheme \texttt{w/ Bias, All} in which only one type of experimental data (respectively, output) is considered at a time for the calibration.
+		The purpose of these schemes is to investigate the effect of using different types of data from the same test to constrain the model parameters prior uncertainties.
+		The calibration is still conducted for the $8$ reflood model parameters and considering the model bias term.
+	\item \texttt{w/o Bias} scheme is similar to the scheme \texttt{w/ Bias, All};
 		it uses all available types of experimental data to calibrate the $8$ reflood model parameters, except that no model bias term is included in the formulation.
-		In essence, this scheme assumes that the \gls[hyper=false]{trace} model perfectly describes the reflood phenomena in the \gls[hyper=false]{feba} experiment.
-	\item \texttt{w/ Bias, no dffbVIHT}. The last calibration scheme is conducted as to investigate the effect of excluding, from the calibration process, an influential parameter (\texttt{dffbVIHT}) that is later found from the scheme \texttt{w/ Bias, All} to be strongly correlated.
+		In essence, this scheme assumes that the \gls[hyper=false]{trace} model perfectly describes the reflood phenomena in the \gls[hyper=false]{feba} test No. $216$.
+	\item \texttt{w/ Bias, no dffbVIHT} is the last calibration scheme considered; it is conducted to investigate the effect of excluding, from the calibration process, an influential parameter (\texttt{dffbVIHT}) that is later found from the scheme \texttt{w/ Bias, All} to be strongly correlated.
 		Except for calibrating only the $7$ reflood model parameters, this scheme used similar assumptions as the first scheme.
 \end{itemize}
 
 The six calibration schemes above aim to update the prior uncertainties of the model parameters using the available experimental data from \gls[hyper=false]{feba} test No. 216.
-The six posterior \gls[hyper=false]{pdf} formulation are then directly sampled using an ensemble \gls[hyper=false]{mcmc} sampler to obtain six different sets of posterior samples.
-To avoid an excessive computational cost of having to run \gls[hyper=false]{trace} hundreds thousands of times (if not more), the \gls[hyper=false]{gp} metamodel for the \gls[hyper=false]{trace} model developed in Chapter~\ref{ch:gp_metamodel} is used to substitute \gls[hyper=false]{trace} run.
+The six posterior \glspl[hyper=false]{pdf} are then directly sampled using an ensemble \gls[hyper=false]{mcmc} sampler to obtain six different sets of posterior samples.
+To avoid the excessive computational cost of having to run \gls[hyper=false]{trace} hundreds of thousands of times, the \gls[hyper=false]{gp} metamodel developed in Chapter~\ref{ch:gp_metamodel} is used to substitute the \gls[hyper=false]{trace} model.
 
 These different sets of samples are then analyzed to assess the effect of using different calibration schemes in constraining the prior uncertainties of the model parameters. 
-Finally, the resulting posterior samples from different schemes are used in forward \gls[hyper=false]{uq} on the \gls[hyper=false]{trace} model of different \gls[hyper=false]{feba} tests (corresponding to different boundary conditions, namely system pressure and reflood rate).
-This final exercise is aimed to assess the implication of the posterior uncertainties from different calibration schemes on (and their applicability for) the prediction under conditions different from the condition of the calibration data.
+Finally, the same posterior samples are used in forward \gls[hyper=false]{uq} on the \gls[hyper=false]{trace} model of different \gls[hyper=false]{feba} tests (corresponding to different boundary conditions, namely system pressure and reflood rate).
+This final exercise is aimed to assess the implication of the posterior uncertainties from different calibration schemes on (and their applicability for) the prediction under conditions different from the conditions of the calibration data.
 
-In the following, the important terms of Eq.~(\ref{eq:bc_observation_simulation_true}) will be discussed in the context of the present application on the \gls[hyper=false]{trace} model before detailing each calibration scheme.
-Afterward, the \gls[hyper=false]{mcmc} sampler and simulation setting as well as a method to evaluate and compare different posterior prediction uncertainties are presented.
+In the following, the important terms of Eq.~(\ref{eq:bc_observation_simulation_true}) will be discussed in the context of the present application to the \gls[hyper=false]{trace} model before detailing each calibration scheme.
+Afterward, the \gls[hyper=false]{mcmc} sampler as well as a method to evaluate and compare different posterior prediction uncertainties are presented.
 
 %-------------------------------------------------------------------------------------------
 \subsubsection{Experimental Data and Observation Layout}\label{subsub:bc_observation_layout}
