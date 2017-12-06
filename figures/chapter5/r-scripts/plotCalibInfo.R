@@ -64,7 +64,7 @@ p <- ggplot(data = calibinfo_df1,
             aes(x = inf_score, y = cal_score, shape = case_name))
 p <- p + facet_grid(output_type ~ feba_test)
 p <- p + geom_point(size = 4)
-p <- p + scale_shape_manual(values = 0:9)
+p <- p + scale_shape_manual(values = c(0,15,2,17,1,16,11,7,8))
 p <- p + theme_bw()
 p <- p + geom_hline(data = calibinfo_srs_df, aes(yintercept = cal_score))
 p <- p + geom_vline(data = calibinfo_srs_df, aes(xintercept = inf_score))
