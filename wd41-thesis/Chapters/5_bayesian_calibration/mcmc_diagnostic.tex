@@ -217,7 +217,7 @@ It can be used to determine the number of iterations to discard before the chain
 % Importance of Burn-in period revisited
 The relationship between exponential correlation time and stationarity holds only for strictly exponential correlation function which is often the case for an infinitely long chain \cite{Sokal1997}.
 \marginpar{Determining the number of iterations to discard}
-Furthermore and in general, the exponential autocorrelation time is different from (twice) the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance}})) except in the case of exponentially decaying autocorrelation function.
+Furthermore and in general, the exponential autocorrelation time is different from (twice) the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})) except in the case of exponentially decaying autocorrelation function.
 Thus, in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997} (thus this thesis implicitly assumed the integrated autocorrelation time when the term is used).
 Once more, in practice, a conservative multiples of the estimated autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $20$ \cite{Sokal1997}, is used to determine the total number of iterations to discard.
 

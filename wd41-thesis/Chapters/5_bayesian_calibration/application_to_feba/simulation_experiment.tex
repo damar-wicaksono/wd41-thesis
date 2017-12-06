@@ -39,19 +39,17 @@ Afterward, the \gls[hyper=false]{mcmc} sampler as well as a method to evaluate a
 %-------------------------------------------------------------------------------------------
 
 % Introductory Paragraph
-The experimental data of the \gls[hyper=false]{feba} test No. $216$ used in the present calibration is based on the report provided to the participants of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013}.
-The data in the report, in turn, is based on the digitization of experimental curves on the original report \cite{Ihle1984} and additional review on the associated experimental uncertainties.
-Therefore this were the data used by other participants of the benchmark.
+The experimental data of \gls[hyper=false]{feba} test No. $216$ used for the calibration was extracted from the experimental report \cite{Ihle1984} report which was provided to the participants of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013}.
 
 % Clad Temperature
-The experimental data provided for the clad temperature ($TC$) of the \gls[hyper=false]{feba} test No. $216$ consists of $33$ time points for each of the $8$ different axial locations of the thermocouples along the test section.
+The experimental data provided for the clad temperature ($TC$) of \gls[hyper=false]{feba} test No. $216$ consists of $33$ time points for each of the $8$ different axial locations of the thermocouples along the test section.
 \marginpar{Clad temperature ($TC$) data}
 Recall that by convention in the experiment, $TC1$ corresponds to the thermocouple measurement at the top of the test section ($\approx 4.1\,[m]$), while $TC8$ corresponds to the measurement at the bottom of the section ($\approx 0.3\,[m]$).
 
-Due to the strong discontinuity of the clad temperature around the point of quenching, the model bias term cannot be modeled using stationary \gls[hyper=false]{gp} (see Section~\ref{subsub:bc_model_bias}) as it severely violates to the constant variance assumption as function of time and axial location (at the very least, before and after the quenching occurs).
-To keep the simplicity from using the stationary \gls[hyper=false]{gp} formulation, the model bias term is modeled only for the part of transient before quenching occurs.
-Thus the calibration is also conducted using the data prior to quenching.
-This is further justified by the fact that after quenching there is much less relevant variation in the temperature transient.
+Due to the strong discontinuity of the clad temperature around the point of quenching, the model bias term cannot be modeled using stationary \gls[hyper=false]{gp} (see Section~\ref{subsub:bc_model_bias}) as it severely violates the constant variance assumption as function of time and axial location (at the very least, before and after the quenching occurs).
+To keep using a simple stationary \gls[hyper=false]{gp} formulation, the model bias term is modeled only for the part of the transient before the quenching occurs.
+Thus, the calibration is also conducted using only the data prior to quenching.
+This is further justified by the fact that after quenching there is almost no relevant variation in the temperature transient.
 
 Because of the different timing of quenching along the test section, the number of data points available for calibration changes per axial location.
 Based on these data points, an observation layout for $TC$ data can be defined,
@@ -64,65 +62,65 @@ Based on these data points, an observation layout for $TC$ data can be defined,
 	\end{split}
 \label{eq:bc_observation_layout_feba_tc}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+where $z$ denotes the axial location and $t$ denotes the time point.
 The total number of data points associated with $TC$ output is $133$.
 
 % Clad Temperature uncertainty
 The reported experimental uncertainty associated with the clad temperature measurement is $\pm0.5\%$ of the measured value in $[^oC]$.
-In this thesis, this statement of uncertainty is translated to a Gaussian probability distribution such that the uncertainty covers the $99.7\%$ probability (i.e., $3$ sigma levels).
-Let $\mathbf{y}_{E,TC}$ is the vector of $TC$ data observed at $\boldsymbol{\Lambda}_{TC}$, then the experimental uncertainty is given as,
+In this thesis, this statement of uncertainty is translated to a Gaussian probability distribution such that the uncertainty covers the $99.7\%$ probability (i.e., $3$-$\sigma$ level).
+Let $\mathbf{y}_{E,TC}$ be the vector of $TC$ data observed at $\boldsymbol{\Lambda}_{TC}$, then the experimental uncertainty is given as,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{TC}) \thicksim \mathcal{N}(0, \Sigma_{TC})\\
-		& \Sigma_{E,TC} = (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T) (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T)
+		& \Sigma_{E,TC} = \text{diag}\left(\left(\frac{0.005}{3}\mathbf{y}_{E,TC}\right)^2\right)
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_tc}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $133$, the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
-The $133$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
+The dimension of the multivariate Gaussian random variable above is $133$ the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+The random variable is independent but not identically distributed as the variance changes for each measurement point.
 
 % Pressure Drop
-The experimental data provided for the pressure drop ($DP$) of the \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
+The experimental data provided for the pressure drop ($DP$) of \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
 \marginpar{Pressure drop ($DP$) data}
 Recall that in the experiment, the \emph{bottom} segment corresponds to the segment $0.0 - 1.7\,[m]$, the \emph{middle} to $1.7 - 2.3\,[m]$, the \emph{top} to $z = 2.3 - 4.1\,[m]$, and the \emph{total} to $0.0 - 4.1\,[m]$.
-In the following, the bottom, the middle, the top, and the total segments are simply indices of the $DP$ output; $z_1$, $z_2$, $z_3$, $z_4$, respectively.
+In the following, the bottom, middle, top, and total segments are simply indices of the $DP$ output; $z_1$, $z_2$, $z_3$, $z_4$, respectively.
 The observation layout for the $DP$ data is then defined as follow,
 \begin{equation}
 		\boldsymbol{\Lambda}_{DP} = \{(z_1,t_1),\ldots,(z_1,t_{18}),(z_2,t_1),\ldots,(z_4,t_{18})\}
 \label{eq:bc_observation_layout_feba_dp}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
-
+where $z$ denotes axial segment and $t$ denotes the time point.
+The total length of the observation layout $\boldsymbol{\Lambda}_{DP}$ is $72$.
+ 
 % Pressure drop uncertainty
 The reported experimental uncertainty associated with the pressure drop measurement is $\pm10\%$ of the measured value in $[Pa]$.
-As before, this statement of uncertainty is translated to a Gaussian probability distribution covering the $99.7\%$ probability (i.e., $3$ sigma levels).
+As before, this statement of uncertainty is translated to a Gaussian probability distribution covering the $99.7\%$ probability (i.e., $3$-$\sigma$ level).
 Let $\mathbf{y}_{E,DP}$ is the vector of $DP$ data observed at $\boldsymbol{\Lambda}_{DP}$, then the experimental uncertainty is given as a multivariate Gaussian,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{DP}) \thicksim \mathcal{N}(0, \Sigma_{DP})\\
-		& \Sigma_{E,DP} = (\mathbf{I} \frac{0.1}{3} \mathbf{y}{E,DP}^T) (\mathbf{I} \frac{0.1}{3} \mathbf{y}_{E,DP}^T)
+		& \Sigma_{E,DP} = \text{diag}\left(\left(\frac{0.1}{3}\mathbf{y}_{E,DP}\right)^2\right)
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_dp}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $72$, the length of the observation layout $\boldsymbol{\Lambda}_{DP}$.
+where the random variable is a $72$-dimensional multivariate Gaussian.
 
 % Liquid carryover
-Finally, the experimental data provided for the liquid carryover ($CO$) of the \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
+Finally, the experimental data provided for the liquid carryover ($CO$) of \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
 \marginpar{Liquid carryover ($CO$) data}
 However, because the collecting tank was saturated at $10\,[kg]$ only the transient up to that mass is of interest.
 By excluding the data points where the tank has been saturated, only $7$ data points are available for the calibration.
-Based on these data points, the observation layout for the $CO$ data is defined as,
+Based on these data points $\mathbf{y}_{E,CO}$, the observation layout for the $CO$ data is defined as,
 \begin{equation}
 		\boldsymbol{\Lambda}_{CO}  = \{(t_1),\ldots,(t_{7})\}
 \label{eq:bc_observation_layout_feba_co}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
-The observed data according to the observation layout is denoted $\mathbf{y}_{E,CO}$.
+where $t$ denotes the time point.
 
 % Liquid carryover uncertainty
-A large uncertainty was indicated for the liquid carryover measurement that possibly includes biased measurement as the measured mass in the collecting tank does not always correspond to the liquid carryover \cite{Sanz2017}.
+A large uncertainty was indicated for the liquid carryover measurement that possibly includes biased measurement as the measured mass in the collecting tank does not always correspond to the liquid carryover of the reflood transient \cite{Sanz2017}.
 The suggested level of uncertainty for the benchmark was $\pm0.5\,[kg]$.
-To cover the reported uncertainty and the possible bias, the reported level is assumed to be $1\sigma$ level of an independent identically distributed multivariate Gaussian,
+To cover the reported uncertainty and the possible bias, the reported level is assumed to be $1$-$\sigma$ level of an independent identically distributed multivariate Gaussian,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{CO}) \thicksim \mathcal{N}(0, \mathbf{I} \sigma^2_{CO})\\
@@ -134,21 +132,12 @@ $\sigma_{E,CO}$ is the standard deviation of the distribution, taken to be $0.5\
 
 % Full observation layout
 Finally, the observation layout for each output (data) type can be combined into a single long vector of the full observation layout,
-\marginpar{Full observation layout}
-\begin{equation}
-	\begin{split}
-		\boldsymbol{\Lambda} & = \{(TC, z_1,t_1),\ldots,(TC,z_8,t_{27}),\\
-		                     & \quad\quad (DP,z_1,t_{1}),\ldots,(DP,z_4,t_{18}),\\
-												 & \quad\quad (CO,t_1),\ldots,(CO,t_7)\}\\
-	\end{split}
-\label{eq:bc_observation_layout_feba_full}
-\end{equation}
-That is, by convention here, $\boldsymbol{\Lambda} = \{\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{DP}, \boldsymbol{\Lambda}_{CO}\}$.
+$\boldsymbol{\Lambda} = \{\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{DP}, \boldsymbol{\Lambda}_{CO}\}$.
 The total number of data points of \gls[hyper=false]{feba} test No. $216$, and the length of the observation layout $\boldsymbol{\Lambda}$, used in the calibration is thus $212$.
 
-%--------------------------------------------------------------------------------------------
-\subsubsection{Gaussian Process Approximation for TRACE Simulation}\label{subsub:bc_gp_trace}
-%--------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------
+\subsubsection{Gaussian Process Approximation for TRACE Simulations}\label{subsub:bc_gp_trace}
+%---------------------------------------------------------------------------------------------
 
 Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
 The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
