@@ -206,16 +206,17 @@ The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapt
   \item Assume the vectors $\left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right)$, $\left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right)$, and\\ $\left(\mathbf{y}_{E,CO} - \mathbf{\hat{y}}_{M,CO}\right)$ are realizations from stationary \glspl[hyper=false]{gp} on the observation layouts (i.e., as function time and space). Note as the observation layouts comprise discrete points in time and space, the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
     The power-exponential covariance function is selected for the covariance kernel and the hyper-parameters of the process (i.e., $\sigma^2$. $\bm{p}$, $\bm{\theta}$) are estimated using the \texttt{R} package \texttt{DiceKriging}. 
   \item The mean of the bias term is taken to be the difference between the data and the nominal prediction, while the covariance matrix of the bias term is taken to be covariance matrix constructed at the observation layout using the estimated hyper-parameters above.
+  The constructed covariance matrix takes into account correlations of the model bias in time and space.
   In the present analysis the estimated values of the hyper-parameters above in the previous step are kept constant.
 \end{enumerate}
 
 % What does the bias mean
 The above model bias term formulation is only partially Bayesian as it uses the data to make the initial estimation.
-But as argued in \cite{Bayarri2007} it is the pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
-Several additional assumptions are made to fully formulate the term.
+But as argued in \cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
+Several additional assumptions are made in this thesis to fully formulate the term.
 By varying the parameters related to the boundary conditions in the construction of the term implies that the residual uncertainty of the experiment is included in the model bias term.
-The residual uncertainty was not directly observed as there no replication of the same controllable inputs was conducted in the experiment. 
-The model bias formulation assumes the presence of the residual uncertainty and, in the present analysis, \gls[hyper=false]{trace} simulation is used as a substitute instead. 
+The residual uncertainty was not directly observed as no replication at the same controllable inputs was conducted in the experiment. 
+In the present analysis, \gls[hyper=false]{trace} simulation is used as a substitute instead. 
 
 By using the above mean for the bias term, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
 This is an indirect way of putting a strong prior preference for the \gls[hyper=false]{trace} nominal prediction such that the model parameters should not dramatically be shifted to correct the mismatch between the experimental data and the \gls[hyper=false]{trace} prediction.
@@ -223,8 +224,8 @@ In other words, it is a way to keep as much as possible the nominal \gls[hyper=f
 Ref. \cite{Bayarri2007} also recommends that the variance of the process is allowed to vary but as the calibration conducted here is based only on the data from a single \gls[hyper=false]{feba} test, it is decided that the variance is kept constant.
 In fact, this represents a pessimistic assumption in the sense that the data is not allowed to reduce the bias by altering the model parameters in line with assuming the mean before.
 
-All in all, the calibration using this proposed model bias term thus aims to update the prior uncertainties of the model parameters assuming that the nominal prediction is centered around the data while allowing the variance unchanged. 
-The interest is emphasized on the range of model parameters uncertainties consistent with this assumption.
+All in all, the calibration using this proposed model bias term thus aims to update the prior uncertainties of the model parameters assuming that the nominal prediction is centered around the data while keeping the variance unchanged. 
+The interest is then emphasized on using experimental data to obtain the uncertainties of the model parameters consistent with these assumptions.
 
 % TC Output
 Based on the above discussion, the model bias term for the $TC$ output is expressed as,

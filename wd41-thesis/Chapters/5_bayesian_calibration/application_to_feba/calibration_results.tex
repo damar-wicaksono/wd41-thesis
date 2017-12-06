@@ -52,13 +52,6 @@ The posteriors presented are from all the calibration schemes considered.
 The three numbers inside the brackets correspond to the $2.5$-th percentile, the median (for the prior also the the nominal values), and the lower $97.5$-th percentile, respectively.
 That is, the interval constructed by the percentiles corresponds to the symmetric $95\%$ credible interval covering $95\%$ probability.
 
-% Explaining the table
-From the table, it can be seen that considering additional outputs in the calibration tends to constrain even more the posterior range of the parameters (see also Figs.~\ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, and \ref{fig:ch5_plot_ens_co_disc_centered}).
-Furthermore, the calibration scheme in which the parameter \texttt{dffbVIHT} was excluded tends to have a tighter posterior uncertainty range of the parameters that were correlated with the parameter \texttt{dffbVIHT} (i.e., \texttt{dffbIntDr} and \texttt{iafbIntDr}),
-while the range for the \texttt{dffbVIHT} remains at its initial prior range (see Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8}).
-Finally, the posterior of the calibration scheme without model bias term tends to have a tight range and to be concentrated at either end of the prior range.
-Additionally, the median posterior values of the parameters are shifted far away from their initial nominal values.
-Most of the initial nominal values actually fall outside the $95\%$ credible intervals (see Fig.~\ref{fig:ch5_plot_ens_all_nodisc}).
 \begin{sidewaystable}
 \caption{Summary of calibration results. The three numbers in brackets are the lower $95\%$ credible interval, the median, and the upper $95\%$ credible interval, respectively.}
 \label{tab:ch5_post_param}
@@ -80,3 +73,11 @@ Most of the initial nominal values actually fall outside the $95\%$ credible int
 \bottomrule
 \end{tabularx}
 \end{sidewaystable}
+
+% Explaining the table
+From the table, it can be seen that considering additional outputs in the calibration tends to constrain even more the posterior range of the parameters (see also Figs.~\ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, and \ref{fig:ch5_plot_ens_co_disc_centered}).
+Furthermore, the calibration scheme in which the parameter \texttt{dffbVIHT} was excluded tends to have a tighter posterior uncertainty range of the parameters that were correlated with the parameter \texttt{dffbVIHT} (i.e., \texttt{dffbIntDr} and \texttt{iafbIntDr}),
+while the range for the \texttt{dffbVIHT} remains at its initial prior range (see Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8}).
+Finally, the posterior of the calibration scheme without model bias term tends to have a tight range and to be concentrated at either end of the prior range.
+Additionally, the median posterior values of the parameters are shifted far away from their initial nominal values.
+Most of the initial nominal values actually fall outside the $95\%$ credible intervals (see Fig.~\ref{fig:ch5_plot_ens_all_nodisc}).
