@@ -219,7 +219,9 @@ The relationship between exponential correlation time and stationarity holds onl
 \marginpar{Determining the number of iterations to discard}
 Furthermore and in general, the exponential autocorrelation time is different from (twice) the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})) except in the case of exponentially decaying autocorrelation function.
 Thus, in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997} (thus this thesis implicitly assumed the integrated autocorrelation time when the term is used).
-Once more, in practice, a conservative multiples of the estimated autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $20$ \cite{Sokal1997}, is used to determine the total number of iterations to discard.
+That is, the (time) autocorrelation time is estimated for the initial chain and is used as the basis to determine the length of the burn-in period. 
+Once more, in practice, a conservative multiples of the estimated autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $20$ \cite{Sokal1997}, is used to that effect.
+Afterward, assuming that the stationary chain has been attained, the time is re-estimated and is used as the basis for assessing the autocorrelation between successive realizations (and if applies, for thinning).
 
 In the end, it is important to acknowledge that the burn-in period as determined by the autocorrelation time is a heuristic.
 \marginpar{Burn-in, a heuristic}

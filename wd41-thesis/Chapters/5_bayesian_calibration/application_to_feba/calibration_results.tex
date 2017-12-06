@@ -5,7 +5,7 @@
 % Introductory Paragraph
 After discarding the samples from the initial burn-in periods,
 the remaining posterior samples can be analyzed to investigate the constraining power of the data (as well as the chosen schemes) and the possible correlation structure of the parameters.
-The posterior samples of the calibration scheme \texttt{w/ Bias, All} is mainly presented, while the graphical representation of the posterior samples from the other calibration schemes can be found in Appendix~\ref{app:mcmc_samples}.
+The posterior samples of the calibration scheme \texttt{w/ Bias, All} is presented in this section, while the graphical representation of the posterior samples from the other calibration schemes can be found in Appendix~\ref{app:mcmc_samples}.
 
 % Explaining corner plot
 The results of calibrating the $8$-parameter model with the calibration scheme \texttt{w/ Bias, All} is presented in a corner plot shown in Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}.
@@ -16,20 +16,20 @@ That is, it projects the multi-dimensional posterior distribution into each of t
 % Diagonal Elements
 The univariate marginals are shown as the diagonal elements of the plot.
 \marginpar{Corner plot, diagonal element, univariate marginal}
-In the diagonal elements of Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, solid lines indicate the $95\%$ symmetric credible intervals computed from the univariate samples\footnote{That is, the interval between the $2.5$-th and the $97.5$-th percentiles of the posterior samples.}, while dashed and dotted lines indicate nominal parameter values and posterior median parameter values, respectively.
+Solid lines indicate the $95\%$ symmetric credible intervals computed from the univariate samples\footnote{That is, the interval between the $2.5$-th and the $97.5$-th percentiles of the posterior samples.}, while dashed and dotted lines indicate nominal parameter values and posterior median parameter values, respectively.
 Note that the range for each of the model parameters in the plot corresponds to the respective prior uncertainty range.
 
 % Off-diagonal elements
 The bivariate marginals of the posterior distribution are shown as the off-diagonal elements of the plot.
 \marginpar{Corner plot, off-diagonal element, bivariate marginal}
 Because correlation is symmetric, only the lower half portion of the plot is shown.
-In this adaption of corner plot, hexagonal binning \cite{Carr2015} is used to provide the ($2$-dimensional) data aggregation method to deal with the large number of posterior samples.
+In this adaption of corner plot, hexagonal binning \cite{Carr2015} is used to represent the large number of posterior samples.
 In the off-diagonal elements of Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, lighter color shading (i.e., more intense color) indicates the region of the parameter space that is denser with sampled points.
 The correlation between each pairs of parameters can be preliminary inferred from the shape of the bivariate marginals while the exact number for the color scale is unimportant.
 
 % Explaining the figure, univariate marginal
 In Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, the most constrained parameters (from either side of the prior range) are the \texttt{iafbIntDr}, \texttt{dffbIntDr}, \texttt{dffbVIHT}, \texttt{dffbWHT}.
-Some parameters are mostly constrained in one side (most notably \texttt{gridHT}), while \texttt{tQuench} is the least constrained by the data and the calibration scheme.
+Some parameters are mostly constrained on one side (most notably \texttt{gridHT}), while \texttt{tQuench} is the least constrained by the data and the calibration scheme.
 
 \begin{sidewaysfigure}
 	\centering
@@ -41,7 +41,7 @@ Some parameters are mostly constrained in one side (most notably \texttt{gridHT}
 % Explaining the figure, bivariate marginal
 Although most pairs are largely uncorrelated, the parameter \texttt{dffbIntDr} is strongly correlated with \texttt{dffbWHT}, \texttt{dffbVIHT}, and \texttt{iafbIntDr}.
 The parameter \texttt{iafbWHT} is also correlated with \texttt{tQuench}.
-It was due to the strong correlation between \texttt{dffbVIHT} and \texttt{dffbIntDr}, an additional calibration scheme that excludes \texttt{dffbVIHT} was conducted to investigate the effect.
+Because of the strong correlation between \texttt{dffbVIHT} and \texttt{dffbIntDr}, the calibration scheme \texttt{w/ Bias, no dffbVIHT} additional calibration scheme that excludes \texttt{dffbVIHT} was conducted to investigate the effect.
 Some correlations (like the one between \texttt{dffbWHT} and \texttt{dffbVIHT}) are approximately elliptical while the others (like the one between \texttt{iafbIntDr} and \texttt{dffbIntDr}) are seemingly more nonlinear.
 However, for most of the strongest correlated parameters, regions of highly concentrated sample values can be identified.
 This, in turn, implies that the posterior parameters values that are consistent with the experimental data are largely contained within a small, bounded region of the parameter space, much smaller than the prior parameter space.
