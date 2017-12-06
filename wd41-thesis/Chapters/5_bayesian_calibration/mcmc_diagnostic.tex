@@ -172,7 +172,7 @@ The argument against thinning is relatively easy to intuit.
 By conducting thinning the autocorrelation in the samples can be reduced thus reducing the statistical error of the estimate.
 At the same time, there can be much smaller number of samples after thinning that often worsen the accuracy of the estimator.
  
-Thinning can be justified in the case expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
+Thinning can be justified in the case of expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
 That is, if the function $f$ is expensive to evaluate.
 For example, in the context of Bayesian data analysis, the posterior samples obtained via \gls[hyper=false]{mcmc} simulation might need to be propagated through a computationally expensive code for the purpose of forward uncertainty quantification by an ordinary \gls[hyper=false]{mc} simulation.
 In this case, only calculations of a few samples might be afforded and, as required by \gls[hyper=false]{mc} simulation, such selection of samples should be independent of each other which, in turn, can be achieved by thinning the chain first. 
