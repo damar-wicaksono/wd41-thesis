@@ -4,53 +4,52 @@
 
 % Introductory paragraph
 The application of the Bayesian calibration framework on the \gls[hyper=false]{trace} reflood model parameters against the \gls[hyper=false]{feba} experimental data is based on $6$ different statistical formulations, in the following referred to as \emph{calibration schemes}.
-These schemes are distinguished by their respective assumption:
+These schemes are distinguished by their respective assumptions:
 \begin{itemize}
-	\item \texttt{w/ Bias, All}. The first calibration scheme assumes that the \gls[hyper=false]{trace} model is an imperfect simulator of the reflood phenomena in the the \gls[hyper=false]{feba} experiment.
-		As such it considers a model bias term (as described furter below) in the calibration process. Furthermore, in this scheme, all available types of experimental data are considered.
-		The data includes the clad temperature at different time points and at different axial locations (will be succinctly referred to below as the $TC$ output or data),
-		the pressure drop at different time points and at different axial segments (referred to as the $DP$ output or data),
-		and the collected liquid carryover at different time points (referred to as the $CO$ output or data).
+	\item \texttt{w/ Bias, All}. The first calibration scheme assumes that the \gls[hyper=false]{trace} model is an imperfect simulator of the reflood phenomena in the \gls[hyper=false]{feba} experiment.
+		As such it considers a model \emph{bias} term (as described further below) in the calibration process.
+    Furthermore, in this scheme, \emph{all} available types of experimental data are considered.
+		The data includes the clad temperature measurements at different time points and at different axial locations (will be succinctly referred to below as the $TC$ output or data),
+		the pressure drop measurements at different time points and at different axial segments (referred to as the $DP$ output or data),
+		and the collected liquid carryover measurement at different time points (referred to as the $CO$ output or data).
 		As mentioned, following the results of the previous chapter, only the most influential $8$ reflood model parameters are considered for the calibration. 
-	\item \texttt{w/ Bias, TC}, \texttt{w/ Bias, DP}, and \texttt{w/ Bias, CO} are three variants of the scheme \texttt{w/ Bias, All} in which only one type of experimental data (respectively, output) is considered at a time for the calibration.
-		The purpose of these schemes is to investigate the effect of using different types of data from the same experiment to constrain the model parameters prior uncertainties.
-		The calibration is still conducted for the $8$ reflood model parameters and by considering the model bias term.
-	\item \texttt{w/o Bias} is conducted to provide a comparison with the calibration. This scheme is similar to the scheme \texttt{w/ Bias, All};
+	\item \texttt{w/ Bias, TC}; \texttt{w/ Bias, DP}; and \texttt{w/ Bias, CO} are three variants of the scheme \texttt{w/ Bias, All} in which only one type of experimental data (respectively, output) is considered at a time for the calibration.
+		The purpose of these schemes is to investigate the effect of using different types of data from the same test to constrain the model parameters prior uncertainties.
+		The calibration is still conducted for the $8$ reflood model parameters and considering the model bias term.
+	\item \texttt{w/o Bias} scheme is similar to the scheme \texttt{w/ Bias, All};
 		it uses all available types of experimental data to calibrate the $8$ reflood model parameters, except that no model bias term is included in the formulation.
-		In essence, this scheme assumes that the \gls[hyper=false]{trace} model perfectly describes the reflood phenomena in the \gls[hyper=false]{feba} experiment.
-	\item \texttt{w/ Bias, no dffbVIHT}. The last calibration scheme is conducted as to investigate the effect of excluding, from the calibration process, an influential parameter (\texttt{dffbVIHT}) that is later found from the scheme \texttt{w/ Bias, All} to be strongly correlated.
+		In essence, this scheme assumes that the \gls[hyper=false]{trace} model perfectly describes the reflood phenomena in the \gls[hyper=false]{feba} test No. $216$.
+	\item \texttt{w/ Bias, no dffbVIHT} is the last calibration scheme considered; it is conducted to investigate the effect of excluding, from the calibration process, an influential parameter (\texttt{dffbVIHT}) that is later found from the scheme \texttt{w/ Bias, All} to be strongly correlated.
 		Except for calibrating only the $7$ reflood model parameters, this scheme used similar assumptions as the first scheme.
 \end{itemize}
 
 The six calibration schemes above aim to update the prior uncertainties of the model parameters using the available experimental data from \gls[hyper=false]{feba} test No. 216.
-The six posterior \gls[hyper=false]{pdf} formulation are then directly sampled using an ensemble \gls[hyper=false]{mcmc} sampler to obtain six different sets of posterior samples.
-To avoid an excessive computational cost of having to run \gls[hyper=false]{trace} hundreds thousands of times (if not more), the \gls[hyper=false]{gp} metamodel for the \gls[hyper=false]{trace} model developed in Chapter~\ref{ch:gp_metamodel} is used to substitute \gls[hyper=false]{trace} run.
+The six posterior \glspl[hyper=false]{pdf} are then directly sampled using an ensemble \gls[hyper=false]{mcmc} sampler to obtain six different sets of posterior samples.
+To avoid the excessive computational cost of having to run \gls[hyper=false]{trace} hundreds of thousands of times, the \gls[hyper=false]{gp} metamodel developed in Chapter~\ref{ch:gp_metamodel} is used to substitute the \gls[hyper=false]{trace} model.
 
 These different sets of samples are then analyzed to assess the effect of using different calibration schemes in constraining the prior uncertainties of the model parameters. 
-Finally, the resulting posterior samples from different schemes are used in forward \gls[hyper=false]{uq} on the \gls[hyper=false]{trace} model of different \gls[hyper=false]{feba} tests (corresponding to different boundary conditions, namely system pressure and reflood rate).
-This final exercise is aimed to assess the implication of the posterior uncertainties from different calibration schemes on (and their applicability for) the prediction under conditions different from the condition of the calibration data.
+Finally, the same posterior samples are used in forward \gls[hyper=false]{uq} on the \gls[hyper=false]{trace} model of different \gls[hyper=false]{feba} tests (corresponding to different boundary conditions, namely system pressure and reflood rate).
+This final exercise is aimed to assess the implication of the posterior uncertainties from different calibration schemes on (and their applicability for) the prediction under conditions different from the conditions of the calibration data.
 
-In the following, the important terms of Eq.~(\ref{eq:bc_observation_simulation_true}) will be discussed in the context of the present application on the \gls[hyper=false]{trace} model before detailing each calibration scheme.
-Afterward, the \gls[hyper=false]{mcmc} sampler and simulation setting as well as a method to evaluate and compare different posterior prediction uncertainties are presented.
+In the following, the important terms of Eq.~(\ref{eq:bc_observation_simulation_true}) will be discussed in the context of the present application to the \gls[hyper=false]{trace} model before detailing each calibration scheme.
+Afterward, the \gls[hyper=false]{mcmc} sampler as well as a method to evaluate and compare different posterior prediction uncertainties are presented.
 
 %-------------------------------------------------------------------------------------------
 \subsubsection{Experimental Data and Observation Layout}\label{subsub:bc_observation_layout}
 %-------------------------------------------------------------------------------------------
 
 % Introductory Paragraph
-The experimental data of the \gls[hyper=false]{feba} test No. $216$ used in the present calibration is based on the report provided to the participants of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013}.
-The data in the report, in turn, is based on the digitization of experimental curves on the original report \cite{Ihle1984} and additional review on the associated experimental uncertainties.
-Therefore this were the data used by other participants of the benchmark.
+The experimental data of \gls[hyper=false]{feba} test No. $216$ used for the calibration was extracted from the experimental report \cite{Ihle1984} report which was provided to the participants of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013}.
 
 % Clad Temperature
-The experimental data provided for the clad temperature ($TC$) of the \gls[hyper=false]{feba} test No. $216$ consists of $33$ time points for each of the $8$ different axial locations of the thermocouples along the test section.
+The experimental data provided for the clad temperature ($TC$) of \gls[hyper=false]{feba} test No. $216$ consists of $33$ time points for each of the $8$ different axial locations of the thermocouples along the test section.
 \marginpar{Clad temperature ($TC$) data}
 Recall that by convention in the experiment, $TC1$ corresponds to the thermocouple measurement at the top of the test section ($\approx 4.1\,[m]$), while $TC8$ corresponds to the measurement at the bottom of the section ($\approx 0.3\,[m]$).
 
-Due to the strong discontinuity of the clad temperature around the point of quenching, the model bias term cannot be modeled using stationary \gls[hyper=false]{gp} (see Section~\ref{subsub:bc_model_bias}) as it severely violates to the constant variance assumption as function of time and axial location (at the very least, before and after the quenching occurs).
-To keep the simplicity from using the stationary \gls[hyper=false]{gp} formulation, the model bias term is modeled only for the part of transient before quenching occurs.
-Thus the calibration is also conducted using the data prior to quenching.
-This is further justified by the fact that after quenching there is much less relevant variation in the temperature transient.
+Due to the strong discontinuity of the clad temperature around the point of quenching, the model bias term cannot be modeled using stationary \gls[hyper=false]{gp} (see Section~\ref{subsub:bc_model_bias}) as it severely violates the constant variance assumption as function of time and axial location (at the very least, before and after the quenching occurs).
+To keep using a simple stationary \gls[hyper=false]{gp} formulation, the model bias term is modeled only for the part of the transient before the quenching occurs.
+Thus, the calibration is also conducted using only the data prior to quenching.
+This is further justified by the fact that after quenching there is almost no relevant variation in the temperature transient.
 
 Because of the different timing of quenching along the test section, the number of data points available for calibration changes per axial location.
 Based on these data points, an observation layout for $TC$ data can be defined,
@@ -63,65 +62,65 @@ Based on these data points, an observation layout for $TC$ data can be defined,
 	\end{split}
 \label{eq:bc_observation_layout_feba_tc}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
+where $z$ denotes the axial location and $t$ denotes the time point.
 The total number of data points associated with $TC$ output is $133$.
 
 % Clad Temperature uncertainty
 The reported experimental uncertainty associated with the clad temperature measurement is $\pm0.5\%$ of the measured value in $[^oC]$.
-In this thesis, this statement of uncertainty is translated to a Gaussian probability distribution such that the uncertainty covers the $99.7\%$ probability (i.e., $3$ sigma levels).
-Let $\mathbf{y}_{E,TC}$ is the vector of $TC$ data observed at $\boldsymbol{\Lambda}_{TC}$, then the experimental uncertainty is given as,
+In this thesis, this statement of uncertainty is translated to a Gaussian probability distribution such that the uncertainty covers the $99.7\%$ probability (i.e., $3$-$\sigma$ level).
+Let $\mathbf{y}_{E,TC}$ be the vector of $TC$ data observed at $\boldsymbol{\Lambda}_{TC}$, then the experimental uncertainty is given as,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{TC}) \thicksim \mathcal{N}(0, \Sigma_{TC})\\
-		& \Sigma_{E,TC} = (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T) (\mathbf{I} \frac{0.005}{3} \mathbf{y}_{E,TC}^T)
+		& \Sigma_{E,TC} = \text{diag}\left(\left(\frac{0.005}{3}\mathbf{y}_{E,TC}\right)^2\right)
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_tc}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $133$, the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
-The $133$-dimensional Gaussian distribution above is independent but not identically distributed as the variance change for each measurement point.
+The dimension of the multivariate Gaussian random variable above is $133$ the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+The random variable is independent but not identically distributed as the variance changes for each measurement point.
 
 % Pressure Drop
-The experimental data provided for the pressure drop ($DP$) of the \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
+The experimental data provided for the pressure drop ($DP$) of \gls[hyper=false]{feba} test No. $216$ consists of $18$ time points for each of the $4$ different axial segments of the pressure drop measurements.
 \marginpar{Pressure drop ($DP$) data}
 Recall that in the experiment, the \emph{bottom} segment corresponds to the segment $0.0 - 1.7\,[m]$, the \emph{middle} to $1.7 - 2.3\,[m]$, the \emph{top} to $z = 2.3 - 4.1\,[m]$, and the \emph{total} to $0.0 - 4.1\,[m]$.
-In the following, the bottom, the middle, the top, and the total segments are simply indices of the $DP$ output; $z_1$, $z_2$, $z_3$, $z_4$, respectively.
+In the following, the bottom, middle, top, and total segments are simply indices of the $DP$ output; $z_1$, $z_2$, $z_3$, $z_4$, respectively.
 The observation layout for the $DP$ data is then defined as follow,
 \begin{equation}
 		\boldsymbol{\Lambda}_{DP} = \{(z_1,t_1),\ldots,(z_1,t_{18}),(z_2,t_1),\ldots,(z_4,t_{18})\}
 \label{eq:bc_observation_layout_feba_dp}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
-
+where $z$ denotes axial segment and $t$ denotes the time point.
+The total length of the observation layout $\boldsymbol{\Lambda}_{DP}$ is $72$.
+ 
 % Pressure drop uncertainty
 The reported experimental uncertainty associated with the pressure drop measurement is $\pm10\%$ of the measured value in $[Pa]$.
-As before, this statement of uncertainty is translated to a Gaussian probability distribution covering the $99.7\%$ probability (i.e., $3$ sigma levels).
+As before, this statement of uncertainty is translated to a Gaussian probability distribution covering the $99.7\%$ probability (i.e., $3$-$\sigma$ level).
 Let $\mathbf{y}_{E,DP}$ is the vector of $DP$ data observed at $\boldsymbol{\Lambda}_{DP}$, then the experimental uncertainty is given as a multivariate Gaussian,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{DP}) \thicksim \mathcal{N}(0, \Sigma_{DP})\\
-		& \Sigma_{E,DP} = (\mathbf{I} \frac{0.1}{3} \mathbf{y}{E,DP}^T) (\mathbf{I} \frac{0.1}{3} \mathbf{y}_{E,DP}^T)
+		& \Sigma_{E,DP} = \text{diag}\left(\left(\frac{0.1}{3}\mathbf{y}_{E,DP}\right)^2\right)
 	\end{split}	
 \label{eq:bc_experimental_uncertainty_feba_dp}
 \end{equation}
-where $\mathbf{I}$ is an identity matrix of size $72$, the length of the observation layout $\boldsymbol{\Lambda}_{DP}$.
+where the random variable is a $72$-dimensional multivariate Gaussian.
 
 % Liquid carryover
-Finally, the experimental data provided for the liquid carryover ($CO$) of the \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
+Finally, the experimental data provided for the liquid carryover ($CO$) of \gls[hyper=false]{feba} test No. $216$ initially consists of $16$ time points.
 \marginpar{Liquid carryover ($CO$) data}
 However, because the collecting tank was saturated at $10\,[kg]$ only the transient up to that mass is of interest.
 By excluding the data points where the tank has been saturated, only $7$ data points are available for the calibration.
-Based on these data points, the observation layout for the $CO$ data is defined as,
+Based on these data points $\mathbf{y}_{E,CO}$, the observation layout for the $CO$ data is defined as,
 \begin{equation}
 		\boldsymbol{\Lambda}_{CO}  = \{(t_1),\ldots,(t_{7})\}
 \label{eq:bc_observation_layout_feba_co}
 \end{equation}
-where $z$ denotes the axial location (or segment for the $DP$ data) and $t$ denotes time point.
-The observed data according to the observation layout is denoted $\mathbf{y}_{E,CO}$.
+where $t$ denotes the time point.
 
 % Liquid carryover uncertainty
-A large uncertainty was indicated for the liquid carryover measurement that possibly includes biased measurement as the measured mass in the collecting tank does not always correspond to the liquid carryover \cite{Sanz2017}.
+A large uncertainty was indicated for the liquid carryover measurement that possibly includes biased measurement as the measured mass in the collecting tank does not always correspond to the liquid carryover of the reflood transient \cite{Sanz2017}.
 The suggested level of uncertainty for the benchmark was $\pm0.5\,[kg]$.
-To cover the reported uncertainty and the possible bias, the reported level is assumed to be $1\sigma$ level of an independent identically distributed multivariate Gaussian,
+To cover the reported uncertainty and the possible bias, the reported level is assumed to be $1$-$\sigma$ level of an independent identically distributed multivariate Gaussian,
 \begin{equation}
 	\begin{split}
 		& \mathcal{E}(\boldsymbol{\Lambda}_{CO}) \thicksim \mathcal{N}(0, \mathbf{I} \sigma^2_{CO})\\
@@ -133,27 +132,18 @@ $\sigma_{E,CO}$ is the standard deviation of the distribution, taken to be $0.5\
 
 % Full observation layout
 Finally, the observation layout for each output (data) type can be combined into a single long vector of the full observation layout,
-\marginpar{Full observation layout}
-\begin{equation}
-	\begin{split}
-		\boldsymbol{\Lambda} & = \{(TC, z_1,t_1),\ldots,(TC,z_8,t_{27}),\\
-		                     & \quad\quad (DP,z_1,t_{1}),\ldots,(DP,z_4,t_{18}),\\
-												 & \quad\quad (CO,t_1),\ldots,(CO,t_7)\}\\
-	\end{split}
-\label{eq:bc_observation_layout_feba_full}
-\end{equation}
-That is, by convention here, $\boldsymbol{\Lambda} = \{\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{DP}, \boldsymbol{\Lambda}_{CO}\}$.
+$\boldsymbol{\Lambda} = \{\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{DP}, \boldsymbol{\Lambda}_{CO}\}$.
 The total number of data points of \gls[hyper=false]{feba} test No. $216$, and the length of the observation layout $\boldsymbol{\Lambda}$, used in the calibration is thus $212$.
 
-%--------------------------------------------------------------------------------------------
-\subsubsection{Gaussian Process Approximation for TRACE Simulation}\label{subsub:bc_gp_trace}
-%--------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------
+\subsubsection{Gaussian Process Approximation for TRACE Simulations}\label{subsub:bc_gp_trace}
+%---------------------------------------------------------------------------------------------
 
-Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
+Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate the \gls[hyper=false]{trace} predictions for each type of output ($TC$, $DP$, and $CO$).
 The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
 After being estimated, the hyper-parameters of the \gls[hyper=false]{gp} metamodel are kept constant in the application of the metamodel.
 
-Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ becomes a probabilistic model.
+Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ (contain both the controllable inputs $\bm{x}_c$ and the model parameters $\bm{x}_m$) becomes a probabilistic model.
 The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
 \begin{equation}
 	\begin{split}
@@ -165,11 +155,12 @@ The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{T
 	\end{split}
 \label{eq:p_variate_metamodel_tc}
 \end{equation}
-where the notations above follow the convention of Section~\ref{sub:gp_multivariate} and following the development in Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
+where the notations above follow the convention of Section~\ref{sub:gp_multivariate}.
+Following the developments in Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
 
 Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
-In relation with observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
-As such, the only difference from the previous development is that now the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
+However, in the observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
+As such, in this chapter for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
 The resulting dimension of the Gaussian distribution is thus $133$.
 
 The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\ref{eq:bc_observation_layout_feba_dp})) follows accordingly,
@@ -184,7 +175,7 @@ The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\re
 \label{eq:p_variate_metamodel_dp}
 \end{equation}
 where $Q_{DP}$, the number of retained principal components with respect to the $DP$ output, is taken to be $10$.
-The observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{DP},DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{DP},DP}$ such that they contain only the relevant points in time.
+As before, the observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{DP},DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{DP},DP}$ such that they contain only the observed points of the $DP$ outputs in time.
 
 Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (Eq.~(\ref{eq:bc_observation_layout_feba_co})) for a given input $\bm{x}_o$,
 \begin{equation}
@@ -197,8 +188,8 @@ Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (
 	\end{split}
 \label{eq:p_variate_metamodel_co}
 \end{equation}
-where $Q_{CO}$, the number of retained principal components with respect to the $CO$ output, is taken to be $5$.
-Lastly, similar to the two previous cases, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{CO},CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{CO},CO}$ such that they contain only the points in time coincide with the observed data.
+where $Q_{CO} = 5$ is the number of retained principal components with respect to the $CO$ output.
+Once more, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{CO},CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{CO},CO}$ such that they contain only the points in time coincide with the observed data.
 
 %-----------------------------------------------------------------------
 \subsubsection{Modeling the Model Bias Term}\label{subsub:bc_model_bias}
@@ -215,16 +206,17 @@ The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapt
   \item Assume the vectors $\left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right)$, $\left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right)$, and\\ $\left(\mathbf{y}_{E,CO} - \mathbf{\hat{y}}_{M,CO}\right)$ are realizations from stationary \glspl[hyper=false]{gp} on the observation layouts (i.e., as function time and space). Note as the observation layouts comprise discrete points in time and space, the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
     The power-exponential covariance function is selected for the covariance kernel and the hyper-parameters of the process (i.e., $\sigma^2$. $\bm{p}$, $\bm{\theta}$) are estimated using the \texttt{R} package \texttt{DiceKriging}. 
   \item The mean of the bias term is taken to be the difference between the data and the nominal prediction, while the covariance matrix of the bias term is taken to be covariance matrix constructed at the observation layout using the estimated hyper-parameters above.
+  The constructed covariance matrix takes into account correlations of the model bias in time and space.
   In the present analysis the estimated values of the hyper-parameters above in the previous step are kept constant.
 \end{enumerate}
 
 % What does the bias mean
 The above model bias term formulation is only partially Bayesian as it uses the data to make the initial estimation.
-But as argued in \cite{Bayarri2007} it is the pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
-Several additional assumptions are made to fully formulate the term.
+But as argued in \cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
+Several additional assumptions are made in this thesis to fully formulate the term.
 By varying the parameters related to the boundary conditions in the construction of the term implies that the residual uncertainty of the experiment is included in the model bias term.
-The residual uncertainty was not directly observed as there no replication of the same controllable inputs was conducted in the experiment. 
-The model bias formulation assumes the presence of the residual uncertainty and, in the present analysis, \gls[hyper=false]{trace} simulation is used as a substitute instead. 
+The residual uncertainty was not directly observed as no replication at the same controllable inputs was conducted in the experiment. 
+In the present analysis, \gls[hyper=false]{trace} simulation is used as a substitute instead. 
 
 By using the above mean for the bias term, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
 This is an indirect way of putting a strong prior preference for the \gls[hyper=false]{trace} nominal prediction such that the model parameters should not dramatically be shifted to correct the mismatch between the experimental data and the \gls[hyper=false]{trace} prediction.
@@ -232,8 +224,8 @@ In other words, it is a way to keep as much as possible the nominal \gls[hyper=f
 Ref. \cite{Bayarri2007} also recommends that the variance of the process is allowed to vary but as the calibration conducted here is based only on the data from a single \gls[hyper=false]{feba} test, it is decided that the variance is kept constant.
 In fact, this represents a pessimistic assumption in the sense that the data is not allowed to reduce the bias by altering the model parameters in line with assuming the mean before.
 
-All in all, the calibration using this proposed model bias term thus aims to update the prior uncertainties of the model parameters assuming that the nominal prediction is centered around the data while allowing the variance unchanged. 
-The interest is emphasized on the range of model parameters uncertainties consistent with this assumption.
+All in all, the calibration using this proposed model bias term thus aims to update the prior uncertainties of the model parameters assuming that the nominal prediction is centered around the data while keeping the variance unchanged. 
+The interest is then emphasized on using experimental data to obtain the uncertainties of the model parameters consistent with these assumptions.
 
 % TC Output
 Based on the above discussion, the model bias term for the $TC$ output is expressed as,
@@ -431,33 +423,31 @@ Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration sch
 %---------------------------------------------------------------------------------------
 
 % Introductory paragraph
-Different calibration schemes above result in several likelihood functions, each of which when combined with common prior \glspl[hyper=false]{pdf} of the model parameters, yield several posterior \glspl[hyper=false]{pdf} of the model parameters.
-These $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT}) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the respective assumed calibration scheme (or, the error model).
+Each calibration scheme above results in a likelihood function, which when combined with the prior \glspl[hyper=false]{pdf} of the model parameters, yield a posterior \glspl[hyper=false]{pdf}.
+The $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT} scheme) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the respective assumed calibration scheme.
 To characterize the posterior uncertainties of the model parameters, samples are directly generated from the respective posterior \gls[hyper=false]{pdf} by means of \gls[hyper=false]{mcmc} simulation.
-This study opts the use of an ensemble sampler as described in Section~\ref{sub:bc_mcmc_aies} to avoid having dealing with tuning of the simulation.
 
 % Parallel requirement
 Although the use of \gls[hyper=false]{gp} metamodel alleviates the burden of having to run \gls[hyper=false]{trace} directly, evaluating the likelihood function requires an inversion of the covariance matrix.
 The computational cost of matrix inversion is still not negligible, especially considering the expected number of evaluations. 
-Though the Algorithm~\ref{alg:aies} is straightforward to implement in any modern computing environment, it is not readily applicable for using multiple CPU \cite{Foreman-Mackey2013}.
-Therefore, a parallelized implementation of the algorithm would be beneficial in accelerating the \gls[hyper=false]{mcmc} simulations.
+Furthermore, although the \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} algorithm (Algorithm~\ref{alg:aies}) is straightforward to implement, it is not readily applicable for using multiple CPU \cite{Foreman-Mackey2013}.
 
 % EMCEE and RGW
-The parallelization of the \gls[hyper=false]{aies} sampler was originally developed and implemented in the python package \texttt{emcee} \cite{Foreman-Mackey2013}.
+A parallelization of the \gls[hyper=false]{aies} sampler was originally developed and implemented in the python package \texttt{emcee} \cite{Foreman-Mackey2013}.
 The main design philosophy of \texttt{emcee} (and its ported \texttt{R} package \texttt{rgw} \cite{Mantz2016} used in this thesis) is that of a \emph{portable} sampler.
 That is, the user simply has to code the posterior formulation (the likelihood and the prior) in the respective generic computing environment (\texttt{R} or python), without the need to put the probabilistic model within a new framework\footnote{Such as the approach adopted in the more established \texttt{WinBugs} \cite{Lunn2000}, \texttt{Jags} \cite{Plummer2003}, and \texttt{Stan} \cite{Carpenter2017a}. These samplers, however, has more extensive capabilities for conducting a Bayesian data analysis and tends to be faster as they port the user-specified probabilistic models to a lower level language (e.g., \texttt{C++}). Furthermore, being older, they have a larger and more diverse user base.}.
 
 % Settings used in the simulation
 In the present study, $2'000$ iterations are carried out for an ensemble of $1'000$ walkers.
 The initial state of the ensemble is a tight random scatter around the nominal model parameter values.
-The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization bias) and the required level statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
+The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization bias) and the required level of statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
 For the present study, they are assessed after-the-fact and the results is indeed found to be sufficient.
-Meanwhile, there is no clear cut rule for choosing the number of walkers $L$, except to go as large as computational resources allowed \cite{Foreman-Mackey2013}.
+Meanwhile, there is no clear cut rule for choosing the number of walkers $L$ \cite{Foreman-Mackey2013}.
 Larger number of walkers requires more computational cost per iteration but yields more independent samples per iteration.
-At the same time, larger number of walkers might cause more of the initial iterations to be discarded as more iterations are required to settle the ensemble in the typical region of the posterior distribution.
+At the same time, larger number of walkers might cause more of the initial calculations to be discarded as more calculations are required to settle the ensemble in the typical region of the posterior distribution.
 A thousand walkers were selected considering the available computational resources at the time of the analysis.
 
-Each \gls[hyper=false]{mcmc} simulation corresponding to different calibration schemes results in $2'000'000$ posterior samples of the model parameters.
+The \gls[hyper=false]{mcmc} simulation for each calibration schemes results in $2\times10^6$ posterior samples of the model parameters.
 These samples are then further post-processed to remove the initialization bias and to reduce the autocorrelation among successive iterations.
  
 %-------------------------------------------------------------------------------------
@@ -612,12 +602,3 @@ Furthermore, the $2.5$-th and $97.5$-th percentiles of the prior prediction dist
 Finally the experimental data is taken to be the observed value $y_\text{obs.}$ without considering the associated uncertainty following the original paper \cite{Baccou2014}.
 Once again, this lack of consideration is less of an issue for comparing between different uncertain prediction.
  
-% Analyzing convergence
-\clearpage
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=0.90\textwidth]{../figures/chapter5/figures/plotEnsTraceDiscAllCentered}
-		\captionof{figure}[Ensemble trace plots for each model parameter of calibration with model bias term.]{Ensemble trace plots for each model parameter of calibration with model bias term. Shown here is for the last $100$ iterations (out of $1'240$ post-burn-in iterations) and for $400$ walkers (out of $1'000$ walkers).}
-	\label{fig:ch5_plot_ens_trace_all_disc_centered}
-\end{sidewaysfigure}
-\clearpage
