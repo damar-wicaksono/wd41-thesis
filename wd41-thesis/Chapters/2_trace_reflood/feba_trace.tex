@@ -1,6 +1,15 @@
-\section{\glsentryshort{feba} Model in \glsentryshort{trace}}\label{sec:reflood_feba_trace}
+%*******************************************************************************
+\section[FEBA Model in TRACE]{FEBA Model in TRACE}\label{sec:reflood_feba_trace}
+%*******************************************************************************
 
-The \gls{feba} facility was modeled using the TH system code \gls{trace}.
+% Introductory paragraph
+The \gls[hyper=false]{feba} facility was modeled using the \gls[hyper=false]{th} system code \gls[hyper=false]{trace}.
+The \gls[hyper=false]{trace} code use was a prototypical version developed, with the support of \gls[hyper=false]{usnrc}, for propagation of uncertainties.
+The development was a branch from the reference code version \texttt{v5.0 Patch 3} \cite{USNRC2012}.
+The model was developed based on specifications provided within the context of the \gls[hyper=false]{premium} benchmark \cite{Skorek2013,Sanz2017},
+following whenever possible the modeling best-practices guidelines for the \gls[hyper=false]{trace} code \cite{USNRC2012a}.
+
+% TRACE components involved
 The model consists of a one-dimensional \textsc{VESSEL} component (to model the bundle test section),
 a \textsc{PIPE} component (upper plenum of the test section), 
 a \textsc{FILL} component (inlet flow and inlet temperature boundary conditions),
@@ -8,7 +17,8 @@ a \textsc{BREAK} component (outlet pressure boundary condition),
 two \textsc{HTSTR} components (heater rods simulator and non-powered test section housing),
 and a \textsc{POWER} components (imposed electrical boundary condition).
 
-The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315 \ [mm]$.
+% Nodalization
+The \textsc{VESSEL} component was nodalized into $28$ hydraulic nodes of varying sizes between $60$ and $315\,[mm]$.
 Both \textsc{HTSTR} components were also nodalized into the sample number of coarse axial conduction nodes.
 However, since a large axial temperature gradient is expected in a reflood transient,
 the fine-mesh reflood flag in \gls{trace} was enabled.
@@ -56,7 +66,3 @@ and the nodalization of the model is illustrated in Fig.~\ref{fig:feba_nodalizat
     \caption[\Glsentryshort{trace} nodalization of \glsentryshort{feba}]{Nodalization of FEBA experimental facility in \gls{trace}}
     \label{fig:feba_nodalization}
 \end{figure}
-
-\subsection{Base Case Simulation Results}
-
-\subsection{Prior Uncertainty Propagation}
