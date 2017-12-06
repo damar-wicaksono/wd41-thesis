@@ -3,34 +3,61 @@
 %******************************************************************************************
 
 % Introductory paragraph
-In this section, the selection of the initial set of input parameters of the \gls[hyper=false]{feba} simulation in \gls[hyper=false]{trace} is presented.
-Afterward, the initial (prior) uncertainties of these parameters are presented. 
-This part is closely related to the author's participation to the \gls[hyper=false]{premium} benchmark.
+This section presents the selection process of the initial set of uncertain input parameters of the \gls[hyper=false]{feba} simulation in \gls[hyper=false]{trace}.
+Afterward, the assignment of the initial (prior) uncertainties of these parameters are presented. 
+This part is closely related to the author's participation in the \gls[hyper=false]{premium} benchmark thus several reference are made to activities related to that benchmark.
 
 %---------------------------------------------------------------------------------
 \subsection{Selection of Input Parameters}\label{sub:reflood_parameters_selection}
 %---------------------------------------------------------------------------------
 
 % Introductory paragraph
-The selection process for the input parameters differs depending on the type of parameter.
-Each of the selected parameters can broadly fall in of the two following categories:
+The selection process for the uncertain input parameters to consider differs depending on the type of parameter.
+Each of the selected parameters can broadly fall in one of the two following categories:
 \begin{itemize}
 	\item Input parameters that are not specific to the \gls[hyper=false]{trace} code (e.g., initial and boundary conditions, material thermo-physical properties).
 		This category of parameters is often referred to as the \emph{controllable inputs} of the simulation.
-	\item Input parameters that are specific to \gls[hyper=false]{trace} code (e.g., implementation of the $2$-phase momentum and heat transfer package for reflood condition).
+	\item Input parameters that are specific to \gls[hyper=false]{trace} code (e.g., implementation of the two-phase momentum and heat transfer package for reflood condition).
 		This category is often referred to as the \emph{model parameters} of the simulation.
 \end{itemize}
 
 % Selection on the first category
 The selection of parameters belonging to the controllable inputs category simply corresponds to the parameters recommended by the benchmark organizers and employed by most participants \cite{Kovtonyuk2015}.
+The selected parameters are listed in Table~\ref{tab:trace_model_parameter_1}.
 
 % Selection on the second category
 On the other hand, the selection of the model parameters specific to the \gls[hyper=false]{trace} code is challenging due to the fact that \gls[hyper=false]{trace} is a relatively recent code (in comparison with the codes like RELAP5, ATHLET, or CATHARE).
-In essence, the code has been developed from different variants of the TRAC codes for different reactor types (TRAC-BF1, TRAC-P) to result in a single consolidated code applicable to both \gls[hyper=false]{pwr} and BWR\footnote{boiling water reactor}.
-Contributing to that difficulty is the fact that \gls[hyper=false]{trace} is currently undergoing significant developments and improvements, including modifications to the $2$-phase closure models for momentum and heat transfers.
+In essence, the code has been developed from different variants of the TRAC codes for different reactor types (TRAC-BF1, TRAC-P) to result in a single consolidated code applicable to both \gls[hyper=false]{pwr} and \gls[hyper=false]{bwr}.
+Contributing to that difficulty is the fact that \gls[hyper=false]{trace} is currently undergoing significant developments and improvements, including modifications to the two-phase closure models for momentum and heat transfers.
 Consequently, the task of selecting the model parameters and later their prior uncertainties is more difficult than for a more established codes.
 
 % Criteria for choosing the parameters
+To overcome this issue, the following principles have been followed to select the model parameters:
+\begin{enumerate}
+	\item The selection has been focused to the physical models in the post-\glsentryshort{chf} package of the \gls[hyper=false]{trace} code (including the reflood models).
+		Specifically, these are models for the \gls[hyper=false]{iafb} and \gls[hyper=false]{dffb} flow regimes \cite{USNRC2012}.
+	\item Spacer grid model are also included as they are known to have a significant impact on reflooding \cite{Miller2013}.
+	\item A parameter related to the minimum film boiling temperature should be selected, since it has (by model construction) an impact on the time of quenching.
+\end{enumerate}
+
+Additionally, a common principle, the selected models (and parameters) are to be perturbed by means of perturbation factors (detail below) at the highest-possible level of the structure of these models as coded.
+The level allows, to some extent, for reference uncertainty information obtained from codes other than \gls[hyper=false]{trace} to be used.
+Note that, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed.
+
+% Resulting List of Model Parameters 1
+In accordance to the first selection principle above, a set of $10$ high-level parameters has been selected ($5$ for each flow regime).
+Specifically, for each flow regime: the wall-fluid \gls[hyper=false]{htc}, the liquid-interface \gls[hyper=false]{htc}, the vapor-interface \gls[hyper=false]{htc}, the wall-fluid drag coefficient, and the interfacial drag coefficient.
+
+% Resulting List of Model Parameters 2
+Following the second principle, two additional parameters have been selected.
+Namely, the spacer grid pressure loss coefficient model from Yao, Loftus, and Hochreiter as well as the grid convective \gls[hyper=false]{ht} enhancement model from Yao, Hochreiter, and Leech (see \cite{USNRC2012} pp. $425$--$429$ and \cite{Yao1982}).
+These perturbation on the parameters are applied to all seven spacer grids at once.
+
+% Resulting List of Model Parameters 3
+Lastly, from the third principle, the quench temperature parameter in \gls[hyper=false]{trace} (see \cite{USNRC2012} pp. $293$--$299$) has been selected to the list of uncertain input parameters.
+
+The complete list of the model parameters considered in the present study is given in Table~\ref{tab:trace_model_parameter_2}.
+The total number of initial uncertain parameters considered is thus $27$.
 
 %-----------------------------------------------------------------------------------
 \subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
