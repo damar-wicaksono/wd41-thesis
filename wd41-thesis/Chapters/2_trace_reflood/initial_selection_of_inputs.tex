@@ -1,4 +1,42 @@
-\section{Initial Selection of Input Parameters and Prior Uncertainty Propagation}\label{sec:reflood_initial_selection}
+%******************************************************************************************
+\section{Initial Selection of Input Parameters}\label{sec:reflood_initial_inputs_selection}
+%******************************************************************************************
+
+% Introductory paragraph
+In this section, the selection of the initial set of input parameters of the \gls[hyper=false]{feba} simulation in \gls[hyper=false]{trace} is presented.
+Afterward, the initial (prior) uncertainties of these parameters are presented. 
+This part is closely related to the author's participation to the \gls[hyper=false]{premium} benchmark.
+
+%---------------------------------------------------------------------------------
+\subsection{Selection of Input Parameters}\label{sub:reflood_parameters_selection}
+%---------------------------------------------------------------------------------
+
+% Introductory paragraph
+The selection process for the input parameters differs depending on the type of parameter.
+Each of the selected parameters can broadly fall in of the two following categories:
+\begin{itemize}
+	\item Input parameters that are not specific to the \gls[hyper=false]{trace} code (e.g., initial and boundary conditions, material thermo-physical properties).
+		This category of parameters is often referred to as the \emph{controllable inputs} of the simulation.
+	\item Input parameters that are specific to \gls[hyper=false]{trace} code (e.g., implementation of the $2$-phase momentum and heat transfer package for reflood condition).
+		This category is often referred to as the \emph{model parameters} of the simulation.
+\end{itemize}
+
+% Selection on the first category
+The selection of parameters belonging to the controllable inputs category simply corresponds to the parameters recommended by the benchmark organizers and employed by most participants \cite{Kovtonyuk2015}.
+
+% Selection on the second category
+On the other hand, the selection of the model parameters specific to the \gls[hyper=false]{trace} code is challenging due to the fact that \gls[hyper=false]{trace} is a relatively recent code (in comparison with the codes like RELAP5, ATHLET, or CATHARE).
+In essence, the code has been developed from different variants of the TRAC codes for different reactor types (TRAC-BF1, TRAC-P) to result in a single consolidated code applicable to both \gls[hyper=false]{pwr} and BWR\footnote{boiling water reactor}.
+Contributing to that difficulty is the fact that \gls[hyper=false]{trace} is currently undergoing significant developments and improvements, including modifications to the $2$-phase closure models for momentum and heat transfers.
+Consequently, the task of selecting the model parameters and later their prior uncertainties is more difficult than for a more established codes.
+
+% Criteria for choosing the parameters
+
+%-----------------------------------------------------------------------------------
+\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
+%-----------------------------------------------------------------------------------
+
+% Opening paragraph
 
 The nominal values of selected model parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by their respective perturbation factors.
 These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf}, 
