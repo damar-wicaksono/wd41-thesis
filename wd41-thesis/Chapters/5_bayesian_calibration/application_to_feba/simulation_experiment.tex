@@ -139,11 +139,11 @@ The total number of data points of \gls[hyper=false]{feba} test No. $216$, and t
 \subsubsection{Gaussian Process Approximation for TRACE Simulations}\label{subsub:bc_gp_trace}
 %---------------------------------------------------------------------------------------------
 
-Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate \gls[hyper=false]{trace} prediction for each type of output ($TC$, $DP$, and $CO$).
+Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivariate \gls[hyper=false]{gp} metamodels are used to approximate the \gls[hyper=false]{trace} predictions for each type of output ($TC$, $DP$, and $CO$).
 The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
 After being estimated, the hyper-parameters of the \gls[hyper=false]{gp} metamodel are kept constant in the application of the metamodel.
 
-Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ becomes a probabilistic model.
+Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ (contain both the controllable inputs $\bm{x}_c$ and the model parameters $\bm{x}_m$) becomes a probabilistic model.
 The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
 \begin{equation}
 	\begin{split}
@@ -155,11 +155,12 @@ The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{T
 	\end{split}
 \label{eq:p_variate_metamodel_tc}
 \end{equation}
-where the notations above follow the convention of Section~\ref{sub:gp_multivariate} and following the development in Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
+where the notations above follow the convention of Section~\ref{sub:gp_multivariate}.
+Following the developments in Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
 
 Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
-In relation with observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
-As such, the only difference from the previous development is that now the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
+However, in the observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
+As such, in this chapter for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
 The resulting dimension of the Gaussian distribution is thus $133$.
 
 The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\ref{eq:bc_observation_layout_feba_dp})) follows accordingly,
@@ -174,7 +175,7 @@ The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\re
 \label{eq:p_variate_metamodel_dp}
 \end{equation}
 where $Q_{DP}$, the number of retained principal components with respect to the $DP$ output, is taken to be $10$.
-The observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{DP},DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{DP},DP}$ such that they contain only the relevant points in time.
+As before, the observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{DP},DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{DP},DP}$ such that they contain only the observed points of the $DP$ outputs in time.
 
 Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (Eq.~(\ref{eq:bc_observation_layout_feba_co})) for a given input $\bm{x}_o$,
 \begin{equation}
@@ -187,8 +188,8 @@ Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (
 	\end{split}
 \label{eq:p_variate_metamodel_co}
 \end{equation}
-where $Q_{CO}$, the number of retained principal components with respect to the $CO$ output, is taken to be $5$.
-Lastly, similar to the two previous cases, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{CO},CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{CO},CO}$ such that they contain only the points in time coincide with the observed data.
+where $Q_{CO} = 5$ is the number of retained principal components with respect to the $CO$ output.
+Once more, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{CO},CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{CO},CO}$ such that they contain only the points in time coincide with the observed data.
 
 %-----------------------------------------------------------------------
 \subsubsection{Modeling the Model Bias Term}\label{subsub:bc_model_bias}
