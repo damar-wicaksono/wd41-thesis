@@ -58,53 +58,6 @@ Lastly, from the third principle, the quench temperature parameter in \gls[hyper
 Fourteen parameters are selected belonging to this category and summarized in Table~\ref{tab:trace_model_parameter_2}.
 The total number of initial uncertain parameters considered is thus $27$.
 
-%----------------------------------------------------------------------------------
-\subsection{Perturbation Factors}\label{sub:reflood_parameters_perturbation_factor}
-%----------------------------------------------------------------------------------
-
-% Opening paragraph
-The nominal values of selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
-These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of model parameters values can be generated.
-In the case of model parameters, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed of which the uncertainties are to be quantified a posteriori based on experimental data.
-
-% Mode of perturbations
-For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
-In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
-In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
-Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
-The mode of perturbations for each selected input parameter are listed in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
-
-% trace-simexp
-A tool is developed in the Python programming language to assist in automatically pre-process, execute, and post-process numerous \gls[hyper=false]{trace} simulations of \gls[hyper=false]{feba} experiment based on a set of sampled input parameters values.
-The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
-
-%-----------------------------------------------------------------------------------
-\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
-%-----------------------------------------------------------------------------------
-
-% Opening Paragraph
-The uncertainties associated with the controllable inputs were taken directly from the recommended value from the \gls[hyper=false]{premium} benchmark and the list can be found in Table~\ref{tab:trace_model_parameter_1}.
-As for the model parameters, a first determination of the uncertainty ranges has been made following an internal selection process primarily based on the use of information in available literature on uncertainties in physical models for \gls[hyper=false]{lbloca}.
-
-% Main Source of Information
-The main sources of information consisted of Ref.\cite{Wickett1991} and Ref.~\cite{Glaeser2008a} which included uncertainty information for the closure models of system codes TRAC-PF1/MOD1 and ATHLET-Mod2.1 (Cycle B), respectively. 
-Furthermore, prior experience and knowledge of the closure model uncertainties of the CATHARE2 code (\texttt{V1.3L\_1}, Rev.5) has been used \cite{Zerkak2016,IPSN2001}.
-Ref.~\cite{IPSN2001} accounts an analysis by IPSN\footnote{Institut de protection et de s\^{u}ret\'e nucl\'eaire (IPSN)} of the uncertainty quantification method ``M\'ethode D\'eterministe R\'ealiste'' for the \gls[hyper=false]{pwr} \gls[hyper=false]{lbloca} which was proposed by EDF\footnote{Electricit\'e de France} and was evaluated in $2000$.
-The high-level implementation of the perturbation factors for the uncertainty analysis in the post-\gls[hyper=false]{chf} closure models, allowed information from different codes to be extracted for the initial estimate.
-This approach was deemed adequate in the limited context of the determination of the prior \glspl[hyper=false]{pdf}.
-
-% Uniform and Log-Uniform
-To simplify the quantification of the prior uncertainties further, and for the multiplication factor, the \glspl[hyper=false]{pdf} were assumed to follow a symmetric bounded uniform and log-uniform distributions with the nominal parameter value as the median value.
-For the log-uniform distribution the form $[2^{-n}, 2^{n}]$ was assumed, where $n$ an integer.
-All \glspl[hyper=false]{pdf} of model parameters that were a priori deemed to be important were of log-uniform distribution.
-
-The ranges of the parameters (i.e., their minimum and maximum), were determined so as to cover the information available for a similarly (or judged to be related) parameter in Refs.~\cite{Wickett1991,Glaeser2008a}.
-Though this at times resulted in the selection of a large bound, they were deemed acceptable following a verification study against the nominal predictions.
-The verification, at that point, heavily relied on engineering judgment via visual inspection of the width of the predictions uncertainty bands to decide if the width due to the assumed parameter uncertainties were indeed reasonable\footnote{The loosely defined notion of ``reasonable'' in this case is similar to the notion of ``'behavioral vs. non-behavioral'' prediction in hydrology modeling \cite{Beven2009}.}.
-
-%
-Table~\ref{tab:trace_model_parameter_1} lists the results of the prior uncertainty quantification of the selected model parameters.
-
 % Table Input Parameters
 \begin{sidewaystable}
 
@@ -168,3 +121,51 @@ No. & Parameter 							& Description & Distribution & \text{Range of}  & \text{N
 
 \end{tabularx}
 \end{sidewaystable}
+
+%----------------------------------------------------------------------------------
+\subsection{Perturbation Factors}\label{sub:reflood_parameters_perturbation_factor}
+%----------------------------------------------------------------------------------
+
+% Opening paragraph
+The nominal values of selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of model parameters values can be generated.
+In the case of model parameters, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed of which the uncertainties are to be quantified a posteriori based on experimental data.
+
+% Mode of perturbations
+For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
+In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
+In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
+Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
+The mode of perturbations for each selected input parameter are listed in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
+
+% trace-simexp
+A tool is developed in the Python programming language to assist in automatically pre-process, execute, and post-process numerous \gls[hyper=false]{trace} simulations of \gls[hyper=false]{feba} experiment based on a set of sampled input parameters values.
+The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
+
+%-----------------------------------------------------------------------------------
+\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
+%-----------------------------------------------------------------------------------
+
+% Opening Paragraph
+The uncertainties associated with the controllable inputs were taken directly from the recommended value from the \gls[hyper=false]{premium} benchmark and the list can be found in Table~\ref{tab:trace_model_parameter_1}.
+As for the model parameters, a first determination of the uncertainty ranges has been made following an internal selection process primarily based on the use of information in available literature on uncertainties in physical models for \gls[hyper=false]{lbloca}.
+
+% Main Source of Information
+The main sources of information consisted of Ref.\cite{Wickett1991} and Ref.~\cite{Glaeser2008a} which included uncertainty information for the closure models of system codes TRAC-PF1/MOD1 and ATHLET-Mod2.1 (Cycle B), respectively. 
+Furthermore, prior experience and knowledge of the closure model uncertainties of the CATHARE2 code (\texttt{V1.3L\_1}, Rev.5) has been used \cite{Zerkak2016,IPSN2001}.
+Ref.~\cite{IPSN2001} accounts an analysis by IPSN\footnote{Institut de protection et de s\^{u}ret\'e nucl\'eaire (IPSN)} of the uncertainty quantification method ``M\'ethode D\'eterministe R\'ealiste'' for the \gls[hyper=false]{pwr} \gls[hyper=false]{lbloca} which was proposed by EDF\footnote{Electricit\'e de France} and was evaluated in $2000$.
+The high-level implementation of the perturbation factors for the uncertainty analysis in the post-\gls[hyper=false]{chf} closure models, allowed information from different codes to be extracted for the initial estimate.
+This approach was deemed adequate in the limited context of the determination of the prior \glspl[hyper=false]{pdf}.
+
+% Uniform and Log-Uniform
+To simplify the quantification of the prior uncertainties further, and for the multiplication factor, the \glspl[hyper=false]{pdf} were assumed to follow a symmetric bounded uniform and log-uniform distributions with the nominal parameter value as the median value.
+For the log-uniform distribution the form $[2^{-n}, 2^{n}]$ was assumed, where $n$ an integer.
+All \glspl[hyper=false]{pdf} of model parameters that were a priori deemed to be important were of log-uniform distribution.
+
+The ranges of the parameters (i.e., their minimum and maximum), were determined so as to cover the information available for a similarly (or judged to be related) parameter in Refs.~\cite{Wickett1991,Glaeser2008a}.
+Though this at times resulted in the selection of a large bound, they were deemed acceptable following a verification study against the nominal predictions.
+The verification heavily relied on engineering judgment via visual inspection of the width of the predictions uncertainty bands to decide if the width due to the assumed parameter uncertainties were indeed reasonable\footnote{The loosely defined notion of ``reasonable'' in this case is similar to the notion of ``'behavioral vs. non-behavioral'' prediction in hydrology modeling \cite{Beven2009}.}.
+At that point, the approach was admitedly imprecise, but it was intentional in the general context of determining the prior range, especially to avoid mistakenly underestimating the uncertainties associated with influential model parameters. 
+
+%
+Table~\ref{tab:trace_model_parameter_1} lists the results of the prior uncertainty quantification of the selected model parameters.
