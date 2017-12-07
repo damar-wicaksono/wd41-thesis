@@ -72,6 +72,7 @@ For a given sampled perturbation factor, one of three modes of perturbation is p
 In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
 In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
 Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
+The mode of perturbations for each selected input parameter are listed in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
 
 % trace-simexp
 A tool is developed in the Python programming language to assist in automatically pre-process, execute, and post-process numerous \gls[hyper=false]{trace} simulations of \gls[hyper=false]{feba} experiment based on a set of sampled input parameters values.
@@ -90,45 +91,42 @@ As show in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_mode
 	\item \gls[hyper=false]{th} boundary conditions
   \item material properties
 \end{enumerate}
+
+% Table Input Parameters
 \begin{sidewaystable}
 
-\caption{Selected \glsentryshort{trace} model parameter perturbation factors and their range of variations, continued in Table~\ref{tab:trace_model_parameter_2}}
+\caption{Selected \gls[hyper=false]{trace} input parameters (controllable inputs), their perturbation factors and their range of variations.}
 \label{tab:trace_model_parameter_1}
-
 \centering
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 %\begin{tabularx}{\textwidth}{@{}c|>{$}c<{$}|>{$}c<{$}|Y|Y|Y|Y|Y@{}}
 \begin{tabularx}{0.985\textwidth}{@{}cccc>{$}c<{$}>{$}c<{$}c@{}}
 \toprule
-\tableheadline{No.} & \tableheadline{Parameter} & \tableheadline{Description} & \tableheadline{Distribution} & \tableheadline{Range of}  & \tableheadline{Nominal} & \tableheadline{Mode of} \\
-                    & \tableheadline{ID}        &                             &                              & \tableheadline{Variation} & \tableheadline{Value}   & \tableheadline{Perturbation} \\
+No.	& Parameter 				& Description 										& Distribution & \text{Range of}  & \text{Nominal} & Mode of \\
+		& ID        				&                             		&              & \text{Variation} & \text{Value}   & Perturbation \\
 \midrule
-1  & \texttt{break\_ptb}  	& Outlet pressure 								& Uniform 		& [0.90, 1.10]   & 1.0 					& Multiplicative \\ 
-2  & \texttt{fill\_tltb}  	& Inlet water temperature $[K]$ 	& Uniform 		& [-5.00, +5.00] & 0.0 \, [K] 	& Additive \\ 
-3  & \texttt{fill\_vmtbm}	 	& Inlet water velocity          	& Uniform 		& [0.90, 1.10]   & 1.0 					& Multiplicative \\ 
-4  & \texttt{pwr\_rpwtbr} 	& Heater rod power             	 	& Uniform 		& [0.90, 1.05]   & 1.0 					& Multiplicative \\ 
+1  	& \texttt{breakP} 	& Outlet pressure 								& Uniform 	& [0.90, 1.10]   	& 1.0 			& Multiplicative \\ 
+2  	& \texttt{fillT} 		& Inlet water temperature 				& Uniform 	& [-5.00, +5.00] 	& 0.0\,[K] 	& Additive \\ 
+3  	& \texttt{fillV}		& Inlet water velocity          	& Uniform 	& [0.90, 1.10]   	& 1.0 			& Multiplicative \\ 
+4  	& \texttt{pwr} 			& Heater rod power             	 	& Uniform 	& [0.90, 1.05]   	& 1.0 			& Multiplicative \\ 
 \midrule
-5  & \texttt{nic\_cond} 		& Conductivity (Nichrome) 						& Uniform & [0.95, 1.05] & 1.0 	& Multiplicative \\ 
-6  & \texttt{nic\_cp} 			& Specific heat (Nichrome)	 					& Uniform & [0.95, 1.05] & 1.0 	& Multiplicative \\ 
-7  & \texttt{nic\_emis} 		& Emissivity (Nichrome) 							& Uniform & [0.90, 1.00] & 0.95	& Substitutive \\ 
-8  & \texttt{mgo\_cond} 		& Conductivity (MgO)									& Uniform & [0.80, 1.20] & 1.0 	& Multiplicative \\
-9  & \texttt{mgo\_cp} 			& Specific heat (cp) 									& Uniform & [0.80, 1.20] & 1.0 	& Multiplicative \\ 
-10 & \texttt{vessel\_epsw} 	& Wall roughness $[m]$					  		& Uniform & [6.10\times 10^{-7}, 2.44\times 10^{-6}] & 1.5 \times 10^{-6} \, [m] & Multiplicative \\ 
-11 & \texttt{ss\_cond} 			& Conductivity (stainless steel)			& Uniform & [0.95, 1.05] & 1.0 	& Multiplicative \\ 
-12 & \texttt{ss\_cp} 				& Specific heat (stainless steel)			& Uniform	& [0.95, 1.05] & 1.0 	& Multiplicative \\ 
-13 & \texttt{ss\_emis} 			& Emissivity (stainless steel)				& Uniform & [0.56, 0.94] & 0.84 & Substitutive \\ 
-\midrule
-14 	& \texttt{kGridSV} 			& Spacer grid $\Delta p$ coefficient							& Uniform 		& [0.25, 1.75] & 1.0 & Multiplicative \\ 
-15  & \texttt{gridHTEnh} 		& Spacer grid \gls[hyper=false]{htc} enhancement	& Log-Uniform & [0.90, 1.10] & 1.0 & Multiplicative \\ 
+5  	& \texttt{nicK} 		& Conductivity (Nichrome) 				& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+6  	& \texttt{nicCP} 		& Specific heat (Nichrome)				& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+7  	& \texttt{nicEM} 		& Emissivity (Nichrome) 					& Uniform 	& [0.90, 1.00] 		& 0.95			& Substitutive \\ 
+8  	& \texttt{mgoK} 		& Conductivity (MgO)							& Uniform 	& [0.80, 1.20] 		& 1.0 			& Multiplicative \\
+9  	& \texttt{mgoCP}		& Specific heat (MgO) 						& Uniform 	& [0.80, 1.20] 		& 1.0 			& Multiplicative \\ 
+10 	& \texttt{vesEps}		& Wall roughness 									& Uniform 	& [6.10\times 10^{-7}, 2.44\times 10^{-6}] & 1.5 \times 10^{-6} \, [m] & Substitutive \\ 
+11 	& \texttt{ssK} 			& Conductivity (stainless steel)	& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+12 	& \texttt{ssCP} 		& Specific heat (stainless steel)	& Uniform		& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+13 	& \texttt{ssEM} 		& Emissivity (stainless steel)		& Uniform 	& [0.56, 0.94] 		& 0.84 			& Substitutive \\ 
 \bottomrule
-
 \end{tabularx}
 \end{sidewaystable}
 
 
 \begin{sidewaystable}
 
-\caption{Selected \glsentryshort{trace} model parameter perturbation factors and their range of variations, continued from Table~\ref{tab:trace_model_parameter_1}}
+\caption{Selected \gls[hyper=false]{trace} input parameters (model parameters), their perturbation factors and their range of variations}
 \label{tab:trace_model_parameter_2}
 
 \centering
@@ -139,6 +137,8 @@ As show in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_mode
 \tableheadline{No.} & \tableheadline{Parameter} & \tableheadline{Description} & \tableheadline{Distribution} & \tableheadline{Range of}  & \tableheadline{Nominal} & \tableheadline{Mode of} \\
                     & \tableheadline{ID}        &                             &                              & \tableheadline{Variation} & \tableheadline{Value}   & \tableheadline{Perturbation} \\
 \midrule
+14 	& \texttt{kGridSV} 			& Spacer grid $\Delta p$ coefficient							& Uniform 		& [0.25, 1.75] & 1.0 & Multiplicative \\ 
+15  & \texttt{gridHTEnh} 		& Spacer grid \gls[hyper=false]{htc} enhancement	& Log-Uniform & [0.90, 1.10] & 1.0 & Multiplicative \\ 
 16  & \texttt{iafbWallHTC}  	& Wall \gls[hyper=false]{htc} (\glsentryshort{iafb})							& Log-Uniform 		& [0.50, 2.00]   	& 1.0 				& Multiplicative \\ 
 17  & \texttt{dffbWallHTC}  	& Wall \gls[hyper=false]{htc} (\glsentryshort{dffb})  						& Log-Uniform 		& [0.50, 2.00] 	  & 0.0 				& Multiplicative \\ 
 18  & \texttt{iafbLIHTC}	 		& Liquid-interface \gls[hyper=false]{htc} (\glsentryshort{iafb})  & Log-Uniform 		& [0.25, 4.00]   	& 1.0 				& Multiplicative \\ 
