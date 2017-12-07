@@ -7,13 +7,16 @@
 # date      : Nov. 2017
 #
 # Read data -------------------------------------------------------------------
+n_sub <- 5
 trc_uq_df <- readRDS(rds_tidy_fullname)[[1]]
+n_t <- dim(trc_uq_df)[1]
+trc_uq_df <- readRDS(rds_tidy_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_exp_df <- readRDS(rds_tidy_fullname)[[2]]
 
 # Make the plot ---------------------------------------------------------------
 p <- ggplot(data = trc_uq_df, aes(x = time, y = nom_run))
 p <- p + geom_ribbon(aes(x = time, ymin = lb_run, ymax = ub_run),
-                     fill = "gray", alpha = alpha)
+                     fill = "#4D4D4D", alpha = alpha)
 p <- p + geom_line()
 p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
                     shape = 4, stroke = 1.1)
