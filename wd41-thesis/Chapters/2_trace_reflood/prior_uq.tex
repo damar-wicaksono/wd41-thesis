@@ -3,8 +3,11 @@
 %***************************************************************************
 
 % Opening paragraph
-The \emph{prior uncertainty propagation} step consists generating independent samples of values for each of the $27$ selected input parameters from their prior \glspl[hyper=false]{pdf} (Tables~\ref{tab:trace_model_parameter_1}-\ref{tab:trace_model_parameter_2}).
+The quantified prior uncertainties of the input parameters are propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess (and verify) the prior level of prediction uncertainties before experimental data is used to update the prior uncertainties of the model parameters.
+The prior uncertainty propagation step consists generating independent samples of values for each of the $27$ selected input parameters from their prior \glspl[hyper=false]{pdf} (Tables~\ref{tab:trace_model_parameter_1}-\ref{tab:trace_model_parameter_2}).
 and running the \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model using the sampled parameters values.
+
+% Explaining the figure
 Figs.~\ref{fig:ch2_plot_base_case_216_tc}, \ref{fig:ch2_plot_base_case_216_dp}, and~\ref{fig:ch2_plot_base_case_216_co} show the nominal \gls[hyper=false]{trace} predictions (i.e., the prediction with the nominal values of the input parameters, shown in the figure as thick lines) in comparison with the experimental data (shown as crosses) for \gls[hyper=false]{feba} test No. $216$, for three selected outputs of different types:
 the cladding temperature $TC$ at the mid-height assembly, the pressure drop $DP$ of the middle axial segment, and the liquid carryover $CO$ (up to the saturation of the collecting tank at $10\,[kg]$), respectively.
 \bigtriplefigure[pos=tbhp,
@@ -30,7 +33,7 @@ the cladding temperature $TC$ at the mid-height assembly, the pressure drop $DP$
 The comparison between the nominal \gls[hyper=false]{trace} predictions and the corresponding experimental data for the clad temperature and the pressure drop are satisfactory as no major discrepancy is observed.
 Furthermore, with respect to those outputs, \gls[hyper=false]{trace} seems to capture all the important features of the transient in \gls[hyper=false]{feba} test No. $216$.
 That is, \gls[hyper=false]{trace} predicts well the behavior of the reflood curve during the transient; while for the $DP$ output \gls[hyper=false]{trace} predicts well the behavior of channel flooding.
-Note that in Fig.~\ref{fig:ch2_plot_base_case_216_dp} the transient between the two equilibrium indicates the flooding of the channel between axial level $1.7$ and $2.3\,[m]$ from initially pure steam (low pressure drop) to mixture (rising) and to eventually pure liquid (higher pressure drop). 
+Note that in Fig.~\ref{fig:ch2_plot_base_case_216_dp} the transient between the two equilibrium values indicates the flooding of the channel between axial level $1.7$ and $2.3\,[m]$ from initially pure steam (low pressure drop) to mixture (rising) and to eventually pure liquid (higher pressure drop). 
 Note also that Fig.~\ref{fig:ch2_plot_base_case_216_tc} is the prediction at axial level $1.9\,[m]$, a level within the axial segments of the pressure drop.
 On the other hand, there is strong apparent bias (over-prediction) of the \gls[hyper=false]{trace} predictions in the comparison with respect to the liquid carryover.
 
@@ -64,7 +67,7 @@ Although the time of quenching at all axial levels are well predicted, the $TC$ 
 % FEBA Test No. 216 Prior Uncertainty Propagation, DP
 Fig.~\ref{fig:ch2_plot_trace_uq_prior_dp_216} shows the uncertainty propagation results for the pressure drop $DP$ output at all $4$ axial segments.
 The plots in the figure shows the same pointwise symmetric $95\%$ probability of the prediction uncertainty as before.
-As observed, there is no major discrepancy between the \gls[hyper=false]{trace} predictions and the experimental data and the prediction uncertainty bands cover the experimental data especially during the transient (i.e., the ramp between two equilibrium) well.
+As observed, there is no major discrepancy between the \gls[hyper=false]{trace} predictions and the experimental data and the prediction uncertainty bands cover the experimental data especially during the transient (i.e., the ramp between two equilibrium values) well.
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1.0\textwidth]{../figures/chapter2/figures/plotTraceUQPriorDP216}
