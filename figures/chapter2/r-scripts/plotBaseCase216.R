@@ -96,7 +96,7 @@ points(trc_run_df$exp_data[[2]][,1], trc_run_df$exp_data[[2]][,3],
 
 # x-axis
 axis(side = 1, lwd = 1.5,
-     at = c(0, 250, 2500),
+     at = c(0, 250, 500),
      mgp = c(3, cex_lab_shift, 0),
      tcl = tck_len, cex.axis = cex_axis)
 title(xlab = "Time [s]", mgp = c(2.5, 0, 0), cex.lab = cex_lab)
