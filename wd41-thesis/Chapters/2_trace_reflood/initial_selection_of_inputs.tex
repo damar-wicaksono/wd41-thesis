@@ -127,19 +127,18 @@ No. & Parameter 							& Description & Distribution & \text{Range of}  & \text{N
 %----------------------------------------------------------------------------------
 
 % Opening paragraph
-The nominal values of selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
-These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of model parameters values can be generated.
-In the case of model parameters, as was exemplified in Section~\ref{sub:intro_statement_of_problem}, these perturbation factors become the proxy of the physical models (and parameters) they perturbed of which the uncertainties are to be quantified a posteriori based on experimental data.
+The nominal values of the selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of input parameters values can be generated.
 
 % Mode of perturbations
 For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
 In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
 In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
 Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
-The mode of perturbations for each selected input parameter are listed in Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
+The mode of perturbation for each selected input parameter are listed in last column of Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
 
 % trace-simexp
-A tool is developed in the Python programming language to assist in automatically pre-process, execute, and post-process numerous \gls[hyper=false]{trace} simulations of \gls[hyper=false]{feba} experiment based on a set of sampled input parameters values.
+A tool is developed in the Python programming language to assist in automatically pre-processing, executing, and post-processing numerous \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model based on a set of sampled input parameters values.
 The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
 
 %-----------------------------------------------------------------------------------
@@ -147,7 +146,7 @@ The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
 %-----------------------------------------------------------------------------------
 
 % Opening Paragraph
-The uncertainties associated with the controllable inputs were taken directly from the recommended value from the \gls[hyper=false]{premium} benchmark and the list can be found in Table~\ref{tab:trace_model_parameter_1}.
+The uncertainties associated with the controllable inputs were taken directly from the recommended value of the \gls[hyper=false]{premium} benchmark and the list can be found in Table~\ref{tab:trace_model_parameter_1}.
 As for the model parameters, a first determination of the uncertainty ranges has been made following an internal selection process primarily based on the use of information in available literature on uncertainties in physical models for \gls[hyper=false]{lbloca}.
 
 % Main Source of Information
