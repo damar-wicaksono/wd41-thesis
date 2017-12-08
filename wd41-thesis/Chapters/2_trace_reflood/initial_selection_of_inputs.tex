@@ -13,7 +13,7 @@ This part is closely related to PSI participation in the \gls[hyper=false]{premi
 
 % Introductory paragraph
 The selection process for the uncertain input parameters to consider differs depending on the type of parameter.
-Each of the selected parameters can broadly fall in one of the two following categories:
+Each of the selected parameters can broadly fall into one of the two following categories:
 \begin{itemize}
 	\item Input parameters that are not specific to the \gls[hyper=false]{trace} code (e.g., initial and boundary conditions, material thermo-physical properties).
 		This category of parameters is often referred to as the \emph{controllable inputs} of the simulation.
@@ -26,7 +26,7 @@ The selection of parameters belonging to the controllable inputs category simply
 The $13$ selected parameters of this category are listed in Table~\ref{tab:trace_model_parameter_1}.
 
 % Selection on the second category
-On the other hand, the selection of the model parameters specific to the \gls[hyper=false]{trace} code is challenging due to the fact that \gls[hyper=false]{trace} is a relatively recent code (in comparison with the codes like RELAP5, ATHLET, or CATHARE).
+On the other hand, the selection of the model parameters specific to the \gls[hyper=false]{trace} code is challenging due to the fact that \gls[hyper=false]{trace} is a relatively recent code (in comparison with codes like RELAP5, ATHLET, or CATHARE).
 In essence, the code has been developed from different variants of the TRAC codes for different reactor types (TRAC-BF1, TRAC-P) to result in a single consolidated code applicable to both \gls[hyper=false]{pwr} and \gls[hyper=false]{bwr}.
 Contributing to that difficulty is the fact that \gls[hyper=false]{trace} is currently undergoing significant developments and improvements, including modifications to the two-phase closure models for momentum and heat transfers.
 Consequently, the task of selecting the model parameters and later their prior uncertainties is more difficult than for a more established codes.
@@ -34,29 +34,29 @@ Consequently, the task of selecting the model parameters and later their prior u
 % Criteria for choosing the parameters
 To overcome this issue, the following principles have been followed to select the model parameters:
 \begin{enumerate}
-	\item The selection has been focused to the physical models in the post-\glsentryshort{chf} package of the \gls[hyper=false]{trace} code (including the reflood models).
+	\item The selection has been focused on the physical models in the post-\glsentryshort{chf} package of the \gls[hyper=false]{trace} code (including the reflood models).
 		Specifically, these are models for the \gls[hyper=false]{iafb} and \gls[hyper=false]{dffb} flow regimes \cite{USNRC2012}.
 	\item Spacer grid model are also included as they are known to have a significant impact on reflooding \cite{Miller2013}.
-	\item A parameter related to the minimum film boiling temperature should be selected, since it has (by model construction) an impact on the time of quenching.
+	\item Parameters related to the minimum film boiling temperature and transition boiling should be selected, since they have (by model construction) an impact on the time of quenching.
 \end{enumerate}
 
-Additionally, a common principle, the selected models (and parameters) are to be perturbed by means of perturbation factors (detail below) at the highest-possible level of the structure of these models as coded.
-The level allows, to some extent, for reference uncertainty information obtained from codes other than \gls[hyper=false]{trace} to be used.
+Additionally, as a common principle, the selected models (and parameters) are to be perturbed by means of perturbation factors (detail below) at the highest-possible level of the structure of these model.
+This allows, to some extent, to use reference uncertainty information obtained from codes other than \gls[hyper=false]{trace}.
 
 % Resulting List of Model Parameters 1
-In accordance to the first selection principle above, a set of $10$ high-level parameters has been selected ($5$ for each flow regime).
+In accordance with the first selection principle above, a set of $10$ high-level parameters has been selected ($5$ for each flow regime).
 Specifically, for each flow regime: the wall-fluid \gls[hyper=false]{htc}, the liquid-interface \gls[hyper=false]{htc}, the vapor-interface \gls[hyper=false]{htc}, the wall-fluid drag coefficient, and the interfacial drag coefficient.
 
 % Resulting List of Model Parameters 2
-Following the second principle, two additional parameters have been selected.
-Namely, the spacer grid pressure loss coefficient model from Yao, Loftus, and Hochreiter as well as the grid convective \gls[hyper=false]{ht} enhancement model from Yao, Hochreiter, and Leech (see \cite{USNRC2012} pp. $425$--$429$ and \cite{Yao1982}).
-These perturbation on the parameters are applied to all seven spacer grids at once.
+Following the second principle, two additional parameters have been selected:
+the spacer grid pressure loss coefficient model from Yao, Loftus, and Hochreiter as well as the grid convective \gls[hyper=false]{ht} enhancement model from Yao, Hochreiter, and Leech (see \cite{USNRC2012} pp. $425$--$429$ and \cite{Yao1982}).
+These perturbations on the parameters are applied to all seven spacer grids at once.
 
 % Resulting List of Model Parameters 3
-Lastly, from the third principle, the quench temperature parameter in \gls[hyper=false]{trace} and wall-fluid \gls[hyper=false]{htc} for transition boiling (see \cite{USNRC2012} pp. $293$--$299$) have been selected to the list of uncertain input parameters.
+Lastly, from the third principle, the quench temperature parameter in \gls[hyper=false]{trace} and wall-fluid \gls[hyper=false]{htc} for transition boiling (see \cite{USNRC2012} pp. $293$--$299$) have been added to the list of uncertain input parameters.
 
-Fourteen parameters are selected belonging to this category and summarized in Table~\ref{tab:trace_model_parameter_2}.
-The total number of initial uncertain parameters considered is thus $27$.
+In the end, fourteen parameters are and are summarized in Table~\ref{tab:trace_model_parameter_2}.
+The total number of initial uncertain input parameters considered is thus $27$.
 
 % Table Input Parameters
 \begin{sidewaystable}
