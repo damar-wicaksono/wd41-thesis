@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171207170534" modified="D:20171207190356"/>
+<info created="D:20171207170534" modified="D:20171208194213"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -254,7 +254,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 44 -160" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="10.72" depth="5.74" valign="top" size="footnote" style="center">Transition Boiling</text>
+<text layer="alpha" matrix="1 0 0 1 36 -160" transformations="translations" pos="220 716" stroke="black" type="minipage" width="72" height="6.035" depth="1.05" valign="top" size="footnote" style="center">Transition Boiling</text>
 <path matrix="0.00452295 1.84369 -1.06777 0.00307462 1001.55 337.082" fill="black" tiling="falling">
 96 628 m
 96 624 l
@@ -409,36 +409,36 @@ h
 348 604
 344 608 c
 </path>
-<path matrix="2 0 0 1 -504 -4" stroke="black">
+<path matrix="2.375 -0 0 1 -660 -4" stroke="black">
 384 660 m
 416 660 l
 </path>
-<path matrix="2 0 0 1 -504 0" stroke="black">
+<path matrix="2.375 0 0 1 -660 0" stroke="black">
 384 720 m
 416 720 l
 </path>
-<path matrix="2 0 0 1 -504 4" stroke="black">
+<path matrix="2.375 0 0 1 -660 4" stroke="black">
 384 612 m
 416 612 l
 </path>
-<path matrix="2 0 0 1 -504 0" stroke="black">
+<path matrix="2.375 0 0 1 -660 0" stroke="black">
 384 560 m
 416 560 l
 </path>
-<path matrix="2 0 0 1 -504 -8" stroke="black">
+<path matrix="2.375 0 0 1 -660 0" stroke="black">
 384 544 m
 416 544 l
 </path>
-<path matrix="2 0 0 1 -504 0" stroke="black">
+<path matrix="2.375 0 0 1 -660 0" stroke="black">
 384 516 m
 416 516 l
 </path>
-<text matrix="1 0 0 1 44 -16" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="15.706" depth="10.75" valign="top" size="footnote" style="center">Dispersed Flow \\
+<text matrix="1 0 0 1 32 -16" transformations="translations" pos="220 716" stroke="black" type="minipage" width="76" height="15.706" depth="10.75" valign="top" size="footnote" style="center">Dispersed Flow \\
 Film Boiling \\
 (DFFB)</text>
-<text matrix="1 0 0 1 44 -72" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="10.943" depth="5.96" valign="top" size="footnote" style="center">Transitionary \\
+<text matrix="1 0 0 1 36 -72" transformations="translations" pos="220 716" stroke="black" type="minipage" width="72" height="10.943" depth="5.96" valign="top" size="footnote" style="center">Transitionary \\
 (Slug)</text>
-<text matrix="1 0 0 1 44 -116" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="15.706" depth="10.75" valign="top" size="footnote" style="center">Inverted Annular \\
+<text matrix="1 0 0 1 36 -116" transformations="translations" pos="220 716" stroke="black" type="minipage" width="72" height="15.706" depth="10.75" valign="top" size="footnote" style="center">Inverted Annular \\
 Film Boiling \\
 (IAFB)</text>
 <path matrix="0.5 0 0 1 168 -12" fill="darkgray">
@@ -450,7 +450,8 @@ Film Boiling \\
 <path matrix="0.5 0 0 1 196 -8" fill="darkgray">
 4 0 0 4 348 664 e
 </path>
-<text matrix="1 0 0 1 44 -188" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="5.996" depth="1" valign="top" size="footnote" style="center">pre-CHF Regime</text>
+<text matrix="1 0 0 1 36 -176" transformations="translations" pos="220 716" stroke="black" type="minipage" width="72" height="10.943" depth="5.96" valign="top" size="footnote" style="center">pre-CHF\\
+(Nucleate Boiling)</text>
 <path matrix="1 0 0 1 14.3789 -163.591" fill="white">
 1 0 0 1 360 708 e
 </path>
@@ -490,17 +491,18 @@ Film Boiling \\
 <path matrix="1 0 0 1 -18.4452 -140.837" fill="white">
 1 0 0 1 360 708 e
 </path>
-<text matrix="1 0 0 1 44 24" transformations="translations" pos="220 716" stroke="black" type="minipage" width="64" height="9.941" depth="4.97" valign="top" size="footnote" style="center">Steam Convection</text>
+<text matrix="1 0 0 1 32 24" transformations="translations" pos="220 716" stroke="black" type="minipage" width="76" height="10.943" depth="5.96" valign="top" size="footnote" style="center">Pre-CHF\\
+(Steam Convection)</text>
 <path matrix="1 0 0 3 -120 -1488" stroke="black" arrow="normal/normal">
 416 744 m
 416 752 l
 </path>
-<text matrix="1 0 0 1 -236 -4" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(1)</text>
-<text matrix="1 0 0 1 -236 -48" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(2)</text>
-<text matrix="1 0 0 1 -236 -100" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(3)</text>
-<text matrix="0.997397 0.0721114 -0.0721114 0.997397 -181.758 -181.449" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(4)</text>
-<text matrix="1 0 0 1 -236 -188" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(5)</text>
-<text matrix="1 0 0 1 -236 -208" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(6)</text>
+<text matrix="1 0 0 1 -248 -4" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(1)</text>
+<text matrix="1 0 0 1 -248 -48" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(2)</text>
+<text matrix="1 0 0 1 -248 -100" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(3)</text>
+<text matrix="0.997397 0.0721114 -0.0721114 0.997397 -193.758 -181.449" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(4)</text>
+<text matrix="1 0 0 1 -248 -184" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(5)</text>
+<text matrix="1 0 0 1 -248 -204" transformations="translations" pos="484 732" stroke="black" type="label" width="12.73" height="7.473" depth="2.49" valign="baseline">(6)</text>
 <path matrix="1 0 0 1 12 -180" fill="white">
 1 0 0 1 360 708 e
 </path>
@@ -524,6 +526,12 @@ Probe</text>
 <path stroke="black" arrow="normal/normal">
 384 728 m
 396 728 l
+</path>
+<path matrix="0.5 0 0 1 184 -20" fill="darkgray">
+4 0 0 4 348 664 e
+</path>
+<path matrix="1 0 0 1 -4 12" fill="darkgray">
+2 0 0 2 360 708 e
 </path>
 </page>
 </ipe>

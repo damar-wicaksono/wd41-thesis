@@ -3,17 +3,20 @@
 %**************************************************************************************
 
 % Opening Paragraph, the reflood phase 
-\emph{Reflood} phase is the last phase of the $4$ canonical phases in the mitigation of \gls[hyper=false]{lbloca} in a \gls[hyper=false]{pwr}; the other $3$ preceding phases are \emph{blowdown} phase, \emph{refill} phase, and \emph{bypass} phase (see \cite{Hewitt2000} for an introduction on the transient).
-It refers to the phase of the transient at which emergency coolant water flows slowly upward through the reactor core quenching the fuel elements along the way. 
+\emph{Reflood} phase is the last phase of the $4$ canonical phases in the mitigation of \gls[hyper=false]{lbloca} in an \gls[hyper=false]{lwr}; the other $3$ preceding phases are the \emph{blowdown} phase, \emph{refill} phase, and \emph{bypass} phase (see \cite{Hewitt2000} for an introduction on the transient).
+\marginpar{Reflood phase in LBLOCA}
+It refers to the phase of the transient at which emergency coolant water flows slowly upward through the reactor core, quenching the fuel elements along the way. 
 The phase occurs after a successful injection of the water through the downcomer and lower plenum of the \gls[hyper=false]{rpv} (i.e., the refill phase).
 
 % Reflooding
-\emph{Quenching} (or \emph{rewetting}) refers to the phenomenon in which a contact between the liquid phase of the coolant and the hot surface of the fuel elements.
+\emph{Quenching} (or \emph{rewetting}) refers to the phenomenon in which a sustainable contact between the liquid phase of the coolant and the hot surface of the fuel elements is re-established.
+\marginpar{Quenching}
 Prior to the quenching, the excessively high surface temperature prevents a stable contact between the liquid phase and the surface, degrading the \gls[hyper=false]{ht} between the two.
-The maximum temperature for which the liquid might make a stable contact with the surface is referred to as the \emph{quenching} temperature.
+The maximum temperature for which the liquid might make a stable contact with the surface is referred to as the \emph{quenching temperature}.
 In consequence, although the bulk of the flow through the core is liquid, the inability for the liquid to make contact with the surface keeps the surface temperature at a very high level \cite{Hewitt2000,Zeng2010}.
 
 In \gls[hyper=false]{bwr} type reactors, reflood might also occurs by spraying the core from the top resulting in the \emph{top reflood};
+\marginpar{Top and bottom reflood}
 while in both \gls[hyper=false]{bwr} and \gls[hyper=false]{pwr} type reactors, injection of water downward through the downcomer and upward through the core is termed \emph{bottom reflood}.
 There are different physical processes associated with the two, such as the fact that in the top reflood there is steam flow from the bottom of the channel pushing back the liquid injection.
 This thesis only concern with the bottom reflood. 
@@ -21,9 +24,11 @@ As the process set a limiting ability for the emergency coolant to bring about e
 
 % Reflood curve
 A typical mid-height cladding temperature evolution in a channel undergoing a bottom reflood (so-called \emph{reflood curve}) can be seen in Fig.~\ref{fig:ch2_reflood_curve_qois} under a constant coolant injection rate and a constant power boundary condition.
+\marginpar{Reflood curve}
 At the start of the transient (cladding temperature at $T_\text{init.}$) the channel is consists purely of steam flow.
-Keeping the power constant increases the cladding temperature up until a mixture of steam and liquid (droplets) arrives at the location, improve the \gls[hyper=false]{ht} mechanism, and turn the temperature around from the maximum ($T_\text{max.}$).
+Keeping the power constant increases the cladding temperature up until more mixture of steam and liquid (droplets) arrives at the location, improve the \gls[hyper=false]{ht} mechanism, and turn the temperature around from the maximum ($T_\text{max.}$).
 As the channel keeps undergoing reflood from the bottom, more droplets are available at the location to keep decreasing the cladding temperature.
+Moreover as the quenching happens below this particular location, large temperature gradient in the axial location is present and is accelerating the heat conduction from the un-quenched part to the quenched part of the cladding.
 Finally, when the temperature of the cladding reaches the quenching temperature ($T_\text{quench}$), quenching occurs and stable contact between liquid and the cladding can be established.
 From that point onward, the cladding temperature is in equilibrium with the liquid at saturation.
 \begin{figure}[bth]
@@ -34,18 +39,53 @@ From that point onward, the cladding temperature is in equilibrium with the liqu
 \end{figure}
 
 % The Modeling of The Phenomenology
-Phenomenological view of the process, as adopted by \gls[hyper=false]{trace} code, is shown in Fig.~\ref{fig:ch2_reflood_phenomenology} along with the corresponding part in the reflood curve Fig.~\ref{fig:ch2_reflood_curve}.
-The post-\gls[hyper=false]{chf} flow regimes (regimes $(2)$--$(5)$ in the figure) are in between two pre-\gls[hyper=false]{chf} regimes and pure steam convection.
+Phenomenological view of the process, as adopted by \gls[hyper=false]{trace} code \cite{USNRC2012}, is shown in Fig.~\ref{fig:ch2_reflood_phenomenology} along with the corresponding part in the reflood curve of Fig.~\ref{fig:ch2_reflood_curve}.
+The post-\gls[hyper=false]{chf} flow regimes (regimes $(2)$--$(5)$ in the figure) are in-between two pre-\gls[hyper=false]{chf} flow regimes, namely nucleate boiling at the bottom and and steam convection at the top.
 \normdoublefigure[pos=h,
                   mainlabel={fig:ch2_reflood_phenomenology},
-                  maincaption={Phenomenology of flow during reflood according to \gls[hyper=false]{trace} code and the corresponding .},
+                  maincaption={Phenomenology of flow during reflood according to \gls[hyper=false]{trace} code and the corresponding part of the transient in the reflood curve.},
 				mainshortcaption={Phenomenology of flow during reflood according to \gls[hyper=false]{trace} code.},
                   leftopt={width=0.45\textwidth},
-                  leftlabel={fig:ch2_reflood_curve_phenomenology},
+                  leftlabel={fig:ch2_post_chf_regime},
                   leftcaption={post-\gls[hyper=false]{chf} flow regimes $(2)$--$(5)$},
                   %leftshortcaption={},%
                   rightopt={width=0.5\textwidth},
-                  rightlabel={fig:ch2_post_chf_regime},
+                  rightlabel={fig:ch2_reflood_curve},
                   rightcaption={Reflood curve}]
 {../figures/chapter2/figures/postCHFRegime}
 {../figures/chapter2/figures/refloodCurvePhenomenology}
+
+% Steam Flow
+Consider a case of injecting subcooled liquid water with a constant feed rate (i.e., \emph{flooding rate}) into a dry heated channel.
+At the given location of the temperature probe at the start of the transient, steam convection ($2$ in Fig.~\ref{fig:ch2_post_chf_regime}) is the dominant heat transfer mechanism and the cladding temperature keeps increasing.
+
+% DFFB
+As the bottom part of the channel is quenched (the point of quenching on the surface is referred to as \emph{quench front}) three flow regimes can be observed.
+\marginpar{\Glsfirst[hyper=false]{dffb}}
+Far from the quench from, liquid droplets are dispersed and carried away by the bulk steam flow.
+The flow regime, called \glsfirst[hyper=false]{dffb}, provides an improved \gls[hyper=false]{ht} mechanism from the wall to the fluid as compared to the pure steam convection through direct radiation to the droplets, convection to the droplets and convection to the steam.
+The droplets also provide heat sink from the bulk steam flow.
+The presence of the droplets also further enhance the turbulence of the steam flow improving the convection from the wall to the steam flow \cite{Zeng2010}.
+The improvement to \gls[hyper=false]{ht} brought by these mechanism allows the cladding temperature to reach maximum and turn.
+
+% Inverted Slug
+As the quench front progresses upward, in the intermediate distance from the front, more efficient cooling is provided from morphologically less regular entrained liquid, called ligaments or slugs ($3$ in Fig.~\ref{fig:ch2_post_chf_regime}).
+\marginpar{Inverted Slug}
+Due to this efficient cooling, the cladding temperature keeps decreasing.
+The slug flow regime is inverted in the sense that the at the center of the flow liquid phase is the predominant phase. 
+In \gls[hyper=false]{trace} these slugs are modeled as prolate ellipsoids.
+The flow regime itself represents an interpolatory region between the previous \gls[hyper=false]{dffb} flow regime and the subsequent \gls[hyper=false]{iafb} flow regime \cite{USNRC2012}.
+
+% IAFB
+In the short distance from the front, the bulk of the subcooled liquid flow starts to appear in front of the surface.
+\marginpar{\Glsfirst[hyper=false]{iafb}}
+However, a thin vapor film still separates the liquid from the wall and thus prevent ideal \gls[hyper=false]{ht} to occur.
+In this so-called \glsfirst[hyper=false]{iafb} flow regime ($4$ in Fig.~\ref{fig:ch2_post_chf_regime}), the bulk of the coolant flow in the center of the channel is liquid (i.e., the liquid core).
+The \gls[hyper=false]{ht} mechanism from the wall is through convection to the vapor film and direct radiation to the liquid core \cite{Zeng2010,USNRC2012}.
+
+% Transition Boiling
+Finally, as quenching becomes imminent and the cladding temperature reaches the quenching temperature, the flow regime switch to the unstable \emph{transition boiling}, which literally means the transition between dry wall and wet wall regimes.
+\marginpar{Transition boiling}
+In \gls[hyper=false]{trace} the heat transfer is evaluated based on the look-up table \gls[hyper=false]{chf} at the particular flow conditions.
+It results in a very large \gls[hyper=false]{htc} between the wall to the fluid and causes the rapid drop (i.e., quenching) of the temperature ($5$ in Fig.~\ref{fig:ch2_post_chf_regime}). 
+After quenching and the cladding surface is in full contact with the liquid, the cladding temperature is in equilibrium with bulk flow of saturated liquid and the flow regime involves belongs to different phenomenology ($6$ in Fig.~\ref{fig:ch2_post_chf_regime}) (in \gls[hyper=false]{trace}, it belongs to the pre-\gls[hyper=false]{chf} package \cite{USNRC2012}).
