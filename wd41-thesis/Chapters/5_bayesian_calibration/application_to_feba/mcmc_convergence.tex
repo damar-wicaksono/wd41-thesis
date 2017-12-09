@@ -5,7 +5,7 @@
 % Introductory paragraph
 The calibration schemes explained above were each run for a total of $2'000$ iterations using $1'000$ walkers. 
 This results in a total of $2'000'000$ posterior samples.
-These initial samples requires further post-process\-ing to remove the initialization bias and incorrect statistical error estimation due to the autocorrelation in the samples.
+These initial samples require further post-process\-ing to remove the initialization bias and the autocorrelation in the samples.
 In the following, only the results from the calibration scheme with model bias term and considering all types of output (scheme \texttt{w/ Bias, All}) are discussed.
 Though not shown, the results from other schemes are similar.
 
@@ -16,7 +16,7 @@ As can be seen, the walkers traverse the model parameter space and spend more ti
 Furthermore, it can be inferred that some parameters are more constrained by the data (e.g., \texttt{gridHT}) than the others (e.g., \texttt{tQuench}).
 
 % Figure MCMC Ensemble Statistics
-To check the convergence of the results of an ensemble samplers, it is a common practice to investigate the running statistics of the ensemble (i.e., statistics over all walkers per iteration) instead of the individual walkers \cite{Foreman-Mackey2013,Akeret2013}.
+To check the convergence of an ensemble samplers, it is a common practice to investigate the running statistics of the ensemble (i.e., statistics over all walkers per iteration) instead of the individual walkers \cite{Foreman-Mackey2013,Akeret2013}.
 The running average and standard deviation for each model parameter are shown in Fig.~\ref{fig:ch5_plot_ens_stat_mcmc}.
 From the figure, it is clear that after some initial transient (i.e., the burn-in period), the running statistics converge for all parameters.
 Note also that the number of iterations spent in the burn-in period for an ensemble sampler can be large (here up to $760$ iterations).
@@ -24,7 +24,7 @@ Note also that the number of iterations spent in the burn-in period for an ensem
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.90\textwidth]{../figures/chapter5/figures/plotEnsTraceDiscAllCentered}
-		\captionof{figure}[Ensemble trace plots for each model parameter of calibration with model bias term.]{Ensemble trace plots for each model parameter of calibration with model bias term. Shown here is for the last $100$ iterations (out of $1'240$ post-burn-in iterations) and for $400$ walkers (out of $1'000$ walkers).}
+		\captionof{figure}[Ensemble trace plots for each model parameter of calibration with model bias term.]{Ensemble trace plots for each model parameter of calibration with model bias term. Shown here are the last $100$ iterations (out of $1'240$ post-burn-in iterations) of $400$ walkers (out of $1'000$ walkers).}
 	\label{fig:ch5_plot_ens_trace_all_disc_centered}
 \end{sidewaysfigure}
 \clearpage
@@ -32,15 +32,15 @@ Note also that the number of iterations spent in the burn-in period for an ensem
 \begin{figure}[!bth]
     \centering
     \includegraphics[width=1.0\textwidth]{../figures/chapter5/figures/plotEnsStatMCMC}
-    \caption[Ensemble average and standard deviation as function of the number of iterations for calibration with model bias term.]{Ensemble average and standard deviation as function of the number of iterations for calibration with model bias term. Vertical lines indicate the iterations for burn-in (i.e., approximately $10$ times the autocorrelation time).}
+    \caption[Ensemble average and standard deviation as function of the number of iterations for calibration with model bias term.]{Ensemble average and standard deviation as function of the number of iterations for calibration with model bias term. Vertical lines indicate the iterations for burn-in (i.e., approximately $20$ times the autocorrelation time).}
     \label{fig:ch5_plot_ens_stat_mcmc}
 \end{figure}
 
 % Table of autocorrelation times, burn-in
-Although the length of the burn-in period can be inferred directly from the plots in Fig.~\ref{fig:ch5_plot_ens_stat_mcmc}, a more rigorous criteria can be obtained via the autocorrelation time of the running statistics.
-Table~\ref{tab:ch5_ens_stat_mcmc} summarizes the estimated autocorrelation time for the running statistics and for model parameter.
+Although the length of the burn-in period can be inferred directly from Fig.~\ref{fig:ch5_plot_ens_stat_mcmc}, a more rigorous criteria can be obtained via the autocorrelation time of the running statistics.
+Table~\ref{tab:ch5_ens_stat_mcmc} summarizes the estimated autocorrelation time for the running statistics and for each model parameter.
 The autocorrelation times of the average tend to be longer than the ones of the standard deviation. 
-The longest autocorrelation time of all the parameters (shown in the table in bold) becomes the basis for determining the length of burn-in period.
+The longest autocorrelation time of all the parameters (shown in the table in bold) becomes the basis for determining the length of the burn-in period.
 As recommended in \cite{Sokal1997} a multiple (in this case $20$) of the autocorrelation time is deemed enough to remove the initialization bias.
 The obtained length of the burn-in period is shown as vertical lines in Fig.~\ref{fig:ch5_plot_ens_stat_mcmc} (at iteration $760$); those iterations are subsequently discarded.
 \begin{table}[h]
@@ -70,6 +70,6 @@ As can be seen in Table~\ref{tab:ch5_ens_stat_mcmc} ($\tau_{\text{post-burn-in}}
 
 Additionally, the remaining samples are to be used for forward \gls[hyper=false]{uq}.
 The \gls[hyper=false]{mc} simulation for forward \gls[hyper=false]{uq} requires independent (specifically, iid) samples.
-To obtain a set of independent samples, the remaining samples are thinned on the basis of the re-estimated autocorrelation time.
-Using (twice, Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})) the largest autocorrelation time for thinning, $32'000$ posterior samples out of $1'240'000$ post-burn-in samples can be considered independent and readily used for forward uncertainty propagation.
-Though it results in a much smaller sample size, the associated relative statistical error (based on the number of independent samples) for the model parameters estimates is at most $0.6\%$ (Eq.~(\ref{eq:ch5_markov_chain_relative_error_ensemble})).
+To obtain a set of independent samples, the remaining samples are thinned on the basis of the re-estimated autocorrelation time (see Section~\ref{sub:bc_mcmc_thinning}.
+The largest autocorrelation time of all parameters are used for thinning and $32'000$ independent posterior samples can be used for forward uncertainty propagation.
+Though it results in a much smaller sample size, the associated statistical error relative to the standard deviation of the model parameter estimates are at most $0.6\%$ (Eq.~(\ref{eq:ch5_markov_chain_relative_error_ensemble})).
