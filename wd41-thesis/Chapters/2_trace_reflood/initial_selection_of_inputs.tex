@@ -55,8 +55,8 @@ These perturbations on the parameters are applied to all seven spacer grids at o
 % Resulting List of Model Parameters 3
 Lastly, from the third principle, the quench temperature parameter in \gls[hyper=false]{trace} and wall-fluid \gls[hyper=false]{htc} for transition boiling (see \cite{USNRC2012} pp. $293$--$299$) have been added to the list of uncertain input parameters.
 
-In the end, fourteen parameters are and are summarized in Table~\ref{tab:trace_model_parameter_2}.
-The total number of initial uncertain input parameters considered is thus $27$.
+In the end, $14$ parameters are selected and are summarized in Table~\ref{tab:trace_model_parameter_2},
+yielding a total number of initial uncertain input parameters considered of $27$.
 
 % Table Input Parameters
 \begin{sidewaystable}
@@ -128,10 +128,12 @@ No. & Parameter 							& Description & Distribution & \text{Range of}  & \text{N
 
 % Opening paragraph
 The nominal values of the selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means perturbation factors.
-These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of input parameters values can be generated.
+\marginpar{Perturbation factor}
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the sequel, from which a set of samples of input parameters values can be generated.
 
 % Mode of perturbations
 For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
+\marginpar{Modes of perturbation}
 In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
 In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
 Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
@@ -139,6 +141,7 @@ The mode of perturbation for each selected input parameter are listed in last co
 
 % trace-simexp
 A tool is developed in the Python programming language to assist in automatically pre-processing, executing, and post-processing numerous \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model based on a set of sampled input parameters values.
+\marginpar{\texttt{trace-simexp}}
 The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
 
 %-----------------------------------------------------------------------------------
