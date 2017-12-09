@@ -25,27 +25,27 @@ System thermal-hydraulics thus distinguishes itself by considering explicitly th
 % The essence of the problem tackled in thermal-hydraulics system code
 However, it can be argued that the modeling of two-phase flow inside a heated channel remains a central part in nuclear thermal-hydraulics analysis 
 \marginpar{basic thermal-hydraulics, two-phase flow in a heated channel}
-which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios. 
+which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios (Fig.~\ref{fig:ch2_heated_channel}). 
 This is also supported by the fact that the majority of operating nuclear power plants is of \gls[hyper=false]{lwr} type, 
 where two-phase flow can be expected to occur during its operation, both in normal operating and accident condition for \glspl[hyper=false]{bwr} and in accident condition for \glspl[hyper=false]{pwr}.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.55]{../figures/heatedChannel/heatedChannel.pdf}
+	\includegraphics[scale=0.55]{../figures/chapter2/figures/heatedChannel}
 	\caption[Illustration of Heated Channel.]{Thermal-hydraulics system analysis encompasses many aspects of nuclear reactor system analysis, but the core of the problem for predicting the cladding temperature evolution (especially during an accident condition) is to model properly and realistically the coolant flow in a heated channel in steady or transient condition. Here it is shown a simplified picture of loss of coolant accident in a \glsentryshort{pwr} where phase change occurs along the heated channel.}
-	\label{fig:heated_channel}
+	\label{fig:ch2_heated_channel}
 \end{figure}
 
 % Major difficulty
 This remaining problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is by no means trivial.
 \marginpar{flow regimes}
 This due to the fact that in two-phase flow, the morphological configurations of the flow (i.e., \emph{flow regimes}) can vary widely depending on many parameters such as difference in the respective phase density and velocity, as well as the flow orientation.
-Different morphological configuration implies different interfacial surface structure between the two phases (see Fig.~\ref{fig:flow_regimes}), which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
+Different morphological configuration implies different interfacial surface structure between the two phases (see Fig.~\ref{fig:ch2_flow_regimes}), which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
 At the same time, the interfacial surface and its deformation in an arbitrary flow configuration are not known \emph{a priori} and becomes part of problem to be simultaneusly solved.
 \begin{figure}[bth!]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/flowRegimes/flowRegimes.pdf}
+	\includegraphics[width=\textwidth]{../figures/chapter2/figures/flowRegimes}
 	\caption[Some of the observed flow regimes in vertical and horizontal flow]{Some of the observed flow regimes in vertical and horizontal flow with different superficial liquid velocity, $Q_l = V_l / A$, and superficial gas velocity, $Q_g = V_g / A$, where $A$ is the flow area. The flows of both phases are co-current.}
-	\label{fig:flow_regimes}
+	\label{fig:ch2_flow_regimes}
 \end{figure}
 
 % The rigorous approach, local instantaneous formulation
@@ -55,12 +55,12 @@ The two phases are, in turn, separated by zero-thickness interfacial surface.
 The resulting set of equations fully describe the flow at any given location at any given time.
 In addition to that, the solution of this formulation also respect the \emph{topological constraint} of the flow.
 The constraint states that only one phase can exist at any given time and at any given location in the flow \cite{Ghiaasiaan2007}.
-This is illustrated in the Fig.~\ref{fig:phase_indicator_probe} where a hypothetical probe is put within a two-phase flow and a signal of indicator function $M(\mathbf{r}, t)$ is recorded.
+This is illustrated in the Fig.~\ref{fig:ch2_phase_indicator_probe} where a hypothetical probe is put within a two-phase flow and a signal of indicator function $M(\mathbf{r}, t)$ is recorded.
 \begin{figure}[bth!]
 	\centering
-	\includegraphics[scale=0.70]{../figures/phaseIndicatorProbe/phaseIndicatorProbe.pdf}
+	\includegraphics[scale=0.70]{../figures/chapter2/figures/phaseIndicatorProbe}
 	\caption[A hypothetical phase indicator probe inside a channel of a two-phase flow]{Illustration of a hypothetical phase indicator probe inside a channel of a two-phase flow, recording at a point location the indicator function value (Eq.~(\ref{eq:indicator_function})) at every instance.}
-	\label{fig:phase_indicator_probe}
+	\label{fig:ch2_phase_indicator_probe}
 \end{figure}
 
 The indicator function $M(\mathbf{r}, t)$ is defined as,
@@ -111,17 +111,18 @@ This model separately treats the transport phenomena of the two phases of fluid 
 which are able to capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions to be expected in wide range of \gls[hyper=false]{npp} transients.
 
 Averaging greatly simplifies the description of the complicated interfacial structure between phases in a two-phase flow. 
-This simplification, at the same times, incur a loss of information regarding energy, momentum, and mass transfers at the local level (between the phases and between each phase and the channel wall) (Fig.~\ref{fig:flow_averaging}).
+This simplification, at the same times, incur a loss of information regarding energy, momentum, and mass transfers at the local level (between the phases and between each phase and the channel wall) (Fig.~\ref{fig:ch2_flow_averaging}).
 These transfer terms will have to be modeled separately for each distinct flow regime of interest through closure laws \cite{Bestion2008}.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.55]{../figures/flowAveraging/flowAveraging.pdf}
+	\includegraphics[scale=0.55]{../figures/chapter2/figures/flowAveraging}
 	\caption[Illustration of Flow Averaging]{Time and volume average carried out on the two-phase flow inside a channel results in a tractable form of fluid dynamics equation, but incur loss of information at the local level, especially when it comes to the interfacial structure between the two phases and between each phase with the channel wall.}
-	\label{fig:flow_averaging}
+	\label{fig:ch2_flow_averaging}
 \end{figure}
 
 % Opening Paragraph What is TRACE
 \gls[hyper=false]{trace} is the best-estimate system \gls[hyper=false]{th} code developed by the \gls[hyper=false]{usnrc} as a tool for light water reactor transient analysis during normal and accident scenarios.
+\marginpar{\gls[hyper=false]{trace} code}
 Its development is an on-going effort to modernize into a single software package all previous \gls[hyper=false]{usnrc} \gls[hyper=false]{th} codes that were developed separately for specific reactor types and/or applications.
 This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
 Appendix~\ref{app:trace_consv_eqs} summarizes the final formulation of governing equations (time\- and volume-averaged) in \gls[hyper=false]{trace}, of which the complete derivation can be found in \cite{USNRC2012}.
