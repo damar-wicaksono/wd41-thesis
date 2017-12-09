@@ -3,8 +3,7 @@
 %*****************************************************************
 
 % Introductory Paragraph
-After discarding the samples from the initial burn-in periods,
-the remaining posterior samples can be analyzed to investigate the constraining power of the data (as well as the chosen schemes) and the possible correlation structure of the parameters.
+For each calibration scheme, the posterior samples can be analyzed to investigate the constraining power of the data and the possible correlation structure of the parameters.
 The posterior samples of the calibration scheme \texttt{w/ Bias, All} is presented in this section, while the graphical representation of the posterior samples from the other calibration schemes can be found in Appendix~\ref{app:mcmc_samples}.
 
 % Explaining corner plot
@@ -24,7 +23,7 @@ The bivariate marginals of the posterior distribution are shown as the off-diago
 \marginpar{Corner plot, off-diagonal element, bivariate marginal}
 Because correlation is symmetric, only the lower half portion of the plot is shown.
 In this adaption of corner plot, hexagonal binning \cite{Carr2015} is used to represent the large number of posterior samples.
-In the off-diagonal elements of Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, lighter color shading (i.e., more intense color) indicates the region of the parameter space that is denser with sampled points.
+In the off-diagonal elements of Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, lighter color shading indicates the region of the parameter space that is denser with sampled points.
 The correlation between each pairs of parameters can be preliminary inferred from the shape of the bivariate marginals while the exact number for the color scale is unimportant.
 
 % Explaining the figure, univariate marginal
@@ -76,7 +75,7 @@ That is, the interval constructed by the percentiles corresponds to the symmetri
 
 % Explaining the table
 From the table, it can be seen that considering additional outputs in the calibration tends to constrain even more the posterior range of the parameters (see also Figs.~\ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, and \ref{fig:ch5_plot_ens_co_disc_centered}).
-Furthermore, the calibration scheme in which the parameter \texttt{dffbVIHT} was excluded tends to have a tighter posterior uncertainty range of the parameters that were correlated with the parameter \texttt{dffbVIHT} (i.e., \texttt{dffbIntDr} and \texttt{iafbIntDr}),
+Furthermore, the calibration scheme in which the parameter \texttt{dffbVIHT} was excluded tends to have a tighter posterior uncertainty range for the parameters that were correlated with the parameter \texttt{dffbVIHT} (i.e., \texttt{dffbIntDr} and \texttt{iafbIntDr}),
 while the range for the \texttt{dffbVIHT} remains at its initial prior range (see Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8}).
 Finally, the posterior of the calibration scheme without model bias term tends to have a tight range and to be concentrated at either end of the prior range.
 Additionally, the median posterior values of the parameters are shifted far away from their initial nominal values.
