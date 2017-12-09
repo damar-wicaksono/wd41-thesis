@@ -3,10 +3,26 @@
 %********************************************************************
 
 % Opening paragraph
-\lipsum[10]
+Reflood phase is the last phase of the 4 canonical phases in the mitigation of \glsfirst[hyper=false]{lbloca} in a \glsfirst[hyper=false]{lwr}.
+It refers to the phase of the transient in which emergency coolant water flows slowly upward through the dried reactor core, quenching the fuel elements along the way, preventing them from having further damage due to overheating.
 
 % This Chapter and its Overview
-\lipsum[10]
+This chapter introduces the phenomenology of reflood and its modeling in the thermal-hydraulics system code \gls[hyper=false]{trace}.
+Section~\ref{sec:reflood_trace} first presents a quick overview of the \gls[hyper=false]{trace} code,
+including a major simplification the code takes to describe a complex two-phase flow in the reactor coolant circuit during accident scenarios.
+Section~\ref{sec:reflood_phenomenology} then describes the reflood in \glspl[hyper=false]{lwr}: its importance, its phenomenology, and its modeling.
+It introduces several important terminologies used throughout the thesis.
+The description is focused from the perspective of the \gls[hyper=false]{trace} code and is by no means an exhaustive account on the subject. 
+
+The present study is based on the data from a \glsfirst[hyper=false]{setf} for reflood experiment.
+The \glsfirst[hyper=false]{feba} facility and the relevant test runs for this study are described Section~\ref{sec:reflood_feba_setf}.
+The modeling aspects of the facility in the \gls[hyper=false]{trace} is then detailed in Section~\ref{sec:reflood_feba_trace}.
+
+Section~\ref{sec:reflood_initial_inputs_selection} deals with the problem of selecting the initial set of input parameters perceived to be influential for the simulation.
+Afterward, prior uncertainties in the form of \glspl[hyper=false]{pdf} are assigned to the selected input parameters.
+Those two steps provide the starting point for the application of sensitivity and uncertainty analyses on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} presented in the upcoming chapters.
+Section~\ref{sec:reflood_prior_uq} presents the propagation of the specified prior uncertainties on the \gls[hyper=false]{trace} model to assess the initial level of uncertainty in the predictions before any experimental data is used to update the prior uncertainties.
+Lastly, Section~\ref{sec:reflood_chapter_summary} concludes and summarizes the chapter. 
 
 \input{Chapters/2_trace_reflood/trace}
 \input{Chapters/2_trace_reflood/reflood_phemenology_modeling}
