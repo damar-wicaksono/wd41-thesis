@@ -164,7 +164,7 @@ However, some points of the full simulation output do not have a corresponding e
 As such, for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
 The resulting dimension of the Gaussian distribution is thus $133$.
 
-Similar formulation are used for the \gls[hyper=false]{gp} metamodels with respect to the $DP$ and $CO$ outputs.
+Similar formulations are used for the \gls[hyper=false]{gp} metamodels with respect to the $DP$ and $CO$ outputs.
 According to Section~\ref{sec:gp_application_to_feba}, the numbers of retained principal components are $10$ and $5$ for the $DP$ and $TC$ outputs, respectively.
 Again, only the points in time which coincide with the observed data are selected according to the respective observation layout.
 
@@ -173,36 +173,37 @@ Again, only the points in time which coincide with the observed data are selecte
 %-----------------------------------------------------------------------
 
 % Introductory Paragraph
-Following the discussion of Section~\ref{sub:bc_modular_bias}, the model bias term is represented using a \glsfirst[hyper=false]{gp}.
-Model bias term is formulated for each type of data (or output).
-The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapted from \cite{Bayarri2007,Liu2009} (and applied in the reflood model calibration \cite{Wicaksono2016}):
+According to Section~\ref{sub:bc_modular_bias}, model bias term is represented using a \glsfirst[hyper=false]{gp}.
+A model bias term is formulated for each type of data (or output).
+The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapted from \cite{Bayarri2007,Liu2009,Wicaksono2016}:
 \begin{enumerate}
-	\item Generate $N$ realizations of \gls[hyper=false]{trace} simulation for \gls[hyper=false]{feba} test No. $216$ (randomly) varying only the $4$ parameters related to the boundary conditions (namely, \texttt{breakP}, \texttt{fillT}, \texttt{fillV}, and \texttt{pwr}), while keeping the other $8$ model parameters at their respective nominal values.
+	\item Generate $N$ realizations of the \gls[hyper=false]{trace} simulation for \gls[hyper=false]{feba} test No. $216$ (randomly) varying only the $4$ parameters related to the boundary conditions (namely, \texttt{breakP}, \texttt{fillT}, \texttt{fillV}, and \texttt{pwr}), while keeping the other $8$ model parameters at their respective nominal values.
     Each output type of the \gls[hyper=false]{trace} simulations are selected at its respective observation layout ($\boldsymbol{\Lambda}_{TC}$, $\boldsymbol{\Lambda}_{DP}$, and $\boldsymbol{\Lambda}_{CO}$).
     For each simulation the vectors of values are denoted $\mathbf{\hat{y}}_{M,TC}$, $\mathbf{\hat{y}}_{M,DP}$, and $\mathbf{\hat{y}}_{M,CO}$ for the $TC$, $DP$, $CO$ output, respectively.
-  \item Assume the vectors $\left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right)$, $\left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right)$, and\\ $\left(\mathbf{y}_{E,CO} - \mathbf{\hat{y}}_{M,CO}\right)$ are realizations from stationary \glspl[hyper=false]{gp} on the observation layouts (i.e., as function time and space). Note as the observation layouts comprise discrete points in time and space, the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
-    The power-exponential covariance function is selected for the covariance kernel and the hyper-parameters of the process (i.e., $\sigma^2$. $\bm{p}$, $\bm{\theta}$) are estimated using the \texttt{R} package \texttt{DiceKriging}. 
-  \item The mean of the bias term is taken to be the difference between the data and the nominal prediction, while the covariance matrix of the bias term is taken to be covariance matrix constructed at the observation layout using the estimated hyper-parameters above.
+  \item Assume the vectors $\left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right)$, $\left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right)$, and\\ $\left(\mathbf{y}_{E,CO} - \mathbf{\hat{y}}_{M,CO}\right)$ to be realizations from stationary \glspl[hyper=false]{gp} on the observation layouts (i.e., as function time and space).
+    Note that as the observation layouts comprise discrete points in time and space that the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
+    The power-exponential covariance function is selected for the covariance kernel and its hyper-parameters (i.e., $\sigma^2$. $\bm{p}$, $\bm{\theta}$) are estimated using the \texttt{R} package \texttt{DiceKriging}. 
+  \item The mean of the bias term of each output is taken to be the difference between the data $\mathbf{y}_{E,\circ}$ and the nominal prediction $\mathbf{\hat{y}}_{M,\circ}$, while the covariance matrix of the bias term is taken to be the covariance matrix constructed at the observation layout using the estimated hyper-parameters above.
   The constructed covariance matrix takes into account correlations of the model bias in time and space.
-  In the present analysis the estimated values of the hyper-parameters above in the previous step are kept constant.
+  In the present analysis the values of the hyper-parameters estimated in the previous step are kept constant during the subsequent phase of calibration.
 \end{enumerate}
 
 % What does the bias mean
 The above model bias term formulation is only partially Bayesian as it uses the data to make the initial estimation.
 But as argued in \cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
-Several additional assumptions are made in this thesis to fully formulate the term.
-By varying the parameters related to the boundary conditions in the construction of the term implies that the residual uncertainty of the experiment is included in the model bias term.
-The residual uncertainty was not directly observed as no replication at the same controllable inputs was conducted in the experiment. 
-In the present analysis, \gls[hyper=false]{trace} simulation is used as a substitute instead. 
+Several additional assumptions are made in this thesis to fully formulate the bias term.
+By varying the parameters related to the boundary conditions in the construction of the term implies that the residual uncertainty of the experiment associated with with the variations of the boundary conditions is included in the model bias term.
+In the \gls[hyper=false]{feba} experiment, the residual uncertainty was not directly observed as there was no replication of the experiment at the same controllable inputs.
+According to the above formulation, the model bias term allows for such uncertainty based on \gls[hyper=false]{trace} simulation.
 
-By using the above mean for the bias term, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
+By using the mean for the bias term defined above, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
 This is an indirect way of putting a strong prior preference for the \gls[hyper=false]{trace} nominal prediction such that the model parameters should not dramatically be shifted to correct the mismatch between the experimental data and the \gls[hyper=false]{trace} prediction.
-In other words, it is a way to keep as much as possible the nominal \gls[hyper=false]{trace} prediction which was already based on a long running V\&V activities, but does not include the data from \gls[hyper=false]{feba} experiment in it.
-Ref. \cite{Bayarri2007} also recommends that the variance of the process is allowed to vary but as the calibration conducted here is based only on the data from a single \gls[hyper=false]{feba} test, it is decided that the variance is kept constant.
-In fact, this represents a pessimistic assumption in the sense that the data is not allowed to reduce the bias by altering the model parameters in line with assuming the mean before.
+In other words, it is a way to keep as much as possible the nominal \gls[hyper=false]{trace} prediction, which was already based on a long running V\&V activities.
+Ref. \cite{Bayarri2007} also recommends to allow the variance of the process to vary, but as the calibration conducted here is based only on the data from a single \gls[hyper=false]{feba} test, the variance is kept constant.
+In fact, this represents a pessimistic assumption in the sense that the data is not allowed to reduce the bias by altering the model parameters.
+This is in line with the definition of the the mean used before.
 
 All in all, the calibration using this proposed model bias term thus aims to update the prior uncertainties of the model parameters assuming that the nominal prediction is centered around the data while keeping the variance unchanged. 
-The interest is then emphasized on using experimental data to obtain the uncertainties of the model parameters consistent with these assumptions.
 
 % TC Output
 Based on the above discussion, the model bias term for the $TC$ output is expressed as,
@@ -216,38 +217,11 @@ Based on the above discussion, the model bias term for the $TC$ output is expres
 \end{equation}
 where $\mathbf{m}_{\delta,TC}$ and $\Sigma_{\delta,TC}$ are the mean vector and the covariance matrix of the model bias term with respect to the $TC$ output, respectively;
 while $\sigma_{TC}^2$ and $R_{TC}$ are the process variance and correlation function of the process representing the bias term, respectively.
-The bias term is a multivariate Gaussian random variable with the dimension dimension of $133$, following the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
+The bias term is a multivariate Gaussian random variable with the dimension of $133$, equals to the length of the observation layout $\boldsymbol{\Lambda}_{TC}$.
 
-% DP Output
-Similarly for the $DP$ output,
-\begin{equation}
-	\begin{split}
-		& \bm{\mathcal{D}}_{DP} \sim \mathcal{N} (\mathbf{m}_{\delta,DP}, \Sigma_{\delta,DP}) \\
-		& \mathbf{m}_{\delta,DP} = \left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right) \\
-		& \Sigma_{\delta,DP} = \sigma_{M,DP}^2(\boldsymbol{\Lambda}_{TC}, \boldsymbol{\Lambda}_{TC}) \\
-	\end{split}
-\label{eq:feba_gp_bias_dp}
-\end{equation}
-where $\mathbf{m}_{\delta,DP}$ and $\Sigma_{\delta,DP}$ are the mean vector and the covariance matrix of the model bias term with respect to the $DP$ output, respectively;
-the terms $\sigma_{DP}^2$ and $R_{DP}$ are the process variance and correlation function of the process representing the bias term, respectively.
-According to the length of the observation layout $\boldsymbol{\Lambda}_{DP}$, the multivariate Gaussian random variable above has the dimension of $72$. 
-
-% CO Output
-And lastly for the $CO$ output,
-\begin{equation}
-	\begin{split}
-		& \bm{\mathcal{D}}_{CO} \sim \mathcal{N} (\mathbf{m}_{\delta,CO}, \Sigma_{\delta,CO}) \\
-		& \mathbf{m}_{\delta,CO} = \left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right) \\
-		& \Sigma_{\delta,CO}  = \sigma_{M,CO}^2(\boldsymbol{\Lambda}_{CO}, \boldsymbol{\Lambda}_{CO})  \\
-	\end{split}
-\label{eq:feba_gp_bias_co}
-\end{equation}
-where $\mathbf{m}_{\delta,CO}$ and $\Sigma_{\delta,CO}$ are the mean vector and the covariance matrix of the model bias term with respect to the $CO$ output, respectively;
-while $\sigma_{CO}^2$ and $R_{CO}$ are the process variance and correlation function of the process representing the bias term.
-The dimension of the multivariate Gaussian random variable above is $7$ following the length of the observation layout $\boldsymbol{\Lambda}_{CO}$.
-
-% Final note
-As final note, the formulation of the model bias term is supposed to include explicitly different controllable inputs $\bm{x}_c$ to take into account possible change in the bias as function of the inputs.
+% DP and CO. % Final note
+Similar formulations apply for the model bias terms with respect to the $DP$ and $CO$ outputs.
+As a final note, the formulation of the model bias term is supposed to include explicitly different controllable inputs $\bm{x}_c$ to take into account possible change in the bias as function of the inputs.
 However, the present study considers for the calibration only the data from \gls[hyper=false]{feba} test No. $216$ corresponding to a single combination of controllable inputs.
 Therefore, the parametrization of $\bm{x}_c$ is dropped from the following notation.
 
