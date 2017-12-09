@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170503140415" modified="D:20170503140415"/>
+<info created="D:20170503140415" modified="D:20171209145954"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -339,46 +339,47 @@ h
 580 752
 580 752 c
 </path>
-<path matrix="1.23785 0 0 1 -53.821 0" stroke="black" arrow="normal/normal">
+<path matrix="1.23785 0 0 1 -53.821 -24" stroke="black" pen="heavier" arrow="normal/normal">
 344 584 m
 416 584 l
 </path>
-<text matrix="1 0 0 1 32 -4" transformations="translations" pos="340 624" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 8 12" transformations="translations" pos="364 564" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">0</text>
-<text matrix="1 0 0 1 32 4" transformations="translations" pos="416 572" stroke="black" type="label" width="3.874" height="6.128" depth="0" valign="baseline">t</text>
-<text matrix="1 0 0 1 -96 12" transformations="translations" pos="460 620" stroke="black" type="label" width="9.132" height="6.808" depth="0" valign="baseline">M</text>
-<path matrix="1 0 0 1 28 0" stroke="black">
+<text matrix="1 0 0 1 32 -28" transformations="translations" pos="340 624" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
+<text matrix="1 0 0 1 8 -12" transformations="translations" pos="364 564" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">0</text>
+<text matrix="1 0 0 1 32 -20" transformations="translations" pos="416 572" stroke="black" type="label" width="3.874" height="6.128" depth="0" valign="baseline">t</text>
+<text matrix="1 0 0 1 -96 -12" transformations="translations" pos="460 620" stroke="black" type="label" width="9.132" height="6.808" depth="0" valign="baseline">M</text>
+<path matrix="1 0 0 1 28 -24" stroke="black">
 352 624 m
 352 624 l
 364 624 l
 364 624 l
 h
 </path>
-<path matrix="1 0 0 1 28 0" stroke="black">
+<path matrix="1 0 0 1 28 -24" stroke="black">
 364 624 m
 364 584 l
 364 584 l
 364 624 l
 h
 </path>
-<path matrix="1 0 0 1 28 0" stroke="black">
+<path matrix="1 0 0 1 28 -24" stroke="black">
 368 624 m
 368 584 l
 380 584 l
 380 624 l
 h
 </path>
-<path matrix="1 0 0 1 28 0" stroke="black">
+<path matrix="1 0 0 1 28 -24" stroke="black">
 392 624 m
 392 584 l
 420 584 l
 420 624 l
 h
 </path>
-<path matrix="1 0 0 1 28 0" stroke="black" arrow="normal/normal">
+<path matrix="1 0 0 1 28 -24" stroke="black" pen="heavier" arrow="normal/normal">
 352 576 m
 352 640 l
 </path>
-<text matrix="1 0 0 1 -16 0" transformations="translations" pos="380 652" stroke="black" type="label" width="132.172" height="5.535" depth="1.55" valign="baseline" size="footnote">\textit{Hypothetical} Phase Indicator Probe</text>
+<text matrix="1 0 0 1 -4 12" transformations="translations" pos="380 652" stroke="black" type="label" width="182.172" height="8.307" depth="2.32" valign="baseline" size="large">\textit{Hypothetical} Phase Indicator Probe</text>
+<text matrix="1 0 0 1 -16 -28" transformations="translations" pos="380 652" stroke="black" type="label" width="110.226" height="6.918" depth="0" valign="baseline">Phase Indicator Function</text>
 </page>
 </ipe>
