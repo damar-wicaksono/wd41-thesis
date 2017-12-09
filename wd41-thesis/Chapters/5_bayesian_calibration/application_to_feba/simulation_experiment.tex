@@ -144,8 +144,8 @@ Following the results of Chapter~\ref{ch:gp_metamodel}, three separate multivari
 The hyper-parameters associated with these metamodels are separately estimated using actual \gls[hyper=false]{trace} runs $\mathbf{Y}$ based on a design of experiment $\mathbf{DM}$ (see the details in Section~\ref{sec:gp_application_to_feba}).
 After being estimated, the hyper-parameters of the \gls[hyper=false]{gp} metamodel are kept constant in the application of the metamodel.
 
-Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ (contain both the controllable inputs $\bm{x}_c$ and the model parameters $\bm{x}_m$) becomes a probabilistic model.
-The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
+Under the \gls[hyper=false]{gp} formulation, the simulator prediction for a given input $\bm{x}_o$ (containing both the controllable inputs $\bm{x}_c$ and the model parameters $\bm{x}_m$) becomes a probabilistic model.
+The prediction of the $TC$ output at the observation layout $\boldsymbol{\Lambda}_{TC}$ is formulated as follows,
 \begin{equation}
 	\begin{split}
 		& \bm{\mathcal{Y}}_{M,TC} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,TC} (\bm{x}_o), \Sigma_{M,TC} (\bm{x}_o)) \\
@@ -157,40 +157,16 @@ The prediction of $TC$ output at the observation layout $\boldsymbol{\Lambda}_{T
 \label{eq:p_variate_metamodel_tc}
 \end{equation}
 where the notations above follow the convention of Section~\ref{sub:gp_multivariate}.
-Following the developments in Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
+According to Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
 
 Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
-However, in the observation layout of Eq.~(\ref{eq:bc_observation_layout_feba_tc}), not all points in time of the full simulation output have corresponding experimental data.
-As such, in this chapter for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
+However, some points of the full simulation output do not have a corresponding experimental data.
+As such, for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
 The resulting dimension of the Gaussian distribution is thus $133$.
 
-The formulation for the $DP$ output at the $\boldsymbol{\Lambda}_{DP}$ (Eq.~(\ref{eq:bc_observation_layout_feba_dp})) follows accordingly,
-\begin{equation}
-	\begin{split}
-		& \bm{\mathcal{Y}}_{M,DP} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,DP} (\bm{x}_o), \Sigma_{M,DP} (\bm{x}_o)) \\
-		& \boldsymbol{\mu}_{M,DP}  = \bar{\mathbf{y}}_{DP} + \boldsymbol{\Phi}^*_{Q_{DP},DP} \mathbf{m}_{SK,DP}(\bm{x}_o) \\
-		& \Sigma_{M,DP} = \boldsymbol{\Phi}^*_{Q_{DP},DP} \text{diag}(\mathbf{s}^2_{SK,DP}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_{Q_{DP},DP} + \boldsymbol{\Phi}^*_{>Q_{DP},DP} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q,DP}) \\
-		& \mathbf{m}_{SK,DP} = [m_{SK,DP,1}(\bm{x}_o), m_{SK,DP,2}(\bm{x}_o), \cdots, m_{SK,DP,Q_{DP}}(\bm{x}_o)] \\
-		& \mathbf{s}^2_{SK,DP} = [s^2_{SK,DP,1}(\bm{x}_o), s^2_{SK,DP,2}(\bm{x}_o), \cdots, s^2_{SK,DP,Q_{DP}}(\bm{x}_o)]
-	\end{split}
-\label{eq:p_variate_metamodel_dp}
-\end{equation}
-where $Q_{DP}$, the number of retained principal components with respect to the $DP$ output, is taken to be $10$.
-As before, the observation layout $\boldsymbol{\Lambda}_{DP}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{DP}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{DP},DP}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{DP},DP}$ such that they contain only the observed points of the $DP$ outputs in time.
-
-Finally, the $CO$ output at the observation layout $\boldsymbol{\Lambda}_{CO}$ (Eq.~(\ref{eq:bc_observation_layout_feba_co})) for a given input $\bm{x}_o$,
-\begin{equation}
-	\begin{split}
-		& \bm{\mathcal{Y}}_{M,CO} (\bm{x}_o) | \mathbf{Y} \sim \mathcal{N} (\boldsymbol{\mu}_{M,CO} (\bm{x}_o), \Sigma_{M,CO} (\bm{x}_o)) \\
-		& \boldsymbol{\mu}_{M,CO}  = \bar{\mathbf{y}}_{CO} + \boldsymbol{\Phi}^*_{Q_{CO},CO} \mathbf{m}_{SK,CO}(\bm{x}_o) \\
-		& \Sigma_{M,CO} = \boldsymbol{\Phi}^*_{Q_{CO},CO} \text{diag}(\mathbf{s}^2_{SK,CO}(\bm{x}_o)) \boldsymbol{\Phi}^{*T}_{Q_{CO},CO} + \boldsymbol{\Phi}^*_{>Q_{CO},CO} \mathbf{I}\boldsymbol{\Phi}^{*T}_{>Q_{CO},CO}) \\
-		& \mathbf{m}_{SK,CO} = [m_{SK,CO,1}(\bm{x}_o), m_{SK,CO,2}(\bm{x}_o), \cdots, m_{SK,CO,Q_{CO}}(\bm{x}_o)] \\
-		& \mathbf{s}^2_{SK,CO} = [s^2_{SK,CO,1}(\bm{x}_o), s^2_{SK,CO,2}(\bm{x}_o), \cdots, s^2_{SK,CO,Q_{CO}}(\bm{x}_o)]
-	\end{split}
-\label{eq:p_variate_metamodel_co}
-\end{equation}
-where $Q_{CO} = 5$ is the number of retained principal components with respect to the $CO$ output.
-Once more, the observation layout $\boldsymbol{\Lambda}_{CO}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{CO}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{CO},CO}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{CO},CO}$ such that they contain only the points in time coincide with the observed data.
+Similar formulation are used for the \gls[hyper=false]{gp} metamodels with respect to the $DP$ and $CO$ outputs.
+According to Section~\ref{sec:gp_application_to_feba}, the numbers of retained principal components are $10$ and $5$ for the $DP$ and $TC$ outputs, respectively.
+Again, only the points in time which coincide with the observed data are selected according to the respective observation layout.
 
 %-----------------------------------------------------------------------
 \subsubsection{Modeling the Model Bias Term}\label{subsub:bc_model_bias}
