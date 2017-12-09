@@ -9,13 +9,14 @@
 # date      : Nov. 2017
 #
 # Load required libraries -----------------------------------------------------
+library(ggplot2)
 
 # Global variables ------------------------------------------------------------
 # Output filename
 otpfullname <- "./figures/plotTraceUQPriorTC.pdf"
 
 # Input filename
-rds_tidy_fullname <- "./data/febaTrans216-febaVars12Influential-srs_1000_12-tidy-tc.Rds"
+rds_tidy_fullname <- "../data-support/postpro/srs/febaTrans216-febaVars12Influential-srs_1000_12-tc-tidy.Rds"
 
 # Graphic variables
 fig_size <- c(18, 9)
@@ -26,12 +27,12 @@ trc_exp_df <- readRDS(rds_tidy_fullname)[[2]]
 
 # Make the plot
 p <- ggplot(data = trc_uq_df, aes(x = time, y = mid_run))
-p <- p + geom_line()
-p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
-                    shape = 4, stroke = 1.0)
 p <- p + facet_wrap(~ax_locs, ncol = 4)
 p <- p + geom_ribbon(aes(x = time, ymin = lb_run, ymax = ub_run),
                      fill = "gray", alpha = 0.5)
+p <- p + geom_line()
+p <- p + geom_point(data = trc_exp_df, aes(x = time, y = exp_data),
+                    shape = 4, stroke = 1.0)
 p <- p + theme_bw()
 
 # Set axis labels and font size
