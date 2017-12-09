@@ -302,7 +302,7 @@ For instance, the posterior \gls[hyper=false]{pdf} for the model parameters unde
   p_{TC}(\bm{x}_m | \mathbf{y}_{E,TC}) \propto \mathcal{L}_{TC}(\bm{x}_m;\mathbf{y}_{E,TC}) \cdot p(\bm{x}_m)
 \label{eq:feba_posterior}
 \end{equation}
-where the likelihood $\mathcal{L}_{TC}$ is the likelihood function associated with the data generating process in Eq.~(\ref{eq:likelihood_tc}).
+where $\mathcal{L}_{TC}$ is the likelihood function associated with the data generating process in Eq.~(\ref{eq:likelihood_tc}).
 The five other likelihood functions and posterior \glspl[hyper=false]{pdf} are defined similarly.
 Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration schemes considered in this study.
 \begin{table*}[!htbp]\centering
@@ -331,11 +331,11 @@ Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration sch
 
 % Introductory paragraph
 Each calibration scheme above results in a likelihood function, which when combined with the prior \glspl[hyper=false]{pdf} of the model parameters, yield a posterior \glspl[hyper=false]{pdf}.
-The $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT} scheme) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the respective assumed calibration scheme.
+The $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT} scheme) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the assumed respective calibration scheme.
 To characterize the posterior uncertainties of the model parameters, samples are directly generated from the respective posterior \gls[hyper=false]{pdf} by means of \gls[hyper=false]{mcmc} simulation.
 
 % Parallel requirement
-Although the use of \gls[hyper=false]{gp} metamodel alleviates the burden of having to run \gls[hyper=false]{trace} directly, evaluating the likelihood function requires an inversion of the covariance matrix.
+Although the use of \gls[hyper=false]{gp} metamodels alleviate the burden of having to run \gls[hyper=false]{trace} directly, evaluating the likelihood function requires an inversion of the covariance matrix.
 The computational cost of matrix inversion is still not negligible, especially considering the expected number of evaluations. 
 Furthermore, although the \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} algorithm (Algorithm~\ref{alg:aies}) is straightforward to implement, it is not readily applicable for using multiple CPU \cite{Foreman-Mackey2013}.
 
@@ -350,7 +350,7 @@ The initial state of the ensemble is a tight random scatter around the nominal m
 The total number of iterations depends on the convergence of the \gls[hyper=false]{mcmc} simulation (discarding the initialization bias) and the required level of statistical error as detailed in Section~\ref{sec:bc_mcmc_diagnostic}.
 For the present study, they are assessed after-the-fact and the results is indeed found to be sufficient.
 Meanwhile, there is no clear cut rule for choosing the number of walkers $L$ \cite{Foreman-Mackey2013}.
-Larger number of walkers requires more computational cost per iteration but yields more independent samples per iteration.
+Larger number of walkers requires a higher computational cost per iteration but yields more independent samples per iteration.
 At the same time, larger number of walkers might cause more of the initial calculations to be discarded as more calculations are required to settle the ensemble in the typical region of the posterior distribution.
 A thousand walkers were selected considering the available computational resources at the time of the analysis.
 
