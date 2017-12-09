@@ -9,7 +9,7 @@
 n_sub <- 5
 trc_uq_prior_df <- readRDS(rds_tidy_prior_fullname)[[1]]
 n_t <- dim(trc_uq_prior_df)[1]
-
+trc_uq_prior_df <- readRDS(rds_tidy_prior_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_uq_post_corr_df <- readRDS(rds_tidy_corr_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_uq_post_ind_df <- readRDS(rds_tidy_ind_fullname)[[1]][seq(1, n_t, n_sub),]
 trc_exp_df <- readRDS(rds_tidy_prior_fullname)[[2]]
@@ -46,8 +46,8 @@ p <- p + scale_fill_manual(name = "",
                                       "post_ind" = "#AEAEAE",
                                       "post_corr" = "#E6E6E6"),
                            labels = c("Prior",
-                                      "Posterior, Corr.",
-                                      "Posterior, Ind."))
+                                      "Posterior, Ind.",
+                                      "Posterior, Corr."))
 
 # Set axis labels and font size
 p <- p + theme_bw()

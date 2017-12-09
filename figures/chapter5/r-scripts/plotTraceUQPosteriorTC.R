@@ -43,8 +43,8 @@ p <- p + scale_fill_manual(name = "Uncertainty Bands",
                                       "post_ind" = alpha("#AEAEAE", 0.75),
                                       "post_corr" = alpha("#E6E6E6", 0.75)),
                            labels = c("Prior",
-                                      "Posterior, Corr.",
-                                      "Posterior, Ind."))
+                                      "Posterior, Ind.",
+                                      "Posterior, Corr."))
 
 # Set axis labels and font size
 p <- p + theme_bw()
