@@ -186,8 +186,8 @@ In this case, only calculations of a few samples might be afforded and, as requi
 The results above hold for \gls[hyper=false]{mcmc} samples obtained from a stationary chain.
 As illustrated in Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1}, the \gls[hyper=false]{mcmc} samples at the beginning of the chain are taken from a lower probability region of the target probability distribution and thus are less representative of the distribution.
 \marginpar{Burn-in}
-After some period, however, the apparent ``initial transient'' eventually dies off and the chain settles in more typical region of the parameter space.
-The colloquial term \emph{burn-in} period is used to characterized this initial part of the chain.
+After some period, however, the apparent ``initial transient'' eventually dies off and the chain settles in a more typical region of the parameter space.
+The colloquial term \emph{burn-in} period is used to characterize this initial part of the chain.
 By \emph{burn-in} the chain, it is meant that the samples of that period are discarded from further analysis.
 
 % Consequence of burn-in period
@@ -199,9 +199,9 @@ In a single particle \gls[hyper=false]{mcmc} algorithm discarding the samples co
 
 % Burn-in for ensemble sampler
 On the other hand, in an ensemble sampler, burn-in period might contain much larger biased samples relative to the total number of samples due to the use of multiple walkers within an iteration \cite{Hou2012,Foreman-Mackey2013,Akeret2013}.
-Multiple walkers can be initialized from low probability region. 
+Multiple walkers can be initialized from low probability regions.
 Furthermore, although an iteration computationally costs more, the number of iterations in an ensemble sampler is relatively shorter than in a single particle sampler.
-As such, determining the length of burn-in period and discarding the corresponding samples are considered more important for ensemble samplers.
+As such, determining the length of burn-in period -- and discarding the corresponding samples -- is more important for ensemble samplers.
 
 % Burn-in and autocorrelation
 Burn-in period can be associated with the relaxation period of an infinitely long Markov chain \cite{Sokal1997}.
@@ -216,13 +216,15 @@ The time represents the rate of convergence of a Markov chain with respect to th
 It can be used to determine the number of iterations to discard before the chain can be considered stationary.
 
 % Importance of Burn-in period revisited
-The relationship between exponential correlation time and stationarity holds only for strictly exponential correlation function which is often the case for an infinitely long chain \cite{Sokal1997}.
+The relationship between exponential correlation time and stationarity only strictly holds for exponential correlation functions.
+But, this is often the case for an infinitely long chain \cite{Sokal1997}.
+In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function}.
+In practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
+
+In this thesis, they are both estimated using the definition of the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})).
 \marginpar{Determining the number of iterations to discard}
-Furthermore and in general, the exponential autocorrelation time is different from (twice) the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})) except in the case of exponentially decaying autocorrelation function.
-Thus, in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997} (thus this thesis implicitly assumed the integrated autocorrelation time when the term is used).
-That is, the (time) autocorrelation time is estimated for the initial chain and is used as the basis to determine the length of the burn-in period. 
-Once more, in practice, a conservative multiples of the estimated autocorrelation time $\tau_\text{exp}$, ranging from $5$ \cite{Foreman-Mackey2013} to $20$ \cite{Sokal1997}, is used to that effect.
-Afterward, assuming that the stationary chain has been attained, the time is re-estimated and is used as the basis for assessing the autocorrelation between successive realizations (and if applies, for thinning).
+That is, the autocorrelation time is first estimated for the whole chain and is used, after multiplication by a conservative factor of $20$ \cite{Sokal1997}, to determine the length of the burn-in period. 
+Afterward, assuming that the stationary chain has been attained, the autocorrelation time is re-estimated and is used as the basis for assessing the autocorrelation between successive realizations (and if applies, for thinning).
 
 In the end, it is important to acknowledge that the burn-in period as determined by the autocorrelation time is a heuristic.
 \marginpar{Burn-in, a heuristic}
@@ -231,9 +233,9 @@ Moreover, a suspiciously long burn-in period can give an indication of a more se
 It cannot, however, establish the fact that a Markov chain has indeed settled in its stationary (and simultaneously, its target) distribution \cite{Sokal1997,Geyer2011}. 
 
 % Why there's burn-in
-The initial transient is mainly due to the selection of values with low posterior probability to initialize the chain.
+Finally, note that the initial transient is mainly due to selecting values with low posterior probability to initialize the chain.
 \marginpar{Burn-in, alternatives}
-In a simple problem, perhaps it is straightforward to determine a priori a value that lies on high probability region of the posterior.
+In a simple problem, perhaps it can be straightforward to determine a value that lies on high probability region of the posterior.
 This is not the case for a more complex high-dimensional problem and some arbitrary values are often selected instead.
 Thus, some authors \cite{Geyer1992, Akeret2013} proposed instead to tune the initial values such that they are more representative of the posterior \gls[hyper=false]{pdf} and make do without burn-in.
 This tuning, however, requires additional preliminary calculations.
