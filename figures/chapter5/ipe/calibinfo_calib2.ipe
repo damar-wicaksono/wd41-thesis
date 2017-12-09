@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171204141809" modified="D:20171204213637"/>
+<info created="D:20171204141809" modified="D:20171209182457"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -264,12 +264,12 @@ h
 144 656 m
 144 768 l
 </path>
-<path matrix="1.28572 0 0 1 -36.5715 -16" stroke="black" arrow="normal/normal">
+<path matrix="1.46429 0 0 1 -59.4288 -16" stroke="black" arrow="normal/normal">
 128 672 m
 240 672 l
 </path>
-<text matrix="1 0 0 1 -88 -116" transformations="translations" pos="328 760" stroke="black" type="label" width="25.225" height="6.812" depth="1.49" valign="baseline">LUB$_2$</text>
-<text matrix="1 0 0 1 -152 -72" transformations="translations" pos="308 716" stroke="black" type="label" width="26.47" height="6.812" depth="1.49" valign="baseline">UUB$_2$</text>
+<text matrix="1 0 0 1 -88 -116" transformations="translations" pos="328 760" stroke="black" type="label" width="32.703" height="6.808" depth="2.85" valign="baseline">LUB$_{Y,2}$</text>
+<text matrix="1 0 0 1 -152 -72" transformations="translations" pos="308 716" stroke="black" type="label" width="33.948" height="6.808" depth="2.85" valign="baseline">UUB$_{Y,2}$</text>
 <text matrix="1 0 0 1 -172 -96" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">1</text>
 <text matrix="1 0 0 1 -172 -152" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">0</text>
 <path matrix="1 0 0 1 0 -16" stroke="black">
@@ -284,7 +284,7 @@ h
 <use matrix="1 0 0 1 -80 32" name="mark/disk(sx)" pos="280 624" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -80 32" name="mark/disk(sx)" pos="248 624" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -80 32" name="mark/disk(sx)" pos="332 624" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 -140 -116" transformations="translations" pos="328 760" stroke="black" type="label" width="23.348" height="4.29" depth="2.85" valign="baseline">$y$\textsubscript{ref.,2}</text>
+<text matrix="1 0 0 1 -140 -128" transformations="translations" pos="328 760" stroke="black" type="label" width="23.348" height="4.29" depth="2.85" valign="baseline">$y$\textsubscript{ref.,2}</text>
 <path stroke="black">
 224 656 m
 224.045 681.804 l
@@ -299,6 +299,16 @@ h
 144 608 m
 256 608 l
 </path>
-<text matrix="1 0 0 1 -114.885 -114.989" transformations="translations" pos="328 760" stroke="black" type="label" width="19.523" height="4.297" depth="1.93" valign="baseline">$y$\textsubscript{obs.}</text>
+<text matrix="1 0 0 1 -114.885 -126.989" transformations="translations" pos="328 760" stroke="black" type="label" width="19.523" height="4.297" depth="1.93" valign="baseline">$y$\textsubscript{obs.}</text>
+<path stroke="black" arrow="normal/tiny">
+200 656 m
+200 640 l
+</path>
+<path matrix="1 0 0 1 24 0" stroke="black" arrow="normal/tiny">
+200 656 m
+200 640 l
+</path>
+<text matrix="1 0 0 1 -48 -114.989" transformations="translations" pos="328 760" stroke="black" type="label" width="6.137" height="5.152" depth="2.32" valign="baseline" size="large" style="math">y</text>
+<text matrix="1 0 0 0.460553 -160 426.457" transformations="translations" pos="288 620" stroke="black" type="label" width="10.18" height="7.412" depth="0" valign="baseline" size="LARGE" style="math">\pi</text>
 </page>
 </ipe>

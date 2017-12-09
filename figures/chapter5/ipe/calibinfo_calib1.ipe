@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171204141702" modified="D:20171204213619"/>
+<info created="D:20171204141702" modified="D:20171209182526"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -264,12 +264,12 @@ h
 144 656 m
 144 768 l
 </path>
-<path matrix="1.28572 0 0 1 11.4285 -32" stroke="black" arrow="normal/normal">
+<path matrix="1.50429 0 0 1 -16.5489 -32" stroke="black" arrow="normal/normal">
 128 672 m
 240 672 l
 </path>
-<text matrix="1 0 0 1 -36 -132" transformations="translations" pos="328 760" stroke="black" type="label" width="26.47" height="6.812" depth="1.49" valign="baseline">UUB$_1$</text>
-<text matrix="1 0 0 1 -88 -88" transformations="translations" pos="308 716" stroke="black" type="label" width="25.225" height="6.812" depth="1.49" valign="baseline">LUB$_1$</text>
+<text matrix="1 0 0 1 -36 -132" transformations="translations" pos="328 760" stroke="black" type="label" width="33.948" height="6.808" depth="2.85" valign="baseline">UUB$_{Y,1}$</text>
+<text matrix="1 0 0 1 -100 -88" transformations="translations" pos="308 716" stroke="black" type="label" width="32.703" height="6.808" depth="2.85" valign="baseline">LUB$_{Y,1}$</text>
 <text matrix="1 0 0 1 -124 -112" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">1</text>
 <text matrix="1 0 0 1 -124 -168" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">0</text>
 <path matrix="1 0 0 1 48 -32" stroke="black">
@@ -300,5 +300,7 @@ h
 </path>
 <text matrix="1 0 0 1 -56 -126.989" transformations="translations" pos="328 760" stroke="black" type="label" width="19.523" height="4.297" depth="1.93" valign="baseline">$y$\textsubscript{obs.}</text>
 <text matrix="1 0 0 1 -80 -130.989" transformations="translations" pos="328 760" stroke="black" type="label" width="23.348" height="4.29" depth="2.85" valign="baseline">$y$\textsubscript{ref.,1}</text>
+<text matrix="1 0 0 1 4 -130.989" transformations="translations" pos="328 760" stroke="black" type="label" width="6.137" height="5.152" depth="2.32" valign="baseline" size="large">$y$</text>
+<text matrix="1 0 0 0.460553 -112 410.457" transformations="translations" pos="288 620" stroke="black" type="label" width="10.18" height="7.412" depth="0" valign="baseline" size="LARGE" style="math">\pi</text>
 </page>
 </ipe>

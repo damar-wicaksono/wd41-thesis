@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171204120754" modified="D:20171204213720"/>
+<info created="D:20171204120754" modified="D:20171209181201"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -268,8 +268,8 @@ h
 240 720 l
 240 672 l
 </path>
-<text matrix="1 0 0 1 -100 -100" transformations="translations" pos="328 760" stroke="black" type="label" width="30.81" height="8.172" depth="3.34" valign="baseline" size="large">UUB$_y$</text>
-<text matrix="1 0 0 1 -152 -56" transformations="translations" pos="308 716" stroke="black" type="label" width="29.349" height="8.172" depth="3.34" valign="baseline" size="large">LUB$_y$</text>
+<text matrix="1 0 0 1 -100 -100" transformations="translations" pos="328 760" stroke="black" type="label" width="33.128" height="8.173" depth="1.79" valign="baseline" size="large">UUB$_Y$</text>
+<text matrix="1 0 0 1 -152 -56" transformations="translations" pos="308 716" stroke="black" type="label" width="31.667" height="8.173" depth="1.79" valign="baseline" size="large">LUB$_Y$</text>
 <text matrix="1 0 0 1 -172 -80" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">1</text>
 <text matrix="1 0 0 1 -172 -136" transformations="translations" pos="304 796" stroke="black" type="label" width="7.024" height="9.245" depth="0" valign="baseline" size="Large" style="math">0</text>
 <path stroke="black">
