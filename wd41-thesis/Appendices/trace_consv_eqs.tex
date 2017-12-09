@@ -8,9 +8,13 @@ Furthermore, the formulations are given in volumetric term (i.e., per unit volum
 A symbol is defined the first time it appears in an equation 
 and the complete list of symbols can be found in the \hyperref[app:notations]{Glossary of Notations} at back of the thesis.
 
-In the subsequent section the angle brackets and the overbar will be dropped from the void fraction notation Eq.~(\ref{eq:void_fraction}) and any mention of void fraction will refer to the above time- and volume-averaged formulation.
+In the subsequent section the angle brackets and the overbar will be dropped from the void fraction notation Eq.~(\ref{eq:void_fraction}) and any mention of void fraction will refer to the above time- and volume (area)-averaged formulation.
 
-\paragraph{Mass balance equations, liquid and gas phases:}
+%---------------------------------------------------------------
+\section{Mass Balance Equations}\label{sub:trace_consv_eqs_mass}
+%---------------------------------------------------------------
+
+The mass balance equations given for liquid and gas phases are,
 \begin{equation}
 	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l}] = - \Gamma
 \label{eq:mass_balance_liquid}
@@ -45,7 +49,11 @@ Note that the term \gls[hyper=false]{Gamma}, the volumetric interfacial mass-tra
 is given with a convention that it is positive for the transfer from liquid phase to gas phase.
 This term is defined in Eq.~(\ref{eq:Gamma}) below.
 
-\paragraph{Momentum balance equations, liquid and gas phases:}
+%-----------------------------------------------------------------------
+\section{Momentum Balance Equations}\label{sub:trace_consv_eqs_momentum}
+%-----------------------------------------------------------------------
+
+The momentum balance equations are given for liquid and gas phases as follow,
 \begin{equation}
 	\begin{split}
 		& \frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}] + (1 - \alpha) \nabla p \\
@@ -108,7 +116,11 @@ For the friction (shear) terms in right hand side, TRACE uses the following form
 where the friction coefficients \gls[hyper=false]{cint}, \gls[hyper=false]{cwl}, \gls[hyper=false]{cwg} for interfacial shear, wall-liquid shear, and wall-gas shear, 
 respectively are obtained from flow regime-dependent empirical correlations.
 
-\paragraph{Energy balance equations, liquid and gas phases:}
+%-------------------------------------------------------------------
+\section{Energy Balance Equations}\label{sub:trace_consv_eqs_energy}
+%-------------------------------------------------------------------
+
+The energy balance equations are defined for liquid and gas phases as,
 \begin{equation}
 	\begin{split}
 		& \frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t} + \nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right) \mathbf{v_l} \right] \\
@@ -195,7 +207,9 @@ Finally, the mass-transfer rate at the interface is defined using a thermal-ener
 \end{equation}
 In other words, the net heat transfer rate given to the saturated liquid phase, is used entirely for phase change.
 
-\paragraph{}
+%------------------------------------------------------------------------
+\section{Heat Conduction Equations}\label{sub:trace_consv_eqs_conduction}
+%------------------------------------------------------------------------
 
 Besides the set balance equations that govern the two-phase fluid flow,
 \gls[hyper=false]{trace} also includes a heat conduction module (known as \emph{heat structure} component) 
@@ -220,7 +234,9 @@ where the heat flux at the surface of the structure, $q''$ is partitioned to dif
 As can be seen, 
 Eq.~(\ref{eq:conduction_surface}) couples the heat conduction equation with energy balance equations of the fluid through the terms defined in Eqs.~(\ref{eq:qwl}), (\ref{eq:qwg}), and (\ref{eq:qwsat}).
 
-\subsection{Closure and Flow Regimes}\label{sub:closure_and_flow_regimes}
+%---------------------------------------------------------------------
+\section{Closure and Flow Regimes}\label{sub:closure_and_flow_regimes}
+%---------------------------------------------------------------------
 
 In each of the balance equations given above, 
 the right hand side represents the source and sink terms mainly due to fluid interaction with solid structure (\emph{wall})
