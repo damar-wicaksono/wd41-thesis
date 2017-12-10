@@ -3,12 +3,12 @@
 %***************************************************************************
 
 % Opening paragraph
-The quantified prior uncertainties of the input parameters are propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess (and verify) the prior level of prediction uncertainties before experimental data is used to update the prior uncertainties of the model parameters.
-The prior uncertainty propagation step consists generating independent samples of values for each of the $27$ selected input parameters from their prior \glspl[hyper=false]{pdf} (Tables~\ref{tab:trace_model_parameter_1}-\ref{tab:trace_model_parameter_2}).
-and running the \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model using the sampled parameters values.
+The quantified prior uncertainties of the input parameters are propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess (and verify) the prior level of prediction uncertainties.
+Independent samples are generated from the prior \glspl[hyper=false]{pdf} of the $27$ selected input parameters (Tables~\ref{tab:trace_model_parameter_1}-\ref{tab:trace_model_parameter_2})
+and the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} is run using the sampled parameters values.
 
 % Explaining the figure
-Figs.~\ref{fig:ch2_plot_base_case_216_tc}, \ref{fig:ch2_plot_base_case_216_dp}, and~\ref{fig:ch2_plot_base_case_216_co} show the nominal \gls[hyper=false]{trace} predictions (i.e., the prediction with the nominal values of the input parameters, shown in the figure as thick lines) in comparison with the experimental data (shown as crosses) for \gls[hyper=false]{feba} test No. $216$, for three selected outputs of different types:
+Figs.~\ref{fig:ch2_plot_base_case_216_tc}, \ref{fig:ch2_plot_base_case_216_dp}, and~\ref{fig:ch2_plot_base_case_216_co} show the nominal \gls[hyper=false]{trace} predictions (i.e., the prediction with the nominal values of the input parameters) in comparison with the experimental data for \gls[hyper=false]{feba} test No. $216$ for three selected outputs of different types:
 the cladding temperature $TC$ at the mid-height assembly, the pressure drop $DP$ of the middle axial segment, and the liquid carryover $CO$ (up to the saturation of the collecting tank at $10\,[kg]$), respectively.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch2_plot_base_case_216},
@@ -30,12 +30,12 @@ the cladding temperature $TC$ at the mid-height assembly, the pressure drop $DP$
 {../figures/chapter2/figures/plotBaseCase216CO}
 
 % Comments on how the base looks like
-The comparison between the nominal \gls[hyper=false]{trace} predictions and the corresponding experimental data for the clad temperature and the pressure drop are satisfactory as no major discrepancy is observed.
-Furthermore, with respect to those outputs, \gls[hyper=false]{trace} seems to capture all the important features of the transient in \gls[hyper=false]{feba} test No. $216$.
+The comparison between the nominal \gls[hyper=false]{trace} predictions and the corresponding experimental data for the clad temperature and the pressure drop are satisfactory.
+\gls[hyper=false]{trace} seems to capture all the important features of the transient in \gls[hyper=false]{feba} test No. $216$.
 That is, \gls[hyper=false]{trace} predicts well the behavior of the reflood curve during the transient; while for the $DP$ output \gls[hyper=false]{trace} predicts well the behavior of channel flooding.
-Note that in Fig.~\ref{fig:ch2_plot_base_case_216_dp} the transient between the two equilibrium values indicates the flooding of the channel between axial level $1.7$ and $2.3\,[m]$ from initially pure steam (low pressure drop) to mixture (rising) and to eventually pure liquid (higher pressure drop). 
-Note also that Fig.~\ref{fig:ch2_plot_base_case_216_tc} is the prediction at axial level $1.9\,[m]$, a level within the axial segments of the pressure drop.
-On the other hand, there is strong apparent bias (over-prediction) of the \gls[hyper=false]{trace} predictions in the comparison with respect to the liquid carryover.
+Note that in Fig.~\ref{fig:ch2_plot_base_case_216_dp} the transient between the two equilibrium values indicates the flooding of the channel between axial level $1.7$ and $2.3\,[m]$ from an initial pure steam flow (low pressure drop) to mixture (rising) and eventually a pure liquid flow (higher pressure drop). 
+Note also that Fig.~\ref{fig:ch2_plot_base_case_216_tc} is the prediction at the axial level $1.9\,[m]$, a level within the axial segments of the pressure drop.
+On the other hand, there is a strong apparent bias (over-prediction) of the \gls[hyper=false]{trace} predictions with respect to the liquid carryover.
 
 % Make observation about variation in time and amplitude
 The thin lines plotted in each panel of Fig.~\ref{fig:ch2_plot_base_case_216} indicate the predictions from $50$ selected realizations of the uncertainty propagation.
@@ -77,11 +77,11 @@ As observed, there is no major discrepancy between the \gls[hyper=false]{trace} 
 
 % FEBA Test No. 216 Prior Uncertainty Propagation, CO
 Finally, Fig.~\ref{fig:ch2_plot_trace_uq_prior_dp_216} shows the uncertainty propagation results for the liquid carryover $CO$ output.
-As mentioned, although there is large discrepancy between the nominal \gls[hyper=false]{trace} prediction and the experimental data, the prediction uncertainty covers experimental data.
-In particular, the propagation of the prior input parameters uncertainties results in large and skewed toward lower values of the predictions uncertainties. 
+As mentioned, although there is a large discrepancy between the nominal \gls[hyper=false]{trace} prediction and the experimental data, the prediction uncertainty covers the experimental data.
+In particular, the propagation of the prior input parameters uncertainties results in large band that is skewed toward the lower values of the predictions uncertainties. 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{../figures/chapter2/figures/plotTraceUQPriorCO216}
-    \caption[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryover output ($CO$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the pressure drop output ($CO$). The uncertainty bound corresponds to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
+    \caption[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryover output ($CO$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryvover output ($CO$). The uncertainty bound corresponds to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
     \label{fig:ch2_plot_trace_uq_prior_co_216}
 \end{figure}
