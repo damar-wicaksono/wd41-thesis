@@ -9,12 +9,20 @@ In a way this doctoral research is a belated contribution
 
 % Chapter 2
 Chapter~\ref{ch:trace_reflood} presented the reflood experiment at the \glsentryshort{feba} facility that served as the experimental basis of this work.
-The \gls[hyper=false]{trace} model of the facility was developed and a set of initial input parameters perceived to be important for the simulation was selected.
-Thereafter, prior uncertainties of the selected input parameters were assigned.
-Uncertainty propagation was conducted to assess the prior level of prediction uncertainties.
+The \gls[hyper=false]{trace} model of the facility was developed and a set of $27$ initial input parameters perceived to be important for the simulation was selected.
+Thereafter, prior uncertainties of the selected input parameters were assigned and they were propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess the prior level of prediction uncertainties.
 This model then became the running case study in the three subsequent chapters to which the proposed methods are applied.
 
 % Chapter 3
+Chapter~\ref{ch:gsa} introduced selected \gls[hyper=false]{gsa} methods which were then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+First, the importance of the initial set of input parameters was quantitatively assessed through the Morris screening method and the Total-effect Sobol indices.
+The two provided a basis for parameter screening in which less influential parameters were excluded from further analysis, reducing the size of the problem.
+After the screening step, only $12$ out of the initial $27$ input parameters were found to be influential. 
+Then, focusing on the $12$ most influential parameters, the effect of parameter perturbation on the overall time-dependent outputs was investigated.
+The high-dimensionality of the outputs was reduced by means of techniques derived from \gls[hyper=false]{fda}.
+Finally, main- and total effect Sobol' indices, two global sensitivity measures, were estimated for each parameter with respect to the output in the reduced space.
+The results regarding parameters sensitivity with respect to different outputs have provided a better understanding on the inputs/outputs relationship in the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+By analyzing how the model actually behaved (or should have behaved) under parameters perturbation has also provided an additional step of the model verification and validation.
 
 % Chapter 4
 
