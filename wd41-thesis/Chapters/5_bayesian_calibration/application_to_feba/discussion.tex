@@ -2,25 +2,26 @@
 \subsection{Discussion}\label{sub:bc_discussion}
 %***********************************************
 
-% Opening Paragraph, On Convergence
-A series of \gls[hyper=false]{mcmc} simulations was conducted for each of the calibration schemes summarized in Table~\ref{tab:ch5_calibration_schemes}.
-\marginpar{On the convergence of MCMC simulation}
-Two thousands iterations and 1'000 walkers were used in the ensemble sampler generating 2'000'000 samples.
-All simulations were started from the same initial parameters values: the nominal parameters values.
-After post-processing the resulting posterior samples: discarding some of the initial iterations and thinning the samples,
-(serially) independent sample size in the order of tens of thousands was obtained for each calibration scheme. 
-Though the size of independent samples is much smaller than the initially obtained posterior samples, the resulting relative statistical error associated with model parameters estimates is in the order of less than $1\%$.
-Based on the estimated autocorrelation time, before and after burn-in, no indication of lack of convergence during the ensemble iteration was found.
-The autocorrelation time after burn-in was found to be smaller than total number of iterations (see Section~\ref{sub:bc_mcmc_thinning}). 
+%------------------------------------------------------------------------------------------------
+\subsubsection{On the Convergence of the MCMC Simulation}\label{subsub:bc_discussion_convergence}
+%------------------------------------------------------------------------------------------------
 
-% On convergence and the length burn-in period
-However, the results also supported the findings of \cite{Hou2012,Foreman-Mackey2013,Akeret2013} regarding the relatively long length of the burn-in period with respect to the total number of ensemble iterations in comparison with the length of the period in a single particle sample.
-\marginpar{The length of burn-in period}
+% Opening Paragraph, On Convergence
+Though the length of burn-in period is almost $40\%$ of the total number of iterations -- thus discarding a lot of the initial samples -- the resulting statistical error associated with model parameters estimates is in the order of less than $1\%$ relative to the respective standard deviation.
+The relatively long burn-in period with respect to the total number of ensemble iterations is consistent with the observations of Refs.~\cite{Hou2012,Foreman-Mackey2013,Akeret2013}, each of which applied an \gls[hyper=false]{aies} ensemble sampler to conduct a Bayesian calibration of a computer model.
+This relatively long burn-in period is especially true in comparison with the length of the period in a single particle sampler.
 It is not uncommon to run a single particle \gls[hyper=false]{mcmc} simulation up to $100'000$ iterations (or beyond) for computer model calibration \cite{Wu2017,Wu2018}.
-In such case, the length of burn-in period would be much smaller in comparison with the total number of iterations and thus would be less important to discard (a rule of thumb arguess for discarding at most $20\%$ of the total number of samples \cite{Sokal1997}).
-On the contrary, in the case of ensemble sampler, although the total number of iterations are much smaller, the length of burn-in period was conservatively estimated between $40\%$ to $50\%$ of the total number of iterations\footnote{Note that although the number of iterations in an ensemble sampler is much smaller than in a single particle sampler, the computational cost would be relatively similar in terms of likelihood evaluations as multiple walkers mean that more computations have to be conducted per iteration.}.
-Therefore, determining burn-in period was indeed more important;
-if the samples associated with this initial transient were not discarded, it risked that the model parameters estimates would be heavily biased.
+In such case, the length of the burn-in period would be much smaller than the total number of iterations and thus would be less important to discard\footnote{A rule of thumb argues for discarding at most $20\%$ of the total number of samples in a single particle samplers \cite{Sokal1997}.}.
+
+In the case considered here, although the total number of iterations are much smaller ($2'000$), the length of burn-in period was conservatively estimated up to $40\%$ of the total number of iterations\footnote{Note that, despite the lower number of iterations for an ensemble sampler, the computational cost of the sampler in terms of the number of likelihood evaluations is on par with a single particle sampler.}.
+Therefore, determining the burn-in period was indeed more important;
+if the samples associated with this initial transient were not discarded then the model parameters estimates would be heavily biased.
+
+Finally, note that the only free parameter to deal with in this particular application of the ensemble sampler was the total number of iterations; no adjustment to the sampler itself during the iteration was required.
+
+%------------------------------------------------------------------------------------------------------------------
+\subsubsection{On the Constraining Ability of Data and Identifiability}\label{subsub:bc_discussion_identifiability}
+%------------------------------------------------------------------------------------------------------------------
 
 % On the Posterior samples, constraining power of data, and using different type of outputs
 The resulting posterior samples, as presented in the corner plots (Figs.\ref{fig:ch5_plot_ens_all_disc_centered}, \ref{fig:ch5_plot_ens_tc_disc_centered}, \ref{fig:ch5_plot_ens_dp_disc_centered}, \ref{fig:ch5_plot_ens_co_disc_centered}, \ref{fig:ch5_plot_ens_all_disc_centered_noparam8}, and \ref{fig:ch5_plot_ens_all_nodisc}) and as summarized in Table~\ref{tab:ch5_post_param}, indicate different constraining ability of the data on the model parameters prior uncertainties depending on the calibration scheme.
@@ -157,6 +158,10 @@ In this illustration, the correlation among parameters tighten the uncertainty b
 Moreover, as it was suspected, the parameter \texttt{dffbVIHT} is responsible for the strong correlation;
 ignoring the correlation structure in the uncertainty propagation of the results from the scheme  \texttt{w/ Bias, no dffbVIHT} shows a marginal difference compared to the propagation with the correlation structure. 
 
+%-------------------------------------------------------------------------------------------------------
+\subsubsection{On the Calibration with and without the Model Bias Term}\label{subsub:bc_discussion_bias}
+%-------------------------------------------------------------------------------------------------------
+
 % CO FEBA Test 216 Different Calibration Schemes
 At the same time, allowing the parameter \texttt{dffbVIHT} to change dramatically from the initial nominal parameter value also allowed the calibration scheme \texttt{w/o Bias} to correct the bias in the prediction of liquid carryover as indicated in Fig.~\ref{fig:ch5_plot_feba_216_co_post_2}.
 Now the nominal \gls[hyper=false]{trace} prediction mostly falls outside the posterior uncertainty band.
@@ -186,6 +191,10 @@ This is supported by the sensitivity analysis conducted in the previous chapter 
 Recall that the parameter \texttt{dffbVIHT} is responsible for the heat transfer between the vapor phase and the interface and it contributes to the variation in the available entrained liquid and droplets being carried away through the top of the assembly.
 These droplets, in turn, is an important heat sink for the cladding.
 Thus, an increase in the heat transfer coefficient enhances the heat transfer at the top of the assembly and accelerate the evaporation of the available droplets (thus the lower clad temperature) while simultaneously decreases the amount of liquid being carried away (thus the slower rate of liquid carryover collection).
+
+%---------------------------------------------------------------------------------------------------
+\subsubsection{On the Effect of Boundary Conditions}\label{subsub:bc_discussion_boundary_conditions}
+%---------------------------------------------------------------------------------------------------
 
 % TC1 All FEBA Tests Calibration with model bias, kinda look better
 When comparing the uncertainty propagation results of the output $TC1$ across \gls[hyper=false]{feba} tests, another peculiar finding can be observed.
