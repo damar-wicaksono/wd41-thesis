@@ -1,355 +1,129 @@
-\section{Thermal-Hydraulics System Code \glsentryshort{trace}}\label{sec:reflood_trace}
+%*************************************************************************************************************************
+\section[The Thermal-Hydraulics System Code TRACE]{The Thermal-Hydraulics (TH) System Code TRACE}\label{sec:reflood_trace}
+%*************************************************************************************************************************
 
-\gls[hyper=false]{trace} is the best-estimate system \gls[hyper=false]{th} code developed by the \gls[hyper=false]{usnrc} 
-as a tool for light water reactor transient analysis during normal and accident scenarios.
-Its development is an on-going effort 
-to modernize into a single software package all previous \gls[hyper=false]{usnrc} \gls[hyper=false]{th} codes
-that were developed separately for specific reactor types and/or applications.
-This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
-
-\subsection{Thermal-hydraulics System Code}\label{sub:th_system_code}
-
-% What is system code
-Thermal-hydraulics system code is a computer code used to analyze the thermal-hydraulics behavior of \glspl[hyper=false]{npp} \cite{Roth2014}.
-\marginpar{thermal-hydraulics system code}
-Its current usage ranges from safety analysis and licensing process of current reactor designs to qualification of a new reactor design \cite{Petruzzi2008, Petruzzi2016}.
+% What is actually a system code
+A \glsfirst[hyper=false]{th} system code is a computer code used to analyze the \gls[hyper=false]{th} behavior of \glspl[hyper=false]{npp} \cite{Roth2014}.
+\marginpar{Thermal-hydraulics system code}
+Its current usage ranges from safety analysis and licensing process of current reactor designs to qualification of a new reactor designs \cite{Petruzzi2008, Petruzzi2016}.
 To that end, the code is designed to be a comprehensive tool capable of simulating wide range of operating conditions, 
 from normal operations, anticipated transients, to accident scenarios foreseen in nuclear power plant operation.
 
 % Component-based system code
-Nuclear reactor system is a complex system of numerous interconnected components, each serving distinct purpose, built with multiple engineered safety features.
-During a transient, the system might exhibit complex behavior with important physical phenomena interacting at vastly different time scales ($10^{-1} \, [s]$ in a power excursion due to control rod ejection, $10^5 \, [s]$ for decay heat removal after successful reactor shutdown) and
+A nuclear reactor system is a complex system of numerous interconnected components, each serving distinct purposes, built with multiple engineered safety features.
+\marginpar{Nuclear reactor system}
+During a transient, the system might exhibit complex behavior with physical phenomena interacting at vastly different time scales ($10^{-1} \, [s]$ in a power excursion due to control rod ejection, $10^5 \, [s]$ for decay heat removal after successful reactor shutdown) and
 length scales ($10^{-3} \, [mm]$ for boiling at sub-channel level, $10^3 \, [m]$ for coolant flow in the primary/secondary circuit).
-Additionally, the engineered safety features are designed for some equipments (such as control rods, valves, pump, etc.) to perform safety-related action.
-Such equipments, in turn, is controlled by a complex dynamical control system.
+Additionally, the engineered safety features are designed for some equipments (such as control rods, valves, pump, etc.) to perform safety-related actions.
+Such equipments, in turn, are controlled by a complex dynamical control system.
 As such, system code has to take into account these different aspects to properly simulate the thermal-hydraulics behavior of nuclear power plants.
-Indeed, com\-ponent-based codes, such as \gls[hyper=false]{trace}, approach the problem by representing each prominent component in nuclear reactor system separately.
+Indeed, com\-ponent-based codes, such as \gls[hyper=false]{trace}, approach the problem by representing each prominent component in a nuclear reactor system separately.
 On top of a two-phase fluid dynamics equation solver, system code includes models for steam separator, pump, heat exchanger, valve, pressurizer, and neutron-kinetics 
-as well as comprehensive models for control system to mimic the signal monitoring and component action actuation systems in a \gls[hyper=false]{npp}.   
+as well as comprehensive models for control system to mimic the signal monitoring and component actuation systems in a \gls[hyper=false]{npp}.
 System thermal-hydraulics thus distinguishes itself by considering explicitly the geometry, materials, boundary conditions, various interconnecting components, and control systems that constitute an \gls[hyper=false]{npp} \cite{DAuria2012}.
-
 
 % The essence of the problem tackled in thermal-hydraulics system code
 However, it can be argued that the modeling of two-phase flow inside a heated channel remains a central part in nuclear thermal-hydraulics analysis 
 \marginpar{basic thermal-hydraulics, two-phase flow in a heated channel}
-which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios. 
+which puts an emphasis in the correct prediction of cladding temperature evolution during different postulated scenarios (Fig.~\ref{fig:ch2_heated_channel}). 
 This is also supported by the fact that the majority of operating nuclear power plants is of \gls[hyper=false]{lwr} type, 
-where two-phase flow can be expected to occur during its operation, both in normal operating and accident condition for \glspl[hyper=false]{bwr} and in accident condition for \glspl[hyper=false]{pwr}.
+where two-phase flow can be expected to occur during its operation, both in normal operating and accident conditions for \glspl[hyper=false]{bwr} and in accident condition for \glspl[hyper=false]{pwr}.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.55]{../figures/heatedChannel/heatedChannel.pdf}
-	\caption[Illustration of Heated Channel]{System thermal-hydraulics analysis encompasses many aspects of nuclear reactor system analysis, but the core of the problem for predicting the cladding temperature evolution (especially during accident condition) is to model properly and realistically the coolant flow in a heated channel in steady or transient condition. Here it is shown a simplified picture of loss of coolant accident in a \glsentryshort{pwr} where phase change along the heated channel occurs.}
-	\label{fig:heated_channel}
+	\includegraphics[scale=0.55]{../figures/chapter2/figures/heatedChannel}
+	\caption[Illustration of Heated Channel.]{Thermal-hydraulics system analysis encompasses many aspects of nuclear reactor system analysis, but the core of the problem for predicting the cladding temperature evolution (especially during an accident condition) is to model properly and realistically the coolant flow in a heated channel in steady or transient conditions. Here it is shown a simplified picture of a \gls[hyper=false]{loca} in a \glsentryshort{pwr} where phase change occurs along the heated channel.}
+	\label{fig:ch2_heated_channel}
 \end{figure}
 
 % Major difficulty
-This remaining problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is by no means trivial.
+The problem of modeling properly the two-phase flow in a heated channel, though much more limited in scope, is by no means trivial.
 \marginpar{flow regimes}
-This due to the fact that in two-phase flow, the morphological configurations of the flow (i.e., \emph{flow regimes}) can vary widely depending on many parameters such as difference in phase density, phasic velocity, and flow orientation.
-Different morphological configuration implies different interfacial surface structure between the two phases (see Fig.~\ref{fig:flow_regimes}), 
-which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
-At the same time, the interfacial surface and its deformation in an arbitrary flow configuration are not known \emph{a priori} and becomes part of the solution.
+This is due to the fact that in two-phase flow, the morphological configurations of the flow (i.e., \emph{flow regimes}) can vary widely depending on many parameters such as differences in the respective phase density and velocity, as well as in the flow orientation.
+Different flow regimes implies different interfacial surface structure between the two phases (see Fig.~\ref{fig:ch2_flow_regimes}), which in turn affects the mass, momentum, and energy coupling terms (\emph{transfer relation}) between the phases.
+At the same time, the interfacial surface and its deformation in an arbitrary flow configuration are not known \emph{a priori} and becomes part of the problem to be simultaneously solved.
 \begin{figure}[bth!]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/flowRegimes/flowRegimes.pdf}
+	\includegraphics[width=\textwidth]{../figures/chapter2/figures/flowRegimes}
 	\caption[Some of the observed flow regimes in vertical and horizontal flow]{Some of the observed flow regimes in vertical and horizontal flow with different superficial liquid velocity, $Q_l = V_l / A$, and superficial gas velocity, $Q_g = V_g / A$, where $A$ is the flow area. The flows of both phases are co-current.}
-	\label{fig:flow_regimes}
+	\label{fig:ch2_flow_regimes}
 \end{figure}
 
 % The rigorous approach, local instantaneous formulation
-The most rigorous approach in describing two-phase flow is by using local instantaneous formulation where a set partial differential equations describing the conservation of mass, momentum, and energy, is formulated for each phase.
-The two phases are, in turn, separated by zero-thickness interfacial surface.
-The resulting set of equations fully describe the flow at any given location at any given time.
-In addition to that, the solution of this formulation also respect the \emph{topological constraint} of the flow.
+The most rigorous approach in describing two-phase flow is by using local instantaneous formulation where a set of partial differential equations describing the conservation of mass, momentum, and energy, is formulated for each phase.
 \marginpar{local instantaneous formulation, topological constraint}
-The constraint states that only one phase can exist at any given time and at any given location in the flow \cite{Ghiaasiaan2007}.
-This is illustrated in the Fig.~\ref{fig:phase_indicator_probe} where a hypothetical probe is put within a two-phase flow and a signal of indicator function $M(\mathbf{r}, t)$ is recorded.
+The two phases are, in turn, separated by zero-thickness interfacial surfaces.
+The resulting set of equations fully describes the flow at any given location and at any given time.
+In addition, the solution of this formulation also respects the \emph{topological constraint} of the flow.
+The constraint states that only one phase can exist at any given time and location in the flow \cite{Ghiaasiaan2007}.
+This is illustrated in the Fig.~\ref{fig:ch2_phase_indicator_probe} where a hypothetical probe is put within a two-phase flow and a signal of indicator function $M(\mathbf{r}, t)$ is recorded.
 \begin{figure}[bth!]
 	\centering
-	\includegraphics[scale=0.70]{../figures/phaseIndicatorProbe/phaseIndicatorProbe.pdf}
-	\caption[A hypothetical phase indicator probe inside a channel of a two-phase flow]{Illustration of a hypothetical phase indicator probe inside a channel of a two-phase flow, recording at a point location the indicator function value (Eq.~(\ref{eq:indicator_function})) at every instance.}
-	\label{fig:phase_indicator_probe}
+	\includegraphics[scale=0.70]{../figures/chapter2/figures/phaseIndicatorProbe}
+	\caption[A hypothetical phase indicator probe inside a channel of a two-phase flow]{Illustration of a hypothetical phase indicator probe inside a channel of a two-phase flow, recording the evolution of the indicator function (Eq.~(\ref{eq:indicator_function})) at a given point.}
+	\label{fig:ch2_phase_indicator_probe}
 \end{figure}
-The indicator function is defined as,
+
+The indicator function $M(\mathbf{r}, t)$ is defined as,
 \begin{equation}
   M (\mathbf{r}, t) =
     \begin{cases}
-      1 \, ; \, \text{if probe tip in \text{gas phase}} \\
+      1 \, ; \, \text{if probe tip is in the \text{gas phase}} \\
       0 \, ; \, \text{otherwise}
     \end{cases}
 \label{eq:indicator_function}
 \end{equation}
-where \gls[hyper=false]{r} is vector of position;
-and \gls[hyper=false]{t} is time.
+where \gls[hyper=false]{r} is position;
+and \gls[hyper=false]{t} is the time.
 The indicator function defined here is equivalent to the local instantaneous void fraction, 
 which can be interpreted as the probability that the gas phase is present at a given point in space at a given moment \cite{USNRC2012}. 
 
 As mentioned, the interfacial surface structure of the flow determines the coupling terms between the two phases.
 \marginpar{resolving the motion of interfacial surface}
 However, this surface and its deformation along the flow are not known \emph{a priori}.
-As such, the solution of local instantaneous formulation of two-phase flow requires the motion of interfacial surface to be simultaneously resolved. 
-As the time and length scales of the interfacial structure in a two-phase flow of an arbitrary morphological configurations can vary wildly,
+As such, the solution of the local instantaneous formulation of two-phase flow requires to solve the motion of interfacial surface. 
+As the time and length scales of the interfacial structure in a two-phase flow of an arbitrary morphological configuration can vary wildly,
 the problem of resolving the motion of interfacial surface becomes intractable. 
 Though advances have been made in the area of Computational Fluid Dynamics (CFD) in this regard, 
-the problem remains intractable for the purpose of thermal-hydraulics system analysis (see \cite{Bestion2014} for recent review on the topic).
+the problem remains intractable for the purpose of thermal-hydraulics system analysis\footnote{See \cite{Bestion2014} for a recent review on the topic.}.
 
 % The simplified approach, Time and Volume Averaged
-To simplify the intractability problem of resolving the motion of interfacial surface motion in two-phase flow, 
-time- and volume-average is carried out on the flow.
-\marginpar{Time- and Volume-averaging}
+To simplify the intractability problem of resolving the motion of interfacial surface motion in two-phase flow inside a channel, time- and area-average is carried out on the flow.
+\marginpar{Time- and volume (area)-averaging}
 Averaging can be seen as a filtering operation to remove the local temporal and spatial fluctuations (short scale variation) in the flow.
 The length and duration which define short scale variation are problem specific 
 (that is, at least qualitatively, not longer than the length and time scales of the flow configuration of interest).
 The volume over which averaging is carried out is referred to either as a \emph{control volume}, a \emph{cell}, or a \emph{node}.
+It is further assumed that the flow is one-dimensional, in which the flow area changes slowly along the principal direction of the flow.
+Under these assumptions, a control volume simply corresponds to a cross-sectional slice of the channel and the averaging is based on the flow area instead \cite{Ghiaasiaan2007}.
 
-Averaging the indicator function both in time and in volume gives the void fraction,
+Averaging the indicator function both in time and in (a sliced) area gives the \emph{void fraction},
 \begin{equation}
-  \langle \bar{\alpha} \rangle =  \frac{1}{\Delta V \Delta t} \int_{V}^{V + \Delta V} \int_{t}^{t + \Delta t} \alpha(\mathbf{r}, t) d\mathbf{r} dt = \frac{1}{\Delta V} \int_{V}^{V + \Delta V} \overline{\alpha(\mathbf{r})} d\mathbf{r}
+  \langle \bar{\alpha} \rangle =  \frac{1}{A\,\Delta t} \int_{A} \int_{t}^{t + \Delta t} M(\mathbf{r}, t)\,d\mathbf{r}\,dt
 \label{eq:void_fraction}
 \end{equation}
-Following the above formulation, void fraction can be interpreted as the fraction of the control volume occupied by the gas phase \cite{USNRC2012}. 
-In the subsequent section the angle brackets and the overbar will be dropped from the void fraction notation 
-and any mention of void fraction will refer to the time- and volume-averaged formulation given above.
+Following the above formulation, void fraction can be interpreted as the fraction of the control volume occupied by the gas phase \cite{USNRC2012}.
 
 % Two fluid model and its closure
-Averaging the flow state variables in time and volume and using them to formulate a set of mass, momentum, and energy balance equations describing the fluid dynamics yield the so-called \emph{two-fluid model} \cite{Ishii2011}.
+Averaging the flow state variables in time and area and using them to formulate a set of mass, momentum, and energy balance equations describing the fluid dynamics in $1$-dimension yield the so-called \emph{two-fluid model} \cite{Ishii2011}.
 \marginpar{Time- and Volume-Averaged formulation, two-fluid model}
-The model is the state of the art formulation for describing the dynamics of two-phase flow in system codes (which include, for example CATHARE, RELAP5, and \gls[hyper=false]{trace}).
+The model is the state of the art formulation for describing the dynamics of two-phase flow in system codes (which include, for CATHARE, RELAP$5$, and \gls[hyper=false]{trace}).
 This model separately treats the transport phenomena of the two phases of fluid resulting in six balance equations 
-which are able to capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions to be expected in wide range of \gls[hyper=false]{npp} transients.
+which are able to capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, conditions to be expected in a wide range of \gls[hyper=false]{npp} transients.
+
+Averaging greatly simplifies the description of the complicated interfacial structure between phases in a two-phase flow. 
+This simplification, at the same time, incur a loss of information regarding energy, momentum, and mass transfers at the local level (between the phases and between each phase and the channel wall) (Fig.~\ref{fig:ch2_flow_averaging}).
+These transfer terms will have to be modeled separately for each distinct flow regime of interest through closure laws \cite{Bestion2008}.
 \begin{figure}[bth]
 	\centering
-	\includegraphics[scale=0.55]{../figures/flowAveraging/flowAveraging.pdf}
-	\caption[Illustration of Flow Averaging]{Time and volume average carried out on the two-phase flow inside a channel results in a tractable form of fluid dynamics equation, but incur loss of information at the local level, especially when it comes to the interfacial structure between the two phases.}
-	\label{fig:flow_averaging}
+	\includegraphics[scale=0.55]{../figures/chapter2/figures/flowAveraging}
+	\caption[Illustration of Flow Averaging]{Time and volume average carried out on the two-phase flow inside a channel results in a tractable form of fluid dynamics equation, but incur loss of information at the local level, especially when it comes to the interfacial structure between phases and between each phase and the channel wall.}
+	\label{fig:ch2_flow_averaging}
 \end{figure}
 
-% Closing paragraph
-The next section will summarize the final formulation of the governing equations (time- and volume-averaged) adopted in \gls[hyper=false]{trace}, of which the complete derivation can be found in \cite{USNRC2012}.
-As the averaging incurs loss of information regarding the flow local information (such as the interfacial structure between the phases, see Fig.~\ref{fig:flow_averaging}), 
-the transfer relations between the two phases have to be recovered through the use of closure models briefly described in Section~\ref{sub:closure_and_flow_regimes}.
-
-\subsection{Governing Equations}\label{sub:governing_equations}
-
-As mentioned, the hydraulic module of \gls[hyper=false]{trace} is based on a two-fluid six-equation model, 
-solving the conservation equations of mass, momentum, and energy for the liquid and vapor phases in the coolant \cite{USNRC2012}.
-Furthermore, the formulations are given in volumetric term (i.e., per unit volume basis) with a reference to a select control volume (or \emph{node}).
-A symbol is defined the first time it appears in an equation 
-and the complete list of symbols can be found in the \hyperref[app:notations]{Glossary of Notations} at back of the thesis.
-
-\paragraph{Mass balance equations, liquid and gas phases:}
-\begin{equation}
-	\frac{\partial [(1-\alpha)\rho_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l}] = - \Gamma
-\label{eq:mass_balance_liquid}
-\end{equation}
-\begin{equation}
-	\frac{\partial [\alpha \rho_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g}] = \Gamma
-\label{eq:mass_balance_gas}
-\end{equation}
-where the subscripts indicate the phase, $l$ for the liquid phase and $g$ for the gas phase (vapor); 
-\gls[hyper=false]{alpha} is the void fraction; 
-\gls[hyper=false]{rhol} (\gls[hyper=false]{rhog}) is the mass density of the liquid (gas) phase;
-and \gls[hyper=false]{vl} (\gls[hyper=false]{vg}) is the flow velocity of the liquid (gas) phase.
-The terms in either sides of the two mass balance equations are explained in Table~\ref{tab:mass_balance}.
-
-\begin{table}[ht]
-	\myfloatalign
-	\caption[The terms in \glsentryshort{trace} two-fluid model mass balance equations]{The terms in \glsentryshort{trace} two-fluid model mass balance equations (all are given in volumetric term)}
-	\label{tab:mass_balance}
-	\begin{tabularx}{\textwidth}{Xcc} 
-		\toprule
-		\tableheadline{Terms} & \tableheadline{Liquid Phase} & \tableheadline{Gas Phase} \\ 
-		\midrule
-		\footnotesize{mass rate of change}  					 & $\frac{\partial [(1-\alpha)\rho_l]}{\partial t}$  & $\frac{\partial [\alpha \rho_g]}{\partial t}$ \\
-		\footnotesize{mass convection rate} 					 & $\nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l}]$   & $\nabla \cdot [\alpha \rho_g \mathbf{v_g}]$ \\
-		\midrule
-		\footnotesize{interfacial mass-transfer rate}  & $- \Gamma$                                        & $\Gamma$ \\
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-Note that the term \gls[hyper=false]{Gamma}, the volumetric interfacial mass-transfer rate,
-is given with a convention that it is positive for the transfer from liquid phase to gas phase.
-This term is defined in Eq.~(\ref{eq:Gamma}) below.
-
-\paragraph{Momentum balance equations, liquid and gas phases:}
-\begin{equation}
-	\begin{split}
-		& \frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t} + \nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}] + (1 - \alpha) \nabla p \\
-		& \quad = \mathbf{f}_i + \mathbf{f}_{wl} + (1 - \alpha) \rho_l \mathbf{g} - \Gamma \mathbf{v}_i
-	\end{split}
-\label{eq:momentum_balance_liquid}
-\end{equation}
-\begin{equation}
-	\begin{split}
-		& \frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t} + \nabla \cdot [\alpha \rho_g \mathbf{v_g} \otimes \mathbf{v_g}] + \alpha \nabla p \\
-		& \quad = - \mathbf{f}_i + \mathbf{f}_{wg} + \alpha \rho_g \mathbf{g} + \Gamma \mathbf{v}_i
-	\end{split}
-\label{eq:momentum_balance_gas}
-\end{equation}
-where $\nabla p$ is the pressure gradient;
-\gls[hyper=false]{fi} is the volumetric force due to shear at the phase interface;
-\gls[hyper=false]{fwl} is the volumetric force acting on the liquid phase due to shear at the wall (i.e., fluid-structure contact);
-\gls[hyper=false]{fwg} is the volumetric force acting on the gas phase due to shear at the wall;
-\gls[hyper=false]{gravity} is the gravitational acceleration;
-and \gls[hyper=false]{vinterface} is the flow velocity at the phase interface.
-Table~\ref{tab:momentum_balance} lists the terms in either sides of the two momentum balance equations.
-
-\begin{table}[ht]
-	\myfloatalign
-	\caption[The terms in \glsentryshort{trace} two-fluid model momentum balance equations]{The terms in \glsentryshort{trace} two-fluid model momentum balance equations (all are given in volumetric term)}
-	\label{tab:momentum_balance}
-	\begin{tabularx}{\textwidth}{>{\raggedright}Xcc} 
-		\toprule
-		\tableheadline{Terms} & \tableheadline{Liquid Phase} & \tableheadline{Gas Phase} \\ 
-		\midrule
-		\footnotesize{momentum rate of change}  					 	& $\frac{\partial [(1-\alpha)\rho_l \mathbf{v}_l]}{\partial t}$  				& $\frac{\partial [\alpha \rho_g \mathbf{v}_g]}{\partial t}$ \\
-		\footnotesize{momentum convection rate} 					 	& $\nabla \cdot [(1-\alpha) \rho_l \mathbf{v_l} \otimes \mathbf{v_l}]$ 	& $\nabla \cdot [\alpha \rho_g \mathbf{v_g} \otimes \mathbf{v_g}]$ \\
-		\footnotesize{pressure gradient}                  	& $(1 - \alpha) \nabla p$                                        				& $\alpha \nabla p$ \\
-		\midrule
-		\footnotesize{momentum change due to:}            	&                                                                 			& \\
-		\footnotesize{interfacial friction} 								& $\mathbf{f}_i$ 																												&  $- \mathbf{f}_i$ \\
-		\footnotesize{wall friction} 						  					& $\mathbf{f}_{wl}$ 																										& $\mathbf{f}_{wg}$ \\
-		\footnotesize{body force} 													& $(1 - \alpha) \rho_l \mathbf{g}$ 																			& $\alpha \rho_g \mathbf{g}$ \\
-		\footnotesize{interfacial mass-transfer} 	  				& $- \Gamma \mathbf{v}_i$ 																							& $\Gamma \mathbf{v}_i$ \\
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-Note that the formulation in \gls[hyper=false]{trace} uses the simplifying assumption of $p_i = p_g = p_l$.
-That is, the pressure in a given control volume is the same in either phases as well as at the interface \cite{USNRC2012}.
-
-For the friction (shear) terms in right hand side, TRACE uses the following formulations,
-\begin{equation}
-	\mathbf{f}_i = C_i (\mathbf{v}_g - \mathbf{v}_l) |\mathbf{v}_g - \mathbf{v}_l| 
-\label{eq:fi}
-\end{equation}
-\begin{equation}
-	\mathbf{f}_{wl} = - C_{wl} \mathbf{v}_l |\mathbf{v}_l|
-\label{eq:fwl}
-\end{equation}
-\begin{equation}
-	\mathbf{f}_{wg} = - C_{wg} \mathbf{v}_g |\mathbf{v}_g|
-\label{eq:fwg}
-\end{equation}
-where the friction coefficients \gls[hyper=false]{cint}, \gls[hyper=false]{cwl}, \gls[hyper=false]{cwg} for interfacial shear, wall-liquid shear, and wall-gas shear, 
-respectively are obtained from flow regime-dependent empirical correlations.
-
-\paragraph{Energy balance equations, liquid and gas phases:}
-\begin{equation}
-	\begin{split}
-		& \frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t} + \nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right) \mathbf{v_l} \right] \\
-		&	\quad = q_{il} + q_{wl} + q_{wsat} + q_{dl} + (1 - \alpha) \rho_l \mathbf{g} \cdot \mathbf{v}_l \\
-		& \qquad - \Gamma h^\prime_l + (\mathbf{f}_{i} + \mathbf{f}_{wl}) \cdot \mathbf{v}_l
-	\end{split}
-\label{eq:energy_balance_liquid}
-\end{equation}
-\begin{equation}
-	\begin{split}
-		 & \frac{\partial [\alpha \rho_g (e_g + |\mathbf{v_g}|^2/2]}{\partial t} + \nabla \cdot \left[\alpha \rho_g \left(e_g+\frac{P}{\rho_g}+\frac{|\mathbf{v_g}|^2}{2}\right) \mathbf{v_g} \right] \\
-		 & \quad  = q_{ig} + q_{wg} + q_{dg} + \alpha \rho_g \mathbf{g} \cdot \mathbf{v}_g + \Gamma h^\prime_g + (-\mathbf{f}_{i} + \mathbf{f}_{wg}) \cdot \mathbf{v}_g
-	\end{split}
-\label{eq:energy_balance_gas}
-\end{equation}
-where \gls[hyper=false]{el} (\gls[hyper=false]{eg}) is the liquid (gas) phase internal energy;
-\gls[hyper=false]{qil} (\gls[hyper=false]{qig}) is the volumetric interfacial heat transfer on the liquid (gas) phase;
-\gls[hyper=false]{qwl} (\gls[hyper=false]{qwg}) is the volumetric wall (sensible) heat transfer on the liquid (gas) phase;
-\gls[hyper=false]{qwsat} is the volumetric wall (latent) heat transfer on the liquid phase;
-\gls[hyper=false]{qdl} (\gls[hyper=false]{qdg}) is the volumetric direct power deposition on the liquid (gas) phase;
-\gls[hyper=false]{hlp} is the bulk liquid enthalpy;
-and \gls[hyper=false]{hgp} is the gas phase saturation enthalpy.
-Table~\ref{tab:energy_balance} lists all of the terms in either sides of the two energy balance equations.
-
-\begin{table}[ht]
-	\myfloatalign
-	\caption[The terms in \glsentryshort{trace} two-fluid model energy balance equations]{The terms in \glsentryshort{trace} two-fluid model momentum energy equations (all are given in volumetric term)}
-	\label{tab:energy_balance}
-	\begin{tabularx}{\textwidth}{>{\raggedright}Xcc} 
-		\toprule
-		\tableheadline{Terms} & \tableheadline{Liquid Phase} & \tableheadline{Gas Phase} \\ 
-		\midrule
-		\footnotesize{energy rate of change}  						& $\frac{\partial [(1-\alpha)\rho_l(e_l + |\mathbf{v_l}|^2/2]}{\partial t}$  																											& $\frac{\partial [\alpha \rho_g (e_g + |\mathbf{v_g}|^2/2]}{\partial t}$ \\
-		\footnotesize{energy convection rate} 						& \tiny{$\nabla \cdot \left[(1-\alpha) \rho_l \left(e_l+\frac{P}{\rho_l}+\frac{|\mathbf{v_l}|^2}{2}\right) \mathbf{v_l} \right]$} & \tiny{$\nabla \cdot \left[\alpha \rho_g \left(e_g+\frac{P}{\rho_g}+\frac{|\mathbf{v_g}|^2}{2}\right) \mathbf{v_g} \right]$} \\
-		\midrule
-		\footnotesize{(sensible) interfacial heat transfer} 	& \footnotesize{$q_{il}$}																									& \footnotesize{$- \mathbf{f}_i$} \\
-		\footnotesize{(sensible) wall heat transfer} 					& \footnotesize{$q_{wl}$}																									& \footnotesize{$\mathbf{f}_{wg}$} \\
-		\footnotesize{(latent) wall heat transfer} 						& \footnotesize{$q_{w\text{sat}}$} 																				& \footnotesize{$\alpha \rho_g \mathbf{g}$} \\
-		\footnotesize{direct heat deposition} 								& \footnotesize{$q_{dl}$}																									& \footnotesize{$\Gamma \mathbf{v}_i$} \\
-		\footnotesize{energy loss (gain) due to:} 						&                                                                         & \\
-		\footnotesize{gravity}      													& \footnotesize{$(1 - \alpha) \rho_l \mathbf{g} \cdot \mathbf{v}_l$} 			& \footnotesize{$\alpha \rho_l \mathbf{g} \cdot \mathbf{v}_l$} \\
-		\footnotesize{phase change} 													& \footnotesize{$- \Gamma h^\prime_l$} 																		& \footnotesize{$\Gamma h^\prime_g$} \\
-		\footnotesize{wall and interfacial friction} 					& \footnotesize{$(\mathbf{f}_{i} + \mathbf{f}_{wl}) \cdot \mathbf{v}_l$} 	& \footnotesize{$(-\mathbf{f}_{i} + \mathbf{f}_{wg}) \cdot \mathbf{v}_g$}\\
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-The heat transfer terms between the wall and the phases follow Newton's law of cooling,
-\begin{equation}
-	q_{wl} = h_{wl} \, a_{wl} \, (T_w - T_l)
-\label{eq:qwl}
-\end{equation}
-\begin{equation}
-	q_{wg} = h_{wg} \, a_{wg} \, (T_w - T_g)
-\label{eq:qwg}
-\end{equation}
-\begin{equation}
-	q_{w\text{sat}} = h_{w\text{sat}} \, a_{wl} \, (T_w - T_\text{sat})
-\label{eq:qwsat}
-\end{equation}
-where \gls[hyper=false]{tw}, \gls[hyper=false]{tl}, \gls[hyper=false]{tg}, \gls[hyper=false]{tsat} are the wall, liquid phase, liquid phase, and liquid saturation temperatures, respectively;
-\gls[hyper=false]{awl} (\gls[hyper=false]{awg}) is the volumetric surface contact area between the wall and liquid (gas) phase (or \emph{the interfacial area concentration});
-and \gls[hyper=false]{hwl}, \gls[hyper=false]{hwg}, and \gls[hyper=false]{hwsat} are the \glspl[hyper=false]{htc} between wall and liquid, wall and gas, and wall-saturated liquid, respectively.
-The volumetric surface contact area as well as the heat transfer coefficients are obtained from a set of flow regime-dependent empirical correlations.
-
-Additionally, the heat transfer terms at the interface between the two phases are also modeled using the same law,
-\begin{equation}
-	q_{il} = h_{il} \, a_{i} \, (T_{sg} - T_l)
-\label{eq:qil}
-\end{equation}
-\begin{equation}
-	q_{ig} = \frac{p_g}{p} \, h_{ig} \, a_{i} \, (T_{sg} - T_g)
-\label{eq:qig}
-\end{equation}
-where \gls[hyper=false]{hil} (\gls[hyper=false]{hig}) is the \gls[hyper=false]{htc} for liquid (gas) phase at the interface;
-\gls[hyper=false]{ai} is the volumetric interfacial surface area;
-\gls[hyper=false]{pg} is the partial pressure of the gas phase;
-and \gls[hyper=false]{tsg} is the saturation temperature corresponding to partial pressure of the gas phase.
-
-Finally, the mass-transfer rate at the interface is defined using a thermal-energy jump condition that results in
-\begin{equation}
-	\Gamma = \frac{-(q_{ig} + q_{il}) + q_{w\text{sat}}}{(h^\prime_g - h^\prime_l)}
-\label{eq:Gamma}
-\end{equation}
-In other words, the net heat transfer rate given to the saturated liquid phase, is used entirely for phase change.
-
-\paragraph{}
-
-Besides the set balance equations that govern the two-phase fluid flow,
-\gls[hyper=false]{trace} also includes a heat conduction module (known as \emph{heat structure} component) 
-to model correctly the heat transfer process in solid structures (e.g., active fuel, internal passive structures, etc.) 
-and between the surface of such structures and the contacting fluid.
-\paragraph{Heat conduction equation, solid structures:}
-\begin{equation}
-	\rho_s \, C_{ps} \frac{\partial T}{\partial t} - \nabla \cdot (k_s \nabla T) = q_s 
-\label{eq:conduction}
-\end{equation}
-where \gls[hyper=false]{rhos} is the solid structure mass density;
-\gls[hyper=false]{cps} is the solid structure thermal capacity;
-\gls[hyper=false]{ks} is the solid structure thermal conductivity;
-and $q_s$ is the volumetric heat source term in the solid.
-
-At the contact between fluid and solid material, the total heat flux is given as,
-\begin{equation}
-	q'' = h_{wl} \, (T_{w} - T_l) + h_{w\text{sat}} \, (T_w - T_\text{sat}) + h_{wg} \, (T_w - T_g)
-\label{eq:conduction_surface}
-\end{equation}
-where the heat flux at the surface of the structure, $q''$ is partitioned to different phases of the fluid, either as sensible or latent heat.
-As can be seen, 
-Eq.~(\ref{eq:conduction_surface}) couples the heat conduction equation with energy balance equations of the fluid through the terms defined in Eqs.~(\ref{eq:qwl}), (\ref{eq:qwg}), and (\ref{eq:qwsat}).
-
-\subsection{Closure and Flow Regimes}\label{sub:closure_and_flow_regimes}
-
-In each of the balance equations given above, 
-the right hand side represents the source and sink terms mainly due to fluid interaction with solid structure (\emph{wall})
-and the interaction between the phases, among others.
-The set of balance equations characterizes exactly the two-phase flow inside a control volume in a time- and volume-averaged manner provided that the terms in the right hand side of the equation (such as, Eqs.~(\ref{eq:fi})-(\ref{eq:fwg}) and Eqs.~(\ref{eq:qwl})-(\ref{eq:qig})) are correct.
+% Opening Paragraph What is TRACE
+\gls[hyper=false]{trace} is the best-estimate system \gls[hyper=false]{th} code developed by the \gls[hyper=false]{usnrc} as a tool for light water reactor transient analysis during normal and accident scenarios.
+\marginpar{\gls[hyper=false]{trace} code}
+Its development is an on-going effort to modernize into a single software package all previous \gls[hyper=false]{usnrc} \gls[hyper=false]{th} codes that were developed separately for specific reactor types and/or applications.
+This ultimately would make the code more versatile for end users and more efficient to maintain for the developer.
+Appendix~\ref{app:trace_consv_eqs} summarizes the final formulation of THE governing equations (time\- and volume-averaged) in \gls[hyper=false]{trace}, of which the complete derivation can be found in \cite{USNRC2012}.
+In the next section the phenomenology of reflood is described and its modeling aspects with respect to the \gls[hyper=false]{trace} code are presented.

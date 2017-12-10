@@ -1,12 +1,38 @@
-%*************************************************************************************************
-\chapter[Reflood Simulation in TRACE]{Reflood Simulation using TRACE Code}\label{ch:trace_reflood}
-%*************************************************************************************************
+%************************************************************************
+\chapter{Reflood Simulation using the TRACE Code}\label{ch:trace_reflood}
+%************************************************************************
 
-%\input{Chapters/2_trace_reflood/sys_th}
-%\input{Chapters/2_trace_reflood/trace}
-%\input{Chapters/2_trace_reflood/reflood_phemenology_modeling}
-%\input{Chapters/2_trace_reflood/feba_setf}
-%\input{Chapters/2_trace_reflood/feba_trace}
-%\input{Chapters/2_trace_reflood/initial_selection_of_inputs}
-%\input{Chapters/2_trace_reflood/chapter_summary}
-%*****************************************
+% Opening paragraph
+Reflood is the last phase of the four canonical phases in the mitigation of \glspl[hyper=false]{lbloca} in \glspl[hyper=false]{lwr} \cite{Hewitt2000}.
+Starting with a rapid depressurization of the primary coolant circuit (\emph{blowdown}); 
+followed by an initial rejection of emergency coolant water injection into the reactor core due to massive steam flowing out of the boiling core (\emph{bypass});
+and after an eventually successful injection of the emergency coolant water through the downcomer and into the lower plenum of the \gls[hyper=false]{rpv} (\emph{refill}), 
+the \emph{reflood} phase takes place.
+It refers to the phase of the transient in which the emergency coolant water flows slowly upward through the dried reactor core, quenching the fuel elements along the way, preventing them from being further damaged due to overheating.
+
+% This Chapter and its Overview
+This chapter introduces the phenomenology of reflood and its modeling in the thermal-hydraulics system code \gls[hyper=false]{trace}.
+Section~\ref{sec:reflood_trace} first presents a quick overview of the \gls[hyper=false]{trace} code,
+including a major simplification implemented in the code to describe a complex two-phase flow phenomena in the reactor coolant circuit during accident scenarios.
+Section~\ref{sec:reflood_phenomenology} then describes reflood in \glspl[hyper=false]{lwr}: its importance, its phenomenology, and its modeling.
+It introduces several important terminologies used throughout the thesis.
+The description is specific to the \gls[hyper=false]{trace} code and is by no means an exhaustive account on the subject. 
+
+The present study is based on the data from a \glsfirst[hyper=false]{setf} for reflood experiment.
+The \glsfirst[hyper=false]{feba} facility and the relevant test runs for this study are described in Section~\ref{sec:reflood_feba_setf}.
+The modeling aspects of the facility in \gls[hyper=false]{trace} is then detailed in Section~\ref{sec:reflood_feba_trace}.
+
+Section~\ref{sec:reflood_initial_inputs_selection} deals with the problem of selecting the initial set of input parameters perceived to be influential for the simulation.
+Afterward, prior uncertainties in the form of \glspl[hyper=false]{pdf} are assigned to the selected input parameters.
+Those two steps provide the starting point for the sensitivity and uncertainty analyses on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} presented in the upcoming chapters.
+Section~\ref{sec:reflood_prior_uq} presents the propagation of the specified prior uncertainties on the \gls[hyper=false]{trace} model to assess the initial level of uncertainty in the predictions before any experimental data is used to update the prior uncertainties.
+Section~\ref{sec:reflood_chapter_summary} finally concludes and summarizes the chapter. 
+
+\input{Chapters/2_trace_reflood/trace}
+\input{Chapters/2_trace_reflood/reflood_phemenology_modeling}
+\input{Chapters/2_trace_reflood/feba_setf}
+\input{Chapters/2_trace_reflood/feba_trace}
+\input{Chapters/2_trace_reflood/initial_selection_of_inputs}
+\input{Chapters/2_trace_reflood/prior_uq}
+\input{Chapters/2_trace_reflood/chapter_summary}
+%************************************************************
