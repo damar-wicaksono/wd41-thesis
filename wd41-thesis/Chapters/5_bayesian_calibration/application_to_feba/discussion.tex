@@ -100,51 +100,18 @@ while the parameters \texttt{dffbWHT} and \texttt{dffbVIHT} were concentrated on
 The lack of assumed model bias in the calibration formulation did force the parameters to change dramatically and at times, to the limit of the prior uncertainties, in order to compensate any additional residual discrepancy between the simulator predictions and the experimental data, beyond the experimental uncertainty.
 That is, though these distributions might look peculiar, they were the ones found to be consistent with the experimental data under the calibration formulation.
 
-%------------------------------------------------------------------------------------------------------------
-\subsubsection{On the Propagation of the Posterior Samples}\label{subsub:bc_discussion_posterior_propagation}
-%------------------------------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------------------------------------
+\subsubsection{On the Propagation of the Posterior Uncertainties}\label{subsub:bc_discussion_posterior_propagation}
+%------------------------------------------------------------------------------------------------------------------
 
 % On Uncertainty Propagation
-To investigate the implication of the model parameters posterior uncertainties, obtained from different calibration schemes and on different \gls[hyper=false]{feba} tests, $1'000$ samples of model parameters values were taken from the respective pool of posterior samples and subsequently used in the model parameters uncertainties propagation (i.e., forward \gls[hyper=false]{uq}) through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
-The uncertainties of additional parameters related to boundary conditions were also propagated alongside the posterior uncertainties of the model parameters.
-For comparison purpose, uncertainty propagation was also conducted in which the correlation among model parameters was neglected (i.e., the model parameters were taken to be independent of each other).
-In the following, the discussion is focused on the propagation of posterior uncertainties obtained from three calibration schemes, namely: \texttt{w/ Bias, All}, \texttt{w/o Bias}, and \texttt{w/ Bias, no dffbVIHT}.
-
-% On Uncertainty Propagation, Calibration vs. Informativeness
-The notions of informativeness and calibration score were used to summarize the resulting prediction uncertainties associated with different posterior samples on different \gls[hyper=false]{feba} tests.
-\marginpar{On the model parameters posterior uncertainties propagation}
-The usage of these two notions in this thesis were mainly for comparison purpose: an increase in informativeness implied a narrower prediction uncertainty band and vice versa;
-while an increase in calibration score implied a smaller discrepancy between a prediction and its observed data.
-By construction, the calibration score put a high penalty for a failure of an uncertainty band to cover experimental data; it assigned the value of zero.
-
-As it was shown in Fig.~\ref{fig:ch5_plot_calib_info}, all the calibration schemes managed to improve the informativeness of the prediction while simultaneously decreased the calibration score.
-\marginpar{Informativeness vs. calibration score of the posterior prediction uncertainties}
-The tightening of the uncertainty band caused failure in covering some of the experimental data points.
-These points, a portion of the overall reflood transient, often looked very different from the typical \gls[hyper=false]{trace} prediction.
-Consequently, the prediction could not be altered (by altering the model parameters) to cover that portion of the transient without increasing the discrepancy with the experimental data in other part of the transient.
-As such, though the resulting posterior uncertainties resulted in lower calibration scores than the prior, they also resulted in uncertain predictions that have overall smaller discrepancy with the experimental data.
-
-The calibration without considering model bias term often gave the most informative prediction of them all.
-\marginpar{Calibration without model bias term, overfitting}
-On the other hand, it also gave the lowest calibration scores across tests for the $TC$ and $DP$ outputs.
-This indicated a strong overfitting.
-It did, however, give a significant improvement on the prediction of the liquid carryover ($CO$) both in terms of informativeness and calibration score across tests.
-As the nominal \gls[hyper=false]{trace} prediction for the liquid carryover showed a large discrepancy with the experimental data, this improvement implied that the uncertain predictions had been altered significantly from the nominal prediction.
-
-It was also observed that neglecting correlation between parameters had a profound impact on the calibration score and informativeness: it inflated the prediction uncertainty while simultaneously improve the calibration score.
-\marginpar{Correlated parameters, impact}
-The effect of neglecting the correlation on the informativeness and calibration score was particularly striking for the results from the calibration scheme \texttt{w/ Bias, All}.
-This implies that correlation among model parameters is a form of information in the model parameters uncertainties that is specific to the calibration data used.
-It can be argued that in the case of the calibration scheme \texttt{w/ Bias, All}, even with the inclusion of model bias term in the calibration, some parameters in the resulting posterior becomes highly correlated such that it is overfitted to the calibration data.
-It gives prediction with high informativeness while decreasing the calibration score.
-At the same time, for similar informativeness across tests, the prediction using the posterior uncertainties of the calibration scheme \texttt{w/ Bias, All} yield higher calibration score (except for the $CO$ output explained above).
-That is, it is still less overfitted as compared to the calibration without the model bias term.
-
-Finally, removing the most influential correlated parameter (\texttt{dffbVIHT}) from the calibration and keeping its uncertainties at the prior range gave good compromise.
-The resulting prediction uncertainties showed a decent increase in the informativeness and a minor decrease in the calibration score across all tests.
+In the following, to have a better understanding on the different calibration schemes and on the effect of considering model parameter correlations, 
+the discussion is focused on the propagation of posterior uncertainties obtained from three calibration schemes, namely: \texttt{w/ Bias, All}, \texttt{w/o Bias}, and \texttt{w/ Bias, no dffbVIHT}; 
+and only on two selected outputs, namely $TC1$ (the clad temperature at the top of the assembly) and $CO$.
+The difference between the uncertainty propagation of the posterior uncertainties from the three calibration schemes can mainly be observed on the two outputs,
+as shown by the plots similar to Figs.~\ref{fig:ch5_plot_trace_uq_post_all_disc_tc_216}, \ref{fig:ch5_plot_trace_uq_post_all_disc_dp_216}, and \ref{fig:ch5_plot_trace_uq_post_all_disc_co_216} available in the Appendix~\ref{app:mcmc_evaluation}.
 
 % On Uncertainty Propagation, TC1 FEBA Test 216 Different Calibration Schemes
-By looking at the plots similar to Figs.~\ref{fig:ch5_plot_trace_uq_post_all_disc_tc_216}, \ref{fig:ch5_plot_trace_uq_post_all_disc_dp_216}, and \ref{fig:ch5_plot_trace_uq_post_all_disc_co_216} available in the Appendix~\ref{app:mcmc_evaluation}, the difference between the uncertainty propagation of the posterior uncertainties from the three calibration schemes can mainly be observed on two outputs $TC1$ (the clad temperature at the top of the assembly) and $CO$.
 Fig.~\ref{fig:ch5_plot_feba_216_tc1_post} shows the uncertainty propagation results for the $TC1$ output.
 The uncertainty band from the calibration scheme \texttt{w/ Bias, All} (and to a lesser extend the one from the scheme \texttt{w/ Bias, no dffbVIHT}) shows a consistent shape with the nominal \gls[hyper=false]{trace} prediction.
 The band from the scheme \texttt{w/o Bias} is dramatically different (Fig.~\ref{fig:ch5_plot_feba_216_tc1_post_2}); it bears no resemblance whatsoever with the nominal \gls[hyper=false]{trace} prediction.
@@ -154,13 +121,13 @@ As the predictions from the other axial elevations showed no such dramatic diffe
                  mainlabel={fig:ch5_plot_feba_216_tc1_post},
 			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of \gls[hyper=false]{feba} test No. $216$ with the posterior of the model parameters from $3$ different calibration schemes. The uncertainty bands from darkest to lightest shades correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
 			           mainshortcaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA test No. $216$ with the posterior of the model parameters from $3$ different calibration schemes.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_216_tc1_post_1},
 			           leftcaption={\texttt{w/ Bias, All}},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_216_tc1_post_2},
 			           midcaption={\texttt{w/o Bias}},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.3\textwidth},
 			           rightlabel={fig:ch5_plot_feba_216_tc1_post_3},
 			           rightcaption={\texttt{w/ Bias, no dffbVIHT}},
 			           spacing={},
@@ -171,27 +138,30 @@ As the predictions from the other axial elevations showed no such dramatic diffe
 
 % Source of correlation
 Fig.~\ref{fig:ch5_plot_feba_216_tc1_post} also illustrates that the posterior samples from the calibration scheme \texttt{w/ Bias, All} are indeed strongly correlated, ignoring the correlation changes significantly the resulting uncertainty bands of the prediction.
-In other words, the model parameters only takes specific range of values in concert to reproduce the data.
+In essence, the posterior samples are a set of ``collect\-ively-fitted'' values that is consistent with the calibration data \cite{Gutenkunst2007} .
+Within the calibrated (and correlated) region of the parameter space, changes in the model parameters values would not alter the performance of the model against the calibration data.
 In this illustration, the correlation among parameters tighten the uncertainty band while keeping the experimental data within it.
+Removing the correlation structure -- and using only the posterior range of the univariate marginals -- gives realizations that can significantly differ than the calibration data and thus the wider prediction uncertainty bands.
+
 Moreover, as it was suspected, the parameter \texttt{dffbVIHT} is responsible for the strong correlation;
-ignoring the correlation structure in the uncertainty propagation of the results from the scheme  \texttt{w/ Bias, no dffbVIHT} shows a marginal difference compared to the propagation with the correlation structure. 
+ignoring the correlation structure in the uncertainty propagation of the results from the scheme  \texttt{w/ Bias, no dffbVIHT} shows only a marginal difference for the propagations with and without the correlation structure.
+And because an important parameter was removed from the calibration -- and keeping its uncertainty at the prior range --, less better fitted realizations compared to the calibration data were produced.
 
 % CO FEBA Test 216 Different Calibration Schemes
 At the same time, allowing the parameter \texttt{dffbVIHT} to change dramatically from the initial nominal parameter value also allowed the calibration scheme \texttt{w/o Bias} to correct the bias in the prediction of liquid carryover as indicated in Fig.~\ref{fig:ch5_plot_feba_216_co_post_2}.
 Now the nominal \gls[hyper=false]{trace} prediction mostly falls outside the posterior uncertainty band.
-By construction, the other two schemes allowed the nominal \gls[hyper=false]{trace} prediction to be within their respective posterior uncertainty bands although the bands did not (or only marginally) cover the experimental data.
-As the calibration was conducted with respect to all other outputs of which many more data points were available this simply means that the agreement with respect to the other outputs offset the discrepancy of the liquid carryover. 
+By construction, the other two schemes allowed the nominal prediction to be within their respective posterior uncertainty bands although the bands did not (or only marginally) cover the experimental data.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch5_plot_feba_216_co_post},
 			           maincaption={Uncertainty propagation results for $CO$ output of \gls[hyper=false]{feba} test No. $216$ with the posterior of the model parameters from $3$ different calibration schemes. The uncertainty bands from darkest to lightest shades correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
 			           mainshortcaption={Uncertainty propagation results for $CO$ output (the clad temperature at the top of the assembly) of FEBA test No. $216$ with the posterior of the model parameters from $3$ different calibration schemes.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_216_co_post_1},
 			           leftcaption={\texttt{w/ Bias, All}},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_216_co_post_2},
 			           midcaption={\texttt{w/o Bias}},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_feba_216_co_post_3},
 			           rightcaption={\texttt{w/ Bias, no dffbVIHT}},
 			           spacing={},
@@ -201,10 +171,10 @@ As the calibration was conducted with respect to all other outputs of which many
 {../figures/chapter5/figures/plotFEBA216COPost_3}
 
 % Connection with sensitivity analysis
-This is supported by the sensitivity analysis conducted in the previous chapter where it was shown that the parameter \texttt{dffbVIHT} became increasingly important at the top of the assembly and it was also found to be important for the $CO$ output.
-Recall that the parameter \texttt{dffbVIHT} is responsible for the heat transfer between the vapor phase and the interface and it contributes to the variation in the available entrained liquid and droplets being carried away through the top of the assembly.
-These droplets, in turn, is an important heat sink for the cladding.
-Thus, an increase in the heat transfer coefficient enhances the heat transfer at the top of the assembly and accelerate the evaporation of the available droplets (thus the lower clad temperature) while simultaneously decreases the amount of liquid being carried away (thus the slower rate of liquid carryover collection).
+This is supported by the sensitivity analysis conducted in the previous chapter where it was shown that the parameter \texttt{dffbVIHT} was important for the $CO$ output and became increasingly important for the $TC$ output at higher elevations.
+This can be physically understood as the parameter \texttt{dffbVIHT} is responsible for the heat transfer between the vapor phase and the interface and contributes to the variation in the available entrained liquid and droplets being carried away through the top of the assembly.
+These droplets, in turn, are an important heat sink for the cladding.
+Thus, an increase in the heat transfer coefficient enhances the heat transfer at the top of the assembly and accelerates the evaporation of the available droplets (thus the lower clad temperature) while simultaneously decreases the amount of liquid being carried away (thus the slower rate of liquid carryover collection).
 
 %---------------------------------------------------------------------------------------------------
 \subsubsection{On the Effect of Boundary Conditions}\label{subsub:bc_discussion_boundary_conditions}
@@ -213,20 +183,20 @@ Thus, an increase in the heat transfer coefficient enhances the heat transfer at
 % TC1 All FEBA Tests Calibration with model bias, kinda look better
 When comparing the uncertainty propagation results of the output $TC1$ across \gls[hyper=false]{feba} tests, another peculiar finding can be observed.
 Fig.~\ref{fig:ch5_plot_feba_tc1_disc_better} shows the uncertainty propagation with respect to the output $TC1$ for \gls[hyper=false]{feba} test Nos. $216$, $220$, and $222$ using the model parameters posterior uncertainties from the calibration scheme \texttt{w/ Bias, All}.
-It is obvious for the test No. $216$, the calibration data, to be well predicted and covered by the posterior model parameters uncertainties (Fig~\ref{fig:ch5_plot_feba_tc1_disc_216}).
-The prediction for the test No. $220$ (Fig~\ref{fig:ch5_plot_feba_tc1_disc_220}) looks even better.
-While the experimental data for the test No. $222$ falls outside the uncertainty band (of the correlated posterior samples), the shape of the experimental data looks very similar to typical uncertain predictions as represented by the band.
+It is normal for test No. $216$, the test used for the calibration, to be well predicted and covered by the posterior model parameters uncertainties (Fig~\ref{fig:ch5_plot_feba_tc1_disc_216}).
+Surprisingly, the prediction for test No. $220$ (Fig~\ref{fig:ch5_plot_feba_tc1_disc_220}) looks even better.
+The experimental data for test No. $222$ falls outside the uncertainty band (of the correlated posterior samples), but the shape of the experimental data is very similar to that of the uncertainty band.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch5_plot_feba_tc1_disc_better},
 			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $216$, $220$, and $222$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/ Bias, All}. The uncertainty bands from darkest to lightest shades correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
 			           mainshortcaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $216$, $220$, and $222$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/ Bias, All}.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_tc1_disc_216},
 			           leftcaption={Test No. $216$, $P_\text{sys} = 4.1\,[bar]$, $V_\text{in} = 3.8\,[cm \cdot s^{-1}]$},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_tc1_disc_220},
 			           midcaption={Test No. $220$, $P_\text{sys} = 6.2\,[bar]$, $V_\text{in} = 3.9\,[cm \cdot s^{-1}]$},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_feba_tc1_disc_222},
 			           rightcaption={Test No. $222$, $P_\text{sys} = 6.2\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
 			           spacing={},
@@ -237,17 +207,17 @@ While the experimental data for the test No. $222$ falls outside the uncertainty
 
 % TC1 All FEBA Tests Calibration without model bias, kinda look bad
 On the contrary, the uncertainty propagation with respect to the output $TC1$ for \gls[hyper=false]{feba} test Nos. $216$, $220$, and $222$ using the model parameters posterior uncertainties from the calibration scheme \texttt{w/o Bias} look significantly off compared with both the experimental data and the nominal \gls[hyper=false]{trace} prediction (Fig.~\ref{fig:ch5_plot_feba_tc1_nodisc_worse}).
-\bigtriplefigure[pos=tbhp,
+\bigtriplefigure[pos=!b,
                  mainlabel={fig:ch5_plot_feba_tc1_nodisc_worse},
 			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $216$, $220$, and $222$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/o Bias}. The uncertainty bands from darkest to lightest shades correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
 			           mainshortcaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $216$, $220$, and $222$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/o Bias}.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_tc1_nodisc_216},
 			           leftcaption={Test No. $216$, $P_\text{sys} = 4.1\,[bar]$, $V_\text{in} = 3.8\,[cm \cdot s^{-1}]$},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_tc1_nodisc_220},
 			           midcaption={Test No. $220$, $P_\text{sys} = 6.2\,[bar]$, $V_\text{in} = 3.9\,[cm \cdot s^{-1}]$},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_feba_tc1_nodisc_222},
 			           rightcaption={Test No. $222$, $P_\text{sys} = 6.2\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
 			           spacing={},
@@ -257,22 +227,23 @@ On the contrary, the uncertainty propagation with respect to the output $TC1$ fo
 {../figures/chapter5/figures/plotFEBA222TC1PostNoDisc}
 
 % TC1 All FEBA Tests Calibration with model bias, kinda look worse
-In the case of the uncertainty propagation with respect to the output $TC1$ for \gls[hyper=false]{feba} test Nos. $214$, $218$, and $223$, it is the the model parameters posterior uncertainties from the calibration scheme \texttt{w/ Bias, All} that produces significantly different results compared with the experimental data (Fig~\ref{fig:ch5_plot_feba_tc1_disc_worse}).
-The experimental data of test Nos. $218$ and $223$, in particular, are very much different than a typical \gls[hyper=false]{trace} predictions, both the nominal prediction and the corresponding uncertainty band.
-Neglecting the correlation structure between the model parameters inflates the uncertainty band and increase the coverage of the experimental data but the experimental data still looks dissimilar.
-This gives an indication that the observed phenomena might be of different nature, or there is a missing physical process in the simulation of reflood test with a lower system pressure.
-In the case of a very strong bias, under the calibration scheme, the adjustment of the model parameters is not enough to allow \gls[hyper=false]{trace} to better reproduce experimental data. 
-\bigtriplefigure[pos=tbhp,
+In the case of the uncertainty propagation with respect to the output $TC1$ for \gls[hyper=false]{feba} test Nos. $214$, $218$, and $223$, the model parameters posterior uncertainties from the calibration scheme \texttt{w/ Bias, All} produces significantly different results compared with the experimental data (Fig~\ref{fig:ch5_plot_feba_tc1_disc_worse}).
+The experimental data of test Nos. $218$ and $223$, in particular, are very much different than the nominal \gls[hyper=false]{trace} prediction and the corresponding uncertainty band.
+Neglecting the correlation structure between the model parameters inflates the uncertainty band and increases the coverage of the experimental data but the experimental data still exhibits a dissimilar transient behavior.
+This suggests that the observed phenomena might be of a different nature, and that there is a missing physical process in the simulation of reflood test with lower system pressures (and to some extent higher inlet velocity as indicated by test Nos.~$214$ and~$222$).
+In the case of a very strong bias between the nominal \gls[hyper=false]{trace} prediction and the corresponding experimental data, 
+a calibration scheme \texttt{w/ Bias} does not allow to better reproduce the experimental data by making significant adjustments to the model parameters. 
+\bigtriplefigure[pos=!h,
                  mainlabel={fig:ch5_plot_feba_tc1_disc_worse},
 			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $214$, $218$, and $223$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/ Bias, All}. The uncertainty bands from darkest to lightest shades correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
 			           mainshortcaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $214$, $218$, and $223$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/ Bias, All}.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_tc1_disc_214},
 			           leftcaption={Test No. $214$, $P_\text{sys} = 4.1\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_tc1_disc_218},
 			           midcaption={Test No. $218$, $P_\text{sys} = 2.1\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_feba_tc1_disc_223},
 			           rightcaption={Test No. $223$, $P_\text{sys} = 2.2\,[bar]$, $V_\text{in} = 3.8\,[cm \cdot s^{-1}]$},
 			           spacing={},
@@ -282,21 +253,21 @@ In the case of a very strong bias, under the calibration scheme, the adjustment 
 {../figures/chapter5/figures/plotFEBA223TC1PostDisc}
 
 % TC1 All FEBA Tests Calibration without model bias, kinda look better
-And yet, the uncertainty propagation with respect to the output $TC1$ using the model parameters posterior uncertainties from the calibration scheme \texttt{w/o Bias} do not look terribly look off for \gls[hyper=false]{feba} test Nos. $214$, $218$, and $223$.
-While the resulting uncertainty bands still fail to cover most of the experimental data, the upper uncertainty bounds of each test look conspicuously similar to the experimental data.
+And yet, the uncertainty propagation with respect to the output $TC1$ using the model parameters posterior uncertainties from the calibration scheme \texttt{w/o Bias} do not look terribly off from \gls[hyper=false]{feba} test Nos. $214$, $218$, and $223$.
+While the resulting uncertainty bands still fail to cover most of the experimental data, the upper uncertainty bounds of each test looks conspicuously similar to the experimental data.
 As mentioned the experimental data of $TC1$ for these three tests do not exhibit a typical reflood curve.
-At the same time, there is a potential for \gls[hyper=false]{trace} to properly reproduce the data through a significant adjustment to the nominal values of some parameters (e.g., \texttt{dffbVIHT}) as it was allowed by the calibration scheme \texttt{w/o Bias}.
-\bigtriplefigure[pos=tpbhp,
+At the same time, there is a potential for \gls[hyper=false]{trace} to properly reproduce the data through a significant adjustment of the nominal values of some model parameters (e.g., \texttt{dffbVIHT}) as it was allowed by the calibration scheme \texttt{w/o Bias}.
+\bigtriplefigure[pos=!b,
                  mainlabel={fig:ch5_plot_feba_tc1_nodisc_better},
-			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $214$, $218$, and $223$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/o Bias}. The uncertainty bands from darkest to lightest color correspond to the prior, posterior (independent), and posterior (correlated) model parameters uncertainties, respectively.},
+			           maincaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $214$, $218$, and $223$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/o Bias}.},
 			           mainshortcaption={Uncertainty propagation results for $TC1$ output (the clad temperature at the top of the assembly) of FEBA tests No. $214$, $218$, and $223$ with the posterior uncertainties of the model parameters from the calibration scheme \texttt{w/o Bias}.},%
-			           leftopt={width=0.31\textwidth},
+			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_feba_tc1_nodisc_214},
 			           leftcaption={Test No. $214$, $P_\text{sys} = 4.1\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
-			           midopt={width=0.31\textwidth},
+			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_plot_feba_tc1_nodisc_218},
 			           midcaption={Test No. $218$, $P_\text{sys} = 2.1\,[bar]$, $V_\text{in} = 5.8\,[cm \cdot s^{-1}]$},
-			           rightopt={width=0.31\textwidth},
+			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_plot_feba_tc1_nodisc_223},
 			           rightcaption={Test No. $223$, $P_\text{sys} = 2.2\,[bar]$, $V_\text{in} = 3.8\,[cm \cdot s^{-1}]$},
 			           spacing={},
@@ -306,7 +277,7 @@ At the same time, there is a potential for \gls[hyper=false]{trace} to properly 
 {../figures/chapter5/figures/plotFEBA223TC1PostNoDisc}
 
 Therefore, it is worth investigating in a further study whether a proper parametrization with respect to system pressure and reflood rate have been implemented in \gls[hyper=false]{trace}.
-Based on this study and for this particular output (the clad temperature at the top of the assembly), it is perhaps the case that a different reflood closure models adjustment are required for properly simulating reflood in a low system pressure or in an intermediate system pressure but with higher reflood rate particularly in the upper part of the assembly.
+This study suggests that a different reflood closure model adjustment might be required to properly simulate reflood in the upper part of dry assembly, in a low system pressure (here it is $2.1\,[bar])$ or with higher reflood rate (i.e., test Nos.~$214$ and~$222$).
 
 %Meanwhile, it might well be the case that the phenomena being measured for the \gls[hyper=false]{feba} test Nos. $214$, $218$, and $223$ are simply not representative to what being simulated by \gls[hyper=false]{trace} according to its verification and validation activities.
 
