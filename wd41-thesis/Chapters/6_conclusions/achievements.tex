@@ -54,12 +54,12 @@ Although stable, the current version of \texttt{trace-simexp} has been only test
 Extension to other \gls[hyper=false]{trace} models are feasible.
 However, depending on the complexity of those models, further development of the tool might become unrealistic and it would be better to opt for the use of an integrated uncertainty framework 
 (e.g., \texttt{UQLab}, \texttt{Dakota}, \texttt{OpenTurns}, \texttt{Uranie}).
-Typically, such framework supports an application programming interface (API) to make connection with an external simulation model or to a third-party program.
+Typically, such framework supports an application programming interface (API) to a make connection with an external simulation model or to a third-party program.
 It does require initial effort of getting acquainted with the terminologies of each framework, some are easier than the other, but in the long run for a generic complex model they might be the solution.
 
-%---------------------------------------------------------
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Implementation and application of GSA methods (to analyze and better understand the inputs/outputs relationship in a computer simulation with uncertain input)}
-%---------------------------------------------------------
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 % Sensitivity Analysis, Morris
 Three conference papers \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015} and a journal article \cite{Wicaksono2016b} made up Chapter~\ref{ch:gsa}.
@@ -84,20 +84,59 @@ The implementations of the employed \gls[hyper=false]{gsa} methods were develope
 \marginpar{\texttt{gsa-module}}
 The module \texttt{gsa-module} is documented and was tested against a suite of test functions and applied to obtain all the results presented in Chapter~\ref{ch:gsa}.
 
-\paragraph{Recommendations for Future Work}
+\paragraph{Recommendations for Future Work}\mbox{}\\
 
-%-----------------------------------------------------------
-\subsection{Development and validation of a TRACE metamodel, to approximate the inputs/outputs relationship of a complex computer simulation for a faster evaluation}
-%-----------------------------------------------------------
+% screening methods
 
-% Metamodeling and Bayesian Calibration
+% sobol decomposition
+ 
+% gsa module and uncertainty framework
 
-\paragraph{Recommendations for Future Work}
+%---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Development and validation of a TRACE metamodel (to approximate the inputs/outputs relationship of a complex computer simulation for a faster evaluation)}
+%---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-%-------------------------------------------------------------------------------------------------------------
-\subsection{Bayesian calibration of TRACE reflood model parameters against various relevant experimental data}
-%-------------------------------------------------------------------------------------------------------------
+% Metamodeling and Bayesian
+\glsfirst[hyper=false]{gp} metamodeling was demonstrated for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} having high-dimensional outputs.
+In this thesis, the high-dimensionality of the outputs was treated by \gls[hyper=false]{pca} resulting in a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel.
+The validation and testing steps then showed that the error of the metamodel across the prior range of input parameters were within a reasonable range.
+In other words, it managed to approximate the important features of the inputs/outputs relationship of the reflood simulation model in \gls[hyper=false]{trace}.
+Using the \glsfirst[hyper=false]{gp} \glsfirst[hyper=false]{pc} as the surrogate for TRACE run, the prediction for arbitrary input parameters values could be made much faster
+(i.e., $< 5\,[s]$ per metamodel evaluation vs. $6 - 15\,[min]$ per TRACE).
+
+The thesis has demonstrated the applicability of a linear dimension reduction technique to reduce the high dimension of the output.
+The technique performed best for relatively smooth output (in this particular application, the pressure drop and liquid carryover transients), while it performed worse for reconstructing an output exhibiting strong discontinuity (i.e., the cladding temperature output exhibited a discontinuity around quenching).
+Finally, though many practical aspects were involved in the construction of the metamodel, the work in the thesis concluded that the size of training samples (i.e., the actual code runs) was the most important factor;
+if they can be afforded, more runs should be conducted.
+
+\paragraph{Recommendations for Future Work}\mbox{}\\
+
+The worse performance of the \gls[hyper=false]{pca} on reconstructing the cladding temperature output was, in turn, due to the use of \gls[hyper=false]{pca} as the linear dimension reduction.
+\marginpar{Alternative dimension reduction technique}
+Furthermore, the size of training size might get inflated because of this worse performance:
+large training samples was required not because the inputs/outputs relationship was particularly complex, but because reconstruction of the output with small error required more samples. 
+As such, a first step of improvement in this regard can be aimed toward replacing PCA with another, more advanced dimension reduction tool.
+Simulations with high-dimensional outputs, either in time or space, are typical in \gls[hyper=false]{th} analysis.
+It is thus worth investigating the application of different dimension reduction techniques, linear (extension of \gls[hyper=false]{pca}, e.g., \cite{Zhang2005}) or nonlinear (e.g., isomap \cite{Tenenbaum2000} and locally linear embedding (LLE) \cite{Roweis2000}).
+Many of such developments are made in the area of image processing.
+Indeed as shown in Chapter~\ref{ch:gp_metamodel}, a $1$-dimensional time-dependent \gls[hyper=false]{trace} simulation output can be represented as an image.
+
+Furthermore, \gls[hyper=false]{gp} metamodel is not the only available metamodeling technique.
+\marginpar{Alternative metamodeling techniques}
+The response surface method was traditionally employed for \gls[hyper=false]{th} system analysis but more advanced techniques are currently available such as the ones mentioned in Section~\ref{sub:intro_statistical_metamodeling}. 
+The investigation on their applicability -- the predictive performance and the computational cost of construction -- for a variety of \gls[hyper=false]{th} models is of interest in its own right.
+
+Finally, the step proposed in this thesis is to conduct sensitivity analysis before to construct the metamodel.
+\marginpar{Alternative workflow}
+In that case, metamodeling error can be excluded from the sensitivity analysis.
+However, it is also possible to construct the metamodel in advanced before moving on to the sensitivity analysis step.
+Some of metamodeling techniques allows the metamodeling and sensitivity analysis to be combined while providing an estimate of the associated error.
+In particular \gls[hyper=false]{pce}, allows the computation of Sobol' sensitivity indices to be computed by post-processing the resulting coefficients of the expansion \cite{Sudret2008}.
+
+%-----------------------------------------------------------------------------------------------------------------
+\subsection{Bayesian calibration of the TRACE reflood model parameters against various relevant experimental data}
+%-----------------------------------------------------------------------------------------------------------------
 
 % Main Achievements
 
-\paragraph{Recommendations for Future Work}
+\paragraph{Recommendations for Future Work}\mbox{}\\
