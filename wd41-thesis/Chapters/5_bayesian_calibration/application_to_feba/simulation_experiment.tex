@@ -181,20 +181,19 @@ The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapt
     Each output type of the \gls[hyper=false]{trace} simulations are selected at its respective observation layout ($\boldsymbol{\Lambda}_{TC}$, $\boldsymbol{\Lambda}_{DP}$, and $\boldsymbol{\Lambda}_{CO}$).
     For each simulation the vectors of values are denoted $\mathbf{\hat{y}}_{M,TC}$, $\mathbf{\hat{y}}_{M,DP}$, and $\mathbf{\hat{y}}_{M,CO}$ for the $TC$, $DP$, $CO$ output, respectively.
   \item Assume the vectors $\left(\mathbf{y}_{E,TC} - \mathbf{\hat{y}}_{M,TC}\right)$, $\left(\mathbf{y}_{E,DP} - \mathbf{\hat{y}}_{M,DP}\right)$, and\\ $\left(\mathbf{y}_{E,CO} - \mathbf{\hat{y}}_{M,CO}\right)$ to be realizations from stationary \glspl[hyper=false]{gp} on the observation layouts (i.e., as function time and space).
-    Note that as the observation layouts comprise discrete points in time and space that the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
+    Note that as the observation layouts comprise discrete points in time and space the \glspl[hyper=false]{gp} collapse to multivariate Gaussian distributions.
     The power-exponential covariance function is selected for the covariance kernel and its hyper-parameters (i.e., $\sigma^2$. $\bm{p}$, $\bm{\theta}$) are estimated using the \texttt{R} package \texttt{DiceKriging}. 
   \item The mean of the bias term of each output is taken to be the difference between the data $\mathbf{y}_{E,\circ}$ and the nominal prediction $\mathbf{\hat{y}}_{M,\circ}$, while the covariance matrix of the bias term is taken to be the covariance matrix constructed at the observation layout using the estimated hyper-parameters above.
   The constructed covariance matrix takes into account correlations of the model bias in time and space.
-  In the present analysis the values of the hyper-parameters estimated in the previous step are kept constant during the subsequent phase of calibration.
+  In the present analysis the values of the hyper-parameters estimated in the previous step are kept constant during the subsequent phases of the calibration process.
 \end{enumerate}
 
 % What does the bias mean
 The above model bias term formulation is only partially Bayesian as it uses the data to make the initial estimation.
 But as argued in \cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
 Several additional assumptions are made in this thesis to fully formulate the bias term.
-By varying the parameters related to the boundary conditions in the construction of the term implies that the residual uncertainty of the experiment associated with with the variations of the boundary conditions is included in the model bias term.
-In the \gls[hyper=false]{feba} experiment, the residual uncertainty was not directly observed as there was no replication of the experiment at the same controllable inputs.
-According to the above formulation, the model bias term allows for such uncertainty based on \gls[hyper=false]{trace} simulation.
+By varying the parameters related to the boundary conditions in the construction of the term implies that the experimental uncertainty in the boundary conditions is included in the model bias term.
+In the \gls[hyper=false]{feba} experiment, this type of uncertainty was not directly observed as there was no replication of the experiment at the same controllable inputs and the experimental uncertainty with respect to each type of data was given.
 
 By using the mean for the bias term defined above, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
 This is an indirect way of putting a strong prior preference for the \gls[hyper=false]{trace} nominal prediction such that the model parameters should not dramatically be shifted to correct the mismatch between the experimental data and the \gls[hyper=false]{trace} prediction.
@@ -508,7 +507,7 @@ It does not, however, takes into account the possible uncertainties associated w
 % Aggregation
 For multiple \glspl[hyper=false]{qoi} $\bm{Y} = [Y_1, \ldots, Y_D]$ of the same source, both informativeness and calibration score can be aggregated by,
 \begin{equation}
-  \text{Inf}_\bm{Y} (src) = \frac{1}{D} \sum_{d=1}^{D} Inf_{Y_d}(src) \quad\quad \text{Cal}_\bm{Y} (src) = \frac{1}{D} \sum_{d=1}^{D} \text{Cal}_{Y_d}(src)
+  \text{Inf}_{\bm{Y}} (src) = \frac{1}{D} \sum_{d=1}^{D} Inf_{Y_d}(src) \quad\quad \text{Cal}_{\bm{Y}} (src) = \frac{1}{D} \sum_{d=1}^{D} \text{Cal}_{Y_d}(src)
 \label{eq:calibinfo_aggregate}
 \end{equation}
 
@@ -520,4 +519,3 @@ The choice is rather arbitrary but as long as the criteria is applied consistent
 Furthermore, the $2.5$-th and $97.5$-th percentiles of the prior prediction distribution are taken to be the $LUB_{\text{min.}}$ and $UUB_{\text{max.}}$ and the reference value $y_\text{ref.}$ is taken to be the median value of each posterior prediction distribution.
 Finally the experimental data is taken to be the observed value $y_\text{obs.}$ without considering the associated uncertainty following the original paper \cite{Baccou2014}.
 Once again, this lack of consideration is less of an issue for comparing between different uncertain predictions.
- 
