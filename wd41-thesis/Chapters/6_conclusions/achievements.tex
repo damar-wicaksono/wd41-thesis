@@ -1,3 +1,47 @@
 %**************************************************************
 \section{Main Achievements}\label{sec:conclusions_achievements}
 %**************************************************************
+
+% Publications
+The thesis proposed the application of methods adapted from applied literature with the ultimate goal to quantify the uncertainty of model parameters in a \gls[hyper=false]{th} system code, 
+The application of each of the proposed methods was illustrated and demonstrated on the basis of a reflood experiment simulation model in the \gls[hyper=false]{trace} code.
+During the course of the present doctoral research, four papers were presented in international conferences \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015,Wicaksono2016}, a journal article was published \cite{Wicaksono2016b}, and two contributions were submitted \cite{Wicaksono2016a,Zerkak2016} to the \gls[hyper=false]{premium} project and included in the NEA reports \cite{Reventos2016,Sanz2017}.
+
+% Contributions to PREMIUM
+The works related to the contribution to the \gls[hyper=false]{premium} project comprises the bulk of Chapter~\ref{ch:trace_reflood}.
+The \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} was successfully developed within that context and became the basis for several follow-up studies.
+\marginpar{TRACE model of FEBA}
+The model was stable and was relatively quick to run allowing even a relatively brute force sensitivity analysis method to be applied.
+It is now part of the in-house \gls[hyper=false]{trace} code validation database at LRS.
+Still within the context of \gls[hyper=false]{premium} a python scripting tool was developed to assist in conducting computer experiment on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+\marginpar{\texttt{trace-simexp}}
+The tool \texttt{trace-simexp} has reached a stable version, is well documented, and has been applied for several follow-up studies within and without the scope of the present doctoral research.
+
+The prior uncertainties of the input parameters were quantified with a close supervision of an expert at \glsentryshort{psi} \cite{Zerkak2016}.
+\marginpar{Contribution to PREMIUM, prior uncertainty quantification}
+The quantified uncertainties were then propagated both on the \gls[hyper=false]{trace} models of \gls[hyper=false]{feba} and PERICLES (another reflood facility not presented in this thesis).
+The result of the propagation submitted to the \gls[hyper=false]{premium} project were deemed satisfactory as it served the purpose of the prior quantification.
+That is, the prediction uncertainties of both facilities were wide but covered the experimental data well, confirming that the prior range was not underestimated.
+
+% Sensitivity Analysis, Morris
+Three conference papers \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015} and a journal article \cite{Wicaksono2016b} made up Chapter~\ref{ch:gsa}.
+The size of the initial selection of input parameters, as exemplified in \gls[hyper=false]{premium}, can be large. 
+\marginpar{Implementation and application of screening methods}
+Lacking prior knowledge, the selection should also include all the parameters that are vaguely perceived as important. 
+The implementation and the application of screening methods (Morris screening method and Sobol' total-effect indices), as demonstrated in this thesis for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba},
+allows for a quick, systematic, and quantitative screening of the initial set of input parameters in a global manner (i.e. simultaneous perturbation over the whole range of parameter uncertainties).
+In the case studied here, more than half of the initial selection were found to be non-influential to the reflood simulation.
+
+In conjunction with that, \gls[hyper=false]{fda} techniques to characterize the variation of functional data set was investigated and successfully applied to analyze the variation in reflood curves.
+In essence, the application of the \gls[hyper=false]{fda} techniques resulted in the representation of the time-dependent output in a reduced space.
+Indeed, time- and space-dependent outputs are ubiquitous in the \gls[hyper=false]{th} analysis thus dimension reduction techniques are worth investigating.
+\marginpar{Application of GSA coupled with FDA}
+\gls[hyper=false]{gsa} methods and \gls[hyper=false]{fda} techniques were then coupled together to decompose the variance of the output in the reduced space.
+This was done through the implementation and application of \gls[hyper=false]{mc} methods to estimate the Sobol', main- and total-effect, indices.  
+The sensitivity analysis reveals interesting behavior of the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} in terms of interactions
+
+The implementations of the employed \gls[hyper=false]{gsa} methods were developed in-house as a python module to allow full internal control.
+\marginpar{\texttt{gsa-module}}
+The module \texttt{gsa-module} is documented and was tested against a suite of test functions and applied to obtain all the results presented in Chapter~\ref{ch:gsa}.
+
+% Metamodeling and Bayesian Calibration
