@@ -7,13 +7,13 @@
 %------------------------------------------------------------------------------------------------
 
 % Opening Paragraph, On Convergence
-Though the length of burn-in period is almost $40\%$ of the total number of iterations -- thus discarding a lot of the initial samples -- the resulting statistical error associated with model parameters estimates is in the order of less than $1\%$ relative to the respective standard deviation.
-The relatively long burn-in period with respect to the total number of ensemble iterations is consistent with the observations of Refs.~\cite{Hou2012,Foreman-Mackey2013,Akeret2013}, each of which applied an \gls[hyper=false]{aies} ensemble sampler to conduct a Bayesian calibration of a computer model.
-This relatively long burn-in period is especially true in comparison with the length of the period in a single particle sampler.
 It is not uncommon to run a single particle \gls[hyper=false]{mcmc} simulation up to $100'000$ iterations (or beyond) for computer model calibration \cite{Wu2017,Wu2018}.
 In such case, the length of the burn-in period would be much smaller than the total number of iterations and thus would be less important to discard\footnote{A rule of thumb argues for discarding at most $20\%$ of the total number of samples in a single particle samplers \cite{Sokal1997}.}.
 
-In the case considered here, although the total number of iterations are much smaller ($2'000$), the length of burn-in period was conservatively estimated up to $40\%$ of the total number of iterations\footnote{Note that, despite the lower number of iterations for an ensemble sampler, the computational cost of the sampler in terms of the number of likelihood evaluations is on par with a single particle sampler.}.
+In the case considered here, although the total number of iterations are much smaller ($2'000$), the length of burn-in period was conservatively estimated up to $40\%$ of the total number of iterations\footnote{Note that, 
+despite the lower number of iterations for an ensemble sampler, the computational cost of the sampler in terms of the number of likelihood evaluations is on par with a single particle sampler.}.
+Moreover, although a lot of the initial samples was discarded, the resulting statistical error associated with the model parameter estimates obtained by the \gls[hyper=false]{mcmc} simulation is in the order of less than $1\%$ relative to the true standard deviation of the respective parameter.
+The relatively long burn-in period with respect to the total number of ensemble iterations is consistent with the observations of Refs.~\cite{Hou2012,Foreman-Mackey2013,Akeret2013}, each of which applied an \gls[hyper=false]{aies} ensemble sampler to conduct a Bayesian calibration of a computer model.
 Therefore, determining the burn-in period was indeed more important;
 if the samples associated with this initial transient were not discarded then the model parameters estimates would be heavily biased.
 
