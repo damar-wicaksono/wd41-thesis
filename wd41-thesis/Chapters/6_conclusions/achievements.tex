@@ -30,7 +30,6 @@ Finally, four papers were presented in international conferences \cite{Wicaksono
 %-----------------------------------------------------
 
 % Contributions to PREMIUM
-The work related to the contribution to the \gls[hyper=false]{premium} project comprises the bulk of Chapter~\ref{ch:trace_reflood}.
 The \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} was successfully developed within that context and became the basis for several follow-up studies.
 \marginpar{TRACE model of FEBA}
 The model was stable and was relatively quick to run allowing even a relatively brute force sensitivity analysis method to be applied.
@@ -53,21 +52,20 @@ The tool \texttt{trace-simexp} has reached a stable version, is well documented,
 Although stable, the current version of \texttt{trace-simexp} has been only tested so far for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 Extension to other \gls[hyper=false]{trace} models are feasible.
 However, depending on the complexity of those models, further development of the tool might become unrealistic and it would be better to opt for the use of an integrated uncertainty framework 
-(e.g., \texttt{UQLab}, \texttt{Dakota}, \texttt{OpenTurns}, \texttt{Uranie}).
+(e.g., \texttt{UQLab} \cite{Marelli2014}, \texttt{Dakota} \cite{Adams2017}, \texttt{OpenTurns} \cite{Baudin2017}, \texttt{Uranie} \cite{Gaudier2010}).
 Typically, such framework supports an application programming interface (API) to a make connection with an external simulation model or to a third-party program.
-It does require initial effort of getting acquainted with the terminologies of each framework, some are easier than the other, but in the long run for a generic complex model they might be the solution.
+It does require an initial effort of getting acquainted with the terminologies of each framework, some are easier than the other, but in the long run for a generic complex model they might be the solution.
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Implementation and application of GSA methods (to analyze and better understand the inputs/outputs relationship in a computer simulation with uncertain input)}
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 % Sensitivity Analysis, Morris
-Three conference papers \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015} and a journal article \cite{Wicaksono2016b} made up Chapter~\ref{ch:gsa}.
 The size of the initial selection of input parameters, as exemplified in \gls[hyper=false]{premium}, can be large. 
 \marginpar{Implementation and application of screening methods}
 Lacking prior knowledge, the selection should also include all the parameters that are vaguely perceived as important. 
 The implementation and the application of screening methods (Morris screening method and Sobol' total-effect indices), as demonstrated in this thesis for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba},
-allows for a quick, systematic, and quantitative screening of the initial set of input parameters in a global manner (i.e. simultaneous perturbation over the whole range of parameter uncertainties).
+allows for a quick, systematic, and quantitative screening of the initial set of input parameters in a global manner (i.e., simultaneous perturbation over the whole range of parameter uncertainties).
 In the case studied here, more than half of the initial selection were found to be non-influential to the reflood simulation.
 
 % FDA
