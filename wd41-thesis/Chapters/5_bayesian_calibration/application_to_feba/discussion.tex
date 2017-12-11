@@ -47,7 +47,7 @@ By definition, a model parameter that is not sensitive to a simulation output ca
 That is, the parameter is non-identifiable with respect to that output \cite{Hines2014}.
 \marginpar{Non-identifiability, multiple types of data}
 Considering other type of output data can potentially solve the problem.
-And indeed, when considering all types of data, the prior uncertainties of the model parameters was shown to be simultaneously constrained and often even tighter (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}).
+And indeed, when considering all types of data, the prior uncertainties of the model parameters was shown to be simultaneously constrained (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}).
 For instance, the parameters \texttt{iabfIntDr} and \texttt{dffWallHT} are non-identifiable with respect to the temperature and pressure drop data, respectively (Figs.~\ref{fig:ch5_plot_ens_tc_disc_centered} and \ref{fig:ch5_plot_ens_dp_disc_centered}, respectively).
 But, as shown in Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, the calibration using both types of experimental data solves the non-identifiability problem for both parameters.
 
@@ -55,20 +55,20 @@ But, as shown in Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}, the calibration 
 There are, however, several parameters that simply could not be constrained by the considered experimental data.
 \marginpar{Non-identifiability, insensitive parameters}
 The uncertainties, especially the lower bounds of the parameters \texttt{iafbWHT}, \texttt{dffbWDr} and \texttt{tQuench} remained close to their initial values,
-while their upper bounds were only marginally smaller. 
-These parameters were found to be of marginal importance among the selected influential parameters (see Appendix~\ref{app:tbl_results_screening} and \ref{app:tbl_results_sobol}).
-Although it is straightforward to conclude that insensitive parameter simply cannot be constrained by the experimental data, and the most influential ones can be strongly constrained, it stays unclear which among the parameters of intermediate importance as indicated by sensitivity measures of Chapter~\ref{ch:gsa} can be well constrained by the experimental data.
+while their upper bounds were only marginally smaller.
+These parameters were found to be of marginal importance among the selected influential parameters (see Appendices~\ref{app:tbl_results_screening} and \ref{app:tbl_results_sobol}).
+Although it is straightforward to conclude that insensitive parameters simply cannot be constrained by the experimental data, and the most influential ones are strongly constrained, it stays unclear which among the parameters of intermediate importance -- as indicated by sensitivity measures of Chapter~\ref{ch:gsa} -- can be well constrained by the experimental data.
 
 % On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
 The calibration results also showed that strong correlation was pres\-ent among the model parameters.
 \marginpar{Non-identifiability, correlation}
-In the case of the calibration against $TC$ data (Fig.~\ref{fig:ch5_plot_ens_tc_disc_centered}), the parameter \texttt{dffbVIHT} was shown to be correlated with multiple parameters, particularly with the parameter \texttt{dffbIntDr}.
-In the case of the calibration against $DP$ data (Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}), the parameters \texttt{iafbWHT} and \texttt{tQuench} were found to be strongly correlated. 
+In the case of the calibration against the $TC$ data (Fig.~\ref{fig:ch5_plot_ens_tc_disc_centered}), the parameter \texttt{dffbVIHT} was shown to be correlated with multiple parameters, particularly with the parameter \texttt{dffbIntDr}.
+In the case of the calibration against the $DP$ data (Fig.~\ref{fig:ch5_plot_ens_dp_disc_centered}), the parameters \texttt{iafbWHT} and \texttt{tQuench} were found to be strongly correlated. 
 Considering multiple types of experimental data (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered}) did not seem to break these correlations.
 
 Both cases are examples of another form of parameter non-ident-fiability.
-Though these parameters were sensitive with respect to the outputs as the parameters posterior uncertainties were clearly informed and affected by the calibration process (they did, after all, become correlated), 
-the effect of one parameter could be be offset by the change in the other and still reproducing the experimental data. 
+Though these parameters were sensitive with respect to the outputs -- as the parameters posterior uncertainties were clearly informed and affected by the calibration process -- 
+changes in one of those parameters could be offset by the changes in the other and any of the combinations still reproduce the experimental data. 
 As a result, the univariate posterior marginal uncertainties of these parameters remained large.
 
 This is especially true when comparing the correlation between the parameters \texttt{iafbWHT} and \texttt{tQuench} and between the parameters \texttt{dffbVIHT} and \texttt{dffbIntDr}. 
@@ -76,9 +76,8 @@ In the former, due to the correlation over the whole range of both parameters, m
 while in the latter, the upper bounds of both parameters remained large.
 
 % On the Posterior samples, correlation structure On the Posterior samples, excluding dffbVIHTC
-If a more precise estimate of a parameter is of interest then a possible, rather straightforward, solution of the problem is to remove an influential parameter that is strongly correlated from the calibration process \cite{Brun2002} and keeping it at its prior uncertainty.
+If a more precise estimate of a parameter is of interest then a straightforward solution is to remove an influential parameter that is strongly correlated from the calibration process \cite{Brun2002} and to keep it at its prior uncertainty.
 \marginpar{Calibration, excluding a correlated parameter}
-In other words, by choosing only one of the parameters that can be identified more precisely by the data.
 This approach was investigated in this thesis because of the strong correlation between two important parameters, namely \texttt{dffbVIHT} and \texttt{dffbIntDr}.
 The calibration scheme \texttt{w/ Bias, no dffbVIHT}, in which the parameter \texttt{dffbVIHT} was excluded from the calibration process, further constrained the uncertainty of the parameter \texttt{dffbIntDr} (Fig.~\ref{fig:ch5_plot_ens_all_disc_centered_noparam8}).
 
