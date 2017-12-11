@@ -87,17 +87,17 @@ The calibration scheme \texttt{w/ Bias, no dffbVIHT}, in which the parameter \te
 %-------------------------------------------------------------------------------------------------------
 
 % On the Posterior samples, no bias
-The last calibration scheme investigated was the \texttt{w/o Bias} scheme in which no model bias term was incorporated in the calibration process and the only sources of uncertainties was the one associated with the reported experimental data (see Section~\ref{subsub:bc_calibration_schemes}.
+The last calibration scheme investigated was the \texttt{w/o Bias} scheme in which no model bias term was incorporated in the calibration process and the only sources of uncertainties were the ones associated with the reported experimental data (see Section~\ref{subsub:bc_calibration_schemes}).
 The results as presented in Fig.~\ref{fig:ch5_plot_ens_all_nodisc} showed a peculiar behavior.
-A notable feature was that, for many model parameters, the nominal parameters values were found to be outside the $95\%$ posterior uncertainty range.
-Recall that the nominal parameters were already calibrated against experimental data from different \glspl[hyper=false]{setf}.
-Therefore, if this results is to be believed then it also implies that the previous calibration results are highly implausible to simulate the reflood experiment of \gls[hyper=false]{feba};
-and that there are (wildly) different model parameters that allow \gls[hyper=false]{trace} to simulate the experiment better.
+For many model parameters, their nominal values were found to be outside the $95\%$ posterior uncertainty range.
+Recall that these nominal values were obtained by calibration against experimental data from different \glspl[hyper=false]{setf}.
+Therefore, the results imply that the previous calibration results are not able to simulate the reflood experiment of \gls[hyper=false]{feba};
+and that there are different model parameter values that allow \gls[hyper=false]{trace} to simulate the experiment better.
 
 Moreover, the posterior samples of the parameters were concentrated either on one or both sides of the prior uncertainty range.
-The parameters \texttt{iafbWHT} and \texttt{tQuench}, for instance, were concentrated on both sides of their prior uncertainties;
-while the parameters \texttt{dffbWHT} and \texttt{dffbVIHT} were concentrated on one side of their prior uncertainties.
-The lack of assumed model bias in the calibration formulation did force the parameters to change dramatically and at times, to the limit of the prior uncertainties, in order to compensate any additional residual discrepancy between the simulator predictions and the experimental data, beyond the experimental uncertainty.
+The parameters \texttt{iafbWHT} and \texttt{tQuench}, for instance, were concentrated on both sides of their prior uncertainty range;
+while the parameters \texttt{dffbWHT} and \texttt{dffbVIHT} were concentrated on one side only.
+The lack of model bias term in the calibration formulation did force the parameters to change dramatically -- and at times up to the limit of the prior uncertainties -- in order to compensate any discrepancy between the simulator predictions and the experimental data, beyond the experimental uncertainty.
 That is, though these distributions might look peculiar, they were the ones found to be consistent with the experimental data under the calibration formulation.
 
 %------------------------------------------------------------------------------------------------------------------
