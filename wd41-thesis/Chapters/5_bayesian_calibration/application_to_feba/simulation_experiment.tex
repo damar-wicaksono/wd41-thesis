@@ -368,9 +368,9 @@ From the univariate marginal of each model parameter posterior uncertainties, th
 From the bivariate marginals, the correlation structure between the model parameters, if any, can also be quickly assessed.
 
 % Forward uncertainty quantification
-To investigate the implication of the different calibration schemes on \gls[hyper=false]{trace} predictions, simulation campaigns of \gls[hyper=false]{feba} test No. $216$ are conducted using samples from the posterior \glspl[hyper=false]{pdf}.
+To investigate the implication of the different calibration schemes on the \gls[hyper=false]{trace} predictions, simulation campaigns of \gls[hyper=false]{feba} test No. $216$ are conducted using samples from the posterior \glspl[hyper=false]{pdf}.
 Furthermore, to assess if the posterior uncertainties are applicable for the simulations of reflood experiments with different boundary conditions,
-the simulations campaigns are extended to the $5$ additional \gls[hyper=false]{feba} tests.
+the simulation campaigns are extended to the $5$ additional \gls[hyper=false]{feba} tests.
 In other words, these $5$ additional \gls[hyper=false]{feba} tests becomes the validation data sets.
 Finally, the campaigns are conducted both with and without considering the correlation structure in the posterior samples to investigate the effect of the model parameter correlations.
 
@@ -436,7 +436,7 @@ These two information models are illustrated in Fig.~\ref{fig:ch5_calibinfo_mode
 
 % Ignorance
 In the following, 
-the rectangular model is used to represent a complete ignorance with respect to the \gls[hyper=false]{qoi} $Y$ $\pi_{ign,Y}$ using a minimum lower uncertainty bound $LUB_{Y,\text{min.}}$ and a maximum upper uncertainty bound $UUB_{Y,\text{max.}}$.
+the rectangular model is used to represent a complete ignorance with respect to the \gls[hyper=false]{qoi} $Y$, $\pi_{ign,Y}$ using a minimum lower uncertainty bound $LUB_{Y,\text{min.}}$ and a maximum upper uncertainty bound $UUB_{Y,\text{max.}}$.
 That is,
 \begin{equation}
 		\pi_{ign,Y} (y) = 
@@ -451,7 +451,7 @@ That is,
 The information evaluation part of the method comprises two indices to evaluate the quality of information in a given source.
 \emph{Informativeness}, associated with a source $src$ and a \gls[hyper=false]{qoi} $Y$ is defined as,
 \begin{equation}
-  \text{Inf}(src, y) = \frac{|\pi_{\text{ign}, Y}| - |\pi_{\text{src},Y}|}{|\pi_{\text{ign},Y}|} = 1 - \frac{1}{2} \frac{UUB_Y - LUB_Y}{UUB_{Y, \text{max.}} - LUB_{Y, \text{min.}}}
+  \text{Inf}_Y (src) = \frac{|\pi_{\text{ign}, Y}| - |\pi_{\text{src},Y}|}{|\pi_{\text{ign},Y}|} = 1 - \frac{1}{2} \frac{UUB_Y - LUB_Y}{UUB_{Y, \text{max.}} - LUB_{Y, \text{min.}}}
 \label{eq:informativeness}
 \end{equation}
 where $|\circ|$ denotes the area under an information model.
@@ -460,7 +460,7 @@ it takes value between $0.5$ (the widest uncertainty range of a source, the same
 Fig.~\ref{fig:ch5_calibinfo_informativeness} illustrates $\text{Inf}$ calculation.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_calibinfo_informativeness},
-                  maincaption={Informatives of two different information sources. Wider uncertainty interval gives lower informativeness, and vice versa. Thus $\text{Inf}(src_1, y) > \text{Inf}(src_2, y)$},%
+                  maincaption={Informatives of two different information sources. Wider uncertainty interval gives lower informativeness, and vice versa. Thus $\text{Inf}_Y(src_1) > \text{Inf}_Y(src_2)$},%
 									mainshortcaption={Informativeness of two different information sources.},
                   leftopt={width=0.425\textwidth},
                   leftlabel={fig:ch5_calibinfo_informativeness_narrow},
@@ -478,7 +478,7 @@ Fig.~\ref{fig:ch5_calibinfo_informativeness} illustrates $\text{Inf}$ calculatio
 % Information Evaluation, Calibration Score
 \emph{Calibration score} between a source $src$ and the observed value $y_\text{obs.}$ for a \gls[hyper=false]{qoi} is defined as,
 \begin{equation}
-  \text{Cal}(src, y) = \pi_{src, Y}(y_\text{obs.})
+  \text{Cal}_Y (src) = \pi_{src, Y}(y_\text{obs.})
 \label{eq:calibration_score}
 \end{equation}
 that is, the calibration score is the possibility of the observed value $y_\text{obs.}$ under the information model of the source $src$.
@@ -488,17 +488,17 @@ The score is at maximum of $1.0$ for $y_\text{obs.} = y_\text{ref.}$.
 It does not, however, takes into account the possible uncertainties associated with $y_\text{obs.}$.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_calibinfo_calib},
-			           maincaption={Calibration scores of three different sources with the same observed data $y_\text{obs.}$: $\text{Cal}(src_1, y) > \text{Cal}(src_2, y) > \text{Cal}(src_3, y)$},
+			           maincaption={Calibration scores of three different sources with the same observed data $y_\text{obs.}$: $\text{Cal}_Y(src_1) > \text{Cal}_Y(src_2) > \text{Cal}_Y(src_3)$},
 			           mainshortcaption={Calibration scores of three different sources with the same observed data $y_\text{obs.}$.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_calibinfo_calib1},
-			           leftcaption={$\text{Cal}(src_1, y) \approx 1.0$},
+			           leftcaption={$\text{Cal}_Y(src_1) \approx 1.0$},
 			           midopt={width=0.30\textwidth},
 			           midlabel={fig:ch5_calibinfo_calib2},
-			           midcaption={$\text{Cal}(src_2, y)$},
+			           midcaption={$\text{Cal}_Y(src_2)$},
 			           rightopt={width=0.30\textwidth},
 			           rightlabel={fig:ch5_calibinfo_calib3},
-			           rightcaption={$\text{Cal}(src_3, y) = 0$},
+			           rightcaption={$\text{Cal}_Y(src_3) = 0$},
 			           spacing={},
 			           spacingtwo={}]
 {../figures/chapter5/figures/calibinfo_calib1}
@@ -506,9 +506,9 @@ It does not, however, takes into account the possible uncertainties associated w
 {../figures/chapter5/figures/calibinfo_calib3}
 
 % Aggregation
-For multiple outputs $\mathbf{y} = [y_1, \ldots, y_D]$ of the same source, both informativeness and calibration score can be aggregated by,
+For multiple \glspl[hyper=false]{qoi} $\bm{Y} = [Y_1, \ldots, Y_D]$ of the same source, both informativeness and calibration score can be aggregated by,
 \begin{equation}
-  \text{Inf}(src) = \frac{1}{D} \sum_{d=1}^{D} Inf(src, y_d) \quad\quad \text{Cal}(src) = \frac{1}{D} \sum_{d=1}^{D} \text{Cal}(src, y_d)
+  \text{Inf}_\bm{Y} (src) = \frac{1}{D} \sum_{d=1}^{D} Inf_{Y_d}(src) \quad\quad \text{Cal}_\bm{Y} (src) = \frac{1}{D} \sum_{d=1}^{D} \text{Cal}_{Y_d}(src)
 \label{eq:calibinfo_aggregate}
 \end{equation}
 
@@ -519,5 +519,5 @@ For instance, the criteria used in the present study, selecting a symmetric $95\
 The choice is rather arbitrary but as long as the criteria is applied consistently across different prediction uncertainties, the value of the method for comparison is preserved.
 Furthermore, the $2.5$-th and $97.5$-th percentiles of the prior prediction distribution are taken to be the $LUB_{\text{min.}}$ and $UUB_{\text{max.}}$ and the reference value $y_\text{ref.}$ is taken to be the median value of each posterior prediction distribution.
 Finally the experimental data is taken to be the observed value $y_\text{obs.}$ without considering the associated uncertainty following the original paper \cite{Baccou2014}.
-Once again, this lack of consideration is less of an issue for comparing between different uncertain prediction.
+Once again, this lack of consideration is less of an issue for comparing between different uncertain predictions.
  
