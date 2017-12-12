@@ -2,13 +2,28 @@
 \section{Chapter Summary}\label{sec:bc_chapter_summary}
 %******************************************************
 
-% Opening Paragraph
+% Opening Paragraph, this chapter
+The model calibration part of the proposed statistical framework has been presented in this chapter.
+The goal of the chapter was to quantify the uncertainty associated with model parameters a posteriori based on observed/experimental data.
+The quantification followed a Bayesian calibration framework.
 
-% Reiterate first part
+% Reiterate first part (theory)
+The Bayesian calibration framework has been detailed in this chapter, consisting of two parts:
+the formulation of a probabilistic model for the calibration;
+and the computation of the formulated model to obtain the posterior uncertainty of the model parameters.
+A generic calibration formulation was presented along with an account on each of its element.
+Afterward, the computational aspects of a posterior distribution were presented.
+\gls[hyper=false]{mcmc} simulation was used in this thesis to directly obtain samples from the posterior,
+useful for characterization of the posterior uncertainty or for uncertainty propagation.
+Finally, some practical aspects of analyzing the resulting samples were provided.
 
-% Reiterate second part
+% Connection with Previous Chapters
+The results of this chapter have been built upon the results of the three previous chapters.
+The development of the \gls[hyper=false]{trace} model of interest, the selection of initial input parameters, as well as the assignment of the parameters prior uncertainty were conducted in Chapter~\ref{ch:trace_reflood}.
+The sensitivity analysis of the initial parameters selection were carried out in Chapter~\ref{ch:gsa}, in which the parameters importance were quantified and used as a basis for screening, reducing the size of the problem beforehand.
+In Chapter~\ref{ch:gp_metamodel}, a fast surrogate of the \gls[hyper=false]{trace} model was developed -- and validated -- and used in this chapter as a substitute of directly running the \gls[hyper=false]{trace} code.
 
-% Reiterate the application part, calibration schemes, and
+% Reiterate the application part, calibration schemes.
 
 % Result 1: MCMC Convergence
 
