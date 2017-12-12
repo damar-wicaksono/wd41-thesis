@@ -14,7 +14,7 @@ According to Section~\ref{sub:intro_objectives} the listed objectives of the pro
 
 % What was done
 During the course of this doctoral research, each of these methods were investigated and it was applied to the running example of the \gls[hyper=false]{feba} reflood facility simulation model in the \gls[hyper=false]{trace} code. 
-Each of these applications was aimed to illustrate the particularities -- and difficulties -- of applying the method the \gls[hyper=false]{trace} model as well as to demonstrate the values of the method.
+Each of these applications was aimed to illustrate the particularities -- and difficulties -- of applying the method to the \gls[hyper=false]{trace} model as well as to demonstrate the values of the method.
 Chapters~\ref{ch:gsa}--\ref{ch:bayesian_calibration} provided a detailed account on the methods and their applications, of which the main achievements are highlighted below.
 Given the limited scope and duration of the project, many difficulties found along the way remained unaddressed, and they are the basis for the proposed recommendations.
 
@@ -23,7 +23,7 @@ The thesis project was initiated by the participation of \glsentryshort{lrs} at 
 The work related to that participation also constitutes a portion -- and achievement -- of the thesis project.
 
 % Publications
-Finally, four papers were presented in international conferences \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015,Wicaksono2016}, a journal article was published \cite{Wicaksono2016b}, and two contributions were submitted \cite{Wicaksono2016a,Zerkak2016} to the \gls[hyper=false]{premium} project and included in the NEA reports \cite{Reventos2016,Sanz2017}.
+Four papers were presented in international conferences \cite{Wicaksono2014,Wicaksono2014a,Wicaksono2015,Wicaksono2016}, a journal article was published \cite{Wicaksono2016b}, and two contributions were submitted \cite{Wicaksono2016a,Zerkak2016} to the \gls[hyper=false]{premium} project and included in the NEA reports \cite{Reventos2016,Sanz2017}.
 
 %-----------------------------------------------------
 \subsection{Contributions to OECD/NEA PREMIUM Project}
@@ -32,29 +32,29 @@ Finally, four papers were presented in international conferences \cite{Wicaksono
 % Contributions to PREMIUM
 The \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} was successfully developed within that context and became the basis for several follow-up studies.
 \marginpar{TRACE model of FEBA}
-The model was stable and was relatively quick to run allowing even a relatively brute force sensitivity analysis method to be applied.
+The model is stable and is relatively quick to run allowing even a relatively brute force sensitivity analysis method to be applied.
 It is now part of the in-house \gls[hyper=false]{trace} code validation database at \glsentryshort{lrs}.
 
 % Prior quantification
-The prior uncertainties of the input parameters were quantified under a close supervision by thesis supervisor at \glsentryshort{psi} \cite{Zerkak2016}.
+The prior uncertainties of the input parameters were quantified under the supervision of thermal-hydraulics experts at \glsentryshort{lrs} \cite{Zerkak2016}.
 \marginpar{Contribution to PREMIUM, prior uncertainty quantification}
-The quantified uncertainties were then propagated both on the \gls[hyper=false]{trace} models of \gls[hyper=false]{feba} and PERICLES (another reflood facility not presented in this thesis).
-The result of the propagation submitted to the \gls[hyper=false]{premium} project were deemed satisfactory as it served the purpose of the prior quantification.
+The quantified uncertainties were then propagated both in the \gls[hyper=false]{trace} models of \gls[hyper=false]{feba} and PERICLES (another reflood facility not presented in this thesis).
+The results of the propagation submitted to the \gls[hyper=false]{premium} project were deemed satisfactory as it served the purpose of the prior quantification.
 That is, the prediction uncertainties of both facilities were wide but covered the experimental data well, confirming that the prior range was not underestimated.
 
 % trace simexp
-Still within the context of \gls[hyper=false]{premium}, a python scripting tool was developed to assist in conducting computer experiment on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+Still within the context of \gls[hyper=false]{premium}, a python scripting tool was developed to assist conducting computer experiment on the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 \marginpar{\texttt{trace-simexp}}
-The tool \texttt{trace-simexp} has reached a stable version, is well documented, and has been applied for several follow-up studies within and without the scope of the present doctoral research.
+The tool \texttt{trace-simexp} has reached a stable version, is well documented, and has been applied for several follow-up studies within and outside the scope of the present doctoral research.
 
 \paragraph{Recommendations for Future Work}\mbox{}\\
 
 Although stable, the current version of \texttt{trace-simexp} has been only tested so far for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 Extension to other \gls[hyper=false]{trace} models are feasible.
-However, depending on the complexity of those models, further development of the tool might become unrealistic and it would be better to opt for the use of an integrated uncertainty framework 
-(e.g., \texttt{UQLab} \cite{Marelli2014}, \texttt{Dakota} \cite{Adams2017}, \texttt{OpenTurns} \cite{Baudin2017}, \texttt{Uranie} \cite{Gaudier2010}).
+However, depending on the complexity of those models and the computing infrastructure, further development of the tool might become unrealistic. 
+In the long run, it would be better to opt for the use of an integrated uncertainty framework (e.g., \texttt{UQLab} \cite{Marelli2014}, \texttt{Dakota} \cite{Adams2017}, \texttt{OpenTurns} \cite{Baudin2017}, \texttt{Uranie} \cite{Gaudier2010}).
 Typically, such framework supports an application programming interface (API) to a make connection with an external simulation model or to a third-party program.
-It does require an initial effort of getting acquainted with the terminologies of each framework, some are easier than the other, but in the long run for a generic complex model they might be the solution.
+It does require an initial effort of getting acquainted with the terminologies of each framework, some are easier than others, but in the long run for a generic complex model these might be the preferred solution.
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Implementation and application of GSA methods (to analyze and better understand the inputs/outputs relationship in a computer simulation with uncertain input)}
