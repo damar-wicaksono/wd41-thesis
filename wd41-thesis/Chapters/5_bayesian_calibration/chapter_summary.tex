@@ -24,6 +24,12 @@ The sensitivity analysis of the initial parameters selection were carried out in
 In Chapter~\ref{ch:gp_metamodel}, a fast surrogate of the \gls[hyper=false]{trace} model was developed -- and validated -- and used in this chapter as a substitute of directly running the \gls[hyper=false]{trace} code.
 
 % Reiterate the application part, calibration schemes.
+The calibration framework was applied to the running case study of the simulation of a reflood experiment using \gls[hyper=false]{trace} conducted at the \gls[hyper=false]{feba} facility.
+Five calibration schemes that result in five likelihood (thus posterior) formulations were considered.
+The schemes varies with respect to which type (or types) of experimental data is considered and whether model bias term is included.
+An additional scheme was introduced to investigate the effect of removing a strongly correlated parameter from the calibration process.
+The formulated posterior \glspl[hyper=false]{pdf} were then simulated using an implementation of \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} ensemble sampler to obtain different sets of posterior samples.
+Finally, these sets of samples were propagated through all the \gls[hyper=false]{trace} models of the \gls[hyper=false]{feba} tests.
 
 % Result 1: MCMC Convergence
 
