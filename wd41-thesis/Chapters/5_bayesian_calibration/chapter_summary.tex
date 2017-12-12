@@ -26,17 +26,47 @@ In Chapter~\ref{ch:gp_metamodel}, a fast surrogate of the \gls[hyper=false]{trac
 % Reiterate the application part, calibration schemes.
 The calibration framework was applied to the running case study of the simulation of a reflood experiment using \gls[hyper=false]{trace} conducted at the \gls[hyper=false]{feba} facility.
 Five calibration schemes that result in five likelihood (thus posterior) formulations were considered.
-The schemes varies with respect to which type (or types) of experimental data is considered and whether model bias term is included.
+The schemes varies with respect to which type (or types) of experimental data is considered and whether model bias term is included; all with the $8$ most influential reflood parameters considered.
 An additional scheme was introduced to investigate the effect of removing a strongly correlated parameter from the calibration process.
 The formulated posterior \glspl[hyper=false]{pdf} were then simulated using an implementation of \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} ensemble sampler to obtain different sets of posterior samples.
 Finally, these sets of samples were propagated through all the \gls[hyper=false]{trace} models of the \gls[hyper=false]{feba} tests.
 
 % Result 1: MCMC Convergence
+The \gls[hyper=false]{mcmc} simulation was shown to converge in exploring the posterior parameter space and no indication of lack of convergence was observed.
+The resulting independent samples -- readily used for uncertainty propagation -- were large enough to have statistical error of the model parameter estimates in the order of less than $1\%$ relative to the true standard deviation of the respective parameter.
 
 % Result 2: Identifiability Issues
+Two types of parameter non-identifiability were encountered in the calibration results:
+parameter non-identifiability due to insensitivity with respect to a type of data and non-identifiability due to correlation between parameters.
+The former was solved by considering different types of output that the parameter of interest was sensitive to.
+The latter was more challenging as considering different types of data did not manage to solve the non-identifiability issue (the univariate marginals of the parameters remained large).
+At the same time, while excluding one of the correlated parameters did allow for a more precise estimation of the other parameters that were previously correlated, the prior uncertainty of the excluded parameter kept the
+prediction uncertainty band relatively wider.
+However, even without precise estimates of each parameter, the correlation structure among model parameters provided a set of “collective-fitted” values that was consistent with the calibration data.
+Specifically, as long as the correlation structure was kept, propagation with parameters with large
+univariate marginal uncertainties would still produce prediction that
+was consistent with the data.
 
-% Result 4: Correlation in the propagation
+% Result 3: Correlation in the propagation
+The calibration scheme with considering model bias term and incorporating all types of outputs was able to constrain the prior uncer-
+tainties of the model parameters while keeping the nominal TRACE
+parameters values within the posterior uncertainty interval. That was
+in contrast with the results of the calibration scheme without con-
+sidering model bias term, in which the posterior uncertainties were
+concentrated on either or both sides of the prior range, and at times
+having the nominal TRACE parameters values outside the posterior
+uncertainty interval.
 
-% Result 3: Regarding Nominal Parameter Values (w/ w/o bias)
+% Result 4: Regarding Nominal Parameter Values (w/ w/o bias)
 
 % Result 5: Across FEBA Test
+However, the performance of these two poste-
+riors were found to be similar across FEBA tests with the calibra-
+tion scheme without considering model bias was slightly more infor-
+mative (having tighter uncertainty band) but less calibrated (having
+more experimental data points outside the uncertainty band) com-
+pared to the performance of the calibration scheme with consider-
+ing model bias. Furthermore, except for a few outputs (namely the
+ladding temperature output at the top assembly and the liquid car-
+ryover), the relative performance of all posterior uncertainties was
+insensitive to boundary conditions of the different FEBA tests.
