@@ -112,7 +112,7 @@ where $\tau_{\text{int},f}$ is the \emph{integrated autocorrelation time} (or, i
 
 Comparing with Eq.~(\ref{eq:ch5_markov_chain_clt}), Eq.~(\ref{eq:ch5_markov_chain_estimator_variance}) can be interpreted in two ways.
 \marginpar{Effective sample size}
-First, the use of a Markov chain of length $I$ to estimate the expectation of $f$ inflates the estimator variance by factor $2 \tau_{\text{int},f}$.
+First, the use of a Markov chain of length $I$ to estimate the expectation of $f$ inflates the estimator variance by a factor $2 \tau_{\text{int},f}$.
 In other words, $\sigma^2_f \equiv 2 \tau_{\text{int},f} C_f(0)$.
 Or, equivalently, the number of independent samples required in the computation of the \gls[hyper=false]{mc} sampling variance is only a factor of $\frac{1}{2 \tau_{\text{int},f}}$ of the total number of \gls[hyper=false]{mcmc} samples $I$.
 In other words, $N \equiv \frac{I}{2 \tau_{\text{int},f}}$ with $N$ the number of independent samples (or \emph{effective sample size}).
@@ -124,13 +124,13 @@ In either interpretation, the statistical error associated with the \gls[hyper=f
 Moreover, in the case of \gls[hyper=false]{mcmc}, the autocorrelation time $\tau_{\text{int},f}$ directly affects the statistical error.
 As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error of a chain of a given length.
 
-That is, the minimum length of the chain can be determined such that the statistical error of an estimator $\mathbb{V}[\hat{f}]^{0.5}$ is smaller than a target fraction $\epsilon$ of the true standard deviation $\mathbb{V}[f]^{0.5}$ \cite{Akeret2013},
+That is, the minimum length of the chain can be determined such that the statistical error of the estimator of $f$ $\mathbb{V}[\hat{f}]^{0.5}$ is smaller than a fraction $\epsilon$ of the true standard deviation $\mathbb{V}[f]^{0.5}$ \cite{Akeret2013},
 \begin{equation}
-  \left(\frac{\mathbb{V}[\hat{f}]}{C_f(0)}\right)^{0.5} = \left(\frac{\mathbb{V}[\hat{f}]}{\mathbb{V}[f]}\right)^{0.5} = \left(\frac{2\tau_{\text{int},f}}{I}\right)^2 \leq \epsilon \Leftrightarrow I \geq \frac{2\tau_{\text{int},f}}{\epsilon^2} 
+  \left(\frac{\mathbb{V}[\hat{f}]}{C_f(0)}\right)^{0.5} = \left(\frac{\mathbb{V}[\hat{f}]}{\mathbb{V}[f]}\right)^{0.5} = \left(\frac{2\tau_{\text{int},f}}{I}\right)^{0.5} \leq \epsilon \Leftrightarrow I \geq \frac{2\tau_{\text{int},f}}{\epsilon^2} 
 \label{eq:ch5_markov_chain_relative_error}
 \end{equation}
 where $I$ is the number of \gls[hyper=false]{mcmc} samples.
-For a single particle \gls[hyper=false]{mcmc} this number is also the number of \gls[hyper=false]{mcmc} iterations.
+For a single particle \gls[hyper=false]{mcmc} this number is also the number of \gls[hyper=false]{mcmc} iterations\footnote{hence the notation $I$.}.
 For an ensemble sampler, the total number of samples is a multiplication between the number of iterations $I$ and the number of walkers $L$ such that,
 \begin{equation}
   I \geq \frac{2\,\tau_{\text{int},f}}{\epsilon^2\,L} 
@@ -217,9 +217,9 @@ It can be used to determine the number of iterations to discard before the chain
 
 % Importance of Burn-in period revisited
 The relationship between exponential correlation time and stationarity only strictly holds for exponential correlation functions.
-But, this is often the case for an infinitely long chain \cite{Sokal1997}.
-In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function}.
-In practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
+Fortunately, most infinitely long chains have exponential correlation functions \cite{Sokal1997}.
+In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function},
+in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
 
 In this thesis, they are both estimated using the definition of the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})).
 \marginpar{Determining the number of iterations to discard}
@@ -235,7 +235,7 @@ It cannot, however, establish the fact that a Markov chain has indeed settled in
 % Why there's burn-in
 Finally, note that the initial transient is mainly due to selecting values with low posterior probability to initialize the chain.
 \marginpar{Burn-in, alternatives}
-In a simple problem, perhaps it can be straightforward to determine a value that lies on high probability region of the posterior.
+In a simple problem, perhaps it can be straightforward to determine a value that lies in a high probability region of the posterior.
 This is not the case for a more complex high-dimensional problem and some arbitrary values are often selected instead.
 Thus, some authors \cite{Geyer1992, Akeret2013} proposed instead to tune the initial values such that they are more representative of the posterior \gls[hyper=false]{pdf} and make do without burn-in.
 This tuning, however, requires additional preliminary calculations.
