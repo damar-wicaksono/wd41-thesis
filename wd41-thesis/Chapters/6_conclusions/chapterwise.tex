@@ -26,18 +26,17 @@ After the screening step, only $12$ out of the initial $27$ input parameters wer
 Then, focusing on the $12$ most influential parameters, the effect of parameter perturbation on the overall time-dependent outputs was investigated.
 The high-dimensionality of the outputs was reduced by means of techniques derived from \gls[hyper=false]{fda}.
 Finally, main- and total-effect Sobol' indices, two global sensitivity measures, were estimated for each parameter with respect to the output in the reduced space.
-The results regarding parameters sensitivity with respect to different outputs have provided a better understanding on the inputs/outputs relationship in the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
-By analyzing how the model actually behaved (or should have behaved) under parameters perturbation has also provided an additional step into the model verification and validation.
+The results regarding parameter sensitivity with respect to different outputs have provided a better understanding on the inputs/outputs relationship in the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 
 % Chapter 4
 Chapter~\ref{ch:gp_metamodel} detailed the development and validation of a metamodel based on \gls[hyper=false]{gp} to substitute the \gls[hyper=false]{trace} model \gls[hyper=false]{feba}.
 Though a single run of the \gls[hyper=false]{trace} model was relatively short ($\approx 6-14\,[min]$), a large number of runs in the order of hundreds of thousands was expected for the Bayesian calibration.  
 Thus, a computationally efficient metamodel was deemed crucial in the calibration of the model parameters.
 Built upon the results of the previous chapter, the development was directly focused on the $12$ most influential input parameters.
-The high dimensionality of the output, in time and in space, was dealt with \gls[hyper=false]{fda}, a linear dimension reduction method.
+The high dimensionality of the output, in time and in space, was dealt with \gls[hyper=false]{pca}, a linear dimension reduction method.
 The dimension reduction method was shown to have difficulty in representing the cladding temperature output which exhibited strong discontinuity in the vicinity of quenching. 
-Yet, the average predictive performance of the metamodel against a test dataset of actual \gls[hyper=false]{trace} runs was found to be acceptable, especially in comparison to the initial prediction uncertainty due to the prior input parameters uncertainties.
-The validated metamodel, with a cost of $< 5\,[s]$ per evaluation, was then ready to be used over the prior range of the input parameters in lieu of directly running \gls[hyper=false]{trace}.
+Yet, the average predictive performance of the metamodel against a test data set of actual \gls[hyper=false]{trace} runs was found to be acceptable, especially in comparison to the initial prediction uncertainty due to the prior input parameter uncertainties.
+The validated metamodel, with a cost of less than $5\,[s]$ per evaluation, was then ready to be used over the prior range of the input parameters in lieu of directly running \gls[hyper=false]{trace}.
 
 % Chapter 5
 Chapter~\ref{ch:bayesian_calibration}, the last of the main chapters of the thesis, finally proceeded with the a posteriori quantification of uncertainties of the most influential reflood model parameters on the basis of \gls[hyper=false]{feba} test No. $216$.
