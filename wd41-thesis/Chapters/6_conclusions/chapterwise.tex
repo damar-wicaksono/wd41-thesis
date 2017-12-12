@@ -10,14 +10,17 @@ The chapter then presented a set of strategies proposed in this thesis to quanti
 The set of strategies was a consolidated statistical framework adapted from the applied statistical literature, on which a review was conducted.
 
 % Chapter 2
-Chapter~\ref{ch:trace_reflood} presented the reflood experiment at the \glsentryshort{feba} facility that served as the experimental basis of this work.
+Chapter~\ref{ch:trace_reflood} presented the reflood experiment at the \glsentryshort{feba} facility that served as the experimental basis for this work.
+The \gls[hyper=false]{feba} facility was a full-height $5\times5$ bundle of \gls[hyper=false]{pwr} fuel rod simulator.
+The particular test series selected corresponded to the case without flow blockage, under three different values of system backpressure boundary condition (between $2.1, 4.1,$ and $6.2\,[bar]$) and two different reflood rates ($3.8$ and $5.8\,[cm\cdot s^{-1}]$).
+Three types of time series measurement were recorded: cladding temperature at eight axial locations, pressure drop at four axial segments, and liquid carryover.
 The \gls[hyper=false]{trace} model of the facility was developed and a set of $27$ initial input parameters perceived to be important for the simulation was selected.
-Thereafter, prior uncertainties of the selected input parameters were assigned and they were propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess the prior level of prediction uncertainties.
+Thereafter, prior uncertainties of the selected input parameters were assigned and propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess the prior level of prediction uncertainties on all three types of output (data).
 This model then became the running case study in the three subsequent chapters to which the proposed methods are applied.
 
 % Chapter 3
-Chapter~\ref{ch:gsa} introduced selected \gls[hyper=false]{gsa} methods which were then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
-First, the importance of the initial set of input parameters was quantitatively assessed through the Morris screening method and the Total-effect Sobol indices.
+Chapter~\ref{ch:gsa} introduced selected \glsfirst[hyper=false]{gsa} methods which were then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+First, the importance of the initial set of input parameters was quantitatively assessed through the Morris screening method and the total-effect Sobol' indices.
 The two provided a basis for parameter screening in which less influential parameters were excluded from further analysis, reducing the size of the problem.
 After the screening step, only $12$ out of the initial $27$ input parameters were found to be influential. 
 Then, focusing on the $12$ most influential parameters, the effect of parameter perturbation on the overall time-dependent outputs was investigated.
