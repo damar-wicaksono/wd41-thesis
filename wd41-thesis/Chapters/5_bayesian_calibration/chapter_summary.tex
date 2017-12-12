@@ -4,7 +4,7 @@
 
 % Opening Paragraph, this chapter
 The model calibration part of the proposed statistical framework has been presented in this chapter.
-The goal of the chapter was to quantify the uncertainty associated with model parameters a posteriori based on observed/experimental data.
+The goal of the present chapter was to quantify the uncertainty associated with model parameters a posteriori based on observed/experimental data.
 The quantification followed a Bayesian calibration framework.
 
 % Reiterate first part (theory)
@@ -15,7 +15,7 @@ A generic calibration formulation was presented along with an account on each of
 Afterward, the computational aspects of a posterior distribution were presented.
 \gls[hyper=false]{mcmc} simulation was used in this thesis to directly obtain samples from the posterior,
 useful for characterization of the posterior uncertainty or for uncertainty propagation.
-Finally, some practical aspects of analyzing the resulting samples were provided.
+Some practical aspects of analyzing the resulting samples were provided.
 
 % Connection with Previous Chapters
 The results of this chapter have been built upon the results of the three previous chapters.
@@ -36,37 +36,24 @@ The \gls[hyper=false]{mcmc} simulation was shown to converge in exploring the po
 The resulting independent samples -- readily used for uncertainty propagation -- were large enough to have statistical error of the model parameter estimates in the order of less than $1\%$ relative to the true standard deviation of the respective parameter.
 
 % Result 2: Identifiability Issues
-Two types of parameter non-identifiability were encountered in the calibration results:
+Two types of parameter non-identifiability were encountered during the calibration process:
 parameter non-identifiability due to insensitivity with respect to a type of data and non-identifiability due to correlation between parameters.
-The former was solved by considering different types of output that the parameter of interest was sensitive to.
-The latter was more challenging as considering different types of data did not manage to solve the non-identifiability issue (the univariate marginals of the parameters remained large).
-At the same time, while excluding one of the correlated parameters did allow for a more precise estimation of the other parameters that were previously correlated, the prior uncertainty of the excluded parameter kept the
-prediction uncertainty band relatively wider.
-However, even without precise estimates of each parameter, the correlation structure among model parameters provided a set of “collective-fitted” values that was consistent with the calibration data.
-Specifically, as long as the correlation structure was kept, propagation with parameters with large
-univariate marginal uncertainties would still produce prediction that
-was consistent with the data.
+The former was solved by simultaneously considering different types of output that the parameter of interest was sensitive to.
+The latter was more challenging as considering different types of data did not seem to solve the non-identifiability issue (the univariate marginals of the parameter of interest remained large).
+However, even without precise estimates of each parameter, the correlation structure among model parameters provided a set of “collectively-fitted” values that was consistent with the calibration data.
+Specifically, as long as the correlation structure was kept, propagation with parameters with large univariate marginal uncertainties would still produce prediction that was consistent with that data.
+
+This posterior correlation structure \emph{and} the posterior range were specific to the calibration data (here it was based on one \gls[hyper=false]{feba} test run).
+One of two strongly correlated parameter could be argued to be an extraneous parameter with respect to the type of calibration data and its presence would allow many combinations of parameter values to reproduce the data with a tighter prediction uncertainty.
+However, if the data was deemed not sufficiently large or comprehensive enough then care should be taken to avoid overfitting.
+It was shown that by excluding one of the correlated parameters has allowed for a more precise estimation of the other parameters that were previously correlated.
+As the uncertainty of the excluded parameter was kept at its prior, the prediction uncertainty band was relatively wider.
 
 % Result 3: Correlation in the propagation
-The calibration scheme with considering model bias term and incorporating all types of outputs was able to constrain the prior uncer-
-tainties of the model parameters while keeping the nominal TRACE
-parameters values within the posterior uncertainty interval. That was
-in contrast with the results of the calibration scheme without con-
-sidering model bias term, in which the posterior uncertainties were
-concentrated on either or both sides of the prior range, and at times
-having the nominal TRACE parameters values outside the posterior
-uncertainty interval.
-
-% Result 4: Regarding Nominal Parameter Values (w/ w/o bias)
-
-% Result 5: Across FEBA Test
-However, the performance of these two poste-
-riors were found to be similar across FEBA tests with the calibra-
-tion scheme without considering model bias was slightly more infor-
-mative (having tighter uncertainty band) but less calibrated (having
-more experimental data points outside the uncertainty band) com-
-pared to the performance of the calibration scheme with consider-
-ing model bias. Furthermore, except for a few outputs (namely the
-ladding temperature output at the top assembly and the liquid car-
-ryover), the relative performance of all posterior uncertainties was
-insensitive to boundary conditions of the different FEBA tests.
+The calibration scheme with model bias term and incorporated all types of outputs was able to constrain the prior uncertainties of the model parameters while keeping the nominal TRACE parameters values within the posterior uncertainty interval.
+That was in contrast with the results of the calibration scheme without a model bias term, in which the posterior uncertainties were concentrated on either or both sides of the prior range, and in which the nominal TRACE parameter values sometimes laid outside the posterior uncertainty interval.
+This results implied that the previous calibration results (i.e., during the model development) were not consistent with the data of \gls[hyper=false]{feba};
+and that there were different model parameter values that would allow \gls[hyper=false]{trace} to simulate the experiment better.
+This illustrated the value of the incorporating the model bias term in order to avoid overfiting especially considering the fact that the calibration conducted here was based on one test run. 
+Furthermore, although the performance of these two posteriors were found to be similar across FEBA tests,
+the calibration scheme without model bias was found slightly more informative (having tighter uncertainty band) but less calibrated (having more experimental data points outside the uncertainty band) than the calibration scheme with model bias.
