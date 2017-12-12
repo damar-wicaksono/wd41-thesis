@@ -4,23 +4,23 @@
 
 % Opening Paragraph
 The main goal of the present doctoral research was to quantify the uncertainty of physical model parameters implemented in \gls[hyper=false]{th} system codes.
-To that end, a methodology has been developed -- and its application demonstrated -- to quantify the uncertainty of physical model parameters important in the simulation of reflood experiment; relevant phenomena to consider in the safety analysis of \glspl[hyper=false]{lwr}.
-The methodology consisted of three statistical methods for \emph{sensitivity analysis}, \emph{metamodeling}, and \emph{Bayesian calibration}.
+To that end, a methodology has been developed -- and its application demonstrated -- to quantify the uncertainty of physical model parameters important in the simulation of a reflood experiment;
+a relevant phenomenon to consider in the safety analysis of \glspl[hyper=false]{lwr}.
 
+The methodology consisted of three statistical methods for \emph{sensitivity analysis}, \emph{metamodeling}, and \emph{Bayesian calibration}.
 Starting from the \gls[hyper=false]{trace} code modeling of the \gls[hyper=false]{feba} facility for reflood experiment and the initial selection of uncertain input parameters,
-sensitivity analysis methods were then applied in essence to assess the importance of each selected input parameters and to select model parameters that were truly important for the reflood simulation.
+a set of sensitivity analysis methods were then applied to assess the importance of each selected input parameters and to select model parameters that were truly important for the reflood simulation.
 In anticipation of a high computational cost associated with the Bayesian calibration, a statistical metamodel of the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} based on \glsfirst[hyper=false]{gp} was then developed and validated.
 Then, using the validated metamodel to substitute \gls[hyper=false]{trace} code run, the selected model parameters were calibrated against the experimental data of \gls[hyper=false]{feba} which resulted in an a posteriori quantification of the parameters uncertainties.
 Finally, the quantified uncertainties were verified by means of uncertainty propagation on \gls[hyper=false]{feba} tests with boundary conditions different from the conditions of the calibration data.
 
 % What is this chapter all about
 This final chapter starts with a chapter-wise summary of the thesis, presented in Section~\ref{sec:conclusions_chapterwise}.
-The main achievements of the thesis are given in Section~\ref{sec:conclusions_achievements}, while recommendations for future work are proposed in Section~\ref{sec:conclusions_recommendations}.
+The main achievements of the thesis are given in Section~\ref{sec:conclusions_achievements}, in which corresponding recommendations for future work are proposed.
 The chapter -- and the thesis -- is finally concluded in Section~\ref{sec:conclusions_concluding_remarks}.
 
 % The contents of the chapter
 \input{Chapters/6_conclusions/chapterwise}
 \input{Chapters/6_conclusions/achievements}
-\input{Chapters/6_conclusions/recommendations}
 \input{Chapters/6_conclusions/concluding_remarks}
 %************************************************

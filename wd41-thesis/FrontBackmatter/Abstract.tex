@@ -9,13 +9,69 @@
 \let\cleardoublepage\relax
 
 \chapter*{Abstract}
-Short summary of the contents in English\dots a great guide by 
-Kent Beck how to write good abstracts can be found here:  
-\begin{center}
-\url{https://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}
-\end{center}
+
+% Context and Need
+Any of these approaches proved to be a difficult effort due to
+various reasons ranging from the lack of knowledge of the underlying
+physical process (with respect to the fully mechanistic modeling) to
+limitation in the amount and precision of the measured data (with re-
+spect to the fully empirical approach). Simplifying assumptions and
+extrapolations are made because of these limitations. In the end, clo-
+sure laws in system codes are of mixed origins and they become a
+major source of uncertainty 3 in the application of TH system codes,
+especially when used outside their validation domains.
+
+% Task: the proposed methods
+The ultimate goal of the present doctoral research is to quantify the uncertainty of physical model parameters implemented in a \gls[hyper=false]{th} system code.
+Adopting a probabilistic framework to conform to the statistical uncertainty propagation widely adopted in the field of nuclear engineering, the uncertainties in the parameters are represented as \glspl[hyper=false]{pdf} or their approximations.
+The derivation of these functions is posed as an inverse statistical problem following a Bayesian framework as the parameters themselves are not directly observable.
+Although subjectivity cannot be removed completely from the analysis, the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to inform in a more objective and transparent manner the uncertainties associated with the model parameters.
+This is done in three steps by consolidating and adapting recent developments in the applied statistics, namely: global sensitivity analysis, metamodeling, and Bayesian calibration.
+
+% This Document: a detailed account on the application to a model and phase 0
+This thesis provides a detailed account on the adaption of each of the methods above followed by their applications on a running example of a reflood experiment simulation model in the \glsentryshort{trace} code.
+Reflood represents a relevant phenomenon to consider in the safety analysis of \glspl[hyper=false]{lwr};
+while a series of reflood experiment conducted at the \glsentryshort{feba} facility serves as the experimental basis for this work.
+These applications are aimed to illustrate the particularities -- and difficulties -- of applying the methods to a representative simulation model in \gls[hyper=false]{th}. 
+
+% Phase 1 and Findings
+Selected \glsentryshort{gsa} methods are implemented for an analysis with three key underlying ideas. 
+The first idea is to reduce the dimensionality of the input parameters space through parameter screening, 
+while the second is to reduce the dimensionality of the code output space.
+As the output of the simulation is time-dependent, 
+dimension reduction is carried out while trying to preserve the interpretability of the results.
+The third and final idea is to investigate, quantitatively, the effect of variation of parameters on the over-
+all time-dependent output variation through variance decomposition.
+The selected methods are applied to the \glsentryshort{trace} model \glsentryshort{feba},
+reducing the size of the initial selection of input parameters to less than half.
+Additional insight is gained on the model behavior with respect to the input/output relationship by considering different outputs of the same transient or different aspects of the same output.
+
+% Phase 2 and Findings
+In anticipation of a high computational cost associated with the Bayesian calibration,
+a \gls[hyper=false]{gp} metamodel of the \glsentryshort{trace} model is developed and validated.
+The high-dimensionality of the \glsentryshort{trace} outputs is dealt with \glsentryshort{pca}, a linear dimension reduction technique.
+The average prediction error of the metamodel is acceptable to predict for all types of output.
+With the computational cost of less than $5\,[s]$ per metamodel evaluation -- as compared to $6 - 15\,[min]$ per TRACE run -- the metamodel is an applicable surrogate for directly running the \glsentryshort{trace} code. 
+
+% Phase 3 and Findigs
+Finally, 
+
+% Conclusion
+These series of applications on the \glsentryshort{trace} model \glsentryshort{feba} have demonstrated the applicability of the proposed methodology to quantify the uncertainty of the parameters in the physical model of \gls[hyper=false]{th} system codes based on experimental data.
+
+\paragraph{keywords}\mbox{}\\
+
+\glsfirst[hyper=false]{th},
+reflood,
+\gls[hyper=false]{trace} code,
+\glsfirst[hyper=false]{uq},
+\glsfirst[hyper=false]{gsa},
+\glsfirst[hyper=false]{gp} metamodel,
+Bayesian calibration
 
 \vfill
+
+\clearpage
 
 \begin{otherlanguage}{ngerman}
 \pdfbookmark[1]{Zusammenfassung}{Zusammenfassung}
