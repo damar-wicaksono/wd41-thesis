@@ -6,35 +6,35 @@
 Chapter~\ref{ch:intro} introduced the doctoral research through the problem of uncertainty quantification in nuclear engineering \gls[hyper=false]{th} analysis; both as forward and backward (inverse) problems. 
 The particular problem of inverse uncertainty quantification was then put in the context of the recently concluded OECD/NEA \gls[hyper=false]{premium} project;
 a benchmark project comparing different inverse uncertainty quantification methods used in the community. 
-The chapter then presented a set of strategies proposed in this thesis to quantify the uncertainty, namely sensitivity analysis, statistical metamodeling, and Bayesian calibration. 
-The set of strategies was a consolidated statistical framework adapted from the applied statistical literature, on which a review was conducted.
+The chapter then presented a set of strategies to eventually quantify the uncertainty, namely sensitivity analysis, statistical metamodeling, and Bayesian calibration. 
+The set of strategies was consolidated in a statistical framework adapted from the applied statistical literature, on which a review was conducted.
 
 % Chapter 2
 Chapter~\ref{ch:trace_reflood} presented the reflood experiment at the \glsentryshort{feba} facility that served as the experimental basis for this work.
 The \gls[hyper=false]{feba} facility was a full-height $5\times5$ bundle of \gls[hyper=false]{pwr} fuel rod simulator.
-The particular test series selected corresponded to the case without flow blockage, under three different values of system backpressure boundary condition (between $2.1, 4.1,$ and $6.2\,[bar]$) and two different reflood rates ($3.8$ and $5.8\,[cm\cdot s^{-1}]$).
+The particular test series selected corresponded to the case without flow blockage, under three different values of system backpressure boundary condition ($2.1, 4.1,$ and $6.2\,[bar]$) and two different reflood rates ($3.8$ and $5.8\,[cm\cdot s^{-1}]$).
 Three types of time series measurement were recorded: cladding temperature at eight axial locations, pressure drop at four axial segments, and liquid carryover.
 The \gls[hyper=false]{trace} model of the facility was developed and a set of $27$ initial input parameters perceived to be important for the simulation was selected.
 Thereafter, prior uncertainties of the selected input parameters were assigned and propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess the prior level of prediction uncertainties on all three types of output (data).
 This model then became the running case study in the three subsequent chapters to which the proposed methods are applied.
 
 % Chapter 3
-Chapter~\ref{ch:gsa} introduced selected \glsfirst[hyper=false]{gsa} methods which were then applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+Chapter~\ref{ch:gsa} introduced selected \glsfirst[hyper=false]{gsa} methods which were applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 First, the importance of the initial set of input parameters was quantitatively assessed through the Morris screening method and the total-effect Sobol' indices.
 The two provided a basis for parameter screening in which less influential parameters were excluded from further analysis, reducing the size of the problem.
 After the screening step, only $12$ out of the initial $27$ input parameters were found to be influential. 
-Then, focusing on the $12$ most influential parameters, the effect of parameter perturbation on the overall time-dependent outputs was investigated.
+Focusing on the $12$ most influential parameters, the effect of parameter perturbation on the overall time-dependent outputs was investigated.
 The high-dimensionality of the outputs was reduced by means of techniques derived from \gls[hyper=false]{fda}.
 Finally, main- and total-effect Sobol' indices, two global sensitivity measures, were estimated for each parameter with respect to the output in the reduced space.
-The results regarding parameter sensitivity with respect to different outputs have provided a better understanding on the inputs/outputs relationship in the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
+The results regarding parameter sensitivity with respect to different outputs have provided a better understanding of the inputs/outputs relationship in the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 
 % Chapter 4
-Chapter~\ref{ch:gp_metamodel} detailed the development and validation of a metamodel based on \gls[hyper=false]{gp} to substitute the \gls[hyper=false]{trace} model \gls[hyper=false]{feba}.
+Chapter~\ref{ch:gp_metamodel} detailed the development and validation of a metamodel based on \gls[hyper=false]{gp} to substitute the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba}.
 Though a single run of the \gls[hyper=false]{trace} model was relatively short ($\approx 6-14\,[min]$), a large number of runs in the order of hundreds of thousands was expected for the Bayesian calibration.  
 Thus, a computationally efficient metamodel was deemed crucial in the calibration of the model parameters.
 Built upon the results of the previous chapter, the development was directly focused on the $12$ most influential input parameters.
 The high dimensionality of the output, in time and in space, was dealt with \gls[hyper=false]{pca}, a linear dimension reduction method.
-The dimension reduction method was shown to have difficulty in representing the cladding temperature output which exhibited strong discontinuity in the vicinity of quenching. 
+The dimension reduction method was shown to have difficulty in representing the cladding temperature output which exhibited strong discontinuity in the vicinity of the quenching. 
 Yet, the average predictive performance of the metamodel against a test data set of actual \gls[hyper=false]{trace} runs was found to be acceptable, especially in comparison to the initial prediction uncertainty due to the prior input parameter uncertainties.
 The validated metamodel, with a cost of less than $5\,[s]$ per evaluation, was then ready to be used over the prior range of the input parameters in lieu of directly running \gls[hyper=false]{trace}.
 
@@ -43,19 +43,19 @@ Chapter~\ref{ch:bayesian_calibration}, the last of the main chapters of the thes
 Different posteriors \glspl[hyper=false]{pdf} corresponding to different calibration schemes were formulated and directly simulated using an \glsentryshort{aies} ensemble \glsentryshort{MCMC} sampler.
 Five different calibration schemes having different assumptions were investigated: with or without considering model bias term, incorporating different types of data, and including or excluding a strongly correlated model parameter.  
 Two types of parameter non-identifiability were encountered: parameter non-identifiability due to insensitivity with respect to a type of experimental data and non-identifiability due to correlation between parameters.
-The former was solved by considering different types of output that the parameter of interest was sensitive to.
+The former was solved by considering different types of output to which the parameter of interest was sensitive.
 The latter was more challenging as considering different types of data did not manage to solve the non-identifiability issue (the univariate marginals of the parameters remained large). 
 Excluding one of the correlated parameters did allow for a more precise estimation of the other parameters that were previously correlated.
 But at the same time, because the excluded parameter kept its large prior uncertainty, the posterior prediction uncertainty band was relatively wider.
 However, even without precise estimates of each parameter, the correlation structure among model parameters provided a set of ``collectively-fitted'' values that was consistent with the calibration data.
 Specifically, as long as the correlation structure was kept, propagation with parameters with large univariate marginal uncertainties would still produce prediction that was consistent with the calibration data. 
   
-The results of different calibration schemes corresponded to different level of trade-off between \emph{informativeness} (the width of the prediction uncertainty band) and the \emph{calibration score} (consistency with the experimental data and whether it is covered by the uncertainty band).
+The results of different calibration schemes corresponded to different level of trade-off between \emph{informativeness} (the width of the prediction uncertainty band) and \emph{calibration score} (consistency with the experimental data and coverage by the uncertainty band).
 This trade-off was apparent particularly for the schemes with and without model bias term and the scheme with bias but excluding a strongly correlated parameter.
-The scheme without bias resulted in the most reduction of the prior uncertainty for most of the important parameters, in which the nominal \glsentryshort{trace} parameter values sometimes laid outside the posterior uncertainty interval.  
+The scheme without bias resulted in the largest reduction of the prior uncertainty for most of the important parameters, but in which the nominal \glsentryshort{trace} parameter values sometimes laid outside the posterior uncertainty interval.  
 The posterior uncertainties associated with the scheme resulted in predictions with the highest informativeness and the lowest calibration scores across \gls[hyper=false]{feba} tests.
 The scheme with bias resulted in a more modest reduction of the prior uncertainty of the parameters, keeping the nominal \glsentryshort{trace} parameter values within the uncertainty interval, but exhibited strong correlation for some of the parameters.
 The corresponding prediction uncertainties, in turn, gave a better calibration score while having similar level of informativeness.
-It could be argued that the relatively worse calibration scores for the scheme with and without bias, in comparison to  that of the prior, was due to the too narrow posterior uncertainties for the former and due to the correlation in the posterior uncertainties for the latter.
+It could be argued that the relatively worse calibration scores for the scheme with and without bias, in comparison to  that of the prior, was due to the too narrow posterior uncertainties for the former and the correlation in the posterior uncertainties for the latter.
 As the calibration was conducted based only on one \gls[hyper=false]{feba} test, this suggested a symptom of overfitting, which was stronger for the former than the latter.
-Therefore, in the case of limited calibration data, it might be prudent to consider instead the scheme with bias but excluding a strongly correlated parameter, whose calibration scores were consistently high across \gls[hyper=false]{feba} tests albeit with relatively lower informativeness compared to the two previous schemes.
+Therefore, in the case of limited calibration data, it might be prudent to consider instead the scheme with bias but excluding a strongly correlated parameter, whose calibration scores were consistently high across \gls[hyper=false]{feba} tests albeit with relatively lower informativeness compared to the two previous schemes (but, still much higher than that of the prior).
