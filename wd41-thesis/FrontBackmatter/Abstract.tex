@@ -21,8 +21,8 @@ Specifically, this thesis develops a methodology to use experimental data to inf
 The methodology is based on a probabilistic framework and consists of three steps adapted from recent developments in applied statistics: \gls[hyper=false]{gsa}, metamodeling, and Bayesian calibration.
 
 % 
-The methodology is applied to reflood experiments from the \gls[hyper=false]{feba} test facility, which are modeled with the \gls[hyper=false]{th} system code \glsentryshort{trace}.
-Reflood is chosen as a relevant phenomenon for the safety analysis of light water reactors (LWRs) and three typical time-dependent outputs are investigated: cladding temperature, pressure drops and liquid carryover.
+The methodology is applied to reflood experiments from the \glsentryshort{feba} \gls[hyper=false]{setf}, which are modeled with the \gls[hyper=false]{th} system code \glsentryshort{trace}.
+Reflood is chosen as a relevant phenomenon for the safety analysis of \glspl[hyper=false]{lwr} and three typical time-dependent outputs are investigated: cladding temperature, pressure drops and liquid carryover.
 
 In the first step, \gls[hyper=false]{gsa} allows screening out input parameters that have a low impact on the reflood transient.
 \gls[hyper=false]{fda} is then used to reduce the dimensionality of the time-dependent code outputs, while preserving their interpretability.
@@ -31,11 +31,8 @@ The resulting quantities can be used once more with \gls[hyper=false]{th} to inv
 In the second step, a \gls[hyper=false]{gp} metamodel is developed and validated as a surrogate for the TRACE model.
 The average prediction error of the metamodel is sufficient to predict all considered outputs, and its computational cost is less than $5\,[s]$ as compared to $6-15\,[min]$ per \glsentryshort{trace} run. 
 
-In the final step, the a posteriori model parameter uncertainties are quantified based on the calibration using a selected test from the \gls[hyper=false]{feba} experiments.
-Several posteriors \glspl[hyper=false]{pdf} corresponding to different calibration schemes were formulated and directly sampled from using an MCMC ensemble sampler. 
-Different resulting sets of samples were propagated through all the \glsentryshort{trace} models of the \gls[hyper=false]{feba} tests with boundary conditions different than the conditions of the test used for calibration.
-
-In the final step, the a posteriori model parameter uncertainties are quantified by calibration on a selected test from the FEBA experiments. Several posteriors PDFs corresponding to different calibration schemes – with and without model bias term and for different types of output – are formulated and directly sampled using an MCMC ensemble sampler and the GP metamodel. The posterior samples are then propagated in the set of FEBA experiments to check the validity of the posterior model parameter values and uncertainties. 
+In the final step, the a posteriori model parameter uncertainties are quantified by calibration on a selected test from the \glsentryshort{feba} experiments.
+Several posteriors \glspl[hyper=false]{pdf} corresponding to different calibration schemes -- with and without model bias term and for different types of output -- are formulated and directly sampled using an \gls[hyper=false]{mcmc} ensemble sampler and the \glsentryshort{gp} metamodel. The posterior samples are then propagated in the set of \glsentryshort{feba} experiments to check the validity of the posterior model parameter values and uncertainties. 
 
 The calibration is performed on different types of output to inform model parameters that would have otherwise remained non-identifiable. The calibration scheme with model bias term is able to constrain the prior uncertainties of the model parameters while keeping the nominal TRACE parameters values within the posterior uncertainty interval. That is in contrast with the results of the calibration without model bias term, in which the posterior uncertainties are concentrated on either sides of the prior range, and at times do not include the nominal TRACE parameters values. Finally, except for a few outputs – the cladding temperature output at the top assembly and the liquid carryover – the relative performance of all posterior uncertainties is insensitive to boundary conditions of the different FEBA tests. 
 
@@ -61,7 +58,10 @@ Bayesian calibration
 \begin{otherlanguage}{ngerman}
 \pdfbookmark[1]{R\'esum\'e}{R\'esum\'e}
 \chapter*{R\'esum\'e}
-Kurze Zusammenfassung des Inhaltes in deutscher Sprache\dots 
+
+
+
+
 \end{otherlanguage}
 
 \endgroup			
