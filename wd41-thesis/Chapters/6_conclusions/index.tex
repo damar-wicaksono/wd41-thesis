@@ -1,0 +1,25 @@
+%***************************************************************************************
+\chapter[Conclusions and Future Work]{Conclusions and Future Work}\label{ch:conclusions}
+%***************************************************************************************
+
+% Opening Paragraph
+The main goal of the present doctoral research was to quantify the uncertainty of physical model parameters implemented in \gls[hyper=false]{th} system codes and update the uncertainties based on comparison with experimental data.
+To that end, a methodology has been developed and applied to \gls[hyper=false]{trace} models of \gls[hyper=false]{setf} experiments dedicated to reflood;
+a relevant phenomenon to consider in the safety analysis of \glspl[hyper=false]{lwr}.
+
+The methodology consisted of three statistical methods for \emph{sensitivity analysis}, \emph{metamodeling}, and \emph{Bayesian calibration}.
+Starting from the \gls[hyper=false]{trace} code modeling of the \gls[hyper=false]{feba} facility for reflood experiment and a preliminary selection of uncertain input parameters,
+a set of sensitivity analysis methods were applied to assess the sensitivity of the code output to each selected input parameter and select the model parameters that were truly important for the reflood simulation.
+In anticipation of the high computational cost associated with the Bayesian calibration, a \glsfirst[hyper=false]{gp} metamodel of the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} was then developed and validated.
+Using the validated metamodel to substitute the \gls[hyper=false]{trace} code run, the selected model parameters were calibrated against the experimental data of \gls[hyper=false]{feba} which resulted in an a posteriori quantification of the parameters uncertainties.
+Finally, the quantified uncertainties were verified by means of uncertainty propagation on \gls[hyper=false]{feba} tests with boundary conditions different from the conditions of the calibration data.
+
+% What is this chapter all about
+This final chapter starts with a chapter-wise summary of the thesis, presented in Section~\ref{sec:conclusions_chapterwise}.
+The main achievements of the thesis are given in Section~\ref{sec:conclusions_achievements}, in which corresponding recommendations for future work are proposed.
+
+% The contents of the chapter
+\input{Chapters/6_conclusions/chapterwise}
+\input{Chapters/6_conclusions/achievements}
+%\input{Chapters/6_conclusions/concluding_remarks}
+%************************************************
