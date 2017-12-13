@@ -76,12 +76,12 @@ The derivation of these functions is posed as an inverse statistical problem fol
 Although subjectivity cannot be removed completely from the analysis,
 the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to inform in a more objective and transparent manner
 the uncertainties associated with the model parameters.
-This is done in three steps by consolidating and adapting recent developments in the applied statistics literature:
+This is done in three steps by consolidating and adapting recent developments in the applied statistics literature to:
 
 % Aim 1 (Global sensitivity analysis)
 \begin{enumerate}
 	\item \emph{Analyze and better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
-	\Glsfirst[hyper=false]{sa}, in particular \Glsfirst[hyper=false]{gsa}, methods can be used to assist identifying which of the model parameters can be calibrated using the available data.
+	\Glsfirst[hyper=false]{sa}, in particular \glsfirst[hyper=false]{gsa}, methods can be used to assist identifying which of the model parameters can be calibrated using the available data.
   An uncertainty analysis often starts a with large list of input parameters that may and may not be relevant (i.e., influential) to the simulation at hand.
   A screening method can be used to remove the least influential parameters from the list.
   Afterward, a variance decomposition method is employed to quantitatively analyze the contribution of the remaining influential parameters uncertainty on the prediction uncertainty.
@@ -140,7 +140,7 @@ There are several reasons for this emphasis as recognized by the \gls[hyper=fals
 
 % Reason 2
 	\item The models are adequately complex.
-  It is complex that $5$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
+  It is complex that $4$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
 	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on a limited set of models.
 	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and (to calibrate) reflood models in system codes.
 

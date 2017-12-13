@@ -1,10 +1,9 @@
-\newpage
 %************************************************************************************
 \section[MCMC Simulation]{\glsfirst[hyper=false]{mcmc} Simulation}\label{sec:bc_mcmc}
 %************************************************************************************
 
 % Introductory Paragraph
-The formulation of the Bayesian calibration of a computer model presented above results in a joint posterior \gls[hyper=false]{pdf} for all the parameters involved in the resulting probability model $p(\bm{x}\,|\,\mathbf{y})$ (Section~\ref{sub:bc_modular_posterior}).
+The formulation of the Bayesian calibration of a computer model presented above results in a joint posterior \gls[hyper=false]{pdf} for all the parameters involved in the resulting probability model $p(\bm{x}\,|\,\mathbf{y})$ (Eq.~(\ref{eq:bc_joint_posterior}) in Section~\ref{sub:bc_modular_posterior}).
 \marginpar{Posterior uncertainty of the model parameters}
 This density contains all the information (and consequently, the uncertainties) regarding the model parameters conditioned on the observed data and the assumed data-generating process.
 The uncertainties associated with the model parameters can then be represented using different summary statistics, many of which involve integration.
@@ -19,7 +18,8 @@ which is defined as
 	\end{split}
 %\label{eq:variance_marginalization}
 \end{equation*}
-where $\bm{x} = \{x_d, \bm{x}_{\sim d}\}$ and the integrations are carried out over the domain $\mathbf{X}$.
+where $\bm{x} = \{x_d, \bm{x}_{\sim d}\}$ stands for the the set of model parameters $\bm{x}_m$ in Sections~\ref{sec:bc_statistical_framework} and~\ref{sec:bc_modular};
+and the integrations are carried out over the domain $\mathbf{X}$.
 An alternative way to summarize the uncertainties of a model parameter is through its $\theta$-quantile $Q^{\theta}_d$,
 which for parameter $x_d$ is defined as
 \begin{equation*}
@@ -69,24 +69,23 @@ As such, in the following discussion, a generic notation for an arbitrary \gls[h
 % Introductory Paragraph
 Consider the following problem: Generate a set of samples $\{\bm{x}_n\}_{n=1}^N$ from a random variable $\bm{\mathcal{X}}$, given the \gls[hyper=false]{pdf} $p:\mathbf{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}_{\geq 0}$.
 \marginpar{Problem statement}
-It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant:
+It is assumed that the \gls[hyper=false]{pdf} can be evaluated at any given $\bm{x} \in \mathbf{X}$, at least up to a proportionality constant.
+That is,
 \begin{equation}
-	p(\bm{x}) = \frac{p^*(\bm{x})}{C} \propto p^*(\bm{x})  
+	p^*(\bm{x}) = {C} \, p(\bm{x})
 \label{eq:bc_prop_post}
 \end{equation}
 The proportionality constant in the above equation is the normalizing constant such that $p$ is a valid \gls[hyper=false]{pdf},
-\begin{equation}
-	C \; \int p(\bm{x}) d\bm{x} = \int p^*(\bm{x}) d\bm{x}  \Leftrightarrow  C \; (1.0) = \int p^*(\bm{x}) d\bm{x}
-\label{eq:bc_prop_const}
-\end{equation}
-Carrying out the integration of the above can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
+$\int p(\bm{x}) d\bm{x} = 1 \Leftrightarrow C = \int p^*(\bm{x}) d\bm{x}$.
+Carrying out the integration of $p^*$ can be problematic in its own right especially for a highly multidimensional function (such as the normalizing constant of a posterior density given in Eq.~(\ref{eq:bc_normalizing_constant})).
+Therefore, generating a set of samples simply by knowing $p^*$ instead of $p$ is advantageous.
 
-Such samples can then be used, among other things,
+The generated samples can then be used, among other things,
 to evaluate different summary statistics (such as expectation, variance, etc.) of $\bm{x}$ itself or
 of any function under the \gls[hyper=false]{pdf}.
 
 In the rest of the section, the term model input parameter space $\mathbf{X}$ is replaced by the term \emph{state space}, the range of possible values of the random variable $\bm{\mathcal{X}}$;
-A more appropriate term in the context of generic problem of generating samples from a distribution.
+a more appropriate term in the context of generic problem of generating samples from a distribution.
 
 % Why it it difficult to samples
 Generating samples from an arbitrary multidimensional density function is generally a difficult task.
@@ -99,23 +98,20 @@ For a complex multidimensional density function,
 these locations are not known a priori and might have to be identified exhaustively \cite{Mackay2005}.
 
 % Inverse Transform Sampling and Its Problem
-In one dimension,
-the most common way of generating sample from a given density is
-by inverse transform sampling coupled with a random number generator.
+In one dimension, the most common way of generating sample from a given density is by inverse transform sampling coupled with a random number generator.
 \marginpar{Inverse transform sampling}
 The approach requires the quantile function of the \gls[hyper=false]{pdf}.
-To obtain the quantile function,
-the density has to be integrated and its normalizing constant has to be computed.
+To obtain the quantile function, the density has to be integrated and its normalizing constant has to be computed.
 Appendix~\ref{app:its} provides a more detail account on the topic.
 Many univariate random variables are widely studied and the analytical solutions to their quantile functions are available \cite{Lange2010}.
-However, the method is not extendable to distributions of higher dimension.
+However, the method is not readily extendable to distributions of higher dimension.
 Additionally, though sampling algorithms exist for several multivariate densities (notably, the multivariate normal density~--~See Appendix~\ref{app:mvn_sampling}),
 this will not be the case for an arbitrary \gls[hyper=false]{pdf} of higher dimension.
 
 % Illustration
-To illustrate this point,
+To illustrate the difficulty to generate samples from an arbitrary multivariate probability distribution,
 \marginpar{Illustration}
-consider the following unnormalized bivariate \gls[hyper=false]{pdf} parametrized by location parameters $\mu_1, \mu_2$ and scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
+consider the following unnormalized bivariate \gls[hyper=false]{pdf} parametrized by the location parameters $\mu_1, \mu_2$ and the scale parameters $\sigma_1, \sigma_2$ \cite{Balakrishnan2014}:
 \begin{equation}
 	\begin{split}
     & p^*(x_1, x_2) = \frac{\exp{(-(x_1 - \mu_1)/\sigma_1)} \exp{(-(x_2 - \mu_2)/\sigma_2)}}{(1 + \exp{(-(x_1 - \mu_1)/\sigma_1)} + \exp{(-(x_2 - \mu_2)/\sigma_2)})^3} \\ 
@@ -165,7 +161,7 @@ Figs.~\ref{fig:ch5_plot_gumbel_sample_grid_2} and~\ref{fig:ch5_plot_gumbel_sampl
 The figure shows that the generated samples are indeed approximately distributed as the given \gls[hyper=false]{pdf}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_gumbel_sample_grid},
-			           maincaption={Sampling from a multivariate density by discretizing the state space in grids. The state space is discretized into $\Delta = 50$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms of the marginals approximately follow the shape of the respective analytical marginal density. The marginal densities have been normalized to match the peak of the histogram.},
+			           maincaption={Sampling from a multivariate density by discretizing the state space in grids. Each dimension of the state space is discretized into $\Delta = 50$ levels. The density is then evaluated at the discretized points. (Left) $5'000$ samples are generated following the resulting discrete probability distribution; (Center and Right) The histograms of the marginals approximately follow the shape of the respective analytical marginal density. The marginal densities have been normalized to match the peak of the histogram.},
 			           mainshortcaption={Sampling from a multivariate density by discretizing the state space in grids.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:ch5_plot_gumbel_sample_grid_1},
@@ -187,7 +183,7 @@ The main issue with the discretized grid approach, conceptually simple as it is,
 is the curse of dimensionality similar to the one mentioned in the previous chapters.
 \marginpar{curse of dimensionality}
 The number of density evaluations grows exponentially with the number of dimension.
-As a rule, for a given discretization level $\Delta$ and dimension $D$,
+As a rule, for a given discretization level $\Delta$ and a given dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
 
 % Problem with Discretized Grid, typical set
@@ -197,11 +193,10 @@ Assuming a well-behaved function of interest inside the integral, some regions o
 In fact, this ``region of space where it matters'' is related to the mathematical notion of the \emph{typical set} of a distribution \cite{Mackay2005}.
 Loosely speaking, it can be thought of as the region of state space where the probability mass (density times volume) is concentrated.
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
-Although there is good idea where this typical set is located for the example above (the region around the center of the density),
-in an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density) there will not be\footnote{And in fact, the region around the mode becomes less typical in high-dimension. Moving away from the mode of the density reduce its value while increasing the amount of volume.
-In a high-dimensional case, the region of space around the mode contributes less and less mass in comparison to other part of the state space and thus becoming less typical. This is yet another example of the curse of dimensionality.}.
+Although the location of the typical set for the example above is rather trivial (the region around the center of the density),
+it will not be the case for an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density)\footnote{And in fact, the region around the mode of a distribution becomes less representative of the typical set in high-dimension as it becomes smaller in comparison to other part of the state space where the density value, albeit small, is non-negligible. This is yet another example of the curse of dimensionality.}.
 Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
-At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would be potentially be more efficient, requiring less function evaluations for the same accuracy level, to that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
+At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would potentially be more efficient, requiring less function evaluations for the same accuracy level, than that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
 
 % Entry to Markov Chain
 To circumvent these issues,
@@ -257,7 +252,7 @@ A Markov chain is fully specified by three components:
     For any given $\bm{x}$, $T(\bm{x},\circ)$ defines the conditional probability density of $\bm{\mathcal{X}}^{(i)}$ given $\bm{\mathcal{X}}^{(i-1)} = \bm{x}$ with the following properties:
   \begin{equation}
     \begin{split}
-      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall x, \bm{x}' \in \mathbf{X} \\
+      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall \bm{x}, \bm{x}' \in \mathbf{X} \\
       & \int_{\mathbf{X}} T(\bm{x}, \bm{x}') \, d\bm{x} = 1, \,\,\, \forall \bm{x} \in \mathbf{X}\\
     \end{split}
   \label{eq:ch5_markov_chain_transition_kernel}
@@ -271,7 +266,7 @@ A Markov chain is fully specified by three components:
 \end{itemize}
 
 % Transition Between Iterations
-The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, is given by the transition probability kernel $T$ operated on the density function of the previous iteration $\pi^{(i-1)}$ such that,
+The distribution of $\bm{\mathcal{X}}^{(i)}$ due to the transition from the previous iteration $\bm{\mathcal{X}}^{(i-1)}$, is given by the transition probability kernel $T$ operated on the density function of the previous iteration $\pi^{(i-1)}$ such that,
 \begin{equation}
   \pi^{(i)}(\bm{x}') = \int_\mathbf{X} \pi^{(i-1)}(\bm{x}) \, T(\bm{x}, \bm{x}') \, d\bm{x} \equiv (\pi^{(i-1)}T)(\bm{x}')
 \label{eq:ch5_markov_chain_transition}
@@ -302,7 +297,7 @@ In other words, once the chain reaches the stationary density, it will stay ther
 % Convergence (Existence, Uniqueness, and Convergence)
 The notion of stationary density of a Markov chain is central to the application of Markov chain for generating samples from an arbitrary probability density.
 \marginpar{Fundamental theorem of Markov chain}
-Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}). for the transition kernel $T$, a stationary density $\pi^*$ exists, it is unique and is the \emph{limiting density} of the stochastic process, such that
+Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}). for the transition kernel $T$, a stationary density $\pi^*$ exists, is unique and is the \emph{limiting density} of the stochastic process, such that
 \begin{equation}
 	\lim_{i \rightarrow \infty} \,\, |(\pi T^i) - \pi^*| = 0, \,\,\,\, \forall \pi \in \mathbf{D}
 \label{eq:ch5_markov_chain_limiting_density}
@@ -329,15 +324,16 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 % Central Limit Theorem (Limiting Behavior)
 Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
-it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite size, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
-By adding additional condition on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given realization $\{\bm{x}^{(i)}\}_{i=1}^I$ of a Markov chain with stationary density $\pi^*$ and for function $f: \mathbf{X} \mapsto \mathbb{R}$ the following holds,
+it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite length, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
+By adding additional conditions on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
 \begin{equation}
-  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{x}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma^2}{I}\right)
+  \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{\mathcal{X}}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
 \end{equation}
-That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma^2/I$.
-$\sigma^2$ is the variance of the function evaluated under the stationary density of the chain.
-The theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size (assuming that stationarity has been attained).
+That is, the difference between the sample mean and the expected value converges in distribution to the normal distribution with variance $\sigma_f^2/I$.
+$\sigma_f^2$ is the variance of the function evaluated under the stationary density of the chain.
+The theorem implies that for a long enough chain (assuming that the stationarity has been attained), the function $f$ integrated along the target \gls[hyper=false]{pdf} $\pi^*$ and consequently the \glspl[hyper=false]{qoi} as exemplified in the opening of this section can be estimated with the sample mean of $f$ evaluated at the points of the sample path $\{\bm{x}^{(i)}\}_{i=1}^I$.
+Finally, the theorem provides a basis for estimating the error of an estimate computed by \gls[hyper=false]{mcmc} samples of a finite size.
 
 %And indeed, yet another important theorem exist and it is instrumental in such a simulation setting.
 
@@ -365,7 +361,7 @@ A reversible chain is a stationary chain \cite{Robert2004}.
 Consequently, in an \gls[hyper=false]{mcmc} algorithm,
 if the transition probability $T$ satisfies the detailed balance condition with respect to the target distribution $\pi_t$, 
 it ensures the reversibility of the process and ultimately the stationarity of the chain.
-Finally, by imposing the conditions\footnote{Idem.}, the stationary distribution of the chain $\pi^*$ converges to the target distribution $\pi_t$.
+Finally, by imposing the conditions (see Footnote~$9$), the stationary distribution of the chain $\pi^*$ converges to the target distribution $\pi_t$ and the quantities of interest exemplified in the opening of this section can be estimated.
 
 %------------------------------------------------------------
 \subsection{Markov Chain Monte Carlo}\label{sub:bc_mcmc_mcmc}
@@ -375,7 +371,7 @@ Finally, by imposing the conditions\footnote{Idem.}, the stationary distribution
 Consider once more the problem set up at the start of the section:
 \marginpar{The objective revisited}
 Generate samples from a target probability distribution with a density $p(\bm{x})$,
-known at least up to a proportionality constant, $p(\bm{x}) \propto p^*(\bm{x})$.
+known up to a proportionality constant (Eq.~(\ref{eq:bc_prop_post})).
 
 % Markov Chain Monte Carlo
 By acknowledging the theorems above,
@@ -390,7 +386,7 @@ This, in essence, is the objective of \gls[hyper=false]{mcmc} algorithms as defi
 One might think that the task of constructing a Markov transition kernel would be difficult,
 especially considering the wide range of possible target distributions which might call for different classes of transition kernels.
 \marginpar{Metropolis-Hastings algorithm, origin}
-However, there exists a class of algorithms for generating Markov chain that guarantees its convergence (in distribution) to \emph{any} target distribution as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
+However, there exists a class of algorithms for generating Markov chains that guarantees its convergence (in distribution) to \emph{any} target distribution as its stationary distribution\footnote{see \cite{Robert2010,Geyer2011} for more rigorous treatment on the convergence properties.}.
 The Metropolis-Hastings algorithm and its various extensions remains the most universal class of algorithms to generate such Markov chains \cite{Robert2010}. 
 The method was first applied for a statistical mechanics problem by Metropolis et al. \cite{Metropolis1953}\footnote{There is apparently a controversy surrounding the attribution of the algorithm solely to Metropolis, especially when his role was claimed to be nothing more ``other than providing computer time'' \cite{Gubernatis2005}.}
 and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the best of the author's knowledge, no controversy here.}.
@@ -399,7 +395,7 @@ and later generalized by Hastings \cite{Hastings1970}\footnote{There is, to the 
 The \gls[hyper=false]{mh} algorithm prescribes two main components for constructing transition kernels of a Markov chain that converges to the target distribution: a \emph{proposal probability density} $q(\bm{x}^*|\bm{x})$ and an \emph{acceptance probability} $\alpha$.
 \marginpar{Metropolis-Hastings algorithm, proposal density}
 The proposal probability density is responsible for generating a proposal transition or candidate move $\bm{x}^*$ for the Markov chain at each iteration and it is in general a density conditional on the previous state.
-This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such the Gaussian or uniform densities.
+This density is chosen such that it is easier to sample and indeed it is often selected from well-known densities such as the Gaussian or uniform densities.
 This proposal move, in turn, will be accepted with a probability,
 \begin{equation}
   \begin{split}
@@ -411,9 +407,10 @@ This proposal move, in turn, will be accepted with a probability,
 \marginpar{Metropolis-Hastings algorithm, acceptance probability}
 Where $p(\bm{x}^*)$ and $p(\bm{x})$ are the values of the target density at the proposed state and the previous state, respectively;
 and $q(\bm{x}^{(i-1)}\,|\,\bm{x}^*)$ ($q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$) is the value of the proposal density at the previous (proposed) state conditional on the value of the proposed (previous) state.
-Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_const}) cancels out and only the unnormalized density up to that constant $p^*$ is required.
-As such, the potentially difficult multidimensional integral in Eq.~(\ref{eq:bc_prop_const}) has been dispensed with by this formulation.
-The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution. This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
+Notice from the ratio, that the proportionality constant in Eq.~(\ref{eq:bc_prop_post}) cancels out and only the unnormalized density $p^*$ is required.
+As such, the potentially difficult multidimensional integral in Eq.~(\ref{eq:bc_prop_post}) has been dispensed with by this formulation.
+The acceptance probability is formulated to satisfy the \emph{detailed balance condition} (Eq.~(\ref{eq:ch5_markov_chain_detailed_balance})) for any valid proposal probability distribution.
+This, in turn, guarantees the stationarity of the process \cite{Chib1995}.
 
 If the proposal move is accepted it becomes the current state of the chain,
 otherwise the chain remains at its current state for the given iteration.
@@ -424,7 +421,7 @@ Algorithm~\ref{alg:metropolis_hastings} summarizes the steps for constructing a 
 \caption[Metropolis-Hastings Algorithm]{Metropolis-Hastings Algorithm \\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ given proposal density $q (\bm{x}^*\,|\,\bm{x})$ in $I$ iterations}
 \label{alg:metropolis_hastings}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $p^*(\bm{x})$, and $q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$
+  \footnotesize{\REQUIRE $I > 0$, $p^*(\bm{x})$, and $q(\bm{x}^*\,|\,\bm{x}^{(i-1)})$}
   \STATE $\bm{x}^{(0)} \leftarrow \bm{x}_0 \, ; \, \forall \bm{x}_0 \in \mathbf{X}$
   \FOR{$i = 1$ to $I$}
     \STATE sample $\bm{x}^*$ from $q(\bm{x}\,|\,\bm{x}^{(i-1)})$
@@ -461,7 +458,7 @@ The first three iterations of the random walk \gls[hyper=false]{mh} algorithm ar
 At the first iteration (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_1}),
 a proposal move is drawn from the bivariate normal distribution (centered at the origin).
 The proposal move brings the state closer to the center of the target density, thus it is accepted (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_2}).
-A new proposal move is generated from the bivariate normal centered at the newly accepted move.
+A new proposal move is generated from the bivariate normal centered at the newly accepted state.
 This time, because the proposal move moves farther away from the center of the target density, it is rejected.
 The chain remains at the current state and a new proposal move is drawn (Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_iteration_3}).
 Note that this kind of proposal move will not always be rejected outright but is subject to chance based on the acceptance probability.
@@ -524,7 +521,7 @@ Note that, in practice, the correct distribution of the resulting samples cannot
 The whole point of generating samples via \gls[hyper=false]{mcmc} simulation is exactly because such  arbitrary high-dimensional distributions are hard to characterize.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:ch5_plot_illustrate_markov_chain_sample},
-			           maincaption={Results of samples generated by a Markov chain simulation for the target density given in the example. After $50'000$ iterations, the samples resembles the actual shape of the distribution both as a joint (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
+			           maincaption={Results of samples generated by a Markov chain simulation for the target density given in the example. After $50'000$ iterations, the samples resemble the actual shape of the distribution both as a joint (Left) and as marginal distributions (Center and Right). The marginal densities have been normalized to match the peak of the histogram.},
 			           mainshortcaption={Results of samples generated by a Markov chain simulation for the target density given in the example.},%
 			           leftopt={width=0.28\textwidth},
 			           leftlabel={fig:ch5_plot_illustrate_markov_chain_sample_1},
@@ -569,7 +566,7 @@ For the same length of the chain as before ($50'000$), the resulting distributio
 {../figures/chapter5/figures/plotIllustrateMarkovChainLargeStep_2}
 
 % Under-dispersed step
-Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step} shows the behavior of the chain in the case of too small variance parameter for the proposal distribution, in comparison to the scale of the target density.
+Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step} shows the behavior of the chain in the case of a variance parameter for the proposal distribution that is too small in comparison to the scale of the target density.
 \marginpar{Under-dispersed proposal distribution}
 In this case, any proposal move around the previously accepted state would almost always be accepted and the chain traverses the state space very slowly (see Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step_1}).
 Consequently, the resulting samples from the chain (with the same length of $50'000$ samples in this example) would not be representative of the target distribution as illustrated in Fig.~\ref{fig:ch5_plot_illustrate_markov_chain_small_step_2}.
@@ -595,7 +592,7 @@ But this convergence would not be attained for a Markov chain of a practical len
 % Adaptive Sampler
 In fact, the optimal choice of the scale parameters for the proposal distribution is closely related to the characteristic length scale of the target distribution \cite{Mackay2005}.
 \marginpar{Tuning and adaptive \gls[hyper=false]{mh} algorithms}
-Unfortunately, in practice, there would be little information, if any, on the characteristic length scale for each parameter of a given density.
+In practice, there would be little information, if any, on the characteristic length scale for each parameter of a given density.
 As such, some tuning is required regarding the proposal distribution.
 This is the main motivation for the development of various \emph{adaptive} \gls[hyper=false]{mh} algorithms.
 In such algorithms, the proposal distribution (and thus the transition kernels) are adapted during the iteration to optimize the performance of the algorithm \cite{Robert2010}.
@@ -604,8 +601,7 @@ In such algorithms, the proposal distribution (and thus the transition kernels) 
 Instead of delving into any of the particular improvements on the \gls[hyper=false]{mh} algorithm (such as through the adaptive schemes)\footnote{Ref.~\cite{Andrieu2008} provides an overview of adaptive \gls[hyper=false]{mc} algorithms, while Refs.~\cite{Haario2001,Haario2006,Griffin2011} are examples of adaptive algorithms.},
 this thesis adopted a relatively new \gls[hyper=false]{mcmc} algorithm based on an \emph{ensemble} Markov chain.
 The algorithm has the potential of requiring minimal tuning to any given particular problem.
-The main ideas presented the above (i.e., proposal move and its acceptance probability), however,
-remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
+The main ideas presented above (i.e., proposal move and its acceptance probability) remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 
 %----------------------------------------------------------------------------
 \subsection{Affine-Invariant Ensemble Sampler (AIES)}\label{sub:bc_mcmc_aies}
@@ -614,14 +610,14 @@ remain central in an ensemble \gls[hyper=false]{mcmc} algorithm.
 % Introductory Paragraph and main motivation
 \Glsfirst[hyper=false]{aies} is an \gls[hyper=false]{mcmc} algorithm proposed by Goodman and Weare \cite{Goodman2010}.
 \marginpar{AIES, motivation}
-Its main motivation is exactly where the previous section left off: the difficulty in tuning or adapting \gls[hyper=false]{mh} algorithm to make them applicable to wide class of target distribution.
+Its main motivation is exactly where the previous section left off: the difficulty in tuning or adapting \gls[hyper=false]{mh} algorithm to make them applicable to a wide class of target distribution.
 The situation is typically worsened for a highly correlated distribution of high dimension where some of the length scales of the target distribution are very small forcing an adaptive algorithm to spend the majority of its time tuning the scale of the proposal distribution,
 eventually resulting in a high overhead computational cost for adaptation \cite{Foreman-Mackey2013}.
 
 Through an affine transformations (to be defined further below),
-a target distribution with a highly skewed aspect ratio\footnote{loosely defined as the ratio between different characteristic length scales of different dimensions.} can be made less skewed and thus easier to be sampled from \cite{Huijser2015}.
-By ensuring the algorithm to be affine-invariance, the performance of the algorithm would then be equal under all affine transformations of the target distribution.
-Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{sampler of many particles}, as opposed to a sampler of \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
+a target distribution with a highly skewed aspect ratio\footnote{Loosely defined as the ratio between different characteristic length scales of different dimensions.} can be made less skewed and thus easier to be sampled from \cite{Huijser2015}.
+By ensuring the algorithm to be affine-invariant, the performance of the algorithm would then be equal under all affine transformations of the target distribution.
+Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{Sampler of many particles} creating many paths, as opposed to a sampler of a \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
 
 % Ensemble Sampler
 \gls[hyper=false]{aies} belongs to a class of \gls[hyper=false]{mcmc} algorithms that generates a Markov chain on the state space of \emph{ensembles} (i.e., \emph{ensemble samplers}) \cite{Goodman2010}.
@@ -637,7 +633,7 @@ Specifically,
 Eq.~\ref{eq:ch5_ensemble_independence} implies that the target distribution is being independently sampled by $L$ walkers.
 
 A Markov chain of an ensemble, in turn, is a sequence of ensembles, $\{\vec{\bm{\mathcal{X}}}^{(i)}\}$ for $i \geq 0$ that follows the Markov property while preserving the condition in Eq.~(\ref{eq:ch5_ensemble_independence}).
-Consequently, the Markov property lies on the state space of the ensemble\footnote{if each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}, while the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
+Consequently, the Markov property lies on the state space of the ensemble\footnote{If each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}, while the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
 
 % Affine Transformation
 In \gls[hyper=false]{aies}, the transition between states of an ensemble is conducted by carrying out an affine transformation to the ensemble.
@@ -700,7 +696,7 @@ Finally, let $\vec{\bm{x}}^{(0)} = [\bm{x}^{(0)}_1, \ldots, \bm{x}^{(0)}_L]$ be 
 
 % Proposal move
 In transitioning the ensemble to $\vec{\bm{x}}^{(i)}$,
-a proposal move is made on one walker at a time and it follows an affine transformation:
+a proposal move is made for one walker at a time and it follows an affine transformation:
 \marginpar{Proposal move}
 \begin{equation}
 	\bm{x}_l^* = \bm{x}_j + z (\bm{x}_l^{(i-1)} - \bm{x}_j)
@@ -711,7 +707,7 @@ $\bm{x}_l^{(i-1)}$ is the walker to be updated (i.e., walker $l$ at the previous
 $\bm{x}_j$ is the \emph{complementary walker}, randomly selected from the complementary ensembles of $\vec{\bm{x}}^{(i-1)}_{\sim l}$;
 and $z$ is the scaler of the transformation (i.e., the \emph{stretcher}), randomly generated from,
 \begin{equation}
-	g(z) \propto z^{-0.5}, \,\,\,\, z \in [a^{-1}, a]
+	q(z) \propto z^{-0.5}, \,\,\,\, z \in [a^{-1}, a]
 \label{eq:ch5_scaler_distribution}
 \end{equation}
 where $a$ is a free positive parameter,
@@ -728,13 +724,13 @@ a proposal scaler is randomly generated according to $g$ and a proposed move is 
 								 mainlabel={fig:ch5_aies_stretch},
 			           maincaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional state space.},
 			           mainshortcaption={Illustration of a \emph{stretch move} update for a single walker in a $2$-dimensional state space.},%
-			           leftopt={width=0.275\textwidth},
+			           leftopt={width=0.25\textwidth},
 			           leftlabel={fig:ch5_aies_stretch_1},
 			           leftcaption={A walker in an ensemble of complementary walkers},
-			           midopt={width=0.275\textwidth},
+			           midopt={width=0.25\textwidth},
 			           midlabel={fig:ch5_aies_stretch_2},
 			           midcaption={A complementary walker is randomly selected},
-			           rightopt={width=0.275\textwidth},
+			           rightopt={width=0.25\textwidth},
 			           rightlabel={fig:ch5_aies_stretch_3},
 			           rightcaption={A move is proposed},
 			           spacing={},
@@ -760,12 +756,12 @@ Algorithm~\ref{alg:aies} summarizes the steps in the stretch-move \gls[hyper=fal
 \caption[Affine-Invariance Ensemble Sampler (Stretch-Move)]{Affine-Invariant Ensemble Sampler (Stretch Move)\\ Generate samples from $p(\bm{x}) \propto p^*(\bm{x})$ using $L$ walkers in $I$ iterations.}
 \label{alg:aies}
 \begin{algorithmic}
-  \REQUIRE $I > 0$, $L \geq I + 1$, $p^*(\bm{x})$, and $q (z)$
+  \footnotesize{\REQUIRE $I > 0$, $L \geq I + 1$, $p^*(\bm{x})$, and $q (z)$}
 		\STATE $\vec{\bm{x}}^{(0)} = [\bm{x}^{(0)}_1, \ldots, \bm{x}^{(0)}_L] \leftarrow \vec{\bm{x}}_0 \, ; \, \forall \vec{\bm{x}}_0 \in \mathbf{X}^L$
 		\FOR{$i = 1$ to $I$}
 			\FOR{$l = 1$ to $L$}
 				\STATE pick randomly $\bm{x}_j$ from $\vec{\bm{x}}^{(i-1)}_{\sim l}$
-				\STATE sample $z$ from $q(z)$
+				\STATE sample $z$ from $q(z)$ (e.g., Eq.~(\ref{eq:ch5_acceptance_probability_stretch_move}))
 				\STATE $\bm{x}^* \leftarrow \bm{x}_j + z (\bm{x}^{(i-1)}_l - \bm{x}_j)$
 				\STATE $\alpha \leftarrow \text{min} \left(\frac{p^*(\bm{x}^*)}{p^*(\bm{x}^{(i-1)}_l)} \times z^{D-1}, 1.0\right)$
 			\STATE sample $u$ from $\mathcal{U}[0,1]$
@@ -789,28 +785,28 @@ In other words, there is $50'000$ target density evaluations.
 The initial state of the chain $\vec{\bm{x}}^{(0)}$ is set to be at the origin for all walkers.
 
 % Traversing the Target Density and Trace Plot
-Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} presents the evolution of each individual walker traversing the state space of variable $x_1$.
+Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} shows the evolution of each individual walker traversing the state space of variable $x_1$.
 \marginpar{ensemble samples, trace plot}
-As mentioned, the Markov property of an ensemble is not guaranteed at the level of each individual walker.
-Thus it is more appropriate to graphically diagnose the chain by plotting all the individual walkers together.
+The Markov property of an ensemble is not guaranteed for each individual walker.
+Thus it is more suitable to graphically diagnose the chain by plotting all the individual walkers together.
 It is shown here that after an obvious initial phase,
-the ensemble seems to converge and to stay around a particular region of the state space (i.e., its typical set).
+the ensemble seems to converge and to stay around a particular region of the state space.
 The width of the darker region, indicating region of the state space visited more often,
-show the dispersion of the variable. 
-Indeed this is confirmed by plotting the running empirical mean and standard deviation of the ensemble (Fig.~\ref{fig:ch5_plot_aies_walker_running_stats_1}).
+shows the dispersion of the variable. 
+This is confirmed by plotting the running empirical mean and standard deviation of the ensemble (Fig.~\ref{fig:ch5_plot_aies_walker_running_stats_1}).
 The values $5.0$ and $2.3$ shown in the plot are the analytical mean and standard deviation of $x_1$, respectively.
-Although not shown here, the behavior of $x_2$ is similar.
+Though not shown, $x_2$ has a similar behavior.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_aies_walker_ensemble},
                   maincaption={Trace plots of individual walkers and the running mean and standard deviation for $x_1$.},%
-									mainshortcaption={.},
-                  leftopt={width=0.45\textwidth},
+									mainshortcaption={Trace plots of individual walkers and the running mean and standard deviation for $x_1$.},
+                  leftopt={width=0.425\textwidth},
                   leftlabel={fig:ch5_plot_aies_walker_ensemble_1},
                   leftcaption={Trace plot of all walkers},
                   %leftshortcaption={},%
-                  rightopt={width=0.45\textwidth},
+                  rightopt={width=0.425\textwidth},
                   rightlabel={fig:ch5_plot_aies_walker_running_stats_1},
-                  rightcaption={Running empirical mean and standard deviation of the samples},
+                  rightcaption={Running empirical mean and standard deviation},
                   %rightshortcaption={},
                   %spacing={\hfill}
                  ]
@@ -877,16 +873,15 @@ might cause a relatively long ``initialization phase'' noted above (compared to 
 \marginpar{\gls[hyper=false]{aies} algorithm, possible problems}
 This is especially the case if the chain starts at very atypical values of the distribution.
 Having a large ensemble implies a larger ``inertia'' for each of them to move and settle to a more typical region of the state space.
-The algorithm was also recently reported to badly scale with the number of dimensions and to eventually fail in a high dimension ($D \geq 50$) either by a very slow convergence or, more importantly, by a biased convergence (i.e., it converges to a wrong value) \cite{Carpenter2017,Huijser2015}.
+The algorithm was also recently reported to badly scale with the number of dimensions and to eventually fail in a high dimension ($D \geq 50$) either by a very slow convergence or, more importantly, by a biased convergence (i.e., convergence to a wrong value) \cite{Carpenter2017,Huijser2015}.
 The number of dimensions concerned in this thesis, however, is still far below the value cited above. 
 
 % Entry to practical aspects
 There are two important issues not discussed in detail in either of the illustrations above, namely the convergence and the required length of the chain.
 These issues are of practical importance for any \gls[hyper=false]{mcmc} algorithm.
-For instance, the ``initialization phase'' obviously presents in the illustration of the \gls[hyper=false]{aies} algorithm is an indication of a particular lack of convergence to stationarity in the initial part of the transient.
-It needs to be detected and removed lest they would bias the estimation using the samples.
-Rigorous proof of stationarity is difficult to obtain in practice and instead, analysis is often based on empirical diagnostic that can only indicate a lack of stationarity.
+For instance, the ``initialization phase'' of the \gls[hyper=false]{aies} algorithm is an indication of a particular lack of convergence to stationarity in the initial part of the chain.
+It needs to be detected and removed lest it would bias the estimation using its samples.
+Rigorous proof of stationarity is difficult to obtain in practice and instead, analysis is often based on empirical diagnostic with heuristics.
 Afterward,
-the main question will be on how long the chain needs to be generated.
-In turn, these issues are closely related to the error of an \gls[hyper=false]{mcmc} estimate.
+the main question is on how long the chain needs to be to obtain a small enough statistical error on the \gls[hyper=false]{mcmc} estimate.
 Analyzing a realization of a Markov chain for Monte Carlo application is the subject of the next section.

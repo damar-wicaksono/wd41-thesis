@@ -6,9 +6,6 @@ This section of the appendix complements the most important theorems of Markov c
 In the following some of the important notions are first introduced for the discrete-state Markov chain.
 It provides a more intuitive entry to the theory of Markov chain through matrix notation and a graphical representation.
 The associated theorems are presented without proof though the list of references are provided.
-A generalization to the continuous-state Markov chain will then be given,
-though many important equivalent results are difficult to even state let alone proof without involving measure theory.
-In such cases, references will also be provided. 
 
 %-------------------------------------------------
 \subsection{Discrete-State}\label{app:mc_discrete}
@@ -251,24 +248,3 @@ if the transition probability satisfies the detailed balance condition with resp
 it ensures the reversibility of the process and ultimately the stationarity of the chain.
 Finally, imposing the conditions of irreducibility and aperiodicity, the stationary distribution of the chain converges to the target distribution.
 For proof of this theorem see Refs.~\cite{Kelly1978,Robert2004}.
-
-%-----------------------------------------------------
-\subsection{Continuous-State}\label{app:mc_continuous}
-%-----------------------------------------------------
-
-% Markov Chain
-
-% Ingredients
-
-% Transition Kernel
-
-% Ergodic Theorem
-
-% Some difficulty
-% MCMC Algorithm
-The theorem justifies the use of Markov chain to generate samples for Monte Carlo application from an arbitrary distribution of interest.
-\marginpar{Markov Chain Monte Carlo}
-This is what \gls[hyper=false]{mcmc} algorithms do.
-In such an algorithm the task is to come up with transition probability such that the limiting distribution of the Markov chain, over many iterations, converges to the distribution of interest (the so-called \emph{target} distribution).
-Stated differently, the stationary distribution of the Markov chain is aimed to be the distribution of interest.
-
