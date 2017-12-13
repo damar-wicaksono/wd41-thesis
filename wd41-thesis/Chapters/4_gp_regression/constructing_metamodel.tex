@@ -145,7 +145,7 @@ The hyper-parameters in $\boldsymbol{\Psi}$, in turn, include $\sigma^2$ and oth
 Starting from the likelihood formulation, a common approach to estimate the hyper-parameters values is by selecting the ones that maximize the likelihood for a given observed data $\mathbf{y}$.
 \marginpar{maximum likelihood estimation / empirical Bayes}
 This estimation procedure, the maximum likelihood estimation, is also known in the literature as \emph{empirical Bayes} \cite{Koehler1996} where the estimation is derived strictly from available data.
-The procedures is as follow:
+The procedures is as follows:
 First, the hyper-parameters related to $\mathbf{R}$, noted $\boldsymbol{\Theta}$, are initially assumed to be known to estimate $\sigma^2$ by minimizing the negative log likelihood\footnote{logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number} (which is equivalent to maximizing the likelihood),
 \begin{equation}
 	\left(\hat{\sigma}^2 | \boldsymbol{\Theta}\right) = \underset{\sigma^2}{\arg\min} \left(- \ln \mathcal{L} (\hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})\right)

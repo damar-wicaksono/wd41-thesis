@@ -35,7 +35,7 @@ The equation above, the \emph{Kriging} model, consists of two components:
 		where $\sigma^2$ and $R$ are the process variance and a stationary correlation function (such as the ones presented in Section~\ref{sub:gp_covariance}), respectively.
 		The residuals, being modeled as a \gls[hyper=false]{gp}, are correlated and this correlation is a function of the input parameters.
 		As such, a Kriging model can be thought of as a generalized linear model whose elements of the correlation matrix are specified explicitly by a parametric function \cite{Martin2005}.
-		Note that the predictor in Eq.~(\ref{eq:kriging_model}) becomes a stochastic process due to this bias term.
+		Note that the predictor in Eq.~(\ref{eq:kriging_model}) becomes a stochastic process due to this term.
 
 \end{itemize}
 
@@ -119,7 +119,7 @@ where $m_{SK}$ and $s^2_{SK}$ are the mean and the variance of the distribution,
 They are also often referred to as the \emph{simple Kriging mean} and \emph{simple Kriging variance}, respectively.
 
 % Kriging Predictor, the mean
-The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follow
+The simple Kriging mean (or the \emph{Kriging predictor}) is expressed as follows
 \marginpar{(simple) Kriging mean}
 \begin{equation}
 	m_{SK} (\bm{x}_o) = \mu (\bm{x}_o) + \mathbf{R}^T(\bm{x}_o, \mathbf{DM}) \mathbf{R}^{-1}(\mathbf{DM}, \mathbf{DM}) (\mathbf{y} - \boldsymbol{\mu}(\mathbf{DM}))
