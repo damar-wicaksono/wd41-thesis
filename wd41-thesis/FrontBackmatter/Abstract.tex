@@ -40,11 +40,10 @@ The calibration is performed on different types of output to inform model parame
 The proposed methodology was shown to successfully inform the uncertainty of the model parameters involved in a reflood transient.
 In the future the methodology can be applied to model parameters involved in other \gls[hyper=false]{th} phenomena using data from \glspl[hyper=false]{setf} and, hopefully, contributes to achieve the goal of quantifying uncertainties for transients considered in the safety assessment of LWRs.
 
-le
 \vfill
 
 \textsc{keywords}:
-\glsfirst[hyper=false]{th},
+system \glsfirst[hyper=false]{th},
 reflood,
 \gls[hyper=false]{trace} code,
 \glsfirst[hyper=false]{uq},
@@ -61,20 +60,48 @@ Bayesian calibration
 \pdfbookmark[1]{R\'esum\'e}{R\'esum\'e}
 \chapter*{R\'esum\'e}
 
+Les codes de système thermohydraulique nucléaires utilisent plusieurs modèles paramétriques physiques ou empiriques pour modéliser des écoulements diphasiques complexes.
+La précision de leurs prédictions est de fait directement affectée par les incertitudes des paramètres de ces modèles.
+Du fait que ces paramètres ne sont souvent ni mesurables ni n’ont de significations physique propres, leurs incertitudes sont généralement déterminés par un jugement d’expert.
 
+Ce travail de thèse a pour but de quantifier les incertitudes des paramètres des modèles physiques implémentés dans les codes de système thermohydraulique en utilisant des données expérimentales. Cette thèse développe plus spécifiquement une méthodologie qui utilise les données expérimentales pour quantifier ces incertitudes de manière plus objective. La méthodologie utilise une approche probabiliste et comprend trois étapes qui proviennent de développements récents dans le domaine des méthodes statistiques appliquées : analyse de sensibilité globale (GSA), méta-modèle, et calibration Bayésienne. 
+
+La méthode est appliquée dans le cadre d’expériences de renoyage qui se sont déroulés dans l’installation FEBA « Flooding Experiments with Blocked Arrays » et qui sont modélisées avec le code de thermohydraulique TRACE. Le renoyage est choisi car il représente un phénomène d’importance majeure dans le cadre des analyses de sûreté des réacteurs à eau légère (LWR). Trois types de sortie du code qui dépendent du temps sont observés : la température de la gaine, la réduction de pression et la quantité de liquide entrainé hors de la section de test.
+
+Dans la première étape de la méthodologie, l’analyse de sensitivité globale permet d’éliminer des paramètres d’entrées du code qui ont une faible influence sur le transitoire de renoyage. L’analyse de fonctions (« Functional Data Analysis ») permet de réduire le nombre de dimensions des sorties du code dépendant du temps tout en préservant leurs interprétabilités. Ceci permet, à l’aide d’une nouvelle analyse de sensibilité, de quantifier les effets des paramètres d’entrées  sur les paramètres de sorties du code considérés dans leur ensemble.
+
+Dans la seconde étape, un méta-modèle basé sur un processus gaussien (GP) est développé et validé comme substitut au modèle TRACE. Les incertitudes sur les prédictions du méta-modèle sont suffisamment faibles pour prédire précisément toute les sorties d’intérêt. Le méta-modèle est évalué en moins de $5\,[s]$ contre $6-15\,[min]$ pour le modèle TRACE.
+
+Dans la dernière étape, l’incertitude a posteriori sur les paramètres des modèles est quantifiée par calibration sur une expérience choisie parmi l’ensemble des expériences FEBA considérés dans cette thèse. Plusieurs densités de probabilités a posteriori correspondant à différents schémas de calibration (avec et sans terme prenant en compte le biais du modèle et pour différents types de sortie du code)  sont formulées et directement échantillonnées en utilisant le méta-modèle gaussien et un échantillonneur d’ensemble basé sur la méthode de Monte-Carlo par chaînes de Markov (MCMC). Les échantillons obtenus sont propagés dans l’ensemble des expériences FEBA considérés pour vérifier la validité des valeurs et incertitudes des paramètres des modèles obtenus par calibration. 
+
+En utilisant différents types de sorties du code la calibration a permis d’améliorer les incertitudes de certains paramètres qui seraient dans le cas contraire restés à leurs valeurs d’origine. La calibration qui prend en compte le biais du modèle a quant à elle permis de contraindre les incertitudes a priori des paramètres tout en garantissant que leurs valeurs nominales restent dans l’intervalle de confiance a posteriori. Ce n’est pas le cas pour la calibration qui ne prend pas en compte le biais du modèle. Pour cette dernière, les incertitudes a posteriori sont concentrées sur les bords de l’intervalle de confiance a priori des paramètres et parfois n’incluent pas leurs valeurs nominales. Finalement, excepté pour la température de la gaine au sommet de l’assemblage et la quantité de liquide transporté hors du système, les performances de toutes les incertitudes a posteriori obtenues ne sont pas sensibles aux conditions limites des différentes expériences FEBA considérées. 
+
+La méthodologie proposée dans cette thèse a permis de réduire les incertitudes des paramètres des modèles utilisés dans la modélisation du transitoire de renoyage. Dans le future, cette méthodologie pourra être mise en œuvre avec des modèles impliqués dans d’autres phénomènes thermohydrauliques en utilisant des données issues d’autres installations pour l’étude d’effet thermohydraulique (« Separate Effect Test Facilities »), et pourquoi pas ainsi contribué à atteindre le but de quantifier les incertitudes dans les transitoires considérés dans l’analyse de sûreté des réacteurs à eau légère.  
+
+\vfill
+
+\textsc{mots-clefs}:
+système thermohydraulique,
+reflood,
+\gls[hyper=false]{trace} code,
+quantification d'Incertitude \glsentryshort{uq},
+analyse de sensitivité globale \glsentryshort{gsa},
+méta-modèle \glsfirst[hyper=false]{gp},
+calibration Bayésienne
 
 
 \end{otherlanguage}
 
-\chapter*{Intisari}
-Short summary of the contents in English\dots a great guide by 
-Kent Beck how to write good abstracts can be found here:  
-\begin{center}
-\url{https://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}
-\end{center}
+%\chapter*{Intisari}
+%Short summary of the contents in English\dots a great guide by 
+%Kent Beck how to write good abstracts can be found here:  
+%\begin{center}
+%\url{https://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}
+%\end{center}
 
-\vfill
+%\vfill
 
-\endgroup			
+%\endgroup			
 
-\vfill
+%\vfill
+\newpage
