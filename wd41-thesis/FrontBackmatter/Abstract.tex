@@ -11,56 +11,43 @@
 \chapter*{Abstract}
 
 % Context and Need
-Any of these approaches proved to be a difficult effort due to
-various reasons ranging from the lack of knowledge of the underlying
-physical process (with respect to the fully mechanistic modeling) to
-limitation in the amount and precision of the measured data (with re-
-spect to the fully empirical approach). Simplifying assumptions and
-extrapolations are made because of these limitations. In the end, clo-
-sure laws in system codes are of mixed origins and they become a
-major source of uncertainty 3 in the application of TH system codes,
-especially when used outside their validation domains.
+Nuclear \gls[hyper=false]{th} system codes use several parame\-trized physical or empirical models to describe complex two-phase flow phenomena.
+The reliability of their predictions is as such primarily affected by the uncertainty associated with the parameters of the models.
+Because these model parameters often cannot be measured, nor have inherent physical meanings, their uncertainties are mostly based on expert judgment. 
 
-% Task: the proposed methods
-The ultimate goal of the present doctoral research is to quantify the uncertainty of physical model parameters implemented in a \gls[hyper=false]{th} system code.
-Adopting a probabilistic framework to conform to the statistical uncertainty propagation widely adopted in the field of nuclear engineering, the uncertainties in the parameters are represented as \glspl[hyper=false]{pdf} or their approximations.
-The derivation of these functions is posed as an inverse statistical problem following a Bayesian framework as the parameters themselves are not directly observable.
-Although subjectivity cannot be removed completely from the analysis, the research aims to develop a methodology to incorporate the available, albeit indirect, experimental data to inform in a more objective and transparent manner the uncertainties associated with the model parameters.
-This is done in three steps by consolidating and adapting recent developments in the applied statistics, namely: global sensitivity analysis, metamodeling, and Bayesian calibration.
+% Goal
+The present doctoral research aims to quantify the uncertainty of physical model parameters implemented in a \gls[hyper=false]{th} system code based on experimental data.
+Specifically, this thesis develops a methodology to use experimental data to inform these uncertainties in a more objective manner.
+The methodology is based on a probabilistic framework and consists of three steps adapted from recent developments in applied statistics: \gls[hyper=false]{gsa}, metamodeling, and Bayesian calibration.
+The methodology is applied to reflood experiments from the \gls[hyper=false]{feba} test facility, which are modeled with the \gls[hyper=false]{th} system code \glsentryshort{trace}.
+Reflood is chosen as a relevant phenomenon for the safety analysis of light water reactors (LWRs) and three typical time-dependent outputs are investigated: cladding temperature, pressure drops and liquid carryover.
 
-% This Document: a detailed account on the application to a model and phase 0
-This thesis provides a detailed account on the adaption of each of the methods above followed by their applications on a running example of a reflood experiment simulation model in the \glsentryshort{trace} code.
-Reflood represents a relevant phenomenon to consider in the safety analysis of \glspl[hyper=false]{lwr};
-while a series of reflood experiment conducted at the \glsentryshort{feba} facility serves as the experimental basis for this work.
-These applications are aimed to illustrate the particularities -- and difficulties -- of applying the methods to a representative simulation model in \gls[hyper=false]{th}. 
+In the first step, GSA allows screening out input parameters that have a low impact on the reflood transient.
+\gls[hyper=false]{fda} is then used to reduce the dimensionality of the time-dependent code outputs, while preserving their interpretability.
+The resulting quantities can be used once more with \gls[hyper=false]{th} to investigate, quantitatively, the effect of the input parameters on the overall time-dependent outputs.
 
-% Phase 1 and Findings
-Selected \glsentryshort{gsa} methods are implemented for an analysis with three key underlying ideas. 
-The first idea is to reduce the dimensionality of the input parameters space through parameter screening, 
-while the second is to reduce the dimensionality of the code output space.
-As the output of the simulation is time-dependent, 
-dimension reduction is carried out while trying to preserve the interpretability of the results.
-The third and final idea is to investigate, quantitatively, the effect of variation of parameters on the over-
-all time-dependent output variation through variance decomposition.
-The selected methods are applied to the \glsentryshort{trace} model \glsentryshort{feba},
-reducing the size of the initial selection of input parameters to less than half.
-Additional insight is gained on the model behavior with respect to the input/output relationship by considering different outputs of the same transient or different aspects of the same output.
+In the second step, a \gls[hyper=false]{gp} metamodel is developed and validated as a surrogate for the TRACE model.
+The average prediction error of the metamodel is sufficient to predict all considered outputs, and its computational cost is less than $5\,[s]$ as compared to $6-15\,[min]$ per \glsentryshort{trace} run. 
 
-% Phase 2 and Findings
-In anticipation of a high computational cost associated with the Bayesian calibration,
-a \gls[hyper=false]{gp} metamodel of the \glsentryshort{trace} model is developed and validated.
-The high-dimensionality of the \glsentryshort{trace} outputs is dealt with \glsentryshort{pca}, a linear dimension reduction technique.
-The average prediction error of the metamodel is acceptable to predict for all types of output.
-With the computational cost of less than $5\,[s]$ per metamodel evaluation -- as compared to $6 - 15\,[min]$ per TRACE run -- the metamodel is an applicable surrogate for directly running the \glsentryshort{trace} code. 
+In the final step, the a posteriori model parameter uncertainties are quantified based on the calibration using a selected test from the \gls[hyper=false]{feba} experiments.
+Several posteriors \glspl[hyper=false]{pdf} corresponding to different calibration schemes were formulated and directly sampled from using an MCMC ensemble sampler. 
+Different resulting sets of samples were propagated through all the \glsentryshort{trace} models of the \gls[hyper=false]{feba} tests with boundary conditions different than the conditions of the test used for calibration.
 
-% Phase 3 and Findigs
-Finally, 
+The results of different calibration schemes corresponded to different level of trade-off between \emph{informativeness} (the width of the prediction uncertainty band) and the \emph{calibration score} (consistency with the experimental data and whether it is covered by the uncertainty band).
+This trade-off was apparent particularly for the schemes with and without model bias term and the scheme with bias but excluding a strongly correlated parameter.
+The scheme without bias resulted in the most reduction of the prior uncertainty for most of the important parameters, in which the nominal \glsentryshort{trace} parameter values sometimes laid outside the posterior uncertainty interval.  
+The posterior uncertainties associated with the scheme resulted in predictions with the highest informativeness and the lowest calibration scores across \gls[hyper=false]{feba} tests.
+The scheme with bias resulted in a more modest reduction of the prior uncertainty of the parameters, keeping the nominal \glsentryshort{trace} parameter values within the uncertainty interval, but exhibited strong correlation for some of the parameters.
+The corresponding prediction uncertainties, in turn, gave a better calibration score while having similar level of informativeness.
+It could be argued that the relatively worse calibration scores for the scheme with and without bias, in comparison to  that of the prior, was due to the too narrow posterior uncertainties for the former and due to the correlation in the posterior uncertainties for the latter.
+As the calibration was conducted based only on one \gls[hyper=false]{feba} test, this suggested a symptom of overfitting, which was stronger for the former than the latter.
+Therefore, in the case of limited calibration data, it might be prudent to consider instead the scheme with bias but excluding a strongly correlated parameter, whose calibration scores were consistently high across \gls[hyper=false]{feba} tests albeit with relatively lower informativeness compared to the two previous schemes.
 
-% Conclusion
-These series of applications on the \glsentryshort{trace} model \glsentryshort{feba} have demonstrated the applicability of the proposed methodology to quantify the uncertainty of the parameters in the physical model of \gls[hyper=false]{th} system codes based on experimental data.
+Through these series of applications on the TRACE model of FEBA, the proposed methodology to quantify the uncertainty of the parameters in the physical model of TH system codes based on experimental data have been successfully demonstrated. 
 
-\paragraph{keywords}\mbox{}\\
+\vfill
 
+\textsc{keywords}:
 \glsfirst[hyper=false]{th},
 reflood,
 \gls[hyper=false]{trace} code,
