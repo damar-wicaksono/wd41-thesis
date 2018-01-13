@@ -22,7 +22,7 @@ source("./r-scripts/plot_ensemble7.R")
 otpfullname <- "./figures/plotEnsAllDiscCenteredNoParam8.png"
 
 # Input filename
-ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-rep1.Rds"
+ens_rds_fullname <- "../../../../wd41-thesis.analysis.new/trace-mcmc-fixvar-revise-reduced/results/2000/216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-noparam8.Rds"
 #ens_rds_fullname <- "F:\\wd41-thesis\\trace-mcmc\\trace-mcmc-fixvar-revise-reduced\\results\\2000\\216-ens-all-1000-2000-fix_bc-fix_scale-unbiased-nobc-noparam8.Rds"
 
 # Burnin for this case (always change accordingly)
