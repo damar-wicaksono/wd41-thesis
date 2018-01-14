@@ -1,5 +1,5 @@
 #
-# title     : plotCalibInfo.R
+# title     : plotCalibInfoInit.R
 # purpose   : R script to create a facet plot of Calibration Score vs.
 #           : Informativeness for each output for each FEBA Test
 # author    : WD41, LRS/EPFL/PSI
@@ -14,7 +14,7 @@ library(plyr)
 infilenames <- list.files("../../../wd41-thesis/figures/data-support/postpro/qoi/", full.names = T)
 
 # Output filename
-otpfullname <- "./figures/plotCalibInfo.png"
+otpfullname <- "./figures/plotCalibInfoInit.png"
 
 # Graphic variables
 fig_size <- c(9.1, 5.75)
@@ -47,26 +47,28 @@ calibinfo_df1$case_name <- revalue(calibinfo_df1$case_name,
                                      "mcmcDPDiscCentered" = "w/ Bias, DP",
                                      "mcmcCODiscCentered" = "w/ Bias, CO"))
 
+case_names <- c("w/ Bias, All, Corr.", "w/ Bias, All, Ind.",
+                "w/ Bias, no dffbVIHT, Corr.", "w/ Bias, no dffbVIHT, Ind.",
+                "w/o Bias, Corr.", "w/o Bias, Ind.",
+                "w/ Bias, TC", "w/ Bias, DP", "w/ Bias, CO")
+
 calibinfo_df1$case_name <- factor(calibinfo_df1$case_name,
-                                  levels = c("w/ Bias, All, Corr.",
-                                             "w/ Bias, All, Ind.",
-                                             "w/ Bias, no dffbVIHT, Corr.",
-                                             "w/ Bias, no dffbVIHT, Ind.",
-                                             "w/o Bias, Corr.",
-                                             "w/o Bias, Ind.",
-                                             "w/ Bias, TC",
-                                             "w/ Bias, DP",
-                                             "w/ Bias, CO"),
+                                  levels = case_names,
                                   ordered = T)
+
 calibinfo_df1 <- calibinfo_df1[calibinfo_df1$feba_test %in% c(214,218,223,220,222),]
 calibinfo_srs_df <- calibinfo_srs_df[calibinfo_srs_df$feba_test %in% c(214,218,223,220,222),]
+
+case_names <- c("w/ Bias, All, Corr.", "w/ Bias, All, Ind.",
+                "w/o Bias, Corr.", "w/o Bias, Ind.")
+calibinfo_df1 <- calibinfo_df1[calibinfo_df1$case_name %in% case_names,]
 
 # Make the plot ---------------------------------------------------------------
 p <- ggplot(data = calibinfo_df1,
             aes(x = inf_score, y = cal_score, shape = case_name))
 p <- p + facet_grid(output_type ~ feba_test)
 p <- p + geom_point(size = 4)
-p <- p + scale_shape_manual(values = c(0,15,2,17,1,16,11,7,8))
+p <- p + scale_shape_manual(values = c(0,15,1,16,11,7,8))
 p <- p + theme_bw()
 p <- p + geom_hline(data = calibinfo_srs_df, aes(yintercept = cal_score))
 p <- p + geom_vline(data = calibinfo_srs_df, aes(xintercept = inf_score))
