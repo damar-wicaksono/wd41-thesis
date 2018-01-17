@@ -64,6 +64,11 @@ plot_ensemble <- function(param_ranges, n_samples = 1000, n_bins = 100)
                 p[[k]] <- p[[k]] + theme(axis.ticks.y = element_blank())
                 p[[k]] <- p[[k]] + theme(axis.title.y = element_blank())
                 p[[k]] <- p[[k]] + scale_x_continuous(limits = param_ranges[[i]])
+                p[[k]] <- p[[k]] + geom_vline(
+                    xintercept = quantile(ens_samples_rescaled[,i],
+                                          probs = c(0.025, 0.975)))
+                p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
+                
             } else if (j > i)
             {
                 # Upper off-diagonal elements
