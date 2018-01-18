@@ -65,11 +65,11 @@ plot_ensemble <- function(ens_rds, burnin, param_names, param_ranges,
                 p[[k]] <- p[[k]] + geom_vline(
                     xintercept = quantile(ens_samples_rescaled[,i],
                                           probs = c(0.025, 0.975)))
-                p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
+                #p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
                 p[[k]] <- p[[k]] + scale_x_continuous(limits = param_ranges[[i]])
-                p[[k]] <- p[[k]] + geom_vline(
-                    xintercept = median(ens_samples_rescaled[,i]),
-                    color = "black", linetype = "dotted")
+                #p[[k]] <- p[[k]] + geom_vline(
+                #    xintercept = median(ens_samples_rescaled[,i]),
+                #    color = "black", linetype = "dotted")
                 # Plot the tick labels in bottom-most part of the plot
             } else if (j > i)
             {
