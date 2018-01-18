@@ -67,7 +67,7 @@ plot_ensemble <- function(param_ranges, n_samples = 1000, n_bins = 100)
                 p[[k]] <- p[[k]] + geom_vline(
                     xintercept = quantile(ens_samples_rescaled[,i],
                                           probs = c(0.025, 0.975)))
-                p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
+                #p[[k]] <- p[[k]] + geom_vline(xintercept = nom_params[i], linetype = 2)
                 
             } else if (j > i)
             {
@@ -122,6 +122,9 @@ prior_ranges <- list(c(0.5, 2.0),
                      c(0.25, 4.0),
                      c(0.5, 2.0),
                      c(-50, 50))
+
+nom_params <- c(1, 1, 1, 1,
+                1, 1, 1, 0)
 
 # Make the plot ---------------------------------------------------------------
 png(otpfullname,

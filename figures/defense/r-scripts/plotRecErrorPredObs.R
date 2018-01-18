@@ -18,7 +18,7 @@ library(DiceKriging)
 
 # Global variables ------------------------------------------------------------
 # Output filename
-otpfullnames <- c("./figures/plotRecErrorPredObsTC.png",
+otpfullnames <- c("./figures/plotRecErrorPredObsTCBlank.png",
                   "./figures/plotRecErrorPredObsDP.png",
                   "./figures/plotRecErrorPredObsCO.png")
 
@@ -39,7 +39,7 @@ y_labs <- c("",
             "")
 ax_lims <- list(c(10, 105), c(0, 310), c(0, 1.0))
 
-for (i in 1:3)
+for (i in 1:1)
 {
     # Read the data -----------------------------------------------------------
     # Read reconstruction error file
@@ -48,13 +48,13 @@ for (i in 1:3)
     
     # Make the plot -----------------------------------------------------------
     p <- ggplot(data = rec_error_df, aes(x = obs, y = pred)) +
-        geom_point(shape = 4, colour=alpha("black", 8/10))
+        geom_point(shape = 4, colour=alpha("black", 0))
     
     # Set plotting canvas
     p <- p + labs(x = x_labs[i], y = y_labs[i])
     p <- p + theme_bw()
-    p <- p + theme(axis.text.x = element_text(size = 17))
-    p <- p + theme(axis.text.y = element_text(size = 17))
+    p <- p + theme(axis.text.x = element_text(size = 17, colour=alpha("black", 0)))
+    p <- p + theme(axis.text.y = element_text(size = 17, colour=alpha("black", 0)))
     p <- p + geom_abline(slope = 1, intercept = 0, colour=alpha("black", 5/10))
     
     p <- p + scale_y_continuous(limits = ax_lims[[i]])
