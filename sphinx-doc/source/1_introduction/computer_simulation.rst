@@ -1,3 +1,5 @@
+.. _intro_computer_simulation:
+
 Computer Simulation and Safety Analysis of Nuclear Power Plant
 ==============================================================
 
