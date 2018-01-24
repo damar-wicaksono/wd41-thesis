@@ -52,6 +52,16 @@ Finally, except for a few outputs – the cladding temperature output at the top
 The proposed methodology was shown to successfully inform the uncertainty of the model parameters involved in a reflood transient.
 In the future the methodology can be applied to model parameters involved in other TH phenomena using data from SETFs and, hopefully, contributes to achieve the goal of quantifying uncertainties for transients considered in the safety assessment of LWRs.
 
+**Keywords**:
+
+ - system thermal-hydraulics (TH)
+ - reflood
+ - TRAC/RELAP Computational Engine (TRACE) code
+ - uncertainty quantification (UQ)
+ - global sensitivity analysis (GSA)
+ - Gaussian process (GP) metamodel
+ - Bayesian calibration
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
