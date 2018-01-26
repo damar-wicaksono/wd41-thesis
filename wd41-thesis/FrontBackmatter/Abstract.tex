@@ -136,12 +136,13 @@ Karena parameter-parameter tersebut seringkali tidak bisa diukur secara langsung
 % Goal
 Tujuan dari riset doktoral ini adalah untuk melakukan kuantifikasi ketidakpastian dari parameter-parameter yang diimplementasikan di dalam kode thermo-hidrolika sistem berdasarkan data dari eksperimen.
 Khususnya, disertasi ini mengembangkan sebuah metodologi untuk memanfaatkan data dari eksperimen guna memperbarui ketidakpastian tersebut dengan cara yang lebih objektif.
-Metodologi yang diajukan ini dikembangkan berdasarkan kerangka kerja probabilistis dan terdiri dari tiga langkah yang diadaptasi dari perkemban-an terkini dalam statistika terapan: analisis sensitivitas global (\emph{global sensitivity analysis}, \glsentryshort{gsa}), pemetamodelan, kalibrasi Bayes.
+Metodologi yang diajukan ini dikembangkan berdasarkan kerangka kerja probabilistis dan terdiri dari tiga langkah yang diadaptasi dari perkembang\-an terkini dalam statistika terapan:
+analisis sensitivitas global (\emph{global sensitivity analysis}, \glsentryshort{gsa}), pemetamodelan, kalibrasi Bayes.
 
 % Introducing FEBA facility
 Metodologi tersebut kemudian diterapkan pada eksperimen \emph{reflood} di fasilitas uji efek terpisah \glsentryshort{feba}, yang dimodelkan dengan kode thermo-hidrolika sistem \glsentryshort{trace}.
-\emph{Reflood} dipilih sebagai fenomena yang relevan dalam analisis keselamatan reaktor air ringan. 
-Investigasi dilakukan terhadap tiga keluaran utama gayut-waktu: temperatur cladding, penurunan tekanan, dan carryover cairan.
+\emph{Reflood} dipilih sebagai fenomena yang relevan dalam analisis keselamatan reaktor air ringan.
+Investigasi dilakukan terhadap tiga keluaran utama gayut-waktu: temperatur cladding, penurunan tekanan, dan \emph{carryover} cairan.
 
 % First Step - Global Sensitivity Analysis
 Di langkah yang pertama, analisis sensitivitas global mampu me\-nyaring parameter-parameter yang kurang berpengaruh terhadap keluaran simulasi \emph{reflood}. 
@@ -151,19 +152,20 @@ Besaran-besar\-an yang dihasilkan dapat digunakan dengan analisis sensitivitas g
 % Second Step - Metamodeling
 Di langkah yang kedua, sebuah metamodel berdasarkan proses Gauss (\emph{Gaussian process}, \glsentryshort{gp}) dikembangkan dan divalidasi untuk digunakan sebagai pengganti model \glsentryshort{trace}.
 Kesalahan prediksi rerata metamodel tersebut cukup rendah untuk memprediksi secara akurat semua keluaran-keluaran yang disebut di atas.
-Terlebih lagi, biaya komputasi evaluasi dengan metamodel membutuhkan kurang dari $5$ detik untuk tiap evaluasi, dibandingkan dengan waktu yang dibutuhkan \glsentryshort{trace} untuk tiap evaluasi antara $6$ sampai $15$ menit .
+Terlebih lagi, biaya komputasi evaluasi dengan metamodel membutuhkan kurang dari $5$ detik untuk tiap evaluasi, dibandingkan dengan waktu yang dibutuhkan \glsentryshort{trace} untuk tiap evaluasi antara $6$ sampai $15$ menit.
 
 % Third Step - Bayesian Calibration
 Di langkah yang terakhir, ketidakpastian dari parameter-parameter model dikuantifikasi secara a posteriori melalui kalibrasi berdasarkan data dari uji terpilih \glsentryshort{feba}.
-Beberapa fungsi densitas peluang (\emph{probability density function}, \gls[hyper=false]{pdf}) posterior yang terkait dengan beberapa skema kalibrasi -- baik dengan mempertimbangkan suku ketidaksesuaian model (\emph{model bias term}) maupun tidak, dan dengan mempertimbangkan berbagai macam tipe keluaran -- diformulasikan dan langsung diambil secara acak menggunakan algoritma \glsfirst[hyper=false]{mcmc} ansambel dan metamodel proses Gauss.
-Sampel dari fungsi densitas peluang posterior itu kemudian dipropagasikan untuk beberapa uji \glsentryshort{feba} guna memastikan validitas nilai dan ketidakpastian dari parameter-parame\-ter model tersebut.
+Beberapa fungsi densitas peluang (\emph{probability density function}, \gls[hyper=false]{pdf}) posterior yang terkait dengan beberapa skema kalibrasi -- baik dengan mempertimbangkan suku ketidaksesuaian model (\emph{model bias term}) maupun tidak, dan dengan mempertimbangkan berbagai macam tipe keluaran -- diformulasikan.
+Dari formulasi tersebut, sampel langsung diambil secara acak menggunakan algoritma Monte Carlo Rantai Markov (\emph{Markov Chain Monte Carlo}, \glsentryshort{mcmc}) ansambel dan metamodel proses Gauss;
+dan kemudian dipro\-pagasikan untuk beberapa uji \glsentryshort{feba} guna memastikan validitas nilai dan ketidakpastian dari parameter-parame\-ter model tersebut.
 
 % Final Step - Results and Verification
 Kalibrasi dilakukan terhadap beberapa tipe keluaran untuk memperbarui ketidakpastian dari parameter-parameter model.
 Jika keluar\-an-keluaran tersebut tidak dipertimbangkan, maka ketidakpastian dari beberapa parameter-parameter model tidak dapat diperbarui.
 Skema kalibrasi dengan suku ketidaksesuaian model mampu membatasi ketidakpastian awal dari parameter-paremeter tersebut, sembari mempertahankan nilai nominal parameter-parameter \glsentryshort{trace} di dalam rentang ketidakpastian akhir.
 Hasil ini berlawanan dengan hasil dari kalibrasi tanpa suku ketidaksesuaian tersebut, sedemikian hingga ketidakpastian akhir terpusatkan di salah satu sisi rentang ketidakpastian awal, dan kadang tidak mengikutsertakan nilai nominal para\-meter-parameter \glsentryshort{trace}.
-Kecuali untuk beberapa keluaran -- temperatur cladding di bagian atas rangkaian fasilitas uji dan carryover cairan --, kinerja relatif dari ketidakpastian akhir tidak dipengaruhi oleh syarat batas dari beberapa uji \glsentryshort{feba}.
+Kecuali untuk beberapa keluaran -- temperatur cladding di bagian atas rangkaian fasilitas uji dan \emph{carryover} cairan --, kinerja relatif dari ketidakpastian akhir tidak dipengaruhi oleh syarat batas dari beberapa uji \glsentryshort{feba}.
 
 % Conclusion and Outlook
 Metodologi yang diajukan di atas berhasil memperbarui ketidakpastian dari parameter-parameter model yang berhubungan dengan simulasi \emph{reflood}.
