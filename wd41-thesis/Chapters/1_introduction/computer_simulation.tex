@@ -8,7 +8,7 @@
 
 % A definition
 The ubiquity of computer simulation in science and engineering has resulted in numerous definitions of the term \textit{scientific computer simulation}, \textit{model}, and \textit{simulation}.
-\marginpar{scientific computer simulation}
+\marginpar{Scientific computer simulation}
 To avoid confusion, this thesis adopts a recent definition proposed by Kaizer et al.\cite{Kaizer2015} quoted below:
 \begin{quote}
 	Scientific Computer Simulation is the imitation of a behavior of a system, entity, phenomenon, or process in the physical universe 
@@ -28,15 +28,17 @@ This thesis only deals with computer simulation.
 %The model itself is then referred to as physical model\footnote{Note that this term is referring to the mathematical model of a physical process, and \emph{not} a physical copy of object of interest (vis-à-vis conceptual model). As of October $31$, $2017$ the entry ``physical model'' in Wikipedia, the first hit given by Google, refers to the latter \cite{Wikipedia2017}.} .
 
 % A distinction by Beven
-Beven \cite{Beven2009} articulates the definition of a scientific model: a perceptual model (i.e., the theoretical description of the physical phenomena),
+Beven \cite{Beven2009} articulates this definition of a scientific model further through the following distinctions: a perceptual model (i.e., the theoretical description of the physical phenomena),
+\marginpar{Perceptual, formal, and procedural models}
 a formal model (i.e., its mathematical description),
 and a procedural model (i.e., the computer implementation of the formal model).
 For many physical models of complex system, only the procedural model is able to make a quantitative prediction of the system behavior.
-Thus, these distinctions are useful in acknowledging the level of approximation involved in modeling.
+These distinctions are useful in acknowledging the level of approximation involved in modeling.
 
 % Code
-A computer software that implements scientific models down to the solution algorithms is called a \emph{scientific code} or simply a \emph{code} \cite{Trucano2006}.
+A computer software that implements scientific models down to the solution algorithms 
 \marginpar{Code}
+is called a \emph{scientific code} or simply a \emph{code} \cite{Trucano2006}.
 Many modern implementations of scientific codes, apart from possibly being specific to a scientific domain, are comprehensive platforms.
 For instance, in the context of \gls[hyper=false]{th} system modeling, such codes allow modeling various attributes of the system ranging from its geometry, initial and boundary conditions, and design variables to the settings for discretization scheme and numerical solver.
 
@@ -51,7 +53,7 @@ As a result, the terms \emph{computer simulation model} or \emph{simulator} incl
 
 % Goal of simulation and entry to safety analysis
 Scientific codes play a central role in deterministic safety analysis of \glspl[hyper=false]{npp}.
-They provide a \emph{physics-based} evaluation of a relevant phenomenon taking place in the plant during postulated transients to demonstrate that safety requirements are met \cite{IAEA2009}.
+They provide a \emph{physics-based} evaluation of relevant phenomena taking place in the plant during postulated transients to demonstrate that safety requirements are met \cite{IAEA2009}.
 The demonstration is carried out with respect to acceptance criteria, a set of limits and conditions ensuring the integrity of the safety barriers.
 The criteria are set by regulatory bodies for normal and off-normal operation of the plants.
 
@@ -59,16 +61,16 @@ The criteria are set by regulatory bodies for normal and off-normal operation of
 The physics-based evaluation is achieved through simulation.
 \marginpar{Codes in safety analysis of NPP}
 As noted in \cite{IAEA2009,DAuria2012}, there are four disciplines associated with the different physical processes relevant in the safety analysis of the plant behavior:
-the neutronics of the core;
-the thermo-mechanics of the fuel and reactor components;
-the radiological analysis of a possible release;
-and, the system thermal-hydraulics of the plant, the subject of the present thesis\footnote{Ref.~\cite{DAuria2012} added one additional key discipline, namely: reliability analysis. It is excluded in the above listing as it is not technically a discipline of \emph{physics}.}.
+the \emph{neutronics} of the core;
+the \emph{thermo-mechanics} of the fuel and reactor components;
+the \emph{radiological} analysis of a possible release;
+and, the \emph{system thermal-hydraulics} of the plant, the subject of this thesis\footnote{Ref.~\cite{DAuria2012} added one additional key discipline, namely: reliability analysis. It is excluded in the above listing as it is not technically a discipline of \emph{physics}.}.
 Each discipline is, in turn, characterized by a distinct set of governing physical equations and that are often solved by a distinct code.
 
 % Entry to Conservative vs Best Estimate
 The \gls[hyper=false]{npp} safety is established, among other things, by setting the acceptance criteria in terms of limiting physical quantities relevant for the phenomena involved.
 The upper tolerance limit of $1'204\,[^oC]$ for the \glsfirst[hyper=false]{pct} is one such criteria for \glspl[hyper=false]{lwr} \cite{USNRC2017}.
-Whether the physical quantities respect such limits during postulated scenarios is analyzed using simulations in a conservative or best-estimate approach \cite{IAEA2009}.
+Whether the physical quantities respect such limits during postulated scenarios is analyzed using simulations either in a conservative or best-estimate approach \cite{IAEA2009}.
 
 % Conservative Analysis
 During its early days, reactor safety analysis involved a high-degree of conservatism.
@@ -120,11 +122,11 @@ Due to the $1$-dimensional simplification of the flow\footnote{Some system codes
 
 % Structure of a system code
 The typical structure of a system code is illustrated in Fig.~\ref{fig:ch1_th_system_code}.
-As can be seen, a system code constitutes of several building blocks that can be used to model and simulate wide ranges of systems and conditions.
+As shown, a system code constitutes of several building blocks that can be used to model and simulate wide ranges of systems and conditions.
 \marginpar{Structure of thermal-hydraulics system codes}
 It includes a set of conservation equations, closure laws, and equation of states.
-System codes are complemented with models for special components that perform specific functions (e.g., solid heated structure, pumps, and separators) or actions during transients (e.g., valves, instrumentation, and control systems);
-and models for special processes and phenomena that are relevant to the \glspl[hyper=false]{lwr} but too complex to be modeled implicitly in the (simplified) conservation equations (e.g., critical flow).
+System codes are complemented with models for special components that perform specific functions (e.g., heated solid structure, pumps, and separators) or actions during transients (e.g., valves, instrumentation, and control systems);
+and models for special processes and phenomena that are relevant to the \glspl[hyper=false]{lwr} but too complex to be captured implicitly in the (simplified) conservation equations (e.g., critical flow).
 In fact, the inclusion of models for those components and processes are the defining characteristics of \gls[hyper=false]{th} system code \cite{DAuria2012}.   
 \begin{figure}[!bth]	
 	\centering
@@ -135,8 +137,8 @@ In fact, the inclusion of models for those components and processes are the defi
 
 % Constitutive Equations and the Two-fluid Model
 The core element of a system code is a set of conservation equations describing the dynamics of the state variables of the fluid.
-The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the \emph{two-fluid model}.
 \marginpar{Two-fluid model}
+The state-of-the-art model widely implemented in \gls[hyper=false]{th} system codes to describe the dynamics of fluid flow in \glspl[hyper=false]{npp} (specifically, \gls[hyper=false]{lwr}) is based on the \emph{two-fluid model}.
 This model separately treats the transport phenomena of the two-phases of fluid flow (gas and liquid) resulting in a set of six balance equations (mass, momentum, and energy for each of the two phases).
 The model can capture phenomena where thermal and mechanical non-equilibrium conditions exist between the two phases, giving more realistic picture in a wide range of transients.
 %To close the system of equations (i.e., to have the same number of equations as the number of unknowns), it has to be complemented by two additional set of constitutive equations.
@@ -145,6 +147,7 @@ The model can capture phenomena where thermal and mechanical non-equilibrium con
 
 % Validity of Two-fluid Model
 The validity of the two-fluid model relies on the proper modeling of the transfer terms between phases and between each phase and the boundary walls.
+\marginpar{Transfer terms, physical models}
 The transfer terms include interfacial drag, interfacial heat transfer, and wall heat transfer.
 In principle, any two-phase flow pattern exhibits particular phase distributions and interfacial structures.
 As a result, the mathematical expressions of the transfer terms change with the pattern of the two-phase flow.
@@ -169,9 +172,10 @@ Mechanistic approach to closure laws modeling provides a scientific basis for pr
 However, its quality strongly depends on the adequacy of the postulated model and the associated assumptions.
 
 % semi-empirical approach
-Lastly, the semi-empirical approach combines both approaches, i.e., an initial mechanistic model which is tuned using parameters that are fitted to match experimental data.
+Lastly, the semi-empirical approach combines both approaches, i.e.,
 \marginpar{Semi-empirical approach}
-As such, these parameters become a measure of the inadequacy of the postulated model in explaining the data due to any unaccounted physical processes.
+an initial mechanistic model which is tuned using parameters that are fitted to match experimental data.
+These parameters then become a measure of the inadequacy of the postulated model in explaining the data due to any unaccounted physical processes.
 
 % Source of uncertainty
 Any of these approaches proved to be a difficult effort \cite{Barre1990,Nelson1992,Wulff2007} due to various reasons ranging from the lack of knowledge of the underlying physical process (with respect to the fully mechanistic modeling) to limitation in the amount and precision of the measured data (with respect to the fully empirical approach).
