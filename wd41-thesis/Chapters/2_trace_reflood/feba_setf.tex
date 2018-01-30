@@ -1,11 +1,10 @@
-\clearpage
 %********************************************************************************
 \section{FEBA Reflood Separate Effect Test Facility}\label{sec:reflood_feba_setf}
 %********************************************************************************
 
 % Introductory paragraph
 A series of \gls[hyper=false]{feba} experiments was conducted in the 1980s at the Karlsruhe Institute of Technology (KIT)\footnote{formerly Kernforschungzentrum Karlsruhe (KfK)}
-to improve the knowledge of \gls[hyper=false]{ht} mechanism during reflooding,
+to improve the knowledge of heat transfer mechanism during reflooding,
 taking into account the effects of spacer grids and flow blockage due to fuel rod ballooning.
 The data from the facility was also intended to validate the \gls[hyper=false]{th} models and codes available at the time.
 
@@ -15,8 +14,8 @@ An approximate cosine power profile was mapped over the height of the fuel rod s
 Seven spacer grids were used to provide mechanical support of the fuel rod simulators (Fig.~\ref{fig:feba_setf}d).
 
 \begin{figure}[bth]
-	\includegraphics[width=1.0\textwidth]{../figures/chapter2/febaTestSection/febaTestSection.png}
-	\caption[FEBA experimental facility.]{(a) The cross section of a fuel rod simulator used in \gls[hyper=false]{feba} separate-effect test facility; (b) the cross section of the test section including the rectangular housing; (c) the approximate cosine power profile, numbers written inside the box are the relative power $P/P_{avg}$; (d) the location of spacer grids in the test section. All dimensions are in units of milimeters $[mm]$.}
+	\includegraphics[width=1.0\textwidth]{../figures/chapter2/figures/febaTestSection}
+	\caption[FEBA experimental facility.]{(a) The cross section of a fuel rod simulator used in \gls[hyper=false]{feba} separate-effect test facility; (b) the cross section of the test section including the rectangular housing; (c) the approximate cosine power profile, numbers written inside the box are the relative power $P/P_{avg}$; (d) the location of spacer grids in the test section. All dimensions are in units of millimeters $[mm]$.}
 	\label{fig:feba_setf}
 \end{figure}
 
@@ -24,7 +23,7 @@ Seven spacer grids were used to provide mechanical support of the fuel rod simul
 During the initialization phase of the experiment,
 the test section was heated up at low nominal power ($200 \ [kW]$) to achieve a specified initial heater rod temperature, with no liquid present in the test section.
 The transient phase of the experiment was initiated by ramping up the power according to $120$\% (ANS\footnote{American National Standard}) decay heat power curve while simultaneously injecting subcooled liquid from the bottom of the test section.
-Several temperature measurements at the outer surface of the heater rods, hereinafter referred to as the clad temperature, were taken at different axial locations during the course of each transient test.
+Several temperature measurements at the outer surface of the heater rods, hereinafter referred to as the cladding temperature, were taken at different axial locations during the course of each transient test.
 
 % FEBA Test Series
 Eight different test series were performed in the FEBA facility. 
@@ -57,12 +56,13 @@ Different experimental runs corresponding to different experimental conditions o
 
 % Experimental data in the FEBA
 Three types of time series measurement were recorded in the experiment.
-These included thermocouples to measure the clad temperature (referred to as $TC$) at $8$ different axial locations,
-pressure probes to measure the pressure drop (referred to as $DP$) at $4$ different axial segments of the test assembly,
+These included thermocouples to measure the cladding temperature (referred to as $TC$) at eight different axial locations,
+pressure probes to measure the pressure drop (referred to as $DP$) at four different axial segments of the test assembly,
 and a collecting tank measuring the mass of water carried over at the end of the test section (i.e., the liquid carryover, referred to as $CO$).
 It should be noted that the collecting tank for measuring the liquid carryover was saturated at $10\,[kg]$ and thus no measurement above that value is available.
 The axial locations of the thermocouples and the axial segments at which the pressure drop were measured are summarized in Table~\ref{tab:feba_exp_data}. 
-Note that the thermocouple ID was inverted, the increasing number indicated a decreasing elevation, that is, $TC1$ at the top and $TC8$ at the bottom of the assembly.
+Note that the thermocouple ID was inverted, the increasing number indicated a decreasing elevation.
+That is, $TC1$ at the top and $TC8$ at the bottom of the assembly.
 \begin{table}[h]
 	\myfloatalign
 	\caption[Locations of the thermocouples and the pressure drop measurements in the FEBA experiment.]{Locations of the thermocouples and the pressure drop measurements in the FEBA experiment.}
@@ -79,15 +79,14 @@ Note that the thermocouple ID was inverted, the increasing number indicated a de
 													& $TC7$  	& $0.8$ \\
 													& $TC8$  	& $0.3$ \\
 		\midrule
-		\multirow{4}{*}{$DP$} & Bottom  & $0.0 - 1.7$ \\
-		                      & Middle  & $1.7 - 2.5$ \\
-	                        & Top  		& $2.3 - 4.1$ \\
-		                      & Total 	& $0.0 - 4.1$ \\
+		\multirow{4}{*}{$DP$} & Bottom (Bot.) & $0.0 - 1.7$ \\
+		                      & Middle (Mid.) & $1.7 - 2.5$ \\
+	                        & Top (Top)	  & $2.3 - 4.1$ \\
+		                      & Total (Tot.) 	& $0.0 - 4.1$ \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
 
 % Source of FEBA Information
-The facility specification and the test data are compiled in a series of reports that are available at the KIT library website.
+The facility specification and the test data are compiled in a series of reports that are available at the KIT library website \cite{Ihle1984}.
 The specifications and the data provide a valuable source of information for the \gls[hyper=false]{trace} code assessment since the \gls[hyper=false]{feba} experiment is not part of the original validation matrix of the code. 
-More details can be found in \cite{Ihle1984}.
