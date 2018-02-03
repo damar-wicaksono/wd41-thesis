@@ -5,8 +5,8 @@
 The methodology for \gls[hyper=false]{sa} presented in this work belongs to the category of statistical framework,
 a term attributed to Cacuci and Ionescu-Bujor \cite{Ionescu-Bujor2004} or
 simply the global method, following the terminology from Saltelli et al. \cite{Saltelli2004}.
-Within this framework, sensitivity measures of a parameterized model are obtained 
-by postprocessing the collection of model outputs obtained from multiple model evaluations 
+Within this framework, sensitivity measures of a parametrized model are obtained 
+by post-processing the collection of model outputs obtained from multiple model evaluations 
 at different points in the input parameter space according to a certain experimental design. 
 As such, the model itself can be considered as a black box, 
 and the input parameters are modeled as random variables equipped with a joint \gls[hyper=false]{pdf}. 
@@ -34,8 +34,6 @@ The model is then evaluated at each of these $N$ points by using a simulation co
     \end{pmatrix}
 \label{eq:discrete_time}
 \end{equation}
-where $y_n (t_i) = y(t_i; \bm{x}_n)$ is the model output at time $t_i$ evaluated using
-$\bm{x}_n$, the input parameter vector at the $n$-th row of $\mathbf{DM}$. 
+where $y_n (t_i) = y(t_i; \mathbf{x}_n)$ is the model output at time $t_i$ evaluated using $\mathbf{x}_n$, the input parameter vector at the $n$-th row of $\mathbf{DM}$. 
 
-Based on this general description of a time-dependent model output, 
-the next three sections will outline the main components of the proposed \gls[hyper=false]{sa} methodology.
+Based on this general description of a time-dependent model output, the next three sections will outline the main components of the proposed \gls[hyper=false]{sa} methodology.
