@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20180202184301" modified="D:20180203130012"/>
+<info created="D:20180202184301" modified="D:20180204004200"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -571,7 +571,7 @@ Set of \\
 Parameters</text>
 <text matrix="1 0 0 1 -60 76" transformations="translations" pos="240 432" stroke="black" type="minipage" width="140" height="20.988" depth="16.04" valign="top" size="LARGE">Morris\\
 Factorial Sampling</text>
-<text matrix="1 0 0 1 -264 -172" transformations="translations" pos="444 520" stroke="black" type="minipage" width="116" height="14.44" depth="9.47" valign="top" size="large">Runs = $N_S \times (D + 2)$\\
+<text matrix="1 0 0 1 -264 -172" transformations="translations" pos="444 520" stroke="black" type="minipage" width="116" height="14.44" depth="9.47" valign="top" size="large">Runs = $N \times (D + 2)$\\
 $N \sim 10^2 - 10^3$</text>
 <text matrix="1.04132 0 0 1 -86.3471 -308" transformations="translations" pos="444 520" stroke="black" type="minipage" width="88" height="10.04" depth="5.07" valign="top" size="LARGE">Registration</text>
 <path matrix="1 0 0 2.33333 -60.0006 -366.667" stroke="black" pen="heavier" arrow="normal/normal" rarrow="normal/normal">
@@ -596,7 +596,7 @@ $N_R \sim 10^1 - 10^2$</text>
 748 240 m
 748 192 l
 </path>
-<text matrix="1 0 0 1 248 -348" transformations="translations" pos="444 520" stroke="black" type="minipage" width="116" height="14.44" depth="9.47" valign="top" size="large">Runs = $N_S \times (D + 2)$\\
+<text matrix="1 0 0 1 248 -348" transformations="translations" pos="444 520" stroke="black" type="minipage" width="116" height="14.44" depth="9.47" valign="top" size="large">Runs = $N \times (D + 2)$\\
 $N \sim 10^3 - 10^4$</text>
 <text matrix="1 0 0 1 452 -212" transformations="translations" pos="240 432" stroke="black" type="minipage" width="116" height="21.082" depth="16.14" valign="top" size="LARGE">Sobol&apos;-Saltelli\\
 Sampling</text>
@@ -693,7 +693,7 @@ Parameters</text>
 72 0 0 -72 468 456 468 384 a
 h
 </path>
-<text matrix="0.824844 0.56536 -0.56536 0.824844 530.381 -354.659" transformations="rigid" pos="592 480" stroke="black" type="minipage" width="64" height="13.61" depth="8.64" valign="top" size="large" style="center">\bf Influential\\
+<text matrix="0.824844 0.56536 -0.56536 0.824844 526.381 -354.659" transformations="rigid" pos="592 480" stroke="black" type="minipage" width="72" height="13.61" depth="8.64" valign="top" size="large" style="center">\bf Influential\\
 Parameters</text>
 <text matrix="1 0 0 1 228 -84" transformations="translations" pos="444 520" stroke="black" type="minipage" width="148" height="10.144" depth="5.16" valign="top" size="LARGE">Importance Ranking</text>
 <path matrix="-1 -0 0 -1 1212 896" fill="gray" opacity="30%">
@@ -782,10 +782,10 @@ variations</text>
 Scores</text>
 <text matrix="1 0 0 1 -236 -76" transformations="translations" pos="432 116" stroke="black" type="label" width="26.664" height="8.169" depth="0" valign="baseline" size="large">Time</text>
 <text matrix="1 0 0 1 -156 -76" transformations="translations" pos="432 116" stroke="black" type="label" width="31.931" height="8.169" depth="0" valign="baseline" size="large">Scores</text>
-<text matrix="1 0 0 1 -200 -388" transformations="translations" pos="240 432" stroke="black" type="minipage" width="124" height="19.575" depth="14.63" valign="top" size="large" style="itemize">\item Main effect
-\item Total effect</text>
+<text matrix="1 0 0 1 -200 -388" transformations="translations" pos="240 432" stroke="black" type="minipage" width="124" height="19.575" depth="14.63" valign="top" size="large" style="itemize">\item Main-effect
+\item Total-effect</text>
 <text matrix="1 0 0 1 408 -32" transformations="translations" pos="240 432" stroke="black" type="minipage" width="100" height="26.543" depth="21.61" valign="top" size="large" style="itemize">\item Elementary \\ effect
-\item Total effect</text>
+\item Total-effect</text>
 <path matrix="1 0 0 1 0 -56.0004" stroke="black">
 384 160 m
 400 192
@@ -924,5 +924,50 @@ Scores</text>
 \item Time-averaged \\
 clad temperature
 \item etc.</text>
+<path stroke="black">
+528 104 m
+560 136
+588 96
+588 96
+588 72
+588 72
+608 72 c
+</path>
+<path stroke="black">
+528 104 m
+560 144
+580 96
+580 96
+580 72
+580 72
+608 72 c
+</path>
+<path stroke="black">
+384 104 m
+400 156
+436 92
+436 92
+436 72
+436 72
+464 71.9996 c
+</path>
+<path stroke="black">
+528 104 m
+560 168
+592 96
+592 96
+592 72
+592 72
+608 72 c
+</path>
+<path stroke="black">
+388 108 m
+400 172
+436 92
+436 92
+436 72
+436 72
+464 71.9996 c
+</path>
 </page>
 </ipe>
