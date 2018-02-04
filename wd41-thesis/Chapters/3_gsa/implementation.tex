@@ -183,13 +183,13 @@ where $\mathbb{V}[\mathcal{Y}]$ is estimated by the Saltelli et al. estimator in
 
 % Sobol-Saltelli Computational Cost
 The computational cost associated with the estimation of all the main-effect and total-effect indices using the Sobol'-Saltelli method is $N \times (D + 2)$ code runs,
-\marginpar{computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
+\marginpar{Computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
 where $N$ is the number of \gls[hyper=false]{mc} samples and $D$ is the number of parameters.
 Compare this to the cost of brute force Monte Carlo of $2 \times D \times N^2$ code runs to estimate all the main-effect and total-effect sensitivity indices. 
 
 % Morris method computational cost
 As an additional comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
-\marginpar{computational cost: \\ Morris vs. Sobol'-Saltelli}
+\marginpar{Computational cost: \\ Morris vs. Sobol'-Saltelli}
 where $N_R$ is the number of OAT design replications.
 In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
 determines the precision of the estimates.
