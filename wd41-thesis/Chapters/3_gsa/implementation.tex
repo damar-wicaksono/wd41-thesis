@@ -6,7 +6,7 @@ In this work,
 an implementation of the Morris method and a Monte Carlo method to estimate the main- and total-effect sensitivity indices has been developed using the Python \cite{PCT2017} programming language, 
 to allow for well-controlled parametric and convergence studies.
 The implementation follows a black box approach of \gls[hyper=false]{sa}. 
-It deals with the generation of design of experiment (a set of input values at which the model or code is evaluated) and the post-processing of output to obtain the select measures of sensitivity presented in the previous sub-sections.
+It deals with the generation of design of experiment (a set of input values at which the model or code is evaluated) and the post-processing of output to obtain the selected measures of sensitivity presented in the previous sub-sections.
 In the following, the basic procedures that underlie the implementation of both methods are laid out.
 More details on the programming aspects of the implementation (the so-called \texttt{gsa-module}) can be found in Appendix~\ref{app:gsa_module}.
 
@@ -14,20 +14,20 @@ More details on the programming aspects of the implementation (the so-called \te
 \subsection{The Morris Method}\label{sub:sa_morris}
 %--------------------------------------------------
 
-The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps.
+The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps:
 \begin{enumerate}
 
 	\item An OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well as the perturbed points for each parameter.
-A replication in an OAT design consists of $1$ nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
+A replication in an OAT design consists of one nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
 In each of the perturbed points, only one parameter change its value relative to the base.
 Note that in trajectory design, the nominal point only serves as the starting point and a perturbed point becomes the base point for the next perturbation.
 Different replications yield different nominal points and the associated perturbed points.
 
-  \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters.
+  \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters through iso-probabilistic transformation (see Appendix~\ref{app:its}).
 
   \item The model is evaluated for each (rescaled) point of the design matrix. The total number of model evaluations for a given design matrix is $N_R \times (D + 1)$.
   
-  \item Finally, for a selected \gls[hyper=false]{qoi} the $N_R$ elementary effects $EE_d$ are computed for each input parameter $x_d$ and each trajectory. The statistical summaries $\mu_d, \mu^*_d,$ and $\sigma_d$ are computed, and the ranking of the input parameters for the selected \gls[hyper=false]{qoi} is established based on $\mu^*_d$.
+  \item Finally, for a selected \gls[hyper=false]{qoi} the $N_R$ elementary effects $EE_d$ are computed for each input parameter $x_d$. The statistical summaries $\mu_d, \mu^*_d,$ and $\sigma_d$ are computed, and the ranking of the input parameters for the selected \gls[hyper=false]{qoi} is established based on $\mu^*_d$.
 
 \end{enumerate}
 
@@ -37,8 +37,8 @@ The different rankings based on $\mu_d^*$ obtained from various relevant \glspl[
 \subsection{The Sobol'-Saltelli Method}\label{sub:sa_sobol_saltelli}
 %-------------------------------------------------------------------
 
-In principle, the estimation of the Sobol' indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls[hyper=false]{mc} simulation.
-\marginpar{brute force \\ Monte Carlo}
+In principle, the estimation of the Sobol' sensitivity indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls[hyper=false]{mc} simulation.
+\marginpar{Brute force \\ Monte Carlo}
 The most straightforward, though rather rudimentary, 
 estimation method is to use two nested loops for the computation of the conditional variances and expectations appearing in both indices.
 
@@ -78,6 +78,7 @@ while $N$ (the size of \gls[hyper=false]{mc} samples) are typically in the range
 
 % Sobol'-Saltelli Approach
 Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls[hyper=false]{mc} simulation to estimate the indices.
+\marginpar{Sobol'-Saltelli method}
 The formulation starts by expressing the expectation and variance operators in their integral form 
 and ends with different possible \gls[hyper=false]{mc} estimators for both sensitivity indices.
 A detailed derivation of the integral form and the origin of the estimator can be found in Appendix~\ref{app:sobol_saltelli}. 
@@ -129,7 +130,7 @@ For $N$ number of \gls[hyper=false]{mc} samples and $D$ number of model paramete
   \label{eq:ss_sampling_resampling}
   \end{equation}
 
-  \item Rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation.
+  \item Rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation (Appendix~\ref{app:its}).
 
   \item Evaluate the model multiple times using input parameters vectors that correspond to each row of $A$, $B$, and all $A_B^d$.
 
@@ -143,7 +144,7 @@ One is proposed by Saltelli~\cite{Saltelli2002}, and the other, as an alternativ
 The latter proved to be more efficient, especially for a large variation around a parameter estimate~\cite{Iooss2015,Janon2014}.
 
 The general form of main-effect sensitivity index estimator is
-\marginpar{Main-effect sensitivity index estimators}
+\marginpar{Main-effect sensitivity index estimator}
 \begin{equation}
   \widehat{S}_d = \frac{\frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n - \mathbb{E}^2[\mathcal{Y}]}{\mathbb{V}[\mathcal{Y}]}
 \label{eq:ss_main_effect_estimator}
@@ -160,25 +161,25 @@ The estimators for the term $\mathbb{E}^2[\mathcal{Y}]$ and $\mathbb{V}[\mathcal
 
 \begin{table}[h]
 	\myfloatalign
-	\caption[Monte Carlo estimators to estimate the main-effect indices]{Two \gls{mc} estimators for the terms in Eq.~(\ref{eq:ss_main_effect_integral}) to estimate the main-effect indices (the sum is taken implicitly over all samples $N$)}
+	\caption[Monte Carlo estimators to estimate the main-effect indices]{Two \gls[hyper=false]{mc} estimators for the terms in Eq.~(\ref{eq:ss_main_effect_integral}) to estimate the main-effect indices (the sum is taken implicitly over all samples $N$)}
 	\label{tab:ss_main_effect_estimator}
 	\begin{tabularx}{\textwidth}{Xll} \toprule
-		\tableheadline{Estimator}         & $\mathbb{E}^2[Y] = \left( \int f d\mathbf{x}\right)^2$          & $\mathbb{V}[Y] = \int f^2 d\mathbf{x} - \left( \int f d\mathbf{x}\right)^2$ \\ \midrule 
-		Saltelli \cite{Saltelli2002}      & $\frac{1}{N} \sum f(A)_n \cdot f(B)_n$                          & $\frac{1}{N}\sum f(A)_n^2-\left(\frac{1}{N}\sum f(A)_n\right)^2$  \\[0.75cm]
-		Janon et~al.~\cite{Janon2014}     & $\left(\frac{1}{2N} \sum f(B)_n + f(A_B^d)_n\right)^2$          & $\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2$ \\
-                                      &                                                                 & $\quad -\left(\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2\right)^2$ \\
+		\tableheadline{Estimator}         & $\mathbb{E}^2[\mathcal{Y}] = \left( \int f d\mathbf{x}\right)^2$          & $\mathbb{V}[\mathcal{Y}] = \int f^2 d\mathbf{x} - \left( \int f d\mathbf{x}\right)^2$ \\ \midrule 
+		Saltelli \cite{Saltelli2002}      & \footnotesize{$\frac{1}{N} \sum f(A)_n \cdot f(B)_n$}                     & \footnotesize{$\frac{1}{N}\sum f(A)_n^2-\left(\frac{1}{N}\sum f(A)_n\right)^2$}  \\[0.75cm]
+		Janon et~al.~\cite{Janon2014}     & \footnotesize{$\left(\frac{1}{2N} \sum f(B)_n + f(A_B^d)_n\right)^2$}      & \footnotesize{$\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2$} \\
+                                      &                                                                 & \footnotesize{$\quad -\left(\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2\right)^2$} \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
 
 To estimate the total-effect sensitivity indices, the Jansen estimator~\cite{Jansen1999} is recommended in~\cite{Saltelli2010a}.
-\marginpar{Total-effect sensitivity index estimators}
+\marginpar{Total-effect sensitivity index estimator}
 The estimator reads
 \begin{equation}
-  \widehat{ST}_d = \frac{\frac{1}{2N}\sum_{n=1}^{N}\left(f(A)_n - f(A_B^d)_n\right)^2}{\mathbb{V}[Y]}
+  \widehat{ST}_d = \frac{\frac{1}{2N}\sum_{n=1}^{N}\left(f(A)_n - f(A_B^d)_n\right)^2}{\mathbb{V}[\mathcal{Y}]}
 \label{eq:ss_jansen_estimator}
 \end{equation}
-where $\mathbb{V}[Y]$ is estimated by the Saltelli et al. estimator in Table~\ref{tab:ss_main_effect_estimator}.
+where $\mathbb{V}[\mathcal{Y}]$ is estimated by the Saltelli et al. estimator in Table~\ref{tab:ss_main_effect_estimator}.
 
 % Sobol-Saltelli Computational Cost
 The computational cost associated with the estimation of all the main-effect and total-effect indices using the Sobol'-Saltelli method is $N \times (D + 2)$ code runs,
