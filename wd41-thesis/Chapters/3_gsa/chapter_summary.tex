@@ -3,11 +3,11 @@
 %******************************************************
 
 % Introductory paragraph and connection to the next chapter
-The global sensitivity analysis (\gls[hyper=false]{sa}) methodology part of the proposed statistical framework has been presented in this chapter.
-The objective of \gls[hyper=false]{sa} was to increase the understanding of the relationships between model input parameters and time-dependent output, within a selected region of interest in the input parameter space.
+The \glsfirst[hyper=false]{gsa} methodology part of the proposed statistical framework has been presented in this chapter.
+The objective of \gls[hyper=false]{gsa} was to increase the understanding of the relationships between model input parameters and time-dependent output, within a selected region of interest in the input parameter space.
 This understanding is beneficial for the follow-up work presented in Chapters~\ref{ch:gp_metamodel} and~\ref{ch:bayesian_calibration}.
 In Chapter~\ref{ch:gp_metamodel}, a statistical metamodel is constructed based only on the influential parameters, thus avoiding an unnecessarily large number of training samples associated with a large input parameter space.
-In Chapter~\ref{ch:bayesian_calibration}, the initial range of variations of (some of) the input parameters assumed in this chapter are updated based on available experimental data.
+In Chapter~\ref{ch:bayesian_calibration}, the initial range of variations for (some of) the input parameters assumed in this chapter are updated based on available experimental data.
 There, the results of the \gls[hyper=false]{sa} can provide some ideas as to which parameters can be informed (the sensitive ones),
 cannot be informed (the insensitive ones),
 or will present possible complications (the interacting ones) when considering the available experimental data.
@@ -18,7 +18,7 @@ This allowed us to capture the most essential features of the model behavior thr
 thus significantly departing from the more conventional \emph{ad hoc} \glspl[hyper=false]{qoi} (e.g., minimum, maximum, or time-average scalar value) that have been used so far in similar \gls[hyper=false]{sa} studies of nuclear reactor evaluation models.
 
 % Summary of Findings
-The methodology was applied to the running case study of the simulation of a reflood experiment using \gls[hyper=false]{trace} conducted at the \gls[hyper=false]{feba} facility.
+The methodology was applied to the running case study of the simulation of a reflood experiment conducted at the \gls[hyper=false]{feba} facility using \gls[hyper=false]{trace}.
 The value and limitation of screening methods were first demonstrated for this type of application.
 Although the two variants of the Morris method yielded similar results with relatively small number of code runs,
 the Sobol' total-effect indices (also estimated with small number of runs) provide a more quantitative approach to screen the noninfluential parameters.
@@ -36,6 +36,6 @@ But, during the temperature descent and around the quenching, most of the variat
 The nature of these interactions, however, remains to be investigated and is outside the scope of this thesis.
 
 % Closing paragraph
-Lastly, this chapter demonstrates the added value of the proposed \gls[hyper=false]{fda}-based \glspl[hyper=false]{qoi} for \gls[hyper=false]{sa} of transient simulation models.
-The provided example demonstrates that considering different outputs of the same transient and/or different aspects of the same output (as described by different \glspl[hyper=false]{qoi}) can highlight different model behaviors with respect to the input/output relationship.
-This confirms the selection of pertinent \glspl[hyper=false]{qoi} as one of the most crucial steps in a global \gls[hyper=false]{sa}.
+Lastly, this chapter demonstrates the added value of the proposed \gls[hyper=false]{fda}-based \glspl[hyper=false]{qoi} for \gls[hyper=false]{gsa} of transient simulation models.
+The provided example demonstrates that considering different outputs of the same transient or different aspects of the same output (as described by different \glspl[hyper=false]{qoi}) can highlight different model behaviors with respect to the input/output relationship.
+This confirms the selection of pertinent \glspl[hyper=false]{qoi} as one of the most crucial steps in a global \gls[hyper=false]{gsa}.
