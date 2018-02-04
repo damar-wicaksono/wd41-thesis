@@ -18,7 +18,7 @@ In this work, attention was paid to a particular screening method proposed by Mo
 Consider a mathematical model $f: \bm{x} \in [0,1]^D \mapsto y = f(\bm{x}) \in \mathbb{R}$, 
 where $\bm{x} = (x_1, x_2, \dots,x_D)$ is a vector of input parameters.
 The elementary effect of the $d$-th parameter on $f$ is defined as
-\marginpar{elementary effect}
+\marginpar{Elementary effect}
 \begin{equation}
   EE_d = \frac{f(x_1, \dots, x_d+\Delta,\dots,x_D) - f(x_1, \dots, x_d,\dots,x_D)}{\Delta}
 \label{eq:elementary_effect}
@@ -37,14 +37,14 @@ For a given $p$, the grid constructs a finite distribution of $p^{D-1}[p - \Delt
 % OAT Experimental Design
 The elementary effect distributions for each of the input parameters,
 evaluated across discretized input parameter space, 
-\marginpar{\gls[hyper=false]{oat} experimental design}
+\marginpar{\Glsfirst[hyper=false]{oat} experimental design}
 provide useful information on the importance of a parameter on the output.
-Unfortunately, an exhaustive evaluation of all elementary effects for a given discretization levels suffers from a curse of dimensionality especially for numerous parameters and/or for reasonably fine discretization level\footnote{for $p = 8$ and $D = 20$ the total number of evaluations for exhaustive computation of all $EE$s is $\approx 6 \times 10^{17}$ for each parameter}.
+Unfortunately, an exhaustive evaluation of all elementary effects for a given discretization levels suffers from a curse of dimensionality especially for numerous parameters or for reasonably fine discretization level\footnote{for $p = 8$ and $D = 20$ the total number of evaluations for exhaustive computation of all $EE$s is $\approx 6 \times 10^{17}$ for each parameter}.
 Consequently, a class of design of experiment that only change one parameter at a time (\gls[hyper=false]{oat}) are devised to estimate the statistics of the distributions.
   
 % Trajectory OAT Design
 The key idea behind the original Morris method is in initiating the model evaluations from various \textit{nominal} points, $\bm{x}$,
-\marginpar{trajectory OAT design}
+\marginpar{Trajectory \glsentryshort{oat} design}
 randomly selected over the grid and then gradually advancing one grid jump, perturbing one parameter at a time,
 making a perturbed point as the base point for the next perturbation.
 The order of perturbation (i.e., which dimension to perturb first) and the direction of the perturbation (i.e., whether it is added or subtracted) are also randomized between replications.
@@ -69,7 +69,7 @@ Fig.~\ref{fig:ch3_plot_oat_illustration_1} illustrates a trajectory design with 
 {../figures/chapter3/figures/plotOATIllustration_2}
 
 To remove the requirement to specify a method-specific parameter $p$ (the number of levels),
-\marginpar{radial OAT design}
+\marginpar{Radial \glsentryshort{oat} design}
 Campolongo et al.\cite{Campolongo2011} proposed to use a radial scheme coupled with Sobol' quasirandom sequence.
 In a single replication of this particular OAT design, 
 each parameter is perturbed relative to a \textit{base/nominal} point 
@@ -77,8 +77,8 @@ which is not required to be located on a predetermined grid.
 The size and sign of the perturbation is also allowed to vary from parameter to parameter in different replication.
 As such, radial design implicitly incorporates several additional possible sources of variation in the method 
 that can potentially bias the estimation of elementary effects.
-Because the size of parameter perturbations varies, the definition of the elementary effects is slightly changed to,
-\marginpar{elementary effect for radial design}
+Because the size of parameter perturbations varies, the definition of the elementary effects is slightly changed to
+\marginpar{Elementary effect for radial design}
 \begin{equation}
 EE_d = \frac{f(\bm{x} + \Delta x_d \cdot \bm{e}_d) - f(\bm{x})}{\Delta x_d}
 \end{equation}
@@ -92,10 +92,10 @@ An illustration of a radial design in a two-dimensional input parameter space wi
 
 % Mean of the elementary effects
 Consider now that an $N_R$ number of elementary effects associated with the $d$-th parameter have been sampled from the finite distribution of $EE_d$,
-using a \gls[hyper=false]{oat} design with $N_R$ replications.
-The statistical summary of sampled $EE_d$ based on a given number of OAT design replications generated using either the trajectory or the radial design can be calculated.
+using an \gls[hyper=false]{oat} design with $N_R$ replications, either based on the trajectory or radial design.
+The statistical summary of the sampled $EE_d$ based on a given number of an OAT design replications can be calculated.
 The first is the arithmetic mean defined as,
-\marginpar{the mean of the (sampled) elementary effects}
+\marginpar{Mean of the (sampled) elementary effects}
 \begin{equation}
 	\mu_d = \frac{1}{N_R} \sum_{r = 1}^{N_R} EE^r_d
 	\label{eq:sa_morris_mu}
@@ -105,12 +105,12 @@ The mean gives the global influence of the $d$-th parameter on the chosen output
 
 % Standard deviation of the elementary effects
 The second statistical summary of interest is the standard deviation of the (sampled) elementary effects for input parameter $x_d$,
-\marginpar{the standard deviation of the (sampled) elementary effects}
+\marginpar{Standard deviation of the (sampled) elementary effects}
 \begin{equation}
 	\sigma_d = \sqrt{\frac{1}{N_R} \sum_{r = 1}^{N_R} (EE^r_d - \mu_d)^2}
 	\label{eq:sa_morris_sd}
 \end{equation} 
-The standard deviation gives an indication of the presence of nonlinearity and/or interactions between the $d$-th input parameter and the others.
+The standard deviation gives an indication of the presence of nonlinearity or interactions between the $d$-th input parameter and the others.
 
 % Mean of absolute values of the elementary effects
 In cases where $f$ is a non-monotonic function,
@@ -119,7 +119,7 @@ and cancellation effects on the estimation of $\mu_d$ might occur .
 To circumvent this issue,
 Campolongo et al.~\cite{Campolongo2011} proposed to take the absolute values of the sampled elementary effects.
 It is defined as,
-\marginpar{the mean of the (sampled) absolute elementary effects}
+\marginpar{Mean of the (sampled) absolute elementary effects}
 \begin{equation}
 	\mu^*_d = \frac{1}{N_R} \sum_{r = 1}^{N_R} |EE^r_d|
 	\label{eq:sa_morris_mustar}
@@ -130,26 +130,25 @@ its use is justified if the input parameters are to be ranked based on a single 
 % Interpretation and importance classification
 The aforementioned statistical summaries, when evaluated over a large number of replications $N_R$,
 can provide global sensitivity measures of the importance of each input parameter.
-\marginpar{input parameter importance classification}
+\marginpar{Input parameter importance classification}
 As indicated by Morris \cite{Morris1991}, there are three possible categories of parameter importance based on those statistics:
 \begin{enumerate}
-	\item Parameters with noninfluential effects, i.e., the parameters that have relatively small values of both $\mu_d$ (or $\mu^*_d$) and $\sigma_d$;
-	The parameter has a negligible overall effect on the model output.
-	\item Parameters with linear and/or additive effects, i.e., the parameters that have relatively large value of $\mu_d$ (or $\mu^*_d$) and relatively small value of $\sigma_d$.
+	\item Parameters with noninfluential effects on the model output, i.e., the parameters that have relatively small values of both $\mu_d$ (or $\mu^*_d$) and $\sigma_d$.
+	\item Parameters with linear or additive effects, i.e., the parameters that have relatively large value of $\mu_d$ (or $\mu^*_d$) and relatively small value of $\sigma_d$.
 	The small value of $\sigma_d$ and the large value of $\mu_d$ (or $\mu^*_d$) indicate that the variation of elementary effects across replications is small while the magnitude of the effect itself is consistently large for the perturbations in the parameter space.
-	\item Parameters with nonlinear and/or interaction effects, i.e., the parameters that have a relatively small value of $\mu_d$ (or $\mu^*_d$) and a relatively large value of $\sigma_d$.
+	\item Parameters with nonlinear or interaction effects, i.e., the parameters that have a relatively small value of $\mu_d$ (or $\mu^*_d$) and a relatively large value of $\sigma_d$.
 	Opposite to the previous case, a small value of $\mu_d$ (or $\mu^*_d$) indicates that the aggregate effect of perturbation is relatively small (or in the case of $\mu_d$, can be close to zero) while a large value of $\sigma_d$ indicates that the variation of the effect is large; the effect can be large or negligibly small depending on the values of the other parameters at which the model is evaluated.
-	Such large variation is a symptom of nonlinear effects and/or parameter interaction.
+	Such large variation is a symptom of nonlinear effects or parameter interaction.
 \end{enumerate}
 
 % Classification and qualitative measure
-Such classification makes parameter importance ranking and, in turn, screening of noninfluential parameters possible.
+This classification makes parameter importance ranking and, in turn, screening of noninfluential parameters possible.
 However, the procedure is done rather qualitatively, and this is illustrated in Fig.~\ref{fig:ch3_importance_classification}, 
-which depicts a typical parameter classification derived from visual inspection of the elementary effects statistics on the $\sigma$ vs. $\mu^*$ plane.
+which depicts a typical parameter classification derived from a visual inspection of the elementary effects statistics on the $\sigma$ vs. $\mu^*$ plane.
 The notions of influential and noninfluential parameters are based on the relative locations of those statistics in the plane.
-Typically, the noninfluential ones are clustered closer to the origin (relative to the more influential ones) with a pronounced boundary such as the one depicted in Fig.~\ref{fig:ch3_importance_classification}. 
+Typically, the noninfluential ones are clustered closer to the origin (relative to the more influential ones) with a pronounced boundary such as the situation depicted in Fig.~\ref{fig:ch3_importance_classification}. 
 Admittedly, if these statistics are spread somewhat uniformly across the plane, 
-the distinction would be more ambiguous and problematic\footnote{In such a case, a more advanced classification such as the ones based on clustering techniques might be helpful to identify a finer structure of the parameters importance.}.
+the distinction would be more ambiguous and problematic\footnote{In such a case, more advanced classification approaches such as the ones based on clustering techniques might be helpful to identify a finer structure of the parameters importance.}.
 Furthermore, for a parameter with a large value of both $\mu^*$ and $\sigma$,
 the method cannot distinguish between nonlinearity effect from parameter interaction effect on the output.
 
