@@ -252,14 +252,14 @@ A Markov chain is fully specified by three components:
     For any given $\bm{x}$, $T(\bm{x},\circ)$ defines the conditional probability density of $\bm{\mathcal{X}}^{(i)}$ given $\bm{\mathcal{X}}^{(i-1)} = \bm{x}$ with the following properties:
   \begin{equation}
     \begin{split}
-      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall \bm{x}, \bm{x}' \in \mathbf{X} \\
-      & \int_{\mathbf{X}} T(\bm{x}, \bm{x}') \, d\bm{x} = 1, \,\,\, \forall \bm{x} \in \mathbf{X}\\
+      & T(\bm{x}, \bm{x}') \geq 0, \,\,\, \forall\,\bm{x}, \bm{x}' \in \mathbf{X} \\
+      & \int_{\mathbf{X}} T(\bm{x}, \bm{x}') \, d\bm{x}' = 1, \,\,\, \forall\,\bm{x} \in \mathbf{X}\\
     \end{split}
   \label{eq:ch5_markov_chain_transition_kernel}
   \end{equation}
 	As $T(\bm{x}, \circ)$ is a \gls[hyper=false]{pdf}, then for any given $\bm{x}$ it also follows that,
 	\begin{equation}
-    \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \int_\mathbf{A} T(\bm{x}, \bm{x}') \, d\bm{x}' \, ; \, \mathbf{A} \subset \mathbf{X}
+    \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \int_\mathbf{A} T(\bm{x}, \bm{x}') \, d\bm{x}' \, ; \, \mathbf{A} \subseteq \mathbf{X}
   \label{eq:markov_chain_transition_probability}
   \end{equation}
 
@@ -297,7 +297,7 @@ In other words, once the chain reaches the stationary density, it will stay ther
 % Convergence (Existence, Uniqueness, and Convergence)
 The notion of stationary density of a Markov chain is central to the application of Markov chain for generating samples from an arbitrary probability density.
 \marginpar{Fundamental theorem of Markov chain}
-Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}). for the transition kernel $T$, a stationary density $\pi^*$ exists, is unique and is the \emph{limiting density} of the stochastic process, such that
+Under certain conditions (i.e., irreducible, aperiodic, and Harris recurrent~--~See Appendix~\ref{app:markov_chain}) for the transition kernel $T$, a stationary density $\pi^*$ exists, is unique and is the \emph{limiting density} of the stochastic process, such that
 \begin{equation}
 	\lim_{i \rightarrow \infty} \,\, |(\pi T^i) - \pi^*| = 0, \,\,\,\, \forall \pi \in \mathbf{D}
 \label{eq:ch5_markov_chain_limiting_density}
@@ -325,7 +325,7 @@ This statement of the existence, the uniqueness, and the convergence of a statio
 Although the previous theorem provides the mathematical foundation for constructing an \gls[hyper=false]{mcmc} algorithm,
 \marginpar{Central Limit Theorem}
 it is the property of the sample path\footnote{Recall that from Chapter~\ref{ch:gsa}, a sample path is a realization of a stochastic process and in this case, a realization of a Markov chain.} of a finite length, $\{\bm{x}^{(i)}\}_{i=1}^{I}$, that matters when conducting an actual \gls[hyper=false]{mcmc} simulation \cite{Robert2004}.
-By adding additional conditions on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
+By adding additional conditions on T\footnote{Namely, irreducible, aperiodic, Harris recurrent, \emph{and} geometrically ergodic. Thus, the chain is called (geometrically) ergodic\label{foot:bc_ergodicity}.}, another theorem states that for a given Markov chain $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^I$ with stationary density $\pi^*$ and for any function $f: \mathbf{X} \mapsto \mathbb{R}$ the following asymptotic result holds,
 \begin{equation}
   \lim_{I \rightarrow \infty} \,\, \frac{1}{I} \sum_{i=1}^I f(\bm{\mathcal{X}}^{(i)}) - \mathbb{E}_{\pi^*}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \label{eq:ch5_markov_chain_clt}
@@ -352,9 +352,9 @@ A Markov chain with transition kernel density $T(\circ,\circ)$ satisfies the det
 \end{equation}
 \marginpar{Reversible Markov chain}
 As a result, the chain is said to be \emph{reversible}.
-Formally, for $\mathbf{A} \subset \mathbf{X}$,
+Formally, for $\mathbf{A} \subseteq \mathbf{X}$,
 \begin{equation}
-  \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i+1)} = \bm{x}) \,\,\,\, \forall \bm{x} \in \mathbf{X}
+  \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i-1)} = \bm{x}) = \mathbb{P}(\bm{\mathcal{X}}^{(i)} \in \mathbf{A}\,|\,\bm{\mathcal{X}}^{(i+1)} = \bm{x}) \,\,\,\, \forall \, \bm{x} \in \mathbf{X}
 \label{eq:ch5_markov_chain_reversibility}
 \end{equation}
 A reversible chain is a stationary chain \cite{Robert2004}.
