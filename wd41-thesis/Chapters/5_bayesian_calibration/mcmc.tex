@@ -31,7 +31,7 @@ the $95\%$ confidence interval of the parameter is written as $Q_d^{0.025} \leq 
 
 Though these summaries might be of interest,
 \marginpar{Posterior uncertainty of the model prediction}
-in an application setting, the model parameters uncertainties are often propagated through the simulation model to obtain the uncertainty in the output (prediction).
+in an application setting, the model parameters uncertainties are often propagated through the simulation model to obtain the uncertainty in the prediction.
 Hence, the output from a simulation model $y = f(\bm{x})$ is expressed as a random variable $\mathcal{Y}$ from the transformation of a random variable $\bm{\mathcal{X}}\,|\,\mathbf{y}$ by the function $f$
 \begin{equation*}
 	\mathcal{Y} = f(\bm{\mathcal{X}}\mid\mathbf{y})  \, ; \, p_{\bm{\mathcal{X}}\,|\,\mathbf{y}} (\bm{x}) = p(\bm{x}\,|\,\mathbf{y})  
@@ -39,8 +39,8 @@ Hence, the output from a simulation model $y = f(\bm{x})$ is expressed as a rand
 where the \gls[hyper=false]{pdf} of $\bm{\mathcal{X}}\,|\,\mathbf{y}$ is the posterior density $p(\bm{x}\,|\,\mathbf{y})$.
 The actual \gls[hyper=false]{pdf} of $\mathcal{Y}$ follows the rule of transformation of random variable
 and it represents the uncertainty in the output due to the uncertainty in the input parameters conditioned on the data.
-This uncertainty can also be summarized with various statistics and, as before, many of these involve integration operation.
-For instance, the variance of the output, is written as
+This uncertainty can also be summarized with various statistics and, as before, many of these involve integration.
+For instance, the variance of the output:
 \begin{equation*}
 	\mathbb{V}[\mathcal{Y}] = \int_{-\infty}^{\infty} f^2(\bm{x}) p(\bm{x} | \mathbf{y}) d\bm{x} - \left( \int_{-\infty}^{\infty} f(\bm{x}) p(\bm{x} | \mathbf{y}) d\bm{x} \right)^2
 \end{equation*}
@@ -59,8 +59,8 @@ These samples are useful for estimating various quantities given as examples abo
 This technique works with less severe dependence on the dimension of the input parameter space.
 
 Although in the context of Bayesian data analysis the \gls[hyper=false]{pdf} of interest is the posterior \gls[hyper=false]{pdf} \cite{Tierney1994},
-the problem of generating samples from an arbitrary \gls[hyper=false]{pdf} is general.
-As such, in the following discussion, a generic notation for an arbitrary \gls[hyper=false]{pdf} $p(\bm{x})$ is used instead of $p(\bm{x}\,|\,\mathbf{y})$.
+generating samples from an arbitrary \gls[hyper=false]{pdf} is a general problem.
+As such, in the following, a generic notation for an arbitrary \gls[hyper=false]{pdf} $p(\bm{x})$ is used instead of $p(\bm{x}\,|\,\mathbf{y})$.
 
 %----------------------------------------------------
 \subsection{Motivation}\label{sub:bc_mcmc_motivation}
