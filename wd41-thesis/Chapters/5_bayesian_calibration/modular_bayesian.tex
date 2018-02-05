@@ -335,11 +335,11 @@ A lack of identifiability is an example of such an increase in complexity not pr
 % How: Modularization of the Simulator Model
 Consider first the modularization of the metamodel for the simulator approximation.
 \marginpar{Modularization of the metamodel}
-It is natural to consider the outputs of actual simulator runs (and not the experimental data) to be the basis of metamodel construction.
+It is natural to consider the outputs of actual simulator runs (and \emph{not} the experimental data) to be the basis of metamodel construction.
 Moreover, experimental data tends to be scarce, while the simulator runs would be relatively easier to generate across the range of inputs.
-Indeed, this what was done in Chapter~\ref{ch:gp_metamodel} where the training of the metamodel  was separated from the calibration of the model parameters.
+Indeed, this what was done in Chapter~\ref{ch:gp_metamodel}, where the training of the metamodel  was separated from the calibration of the model parameters.
 The training step, where the hyper-parameters associated with the metamodel were estimated using \glsfirst[hyper=false]{mle}, was done only on the basis of simulator runs (i.e., the training data).
-Afterward, the metamodel was required to accurately predict the simulator outputs for arbitrary inputs (both model parameters and controllable inputs) within a predefined range via an independent validation step (using additional simulator runs).
+Afterward, the metamodel was required to accurately predict the simulator outputs for arbitrary inputs (both model parameters and controllable inputs) within a predefined range via an independent validation step using additional simulator runs.
 The estimated hyper-parameters of the \gls[hyper=false]{gp} metamodel was kept constant during the validation step and the performance of the metamodel was not assessed with respect to the experimental data.  
 
 % How: Modularization of the Model Bias
@@ -377,5 +377,5 @@ Meanwhile, completely taking into account all sources of uncertainty up to their
 \marginpar{Modularization, justification}
 Indeed, as it was reported in Refs.~\cite{Kennedy2001,Liu2005,Bayarri2007,Arendt2012,Reichert2012},
 the effect of the additional sources of uncertainty at that level were relatively minor on the calibration results.
-This is due to the fact that the variation in the simulator prediction is largely determined by the uncertainty about the model parameters and the controllable inputs rather than the uncertainty about the hyper-parameters (and parameters for the observation error model).
-As such, it is more important in the simplified analysis to recognize what is being compromised above and to recognize properly the sources of uncertainty in the calibration at the level of metamodel (i.e., simulator approximation), model bias, and observation error in the first place.
+This is due to the fact that the variation in the simulator prediction is largely determined by the uncertainty about the model parameters and the controllable inputs rather than the uncertainty about the hyper-parameters.
+Hence, it is more important in the simplified analysis to recognize what is being compromised above and to recognize properly the sources of uncertainty in the calibration at the level of metamodel (i.e., simulator approximation), model bias, and observation error in the first place.
