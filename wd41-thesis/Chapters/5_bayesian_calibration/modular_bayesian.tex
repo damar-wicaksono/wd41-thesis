@@ -18,8 +18,9 @@ Recall the relationship between the true system response and its prediction by a
     \delta (\bm{x}_c, \boldsymbol{\lambda}) = y_T(\bm{x}_c, \boldsymbol{\lambda}) - y_M (\bm{x}_c, \hat{\bm{x}}_m, \boldsymbol{\lambda})
 \end{equation*}
 where the prediction $y_M$ is made using the best but unknown value of the model parameters.
-As such, the model bias function $\delta$ represents a possible systematic difference between the true system response and the simulator prediction that still remains, even from using a simulator with the \emph{best} set of model parameter values.
+As such, the model bias function $\delta$ represents a possible systematic difference between the true system response and the simulator prediction that still remains,
 \marginpar{Model bias, possible origins}
+even from using a simulator with the \emph{best} set of model parameter values.
 Possible sources for this bias are missing physics in the physical models, numerical approximations, or any other simplifications in the simulator whose effects on the prediction are unknown a priori.
 As such, the bias term tends to be systematic and dependent on the controllable inputs $\bm{x}_c$ and the observation layout $\boldsymbol{\Lambda}$ \cite{Reichert2012}.
 Note that, strictly speaking, there is a dependence of $\hat{\bm{x}}_m$ on $\delta$, but this dependence is suppress from the notation; $\hat{\bm{x}}_m$, though unknown, should in principle be a unique set of values valid for all $\bm{x}_c$ \cite{Bayarri2007,Arendt2012}.
@@ -32,14 +33,13 @@ The unknown model bias function $\delta$ can be represented as a random function
 \end{equation}
 Casting the unknown model bias term as a stochastic process is the salient feature of Bayesian calibration framework proposed by Kennedy and O'Hagan \cite{Kennedy2001}.
 \marginpar{Gaussian process formulation}
-In particular, a stationary \glsfirst[hyper=false]{gp} $\mathcal{D} (\bm{x}_c, \bm{\lambda})$ on $\mathbf{X}_C \subseteq \mathbb{R}^{D_c}$ and on $\bm{\Lambda}$ is used to represent the term.
-That is,
+In particular, a stationary \glsfirst[hyper=false]{gp} $\mathcal{D} (\bm{x}_c, \bm{\lambda})$ on $\mathbf{X}_C \subseteq \mathbb{R}^{D_c}$ and on $\bm{\Lambda}$ is used to represent the term:
 \begin{equation}
         \mathcal{D}(\circ, \circ) \thicksim \mathcal{GP}(m_\delta(\circ,\circ; \bm{\psi}_{\delta}), K_\delta((\circ,\circ), (\circ, \circ); \bm{\psi}_{\delta}))
 \label{eq:bc_data_generating_bias_gp}
 \end{equation}
 where $m_\delta$ and $K_\delta$ are the mean function and the covariance function of the \gls[hyper=false]{gp}, respectively;
-and $\bm{\psi}_{\delta}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} for the model bias function (e.g., its covariance kernel, $\{\sigma, \theta, p\}$, see Chapter~\ref{ch:gp_metamodel} for detail).
+and $\bm{\psi}_{\delta}$ is the hyper-parameters associated with the specification of the \gls[hyper=false]{gp} for the model bias function (e.g., its covariance kernel, $\{\sigma, \theta, p\}$, see Chapter~\ref{ch:gp_metamodel}).
 Under a \gls[hyper=false]{gp} formulation, the notion of \emph{systematic} bias mentioned previously is described statistically in terms of the mean and the covariance of the \gls[hyper=false]{gp} \cite{Reichert2012}.
 
 For a selected values of $\bm{x}_c$ and $\bm{\lambda}$, the \gls[hyper=false]{gp} becomes a Gaussian random variable,
@@ -48,13 +48,13 @@ For a selected values of $\bm{x}_c$ and $\bm{\lambda}$, the \gls[hyper=false]{gp
 \label{eq:bc_data_generating_bias_gp_restricted}
 \end{equation}
 where $s^2_\delta$ is the standard deviation at controllable input $\bm{x}_c$ observed at $\bm{\lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
-Finally, for observations on multiple combinations of the controllable inputs and/or the complete observation layout $\bm{\Lambda}$, the \gls[hyper=false]{gp} becomes a multivariate Gaussian random variable, taking into account correlations of the bias at different elements of the observation layout,  
+Finally, for observations on multiple combinations of the controllable inputs or the complete observation layout $\bm{\Lambda}$, the \gls[hyper=false]{gp} becomes a multivariate Gaussian random variable, taking into account correlations of the bias at different elements of the observation layout,  
 \begin{equation}
         \mathcal{D}(\bm{x}_c, \bm{\Lambda}) \thicksim \mathcal{N}(m_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}), \Sigma_\delta(\bm{x}_c, \bm{\Lambda}; \bm{\psi}_{\delta}))
 \label{eq:bc_data_generating_bias_gp_multivariate}
 \end{equation}
 where $\Sigma_\delta$ is the (symmetric) covariance matrix of the bias at controllable input $\bm{x}_c$ observed on $\bm{\Lambda}$, under the parametrization $\bm{\Psi}_\delta$ of the \gls[hyper=false]{gp}.
-The size of the matrix is $P \times P$, with $P$ the sum of the number of different combinations of the controllable inputs and the number of elements in the observation layout.
+The size of the matrix is $P \times P$, with $P$ the product of the number of different combinations of the controllable inputs and the number of elements in the observation layout.
 
 % Why bias, unbiased model
 Incorporating a bias term in the calibration procedure is important to avoid overfitting in the model parameters estimates.
@@ -88,7 +88,7 @@ The calibrated parameter would be able to predict calibration data well, but not
 The situation becomes more problematic when more precise data becomes available such that uncertainty associated with the observed data becomes narrower.
 In that situation, the uncertainty associated with the calibrated model parameter will also become narrower up to a point value (in this particular example).
 \marginpar{Overfitting}
-This illustrates the two symptoms of overfitting the model parameter: the calibrated model parameter is \emph{biased} (i.e., having a wrong value) and the distribution characterizing its uncertainty is \emph{degenerate} (i.e., increasingly sure on the wrong value with higher precision of the observed data).
+This illustrates the two symptoms of overfitting the model parameter: the calibrated model parameter is \emph{biased} (i.e., having a wrong value) and its uncertainty is \emph{degenerate} (i.e., increasingly sure on the wrong value with higher precision of the observed data).
 The latter symptom is particularly troublesome as it inflates the degree of confidence one has on the prediction.
 
 % Physics-based Simulator
@@ -118,16 +118,16 @@ It does, however, provides additional flexibility in incorporating either prior 
 
 % Physical Parameter vs. Tuning Parameter, some philosophical issue
 At this point, it is worth revisiting the meaning of calibrated parameters in a simulator with bias.
-In a simulator without bias it is straightforward to justify the calibrated model parameters as the ``true'' parameter values of the specified model.
-\marginpar{physical parameters, ``true'' values}
-If the model is physics-based then the parameters also correspond to physical parameters.
-As argued in \cite{OHagan2013,Brynjarsdottir2014}, physical parameters often have meaning outside the world described by the model where the parameters currently reside.
-Furthermore, having a true value, such physical parameters would be generally applicable to extrapolation outside the calibration domain.
+In a simulator without bias it is straightforward to justify that the calibrated model parameters as the ``true'' parameter values of the specified model.
+\marginpar{Physical parameters, ``true'' values}
+If the model is physics-based then they also correspond to physical parameters.
+As argued in \cite{OHagan2013,Brynjarsdottir2014}, physical parameters often have meaning outside the world described by the model where the parameters reside.
+Moreover, having a true value, such physical parameters would generally be applicable to extrapolation outside the calibration domain.
 
 On the contrary, as illustrated in one of the examples above, calibrated model parameters in a simulator with bias act as best-fitting parameters that allow the simulator to fit, in some sense, the calibration data.
 \marginpar{Tuning parameters, best-fitting values}
 Incorporating model bias term might help in alleviating the problem of overfitting, but the a priori arbitrariness of the model bias term confounds with the model parameters itself, making the resulting calibrated model parameters more difficult to interpret \cite{Higdon2004}.
-As such, in practice, it is important to emphasize that calibrated model parameters in a simulator with bias will simply be optimal under particular assumptions (e.g., criteria, model bias term, etc.) \cite{Campbell2006}.
+As such, in practice, it is important to emphasize that calibrated model parameters in a simulator with bias will simply be optimal under particular assumptions (e.g., criteria, model bias term) \cite{Campbell2006}.
 Ref.~\cite{Brynjarsdottir2014} went further by arguing that such model parameters (tuning) had limited scientific values and would not help for extrapolation.
 
 Regarding this dichotomy, the present thesis takes a more pragmatic view: the distinction is rather irrelevant.
