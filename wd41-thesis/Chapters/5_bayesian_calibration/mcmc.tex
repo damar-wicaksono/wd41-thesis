@@ -613,7 +613,7 @@ Its main motivation is exactly where the previous section left off: the difficul
 The situation is typically worsened for a highly correlated distribution of high dimension where some of the length scales of the target distribution are very small forcing an adaptive algorithm to spend the majority of its time tuning the scale of the proposal distribution,
 eventually resulting in a high overhead computational cost for adaptation \cite{Foreman-Mackey2013}.
 
-Through an affine transformations (to be defined further below),
+Through an affine transformation (to be defined further below),
 a target distribution with a highly skewed aspect ratio\footnote{Loosely defined as the ratio between different characteristic length scales of different dimensions.} can be made less skewed and thus easier to be sampled from \cite{Huijser2015}.
 By ensuring the algorithm to be affine-invariant, the performance of the algorithm would then be equal under all affine transformations of the target distribution.
 Finally, implementing such a transformation to an ensemble sampler\footnote{\emph{Sampler of many particles} creating many paths, as opposed to a sampler of a \emph{single particle} in the conventional \gls[hyper=false]{mcmc} algorithm, such as the previous \gls[hyper=false]{mh} algorithm.} results in an algorithm that requires minimal tuning with respect to each of the state space dimensions (explained below).
@@ -629,7 +629,7 @@ Specifically,
 	p(\vec{\bm{x}}) = p(\bm{x}_1) \cdot p(\bm{x}_2) \cdot \ldots \cdot p(\bm{x}_L) 
 \label{eq:ch5_ensemble_independence}
 \end{equation}
-Eq.~\ref{eq:ch5_ensemble_independence} implies that the target distribution is being independently sampled by $L$ walkers.
+Eq.~(\ref{eq:ch5_ensemble_independence}) implies that the target distribution is being independently sampled by $L$ walkers.
 
 A Markov chain of an ensemble, in turn, is a sequence of ensembles, $\{\vec{\bm{\mathcal{X}}}^{(i)}\}$ for $i \geq 0$ that follows the Markov property while preserving the condition in Eq.~(\ref{eq:ch5_ensemble_independence}).
 Consequently, the Markov property lies on the state space of the ensemble\footnote{If each walker is in $\mathbb{R}^D$ then an ensemble of $L$ walkers can be thought of to be in $\mathbb{R}^{DL}$.}, while the sequence of each walker $\{\bm{\mathcal{X}}_l^{(i)}\}$ itself needs not be Markovian \cite{Goodman2010}.
@@ -728,7 +728,7 @@ a proposal scaler is randomly generated according to $g$ and a proposed move is 
 			           leftcaption={A walker in an ensemble of complementary walkers},
 			           midopt={width=0.25\textwidth},
 			           midlabel={fig:ch5_aies_stretch_2},
-			           midcaption={A complementary walker is randomly selected},
+			           midcaption={A complementary walk\-er is randomly selected},
 			           rightopt={width=0.25\textwidth},
 			           rightlabel={fig:ch5_aies_stretch_3},
 			           rightcaption={A move is proposed},
@@ -748,7 +748,7 @@ The probability of accepting this proposal move is given by,
 where $p^*(\bm{x}_l^{*})$ and $p^*(\bm{x}_l^{(i-1)})$ are the values of the (unnormalized) target density at the proposed and previous states, respectively;
 and $D$ is the dimension of the state space.
 As with the \gls[hyper=false]{mh} algorithm,
-if accepted the proposal move becomes the current state of the walker; otherwise, it remains in the previous state.
+if accepted, the proposal move becomes the current state of the walker; otherwise, it remains in the previous state.
 The steps are then repeated for the current iteration until all the walkers in the ensemble have been updated.
 Algorithm~\ref{alg:aies} summarizes the steps in the stretch-move \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} algorithm.
 \begin{algorithm}
@@ -787,7 +787,7 @@ The initial state of the chain $\vec{\bm{x}}^{(0)}$ is set to be at the origin f
 Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1} shows the evolution of each individual walker traversing the state space of variable $x_1$.
 \marginpar{ensemble samples, trace plot}
 The Markov property of an ensemble is not guaranteed for each individual walker.
-Thus it is more suitable to graphically diagnose the chain by plotting all the individual walkers together.
+Thus, it is more suitable to graphically diagnose the chain by plotting all the individual walkers together.
 It is shown here that after an obvious initial phase,
 the ensemble seems to converge and to stay around a particular region of the state space.
 The width of the darker region, indicating region of the state space visited more often,
@@ -857,7 +857,7 @@ Thus the final number of samples presented below is $(500-100)\times100=40'000$ 
 {../figures/chapter5/figures/plotAIESWalkerSamples_3}
 
 % intuition Possible problem and Why not
-The \gls[hyper=false]{aies} algorithm requires minimal tuning to generate samples from a arbitrary target distribution.
+The \gls[hyper=false]{aies} algorithm requires minimal tuning to generate samples from an arbitrary target distribution.
 \marginpar{\gls[hyper=false]{aies} algorithm, intuition}
 The intuition behind this is that instead of trying to adapt the proposal distribution during the iterations (possibly with several associated tuning parameters),
 a proposal move relies on the information carried by the previous positions of the complementary ensemble.
