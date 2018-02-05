@@ -142,7 +142,7 @@ A straightforward approach to generate samples from a given multivariate density
 \marginpar{Discretized grid approach}
 discretizing the state space of the density function and evaluate the density at the discretized points.
 Supposed the domain of the density has been discretized uniformly in each dimension with a level $\Delta$ resulting in $\{(x_{1,i}\,,\,x_{2,j});\, i, j = 1, \ldots, I\}$ with $I$ the number of discretized points.
-At the discretized levels, the probability for each value of $(x_{1,i}\,,\,x_{2,j})$ is approximated by $p(x_{1,i}\,,\,x_{2,j})$ $= p^*(x_{1,i}\,,\,x_{2,j}) / \sum_{i,j} p^*(x_{1,i}\,,\,x_{2,j})$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in computing $p$.)}.
+At the discretized levels, the probability for each value of $(x_{1,i}\,,\,x_{2,j})$ is approximated by $p(x_{1,i}\,,\,x_{2,j})$ $= p^*(x_{1,i}\,,\,x_{2,j}) / \sum_{i,j} p^*(x_{1,i}\,,\,x_{2,j})$\footnote{strictly speaking, each density value has to be multiplied by the hypervolume of the grid to obtain the probability mass, but the term cancels out in computing $p$.}.
 The set $\{p(x_{1,i}\,,\,x_{2,j});\, i,j = 1,\ldots,I)\}$ constitute a complete discrete probability distributions.
 Generating samples from such a probability distribution is straightforward in a modern computing environment \cite{Mackay2005}.
 
@@ -181,7 +181,7 @@ The figure shows that the generated samples are indeed approximately distributed
 % Problem with Discretized Grid, curse of dimensionality
 The main issue with the discretized grid approach, conceptually simple as it is,
 is the curse of dimensionality similar to the one mentioned in the previous chapters.
-\marginpar{curse of dimensionality}
+\marginpar{Curse of dimensionality}
 The number of density evaluations grows exponentially with the number of dimension.
 As a rule, for a given discretization level $\Delta$ and a given dimension $D$,
 the number of density evaluations is $(\Delta+1)^D$.
@@ -195,8 +195,8 @@ Loosely speaking, it can be thought of as the region of state space where the pr
 Consequently, any integration over the whole state space of a density can be approximated by an integration over this typical set \cite{Mackay2005}.
 Although the location of the typical set for the example above is rather trivial (the region around the center of the density),
 it will not be the case for an arbitrary high-dimensional \gls[hyper=false]{pdf} (such as a posterior density)\footnote{And in fact, the region around the mode of a distribution becomes less representative of the typical set in high-dimension as it becomes smaller in comparison to other part of the state space where the density value, albeit small, is non-negligible. This is yet another example of the curse of dimensionality.}.
-Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa} the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
-At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would potentially be more efficient, requiring less function evaluations for the same accuracy level, than that of the grid approach\footnote{deterministic numerical integration is either based on or and improvement of a discretized grid approach.}.
+Having samples that are representative of a typical set is a particularly challenging task in conducting \gls[hyper=false]{mc} integration over an arbitrary high-dimensional \gls[hyper=false]{pdf}\footnote{Recall that in Chapter~\ref{ch:gsa}, the \gls[hyper=false]{mc} integrations for Sobol' indices estimation were conducted over a uniform density thus it was only the property of the function of interest that mattered.}.
+At the same time, if such samples can be obtained then the performance of \gls[hyper=false]{mc} integration in high dimension would potentially be more efficient, requiring less function evaluations for the same accuracy level, than that of the grid approach\footnote{Deterministic numerical integration is either based on or and improvement of the discretized grid approach.}.
 
 % Entry to Markov Chain
 To circumvent these issues,
@@ -209,7 +209,7 @@ As such, this family of techniques potentially has less severe dependence to the
 Generating such samples for the purpose of \glsfirst[hyper=false]{mc} simulation by simulating a Markov chain is termed \glsfirst[hyper=false]{mcmc}.
 
 The following briefly presents the basics of Markov chain and its importance in solving the problem of generating samples from an arbitrary \gls[hyper=false]{pdf}.
-Markov chain (in continuous state space) as well as some important related concepts and theorems are first presented, without proof and in a somewhat lax manner.
+Markov chain in continuous state space as well as some important related concepts and theorems are first presented, without proof and in a somewhat lax manner.
 A more precise statements of these concepts and theorems are difficult without measure theory which for the purpose of this thesis is irrelevant. 
 Appendix~\ref{app:markov_chain} provides the definitions and illustrations of some of these concepts for a discrete state Markov chain where more intuitive matrix notation and graphical representation are applicable.
 Finally,
