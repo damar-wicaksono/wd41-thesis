@@ -143,7 +143,7 @@ The Bayesian framework accommodates this aim of calibration in a flexible manner
 %-----------------------------------------------------------------------------------------
 
 % Introductory paragraph
-Now recall the relationship between the true system response and its observation through a measurement (Eq.~(\ref{eq:bc_observation_true})),
+Now recall the relationship between the true system response and its observation through a measurement given in Eq.~(\ref{eq:bc_observation_true}),
 \begin{equation*}
     y_E(\bm{x}_c, \boldsymbol{\lambda}) = y_T (\bm{x}_c, \boldsymbol{\lambda}) + \epsilon
 \end{equation*}
@@ -168,7 +168,7 @@ But intuitively, as argued in \cite{Wikle2001}, this structure becomes much simp
 it can mainly be attributed to the residual variability and instrument precision with a simpler description.
 The true system response itself is already separately formulated in terms of the simulator prediction and a model bias term (Eq.~(\ref{eq:bc_true_simulation})).
 As such, any possible complicated structure of the error (either bias or correlation) is already assigned to the model bias formulation and assuming a simpler measurement error model (i.e., independent) is sufficient \cite{Wikle2001}.
-At the same time, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias term and observation error based on the data alone.
+In any case, as noted in \cite{Kennedy2001,Bayarri2007}, it will be difficult to distinguish two correlation structures separately for the model bias term and observation error based on the data alone.
 
 % Gaussian Assumption, some comments
 The particular distribution of the observation error is often assumed to be a Gaussian in the
@@ -183,7 +183,7 @@ or equivalently following the conditional independence assumption explained abov
   \left(\mathcal{Y}_E | \mathcal{Y}_T = y_T(\bm{x}_c, \boldsymbol{\lambda})\right) \thicksim \mathcal{N}(y_T(\bm{x}_c, \boldsymbol{\lambda}), \sigma_{obs}^2(\bm{\lambda}))
 \label{eq:bc_data_generating_exp_gaussian_2}
 \end{equation}
-where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and the only hyper-parameter of this observation error specification.
+where $\sigma_{obs}^2$ is the variance of the Gaussian distribution and is the only hyper-parameter of this observation error specification.
 The value of the variance depends on the element of the observation layout $\bm{\lambda}$.
 Eq.~(\ref{eq:bc_data_generating_exp_gaussian_1}) implies that the observation is taken without bias and the error is independent (but need not be identically distributed) Gaussian random variable.
 
@@ -207,15 +207,16 @@ and $\bm{\psi}_{m}$ is the hyper-parameters associated with the specification of
 This step is taken especially if the simulator is computationally expensive to evaluate and only a limited number of simulator runs can be afforded \cite{Kennedy2001,Bayarri2007,Arendt2012}.
 The probabilistic model in Eq.~(\ref{eq:bc_data_generating_simulator_gp}) then becomes an approximation to the actual simulator (i.e., a \gls[hyper=false]{gp} metamodel).
 Furthermore, as explained in Chapter~\ref{ch:gp_metamodel}, the uncertainty associated with a prediction by the metamodel at an arbitrary input point stems from the fact that the simulator itself was not run at that input.
-This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{The statement conditional on the training data in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
+This prediction is based on the outputs of which the simulator was run (i.e., the training data)\footnote{The statement ``conditional on the training data'' in Eq.~(\ref{eq:bc_data_generating_simulator_gp}), i.e., $\mathcal{Y}_M (\bm{x}_c, \hat{\bm{x}}_m; \bm{\lambda}) | \mathcal{Y}(\mathbf{DM})$ has been implicitly assumed.}.
 
 %-----------------------------------------------------------------------------
 \subsection{Posterior of the Model Parameters}\label{sub:bc_modular_posterior}
 %-----------------------------------------------------------------------------
 
 % Introductory Paragraph
-Summarizing the above discussions for a deterministic simulator $y_M$,
+Summarizing the above discussions 
 \marginpar{Data generating process, general}
+for a deterministic simulator $y_M$,
 \begin{equation}
     \begin{split}
 				& \mathcal{Y}_M \equiv \mathcal{Y}_M \thicksim p(y_M \,|\, \hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda}) = \delta_d (y_M - y_M(\hat{\bm{x}}_m, \bm{x}_c, \bm{\lambda})) \\
@@ -226,8 +227,8 @@ Summarizing the above discussions for a deterministic simulator $y_M$,
 \end{equation}
 where $\delta_d$ is the Dirac delta function indicating that the simulator prediction is exact (i.e., a \emph{degenerate} density).
 
-Suppose that the form of the densities in Eq.~\ref{eq:bc_data_generating_models} are already given,
-then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on the right hand side of Eq.~\ref{eq:bc_true_simulation}.
+Suppose that the form of the densities in Eq.~(\ref{eq:bc_data_generating_models}) are already given,
+then the stochastic process $\mathcal{Y}_E$ is obtained by adding the terms on the right hand side of Eq.~(\ref{eq:bc_true_simulation}).
 Assuming that they are independent, the \gls[hyper=false]{pdf} of $\mathcal{Y}_E$ is defined as the convolution of the terms \cite{Siegrist2017},
 \begin{equation}
   \begin{split}
@@ -252,7 +253,7 @@ simulator approximation, a normal likelihood for the calibration problem can be 
     \end{split}
 \label{eq:bc_data_generating_models_gaussian}
 \end{equation}
-As such, the data generating process $\mathcal{Y}_E$ under Gaussian formulation above is
+As such, the data generating process $\mathcal{Y}_E$ under the Gaussian formulation above is
 \begin{equation}
 	\begin{split}
 		& \mathcal{Y}_E \thicksim \mathcal{N}(m_*, s^2_*) \\
@@ -261,7 +262,7 @@ As such, the data generating process $\mathcal{Y}_E$ under Gaussian formulation 
 	\end{split}
 \label{eq:bc_data_model_gaussian}
 \end{equation}
-where $m_*$ and $s^2_*$ are the mean and the standard deviation of the experimental data generating process under Gaussian formulation, respectively.
+where $m_*$ and $s^2_*$ are the mean and the standard deviation of the experimental data generating process under the Gaussian formulation, respectively.
 
 % Generic Likelihood
 Given a set of experimental data $\mathbf{y}$ taken at $\mathbf{x}_c$ and observed on an observation layout $\bm{\Lambda}$,
@@ -271,7 +272,7 @@ the likelihood function is then defined as follows
   \mathcal{L}(\hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_\epsilon; \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \equiv p(y_E = \mathbf{y} | \bm{x}_c = \mathbf{x}_c, \hat{\bm{x}}_m, \bm{\psi}_\delta, \bm{\psi}_{\epsilon}, \bm{\Lambda})
 \label{eq:bc_likelihood}
 \end{equation}
-Under Gaussian formulation, the likelihood function is obtained by using the Gaussian density of Eq.~(\ref{eq:bc_data_model_gaussian}) for $p$.
+Under the Gaussian formulation, the likelihood function is obtained by using the Gaussian density of Eq.~(\ref{eq:bc_data_model_gaussian}) for $p$.
 Note that if the set of experimental data is simultaneously given on the observation layout $\bm{\Lambda}$ then the covariance matrix $\Sigma_*$ is used instead of the standard deviation $s^2_*$,
 \begin{equation}
 	\begin{split}
@@ -300,7 +301,7 @@ The denominator of the Eq.~(\ref{eq:bc_joint_posterior}) is a normalizing consta
 As such, it is defined as a multidimensional integral of the following,
 \begin{equation}
 	\begin{split}
-	p(y_E = \mathbf{y} \,|\, \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \cdot \\
+	p(y_E = \mathbf{y} \,|\, \bm{x}_c = \mathbf{x}_c ; \bm{\Lambda}) = & \int \mathcal{L}(\hat{\bm{x}}_m,\bm{\psi}_\delta, \bm{\psi}_\epsilon ;  \mathbf{y}, \mathbf{x}_c, \bm{\Lambda}) \cdot \ldots \\
 	& p(\hat{\bm{x}}_m) \cdot p(\bm{\psi}_\epsilon\,|\,\bm{\Lambda}) \cdot p(\bm{\psi}_\delta\,|\,\bm{\Lambda}) \, d\hat{\bm{x}}_m d\bm{\psi}_\epsilon d\bm{\psi}_\delta
 	\end{split}
 \label{eq:bc_normalizing_constant}
@@ -313,7 +314,7 @@ Besides the model parameters and controllable inputs, the complete formulation a
 By simultaneously calibrating them against experimental data,
 the uncertainties due to the specifications of the model bias, the observation error, and the simulator approximation up to their (hyper-)parametrization are taken into account.
 In principle, the hyper-parameters are now also part of the calibration problem, increasing the size (in dimension) and the complexity of it.
-Before presenting a simulation method to make inference on the model parameters, in Section~\ref{sec:bc_mcmc}, 
+Before presenting a simulation method to make inference on the model parameters, 
 a modularized approach \cite{Liu2005} to simplify the problem is introduced beforehand in the following, assuming the Gaussian formulation.
 
 %---------------------------------------------------------------------------------
