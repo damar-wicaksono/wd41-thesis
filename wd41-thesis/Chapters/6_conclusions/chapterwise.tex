@@ -13,7 +13,7 @@ The set of strategies was consolidated in a statistical framework adapted from t
 Chapter~\ref{ch:trace_reflood} presented the reflood experiment at the \glsentryshort{feba} facility that served as the experimental basis for this work.
 The \gls[hyper=false]{feba} facility was a full-height $5\times5$ bundle of \gls[hyper=false]{pwr} fuel rod simulator.
 The particular test series selected corresponded to the case without flow blockage, under three different values of system backpressure boundary condition ($2.1, 4.1,$ and $6.2\,[bar]$) and two different reflood rates ($3.8$ and $5.8\,[cm\cdot s^{-1}]$).
-Three types of time series measurement were recorded: cladding temperature at eight axial locations, pressure drop at four axial segments, and liquid carryover.
+Three types of time series measurement were recorded: clad temperature at eight axial locations, pressure drop at four axial segments, and liquid carryover.
 The \gls[hyper=false]{trace} model of the facility was developed and a set of $27$ initial input parameters perceived to be important for the simulation was selected.
 Thereafter, prior uncertainties of the selected input parameters were assigned and propagated through the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} to assess the prior level of prediction uncertainties on all three types of output (data).
 This model then became the running case study in the three subsequent chapters to which the proposed methods are applied.
@@ -34,7 +34,7 @@ Though a single run of the \gls[hyper=false]{trace} model was relatively short (
 Thus, a computationally efficient metamodel was deemed crucial in the calibration of the model parameters.
 Built upon the results of the previous chapter, the development was directly focused on the $12$ most influential input parameters.
 The high dimensionality of the output, in time and in space, was dealt with \gls[hyper=false]{pca}, a linear dimension reduction method.
-The dimension reduction method was shown to have difficulty in representing the cladding temperature output which exhibited strong discontinuity in the vicinity of the quenching. 
+The dimension reduction method was shown to have difficulty in representing the clad temperature output which exhibited strong discontinuity in the vicinity of the quenching. 
 Yet, the average predictive performance of the metamodel against a test data set of actual \gls[hyper=false]{trace} runs was found to be acceptable, especially in comparison to the initial prediction uncertainty due to the prior input parameter uncertainties.
 The validated metamodel, with a cost of less than $5\,[s]$ per evaluation, was then ready to be used over the prior range of the input parameters in lieu of directly running \gls[hyper=false]{trace}.
 
