@@ -7,25 +7,25 @@ The \gls[hyper=false]{fpc} score $\theta_{n,i}$ associated with each realization
 In other words, the variance of the score is decomposed into the variance contribution associated with each inpu parameter.
 
 % 1st fPC of Registered TC4
-The estimated Sobol' indices for the first \gls[hyper=false]{fpc} of the (registered) mid-height cladding temperature transient are given in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc1}.
-\marginpar{Sobol' indices for the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the mid-height cladding temperature transient}
+The estimated Sobol' indices for the first \gls[hyper=false]{fpc} of the (registered) mid-height clad temperature transient are given in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc1}.
+\marginpar{Sobol' indices for the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the mid-height clad temperature transient}
 As shown, the variation in the amplitude of the temperature reversal was mainly due to the spacer grid heat transfer enhancement and the \gls[hyper=false]{dffb}-related model parameters.
 The other parameters are proved to be almost noninfluential.
-This result is consistent with the result obtained when using the maximum cladding temperature as the \gls[hyper=false]{qoi} 
-and confirms the maximum cladding temperature as a viable representative \gls[hyper=false]{qoi} during the temperature reversal period.
+This result is consistent with the result obtained when using the maximum clad temperature as the \gls[hyper=false]{qoi} 
+and confirms the maximum clad temperature as a viable representative \gls[hyper=false]{qoi} during the temperature reversal period.
 \bigfigure[pos=tbhp,
 					 opt={width=0.825\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_pc1},
-           shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} scores of the (registered) mid-height cladding temperature transient as the \gls[hyper=false]{qoi}}]
+           shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} scores of the (registered) mid-height clad temperature transient as the \gls[hyper=false]{qoi}}]
 {../figures/chapter3/figures/plotSobolBoxplotTC4RegPC1}
-{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the (registered) mid-height cladding temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the (registered) mid-height clad temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % 2nd fPC of Registered TC4
-Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2} shows the Sobol' sensitivity indices using the scores associated with the second \gls[hyper=false]{fpc} of the (registered) mid-height cladding temperature transient as the \gls[hyper=false]{qoi}.
-\marginpar{Sobol' indices for the 2\textsuperscript{nd} \gls[hyper=false]{fpc} of the cladding temperature transient}
+Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2} shows the Sobol' sensitivity indices using the scores associated with the second \gls[hyper=false]{fpc} of the (registered) mid-height clad temperature transient as the \gls[hyper=false]{qoi}.
+\marginpar{Sobol' indices for the 2\textsuperscript{nd} \gls[hyper=false]{fpc} of the clad temperature transient}
 Contrary to the first component, most of the variation in the second \gls[hyper=false]{fpc} can only be explained through interactions between input parameters since the main-effect indices only summed up to $27\%$ of the total variance.
 The difference between the main-effect and total-effect indices are large for all input parameters, especially for the \gls[hyper=false]{dffb}-related parameters.
-These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum cladding temperature).
+These parameter interactions, associated with a particular mode of variation, could not be captured from the conventional \glspl[hyper=false]{qoi} (e.g., the maximum clad temperature).
 It could only be speculated from the time-dependent representation of the sensitivity indices showed in Fig.~\ref{fig:ch3_plot_si_evol}, but with a less concise description of the parameter sensitivity.
 \bigfigure[pos=!tbhp,
 					 opt={width=0.825\textwidth},
@@ -36,8 +36,8 @@ It could only be speculated from the time-dependent representation of the sensit
 
 % 1st fPC of Warping TC4
 The sensitivity indices with respect to the first \gls[hyper=false]{fpc} of the warping functions 
-\marginpar{Sobol' indices for the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function for the cladding temperature transient}
-for the mid-height cladding temperature transient are shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_warp_pc1}.
+\marginpar{Sobol' indices for the 1\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function for the clad temperature transient}
+for the mid-height clad temperature transient are shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_warp_pc1}.
 The spacer grid heat transfer enhancement parameter is the main source of variation in the time-shift of the landmarks,
 while two \gls[hyper=false]{dffb}-related parameters (\texttt{dffbWHT} and \texttt{dffbIntDr}) and the quenching temperature each contributes around $10\%$ to the total output variation.
 In comparison, the rest of the parameters have a trivial effect to the shift.
@@ -45,9 +45,9 @@ Only a small portion of the output variation is due to parameter interactions fr
 \bigfigure[pos=!tbhp,
 					 opt={width=0.825\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_warp_pc1},
-           shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} scores of the warping function for the mid-height cladding temperature transient as the \gls[hyper=false]{qoi}}]
+           shortcaption={Sobol' indices estimates with the $1$\textsuperscript{st} \gls[hyper=false]{fpc} scores of the warping function for the mid-height clad temperature transient as the \gls[hyper=false]{qoi}}]
 {../figures/chapter3/figures/plotSobolBoxplotTC4WarpPC1}
-{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function for the mid-height cladding temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
+{The sensitivity indices with respect to the $1$\textsuperscript{st} \gls[hyper=false]{fpc} of the warping function for the mid-height clad temperature transient. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % 1st fPC of DP Pressure Drop
 Fig.~\ref{fig:ch3_plot_sobol_boxplot_dpmid_pc1} presents the sensitivity indices with respect to the scores 
