@@ -484,9 +484,9 @@ As expected, the realizations from Mat\'ern kernel with $\nu = 5/2$ is smoother 
 \subsection{Multidimensional Construction}\label{sub:gp_multidimension}
 %----------------------------------------------------------------------
 
-In order to create a valid multidimensional correlation kernel function from a valid $1$-dimensional correlation function given above, 
-a tensor product construction is used as follows,
-\marginpar{tensor product}
+In order to create a valid multidimensional correlation kernel 
+\marginpar{Tensor product}
+function from a valid $1$-dimensional correlation function given above, a tensor product construction is used as follows,
 \begin{equation}
 	R(\bm{x}_i, \bm{x}_j) = \prod_{d = 1}^{D} r_d \left(x_i^{(d)}, x_j^{(d)}\right)
 \label{eq:tensor_product}
@@ -494,11 +494,13 @@ a tensor product construction is used as follows,
 where $r_d$ is a $1$-dimensional correlation kernel function for the $d$-th input dimension;
 while $x_i^{(d)}$ and $x_j^{(d)}$ are a pair of values in the $d$-th input dimension.
 
-Although it is possible to mix different types of correlation function or use different kind of multidimensional construction (see for example \cite{Higdon2002}),
+Although it is possible to mix different types of correlation function or use different kind of multidimensional construction (see for example Ref.~\cite{Higdon2002}),
+\marginpar{Mixing kernels}
 the tensor product with the same correlation function for each input dimension is the most well-established 
 and, by far, the most popular approach in the applied metamodeling literature to date \cite{Roustant2012,Sacks1989,Sacks1989a,Santner2003,Currin1991,Marrel2008,Bachoc2014,Kennedy2006,Jones2009}.
 
 Fig.~\ref{fig:random_surfaces} shows two examples of realizations of random surface drawn from a multidimensional \gls[hyper=false]{gp} with the same process variance ($\sigma^2 = 10.0$) but with two different correlation kernels.
+\marginpar{Random surface}
 On the left is an example of a realization drawn from the \gls[hyper=false]{gp} using two Gaussian correlation kernel functions in which the characteristic length scale in the $y$-direction is four times the scale in then $x$-direction.
 On the right is an example of a realization drawn from the \gls[hyper=false]{gp} using Mat\'ern correlation kernel functions.
 For this case, the shape parameter is three times larger in the $x$-direction than in the $y$-direction.
