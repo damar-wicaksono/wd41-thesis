@@ -161,7 +161,7 @@ Often the results of \gls[hyper=false]{pca} are reformulated in terms of princip
 	\mathbf{W}^* = \sqrt{N-1} \mathbf{U}
 \label{eq:standardized_pc_scores}
 \end{equation}
-where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{However, $\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$.}.
+where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{$\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$.}.
 This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})),
 it also results in standardized PC scores with variance of $1.0$.
 In the context of regression of PC scores used later in metamodeling, the latter property improves the numerical stability of the maximum likelihood estimation of the hyper-parameters. 
@@ -246,7 +246,7 @@ $\boldsymbol{\Phi}^*_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns
 \end{equation}
 where $\boldsymbol{\phi}^*_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading taken from Eq.(~\ref{eq:pc_loadings}).
 
-Finally, following \cite{Wilkinson2010},
+Finally, following Ref.~\cite{Wilkinson2010},
 $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distributed normal random variable with mean $0$ and variance $1$.
 In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as a set of independent normal random variables with the variance given by the PC loadings.
 
@@ -263,6 +263,6 @@ The multivariate output evaluated at $\bm{x}_o$ conditioned by the training data
 \label{eq:p_variate_metamodel}
 \end{equation}
 The model above assumed that the hyper-parameters associated with a selected correlation function are known.
-In practice they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
+In practice, they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
 Additionally, the theoretical underestimation of the Kriging variance explained in that section also applies here when the \gls[hyper=false]{ml} estimates are plugged into the formulation.
 In practice, however, Ref.~\cite{Bayarri2007} noted that the uncertainties associated with the model parameters often eclipse the uncertainties induced by the metamodel hyper-parameters.
