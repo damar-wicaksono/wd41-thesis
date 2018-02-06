@@ -159,7 +159,7 @@ The prediction of the $TC$ output at the observation layout $\boldsymbol{\Lambda
 where the notations above follow the convention of Section~\ref{sub:gp_multivariate}.
 According to Section~\ref{sec:gp_application_to_feba}, the number of retained principal components for the $TC$ output $Q_{TC}$ is selected to be $7$.
 
-Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at $8$ axial levels and at 10'000 time-steps) for the dimension reduction.
+Recall that the \gls[hyper=false]{svd} was conducted on the full \gls[hyper=false]{trace} simulation output (in the case of the temperature output: at eight axial levels and at 10'000 time-steps) for the dimension reduction.
 However, some points of the full simulation output do not have a corresponding experimental data.
 As such, for the calibration, the observation layout $\boldsymbol{\Lambda}_{TC}$ is used to select the elements of the output mean vector $\bar{\mathbf{y}}_{TC}$, the eigenvectors $\boldsymbol{\Phi}^*_{Q_{TC},TC}$, and the unretained eigenvectors $\boldsymbol{\Phi}^*_{>Q_{TC},TC}$ such that they contain only the points in time where data are actually observed.
 The resulting dimension of the Gaussian distribution is thus $133$.
