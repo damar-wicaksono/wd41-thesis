@@ -114,6 +114,7 @@ and $\mathbf{V}$ is the $P \times P$ orthogonal, right singular matrix.
 
 % Principal Component and Principal Component Scores
 The column vector elements of $\mathbf{V}$ are the principal components of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
+\marginpar{Principal component}
 Principal components are sorted in descending order such that the first principal component (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
 % Partial Variance of principal component
 The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
@@ -136,7 +137,9 @@ The singular values are related to the explained variance of the eigenvectors (i
 {../figures/chapter4/figures/plotPCA_2}
 
 % Projection of data
-Projection of the data into the principal components results in \emph{principal component scores} (PC scores),
+Projection of the data into the principal components results
+\marginpar{Principal component score}
+in \emph{principal component scores} (PC scores),
 \begin{equation}
 	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
 \label{eq:pc_scores}
@@ -158,7 +161,7 @@ Often the results of \gls[hyper=false]{pca} are reformulated in terms of princip
 	\mathbf{W}^* = \sqrt{N-1} \mathbf{U}
 \label{eq:standardized_pc_scores}
 \end{equation}
-where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{however $\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$}.
+where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{However, $\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$.}.
 This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})),
 it also results in standardized PC scores with variance of $1.0$.
 In the context of regression of PC scores used later in metamodeling, the latter property improves the numerical stability of the maximum likelihood estimation of the hyper-parameters. 
