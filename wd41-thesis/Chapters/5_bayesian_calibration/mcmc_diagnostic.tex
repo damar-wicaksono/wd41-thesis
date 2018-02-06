@@ -75,7 +75,7 @@ To derive the expression for $\sigma^2_f$ in the equation, consider that the var
   \mathbb{V}[\,\hat{f}\,] = \mathbb{E}\left[\left(\frac{1}{I} \sum_{i=1}^I \left( f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right)\right)^2 \right]
 \label{eq:ch5_markov_chain_estimate_variance}
 \end{equation}
-by using nested sum, the definition can be rewritten as,
+By using nested sum, the definition can be rewritten as,
 \begin{equation*}
   \begin{split}
   \mathbb{V}[\,\hat{f}\,] & = \mathbb{E}\left[\frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I \left(f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right) \cdot \left(f[\bm{\mathcal{X}}^{(j)}]  - \mathbb{E}[f] \right) \right] \\
@@ -192,7 +192,7 @@ As illustrated in Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1}, the \gls[hyper
 \marginpar{Burn-in}
 After some period, however, the apparent ``initial transient'' eventually dies off and the chain settles in a more typical region of the parameter space.
 The colloquial term \emph{burn-in} period is used to characterize this initial part of the chain.
-By \emph{burn-in} the chain, it is meant that the samples of that period are discarded from further analysis.
+By \emph{burn-in} the chain, it is meant that the samples of that period are discarded.
 
 % Consequence of burn-in period
 As opposed to the previous discussion on autocorrelation in equilibrium that causes inflation of \gls[hyper=false]{mc} \emph{statistical error},
@@ -216,13 +216,13 @@ Under this assumption, the \emph{exponential} autocorrelation time of a function
   \tau_{\text{exp},f} = \lim\limits_{t\rightarrow\infty} \frac{t}{-\ln{|\rho_f(t)|}} 
 \label{eq:ch5_markov_chain_exponential_autocorrelation_time}
 \end{equation}
-The time represents the rate of convergence of a Markov chain with respect to the given function $f$, starting from arbitrary initial values, to its stationary distribution \cite{Sokal1997}.
-It can be used to determine the number of iterations to discard before the chain can be considered stationary.
+The time represents the rate of convergence of a Markov chain with respect to the given function $f$, starting from arbitrary initial values to its stationary distribution \cite{Sokal1997}.
+It can be used to determine the number of iterations to discard before the chain is considered stationary.
 
 % Importance of Burn-in period revisited
 The relationship between exponential correlation time and stationarity only strictly holds for exponential correlation functions.
 Fortunately, most infinitely long chains have exponential correlation functions \cite{Sokal1997}.
-In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function},
+In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function.},
 in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
 
 In this thesis, they are both estimated using the definition of the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})).
