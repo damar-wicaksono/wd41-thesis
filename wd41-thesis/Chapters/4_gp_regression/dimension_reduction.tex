@@ -113,9 +113,9 @@ $\mathbf{S}$ is the $N \times P$ diagonal matrix of singular values;
 and $\mathbf{V}$ is the $P \times P$ orthogonal, right singular matrix.
 
 % Principal Component and Principal Component Scores
-The column vector elements of $\mathbf{V}$ are the principal components of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
+The column vector elements of $\mathbf{V}$ are the principal components (PCs) of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
 \marginpar{Principal component}
-Principal components are sorted in descending order such that the first principal component (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
+\glspl[hyper=false]{pc} are sorted in descending order such that the first \gls[hyper=false]{pc} (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
 % Partial Variance of principal component
 The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
 \begin{equation}
@@ -124,7 +124,7 @@ The singular values are related to the explained variance of the eigenvectors (i
 \end{equation}
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:pca_illustrate},
-                  maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal directions of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Illustrated above, $3$ selected points in the data set in both coordinates.},%
+                  maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal directions of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Above, three selected points in the data set in both coordinates.},%
 									mainshortcaption={Principal Component Analysis of a bivariate data set.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:pca_original},
@@ -137,9 +137,9 @@ The singular values are related to the explained variance of the eigenvectors (i
 {../figures/chapter4/figures/plotPCA_2}
 
 % Projection of data
-Projection of the data into the principal components results
+Projection of the data into the \glspl[hyper=false]{pc} results
 \marginpar{Principal component score}
-in \emph{principal component scores} (PC scores),
+in \emph{principal component scores} (\gls[hyper=false]{pc} scores),
 \begin{equation}
 	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
 \label{eq:pc_scores}
@@ -200,7 +200,7 @@ where $\bar{\mathbf{y}}$ is the $P$-dimensional vector of sample mean (Eq.~(\ref
 The other elements in the equation are described below.
 
 % The Retained Eigenvectors
-$\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
+$\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the \gls[hyper=false]{pc} loadings retained to reconstruct the multivariate output.
 Specifically, $\boldsymbol{\Phi}^*_Q$ is,
 \begin{equation}
 		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\phi}^*_1, \boldsymbol{\phi}^*_2, \ldots, \boldsymbol{\phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \ldots, \mathbf{v}^*_Q) ; \, Q \ll P
@@ -235,7 +235,7 @@ Conditioning the \gls[hyper=false]{gp} of $\mathit{w}_i$ by the observed data yi
 \label{eq:conditional_w}
 \end{equation}
 where $m_{SK,i}$ and $s^2_{SK,i}$ are the simple Kriging mean and variance, respectively (Eq.~(\ref{eq:mean_sk}) and Eq.~(\ref{eq:variance_sk})),
-associated to the $i$-th standardized PC score.
+associated with the $i$-th standardized PC score.
 The simple Kriging formulation is used here as the assumed process is already centered (zero-mean).
 
 % The unretained eigenvectors
