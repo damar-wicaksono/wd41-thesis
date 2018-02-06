@@ -555,8 +555,8 @@ What has changed, however, is the scale of the variation in the output space.
 Mean function is the drift term in the \gls[hyper=false]{gp} model.
 Strictly speaking, incorporating other than a constant mean function to the specification of a \gls[hyper=false]{gp} introduces non-stationarity to the process.
 But as the known mean function can always be removed from the formulation (i.e., by \emph{centering}), the process, especially with respect to its correlation function, can still be considered stationary.
-Fig.~\ref{fig:plot_mean_function_unconditional} shows several realizations drawn from $3$ \glspl[hyper=false]{gp} having the same covariance kernel, but with three different mean functions.
-As it can be seen, the process are centered differently for the $3$ \glspl[hyper=false]{gp}. 
+Fig.~\ref{fig:plot_mean_function_unconditional} shows several realizations drawn from three \glspl[hyper=false]{gp} having the same covariance kernel, but with three different mean functions.
+As it can be seen, the process are centered differently for the three \glspl[hyper=false]{gp}. 
 The choice of the mean function determines the behavior of the conditional process (where it is constrained by the observed data) in the region far away from the available data.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_mean_function_unconditional},
@@ -579,5 +579,5 @@ The choice of the mean function determines the behavior of the conditional proce
 
 The use of the mean function provides an opportunity to incorporate prior knowledge of the process before observing any data or to improve the resulting model performance for extrapolation purpose \cite{Ginsbourger2009,Roberts2012}.
 However, without a very specific knowledge of how a process is expected to behave, it is difficult to completely specify a justifiable mean a priori.
-Indeed, it was argued in \cite{Currin1991} that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
+Indeed, it was argued in Ref.~\cite{Currin1991} that the use of either zero or constant mean in GP to model a process signifies a vague or the least informative prior to the unknown.
 This eventually leads to the most generic formulation.
