@@ -484,9 +484,9 @@ As expected, the realizations from Mat\'ern kernel with $\nu = 5/2$ is smoother 
 \subsection{Multidimensional Construction}\label{sub:gp_multidimension}
 %----------------------------------------------------------------------
 
-In order to create a valid multidimensional correlation kernel 
+In order to create a valid multidimensional correlation kernel function from a valid $1$-dimensional correlation function given above, 
 \marginpar{Tensor product}
-function from a valid $1$-dimensional correlation function given above, a tensor product construction is used as follows,
+a tensor product construction is used as follows,
 \begin{equation}
 	R(\bm{x}_i, \bm{x}_j) = \prod_{d = 1}^{D} r_d \left(x_i^{(d)}, x_j^{(d)}\right)
 \label{eq:tensor_product}
@@ -527,11 +527,11 @@ For stationary \gls[hyper=false]{gp}, the shape of the sample path is determined
 The role of the process variance according to Eq.~(\ref{eq:cov_function}) is to determine the scale of the magnitude of the output variation. 
 Fig.~\ref{fig:plot_process_variance} gives an illustration of the realizations drawn from a set of \glspl[hyper=false]{gp} with the same kernel correlation function (i.e., Gaussian kernel with $\theta = 1.0$), 
 but with different values of process variance.
-As it can be seen, the visible features of the realizations remain very similar to each other.
+As shown, the visible features of the realizations remain very similar to each other.
 What has changed, however, is the scale of the variation in the output space.  
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_process_variance},
-			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of process variance. The plotting range of the $y$-axis for each panel is set to $\pm \, 3 \times \sigma$.},
+			           maincaption={Realizations of \gls[hyper=false]{gp} with Gaussian correlation kernel for three different values of process variance. The plotting range of the $y$-axis for each panel is set to $\pm \, 3 \times \sigma$.},
 			           mainshortcaption={Effect of different process variance values on GP realization},%
 			           leftopt={width=0.28\textwidth},
 			           leftlabel={fig:plot_process_variance_1},
