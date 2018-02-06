@@ -3,20 +3,20 @@
 %******************************************************************
 
 Consider a general \emph{regression} problem:
-\marginpar{regression problem}
+\marginpar{Regression problem}
 Given a deterministic computer simulator (which, in essence, is a function) $f:\bm{x} \in \boldsymbol{X} \subseteq \mathbb{R}^D \mapsto \mathbb{R}$ 
 evaluated at $\mathbf{DM}$, an experimental design matrix $\{\mathbf{x}_n\}_{n=1}^N$,
 yielding $N$ outputs $\mathbf{y} = \{f(\mathbf{x}_n) = \text{y}_n\}_{n=1}^N$, 
 the objective of the regression is to compute (or \emph{predict}) the value of $f(\bm{x}_o)$ with $\bm{x}_o \notin \mathbf{DM}$.
 
 The set $\mathcal{D} \equiv \{(\mathbf{DM}, \mathbf{y})\} = \{(\mathbf{x}_n, f(\mathbf{x}_n) = \text{y}_n)\}_{n=1}^N$ of $N$ observations is often referred to as the training data,
-\marginpar{training data, training samples, and training outputs}
+\marginpar{Training data, training samples, and training outputs}
 though the term is used interchangeably with the training outputs $\mathbf{y}$.
 The experimental design matrix $\mathbf{DM}$ introduced in the previous chapter is interchangeably referred to as the training samples, inputs, or points in this chapter.
 As before, the domain $\bm{X}$ is often rescaled such that $\bm{x} \in [0,1]^D$.
 
 To evaluate $f$ at any given $\bm{x}_o \notin \mathbf{DM}$, the code of course can be simply run at that input.
-\marginpar{emulator, surrogate model, and metamodel} 
+\marginpar{Emulator, surrogate model, and metamodel} 
 Unfortunately, the true underlying function $f(\circ)$ that produces $y$ itself might be too complex and expensive to evaluate.
 As such, the response surface of the function has to be reconstructed or estimated based only on the small training data set before the prediction is made.
 The estimated function is chosen to be a simpler function that can be evaluated much faster (such as polynomials).
@@ -26,9 +26,9 @@ This simpler, approximating function is often referred to as an \emph{emulator},
 % Adopted framework
 In this thesis, 
 \marginpar{Gaussian process metamodel}
-the metamodel is represented using Gaussian Process (\gls[hyper=false]{gp}), following the seminal works of Sacks et al. (\cite{Sacks1989, Sacks1989a}) and interpreted through a Bayesian perspective.
-The advantages of using \gls[hyper=false]{gp} to represent an unknown function are its ability to model a complicated multi-dimensional function with limited number of parameters (\cite{Jones2009})
-as well as the provision of prediction error estimate (\cite{Santner2003,Currin1991}).
+the metamodel is represented using Gaussian Process (\gls[hyper=false]{gp}), following the seminal works of Sacks et al. \cite{Sacks1989, Sacks1989a} and interpreted through a Bayesian perspective.
+The advantages of using \gls[hyper=false]{gp} to represent an unknown function are its ability to model a complicated multi-dimensional function with limited number of parameters \cite{Jones2009}
+as well as the provision of prediction error estimate \cite{Santner2003,Currin1991}.
 Furthermore, being a statistical model based on a stochastic process, it fits the statistical calibration framework of computer model presented in the next chapter.
 
 % Two Interpretations
@@ -42,15 +42,15 @@ the prediction of the output at $\bm{x}_o$ is made based on the posterior (or co
 Both of these interpretations give equivalent results.
 The subtle difference lies in the interpretation of prediction error.
 In the frequentist case, the error is defined as the mean squared of error between the prediction made by the estimated process and the (hypothetical) true process \cite{Isaaks1989};
-\marginpar{prediction error}
+\marginpar{Prediction error}
 while in the Bayesian case the error corresponds to the \emph{epistemic} uncertainty of the prediction conditional on the observed data.
 That is, though the underlying computer simulation itself might be deterministic, 
 the uncertainty of the prediction at $\bm{x}_o$ stems from the fact that the simulator was not actually run at that input and thus the output is not \emph{known}. 
-The Bayesian perspective, as argued in \cite{Currin1991,Santner2003,OHagan2006}, gives a more intuitive interpretation of the prediction error.
+The Bayesian perspective, as argued in Refs.~\cite{Currin1991,Santner2003,OHagan2006}, gives a more intuitive interpretation of the prediction error.
 This perspective is illustrated in Fig.~\ref{fig:plot_bayesian_perspective}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_bayesian_perspective},
-			           maincaption={Gaussian process prior is equivalent to setting a prior over functions. After observing the data, the process is updated to obtain the posterior process with reduced uncertainties. Uncertainties are attached to each prediction made at arbitrary inputs which lie outside the observed data (e.g., red points). Dashed lines and gray region represent the mean and $3 \times \sigma$, respectively. The scales in the axes are arbitrary.},
+			           maincaption={Gaussian process prior is equivalent to setting a prior over functions. After observing the data, the process is updated to obtain the posterior process with reduced uncertainties. Uncertainties are attached to each prediction made at arbitrary inputs which lie outside the observed data (e.g., black points). Dashed lines and gray region represent the mean and $3 \times \sigma$, respectively. The scales in the axes are arbitrary.},
 			           mainshortcaption={Illustration of Bayesian perspective of regression and metamodeling.},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_bayesian_perspective_1},
