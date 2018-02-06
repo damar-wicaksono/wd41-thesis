@@ -243,8 +243,8 @@ is subjected to the validation process presented in the next section.
 %-------------------------------------------------------------------
 
 % What is Validation and Why
-Metamodel is always fitted based on a relatively small training data, much smaller than the space of all possible inputs/output.
-\marginpar{metamodel validation}
+Metamodel is always fitted based on a relatively small training data, much smaller than the space of all possible inputs/outputs.
+\marginpar{Metamodel validation}
 As such, its validation is a necessary step in applying the metamodel with confidence at any given input as a surrogate of the original computer simulator.
 Metamodel validation is defined as a process to determine whether a metamodel has a sufficient range of accuracy within its domain of applicability, consistent with its intended use \cite{Kleijnen2000}.
 As the metamodel is based on a deterministic simulator, 
@@ -264,30 +264,30 @@ In addition to that, the results can also be sensitive to the size of validation
 
 % Validation strategy (cross-validation)
 For a computationally expensive simulator, it is not always possible to generate large (if any at all) independent validation samples.
-\marginpar{cross-validation strategy}
+\marginpar{Cross-validation strategy}
 The \emph{cross-validation} is an alternative approach to validate a metamodel in this situation \cite{Meckesheimer2002,Iooss2010}.
 In cross-validation, a batch of samples is removed from the available training samples, 
 used the remaining training samples for fitting and the subsamples for assessing the metamodel (essentially becomes the validation samples).
 The procedure is repeated by selecting randomly the elements for the removed batch.
-The most extreme case of this approach is the so-called \emph{leave-one-out} (LOO) cross validation, 
+The most extreme case of this approach is the so-called \emph{leave-one-out} (LOO) cross-validation, 
 where a single training point is removed for validation purpose and exhaustively repeating the procedure.
 Cross-validation does not require additional simulator runs to generate validation samples.
 It also incorporates in its results, to a certain extend, the sensitivity due to perturbation in the training samples.
 However, it can potentially be expensive if numerous metamodel fitting are to be carried out (such as in the case of the LOO approach).
-Furthermore, if an experimental design with a particular geometrical structure is used, removing one or more points might destroy its property\footnote{this is indeed the case for an optimized latin hypercube design}.
+Furthermore, if an experimental design with a particular geometrical structure is used, removing one or more points might destroy its property\footnote{This is indeed the case for an optimized latin hypercube design.}.
 The fitting, in turn, is carried out in sub-optimal manner \cite{Iooss2010,Challenor2013} and the prediction becomes rather pessimistic (i.e., with larger error).
 
 % Validation Measure (Emphasis on Predictivity)
 The second part of the strategy is to define a validation metric in line with the intended use of the metamodel.
-\marginpar{validation metric}
+\marginpar{Validation metric}
 Because the metamodel in this thesis is going to be used to explore the posterior probability across the model parameter space,
-the aim is to construct a metamodel that has a decent global accuracy\footnote{as opposed to the (local) accuracy in a particular region of input parameter space such as during design optimization}.
+the aim is to construct a metamodel that has a decent global accuracy\footnote{as opposed to the (local) accuracy in a particular region of input parameter space such as during design optimization.}.
 Global accuracy measures the metamodel performance over many different input values across its parameter space, on average.
 The accuracy of the metamodel for a particular input, however, can still be poor and in the case of \gls[hyper=false]{gp} metamodel is defined probabilistically.  
 
 % Predictivity Coefficient
 A particular validation metric that quantifies such global accuracy is the \emph{predictivity coefficient} $Q_2$ \cite{Iooss2010}.
-\marginpar{predictivity coefficient}
+\marginpar{Predictivity coefficient $Q_2$}
 Assuming that the independent validation samples strategy is adopted, 
 let $\mathbf{DM}^* = \{\mathbf{x}^*_n\}_{n=1}^{N_{valid}}$ denote the set of validation inputs at which the computer simulator is evaluated, 
 yielding $N_{valid}$ outputs $\mathbf{y}^* = \{f(\mathbf{x}^*_n) = \text{y}^*_n\}_{n=1}^{N_{valid}}$.
@@ -304,19 +304,12 @@ $Q_2$ with values close to $1.0$ implies a highly accurate metamodel.
 
 % Model Selection
 Finally, the validation procedure above assumed the design of experiment for training, the correlation function, and the form of mean function have been chosen.
-\marginpar{on model selection and metamodeling choices}
-These are additional metamodeling choices the analyst has to made upfront and there is no general rule to select which one for which application.
+\marginpar{On model selection and metamodeling choices}
+These are additional metamodeling choices an analyst has to made upfront and there is no general rule to select which one for which application.
 Different studies reported one proper metamodeling choice that is supported by a particular case (or some cases) and presented them as generic advice.
-The danger of taking such advices at face value, as noted in \cite{Chen2016}, is that results might be anecdotal.
+The danger of taking such advices at face value, as noted in Ref.~\cite{Chen2016}, is that the results might be anecdotal.
 More importantly, they might not apply to the particular case being studied.
 The most pragmatic approach in assessing the appropriateness of such choices is thus to carry out empirical study for the particular case being studied.
 In other words, different design of experiments (ideally with replications), different correlation functions, and different mean functions (if applied) are to be tested for the same problem and the best choices are selected based on the comparison of validation metrics.
 
-Metamodel promises much faster evaluation of the simulator output at any given output, but for it to be used with confidence, some time has to be invested to properly design, fit, and validate it.
-
-%------------------------------------------------------
-%\subsection{Summary}\label{sub:gp_construction_summary}
-%------------------------------------------------------
-%To avoid this possible complication, the more straightforward validation samples strategy is adopted in this thesis. 
-%The decision is also supported by the fact that the running cost of the \gls[hyper=false]{feba} \gls[hyper=false]{trace} model is not particularly high;
-%a decent amount of validation samples in the order of thousands can still be afforded.
+Metamodel promises much faster evaluation of the simulator output at any given input, but for it to be used with confidence, some time has to be invested to properly design, fit, and validate it.
