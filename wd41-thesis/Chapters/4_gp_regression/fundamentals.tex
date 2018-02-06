@@ -282,8 +282,8 @@ and $\sigma^2$ is the aforementioned stochastic process variance, which determin
 
 % Continuity and Differentiability of Stochastic Process
 In the following, three different types of stationary correlation kernel functions are presented. 
-These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
 \marginpar{one-dimensional correlation kernel, $r$}
+These functions, namely \emph{Gaussian}, \emph{power-exponential}, and \emph{Mat\'ern class} kernels are widely applied in the simulation metamodeling literature.
 At first, only $1$-dimensional kernel functions denoted by $r(x_i, x_j)$ are described.
 Later on, these $1$-dimensional functions are used to create a multidimensional kernel function $R(\bm{x}_i, \bm{x}_j)$ by means of tensor product.
 
@@ -305,14 +305,14 @@ The Gaussian correlation kernel function, also known as the \emph{squared expone
 \end{equation}
 
 The Gaussian kernel is parameterized by a single \emph{hyper-parameter} $\theta$ that defines the characteristic length-scale of the process (or the \emph{range} parameter).
-\marginpar{characteristic length-scale (range) parameter}
+\marginpar{Characteristic length-scale (range) parameter}
 Fig.~\ref{fig:plot_corrfun_gauss} shows the correlation value as function of Euclidian distance, $(x_i - x_j)^2$, between input points according to the Gaussian kernel, 
-for 3 different range parameters.
+for three different range parameters.
 Obviously, for smaller $\theta$ the correlation between two inputs drops more quickly over shorter distance, and vice versa.
 \begin{figure}[bth]
 	\centering
 	\includegraphics[scale=0.35]{../figures/chapter4/figures/plotCorrFunGauss}
-	\caption[Gaussian correlation kernels with 3 different range parameters.]{Examples of Gaussian correlation kernels with 3 different range parameters.}
+	\caption[Gaussian correlation kernels with three different range parameters.]{Examples of Gaussian correlation kernels with three different range parameters.}
 	\label{fig:plot_corrfun_gauss}
 \end{figure}
 
@@ -324,14 +324,14 @@ On the other hand, with a longer range, the output of random function tends to b
 Gaussian kernel, however, always produces smooth realization.
 That is, at any given point the Gaussian kernel is continuous and differentiable (see the neighborhood of the origin of Fig.~\ref{fig:plot_corrfun_gauss}).
 The Gaussian kernel is widely applied in the metamodeling literature and almost become a default choice for the correlation kernel \cite{Kennedy2006},
-though as mentioned in \cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly selected design points).
+though as mentioned in Ref.~\cite{Rasmussen2006} the overly smooth process can result in either physically unrealistic or numerically difficult situations (i.e., the resulting variance-covariance matrix is ill-conditioned for poorly selected design points).
 
 Fig.~\ref{fig:plot_corrfun_gauss_realizations} shows a comparison between realizations of a \gls[hyper=false]{gp} using Gaussian kernel for three different range parameters.
 The short range, illustrated on the left panel, allows for more sudden change in the output values while the long range on the right shows smoother (and rigid) pattern for the same input domain ($0.0 \leq x \leq 3.0$). 
 Also notice that the realizations with the shorter range produces more local maxima and minima.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_gauss_realizations},
-			           maincaption={Examples of realizations from \gls[hyper=false]{gp} with Gaussian correlation kernel for $3$ different values of range parameter. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$. Each process has the same process variance, $\sigma^2 = 1.0$},
+			           maincaption={Examples of realizations from \gls[hyper=false]{gp} with Gaussian correlation kernel for three different values of range parameter. The plotting range of the $y$-axis for each panel are set to $\pm \, 3 \times \sigma$. Each process has the same process variance, $\sigma^2 = 1.0$},
 			           mainshortcaption={Realizations of random function drawn from \gls[hyper=false]{gp} with Gaussian kernel},%
 			           leftopt={width=0.30\textwidth},
 			           leftlabel={fig:plot_corrfun_gauss_realization_1},
@@ -358,9 +358,8 @@ The Gaussian correlation kernel belongs to a wider class of $2$-param\-eter kern
 \label{eq:powexp_kernel}
 \end{equation}
 
-The parameter $\theta$ remains the range parameter of the process,
-while the additional parameter $p$ is referred to as the shape parameter of the process.
-\marginpar{shape parameter}
+The parameter $\theta$ remains the range parameter of the process, while the additional parameter $p$ is referred to as the shape parameter of the process.
+\marginpar{Shape parameter $p$}
 Specifically, the shape parameter $p$ determines the differentiability of the process at the origin \cite{Abrahamsen1997}.
 Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponential kernel with three different values of $p$ and $\theta$ as function of $L_1$ norm ($|\bm{x}_i - \bm{x}_j|$).
 \bigtriplefigure[pos=tbhp,
@@ -382,8 +381,8 @@ Fig.~\ref{fig:plot_corrfun_powexp} shows the correlation value of power-exponent
 {../figures/chapter4/figures/plotCorrFunPowExp_2}
 {../figures/chapter4/figures/plotCorrFunPowExp_3}
 
-Although, strictly speaking, only when $p = 2$ is the power-exponential correlation differentiable at the origin (thus guarantee the smoothness of the realization).
-The shape parameter dictates the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
+Although, strictly speaking, only when $p = 2$ is the power-exponential correlation differentiable at the origin (thus guarantee the smoothness of the realization),
+the shape parameter dictates the apparent roughness of the sample path drawn from the process as illustrated in Fig.~\ref{fig:plot_corrfun_gauss_realizations} \cite{Rasmussen2006}.
 \bigtriplefigure[pos=tbhp,
 								 mainlabel={fig:plot_corrfun_powexp_realizations},
 			           maincaption={Several realizations from \gls[hyper=false]{gp} with power-exponential kernel functions of different shape $p$ and scale $\theta$ parameters.},
@@ -403,8 +402,8 @@ The shape parameter dictates the apparent roughness of the sample path drawn fro
 {../figures/chapter4/figures/plotCorrFunPowExpRealizations_2}
 {../figures/chapter4/figures/plotCorrFunPowExpRealizations_3}
 
-It is argued in \cite{Marrel2008} that the power-exponen\-tial kernel function is an appropriate choice in metamodeling application due to its flexibility of representing different shape with respect to its regularity and differentiability mainly controlled through the additional parameter $p$.
-\marginpar{exponential kernel}
+It is argued in Ref.~\cite{Marrel2008} that the power-exponen\-tial kernel function is an appropriate choice in metamodeling application due to its flexibility of representing different shape with respect to its regularity and differentiability mainly controlled through the additional parameter $p$.
+\marginpar{Exponential kernel}
 For instance, Gaussian correlation kernel is a special case of the power-exponential kernel when $p$ equals to 2. 
 Another special case is when $p = 1$ which is called the \emph{exponential} kernel.
 In this particular case, realizations of which are depicted in Fig.~\ref{fig:plot_corrfun_powexp_realization_2}, the process is continuous but not differentiable \cite{Rasmussen2006}.
@@ -413,7 +412,7 @@ In this particular case, realizations of which are depicted in Fig.~\ref{fig:plo
 \subsubsection{Mat\'ern Class Kernel}\label{subsub:gp_matern_cov}
 %================================================================
 
-The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula \cite{Santner2003,Rasmussen2006}
+The Mat\'ern class correlation kernel is another $2$-parameter kernel family and it is given by the following formula \cite{Santner2003,Rasmussen2006},
 \begin{equation}
 	r(x_i, x_j; \theta, \nu) = \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\frac{2\sqrt{\nu} |x_i - x_j|}{\theta}\right)^\nu K_{\nu}\left(\frac{2\sqrt{\nu} |x_i - x_j|}{\theta}\right)
 \label{eq:matern_kernel}
@@ -428,12 +427,12 @@ because in that case the resulting modified Bessel function can be written simpl
 \label{eq:modified_bessel}
 \end{equation}
 
-The Mat\'ern class is considered more flexible than the power-expo\-nential kernel because the \emph{shape} parameter $\nu$ directly controls the number of differentiability of the process \cite{Stein1989}\footnote{that was not the case for power-exponential kernel because, strictly speaking, the process in only differentiable at $p = 2$ (and in fact, infinitely differentiable).}.
+The Mat\'ern class is considered more flexible than the power-expo\-nential kernel because the \emph{shape} parameter $\nu$ directly controls the number of differentiability of the process \cite{Stein1989}\footnote{That was not the case for power-exponential kernel because, strictly speaking, the process in only differentiable at $p = 2$ (and in fact, infinitely differentiable).}.
 \marginpar{shape parameter $\nu$}
 However, it was argued in \cite{Rasmussen2006}, that for machine learning application (i.e., regression and classification) only $\nu = 3/2$ (once differentiable) and $\nu = 5/2$ (twice differentiable) are of practical interest.
-This is due to the fact that for $\nu < 3/2$ the process becomes too rough\footnote{in fact, it reduces to the exponential correlation function},
+This is due to the fact that for $\nu < 3/2$ the process becomes too rough\footnote{In fact, it reduces to the exponential correlation function.},
 while for $\nu \geq 7/2$ the smoothness of the process realization cannot be distinguished anymore from an even smoother process.
-These two Mat\'ern correlation kernels are given below \cite{Roustant2012,Rasmussen2006}.
+These two Mat\'ern correlation kernels are given below \cite{Roustant2012,Rasmussen2006},
 \begin{equation}
 	r_{\nu=3/2}(x_i, x_j;\theta) = \left(1 + \frac{\sqrt{3}|x_i - x_j|}{\theta}\right) \exp{\left[-\frac{\sqrt{3} |x_i - x_j|}{\theta}\right]}
 \label{eq:matern3_2}
@@ -447,7 +446,7 @@ As the two previous kernels, the parameter $\theta$ serves as the range paramete
 Example plots of the Mat\'ern kernel with different shape and range parameters are shown in Fig.~\ref{fig:plot_corrfun_matern}.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:plot_corrfun_matern},
-                  maincaption={Mat\'ern kernels for $2$ different range parameters $\theta$ and, for each, $2$ different shape parameters $\nu$.},%
+                  maincaption={Mat\'ern kernels for two different range parameters $\theta$ and, for each, two different shape parameters $\nu$.},%
 									mainshortcaption={Examples of Mat\'ern kernel functions},
                   leftopt={width=0.45\textwidth},%width=0.45\textwidth},
                   leftlabel={fig:plot_corrfun_matern_1},
