@@ -5,16 +5,19 @@
 % Opening paragraph
 Consider once more Eq.~(\ref{eq:ch5_markov_chain_clt}), the central limit theorem (CLT) for the \gls[hyper=false]{mcmc}.
 Let $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^{I}$ be a stationary Markov chain of length $I$ with a stationary distribution $\pi_t$ (i.e., the target distribution).
-The chain is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$, and the asymptotic error of the estimator follows as
+The chain is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$.
+The asymptotic error of the estimator is as follows
 \begin{equation*}
   \lim_{I \rightarrow \infty} \,\, \hat{f} - \mathbb{E}_{\pi_t}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
 \end{equation*}
-Where $\sigma^2_f$ is the variance of a given function $f$ evaluated under the stationary distribution of the chain.
+where $\sigma^2_f$ is the variance of a given function $f$ evaluated under the stationary distribution of the chain.
 As mentioned, by construction, the successive realizations in a Markov chain are not independent.
 Before discussing in Section~\ref{sub:bc_mcmc_thinning} the implication of this correlation on the statistical error $\frac{\sigma^2_f}{I}$, several important concepts are introduced below\footnote{Note that the dependence on $\pi_t$ in the discussion below is implicitly assumed and suppressed from the notation.}.
 
 % Autocovariance
-The autocovariance of the function $f$ is defined as the covariation between the function $f$ evaluated using the chain at the iteration $i$ and iteration $j$.
+The autocovariance of the function $f$ is defined as the covariation between 
+\marginpar{Autocovariance}
+the function $f$ evaluated using the chain at the iteration $i$ and iteration $j$.
 That is,
 \begin{equation}
   \text{Cov}\left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(j)}) \right] \equiv \mathbb{E}\left[\left(f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right) \cdot \left(f[\bm{\mathcal{X}}^{(j)}]  - \mathbb{E}[f] \right) \right]
@@ -32,6 +35,7 @@ Such function includes function that returns a particular dimension of a multiva
 
 % Autocorrelation
 The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance function defined as,
+\marginpar{Autocorrelation function}
 \begin{equation}
   \rho_f (t) \equiv \frac{C_f(t)}{C_f(0)}
 \label{eq:ch5_autocorrelation}
@@ -40,7 +44,7 @@ where $C_f(0)$ is the lag-$0$ autocovariance and is equal to the process varianc
 
 % Some illustration
 Autocovariance (and autocorrelation) measures the strength of the covariance (and correlation) between samples in a Markov chain.
-By definition both functions are symmetric about the origin.
+By definition, both functions are symmetric about the origin.
 They also tend to decay with increasing lag as illustrated in the figure below for three different Markov chains with different autocorrelations.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_plot_illustrate_acf},
