@@ -3,7 +3,7 @@
 %**************************************************************************
 
 % Introductory Paragraph
-The construction of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{feba} \gls[hyper=false]{trace} model was carried out in three steps following the recommendation in the statistical/machine learning literature (\cite{Rasmussen2006, Hastie2009}): training, validation, testing as summarized in Fig.~\ref{fig:ch4_simulation_experiment} below.
+The construction of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{feba} \gls[hyper=false]{trace} model was carried out in three steps following the recommendation in the statistical/machine learning literature \cite{Rasmussen2006, Hastie2009}: training, validation, testing as summarized in Fig.~\ref{fig:ch4_simulation_experiment} below.
 \bigfigure[pos=tbhp,
            opt={width=1.0\textwidth},
            label={fig:ch4_simulation_experiment},
@@ -13,17 +13,17 @@ The construction of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the
 
 % Training
 In the training step, a metamodel was constructed (i.e. \emph{trained}) based on a training data set. 
-\marginpar{training, experimental design}
+\marginpar{Training, experimental design}
 The training data set consists of a set of training inputs and its code output counterparts (from actual code runs). 
 The set of training inputs was generated using an experimental design algorithm (of which several of them were considered: simple random sampling, latin hypercube, optimized latin hypercube, and Sobol' sequence).
-Following the recommendation in \cite{Loeppky2009} the starting sample size was 120 (or $10\times D$, with $D$ the number of dimensions) and increased in multiples of two ($240$, $480$, and $960$).
+Following the recommendation in Ref.~\cite{Loeppky2009} the starting sample size was 120 (or $10\times D$, with $D$ the number of dimensions) and increased in multiples of two ($240$, $480$, and $960$).
 Furthermore, to take into account the effect of random variation in the training data set of each design and size,
-$5$ replications of each data set were generated for training and
-$5$ different metamodels were trained.
+five replications of each data set were generated for training and
+five different metamodels were trained.
 
 % Dimension Reduction
 Metamodels predicting different types of outputs (i.e., clad temperature, pressure drop, and liquid carryover) were constructed separately.
-\marginpar{dimension reduction}
+\marginpar{Dimension reduction}
 These different outputs were themselves of a multivariate nature:
 liquid carryover was a time-dependent quantity,
 while clad temperature and pressure drop were time- and space-dependent quantities.
@@ -36,7 +36,7 @@ Therefore, there were multiple \gls[hyper=false]{gp} metamodels representing the
 
 % Model Fitting
 Several covariance kernel functions were considered for constructing a metamodel: Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, and power-exponential kernels.
-\marginpar{model fitting}
+\marginpar{Model fitting}
 The hyper-parameters associated with each kernel were estimated (i.e., \emph{fitted}) by \gls[hyper=false]{mle} as implemented in the \texttt{R} package \texttt{DiceKriging} \cite{Roustant2012}.
 Following the hyper-parameters estimation for each \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, a metamodel of the \gls[hyper=false]{trace} model was fully trained and ready for making prediction in arbitrary inputs.
 To make prediction back in the original physical space, the full output space had to be first reconstructed using linear combinations of the predicted standardized \gls[hyper=false]{pc} scores and the \gls[hyper=false]{pc} loadings (See Eq.~(\ref{eq:p_variate_metamodel})).
@@ -44,7 +44,7 @@ To make prediction back in the original physical space, the full output space ha
 % Validation
 A validation step was conducted to assess and compare the predictive performance of different metamodels constructed with different experimental designs and covariance functions,
 taking into account the effects of randomness in the experimental design generation and of training sample size.
-\marginpar{validation and selection}
+\marginpar{Model validation and selection}
 The validation step was conducted by means of independent validation data sets,
 a separate set of \gls[hyper=false]{trace} outputs from actual runs (preferably large enough) for the metamodels to predict.
 The predictivity coefficient defined in Eq.~(\ref{eq:predictivity_coefficient}) measured the discrepancy between the output from the validation data set and from the prediction by the metamodel, and thus the quality of the metamodel.
@@ -67,7 +67,7 @@ The best setting of the metamodel (the experimental design and the covariance fu
 
 % Testing
 Finally, the ultimate performance of the metamodel were assessed in the testing step based on yet another large number of test data set, separately generated.
-\marginpar{testing}
+\marginpar{Testing}
 The purpose of this step was to further confirm the previous results on another data set 
 and to give a more robust idea of the expected error of the metamodel in the application setting.
 
@@ -92,7 +92,7 @@ The settings used in the simulation experiment for constructing and assessing th
                                               & \footnotesize{optimized latin hypercube (Opt. LHS), Sobol' sequence} \\
         \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960, 1'920$ (only for testing)}\\
         \footnotesize{Replication}           	& \footnotesize{$5$}\\
-        \footnotesize{Covariance kernels}     & \footnotesize{Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, power exponential} \\
+        \footnotesize{Covariance kernels}     & \footnotesize{Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, power-exponential} \\
         \footnotesize{Model fitting}          & \footnotesize{\glsfirst[hyper=false]{mle}} \\
         \midrule
         \textbf{\small{Validation}}           & \\
