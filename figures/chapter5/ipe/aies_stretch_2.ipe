@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170929105127" modified="D:20170929114219"/>
+<info created="D:20170929105127" modified="D:20180206005250"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -303,6 +303,6 @@ h
 <path matrix="1 0 0 1 64 40" stroke="black" fill="black" pen="heavier" tiling="falling">
 4 0 0 4 160 512 e
 </path>
-<text matrix="0.964286 0 0 1.33333 -118.857 -330.667" transformations="translations" pos="368 668" stroke="black" type="minipage" width="104" height="12.891" depth="7.92" valign="top">A randomly selected complementary walker</text>
+<text matrix="0.964286 0 0 1.33333 -118.857 -330.667" transformations="translations" pos="368 668" stroke="black" type="minipage" width="104" height="12.891" depth="7.92" valign="top">A randomly selected \\complementary walker</text>
 </page>
 </ipe>

@@ -190,14 +190,14 @@ The formulation of a \glsfirst[hyper=false]{gp} for the model bias term is adapt
 
 % What does the bias mean
 The above model bias term formulation is only partially Bayesian as it uses the data to make the initial estimation.
-But as argued in \cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
+But as argued in Ref.~\cite{Bayarri2007} it is a pragmatic way to carry out the analysis as there is no independent data to formulate the bias.
 Several additional assumptions are made in this thesis to fully formulate the bias term.
 By varying the parameters related to the boundary conditions in the construction of the term implies that the experimental uncertainty in the boundary conditions is included in the model bias term.
 In the \gls[hyper=false]{feba} experiment, the effect of these uncertainties on the experimental data was not directly observed as there was no replication of the experiment at the same controllable inputs and the experimental uncertainty with respect to each type of data was taken as given from the benchmark specification.
 
 By using the mean for the bias term defined above, any difference between the nominal \gls[hyper=false]{trace} prediction and the experimental data is corrected.
 This is an indirect way of putting a strong prior preference for the \gls[hyper=false]{trace} nominal prediction such that the model parameters should not dramatically be shifted to correct the mismatch between the experimental data and the \gls[hyper=false]{trace} prediction.
-In other words, it is a way to keep as much as possible the nominal \gls[hyper=false]{trace} prediction, which was already based on a long running V\&V activities.
+In other words, it is a way to keep as much as possible the nominal \gls[hyper=false]{trace} prediction, which was already based on a long running \gls[hyper=false]{vv} activities.
 Ref. \cite{Bayarri2007} also recommends to allow the variance of the process to vary, but as the calibration conducted here is based only on the data from a single \gls[hyper=false]{feba} test, the variance is kept constant.
 In fact, this represents a pessimistic assumption in the sense that the data is not allowed to reduce the bias by altering the model parameters.
 This is in line with the definition of the the mean used before.
@@ -293,7 +293,7 @@ The likelihood is from the Gaussian density (the formula for the density is give
 Note that the model parameters are embedded inside the likelihood function through the mean and the covariance of the \gls[hyper=false]{gp} metamodel prediction.
 
 % Posterior
-The posterior \gls[hyper=false]{pdf} is then formulated by assigning the prior \gls[hyper=false]{pdf} for the $8$ (respectively 7 for the scheme \texttt{w/ Bias, no dffbVIHT}) important reflood model parameters $\bm{x}_m$ from Table~\ref{tab:trace_model_parameter_2}.
+The posterior \gls[hyper=false]{pdf} is then formulated by assigning the prior \gls[hyper=false]{pdf} for the eight (respectively seven for the scheme \texttt{w/ Bias, no dffbVIHT}) important reflood model parameters $\bm{x}_m$ from Table~\ref{tab:trace_model_parameter_2}.
 \marginpar{Posterior PDFs}
 The posterior \gls[hyper=false]{pdf} is defined for each of the calibration schemes using the respective likelihood functions.
 For instance, the posterior \gls[hyper=false]{pdf} for the model parameters under the calibration scheme \texttt{w/ Bias, TC} up to a constant is written as,
@@ -330,7 +330,7 @@ Table~\ref{tab:ch5_calibration_schemes} summarizes the different calibration sch
 
 % Introductory paragraph
 Each calibration scheme above results in a likelihood function, which when combined with the prior \glspl[hyper=false]{pdf} of the model parameters, yield a posterior \glspl[hyper=false]{pdf}.
-The $8$-dimensional (respectively $7$ for the \texttt{w/ Bias, no dffbVIHT} scheme) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the assumed respective calibration scheme.
+The $8$-dimensional (respectively seven for the \texttt{w/ Bias, no dffbVIHT} scheme) posterior \glspl[hyper=false]{pdf} contain all the information on the model parameters conditional on the experimental data and the assumed prior uncertainties, under the assumed respective calibration scheme.
 To characterize the posterior uncertainties of the model parameters, samples are directly generated from the respective posterior \gls[hyper=false]{pdf} by means of \gls[hyper=false]{mcmc} simulation.
 
 % Parallel requirement
@@ -369,8 +369,8 @@ From the bivariate marginals, the correlation structure between the model parame
 % Forward uncertainty quantification
 To investigate the implication of the different calibration schemes on the \gls[hyper=false]{trace} predictions, simulation campaigns of \gls[hyper=false]{feba} test No. $216$ are conducted using samples from the posterior \glspl[hyper=false]{pdf}.
 Furthermore, to assess if the posterior uncertainties are applicable for the simulations of reflood experiments with different boundary conditions,
-the simulation campaigns are extended to the $5$ additional \gls[hyper=false]{feba} tests.
-In other words, these $5$ additional \gls[hyper=false]{feba} tests becomes the validation data sets.
+the simulation campaigns are extended to the five additional \gls[hyper=false]{feba} tests.
+In other words, these five additional \gls[hyper=false]{feba} tests becomes the validation data sets.
 Finally, the campaigns are conducted both with and without considering the correlation structure in the posterior samples to investigate the effect of the model parameter correlations.
 
 % Forward uncertainty quantification
@@ -382,7 +382,7 @@ From these plots the different propagation campaigns can be compared.
 
 % Calibration
 At the same time, the numerous plots are unwieldy to deal with.
-To circumvent this issue a more quantitative means of aggregating the results of different prediction uncertainties is required.
+To circumvent this issue, a more quantitative means of aggregating the results of different prediction uncertainties is required.
 Although formal Bayesian approaches are available to assess the quality of the prediction using the model parameters posterior uncertainty\footnote{Formal computer model validation metrics, Bayesian or otherwise, is a research topic in its own right, see for instance the validation metrics proposed in \cite{Rebba2006,Rebba2006a,Jiang2008}. Their application is outside the scope of this thesis.}, this thesis adopts a more pragmatic assessment method based on the possibilistic theory proposed in \cite{Baccou2014}.
 
 The aim of the method is to quickly compare the applicability of the different posterior uncertainties in making prediction.
@@ -394,6 +394,7 @@ For the comparison purpose in this thesis, only the first two steps above are ap
 % Information modeling
 In the information modeling, the information in a prediction uncertainty of a \gls[hyper=false]{qoi} $Y$ is represented by an interval (lower and upper uncertainty bounds: $LUB_Y$ and $UUB_Y$, respectively) and a reference value $y_\text{ref.}$.
 A \emph{source} of information $src$ for a particular \gls[hyper=false]{qoi} $Y$ consists of such an interval and, optionally, a reference value.
+\marginpar{Rectangular model}
 If for the \gls[hyper=false]{qoi} $Y$ only the bounds $LUB_Y$ and $UUB_Y$ are supplied then a rectangular model can be defined,
 \begin{equation}
 		\pi_{src,Y} (y) = 
@@ -405,7 +406,9 @@ If for the \gls[hyper=false]{qoi} $Y$ only the bounds $LUB_Y$ and $UUB_Y$ are su
 \end{equation}
 where $\pi$ is the possibility measure, whose minimum and maximum are $0.0$ and $1.0$, respectively.
 
-The presence of a reference value $y_\text{ref.}$ between two bounds $LUB_Y$ and $UUB_Y$ allows the triangular model to be defined,
+The presence of a reference value $y_\text{ref.}$ between two bounds $LUB_Y$
+\marginpar{Triangular model}
+and $UUB_Y$ allows the triangular model to be defined,
 \begin{equation}
   \pi_{src,Y} (y) = 
 			\begin{cases}
@@ -418,8 +421,8 @@ The presence of a reference value $y_\text{ref.}$ between two bounds $LUB_Y$ and
 These two information models are illustrated in Fig.~\ref{fig:ch5_calibinfo_modeling}.
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:ch5_calibinfo_modeling},
-                  maincaption={Information modeling to represent uncertainty propagation results for a \gls[hyper=false]{qoi} $y$.},%
-									mainshortcaption={Information modeling to represent uncertainty propagation results for a QoI $y$.},
+                  maincaption={Information modeling to represent uncertainty propagation results for a \gls[hyper=false]{qoi} $Y$.},%
+									mainshortcaption={Information modeling to represent uncertainty propagation results for a QoI $Y$.},
                   leftopt={width=0.375\textwidth},
                   leftlabel={fig:ch5_calibinfo_modeling_rectangular},
                   leftcaption={Rectangular model},
@@ -435,7 +438,9 @@ These two information models are illustrated in Fig.~\ref{fig:ch5_calibinfo_mode
 
 % Ignorance
 In the following, 
-the rectangular model is used to represent a complete ignorance with respect to the \gls[hyper=false]{qoi} $Y$, $\pi_{ign,Y}$ using a minimum lower uncertainty bound $LUB_{Y,\text{min.}}$ and a maximum upper uncertainty bound $UUB_{Y,\text{max.}}$.
+the rectangular model is used to represent a complete ignorance 
+\marginpar{Ignorance}
+with respect to the \gls[hyper=false]{qoi} $Y$, $\pi_{ign,Y}$ using a minimum lower uncertainty bound $LUB_{Y,\text{min.}}$ and a maximum upper uncertainty bound $UUB_{Y,\text{max.}}$.
 That is,
 \begin{equation}
 		\pi_{ign,Y} (y) = 
@@ -448,6 +453,7 @@ That is,
 
 % Information Evaluation, Informativeness
 The information evaluation part of the method comprises two indices to evaluate the quality of information in a given source.
+\marginpar{Informativeness}
 \emph{Informativeness}, associated with a source $src$ and a \gls[hyper=false]{qoi} $Y$ is defined as,
 \begin{equation}
   \text{Inf}_Y (src) = \frac{|\pi_{\text{ign}, Y}| - |\pi_{\text{src},Y}|}{|\pi_{\text{ign},Y}|} = 1 - \frac{1}{2} \frac{UUB_Y - LUB_Y}{UUB_{Y, \text{max.}} - LUB_{Y, \text{min.}}}
@@ -475,7 +481,9 @@ Fig.~\ref{fig:ch5_calibinfo_informativeness} illustrates $\text{Inf}$ calculatio
 {../figures/chapter5/figures/calibinfo_informativeness_wide}
 
 % Information Evaluation, Calibration Score
-\emph{Calibration score} between a source $src$ and the observed value $y_\text{obs.}$ for a \gls[hyper=false]{qoi} is defined as,
+\emph{Calibration score} between a source $src$ and the observed value $y_\text{obs.}$ 
+\marginpar{Calibration score}
+for a \gls[hyper=false]{qoi} is defined as,
 \begin{equation}
   \text{Cal}_Y (src) = \pi_{src, Y}(y_\text{obs.})
 \label{eq:calibration_score}

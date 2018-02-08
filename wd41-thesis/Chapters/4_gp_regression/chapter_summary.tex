@@ -18,14 +18,14 @@ As such, a first step of improvement in this regard can be aimed toward replacin
 
 % Computational Advantages (and disadvantages)
 Using the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel as the surrogate for \gls[hyper=false]{trace} run, 
-the prediction for arbitrary model parameters values can be made much faster ($< 5 [s]$ per metamodel evaluation vs. $6-15 \, [min]$ per \gls[hyper=false]{trace} run).
+the prediction for arbitrary model parameters values can be made much faster ($< 5 \, [s]$ per metamodel evaluation vs. $6-15 \, [min]$ per \gls[hyper=false]{trace} run).
 As such the metamodel constructed in this chapter can be used as the basis for Bayesian model calibration which requires tens if not hundreds of thousands function evaluations. 
 However, it is also important to note that the time required for the construction of the metamodel as well as for its convergence study has to be taken into account.
 The training, validation, and testing data have to be gene\-rated from actual code runs.
 Additionally, the model fitting step to estimate \gls[hyper=false]{gp} metamodel hyper-parameters is an optimization problem that can easily become expensive for large training sample of large dimensions (large number of input parameters).
 
 % Recommendation
-The study confirms that the size of the training data is the main factor in determining the predictive performance of the metamodel.
+On a different note, the study confirms that the size of the training data is the main factor in determining the predictive performance of the metamodel.
 As a result, the size of the training data should be as large as the computational budget allowed.
 At the same time, the choice of covariance function has some impact especially in relation to the stability of the performance.
 Regarding this, the power-exponential and Mat\'ern covariance kernel functions are preferred,
