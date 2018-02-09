@@ -111,4 +111,3 @@ This was done through variance-based sensitivity analysis using the Sobol’-Sal
    application_to_FEBA
    chapter_summary
 
-.. bibliography:: ../../../references/wd41-thesis.bib

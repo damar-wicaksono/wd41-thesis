@@ -17,3 +17,4 @@ Lorem Ipsum Dolor Sit Amet
    3_gsa/index.rst
    4_gp_regression/index.rst
    5_bayesian_calibration/index.rst
+   zbibliography.rst
