@@ -104,7 +104,6 @@ This was done through variance-based sensitivity analysis using the Sobol’-Sal
    :maxdepth: 2
    :caption: This chapter contains the following Section:
    
-   statistical_framework
    parameters_screening
    variance_decomposition
    time_dependent_variation

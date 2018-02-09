@@ -18,7 +18,7 @@ In other words, the probability of X belongs to the domain is by definition 1.0,
 
 The type of random variables considered in this study is restricted to continuous random variable and the term probability is often used referring to both *probability density* and *probability mass*. 
 When the distinction is required, the notations used are :math:`p` and :math:`\mathbb{P}` for density and probability, respectively. 
-Additionaly, the density function of random vector X written as :math:`p_X (x)`is shortened simply to as it is often clear from the context.
+Additionaly, the density function of random vector X written as :math:`p_X (x)` is shortened simply to as it is often clear from the context.
 
 Multivariate Gaussian (Normal) Random Variable
 ==============================================
