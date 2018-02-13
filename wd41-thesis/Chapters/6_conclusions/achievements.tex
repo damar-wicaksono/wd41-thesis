@@ -65,7 +65,8 @@ The size of the initial selection of input parameters, as exemplified in \gls[hy
 \marginpar{Implementation and application of screening methods}
 Lacking prior knowledge, the selection should also include all the parameters that are vaguely perceived as important. 
 The implementation and the application of screening methods (Morris screening method and Sobol' total-effect indices), as demonstrated in this thesis for the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba},
-allows for a quick, systematic, and quantitative screening of the initial set of input parameters in a global manner (i.e., simultaneous perturbation over the whole range of parameter uncertainties).
+allows for a quick, systematic, quantitative screening of the initial set of input parameters in a global manner (i.e., simultaneous perturbation over the whole range of parameter uncertainties), and with less assumptions regarding the linearity or monotonicity of the model or it being additive.
+The last point motivates the departure from more conventional \gls[hyper=false]{gsa} methods based on correlation coefficients (such as Person and Spearman's)\footnote{Although these methods, unlike Sobol' indices, still allow for dealing with correlated inputs in straightforward manner.}.
 In the case studied here, more than half of the initial parameters were found to be non-influential to the relevant outputs of the reflood simulation.
 
 % FDA
@@ -81,6 +82,8 @@ Finally, the implementations of the employed \gls[hyper=false]{gsa} methods were
 \marginpar{\texttt{gsa-module}}
 The module \texttt{gsa-module} has been documented and tested against a suite of test functions.
 It was applied to obtain all the results presented in Chapter~\ref{ch:gsa}.
+
+\clearpage
 
 \paragraph{Recommendations for Future Work}\mbox{}\\
 
@@ -116,17 +119,17 @@ In other words, it managed to approximate the important features of the inputs/o
 Using the \glsfirst[hyper=false]{gp} \glsfirst[hyper=false]{pc} as a surrogate for TRACE, the prediction for arbitrary input parameter values could be made much faster
 (i.e., $< 5\,[s]$ per metamodel evaluation vs. $6 - 15\,[min]$ per TRACE).
 The thesis has also demonstrated the applicability of \gls[hyper=false]{pca} to reduce the high dimension of the output.
-The technique performed best for relatively smooth outputs (in this particular application, the pressure drop and liquid carryover transients), while it performed worse for reconstructing an output exhibiting strong discontinuity (e.g., the cladding temperature output exhibited a discontinuity around quenching).
+The technique performed best for relatively smooth outputs (in this particular application, the pressure drop and liquid carryover transients), while it performed worse for reconstructing an output exhibiting strong discontinuity (e.g., the clad temperature output exhibited a discontinuity around quenching).
 Finally, though many practical aspects were involved in the construction of the metamodel, the work in the thesis concluded that the size of the training sample (i.e., the actual number of code runs) was the most important factor;
 if they can be afforded, more runs should be conducted.
 
 \paragraph{Recommendations for Future Work}\mbox{}\\
 
-The worse performance of the \gls[hyper=false]{pca} on reconstructing the cladding temperature output was, in turn, due to the use of \gls[hyper=false]{pca} as the linear dimension reduction.
+The worse performance of the \gls[hyper=false]{pca} on reconstructing the clad temperature output was, in turn, due to the use of \gls[hyper=false]{pca} as the linear dimension reduction.
 \marginpar{Alternative dimension reduction technique}
 As such, a first step of improvement in this regard can be aimed toward replacing PCA with another more advanced, dimension reduction tool.
 Simulations with high-dimensional outputs, either in time or space, are typical in \gls[hyper=false]{th} analysis.
-It is thus worth investigating the application of different dimension reduction techniques, linear (extension of \gls[hyper=false]{pca}, e.g., \cite{Zhang2005}) or nonlinear (e.g., isomap \cite{Tenenbaum2000} and locally linear embedding (LLE) \cite{Roweis2000}).
+It is thus worth investigating the application of different dimension reduction techniques, linear (extension of \gls[hyper=false]{pca}, e.g., \cite{Zhang2005}) or nonlinear (e.g., isomap \cite{Tenenbaum2000}, locally linear embedding (LLE) \cite{Roweis2000}, or wavelet \cite{Graps1995}).
 Many of such developments are made in the area of image processing.
 Indeed as shown in Chapter~\ref{ch:gp_metamodel}, a $1$-dimensional time-dependent \gls[hyper=false]{trace} simulation output can be represented as an image.
 
@@ -172,6 +175,7 @@ The formulation of the model bias term only considered the bias from one experim
 The applicability of the resulting posterior uncertainty is only applicable insofar that the assumed bias from the calibration data is valid for the test data (i.e., all the other \gls[hyper=false]{feba} tests).
 For \gls[hyper=false]{feba}, different experimental conditions leads to different bias structure of the model, which was apparent in the case of test Nos. $223$ and $218$ (i.e., tests with lower system backpressure compared to test for the calibration).
 Indeed the propagation of the posterior uncertainties performed poorly in such situation.
+Furthermore, a more consistent uncertainty propagation should incorporate the bias term if the term is used in the calibration.
  
 A more comprehensive calibration procedure should therefore take into account the difference in the bias structure from different experimental conditions.
 One possibility is to concatenate all the experimental data of \gls[hyper=false]{feba} into a single calibration process resulting in a posterior uncertainty of model parameters that takes into account all available experimental boundary conditions of \gls[hyper=false]{feba}. 

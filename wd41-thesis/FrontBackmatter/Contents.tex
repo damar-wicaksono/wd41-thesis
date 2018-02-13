@@ -3,12 +3,13 @@
 %*******************************************************
 %\phantomsection
 \refstepcounter{dummy}
-\pdfbookmark[1]{\contentsname}{tableofcontents}
+%\pdfbookmark[1]{\contentsname}{tableofcontents}
 \setcounter{tocdepth}{2} % <-- 2 includes up to subsections in the ToC
 \setcounter{secnumdepth}{3} % <-- 3 numbers up to subsubsections
 \manualmark
 \markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
-\tableofcontents 
+\addcontentsline{toc}{chapter}{\contentsname}
+\tableofcontents
 \automark[section]{chapter}
 \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
@@ -27,7 +28,8 @@
     %\phantomsection 
     \refstepcounter{dummy}
     %\addcontentsline{toc}{chapter}{\listfigurename}
-    \pdfbookmark[1]{\listfigurename}{lof}
+    %\pdfbookmark[1]{\listfigurename}{lof}
+		\addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
 
     \vspace{8ex}
@@ -38,7 +40,8 @@
     %\phantomsection 
     \refstepcounter{dummy}
     %\addcontentsline{toc}{chapter}{\listtablename}
-    \pdfbookmark[1]{\listtablename}{lot}
+    %\pdfbookmark[1]{\listtablename}{lot}
+		\addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
         
     \vspace{8ex}
@@ -49,9 +52,9 @@
     %*******************************************************      
       %\phantomsection 
     \refstepcounter{dummy}
+    \addcontentsline{toc}{chapter}{List of Algorithms}
     \listofalgorithms
-    \addtocontents{loa}{\def\string\figurename{Algorithm}}
-    %\addcontentsline{toc}{chapter}{List of Algorithms}
+    %\addtocontents{loa}{\def\string\figurename{Algorithm}}
     %\addcontentsline{toc}{chapter}{\lstlistlistingname}
     %\pdfbookmark[1]{\lstlistlistingname}{lol}
     %\lstlistoflistings 

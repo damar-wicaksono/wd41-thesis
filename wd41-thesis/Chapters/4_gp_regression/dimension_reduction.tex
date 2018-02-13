@@ -4,16 +4,16 @@
 
 % Introductory Paragraph, Multiple Output
 The previous discussion on \gls[hyper=false]{gp} metamodel dealt with a single output (univariate) case.
-Many computer simulations produce multivariate outputs\footnote{in this thesis the number of outputs are referred to as the \emph{dimension of the output parameter space}.}.
-\marginpar{multivariate outputs}
+Many computer simulations produce multivariate outputs\footnote{In this thesis, the number of outputs are referred to as the \emph{dimension of the output parameter space}.}.
+\marginpar{Multivariate outputs}
 A typical \gls[hyper=false]{trace} simulation, for example, produces flow variables as functions of time and space as its \emph{raw} outputs.
 This is indeed the case for the reflood simulation problem presented in Chapter~\ref{ch:trace_reflood}.
 As outlined in Chapter~\ref{ch:gsa}, some techniques can be used to transform the raw outputs into quantities of interest (the maximum, etc.) that are useful to answer the questions at hand.
 However, in the calibration setting, some of these outputs have corresponding measurement data and need to be represented by the metamodel in their original form for a direct comparison.
 
 % Introductory Paragraph, one suggested approach
-An approach proposed in \cite{Kleijnen2000} is to represent the multiple outputs by separate metamodels.
-\marginpar{separate univariate metamodel}
+An approach proposed in Ref.~\cite{Kleijnen2000} is to represent the multiple outputs by separate metamodels.
+\marginpar{Separate univariate metamodel}
 That is, one metamodel is developed to represent each one of the multiple outputs individually.
 Yet, for a very high-dimensional output (from tens to thousands), this approach is impractical as the numbers of metamodel to train becomes too numerous.
 Furthermore, the outputs produced by the computer simulation are often highly correlated to each other.
@@ -21,7 +21,7 @@ As such, developing individual metamodels to represent the correlated outputs se
 
 % The approach in this thesis
 To cope with the problem of high-dimensionality of the outputs,
-\marginpar{extension to multivariate case} 
+\marginpar{Extension to multivariate case} 
 this thesis adopted a \gls[hyper=false]{lmc} \cite{Goulard1992,Paulo2012} coupled with a \gls[hyper=false]{pca} \cite{Jolliffe2002,Higdon2008} to construct a tractable, multivariate version of \gls[hyper=false]{gp} metamodel.
 The original \gls[hyper=false]{lmc} was formulated to model multivariate data in geostatistics that covary together (over a region) in a linear fashion, 
 while \gls[hyper=false]{pca} is used here as a data-driven dimensional reduction tool.
@@ -113,8 +113,9 @@ $\mathbf{S}$ is the $N \times P$ diagonal matrix of singular values;
 and $\mathbf{V}$ is the $P \times P$ orthogonal, right singular matrix.
 
 % Principal Component and Principal Component Scores
-The column vector elements of $\mathbf{V}$ are the principal components of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
-Principal components are sorted in descending order such that the first principal component (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
+The column vector elements of $\mathbf{V}$ are the principal components (PCs) of the data set which describe the main directions of the data set, along which the variance of the data set is the largest.
+\marginpar{Principal component}
+\glspl[hyper=false]{pc} are sorted in descending order such that the first \gls[hyper=false]{pc} (leftmost in $\mathbf{V}$) contains the largest variance (Fig.~\ref{fig:pca_original}).
 % Partial Variance of principal component
 The singular values are related to the explained variance of the eigenvectors (i.e., their respective eigenvalues) by the following,
 \begin{equation}
@@ -123,7 +124,7 @@ The singular values are related to the explained variance of the eigenvectors (i
 \end{equation}
 \normdoublefigure[pos=tbhp,
                   mainlabel={fig:pca_illustrate},
-                  maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal directions of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Illustrated above, $3$ selected points in the data set in both coordinates.},%
+                  maincaption={\gls[hyper=false]{pca} of a bivariate data set. A highly correlated bivariate data set can be transformed into a new orthogonal coordinate system according to the principal directions of the data set. The principal directions redistribute the partial variance such that the total variance is preserved in the transformed coordinate. Above, three selected points in the data set in both coordinates.},%
 									mainshortcaption={Principal Component Analysis of a bivariate data set.},
                   leftopt={width=0.45\textwidth},
                   leftlabel={fig:pca_original},
@@ -136,7 +137,9 @@ The singular values are related to the explained variance of the eigenvectors (i
 {../figures/chapter4/figures/plotPCA_2}
 
 % Projection of data
-Projection of the data into the principal components results in \emph{principal component scores} (PC scores),
+Projection of the data into the \glspl[hyper=false]{pc} results
+\marginpar{Principal component score}
+in \emph{principal component scores} (\gls[hyper=false]{pc} scores),
 \begin{equation}
 	\mathbf{W} = \mathbf{Y}^* \mathbf{V} = \mathbf{U} \mathbf{S}
 \label{eq:pc_scores}
@@ -158,7 +161,7 @@ Often the results of \gls[hyper=false]{pca} are reformulated in terms of princip
 	\mathbf{W}^* = \sqrt{N-1} \mathbf{U}
 \label{eq:standardized_pc_scores}
 \end{equation}
-where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{however $\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$}.
+where $\mathbf{Y}^* = \mathbf{W}^* \mathbf{V}^{*T}$ holds\footnote{$\mathbf{W}^* \neq \mathbf{Y}^* \mathbf{V}^{*}$ as $\mathbf{V}^{*}$ is not orthogonal any longer, but $\mathbf{W}^* = (N-1) \mathbf{Y}^* \mathbf{V}^{*} \mathbf{S}^{-2}$.}.
 This reformulation gives a magnitude to the unit-norm principal components according to their respective standard deviation (square-root of variance Eq.~(\ref{eq:singular_values_variance})),
 it also results in standardized PC scores with variance of $1.0$.
 In the context of regression of PC scores used later in metamodeling, the latter property improves the numerical stability of the maximum likelihood estimation of the hyper-parameters. 
@@ -197,7 +200,7 @@ where $\bar{\mathbf{y}}$ is the $P$-dimensional vector of sample mean (Eq.~(\ref
 The other elements in the equation are described below.
 
 % The Retained Eigenvectors
-$\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the PC loadings retained to reconstruct the multivariate output.
+$\boldsymbol{\Phi}^*_Q$, a $P \times Q$ matrix, is the first $Q$ columns of the \gls[hyper=false]{pc} loadings retained to reconstruct the multivariate output.
 Specifically, $\boldsymbol{\Phi}^*_Q$ is,
 \begin{equation}
 		\boldsymbol{\Phi}^*_Q = (\boldsymbol{\phi}^*_1, \boldsymbol{\phi}^*_2, \ldots, \boldsymbol{\phi}^*_Q) = (\mathbf{v}^*_1, \mathbf{v}^*_2, \ldots, \mathbf{v}^*_Q) ; \, Q \ll P
@@ -232,7 +235,7 @@ Conditioning the \gls[hyper=false]{gp} of $\mathit{w}_i$ by the observed data yi
 \label{eq:conditional_w}
 \end{equation}
 where $m_{SK,i}$ and $s^2_{SK,i}$ are the simple Kriging mean and variance, respectively (Eq.~(\ref{eq:mean_sk}) and Eq.~(\ref{eq:variance_sk})),
-associated to the $i$-th standardized PC score.
+associated with the $i$-th standardized PC score.
 The simple Kriging formulation is used here as the assumed process is already centered (zero-mean).
 
 % The unretained eigenvectors
@@ -243,7 +246,7 @@ $\boldsymbol{\Phi}^*_{>Q}$, a $P \times (P-Q)$ matrix, is the unretained columns
 \end{equation}
 where $\boldsymbol{\phi}^*_{Q+i}$ is the $P$-dimensional column vector of the unretained $i$-th PC loading taken from Eq.(~\ref{eq:pc_loadings}).
 
-Finally, following \cite{Wilkinson2010},
+Finally, following Ref.~\cite{Wilkinson2010},
 $\mathbf{e}$ is the $(P-Q)$-dimensional vector of independent identically distributed normal random variable with mean $0$ and variance $1$.
 In other words, truncation error in Eq.~(\ref{eq:lmc_pca}) due to the unretained PC loadings are modeled as a set of independent normal random variables with the variance given by the PC loadings.
 
@@ -260,6 +263,6 @@ The multivariate output evaluated at $\bm{x}_o$ conditioned by the training data
 \label{eq:p_variate_metamodel}
 \end{equation}
 The model above assumed that the hyper-parameters associated with a selected correlation function are known.
-In practice they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
+In practice, they are not and thus estimated from the data itself using \gls[hyper=false]{mle} as outlined in Section~\ref{sub:gp_fitting}.
 Additionally, the theoretical underestimation of the Kriging variance explained in that section also applies here when the \gls[hyper=false]{ml} estimates are plugged into the formulation.
 In practice, however, Ref.~\cite{Bayarri2007} noted that the uncertainties associated with the model parameters often eclipse the uncertainties induced by the metamodel hyper-parameters.

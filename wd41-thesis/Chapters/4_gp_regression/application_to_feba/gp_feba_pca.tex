@@ -1,18 +1,18 @@
-%*************************************************************************************
-\subsection{Dimension Reduction by \glsfirst[hyper=false]{pca}}\label{sub:gp_feba_pca}
-%*************************************************************************************
+%********************************************************************************************
+\subsection{Dimension Reduction by Principal Component Analysis (PCA)}\label{sub:gp_feba_pca}
+%********************************************************************************************
 
 % Introductory paragraph
 As mentioned, the different outputs considered in this study (i.e., clad temperature, pressure drop, and liquid carryover) were of multivariate nature.
 For instance, the clad temperature output was defined both in time instance and axial location.
-Considering $8$ different axial locations for the thermocouples and $1'000 \, [s]$ transient (to ensure that all runs were quenched) with time step size of $0.1 \, [s]$, the dimensionality of this output amounted to $80'000$.
-Fig.~\ref{fig:ch4_plot_image_tc_run} shows $3$ different clad temperature output from $3$ different \gls[hyper=false]{trace} runs.
+Considering eight different axial locations for the thermocouples and $1'000 \, [s]$ transient (to ensure that all runs were quenched) with time step size of $0.1 \, [s]$, the dimensionality of this output amounted to $80'000$.
+Fig.~\ref{fig:ch4_plot_image_tc_run} shows three different clad temperature outputs from three different \gls[hyper=false]{trace} runs.
 It shows the contour plot of clad temperature as function of time and axial location in the $x$- and $y$- axes, respectively.
-Though not shown here, the other two types of output were of similar nature: pressure drop was also defined in time instance and in $4$ axial segments (with dimensionality of the output amounting to $40'000$), while liquid carryover output was defined only in time (with dimensionality amounting to $10'000$).
+Though not shown here, the other two types of output were of similar nature: pressure drop was also defined in time instance and in four axial segments (with dimensionality of the output amounting to $40'000$), while liquid carryover output was defined only in time (with dimensionality amounting to $10'000$).
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_image_tc_run},
-			           maincaption={Examples of multivariate clad temperature output $[K]$ at 8 different locations as function of time, presented as ``images'', taken from three different training runs.},
-			           mainshortcaption={Examples of multivariate clad temperature output in at 8 different locations as function of time, presented as ``images''},%
+			           maincaption={Examples of multivariate clad temperature output $[K]$ at eight different locations as function of time, presented as ``images'', taken from three different training runs.},
+			           mainshortcaption={Examples of multivariate clad temperature output in at eight different locations as function of time, presented as ``images''},%
 			           leftopt={width=0.305\textwidth},
 			           leftlabel={fig:ch4_plot_image_tc_run_1},
 			           leftcaption={Training run 996},
@@ -37,8 +37,8 @@ added by linear combination of the \gls[hyper=false]{pc} multiplied by a unique 
 In other words, ``images'' in Fig.~\ref{fig:ch4_plot_image_tc_run} can be reconstructed by overlapping the mean surface and the multiples of \glspl[hyper=false]{pc} ``images'' shown in Fig.~\ref{fig:ch4_plot_pca_image}.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch4_plot_pca_image},
-			           maincaption={PCA results of the clad temperature output},
-			           mainshortcaption={PCA results of the clad temperature output},%
+			           maincaption={PCA results for the clad temperature output},
+			           mainshortcaption={PCA results for the clad temperature output},%
 			           leftopt={width=0.29\textwidth},
 			           leftlabel={fig:ch4_plot_pca_image_ave},
 			           leftcaption={Mean surface},

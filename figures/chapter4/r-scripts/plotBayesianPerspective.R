@@ -137,7 +137,8 @@ dev.off()
 embed_fonts(otpfullnames[1], outfile = otpfullnames[1])
 
 # Plot the observed data (center)
-pdf(otpfullnames[2], family = "CM Roman", width = fig_size[1], height = fig_size[2])
+pdf(otpfullnames[2], family = "CM Roman",
+    width = fig_size[1], height = fig_size[2])
 par(mfrow = c(1,1), mar = margin, las = 1, oma = c(0, 0, 0, 0), bty = "l")
 
 plot(0, 0, type = "n", 
@@ -170,7 +171,7 @@ lines(xx, mu, lwd = 1.5, lty = 2)
 # Observed Data
 points(xx[index_obs], yy_obs, pch = 4, cex = 3, lwd = 1)
 points(x = xx[index_pred], y = mu_pred,
-       pch = 21, cex = 2., bg = "red", col = "red")
+       pch = 21, cex = 2., bg = "black", col = "black")
 # Uncertainty Region
 polygon(c(xx, rev(xx)), c(yy_high_star, rev(yy_low_star)),
         col = rgb(0, 0, 0,0.1), border = NA)

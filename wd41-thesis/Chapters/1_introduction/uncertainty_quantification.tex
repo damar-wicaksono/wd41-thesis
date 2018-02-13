@@ -55,7 +55,7 @@ The sources of primary interest in the present research are:
 
   \item \emph{Uncertainty associated with the physical model parameters}.
 	The value of the physical model parameters are often not known a priori.
-	As such the uncertainties are epistemic.
+	Thus, the uncertainties are epistemic.
 	They can either be estimated using data from a calibration experiment or by expert judgment.
 	
   \item \emph{Uncertainty associated with the physical models}.
@@ -63,13 +63,13 @@ The sources of primary interest in the present research are:
 	If derived in a fully mechanistic manner, some important processes might be unaccounted for due to the inherent complexity and lack of knowledge (i.e., the case of \emph{missing physics}).
 	On the contrary, if derived fully empirically, models might be derived separately for different elementary processes, while in the applications of the code multiple such models are used in concert.
 	Despite each being validated, it is fair to question the validity of models used in an ensemble.
-	Any of the two points tends to cause a systematic bias on the code prediction, the extend of which is unknown and uncertain.
+	Any of the two tends to cause a systematic bias on the code prediction, the extend of which is unknown and uncertain.
 	As a result, this source of uncertainty is referred to as model \emph{bias}, \emph{inadequacy}, or \emph{discrepancy}.
 
 \end{enumerate}
 
 % Forward uncertainty quantification, Inputs as random variables
-In uncertainty analysis, the controllable inputs and physical model parameters are modeled as random variables ($\bm{\mathcal{X}}_c$ and $\bm{\mathcal{X}}_m$, respectively) equipped with \glspl[hyper=false]{pdf}.
+In uncertainty analysis, the controllable inputs and physical model parameters are modeled as random variables ($\bm{\mathcal{X}}_c$ and $\bm{\mathcal{X}}_m$, respectively) equipped with probability density functions (PDFs).
 \marginpar{Forward uncertainty quantification}
 By transforming the random variable inputs, the simulator output becomes random variable as well
 \begin{equation*}
@@ -83,7 +83,7 @@ For instance, the mean of a \gls[hyper=false]{qoi} given by function $g$ is
 \end{equation*}
 where $p(\bm{x}_c, \bm{x}_m)$ denotes the joint \gls[hyper=false]{pdf} for the input parameters.
 
-Using \gls[hyper=false]{mc} techniques, samples are generated from the joint input parameters distribution and are used to run the code multiple times.
+Using \glsfirst[hyper=false]{mc} techniques, samples are generated from the joint input parameters distribution and are used to run the code multiple times.
 Afterward, the resulting code outputs (raw or post-processed), are summarized to obtain the uncertainty measure of the prediction.
 In other words, the uncertainties in the controllable inputs and physical model parameters are \emph{propagated forward} through the code to quantify the uncertainty of the predictions as shown in Fig.~\ref{fig:ch1_simulator_uq_forward}.
 The practice of propagating parametric uncertainty by \gls[hyper=false]{mc} is widely accepted in the nuclear engineering thermal-hydraulics community \cite{Lellouche1990,Glaeser1994,Wallis2007,Glaeser2008}.
@@ -130,7 +130,7 @@ Experts fixed the range of variation of the parameters based on their expectatio
 To derive the uncertainty associated with the model parameters described above, the problem can be posed as an inverse problem.
 \marginpar{An inverse problem}
 In this setting, given a set of experimental data $\{\mathbf{D}\}$ taken with known controllable inputs $\mathbf{x}_c$, the task is to infer the value of the \emph{unobserved} parameters in the physical model used to predict the same quantity as the experimental data.
-To avoid excessive bias to the calibration data, it is important here to acknowledge the observation errors of the experimental data and the controllable inputs, and the possible systematic bias of the associated models.
+To avoid excessive bias towards the calibration data, it is important here to acknowledge the observation errors of the experimental data and the controllable inputs, and the possible systematic bias of the associated models.
 
 % Bayesian framework
 In a probabilistic setting, a way to make an inference of unobserved parameters based on observed data is
@@ -139,7 +139,7 @@ through the Bayes' theorem,
 \begin{equation*}
 	p(\bm{x}_m\,|\,\{\mathbf{D}\},\mathbf{x}_c) = \frac{p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c) \cdot p(\bm{x}_m)}{\int p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c) \cdot p(\bm{x}_m)\,d\bm{x}_m}
 \end{equation*}
-where the left-hand side of the equation is the posterior probability density conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
+where the left-hand side of the equation is the posterior probability density of the model parameters $\bm{x}_m$ conditioned on the observed data $\{\mathbf{D}\}$ and controllable inputs $\mathbf{x}_c$.
 The right-hand side constitutes of the likelihood function $p(\{\mathbf{D}\}\,|\,\bm{x}_m, \mathbf{x}_c)$ (probability of observing data given the parameters), the prior of the model parameters $p(\bm{x}_m)$ (the initial state of knowledge regarding the parameters values before observing the data),
 while the denominator is a normalizing constant such that the posterior is a valid \gls[hyper=false]{pdf} (that is, it integrates to one)\footnote{Note that the formulation assumes the controllable inputs $\mathbf{x}_c$ are fully known. If they are considered uncertain, such as due to their inherent variability, then a prior probability can be put on them as well.}.
 The posterior represents the knowledge one has on the model parameters values conditioned on the data under the modeling assumption.
@@ -152,9 +152,9 @@ Fig.~\ref{fig:ch1_simulator_uq_inverse} depicts a simplified flowchart of the in
 {Simplified flowchart of inverse quantification for model parameters of a simulator.}
 
 The formulation and computation of the posterior above can be seen as a calibration exercise.
-That is, it seeks to adjust the model parameters such that the predictions of the simulator are consistent with the observed data (i.e., calibration data) under the assumed likelihood and the prior.
 \marginpar{Statistical calibration}
-However, instead of obtaining a single estimated value (or values in case of multiple parameters), the resulting posterior is a \gls[hyper=false]{pdf}, conditioned on the observed data.
+That is, it seeks to adjust the model parameters such that the predictions of the simulator are consistent with the observed (i.e., calibration) data under the assumed likelihood and the prior.
+However, instead of obtaining a single estimated value (or values in case of multiple parameters), the resulting posterior is a joint \gls[hyper=false]{pdf}, conditioned on the observed data.
 In relation to the aforementioned expert-judgment for estimating the parameters uncertainty, the approach uses the experimental data to better inform the prior expectation about the model parameters values.
 The posterior \gls[hyper=false]{pdf}, in turn, can be used in uncertainty propagation to quantify the uncertainty on the prediction made outside the calibration data.
 
@@ -208,7 +208,7 @@ Guidelines were indeed provided, but each participant eventually came up with th
 
 Although complete exclusion of expert judgment is not feasible (nor advised), it is useful to take benefit from the progress made in the computer experiment community.
 For instance, the Morris screening method can be useful in the initial parameter identification and importance ranking process by making the analysis more systematic and robust.
-The method can provide smooth transition from the more familiar one-at-a-time method adopted by most participants.
+The method can provide a smooth transition from the more familiar one-at-a-time method adopted by most participants.
 Furthermore, there was a valid issue raised by a participant regarding the possibility of ``complicated'' code response from simultaneous parameters perturbation \cite{Wicaksono2015}.
 This can be interpreted as parameter interaction in the literature.
 In this case, \gls[hyper=false]{gsa} methods can help in the investigation about its presence. 
@@ -218,7 +218,7 @@ Secondly, there was a slight disagreement between participants regarding the use
 This notion stemmed from the use of a Bayesian method (the so-called CIRC\'E \cite{Crecy2001,Reventos2016}, a method based on maximum likelihood approach under linear assumption coupled with normal prior for the parameter) to update the prior distribution of the model parameter such that the resulting posterior distribution yields the closest agreement with the experimental data.
 \marginpar{Calibrated parameter and best-estimate code}
 In the application of CIRC\'E, the nominal value of the model parameter was allowed to shift following the updated central measure of the posterior.
-Such practice of calibration was questioned because the best-estimate code used was, in fact, already calibrated on the basis of larger experimental databases over decades of verification and validation (V\&V) activities.
+Such practice of calibration was questioned because the best-estimate code used was, in fact, already calibrated on the basis of larger experimental databases over decades of \gls[hyper=false]{vv} activities.
 In other words, the calibration over a very limited set of the \gls[hyper=false]{feba} tests would undermine the built-in (calibrated) models already in place.
 
 That is a valid point of contention.
@@ -233,7 +233,7 @@ The narrow uncertainty obtained indicates that the calibration procedure converg
 
 While the Bayesian approach makes sense for parameter calibration, updating its value in light of new data,
 its application might require accounting for additional sources of uncertainty.
-It also makes sense to acknowledge the extensive V\&V activities that serve as the basis of \gls[hyper=false]{th} system codes;
+It also makes sense to acknowledge the extensive \gls[hyper=false]{vv} activities that serve as the basis of \gls[hyper=false]{th} system codes;
 observing one additional data set should not render previous results invalid right away.
 Thus it remains an open question how to compromise between learning from new data and preserving what has been learned before.
 

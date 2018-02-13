@@ -6,18 +6,18 @@
 As explained in Chapter 2, two conventional \glspl[hyper=false]{qoi} to characterize a reflood curve are the maximum clad temperature and the time of quenching.
 As shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_maxtemp} the variation of the maximum mid-height clad temperature (with standard deviation of $59.7\,[K]$) was driven mainly by four model parameters,
 contributing up to $77\%$ of the total output variation.
-One influential parameter was related to the spacer grid HT enhancement model and the three others were related to the \gls[hyper=false]{dffb}-regime model parameters (with a combined effect of $63\%$).
+One influential parameter was related to the spacer grid heat transfer enhancement model and the three others were related to the \gls[hyper=false]{dffb}-regime model parameters (with a combined effect of $63\%$).
 Moreover since the sum of all the main-effect indices was relatively close to $1.0$, the parameters were not interacting with respect to this particular \gls[hyper=false]{qoi}.
 \bigfigure[pos=tbhp,
 					 opt={width=0.85\textwidth},
            label={fig:ch3_plot_sobol_boxplot_tc4_maxtemp},
            shortcaption={Sobol' Indices estimates with the maximum mid-height clad temperature as the \gls[hyper=false]{qoi}.}]
 {../figures/chapter3/figures/plotSobolBoxplotTC4MaxTemp}
-{The main-effect and total-effect sensitivity indices with the maximum mid-height clad temperature as the \gls[hyper=false]{qoi}. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sampe percentile.}
+{The main-effect and total-effect sensitivity indices with the maximum mid-height clad temperature as the \gls[hyper=false]{qoi}. Each boxplot represents the bootstrap sample quartile statistics and the vertical line extends the $95$th sample percentile.}
 
 % Time of Quenching as QoI
 The parameter sensitivity with respect to the time of quenching gave a different picture as shown in Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_quenchtime}.
-The variation in the time of quenching (with standard deviation of $59.9\,[s]$) was driven mainly by the spacer grid HT enhancement parameter model (with contribution close to $50\%$  of the total output variation).
+The variation in the time of quenching (with standard deviation of $59.9\,[s]$) was driven mainly by the spacer grid heat transfer enhancement parameter model (with contribution close to $50\%$  of the total output variation).
 The \gls[hyper=false]{dffb}-related parameters were next in line with a combined contribution of about $\sim18\%$, while each of the other parameters contributes to less than $10\%$ of the total output variation.
 Similar to the case of the maximum clad temperature, no strong interaction effect was observed. 
 \bigfigure[pos=tbhp,
@@ -29,20 +29,14 @@ Similar to the case of the maximum clad temperature, no strong interaction effec
 
 % Time-dependent sensitivity indices
 To better understand how the output sensitivity to the model parameters is changing over the course of the reflood transient, 
-the clad temperature at the middle of the assembly at each time step was taken as the \gls[hyper=false]{qoi} and the main-effect indices were calculated.
+the mid-height clad temperature at each time step was taken as the \gls[hyper=false]{qoi} and the main-effect indices were calculated.
 This resulted in a set of sensitivity indices at each time with respect to the clad temperature as presented in Fig.~\ref{fig:ch3_plot_si_evol}.
 Note that the indices presented in the figure correspond to the reflood curves in which the phase variations between realizations were removed through the registration procedure.
-\bigfigure[pos=tbhp,
-					 opt={width=1.0\textwidth},
-           label={fig:ch3_plot_si_evol},
-           shortcaption={Evolution of the main-effect indices with the clad temperature at each time step as \gls[hyper=false]{qoi}.}]
-{../figures/chapter3/figures/plotSIEvol}
-{(top) the main-effect sensitivity indices at different time steps during the reflood transient. (bottom) The cladding temperature standard deviation at different time steps during the same transient.}
 
 % "1st" part of the transient
 The top panel of Fig.~\ref{fig:ch3_plot_si_evol} shows how the relative importance of the parameters and their interactions in a dynamic model change with time.
 With respect to the clad temperature, up to $120\,[s]$, the model parameters were non-interacting as indicated by the sum of the main-effect indices that was close to $1.0$.
-The spacer HT enhancement and \gls[hyper=false]{dffb}-related model parameters were found to be the most important in this time period.
+The spacer heat transfer enhancement and \gls[hyper=false]{dffb}-related model parameters were found to be the most important parameters in this time period.
 
 % "2nd" part of the transient
 However, from $120\,[s]$ onward, stronger parameter interactions took place, as indicated by the decreasing sum of the main-effect indices which at its minimum only explained well below $20\%$ of the total output variation.
@@ -51,16 +45,23 @@ The quench temperature (\texttt{tQuench}), which for the most part of the transi
 At $\sim300\,[s]$, the temperature transient variations suddenly were driven only by parameter interactions.
 Finally, the variation of the pressure boundary condition (\texttt{breakP}) accounted for most of the temperature variance at the end of the transient.
 
+\bigfigure[pos=tbhp,
+					 opt={width=1.0\textwidth},
+           label={fig:ch3_plot_si_evol},
+           shortcaption={Evolution of the main-effect indices with the clad temperature at each time step as \gls[hyper=false]{qoi}.}]
+{../figures/chapter3/figures/plotSIEvol}
+{(top) the main-effect sensitivity indices at different time steps during the reflood transient. (bottom) The clad temperature standard deviation at different time steps during the same transient.}
+
 % Putting the dynamic into context
 To put the dynamic behavior of the sensitivity indices in context, the temperature variation is also given for each time step in the bottom panel of Fig.~\ref{fig:ch3_plot_si_evol}.
 Note that in the plot, the last part of the transient (where the pressure boundary condition becomes visibly important) amounts to $2\,[K]$, a hardly relevant magnitude in the current context.
-After quenching, the wall temperature is essentially commensurate with the coolant temperature.
+After quenching, the clad surface temperature is essentially commensurate with the coolant temperature.
 The small temperature variation, in turn, corresponds to the change in the saturation temperature at the outlet due to variation in the pressure boundary condition.
 
 % Note on the imperfection of registration
 The figure also shows some sign of imperfection in the registration procedure.
 The sudden jump of variation around the time of quenching can be attributed to a residual misalignment that still exists in the registered dataset.
-As the landmark registration is supposed to remove the phase variation with respect to time of quenching (one of the landmarks),
+As the landmark registration is supposed to remove the phase variation with respect to the time of quenching (one of the landmarks),
 temperature variation of this magnitude at the particular time should not have been observed.
 
 % Closing paragraph

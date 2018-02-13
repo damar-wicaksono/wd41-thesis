@@ -4,19 +4,20 @@
 
 % On screening
 The Morris screening method was used to filter out noninfluential parameters from further analysis (Table~\ref{tab:ch3_screening_results}).
-\marginpar{screening analysis results}
+\marginpar{Screening analysis results}
 It was shown that such reduction was valuable to the downstream analysis by reducing the size of the problem (i.e., the number of parameters).
 The screening results with respect to the average temperature showed that most of the model parameters related to the \gls[hyper=false]{iafb} regime have relatively lower importance than the ones related to the \gls[hyper=false]{dffb} regime. 
 This finding confirms that the implementation of the reflood models in \gls[hyper=false]{trace} is consistent with the widely accepted phenomenological view on the relevance of \gls[hyper=false]{dffb} for heated channel reflooding at low flooding rate \cite{Andreani1994}.
-Intuitively, most drag related parameters becomes more prominent with respect to the average pressure drop output, though correlation between outputs does not exclude the common importance of heat transfer related parameters.
-Finally with respect to average liquid carryover, only four parameters were found to be of prominence which is also in accordance with the expected simulated physical process. 
+Intuitively, most drag related parameters becomes more prominent with respect to the average pressure drop output, though correlation between outputs does not exclude the common importance of heat transfer-related parameters.
+Finally, with respect to average liquid carryover, only four parameters were found to be important.
+It is also in accordance with the expected simulated physical process. 
 
-Those findings also illustrates the fact that the Morris screening method could serve as a preliminary analysis of model parameters to verify if the model behaves (in terms of parameters importance) as expected with limited number of code runs.
+Those findings also illustrate the fact that the Morris screening method could serve as a preliminary analysis of model development to verify if the model behaves (in terms of parameters importance) as expected with limited number of code runs.
 In Ref.~\cite{Wicaksono2014} the Morris method was used with this perspective in mind.
 
 % Radial vs Trajectory
 A comparison between the importance rankings obtained by the two Morris screening method variants showed a consistent result.
-\marginpar{Morris with radial design vs. trajectory trajectory design}
+\marginpar{Morris with radial design vs. trajectory design}
 The radial design, however, exhibits more erratic variations in the elementary effect statistics estimations and thus requires slightly more replications (thus code runs) to stabilize.
 This is due to the fact that, in the radial design, grid jump varies from replication to replication and from parameter to parameter excluding the possible bias due to an unexplored area of the input parameter space. 
 The trajectory design, in contrast, uses a constant grid jump which constrains the possible parameter perturbation.
@@ -26,18 +27,18 @@ This, however, entails more code runs.
 
 % On the use of Sobol' total effect
 The elementary effects statistics, however, are deemed qualitative as they do not quantify exactly the contribution of the parameters variations to the output variations.
-\marginpar{the utility of Sobol' total-effect indices}
+\marginpar{Utility of Sobol' total-effect indices}
 The comparison between two parameters whose value of the first $\mu^*$ is larger than the second is hard to intuit beyond the fact that the first parameter is relatively more important than the second.
-In this regard, the Sobol' total-effect indices were found to be useful for screening application in a more quantitative manner but required more code runs as compared to the Morris method ($\sim 3'000$ vs $\sim 7'000$).
+In this regard, the Sobol' total-effect indices were found to be useful for screening application in a more quantitative manner, but required more code runs as compared to the Morris method ($\sim 3'000$ vs $\sim 7'000$).
 As explained, the total-effect index of a parameter is the proportion of output variance due to the variation of the parameter, including all the possible interactions of any order with any other input parameters.
-A parameter with low total-effect index implies that a parameter is simply less influential with respect to the selected output.
+A parameter with low total-effect index implies that the parameter is simply less influential with respect to the selected output.
 By setting a cut-off value, a parameter was classified as either influential and noninfluential in a quantitative and consistent manner with reference always to the same output variance.
-Nevertheless, the selection of threshold (cut-off) value is admittedly subjective and the results needs to be further verified.
+Nevertheless, the selection of the cut-off value is admittedly subjective and the results need to be further verified.
 This was done through uncertainty propagation using influential and noninfluential parameter subsets which is presented in Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs}.
 
 % Conventional reflood QoI
 With respect to the Sobol' indices,
-\marginpar{sensitivity with respect to conventional \glspl[hyper=false]{qoi}}
+\marginpar{Sensitivity with respect to conventional \glspl[hyper=false]{qoi}}
 the parameters driving the variations of the maximum clad temperature and the time of quenching were found to be different (Figs.~\ref{fig:ch3_plot_sobol_boxplot_tc4_maxtemp} and \ref{fig:ch3_plot_sobol_boxplot_tc4_quenchtime}).
 Since the two events occurred at two separate instants of the reflood transient,
 the results indicated that the shape of the temperature curves varied in a complicated manner.
@@ -45,21 +46,21 @@ This variation, however, was insufficiently characterized by the two conventiona
 Indeed, the importance of the model parameters varied across the transient (Fig.~\ref{fig:ch3_plot_si_evol}).
 
 % Time-Dependent QoI
-The depiction given in Fig.~\ref{fig:ch3_plot_si_evol} might give the misleading impression that the parameters themselves were time-dependent or were being perturbed at different times in the transient.
-\marginpar{time-dependent sensitivity}
+The depiction given in Fig.~\ref{fig:ch3_plot_si_evol} might give a misleading impression that the parameters themselves were time-dependent or were being perturbed at different times in the transient.
+\marginpar{Time-dependent sensitivity}
 This was not the case; the parameters were constant and perturbing them at the start of the transient will affect the whole course of the transient.
-To increase the interpretability of the effect of parameter perturbation, different features of the transient output variations were explored using \gls[hyper=false]{fpca} discussed below.
+To increase the interpretability of the effect of parameter perturbation, different features of the transient output variations were explored using \glsentryshort{fpca}.
 
 % Result of registered temperature fpc1
 The model parameters influenced the amplitude of the clad temperature reversal of the reflood transient (Fig.~\ref{fig:ch3_plot_pc1_tc4}) with minor interactions among themselves (Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc1}).
-\marginpar{mid-height clad temperature transient, variation and sensitivity, \gls[hyper=false]{fpc}$1$}
-These parameters were mainly related to the spacer grid \gls[hyper=false]{ht} enhancement model (\cite{Yao1982}) and the \gls[hyper=false]{dffb}-related heat and momentum transfer parameters (\cite{USNRC2012}).
+\marginpar{Mid-height clad temperature transient, variation and sensitivity, 1\textsuperscript{st} \gls[hyper=false]{fpc}}
+These parameters were mainly related to the spacer grid heat transfer enhancement model \cite{Yao1982} and the \gls[hyper=false]{dffb}-related heat and momentum transfer parameters \cite{USNRC2012}.
 As the model was found to be largely additive with respect to this part of the transient,
 temperature data from the experiments could in principle be used to inform these parameters although such an application would require further investigation (e.g., in the case of colinearity between these parameters).
 
 % Result of registered temperature fpc2
 On the other hand, the temperature descent up to and around the time of quenching (Fig.~\ref{fig:ch3_plot_pc2_tc4}) proved to be influenced by interactions between parameters (Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_pc2}).
-\marginpar{mid-height clad temperature transient, variation and sensitivity, \gls[hyper=false]{fpc}$2$}
+\marginpar{Mid-height clad temperature transient, variation and sensitivity, 2\textsuperscript{nd} \gls[hyper=false]{fpc}}
 From the reflood modeling point of view, this can be explained by the fact that the temperature descent (which occurs at later stage of the transient) is more affected by flow regime changes.
 This observation is inferred from the total-effect index for two parameters of the \gls[hyper=false]{iafb} flow regime which was found to be no less influential as compared to the relevant \gls[hyper=false]{dffb}-related parameters.
 Indeed, the conditions and the criteria leading to the changes from one regime to another in the \gls[hyper=false]{trace} code depend indirectly on the simultaneous perturbation of these parameters.
@@ -69,44 +70,47 @@ From a numerical point of view, this can also be explained by the fact that the 
 As such, any given parameter perturbation which has a minimal impact at the early phase of the transient might interact with the others and accumulate their small effects over time and later be responsible to the growing variance of the output. 
 
 % Nature of interaction
-The existence of parameter interactions also marks the the fact that hydrodynamic processes (e.g., wall and interfacial drags) are indeed coupled with \gls[hyper=false]{ht} processes (e.g., wall and interfacial \gls[hyper=false]{ht}) in \gls[hyper=false]{th} system codes (including \gls[hyper=false]{trace}) mainly through the void fraction \cite{Yadigaroglu1993}.
-Thus the simulation of a reflood process can be expected to reflect this coupling.
-It does, however, also complicate the task of model parameters calibration especially if done solely on the basis of temperature transient data because multiple combination of parameter values might give a similar cladding temperature prediction at this particular phase of the transient.
-Thus, to better inform the model, additional types of data associated with different types of outputs (e.g., pressure drop and liquid carryover) should be considered, as will be discussed later.
+The existence of parameter interactions also marks the the fact that hydrodynamic processes (e.g., wall and interfacial drags) are indeed coupled with heat transfer processes (e.g., wall and interfacial heat transfers) in 
+\marginpar{Parameter interactions}
+the \gls[hyper=false]{th} system code \gls[hyper=false]{trace} mainly through the void fraction \cite{Yadigaroglu1993}.
+Thus, the simulation of a reflood process can be expected to reflect this coupling.
+It does, however, also complicate the task of model parameters calibration if done solely on the basis of temperature transient data because multiple combination of parameter values might give a similar clad temperature prediction at this particular phase of the transient.
+Hence, to better inform the model, additional types of data associated with different types of outputs (e.g., pressure drop and liquid carryover) should be considered.
 
 And although it was shown that a high degree of parameter interactions existed with respect to this particular mode of variation, the nature of these interactions among the parameters is still poorly known.
+\marginpar{Sobol' indices, second-order}
 The estimation of the second-order Sobol' sensitivity indices would be required.
 These indices can give a clearer picture on the actual structure of the parameter interactions.
 In relation to this, one can notice the analogy between the different phemonenological phases of the reflood curve defined in the FEBA evaluation report \cite{Ihle1984}, namely the mist cooling, the film boiling, and the quenching phase,
 with the three \glspl[hyper=false]{fpc} empirically obtained from \gls[hyper=false]{fda}, namely the temperature reversal, the temperature descent, and the quenching (the third \gls[hyper=false]{fpc} is not discussed in this thesis for conciseness but is shown in Ref.~\cite{Wicaksono2014a}).
 
-In other words, global \gls[hyper=false]{sa} using \gls[hyper=false]{fda}-based \glspl[hyper=false]{qoi} concisely and quantitatively shows how the effect of the the entrained droplets (mist) on the clad temperature,
+In other words, \gls[hyper=false]{gsa} using \gls[hyper=false]{fda}-based \glspl[hyper=false]{qoi} concisely and quantitatively shows how the effect of the the entrained droplets (mist) on the clad temperature,
 which is implicitly captured by the \gls[hyper=false]{dffb}-related parameters, dominates the variation of the clad temperature during the mist cooling phase (as labeled by the \gls[hyper=false]{feba} experimentalists).
 Furthermore, a more intricate picture can be inferred during the film boiling phase,
-which happens at a later phase and may relate to the interpolation in \gls[hyper=false]{trace} between the \gls[hyper=false]{dffb} and the \gls[hyper=false]{iafb} regimes (or the so-called inverted slug regime). 
+which happens at a later phase and may relate to the interpolation in \gls[hyper=false]{trace} between the \gls[hyper=false]{dffb} and the \gls[hyper=false]{iafb} regimes (i.e., the inverted slug regime). 
 
 % Result of warping function fpc1
 The analysis of the clad temperature transient presented above was conducted after the phase variations in the timing of the two reflood landmarks (i.e., maximum temperature and quenching) were removed through registration. 
-\marginpar{clad temperature transient warping function, variation and sensitivity}
+\marginpar{Warping function for the clad temperature transient, variation and sensitivity}
 The variations of the warping functions were separately analyzed (Fig.~\ref{fig:ch3_plot_pc1_tc4_warp}) and their sensitivity indices were derived (Fig.~\ref{fig:ch3_plot_sobol_boxplot_tc4_warp_pc1}).
-The results showed that the parameter responsible for the time shift of the two reflood landmarks was mainly the one related to the spacer grid \gls[hyper=false]{ht} enhancement model.
+The results showed that the parameter responsible for the time shift of the two reflood landmarks was mainly the one related to the spacer grid heat transfer enhancement model.
 This is consistent with the results obtained using the time of quenching as the \gls[hyper=false]{qoi}.
 However, Fig.~\ref{fig:ch3_plot_pc1_tc4_warp} also succinctly presented the finding that although a delay in the time of the maximum temperature implies a delay in the time of quenching,
 the variation of the former was much smaller than the variation of the latter.
 
 % Result of Pressure Drop fpc1
-The variation of the mid. assembly pressure drop transient (Fig.~\ref{fig:ch3_plot_sobol_boxplot_dpmid_pc1}) was mainly related to the rate of pressure drop rise along the segment.
-\marginpar{mid. assembly pressure drop transient, variation and sensitivity}
+The variation of the pressure drop transient at the middle of the assembly (Fig.~\ref{fig:ch3_plot_sobol_boxplot_dpmid_pc1}) was mainly related to the rate of pressure drop rise along the segment.
+\marginpar{Pressure drop transient, variation and sensitivity}
 Following the sensitivity analysis result (Fig.~\ref{fig:ch3_plot_sobol_boxplot_dpmid_pc1}), the interfacial drag of the \gls[hyper=false]{iafb} regime became relatively influential along with the inlet mass flow rate boundary condition.
-This was not the case for any of the clad temperature outputs (at different axial locations) and was found to be consistent across all pressure drop outputs.
+This was not the case for the clad temperature outputs at different axial locations and was found to be consistent across all pressure drop outputs.
 As such, it might be worthwhile to consider pressure drop output for model calibration, especially for the parameter \texttt{iafbIntDr}.
 
 % Result of Liquid carryover fpc1
-Finally, the functional variation of the liquid carryover transient (Fig.~\ref{fig:ch3_plot_pc1_co}) showed that the variation in liquid carryover transient was straightforward to interpret,
-either faster or slower rate in comparison with the mean.
-\marginpar{liquid carryover transient, variation and sensitivity}
-The sensitivity analysis (Fig.~\ref{fig:ch3_plot_sobol_boxplot_co_pc1}) results are reasonable in the sense that the variation could be attributed to the variation in the amount of liquid (and droplets) being transported (as represented by the inlet mass flow boundary condition (\texttt{fillV}) and the interfacial drag (\texttt{dffbIntDr})) as well as the variation in the amount of droplets being evaporated (as represented by the interfacial \gls[hyper=false]{ht} rate parameter (\texttt{dffbVIHT})).  
-However, the sensitivity analysis showed that the inlet mass flow rate boundary condition was much larger than the two reflood model parameters.
+Finally, the functional variation of the liquid carryover transient (Fig.~\ref{fig:ch3_plot_pc1_co}) showed that the variation in liquid carryover transient was
+\marginpar{Liquid carryover transient, variation and sensitivity}
+straightforward to interpret, either faster or slower rate in comparison with the mean.
+The sensitivity analysis (Fig.~\ref{fig:ch3_plot_sobol_boxplot_co_pc1}) results are reasonable in the sense that the variation could be attributed to the variation in the amount of liquid (and droplets) being transported (as represented by the inlet mass flow boundary condition (\texttt{fillV}) and the interfacial drag (\texttt{dffbIntDr})) as well as the variation in the amount of droplets being evaporated (as represented by the interfacial heat transfer parameter (\texttt{dffbVIHT})).  
+However, the analysis showed that the inlet mass flow rate boundary condition was much larger than the two reflood model parameters.
 This puts into question the value of liquid carryover data to calibrate the two reflood model parameters under the uncertainty of inlet mass flow rate boundary condition whose variability is assumed to be irreducible.
 
 % Closing

@@ -310,7 +310,7 @@
 {
   type=alphanumeric,
 	name={\ensuremath{\mathbf{v}_g}},
-	description={flow velocity, gas phase},
+	description={Flow velocity, gas phase},
 	sort={vinterface}
 }	
 
@@ -318,7 +318,7 @@
 {
   type=alphanumeric,
 	name={\ensuremath{\mathbf{v}_i}},
-	description={flow velocity at the phase interface},
+	description={Flow velocity at the phase interface},
 	sort={vinterface}
 }	
 
@@ -326,9 +326,65 @@
 {
   type=alphanumeric,
 	name={\ensuremath{\mathbf{v}_l}},
-	description={flow velocity, liquid phase},
-	sort={vinterface}
+	description={Flow velocity, liquid phase},
+	sort={vl}
 }	
+
+\newglossaryentry{X}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}}},
+	description={Generic inputs as vector of random variables},
+	sort={x}
+}	
+
+\newglossaryentry{xc1}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{x}_c}},
+	description={Vector of controllable inputs, as a generic variable},
+	sort={xc1}
+}
+
+\newglossaryentry{xc2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}_c}},
+	description={Vector of controllable inputs, as a random variable},
+	sort={xc2}
+}
+
+\newglossaryentry{xc3}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{x}_c}},
+	description={Vector of controllable inputs, as a particular realization},
+	sort={xc3}
+}
+
+\newglossaryentry{xm1}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{x}_m}},
+	description={Vector of model parameters, as generic variable},
+	sort={xm1}
+}
+
+\newglossaryentry{xm2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}_m}},
+	description={Vector of model parameters, as a random variable},
+	sort={xm2}
+}
+
+\newglossaryentry{xm3}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{x}_m}},
+	description={Vector of model parameters, as a particular realization},
+	sort={xm3}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Greek Notation Section %
@@ -398,8 +454,6 @@
 \newacronym[plural=GPs, firstplural=Gaussian Processes (GPs)]{gp}{GP}{Gaussian process}
 \newacronym{gsa}{GSA}{global sensitivity analysis}
 \newacronym{iafb}{IAFB}{inverted annular film boiling}
-\newacronym{ht}{HT}{heat transfer}
-\newacronym[plural=HPDIs, firstplural=highest posterior density intervals]{hpdi}{HPDI}{highest posterior density interval}
 \newacronym[plural=HTCs, firstplural= heat transfer coefficients (HTCs)]{htc}{HTC}{heat transfer coefficient}
 \newacronym{iid}{iid}{independent and identically distributed}
 \newacronym{lbloca}{LBLOCA}{large break loss-of-coolant accident}
@@ -421,7 +475,7 @@
 \newacronym[plural=PCs, firstplural=principal components (PCs)]{pc}{PC}{principal component}
 \newacronym{pca}{PCA}{principal component analysis}
 \newacronym{pce}{PCE}{polynomial chaos expansion}
-\newacronym{pct}{PCT}{peak cladding temperature}
+\newacronym{pct}{PCT}{peak clad temperature}
 \newacronym{pdf}{PDF}{probability density function}
 \newacronym{psi}{PSI}{Paul Scherrer Institut}
 \newacronym{postchf}{post-CHF}{post-Critical-Heat-Flux}
@@ -440,6 +494,6 @@
 \newacronym{trace}{TRACE}{TRAC/RELAP Computational Engine}
 \newacronym{uq}{UQ}{uncertainty quantification}
 \newacronym{usnrc}{USNRC}{the United States Nuclear Regulatory Commission}
-\newglossaryentry{sample}{name={sample}, description={a sample entry}}
+\newacronym{vv}{V\&V}{verification and validation}
 \newacronym{wgama}{WGAMA}{Working Group on the Analysis and Management of Accidents}
 %\newglossaryentry{sample}{name={sample}, description={a sample entry}}

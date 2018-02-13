@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171204141702" modified="D:20171209182526"/>
+<info created="D:20171204141702" modified="D:20180206224447"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -288,7 +288,7 @@ h
 224.045 681.804 l
 </path>
 <use name="mark/disk(sx)" pos="268 640" size="normal" stroke="black"/>
-<use name="mark/cross(sx)" pos="272 640" size="normal" stroke="black"/>
+<use name="mark/cross(sx)" pos="272 640" size="large" stroke="black"/>
 <text matrix="1 0 0 1 -74.374 -3.95001" transformations="translations" pos="312 684" stroke="black" type="label" width="18.222" height="4.294" depth="1.49" valign="baseline" style="math">src_1</text>
 <path matrix="0.958891 0 0 1 7.63321 16" stroke="white">
 192 592 m
@@ -300,7 +300,7 @@ h
 </path>
 <text matrix="1 0 0 1 -56 -126.989" transformations="translations" pos="328 760" stroke="black" type="label" width="19.523" height="4.297" depth="1.93" valign="baseline">$y$\textsubscript{obs.}</text>
 <text matrix="1 0 0 1 -80 -130.989" transformations="translations" pos="328 760" stroke="black" type="label" width="23.348" height="4.29" depth="2.85" valign="baseline">$y$\textsubscript{ref.,1}</text>
-<text matrix="1 0 0 1 4 -130.989" transformations="translations" pos="328 760" stroke="black" type="label" width="6.137" height="5.152" depth="2.32" valign="baseline" size="large">$y$</text>
+<text matrix="1 0 0 1 4 -130.989" transformations="translations" pos="328 760" stroke="black" type="label" width="6.137" height="5.152" depth="2.32" valign="baseline" size="large" style="math">y</text>
 <text matrix="1 0 0 0.460553 -112 410.457" transformations="translations" pos="288 620" stroke="black" type="label" width="10.18" height="7.412" depth="0" valign="baseline" size="LARGE" style="math">\pi</text>
 </page>
 </ipe>

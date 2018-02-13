@@ -12,18 +12,18 @@ followed by the objectives as well as the scope of the present doctoral research
 
 % Introductory Paragraph
 System code development is an effort to consolidate correlations and mechanistic models to create a phenomenological-based simulation code that can provide best-estimate results.
-This consolidated effort results in a code that can simulate a wide range of transients foreseen in nuclear power plant operation in a best-estimate manner.
+This consolidated effort results in a code that can simulate a wide range of transients foreseen in \gls[hyper=false]{npp} operation in a best-estimate manner.
 Alas, to come up with a consistent set of closure laws is a great challenge for code developers.
 
 % Closure Laws Difficulty, Conceptual
 The closure laws required to close the two-fluid model pose particularly difficult challenges \cite{Wulff2007}.
 For instance, to have a correlation of heat transfer between the wall and the fluid, temperature data from the wall, and the liquid and gas phases are needed.
 But measuring temperature of the individual phases in an arbitrary interfacial topology has its own technical difficulties to the extend that no such data is available to be implemented in the closure laws.
-Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfacial friction factor, wall friction factor, etc.) were generally carried out in adiabatic conditions.
-As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlation.
+Additionally, the experiments to obtain hydrodynamic closure laws (e.g., interfacial friction factor, wall friction factor) were generally carried out in adiabatic conditions.
+As a result, this excludes the coupling of any heat transfer phenomena between the phases and the wall in such correlations.
 
 % Closure Laws Difficult, Practical
-Furthermore, during the development of a simulation code, programming considerations also came into the picture.
+Furthermore, during the development of a code, programming considerations also came into the picture.
 For robustness, simplification is often required and continuity is enforced.
 Transitionary flow regime for which data is not available is often modeled to be the average of the two known bounding regimes.
 Different code developments, which used different assumptions and experimental databases, come up with different set of closure laws with their own parametrization (see for instance \cite{Nelson1992} for TRAC code and \cite{Bestion1990} for CATHARE code).
@@ -68,7 +68,7 @@ But, there has not been an orchestrated effort to incorporate the accumulated da
 The purpose of this research is to quantify the uncertainty of physical model parameters implemented in a \gls[hyper=false]{th} system code.
 The physical models of interest describe the phasic interactions in a complex multiphase flow during a reactor transient, namely heat, mass, and momentum exchanges between vapor, liquid and structures.
 These models are parametrized by physical or empirical parameters, the values of which are uncertain.
-This results in uncertain code predictions of important safety quantities, such as the evolution of the fuel cladding temperature during a postulated reactor transient.
+This results in uncertain code predictions of important safety quantities, such as the evolution of the fuel clad temperature during a postulated reactor transient.
 
 Adopting a probabilistic framework to conform to the statistical uncertainty propagation widely adopted in the field of nuclear engineering,
 the uncertainties in the parameters are represented as probability density functions (PDFs) or their approximations.
@@ -83,12 +83,12 @@ This is done in three steps by consolidating and adapting recent developments in
 	\item \emph{Analyze and better understand} the inputs/outputs relationship in a computer simulation with uncertain inputs.
 	\Glsfirst[hyper=false]{sa}, in particular \glsfirst[hyper=false]{gsa}, methods can be used to assist identifying which of the model parameters can be calibrated using the available data.
   An uncertainty analysis often starts a with large list of input parameters that may and may not be relevant (i.e., influential) to the simulation at hand.
-  A screening method can be used to remove the least influential parameters from the list.
+  A \emph{screening} method can be used to remove the least influential parameters from the list.
   Afterward, a variance decomposition method is employed to quantitatively analyze the contribution of the remaining influential parameters uncertainty on the prediction uncertainty.
-	Multiple types of data can be measured during experiments in a test facility (e.g., cladding temperature, pressure drop, etc.), it might be worthwhile to consider each one of them.
+	Multiple types of data can be measured during experiments in a test facility (e.g., clad temperature, pressure drop, etc.), it might be worthwhile to consider each one of them.
   Finally, for each of the different types,
 	the analysis is conducted on various derived \glspl[hyper=false]{qoi}, some of which explicitly consider the output as function.
-	By doing so, it is hoped that interesting model behavior with respect to its parameters perturbation can be revealed.
+	By doing so, it is hoped that interesting model behavior with respect to the input parameters perturbation can be revealed.
   
   Section~\ref{sub:intro_sa} provides an overview of the wide range of \gls[hyper=false]{sa} methods in the applied literature,
   while Chapter~\ref{ch:gsa} presents the details of the selected \gls[hyper=false]{sa} methods and their applications to a \gls[hyper=false]{trace} model.
@@ -142,12 +142,12 @@ There are several reasons for this emphasis as recognized by the \gls[hyper=fals
 	\item The models are adequately complex.
   It is complex that $4$ flow regimes are involved in a single phenomena: multiple sub-models, parametrized with numerous inputs, with multivariate outputs (both time- and space-dependent).
 	But as the source of data is from reflooding \glspl[hyper=false]{setf}, real plant system (and full scale) effects can be excluded and the ensuing analysis can be concentrated on a limited set of models.
-	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and (to calibrate) reflood models in system codes.
+	In fact, as already pointed out, reflooding \glspl[hyper=false]{setf} were designed to validate and to calibrate reflood models in system codes.
 
 % Reason 3
 	\item Multiple data of various types (pressure, temperature, etc.), taken with different experimental conditions (flow rate, system pressure, etc.), are typically available from experiment within the same facility.
 	As calibration in the present research is conducted using one experimental condition, it is important to validate the calibration results against the data with different experimental conditions albeit from the same experimental facility. 
-	Moreover, additional data from other reflooding \glspl[hyper=false]{setf} are also available.
+	Moreover, additional data from other reflooding \glspl[hyper=false]{setf} are available.
 	This is important for validating the proposed method further and expanding it to calibration against data from multiple facilities.
 	
 \end{itemize}
@@ -163,7 +163,7 @@ The main reasoning for this choice are twofold:
 First, statistical methods tend to require fewer assumptions regarding the model complexity.
 While they may be more computationally expensive than their non-statistical counterparts,
 they are also easier to set up, with minimal intrusion to the code itself, and subject to less severe dependence on the number of input parameters.
-Secondly, the ultimate results of the model parameters calibration (i.e., its uncertainty quantification) should be represented in terms of probability.
+Secondly, the ultimate results of the model parameters calibration (i.e., their quantified uncertainties) should be represented in terms of probability.
 As mentioned previously, this is to conform with the widely accepted practice of statistical uncertainty propagation in the nuclear engineering community.  
 
 % Closing

@@ -10,12 +10,12 @@ The second step of the analysis consisted of variance decomposition through the 
 \marginpar{Variance decomposition}
 This was a more detailed analysis where the contribution of each input parameter variation to a particular output variance was quantified.
 Since the number of code runs is directly proportional to the number of input parameters, 
-the screening procedure done in the first step allowed us to reduce the size of the problem and to generate a larger sample for a fewer code runs\footnote{Note that the total duration of the transient is set to be $600 \ [s]$ and each TRACE run required between $\sim 400 - 600 \ [CPUs]$, where $[CPUs] = $ ``Central Processing Unit seconds''}.
+the screening procedure done in the first step allowed us to reduce the size of the problem and to generate a larger sample for a fewer code runs\footnote{Note that the total duration of the transient is set to be $600 \ [s]$ and each TRACE run required between $\sim 400 - 600 \ [CPUs]$, where $[CPUs]$ is ``Central Processing Unit seconds''.}.
 A larger sample, in turn, led to a more precise Sobol' indices estimates.
 The experimental design matrix used to carry out the estimation was generated using a Sobol' quasi-random sequence generator \cite{Joe2008}.
 
 Different types of \glspl[hyper=false]{qoi} were investigated for this simulation experiment.
-\marginpar{Quantities of Interest}
+\marginpar{Quantities of Interest (QoIs)}
 The application of the Morris method to the TRACE model of the FEBA facility to rank the parameter importance was already demonstrated in \cite{Wicaksono2014} using the time-averaged temperature as QoI, 
 which is defined as
 \begin{equation}
@@ -24,8 +24,8 @@ which is defined as
 \end{equation}
 where the integration of the pointwise time-dependent reflood curve was approximated using the trapezoidal rule over the duration of the transient.
 The time-averaged temperature was selected as the simplest possible scalar \gls[hyper=false]{qoi} to capture the overall variation of the temperature transient 
-since it was previously shown that a high maximum cladding temperature as \gls[hyper=false]{qoi} would not necessarily imply a delayed time of quenching, and vice versa \cite{Wicaksono2014}. 
-To further investigate these aspects, the maximum cladding temperature and the quench time have also been considered as \glspl[hyper=false]{qoi} in this study.
+since it was previously shown that a high maximum clad temperature as \gls[hyper=false]{qoi} would not necessarily imply a delayed time of quenching, and vice versa \cite{Wicaksono2014}. 
+To further investigate these aspects, the maximum clad temperature and the quench time have also been considered as \glspl[hyper=false]{qoi} in this study.
 
 To represent better the notion of functional variation, \gls[hyper=false]{fda}-based techniques were applied to derive a new set of \glspl[hyper=false]{qoi}.
 \marginpar{FDA-based Quantities of Interest}
@@ -41,8 +41,8 @@ The flowchart of the simulation experiment for the analysis is illustrated and s
 
 \begin{sidewaysfigure}
 	\centering
-	\includegraphics[width=0.85\textwidth]{../figures/chapter3/ai/simulation_experiment.png}
-	\caption[Flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of the FEBA facility]{The flowchart for the implemented sensitivity analysis methodology applied to the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} facility.}
+	\includegraphics[width=0.85\textwidth]{../figures/chapter3/figures/simulation_experiment}
+	\caption[Flowchart for the implemented sensitivity analysis methodology applied to the TRACE model of the FEBA facility]{Flowchart for the implemented sensitivity analysis methodology applied to the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility.}
 	\label{fig:sensitivity_flowchart}
 \end{sidewaysfigure}
 

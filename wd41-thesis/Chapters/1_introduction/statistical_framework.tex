@@ -5,7 +5,7 @@
 % Introductory paragraph
 The set of strategies for sensitivity analysis, model approximation, and calibration presented above constitutes a consolidated statistical framework that will be used in this thesis for quantifying the uncertainty in model parameters of a \gls[hyper=false]{th} system code.
 This section presents a broad, and by no means exhaustive, literature review of the strategies used in this thesis.
-For each strategy, the review first reiterates its main motivation followed by the generic classification and the steps involved before briefly summarizing its applications in nuclear engineering \gls[hyper=false]{th}, both in the past and more recent times.
+For each strategy, the review first reiterates its main motivation followed by a generic classification and the steps involved before briefly summarizing its applications in nuclear engineering \gls[hyper=false]{th}, both in the past and more recent times.
 As will be outlined in Section~\ref{sec:intro_thesis_structure}, three main chapters of the thesis will be dedicated for each of the proposed strategies detailing the selected methods further and presenting their applications on a \gls[hyper=false]{trace} model.
 
 %-------------------------------------------------------------------------------
@@ -66,15 +66,15 @@ Last,
 the choice of a statistical framework for sensitivity analysis fits the Monte Carlo (MC)-based uncertainty propagation method widely adopted in nuclear reactor evaluation models \cite{Boyack1990, Nutt2004, Wallis2007, Glaeser2008}. 
 The method prescribes that the uncertain model input parameters (modeled as random variables) 
 should be simultaneously and randomly perturbed across their range of variations. 
-Multiple randomly generated input values are then propagated through the code to quantify the dispersion of the prediction (e.g., peak cladding temperature) 
+Multiple randomly generated input values are then propagated through the code to quantify the dispersion of the prediction (e.g., peak clad temperature) 
 which serves as a measure of the prediction reliability. 
 Statistical global sensitivity analysis thus complements the propagation step 
 by addressing the follow-up question on the identification of the most important parameters in driving the prediction uncertainty. 
 
 % Quantity of Interests
 Saltelli et al. \cite{Saltelli2006} emphasized that an analysis using computer simulation 
-\marginpar{Choosing model output as the quantity of interest}
-should be focused on the specific question the simulation is required to answer 
+\marginpar{Choosing model output as a quantity of interest}
+should be focused on a specific question the simulation is required to answer 
 as opposed to the analysis of each and every individual model output. 
 This is done through judicious choice of representative quantities of interest (QoIs) 
 that properly substantiate the problem at hand. 
@@ -94,7 +94,7 @@ In accordance to such approach, \glsfirst[hyper=false]{fda} popularized by Ramsa
 
 % Recent Development in Nuclear Engineering Application
 Despite these recent developments, 
-\marginpar{More recent development in nuclear engineering application}
+\marginpar{Developments in nuclear engineering application}
 there are very few publications on the application of global sensitivity analysis to nuclear thermal-hydraulics evaluation models specifically dealing with time-dependent output.
 Notable recent examples related to sensitivity analysis for a time-dependent \gls[hyper=false]{th} problem were the work done by Ionescu-Bujor et al. \cite{Ionescu-Bujor2005} 
 for reflooding experiment of degraded fuel rods, utilizing adjoint sensitivity method; 
@@ -131,9 +131,9 @@ This approximating model in the literature is referred to as \emph{metamodel}, \
 
 % Broad classification
 Nowadays, any of the terms above are used interchangeably and all are used to substitute the original simulator to reduce the computational cost of conducting computer experiments \cite{Simpson2001,Razavi2012,Asher2015}. 
-Subtle differences do exist.
-Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivations (i.e., surrogate modeling) according to the literature.
 \marginpar{Classification}
+Subtle differences do exist.
+Thus, it is worthwhile to consider a broad classification of surrogate models and the approaches to their derivations (i.e., surrogate modeling or metamodeling) according to the literature.
 Surrogate models according to their derivations can be broadly classified in two categories: the data-driven \emph{response surface surrogates} and the mechanistic \emph{reduced-order models} \cite{Razavi2012}.
 
 % Reduced order model
@@ -201,7 +201,7 @@ Note that the list is not at all exhaustive.
 % Development in nuclear engineering application
 Metamodel applications have a long history in nuclear engineering analyses due to the complexity of the simulators and the long-understood importance of quantifying the uncertainty of the predictions.
 \marginpar{Developments in nuclear engineering application}
-As such, historically, metamodels (specifically, the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
+Hence, historically, metamodels (specifically, the response surface method) have been applied for quantifying the prediction uncertainty forward through \gls[hyper=false]{mc} sampling as well as for statistical sensitivity analysis \cite{Cox1977,Ishigami1989}.
 The range of applications varied from quantifying the reactor safety margin \cite{Lellouche1990} for a \gls[hyper=false]{lbloca} scenario, propagating the uncertainty of fuel rods failure in the core \cite{Meyder1986} during the same scenario, to the uncertainty and sensitivity analyses of severe accident progressions \cite{Khatib-Rahbar1989}.
 In recent times, more advanced metamodels (e.g., \gls[hyper=false]{gp} metamodel) have been applied to more diverse engineering analysis;
 from the design optimization problem of fuel assembly \cite{Raza2008} and spacer grid \cite{Kim2005} to the calibration of physical models in \gls[hyper=false]{th} system code \cite{Wu2017} and fuel performance \cite{Higdon2013} code.\\
@@ -221,7 +221,7 @@ The framework offers flexibility in modeling various sources of uncertainty \cit
 % Bayesian Calibration
 Bayesian framework for the calibration of computer simulation mo\-del was popularized by the work of Kennedy and O'Hagan \cite{Kennedy2001}.
 \marginpar{Bayesian framework, Kennedy and O'Hagan approach}
-The main goal of the framework is similar to any calibration framework, that is to learn the proper values of model parameters and their uncertainties by taking into account different sources of uncertainty based on the observed data.
+The main goal of the framework is similar to any calibration framework, that is to learn the apropriate values of model parameters and their uncertainties by taking into account different sources of uncertainty based on the observed data.
 The distinct idea is to acknowledge that a systematic bias between a physics-based simulator and reality might exist and is often not known a priori.
 If the bias is not modeled properly, the calibration process might overfit the model parameters.
 That is, the calibrated model parameters will be overly sensitive to the calibration data and thus not applicable for prediction.
@@ -231,7 +231,7 @@ Due to its popularity, the term \emph{KOH approach} became synonymous to this pa
 It is adapted here to deal with the particular problem posed in the \gls[hyper=false]{premium} benchmark that itself represents a typical problem in nuclear engineering \gls[hyper=false]{th} analysis, as detailed in Chapter~\ref{ch:bayesian_calibration}.
 
 % Bayesian data analysis
-Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a formulation of a posterior distribution for the model parameters of interest and the computation involving the posterior distribution.
+Bayesian framework for model calibration consists of two main aspects \cite{Gelman2013}: a \emph{formulation} of a posterior distribution for the model parameters of interest and the \emph{computation} involving the posterior distribution.
 \marginpar{Steps in Bayesian framework}
 Regarding the first aspect, the KOH approach for model calibration, in essence, prescribes a probabilistic model for the data-generating process of the experimental data, incorporating the prediction by the simulator, the uncertain model bias term, and the uncertain model parameters into it.
 \marginpar{Bayesian framework, formulation}

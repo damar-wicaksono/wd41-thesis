@@ -9,17 +9,17 @@ and the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} is run using t
 
 % Explaining the figure
 Figs.~\ref{fig:ch2_plot_base_case_216_tc}, \ref{fig:ch2_plot_base_case_216_dp}, and~\ref{fig:ch2_plot_base_case_216_co} show the nominal \gls[hyper=false]{trace} predictions (i.e., the prediction with the nominal values of the input parameters) in comparison with the experimental data for \gls[hyper=false]{feba} test No. $216$ for three selected outputs of different types:
-the cladding temperature $TC$ at the mid-height assembly, the pressure drop $DP$ of the middle axial segment, and the liquid carryover $CO$ (up to the saturation of the collecting tank at $10\,[kg]$), respectively.
+the clad temperature $TC$ at the mid-height assembly, the pressure drop $DP$ of the middle axial segment, and the liquid carryover $CO$ (up to the saturation of the collecting tank at $10\,[kg]$), respectively.
 \bigtriplefigure[pos=tbhp,
                  mainlabel={fig:ch2_plot_base_case_216},
 			           maincaption={Nominal \gls[hyper=false]{trace} predictions (thick lines) for \gls[hyper=false]{feba} test No. $216$ in comparison with the experimental data (crosses) for three selected outputs. The thin lines in each panel indicate the predictions from $50$ selected realizations of the uncertainty propagation of the input parameters.},
 			           mainshortcaption={Nominal \gls[hyper=false]{trace} predictions for \gls[hyper=false]{feba} test No. $216$ in comparison with the experimental data for three selected outputs.},%
 			           leftopt={width=0.31\textwidth},
 			           leftlabel={fig:ch2_plot_base_case_216_tc},
-			           leftcaption={Mid-height Cladding temperature ($TC$)},
+			           leftcaption={Mid-height clad temperature ($TC$)},
 			           midopt={width=0.31\textwidth},
 			           midlabel={fig:ch2_plot_base_case_216_dp},
-			           midcaption={Mid. Pressure drop ($DP$)},
+			           midcaption={Mid. pressure drop ($DP$)},
 			           rightopt={width=0.31\textwidth},
 			           rightlabel={fig:ch2_plot_base_case_216_co},
 			           rightcaption={Liquid carryover ($CO$)},
@@ -39,9 +39,16 @@ On the other hand, there is a strong apparent bias (over-prediction) of the \gls
 
 % Make observation about variation in time and amplitude
 The thin lines plotted in each panel of Fig.~\ref{fig:ch2_plot_base_case_216} indicate the predictions from $50$ selected realizations of the uncertainty propagation.
-Particularly with respect to the clad temperature output, the predictions exhibit large variations both in terms of amplitude (vertical variation) and phase (horizontal variation).
+Particularly with respect to the clad temperature output, the predictions exhibit large variations both in terms of amplitude (vertical) and phase (horizontal).
 Specifically for the latter, the timing of important events like the time of quenching varies significantly across realizations.
 Moreover, for all the three outputs shown in the figure, the experimental data seems to be within the parametrization of \gls[hyper=false]{trace} according to the assumed prior uncertainties for the parameters.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=0.90\textwidth]{../figures/chapter2/figures/plotTraceUQPriorTC216}
+		\captionof{figure}[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the clad temperature output ($TC$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the clad temperature output ($TC$). The uncertainty bounds correspond to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
+	\label{fig:ch2_plot_trace_uq_prior_tc_216}
+\end{sidewaysfigure}
 
 Figs.~\ref{fig:ch2_plot_trace_uq_prior_tc_216}, \ref{fig:ch2_plot_trace_uq_prior_dp_216}, and~\ref{fig:ch2_plot_trace_uq_prior_co_216} show the complete results of the uncertainty propagation for the three types of output for \gls[hyper=false]{feba} test No. $216$ based on $1'000$ samples of input parameters values.
 The prediction uncertainty bands plotted in each panel of the figures refer to the pointwise symmetric $95\%$ probability.
@@ -49,31 +56,23 @@ That is, they are constructed based on the intervals between the $2.5$-th and $9
 Similar plots showing the results of all the $6$ \gls[hyper=false]{feba} tests are given in Appendix~\ref{app:tbl_results_uq_feba}.
 
 % FEBA Test No. 216 Prior Uncertainty Propagation, TC
-Fig.~\ref{fig:ch2_plot_trace_uq_prior_tc_216} shows the uncertainty propagation results for the cladding temperature $TC$ output at all $8$ axial levels.
+Fig.~\ref{fig:ch2_plot_trace_uq_prior_tc_216} shows the uncertainty propagation results for the clad temperature $TC$ output at all eight axial levels.
 As observed, for each axial level, the experimental data is well enveloped within the wide prediction uncertainty bands. 
 The uncertainty band becomes wider starting from the start of the transient up to the time of quenching.
 Furthermore, the uncertainty bands also become wider for the $TC$ predictions moving from the bottom to the top of the assembly.
-Note that the sampled values of the $27$ input parameters are not changed during a given transient (or simulation).
-Lastly, it can also be observed that the nominal \gls[hyper=false]{trace} predictions tends to have larger discrepancy with the experimental data above the mid-height assembly.
+Lastly, as observed, the nominal \gls[hyper=false]{trace} predictions tends to have larger discrepancy with the experimental data above the mid-height assembly.
 Although the time of quenching at all axial levels are well predicted, the $TC$ predictions above the mid-height assembly are underestimated during the transient up to the time of quenching. 
-
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=0.90\textwidth]{../figures/chapter2/figures/plotTraceUQPriorTC216}
-		\captionof{figure}[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the cladding temperature output ($TC$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the cladding temperature output ($TC$). The uncertainty bounds correspond to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
-	\label{fig:ch2_plot_trace_uq_prior_tc_216}
-\end{sidewaysfigure}
-
 % FEBA Test No. 216 Prior Uncertainty Propagation, DP
-Fig.~\ref{fig:ch2_plot_trace_uq_prior_dp_216} shows the uncertainty propagation results for the pressure drop $DP$ output at all $4$ axial segments.
-The plots in the figure shows the same pointwise symmetric $95\%$ probability of the prediction uncertainty as before.
-As observed, there is no major discrepancy between the \gls[hyper=false]{trace} predictions and the experimental data and the prediction uncertainty bands cover the experimental data especially during the transient (i.e., the ramp between two equilibrium values) well.
-\bigfigure[pos=!h,
+\bigfigure[pos=H,
            opt={width=1.0\textwidth},
            label={fig:ch2_plot_trace_uq_prior_dp_216},
            shortcaption={Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the pressure drop output ($DP$).}]
 {../figures/chapter2/figures/plotTraceUQPriorDP216}
 {Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the pressure drop output ($DP$). The uncertainty bound corresponds to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
+
+Fig.~\ref{fig:ch2_plot_trace_uq_prior_dp_216} shows the uncertainty propagation results for the pressure drop $DP$ output at all four axial segments.
+The plots in the figure shows the same pointwise symmetric $95\%$ probability of the prediction uncertainty as before.
+As observed, there is no major discrepancy between the \gls[hyper=false]{trace} predictions and the experimental data and the uncertainty bands cover the experimental data well, especially during the transient (i.e., the ramp between two equilibrium values).
 
 % FEBA Test No. 216 Prior Uncertainty Propagation, CO
 Finally, Fig.~\ref{fig:ch2_plot_trace_uq_prior_dp_216} shows the uncertainty propagation results for the liquid carryover $CO$ output.
@@ -82,6 +81,6 @@ In particular, the propagation of the prior input parameters uncertainties resul
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{../figures/chapter2/figures/plotTraceUQPriorCO216}
-    \caption[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryover output ($CO$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryvover output ($CO$). The uncertainty bound corresponds to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
+    \caption[Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryover output ($CO$).]{Propagation of the $27$ input parameters prior uncertainties on FEBA test No. $216$ for the liquid carryover output ($CO$). The bound corresponds to the symmetric ($95\%$) probability; solid lines and crosses indicate the simulation with the nominal parameters values and the experimental data, respectively.}
     \label{fig:ch2_plot_trace_uq_prior_co_216}
 \end{figure}

@@ -12,9 +12,9 @@ including training sample size as well as the choice of experimental design and 
 It was found that higher \glspl[hyper=false]{pc} tends to be harder to fit.
 \marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, clad temperature output}
 That is, more and more training samples were required to have a \gls[hyper=false]{gp} metamodel of good predictive accuracy.
-Fig.~\ref{fig:ch4_plot_pc_q2_tc} shows the predictivity coefficient $Q_2$ as function of the training sample size for 3 different \glspl[hyper=false]{pc} \gls[hyper=false]{gp} metamodels with respect to the clad temperature output.
+Fig.~\ref{fig:ch4_plot_pc_q2_tc} shows the predictivity coefficient $Q_2$ as function of the training sample size for three different \glspl[hyper=false]{pc} \gls[hyper=false]{gp} metamodels with respect to the clad temperature output.
 The $Q_2$ was calculated based on the validation data set of $5'000$ data points (i.e., independent \gls[hyper=false]{trace} runs).
-The multiple points per training sample size correspond to \gls[hyper=false]{gp} metamodels constructed using different experimental designs, covariance kernel functions, and the $5$ replications.
+The multiple points per training sample size correspond to \gls[hyper=false]{gp} metamodels constructed using different experimental designs, covariance kernel functions, and the five replications.
 \bigfigure[pos=!tbhp,
 					 opt={width=0.82\textwidth},
            label={fig:ch4_plot_pc_q2_tc},
@@ -39,9 +39,9 @@ Furthermore, the plot also shows that the variations in the performance tends to
 
 % Describing the figure itself (as it is the first time it appears)
 Fig.~\ref{fig:ch4_plot_pc_gp_construction_tc} summarizes the effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodels to predict the clad temperature output.
-The training samples were replicated $5$ times for each size and for each design.
-The predictive performance was assessed in terms of the \gls[hyper=false]{rmse} which was computed by retaining the first $7$ \glspl[hyper=false]{pc} and using the validation data set.
-As such the \gls[hyper=false]{rmse} shown in the figure represents the combined error due to \gls[hyper=false]{pc} truncation and misprediction of the \gls[hyper=false]{pc} scores.
+The training samples were replicated five times for each size and for each design.
+The predictive performance was assessed in terms of the \gls[hyper=false]{rmse} which was computed by retaining the first seven \glspl[hyper=false]{pc} and using the validation data set.
+Therefore, the \gls[hyper=false]{rmse} shown in the figure represents the combined error due to \gls[hyper=false]{pc} truncation and misprediction of the \gls[hyper=false]{pc} scores.
 
 % Describing the finding in the figure
 The size of the training sample was the most important factor in determining the predictive performance of a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel.
@@ -68,18 +68,18 @@ Those $10$ \glspl[hyper=false]{pc} carried close to $100\%$ of the total output 
 % The Liquid carryover output
 Finally, the liquid carryover output was found to be the easiest to construct.
 \marginpar{\gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, liquid carryover output}
-While the predictive performance of the \gls[hyper=false]{gp} metamodel with respect to the pressure drop output converged faster across the first $5$ \gls[hyper=false]{pc} scores (Fig.~\ref{fig:ch4_plot_pc_q2_dp}), the first $5$ \glspl[hyper=false]{pc} of the liquid carryover output contained almost all of the total output variance (Fig.~\ref{fig:ch4_plot_pc_q2_co}).
+While the predictive performance of the \gls[hyper=false]{gp} metamodel with respect to the pressure drop output converged faster across the first five \gls[hyper=false]{pc} scores (Fig.~\ref{fig:ch4_plot_pc_q2_dp}), those \glspl[hyper=false]{pc} of the liquid carryover output contained almost all of the total output variance (Fig.~\ref{fig:ch4_plot_pc_q2_co}).
 \bigfigure[pos=!tbhp,
 					 opt={width=0.85\textwidth},
            label={fig:ch4_plot_pc_q2_co},
            shortcaption={Convergence of \gls[hyper=false]{gp} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with the liquid carryover output}]
 {../figures/chapter4/figures/plotPCQ2CO}
-{Convergence of \gls[hyper=false]{gp} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with liquid carryover output and the $Q_2$ validation metric. The number inside parentheses is the explained variance of the output by the \gls[hyper=false]{pc} and the cumulative explained variance of the first $5$ \glspl[hyper=false]{pc} is about $99\%$.}
+{Convergence of \gls[hyper=false]{gp} metamodel with increasing number of training samples with respect to the standardized \glspl[hyper=false]{pc} scores associated with liquid carryover output and the $Q_2$ validation metric. The number inside parentheses is the explained variance of the output by the \gls[hyper=false]{pc} and the cumulative explained variance of the first five \glspl[hyper=false]{pc} is about $99\%$.}
 
 
 % Describing finding in the figure, pressure drop output
 The effect of different training sample sizes, types of experimental design, and types of covariance kernel function on the predictive performance of the constructed \gls[hyper=false]{gp} \gls[hyper=false]{pc} were also investigated with respect to the pressure drop and the liquid carryover outputs.
-$10$ and $5$ \glspl[hyper=false]{pc} were used to compute the predicted reconstruction error for the pressure drop and the liquid carryover outputs, respectively. 
+Ten and five \glspl[hyper=false]{pc} were used to compute the predicted reconstruction error for the pressure drop and the liquid carryover outputs, respectively. 
 The findings for these two outputs were also similar to the ones for the clad temperature output:
 the training sample size was the most important factor in determining the predictive performance,
 there was a relatively minor effect of the choice of covariance kernel functions especially in terms of the performance variation (with an exception of the Gaussian kernel function which has the worst performance in terms of consistency across replications),

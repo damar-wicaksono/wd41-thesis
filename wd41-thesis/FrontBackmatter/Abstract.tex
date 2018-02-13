@@ -1,15 +1,15 @@
 %*******************************************************
-% Abstract
+% Abstract, Resume, and Intisari
 %*******************************************************
-%\renewcommand{\abstractname}{Abstract}
-\pdfbookmark[1]{Abstract}{Abstract}
-\addcontentsline{toc}{chapter}{Abstract}
 \begingroup
 \let\clearpage\relax
 \let\cleardoublepage\relax
 \let\cleardoublepage\relax
 
+%------------------
 \chapter*{Abstract}
+%------------------
+\addcontentsline{toc}{chapter}{Abstract}
 
 % Context and Need
 Nuclear \gls[hyper=false]{th} system codes use several parame\-trized physical or empirical models to describe complex two-phase flow phenomena.
@@ -21,24 +21,33 @@ The present doctoral research aims to quantify the uncertainty of physical model
 Specifically, this thesis develops a methodology to use experimental data to inform these uncertainties in a more objective manner.
 The methodology is based on a probabilistic framework and consists of three steps adapted from recent developments in applied statistics: \gls[hyper=false]{gsa}, metamodeling, and Bayesian calibration.
 
-% 
+% Introducing FEBA facility
 The methodology is applied to reflood experiments from the \glsentryshort{feba} \gls[hyper=false]{setf}, which are modeled with the \gls[hyper=false]{th} system code \glsentryshort{trace}.
-Reflood is chosen as a relevant phenomenon for the safety analysis of \glspl[hyper=false]{lwr} and three typical time-dependent outputs are investigated: cladding temperature, pressure drops and liquid carryover.
+Reflood is chosen as a relevant phenomenon for the safety analysis of \glspl[hyper=false]{lwr} and three typical time-dependent outputs are investigated: clad temperature, pressure drops and liquid carryover.
 
+% First Step - Global Sensitivity Analysis
 In the first step, \gls[hyper=false]{gsa} allows screening out input parameters that have a low impact on the reflood transient.
-\gls[hyper=false]{fda} is then used to reduce the dimensionality of the time-dependent code outputs, while preserving their interpretability.
-The resulting quantities can be used once more with \gls[hyper=false]{th} to investigate, quantitatively, the effect of the input parameters on the overall time-dependent outputs.
+\Glsfirst[hyper=false]{fda} is then used to reduce the dimensionality of the time-dependent code outputs, while preserving their interpretability.
+The resulting quantities can be used once more with \gls[hyper=false]{gsa} to investigate, quantitatively, the effect of the input parameters on the overall time-dependent outputs.
 
+% Second Step - Metamodeling
 In the second step, a \gls[hyper=false]{gp} metamodel is developed and validated as a surrogate for the TRACE model.
-The average prediction error of the metamodel is sufficient to predict all considered outputs, and its computational cost is less than $5\,[s]$ as compared to $6-15\,[min]$ per \glsentryshort{trace} run. 
+The average prediction error of the metamodel is sufficiently low to predict all considered outputs, and its computational cost is less than $5\,[s]$ as compared to $6-15\,[min]$ per \glsentryshort{trace} run. 
 
+% Third Step - Bayesian Calibration
 In the final step, the a posteriori model parameter uncertainties are quantified by calibration on a selected test from the \glsentryshort{feba} experiments.
-Several posteriors \glspl[hyper=false]{pdf} corresponding to different calibration schemes -- with and without model bias term and for different types of output -- are formulated and directly sampled using an \gls[hyper=false]{mcmc} ensemble sampler and the \glsentryshort{gp} metamodel. The posterior samples are then propagated in the set of \glsentryshort{feba} experiments to check the validity of the posterior model parameter values and uncertainties. 
+Several posterior \glspl[hyper=false]{pdf} corresponding to different calibration schemes -- with and without model bias term and for different types of output -- are formulated and directly sampled using a \gls[hyper=false]{mcmc} ensemble sampler and the \glsentryshort{gp} metamodel.
+The posterior samples are then propagated in a set of \glsentryshort{feba} experiments to check the validity of the posterior model parameter values and uncertainties. 
 
-The calibration is performed on different types of output to inform model parameters that would have otherwise remained non-identifiable. The calibration scheme with model bias term is able to constrain the prior uncertainties of the model parameters while keeping the nominal TRACE parameters values within the posterior uncertainty interval. That is in contrast with the results of the calibration without model bias term, in which the posterior uncertainties are concentrated on either sides of the prior range, and at times do not include the nominal TRACE parameters values. Finally, except for a few outputs – the cladding temperature output at the top assembly and the liquid carryover – the relative performance of all posterior uncertainties is insensitive to boundary conditions of the different FEBA tests. 
+% Final Step - Results and Verification
+The calibration is performed on different types of output to inform model parameters that would have otherwise remained non-identifiable.
+The calibration scheme with model bias term is able to constrain the prior uncertainties of the model parameters while keeping the nominal \glsentryshort{trace} parameters values within the posterior uncertainty interval.
+That is in contrast with the results of the calibration without model bias term, in which the posterior uncertainties are concentrated on either side of the prior range, and at times do not include the nominal \glsentryshort{trace} parameters values.
+Finally, except for a few outputs -- the clad temperature output at the top assembly and the liquid carryover --, the relative performance of all posterior uncertainties is insensitive to boundary conditions of the different \glsentryshort{feba} tests. 
 
+% Conclusion and Outlook
 The proposed methodology was shown to successfully inform the uncertainty of the model parameters involved in a reflood transient.
-In the future the methodology can be applied to model parameters involved in other \gls[hyper=false]{th} phenomena using data from \glspl[hyper=false]{setf} and, hopefully, contributes to achieve the goal of quantifying uncertainties for transients considered in the safety assessment of LWRs.
+In the future, the methodology can be applied to model parameters involved in other \gls[hyper=false]{th} phenomena using data from \glspl[hyper=false]{setf} and, hopefully, contributes to achieve the goal of quantifying uncertainties for transients considered in the safety assessment of \glspl[hyper=false]{lwr}.
 
 \vfill
 
@@ -51,58 +60,132 @@ reflood,
 \glsfirst[hyper=false]{gp} metamodel,
 Bayesian calibration
 
-\vfill
-
-\clearpage
 \newpage
 
 \begin{otherlanguage}{ngerman}
-\pdfbookmark[1]{R\'esum\'e}{R\'esum\'e}
+%--------------------
 \chapter*{R\'esum\'e}
+%--------------------
+\addcontentsline{toc}{chapter}{R\'esum\'e}
 
+% Context and Need
 Les codes de système thermohydraulique nucléaires utilisent plusieurs modèles paramétriques physiques ou empiriques pour modéliser des écoulements diphasiques complexes.
 La précision de leurs prédictions est de fait directement affectée par les incertitudes des paramètres de ces modèles.
 Du fait que ces paramètres ne sont souvent ni mesurables ni n’ont de significations physique propres, leurs incertitudes sont généralement déterminés par un jugement d’expert.
 
-Ce travail de thèse a pour but de quantifier les incertitudes des paramètres des modèles physiques implémentés dans les codes de système thermohydraulique en utilisant des données expérimentales. Cette thèse développe plus spécifiquement une méthodologie qui utilise les données expérimentales pour quantifier ces incertitudes de manière plus objective. La méthodologie utilise une approche probabiliste et comprend trois étapes qui proviennent de développements récents dans le domaine des méthodes statistiques appliquées : analyse de sensibilité globale (GSA), méta-modèle, et calibration Bayésienne. 
+% Goal
+Ce travail de thèse a pour but de quantifier les incertitudes des paramètres des modèles physiques implémentés dans les codes de système thermohydraulique en utilisant des données expérimentales.
+Cette thèse développe plus spécifiquement une méthodologie qui utilise les données expérimentales pour quantifier ces incertitudes de manière plus objective.
+La méthodologie utilise une approche probabiliste et comprend trois étapes qui proviennent de développements récents dans le domaine des méthodes statistiques appliquées : analyse de sensibilité globale (GSA), méta-modèle, et calibration Bayésienne. 
 
-La méthode est appliquée dans le cadre d’expériences de renoyage qui se sont déroulés dans l’installation FEBA « Flooding Experiments with Blocked Arrays » et qui sont modélisées avec le code de thermohydraulique TRACE. Le renoyage est choisi car il représente un phénomène d’importance majeure dans le cadre des analyses de sûreté des réacteurs à eau légère (LWR). Trois types de sortie du code qui dépendent du temps sont observés : la température de la gaine, la réduction de pression et la quantité de liquide entrainé hors de la section de test.
+% Introducing FEBA facility
+La méthode est appliquée dans le cadre d’expériences de renoyage qui se sont déroulés dans l’installation \glsentryshort{feba} et qui sont modélisées avec le code de thermohydraulique \glsentryshort{trace}.
+Le renoyage est choisi car il représente un phénomène d’importance majeure dans le cadre des analyses de sûreté des réacteurs à eau légère (\glsentryshort{lwr}).
+Trois types de sortie du code qui dépendent du temps sont observés : la température de la gaine, la réduction de pression et la quantité de liquide entrainé hors de la section de test.
 
-Dans la première étape de la méthodologie, l’analyse de sensitivité globale permet d’éliminer des paramètres d’entrées du code qui ont une faible influence sur le transitoire de renoyage. L’analyse de fonctions (« Functional Data Analysis ») permet de réduire le nombre de dimensions des sorties du code dépendant du temps tout en préservant leurs interprétabilités. Ceci permet, à l’aide d’une nouvelle analyse de sensibilité, de quantifier les effets des paramètres d’entrées  sur les paramètres de sorties du code considérés dans leur ensemble.
+% First Step - Global Sensitivity Analysis
+Dans la première étape de la méthodologie, l’analyse de sensitivité globale permet d’éliminer des paramètres d’entrées du code qui ont une faible influence sur le transitoire de renoyage.
+L’analyse de fonctions (\gls[hyper=false]{fda}) permet de réduire le nombre de dimensions des sorties du code dépendant du temps tout en préservant leurs interprétabilités.
+Ceci permet, à l’aide d’une nouvelle analyse de sensibilité, de quantifier les effets des paramètres d’entrées  sur les paramètres de sorties du code considérés dans leur ensemble.
 
-Dans la seconde étape, un méta-modèle basé sur un processus gaussien (GP) est développé et validé comme substitut au modèle TRACE. Les incertitudes sur les prédictions du méta-modèle sont suffisamment faibles pour prédire précisément toute les sorties d’intérêt. Le méta-modèle est évalué en moins de $5\,[s]$ contre $6-15\,[min]$ pour le modèle TRACE.
+% Second Step - Metamodeling
+Dans la seconde étape, un méta-modèle basé sur un processus gaussien (\glsentryshort{gp}) est développé et validé comme substitut au modèle \glsentryshort{trace}.
+Les incertitudes sur les prédictions du méta-modèle sont suffisamment faibles pour prédire précisément toute les sorties d’intérêt. Le méta-modèle est évalué en moins de $5\,[s]$ contre $6-15\,[min]$ pour le modèle \glsentryshort{trace}.
 
-Dans la dernière étape, l’incertitude a posteriori sur les paramètres des modèles est quantifiée par calibration sur une expérience choisie parmi l’ensemble des expériences FEBA considérés dans cette thèse. Plusieurs densités de probabilités a posteriori correspondant à différents schémas de calibration (avec et sans terme prenant en compte le biais du modèle et pour différents types de sortie du code)  sont formulées et directement échantillonnées en utilisant le méta-modèle gaussien et un échantillonneur d’ensemble basé sur la méthode de Monte-Carlo par chaînes de Markov (MCMC). Les échantillons obtenus sont propagés dans l’ensemble des expériences FEBA considérés pour vérifier la validité des valeurs et incertitudes des paramètres des modèles obtenus par calibration. 
+% Third Step - Bayesian Calibration
+Dans la dernière étape, l’incertitude a posteriori sur les paramètres des modèles est quantifiée par calibration sur une expérience choisie parmi l’ensemble des expériences \glsentryshort{feba} considérés dans cette thèse.
+Plusieurs densités de probabilités a posteriori correspondant à différents schémas de calibration (avec et sans terme prenant en compte le biais du modèle et pour différents types de sortie du code) sont formulées et directement échantillonnées en utilisant le méta-modèle gaussien et un échantillonneur d’ensemble basé sur la méthode de Monte-Carlo par chaînes de Markov (\glsentryshort{mcmc}).
+Les échantillons obtenus sont propagés dans l’ensemble des expériences \glsentryshort{feba} considérés pour vérifier la validité des valeurs et incertitudes des paramètres des modèles obtenus par calibration. 
 
-En utilisant différents types de sorties du code la calibration a permis d’améliorer les incertitudes de certains paramètres qui seraient dans le cas contraire restés à leurs valeurs d’origine. La calibration qui prend en compte le biais du modèle a quant à elle permis de contraindre les incertitudes a priori des paramètres tout en garantissant que leurs valeurs nominales restent dans l’intervalle de confiance a posteriori. Ce n’est pas le cas pour la calibration qui ne prend pas en compte le biais du modèle. Pour cette dernière, les incertitudes a posteriori sont concentrées sur les bords de l’intervalle de confiance a priori des paramètres et parfois n’incluent pas leurs valeurs nominales. Finalement, excepté pour la température de la gaine au sommet de l’assemblage et la quantité de liquide transporté hors du système, les performances de toutes les incertitudes a posteriori obtenues ne sont pas sensibles aux conditions limites des différentes expériences FEBA considérées. 
+% Final Step - Results and Verification
+En utilisant différents types de sorties du code la calibration a permis d’améliorer les incertitudes de certains paramètres qui seraient dans le cas contraire restés à leurs valeurs d’origine.
+La calibration qui prend en compte le biais du modèle a quant à elle permis de contraindre les incertitudes a priori des paramètres tout en garantissant que leurs valeurs nominales restent dans l’intervalle de confiance a posteriori.
+Ce n’est pas le cas pour la calibration qui ne prend pas en compte le biais du modèle.
+Pour cette dernière, les incertitudes a posteriori sont concentrées sur les bords de l’intervalle de confiance a priori des paramètres et parfois n’incluent pas leurs valeurs nominales.
+Finalement, excepté pour la température de la gaine au sommet de l’assemblage et la quantité de liquide transporté hors du système, les performances de toutes les incertitudes a posteriori obtenues ne sont pas sensibles aux conditions limites des différentes expériences FEBA considérées. 
 
-La méthodologie proposée dans cette thèse a permis de réduire les incertitudes des paramètres des modèles utilisés dans la modélisation du transitoire de renoyage. Dans le future, cette méthodologie pourra être mise en œuvre avec des modèles impliqués dans d’autres phénomènes thermohydrauliques en utilisant des données issues d’autres installations pour l’étude d’effet thermohydraulique (« Separate Effect Test Facilities »), et pourquoi pas ainsi contribué à atteindre le but de quantifier les incertitudes dans les transitoires considérés dans l’analyse de sûreté des réacteurs à eau légère.  
+% Conclusion and Outlook
+La méthodologie proposée dans cette thèse a permis de réduire les incertitudes des paramètres des modèles utilisés dans la modélisation du transitoire de renoyage.
+Dans le future, cette méthodologie pourra être mise en œuvre avec des modèles impliqués dans d’autres phénomènes thermohydrauliques en utilisant des données issues d’autres installations pour l’étude d’effet thermohydraulique (\gls[hyper=false]{setf}), et pourquoi pas ainsi contribué à atteindre le but de quantifier les incertitudes dans les transitoires considérés dans l’analyse de sûreté des réacteurs à eau légère.  
 
 \vfill
 
 \textsc{mots-clefs}:
 système thermohydraulique,
 reflood,
-\gls[hyper=false]{trace} code,
-quantification d'Incertitude \glsentryshort{uq},
-analyse de sensitivité globale \glsentryshort{gsa},
-méta-modèle processus gaussien \glsentryshort[hyper=false]{gp},
+code \glsfirst[hyper=false]{trace},
+quantification d'Incertitude (\glsentryshort{uq}),
+analyse de sensitivité globale (\glsentryshort{gsa}),
+méta-modèle processus gaussien (\glsentryshort{gp}),
 calibration Bayésienne
-
 
 \end{otherlanguage}
 
-%\chapter*{Intisari}
-%Short summary of the contents in English\dots a great guide by 
-%Kent Beck how to write good abstracts can be found here:  
-%\begin{center}
-%\url{https://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}
-%\end{center}
-
-%\vfill
-
-%\endgroup			
-
-%\vfill
 \newpage
-\endgroup
+
+%------------------
+\chapter*{Intisari}
+%------------------
+\addcontentsline{toc}{chapter}{Intisari}
+
+% Context and Need
+Kode thermo-hidrolika sistem tenaga nuklir menggunakan beberapa model parametrik, baik empiris maupun mekanistis, untuk menggambarkan fenomena-fenomena aliran dua fase yang kompleks.   
+Keandalan prediksi kode thermo-hidrolika sistem dipengaruhi oleh ketidakpastian yang berhubungan dengan parameter-parameter di dalam model-model tersebut.
+Karena parameter-parameter tersebut seringkali tidak bisa diukur secara langsung, dan bahkan tidak memiliki arti fisik yang melekat, ketidakpastian yang berhubungan dengan parame\-ter-parameter tersebut biasanya ditentukan dengan pertimbangan ahli.
+
+% Goal
+Tujuan dari riset doktoral ini adalah untuk melakukan kuantifikasi ketidakpastian dari parameter-parameter yang diimplementasikan di dalam kode thermo-hidrolika sistem berdasarkan data dari eksperimen.
+Khususnya, disertasi ini mengembangkan sebuah metodologi untuk memanfaatkan data dari eksperimen guna memperbarui ketidakpastian tersebut dengan cara yang lebih objektif.
+Metodologi yang diajukan ini dikembangkan berdasarkan kerangka kerja probabilistis dan terdiri dari tiga langkah yang diadaptasi dari perkembang\-an terkini dalam statistika terapan:
+analisis sensitivitas global (\emph{global sensitivity analysis}, \glsentryshort{gsa}), pemetamodelan, dan kalibrasi Bayes.
+
+% Introducing FEBA facility
+Metodologi tersebut kemudian diterapkan pada eksperimen \emph{reflood} di fasilitas uji efek terpisah \glsentryshort{feba}, yang dimodelkan dengan kode thermo-hidrolika sistem \glsentryshort{trace}.
+\emph{Reflood} dipilih sebagai fenomena yang relevan dalam analisis keselamatan reaktor air ringan.
+Investigasi dilakukan terhadap tiga keluaran utama gayut-waktu: temperatur cladding, penurunan tekanan, dan \emph{carryover} cairan.
+
+% First Step - Global Sensitivity Analysis
+Di langkah yang pertama, analisis sensitivitas global mampu me\-nyaring parameter-parameter yang kurang berpengaruh terhadap keluaran simulasi \emph{reflood}. 
+Kemudian, analisis data fungsi (\emph{functional data analysis}, \glsentryshort{fda}) digunakan untuk mereduksi dimensi keluaran gayut-waktu, sembari mempertahan\-kan penafsiran keluaran tersebut.
+Besaran-besar\-an yang dihasilkan dapat digunakan dengan analisis sensitivitas global untuk menginvestigasi, secara kuantitatif, efek parameter masukan terhadap keluaran gayut-waktu secara menyeluruh.
+
+% Second Step - Metamodeling
+Di langkah yang kedua, sebuah metamodel berdasarkan proses Gauss (\emph{Gaussian process}, \glsentryshort{gp}) dikembangkan dan divalidasi untuk digunakan sebagai pengganti model \glsentryshort{trace}.
+Kesalahan prediksi rerata metamodel tersebut cukup rendah untuk memprediksi secara akurat semua keluaran-keluaran yang disebut di atas.
+Terlebih lagi, biaya komputasi evaluasi dengan metamodel membutuhkan kurang dari $5$ detik untuk tiap evaluasi, dibandingkan dengan waktu yang dibutuhkan \glsentryshort{trace} untuk tiap evaluasi antara $6$ sampai $15$ menit.
+
+% Third Step - Bayesian Calibration
+Di langkah yang terakhir, ketidakpastian dari parameter-parameter model dikuantifikasi secara a posteriori melalui kalibrasi berdasarkan data dari uji terpilih \glsentryshort{feba}.
+Beberapa fungsi densitas peluang (\emph{probability density function}, \gls[hyper=false]{pdf}) posterior yang terkait dengan beberapa skema kalibrasi -- baik dengan mempertimbangkan suku ketidaksesuaian model (\emph{model bias term}) maupun tidak, dan dengan mempertimbangkan berbagai macam tipe keluaran -- diformulasikan.
+Dari formulasi tersebut, sampel langsung diambil secara acak menggunakan algoritma Monte Carlo Rantai Markov (\emph{Markov Chain Monte Carlo}, \glsentryshort{mcmc}) ansambel dan metamodel proses Gauss;
+dan kemudian dipro\-pagasikan untuk beberapa uji \glsentryshort{feba} guna memastikan validitas nilai dan ketidakpastian dari parameter-parame\-ter model tersebut.
+
+% Final Step - Results and Verification
+Kalibrasi dilakukan terhadap beberapa tipe keluaran untuk memperbarui ketidakpastian dari parameter-parameter model.
+Jika keluar\-an-keluaran tersebut tidak dipertimbangkan, maka ketidakpastian dari beberapa parameter-parameter model tidak dapat diperbarui.
+Skema kalibrasi dengan suku ketidaksesuaian model mampu membatasi ketidakpastian awal dari parameter-paremeter tersebut, sembari mempertahankan nilai nominal parameter-parameter \glsentryshort{trace} di dalam rentang ketidakpastian akhir.
+Hasil ini berlawanan dengan hasil dari kalibrasi tanpa suku ketidaksesuaian tersebut, sedemikian hingga ketidakpastian akhir terpusatkan di salah satu sisi rentang ketidakpastian awal, dan kadang tidak mengikutsertakan nilai nominal para\-meter-parameter \glsentryshort{trace}.
+Kecuali untuk beberapa keluaran -- temperatur cladding di bagian atas rangkaian fasilitas uji dan \emph{carryover} cairan --, kinerja relatif dari ketidakpastian akhir tidak dipengaruhi oleh syarat batas dari beberapa uji \glsentryshort{feba}.
+
+% Conclusion and Outlook
+Metodologi yang diajukan di atas berhasil memperbarui ketidakpastian dari parameter-parameter model yang berhubungan dengan simulasi \emph{reflood}.
+Pada masa yang akan datang, metodologi ini dapat diterapkan untuk parameter-parameter model yang berhubungan dengan simulasi fenomena-fenomena thermo-hidrolika lainnya menggunakan data dari berbagai fasilitas uji efek terpisah.
+Metodologi ini juga diharapkan dapat memberikan kontribusi dalam melakukan kuantifikasi ketidakpastian secara menyeluruh dalam penilaian keselamatan reaktor air ringan.
+
+\vfill
+
+\textsc{kata kunci}:
+thermo-hidrolika sistem,
+reflood,
+kode \glsfirst[hyper=false]{trace},
+kuantifikasi ketidakpastian (\glsentryshort{uq}),
+analisis sensitivitas (\glsentryshort{gsa}),
+metamodel proses Gauss (\glsentryshort{gp}),
+Kalibrasi Bayes
+
+\newpage
+
+\endgroup			
+
+\vfill
+
