@@ -1,2 +1,4 @@
-Thesis Overview: Methodological Roadmap
-=======================================
+.. _intro_thesis_structure:
+
+Structure of the Thesis
+=======================
