@@ -1,4 +1,3 @@
-
 Glossary
 ========
 
@@ -8,10 +7,16 @@ Glossary
      loss-of-coolant-accident(s)
 
     LWR 
-     light water reactor(s)
+     light water reactor
+
+    LWRs
+     light water reactors
 
     NPP 
-     Nuclear power plant(s)
+     Nuclear power plant
+
+    NPPs
+     Nuclear power plants
 
     PCT
      peak clad temperature
