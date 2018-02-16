@@ -72,3 +72,4 @@ In the future the methodology can be applied to model parameters involved in oth
    4_gp_regression/index.rst
    5_bayesian_calibration/index.rst
    zbibliography.rst
+   glossary.rst

@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'wd41-thesis'
-copyright = '2017, Damar Wicaksono'
+copyright = '2018, Damar Wicaksono'
 author = 'Damar Wicaksono'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -79,6 +79,8 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# Add Figure numbering
+numfig = True
 
 # -- Options for HTML output ----------------------------------------------
 
