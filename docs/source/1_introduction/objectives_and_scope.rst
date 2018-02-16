@@ -1,2 +1,4 @@
-Problem and Objective
-=====================
+.. _intro_objectives_and_scope:
+
+Objectives and Scope
+====================

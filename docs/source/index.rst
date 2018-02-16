@@ -66,7 +66,7 @@ In the future the methodology can be applied to model parameters involved in oth
    :maxdepth: 2
    :caption: Contents:
 
-   Uncertainty Quantification in Nuclear Engineering Thermal-Hydraulics <1_introduction/index.rst>
+   1_introduction/index.rst
    2_trace_reflood/index.rst
    3_gsa/index.rst
    4_gp_regression/index.rst
