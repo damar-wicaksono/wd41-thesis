@@ -13,13 +13,19 @@ Glossary
      light water reactors
 
     NPP 
-     Nuclear power plant
+     nuclear power plant
 
     NPPs
-     Nuclear power plants
+     nuclear power plants
 
     PCT
      peak clad temperature
 
+    QoI
+     quantity of interest
+
+    QoIs
+     quantities of interest
+
     TH 
-     Thermal-hydraulics
+     thermal-hydraulics
