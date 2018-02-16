@@ -12,6 +12,9 @@ Glossary
     LWRs
      light water reactors
 
+    MC
+     Monte Carlo
+
     NPP 
      nuclear power plant
 
@@ -20,6 +23,12 @@ Glossary
 
     PCT
      peak clad temperature
+
+    PDF
+     probability density function
+
+    PDFs
+     probability density functions
 
     QoI
      quantity of interest
