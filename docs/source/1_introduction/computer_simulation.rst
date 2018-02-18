@@ -94,6 +94,8 @@ In that context, Best-estimate :term:`TH` system codes were developed to provide
 The codes were designed to be comprehensive tools capable of simulating realistically a wide range of transients foreseen in :term:`LWR` operation,
 and were developed using the current best understanding of flow processes expected to happen during the transients.
 
+.. _sub_intro_th_system_code:
+
 Thermal-Hydraulics (TH) System Codes
 ------------------------------------
 

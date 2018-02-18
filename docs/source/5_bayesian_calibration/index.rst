@@ -1,4 +1,4 @@
-.. _bayesian:
+.. _ch_bayesian_calibration:
 
 =====================================================================================
 Bayesian Calibration of Computer Model: Connecting Uncertain Model and Uncertain Data
