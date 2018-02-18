@@ -15,11 +15,16 @@ Glossary
     MC
      Monte Carlo
 
-    NPP 
+    NEA
+     Nuclear Energy Agency
+    NPP
      nuclear power plant
 
     NPPs
      nuclear power plants
+
+    OECD
+     Organization for Economic Cooperation and Development
 
     PCT
      peak clad temperature
@@ -30,6 +35,12 @@ Glossary
     PDFs
      probability density functions
 
+    PREMIUM
+     Post-BEMUSE Reflood Models Input Uncertainty Methods
+
+    PSI
+     Paul Scherrer Institut
+
     QoI
      quantity of interest
 
@@ -38,3 +49,6 @@ Glossary
 
     TH 
      thermal-hydraulics
+
+    WGAMA
+     Working Group on the Analysis and Management of Accidents
