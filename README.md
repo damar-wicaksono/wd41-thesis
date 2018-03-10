@@ -61,8 +61,8 @@ The workaround is available from the [stackexchange].
 ### Modification for using the Margin for Figures
 
 The `classicthesis` has a wide margin, thus makes space more or less a premium.
-I would like to use the margin for larger figure as well.
-Thankfully Benjamin Hopfer came with [a very nice solution] to this problem.
+But, I would like to use the margin for larger figure as well.
+Thankfully, [B. Hopfer] came with [a very nice solution] to this problem.
 His modification allowed figure to use the margin space.
 Furthermore, he also made a modification to have multiple figures (two or three) with their own caption in one line.
 The whole figure caption remains.
@@ -185,6 +185,7 @@ which contains the chapter introduction and input statement to include files of 
 [MikTeX]: https://miktex.org
 [ClassicThesis]: http://www.ctan.org/tex-archive/macros/latex/contrib/classicthesis/
 [A. Miede]: http://www.miede.de
+[B. Hopfer]: http://benjaminhopfer.com/
 [glossary]: https://www.ctan.org/pkg/glossaries?lang=en
 [stackexchange]: http://tex.stackexchange.com/questions/156308/classicthesis-conflicts-with-glossaries
 [EPFL Infoscience]: https://infoscience.epfl.ch/record/253113?ln=en
