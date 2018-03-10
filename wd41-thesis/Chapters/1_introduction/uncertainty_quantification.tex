@@ -14,8 +14,8 @@ The notion of \emph{simulator} introduced in Section~\ref{sec:intro_computer_sim
 \end{figure}
 
 The input deck defines a specific problem (i.e., system) of interest and can be seen as the input of \gls[hyper=false]{th} codes.
-It includes the geometrical configuration (i.e., the nodalization), the material and fluid involved, the initial and boundary conditions, and possibly the settings for the numerical solver.
 \marginpar{Controllable inputs and model parameters}
+It includes the geometrical configuration (i.e., the nodalization), the material and fluid involved, the initial and boundary conditions, and possibly the settings for the numerical solver.
 Some of these specifications (such as the boundary conditions) are parametrized and constitutes \emph{controllable inputs} denoted by $\bm{x}_c$.
 The simulator is to be run for a given controllable input value\footnote{Later on, \emph{controllable} inputs correspond to the parameters whose counterparts in a physical experiment which can be controlled by the experimentalist.}.
 The conservation equations of the code are closed with additional set of closure laws (and other sub-models) $\mathcal{M}_i(\bm{x}_c, \bm{x}_m, \bm{u})$.

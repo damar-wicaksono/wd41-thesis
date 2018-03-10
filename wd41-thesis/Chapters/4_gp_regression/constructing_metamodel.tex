@@ -148,25 +148,25 @@ This estimation procedure, the maximum likelihood estimation, is also known in t
 The procedures is as follows:
 First, the hyper-parameters related to $\mathbf{R}$, noted $\boldsymbol{\Theta}$, are initially assumed to be known to estimate $\sigma^2$ by minimizing the negative log likelihood\footnote{Logarithm is often taken on the likelihood to avoid underflow error when dealing with a very small number.} (which is equivalent to maximizing the likelihood),
 \begin{equation}
-	\left(\hat{\sigma}^2 | \boldsymbol{\Theta}\right) = \underset{\sigma^2}{\arg\min} \left(- \ln \mathcal{L} (\hat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})\right)
+	\left(\widehat{\sigma}^2 | \boldsymbol{\Theta}\right) = \underset{\sigma^2}{\arg\min} \left(- \ln \mathcal{L} (\widehat{\sigma}^2 ; \hat{\boldsymbol{\Theta}})\right)
 \label{eq:concentrated_likelihood_1}
 \end{equation} 
 yielding
 \begin{equation}
 	\begin{split}
-		\hat{\sigma}^2           & = \frac{(\mathbf{y} - \boldsymbol{\mu})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \boldsymbol{\mu})}{N}\\
+		\widehat{\sigma}^2           & = \frac{(\mathbf{y} - \boldsymbol{\mu})^T \mathbf{R}_{\boldsymbol{\Theta}}^{-1} (\mathbf{y} - \boldsymbol{\mu})}{N}\\
 	\end{split}
 \label{eq:sigma_ml}
 \end{equation}
 
-The estimated $\hat{\sigma}^2$ are then fed back into Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} \cite{Cole2013,Kreutz2013}.
+The estimated $\widehat{\sigma}^2$ are then fed back into Eq.~(\ref{eq:gp_likelihood}) to obtain the so-called \emph{concentrated/profile likelihood} \cite{Cole2013,Kreutz2013}.
 \marginpar{Concentrated (profile) likelihood}
 The term is due to the fact that the full likelihood has been further conditioned by setting some of the parameters 
 (in this case $\sigma^2$) to a constant (in this case, its maximum likelihood estimates).
 This procedure eases the numerical difficulty of finding simultaneously the maximum likelihood estimates of all the hyper-parameters in high-dimensional space.
-Finally, the estimate of $\hat{\boldsymbol{\Theta}}$ is obtained through the maximum of the (profile) likelihood,
+Finally, the estimate of $\widehat{\boldsymbol{\Theta}}$ is obtained through the maximum of the (profile) likelihood,
 \begin{equation}
-	\left(\hat{\boldsymbol{\Theta}} | \hat{\sigma}^2\right) = \underset{\boldsymbol{\Theta}}{\arg\min} \left(- \ln \mathcal{L} (\hat{\boldsymbol{\Theta}};\hat{\sigma}^2)\right)
+	\left(\widehat{\boldsymbol{\Theta}} | \widehat{\sigma}^2\right) = \underset{\boldsymbol{\Theta}}{\arg\min} \left(- \ln \mathcal{L} (\boldsymbol{\Theta};\widehat{\sigma}^2)\right)
 	\label{eq:theta_ml}
 \end{equation}
 The computation of Eq.~(\ref{eq:theta_ml}) can then be carried out using an unconstrained optimization algorithm, 
@@ -206,15 +206,15 @@ Review of different types of optimization algorithms can be found in Ref.~\cite{
 % Universal Kriging Predictor and Variance
 Having estimated the hyper-parameters, the Kriging predictor is expressed as,
 \begin{equation}
-	\hat{m}_{SK}(\mathbf{x}_o) =  \mu(\mathbf{x}_o) + \mathbf{r}^T_{o,\hat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\hat{\boldsymbol{\Theta}}} (\mathbf{y} - \boldsymbol{\mu})
+	\hat{m}_{SK}(\mathbf{x}_o) =  \mu(\mathbf{x}_o) + \mathbf{r}^T_{o,\widehat{\boldsymbol{\Theta}}} \mathbf{R}^{-1}_{\widehat{\boldsymbol{\Theta}}} (\mathbf{y} - \boldsymbol{\mu})
 \label{eq:sk_predictor_ml}
 \end{equation}
 As before, for compactness, the $N \times 1$ correlation vector between outputs at the test and the training points $\mathbf{R}(\mathbf{x}_o, \mathbf{DM})$ is written simply as $\mathbf{r}_o$.
-The subscript $\hat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ which implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
+The subscript $\widehat{\boldsymbol{\Theta}}$ appears in $\mathbf{r}$ and $\mathbf{R}$ which implies that the correlation functions are evaluated using the maximum likelihood estimated values of the hyper-parameters.
 
 The variance associated with the predictor is expressed as
 \begin{equation}
-	\hat{s}^2_{SK} (\mathbf{x}_o) = \hat{\sigma}^2 (1 - \mathbf{r}_{o,\hat{\boldsymbol{\Theta}}}^T \mathbf{R}_{\hat{\boldsymbol{\Theta}}}^{-1} \mathbf{r}_{o,\hat{\boldsymbol{\Theta}}})
+	\widehat{s}^2_{SK} (\mathbf{x}_o) = \widehat{\sigma}^2 (1 - \mathbf{r}_{o,\widehat{\boldsymbol{\Theta}}}^T \mathbf{R}_{\widehat{\boldsymbol{\Theta}}}^{-1} \mathbf{r}_{o,\widehat{\boldsymbol{\Theta}}})
 \label{eq:sk_variance_ml}
 \end{equation}
 

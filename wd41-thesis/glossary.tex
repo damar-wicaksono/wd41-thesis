@@ -2,6 +2,7 @@
 % Alphanumeric Notation Section %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% a -----------------
 \newglossaryentry{ai}
 {
   type=alphanumeric,
@@ -26,12 +27,72 @@
 	sort={awl}
 }
 
+% A -----------------
+\newglossaryentry{AB}
+{
+  type=alphanumeric,
+	name={\ensuremath{A, B}},
+	description={two independent design matrices (each of size $N$)},
+	sort={AzB}
+}
+
+\newglossaryentry{ABd}
+{
+  type=alphanumeric,
+	name={\ensuremath{A^d_B}},
+	description={design matrix $A$ with the $d$-th column substituted by the $d$-th column of matrix $B$},
+	sort={AzBd}
+}
+
+% B ------------------
+\newglossaryentry{Bpk}
+{
+  type=alphanumeric,
+	name={\ensuremath{B^p_k}},
+	description={$k$-th B-spline basis function of degree $p$},
+	sort={Bpk}
+}
+
+% c ------------------
+\newglossaryentry{cik}
+{
+  type=alphanumeric,
+	name={\ensuremath{c_{ik}}},
+	description={$k$-th basis coefficient for functional realization (or curve) $i$},
+	sort={cik}
+}
+
+% C ------------------
+\newglossaryentry{Cal}
+{
+  type=alphanumeric,
+	name={\ensuremath{\textnormal{Cal}}},
+	description={Calibration score},
+	sort={Cz1}
+}
+
+\newglossaryentry{Cf}
+{
+  type=alphanumeric,
+	name={\ensuremath{C_f (t)}},
+	description={lag-$t$ autocovariance function with respect to function $f$},
+	sort={Cz2}
+}
+
 \newglossaryentry{cint}
 {
   type=alphanumeric,
 	name={\ensuremath{C_i}},
 	description={interfacial friction coefficient},
-	sort={cint}
+	sort={cz3}
+}
+
+\newglossaryentry{CO}
+{
+  type=alphanumeric,
+	name={\ensuremath{CO}},
+	description={liquid carryover output/data type},
+	sort={Cz4}
 }
 
 \newglossaryentry{cps}
@@ -39,7 +100,7 @@
   type=alphanumeric,
 	name={\ensuremath{C_{ps}}},
 	description={solid structure heat capacity},
-	sort={cps}
+	sort={cz5}
 }
 
 \newglossaryentry{cwg}
@@ -47,7 +108,7 @@
   type=alphanumeric,
 	name={\ensuremath{C_{wg}}},
 	description={wall - gas phase friction coefficient},
-	sort={cwg}
+	sort={cz6}
 }
 
 \newglossaryentry{cwl}
@@ -55,7 +116,74 @@
   type=alphanumeric,
 	name={\ensuremath{C_{wl}}},
 	description={wall - liquid phase friction coefficient},
-	sort={cwl}
+	sort={cz7}
+}
+
+\newglossaryentry{Cov}
+{
+  type=alphanumeric,
+	name={\ensuremath{\textnormal{Cov}[\circ,\circ]}},
+	description={covariance operator},
+	sort={Cz8}
+}
+
+% d -------------------
+\newglossaryentry{dim}
+{
+  type=alphanumeric,
+	name={\ensuremath{D}},
+	description={number of input (dimensions)},
+	sort={d1}
+}
+
+\newglossaryentry{d}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{D}}},
+	description={vector of observed/experimental data points},
+	sort={d2}
+}
+
+\newglossaryentry{dm}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{DM}}},
+	description={(experimental) design matrix, $N \times D$},
+	sort={d3}
+}
+
+\newglossaryentry{DP}
+{
+  type=alphanumeric,
+	name={\ensuremath{DP}},
+	description={pressure drop output/data type},
+	sort={d4}
+}
+
+% D-based symbol ----
+\newglossaryentry{D1}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{D}}},
+	description={Chapter~\ref{ch:gp_metamodel} training data, a set of inputs and outputs tuples. \newline Chapter~\ref{ch:bayesian_calibration} model bias, as a stochastic process},
+	sort={Dz}
+}
+
+% e -----------------
+\newglossaryentry{e}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{e}}},
+	description={vector of independent identically distributed normal random variable, mean $0$ and variance $1.0$},
+	sort={e1}
+}
+
+\newglossaryentry{ed}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{e}_d}},
+	description={$d$-th basis vector of the input parameter space},
+	sort={e2}
 }
 
 \newglossaryentry{eg}
@@ -63,7 +191,7 @@
   type=alphanumeric,
 	name={\ensuremath{e_g}},
 	description={gas phase internal energy},
-	sort={eg}
+	sort={e3}
 }
 
 \newglossaryentry{el}
@@ -71,7 +199,41 @@
   type=alphanumeric,
 	name={\ensuremath{e_l}},
 	description={liquid phase internal energy},
-	sort={el}
+	sort={e4}
+}
+
+% E ------------------
+\newglossaryentry{Exp}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbb{E[\circ]}}},
+	description={expectation operator},
+	sort={Ez1}
+}
+
+\newglossaryentry{EEd}
+{
+  type=alphanumeric,
+	name={\ensuremath{EE_d}},
+	description={elementary effect of the $d$-th parameter},
+	sort={Ez2}
+}
+
+\newglossaryentry{EErd}
+{
+  type=alphanumeric,
+	name={\ensuremath{ EE_d^r}},
+	description={elementary effect of the $d$-th parameter associated with the design replication $r$},
+	sort={Ez3}
+}
+
+% f-----------------
+\newglossaryentry{f}
+{
+  type=alphanumeric,
+	name={\ensuremath{f}},
+	description={function, generic notation},
+	sort={f}
 }
 
 \newglossaryentry{fi}
@@ -104,6 +266,14 @@
 	name={\ensuremath{\mathbf{g}}},
 	description={gravitational acceleration},
 	sort={g}
+}
+
+\newglossaryentry{GP}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{GP}}},
+	description={Gaussian process},
+	sort={GP}
 }
 
 \newglossaryentry{ks}
@@ -170,12 +340,122 @@
 	sort={hwsat}
 }
 
-\newglossaryentry{m}
+% I ------------------
+\newglossaryentry{I}
+{
+  type=alphanumeric,
+	name={\ensuremath{I}},
+	description={length of Markov chain},
+	sort={Iz1}
+}
+
+\newglossaryentry{Inf}
+{
+  type=alphanumeric,
+	name={\ensuremath{\textnormal{Inf}}},
+	description={Informativeness},
+	sort={Iz2}
+}
+
+\newglossaryentry{Kcirc}
+{
+  type=alphanumeric,
+	name={\ensuremath{K (\circ, \circ)}},
+	description={covariance function},
+	sort={Kcirc}
+}
+
+% L ------------------
+\newglossaryentry{L}
+{
+  type=alphanumeric,
+	name={\ensuremath{L}},
+	description={Chapter~\ref{ch:gsa}, number of knots for B-spline (i.e. $L+1$). \newline Chapter~\ref{ch:bayesian_calibration}, number of walkers in ensemble sampler},
+	sort={l1}
+}
+
+\newglossaryentry{LUB}
+{
+  type=alphanumeric,
+	name={\ensuremath{LUB_Y}},
+	description={lower uncertainty bound of QoI $Y$},
+	sort={l2}
+}
+
+\newglossaryentry{likelihood}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{L}}},
+	description={likelihood function},
+	sort={l3}
+}
+
+% m --------------------
+\newglossaryentry{mcirc}
+{
+  type=alphanumeric,
+	name={\ensuremath{m (\circ)}},
+	description={mean function},
+	sort={mcirc}
+}
+
+\newglossaryentry{msk}
+{
+  type=alphanumeric,
+	name={\ensuremath{m_{SK}}},
+	description={simple Kriging mean},
+	sort={msk}
+}
+
+% M -----------------
+\newglossaryentry{Mz}
 {
   type=alphanumeric,
 	name={\ensuremath{M}},
 	description={gas phase indicator function, 1 if point is in gas phase, 0 otherwise},
-	sort={m}
+	sort={Mz}
+}
+
+% N ----------------
+\newglossaryentry{N}
+{
+  type=alphanumeric,
+	name={\ensuremath{N}},
+	description={number of samples/realizations},
+	sort={Nz1}
+}
+
+\newglossaryentry{NR}
+{
+  type=alphanumeric,
+	name={\ensuremath{N_R}},
+	description={number of OAT design replications (trajectory or radial)},
+	sort={NzR}
+}
+
+\newglossaryentry{Normal}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{N}}},
+	description={Gaussian (normal) random variable},
+	sort={Nz2}
+}
+
+% p ----------------
+\newglossaryentry{p}
+{
+  type=alphanumeric,
+	name={\ensuremath{p}},
+	description={Chapter~\ref{ch:gsa}, number of discretization levels. \newline Chapter~\ref{ch:bayesian_calibration}, generic notation for a probability density function (PDF)},
+	sort={p1}
+}
+
+\newglossaryentry{pstar}
+{
+  type=alphanumeric,
+	name={\ensuremath{p^*}},
+	description={generic notation for an unnormalized probability density function (PDF)},
+	sort={p2}
 }
 
 \newglossaryentry{pg}
@@ -186,6 +466,33 @@
 	sort={pg}
 }
 
+% P ----------------
+\newglossaryentry{P}
+{
+  type=alphanumeric,
+	name={\ensuremath{P}},
+	description={Chapter~\ref{ch:gp_metamodel} dimension of the output parameter space. \newline Elsewhere, assembly power},
+	sort={Pz1}
+}
+
+\newglossaryentry{Psys}
+{
+  type=alphanumeric,
+	name={\ensuremath{P_\text{sys}}},
+	description={system (back-) pressure},
+	sort={Pz2}
+}
+
+% P-based symbol -------------
+\newglossaryentry{Probability}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbb{P}}},
+	description={probability},
+	sort={Pz3}
+}
+
+% q ------------------
 \newglossaryentry{qig}
 {
   type=alphanumeric,
@@ -250,6 +557,48 @@
 	sort={qdl}
 }
 
+% Q ----------------
+\newglossaryentry{Q}
+{
+  type=alphanumeric,
+	name={\ensuremath{Q}},
+	description={number of retained principal components},
+	sort={Qz}
+}
+
+\newglossaryentry{Qz2}
+{
+  type=alphanumeric,
+	name={\ensuremath{Q_{2}}},
+	description={predictivity coefficient},
+	sort={Qz2}
+}
+
+\newglossaryentry{Qzd}
+{
+  type=alphanumeric,
+	name={\ensuremath{Q_{d}^\theta}},
+	description={$\theta$-quantile of random variable $\mathcal{X}_d$},
+	sort={Qzd}
+}
+
+\newglossaryentry{Qg}
+{
+  type=alphanumeric,
+	name={\ensuremath{Q_{g}}},
+	description={superficial velocity of the gas phase},
+	sort={Qzg}
+}
+
+\newglossaryentry{Ql}
+{
+  type=alphanumeric,
+	name={\ensuremath{Q_{l}}},
+	description={superficial velocity of the liquid phase},
+	sort={Qzl}
+}
+
+% r ----------------
 \newglossaryentry{r}
 {
   type=alphanumeric,
@@ -258,52 +607,202 @@
 	sort={r}
 }
 
+\newglossaryentry{Rcirc}
+{
+  type=alphanumeric,
+	name={\ensuremath{R (\circ, \circ)}},
+	description={correlation function},
+	sort={Rcirc}
+}
+
+\newglossaryentry{RMSE}
+{
+  type=alphanumeric,
+	name={\ensuremath{RMSE_{rec.}}},
+	description={root-mean-square-error of the reconstructed prediction},
+	sort={Rz1}
+}
+
+\newglossaryentry{Real}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbb{R}}},
+	description={real number},
+	sort={Rz2}
+}
+
+% s -------------------
+\newglossaryentry{s2sk}
+{
+  type=alphanumeric,
+	name={\ensuremath{s^2_{SK}}},
+	description={simple Kriging variance},
+	sort={s2sk}
+}
+
+% S -----------------
+\newglossaryentry{Sd}
+{
+  type=alphanumeric,
+	name={\ensuremath{S_d}},
+	description={Sobol' main-effect index of parameter $d$},
+	sort={Sd}
+}
+
+\newglossaryentry{Sdhat}
+{
+  type=alphanumeric,
+	name={\ensuremath{\widehat{S}_d}},
+	description={Sobol' main-effect index of parameter $d$, its estimate},
+	sort={Sdhat}
+}
+
+\newglossaryentry{STd}
+{
+  type=alphanumeric,
+	name={\ensuremath{ST_d}},
+	description={Sobol' total-effect index of parameter $d$},
+	sort={STd}
+}
+
+\newglossaryentry{STdhat}
+{
+  type=alphanumeric,
+	name={\ensuremath{\widehat{ST}_d}},
+	description={Sobol' total-effect index of parameter $d$, its estimate},
+	sort={STdhat}
+}
+
+% t ----------------
 \newglossaryentry{t}
 {
   type=alphanumeric,
 	name={\ensuremath{t}},
 	description={time},
-	sort={t}
+	sort={t1}
 }
 
-\newglossaryentry{tg}
+\newglossaryentry{tzmax}
+{
+  type=alphanumeric,
+	name={\ensuremath{t_{T_\text{max.}}}},
+	description={time at maximum temperature},
+	sort={t2}
+}
+
+\newglossaryentry{tzquench}
+{
+  type=alphanumeric,
+	name={\ensuremath{t_\text{quench}}},
+	description={time at quenching},
+	sort={t3}
+}
+
+% T -------------------------
+\newglossaryentry{Transition}
+{
+  type=alphanumeric,
+	name={\ensuremath{T (\circ, \circ)}},
+	description={transition probability kernel density},
+	sort={tz1}
+}
+
+\newglossaryentry{TC}
+{
+  type=alphanumeric,
+	name={\ensuremath{TC}},
+	description={clad temperature output/data type},
+	sort={Tz2}
+}
+
+\newglossaryentry{Tg}
 {
   type=alphanumeric,
 	name={\ensuremath{T_{g}}},
-	description={Gas phase temperature},
-	sort={tg}
+	description={gas phase temperature},
+	sort={Tzg}
 }
 
-\newglossaryentry{tl}
+\newglossaryentry{Tinit}
+{
+  type=alphanumeric,
+	name={\ensuremath{T_{\text{init.}}}},
+	description={initial temperature (prior to transient)},
+	sort={Tzinit}
+}
+
+\newglossaryentry{Tl}
 {
   type=alphanumeric,
 	name={\ensuremath{T_{l}}},
-	description={Liquid phase temperature},
-	sort={tl}
+	description={liquid phase temperature},
+	sort={Tzl}
 }
 
-\newglossaryentry{tsat}
+\newglossaryentry{Tmax}
 {
   type=alphanumeric,
-	name={\ensuremath{T_{\text{sat}}}},
-	description={Fluid saturation temperature},
-	sort={tsat}
+	name={\ensuremath{T_{\text{max.}}}},
+	description={maximum temperature},
+	sort={Tzmax}
 }
 
-\newglossaryentry{tsg}
+\newglossaryentry{Tquench}
+{
+  type=alphanumeric,
+	name={\ensuremath{T_{\text{quench}}}},
+	description={quenching temperature},
+	sort={Tzquench}
+}
+
+\newglossaryentry{Tsat}
+{
+  type=alphanumeric,
+	name={\ensuremath{T_{\text{sat.}}}},
+	description={fluid saturation temperature},
+	sort={Tzsat}
+}
+
+\newglossaryentry{Tsg}
 {
   type=alphanumeric,
 	name={\ensuremath{T_{sg}}},
 	description={saturation temperature w.r.t the partial pressure of the gas phase ($p_g$)},
-	sort={tsg}
+	sort={Tzsg}
 }
 
-\newglossaryentry{tw}
+\newglossaryentry{Tw}
 {
   type=alphanumeric,
 	name={\ensuremath{T_{w}}},
 	description={Wall temperature},
-	sort={tw}
+	sort={Tzw}
+}
+
+% U -----------------------
+\newglossaryentry{UUB}
+{
+  type=alphanumeric,
+	name={\ensuremath{UUB_Y}},
+	description={upper uncertainty bound of QoI $Y$},
+	sort={UUB}
+}
+
+% v ----------------
+\newglossaryentry{v}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{v}}},
+	description={vector of principal component},
+	sort={v1}
+}
+
+\newglossaryentry{vstar}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{v}^*}},
+	description={vector of principal component loading},
+	sort={v2}
 }
 
 \newglossaryentry{vg}
@@ -311,7 +810,7 @@
   type=alphanumeric,
 	name={\ensuremath{\mathbf{v}_g}},
 	description={Flow velocity, gas phase},
-	sort={vinterface}
+	sort={vg}
 }	
 
 \newglossaryentry{vinterface}
@@ -328,30 +827,73 @@
 	name={\ensuremath{\mathbf{v}_l}},
 	description={Flow velocity, liquid phase},
 	sort={vl}
-}	
+}
 
-\newglossaryentry{X}
+% V -----------------
+\newglossaryentry{Vin}
 {
   type=alphanumeric,
-	name={\ensuremath{\bm{\mathcal{X}}}},
-	description={Generic inputs as vector of random variables},
-	sort={x}
-}	
+	name={\ensuremath{V_\textnormal{in}}},
+	description={inlet velocity},
+	sort={vz1}
+}
+
+\newglossaryentry{vg1}
+{
+  type=alphanumeric,
+	name={\ensuremath{V_{g}}},
+	description={Volumetric flow rate of the gas phase},
+	sort={vz2}
+}
+
+\newglossaryentry{vl1}
+{
+  type=alphanumeric,
+	name={\ensuremath{V_{l}}},
+	description={Volumetric flow rate of the liquid phase},
+	sort={vz3}
+}
+
+\newglossaryentry{Var}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbb{V[\circ]}}},
+	description={variance operator},
+	sort={vz4}
+}
+
+% w -----------------
+\newglossaryentry{w1}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{w}}},
+	description={vector of principal component scores},
+	sort={w1}
+}
+
+\newglossaryentry{w2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{w}^*}},
+	description={vector of standardized principal component scores},
+	sort={w2}
+}
+
+% x ----------------
+\newglossaryentry{xo}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{x}_o}},
+	description={test input, point not in $\mathbf{DM}$},
+	sort={x1}
+}
 
 \newglossaryentry{xc1}
 {
   type=alphanumeric,
 	name={\ensuremath{\bm{x}_c}},
 	description={Vector of controllable inputs, as a generic variable},
-	sort={xc1}
-}
-
-\newglossaryentry{xc2}
-{
-  type=alphanumeric,
-	name={\ensuremath{\bm{\mathcal{X}}_c}},
-	description={Vector of controllable inputs, as a random variable},
-	sort={xc2}
+	sort={x2}
 }
 
 \newglossaryentry{xc3}
@@ -359,7 +901,7 @@
   type=alphanumeric,
 	name={\ensuremath{\mathbf{x}_c}},
 	description={Vector of controllable inputs, as a particular realization},
-	sort={xc3}
+	sort={x3}
 }
 
 \newglossaryentry{xm1}
@@ -367,15 +909,7 @@
   type=alphanumeric,
 	name={\ensuremath{\bm{x}_m}},
 	description={Vector of model parameters, as generic variable},
-	sort={xm1}
-}
-
-\newglossaryentry{xm2}
-{
-  type=alphanumeric,
-	name={\ensuremath{\bm{\mathcal{X}}_m}},
-	description={Vector of model parameters, as a random variable},
-	sort={xm2}
+	sort={x4}
 }
 
 \newglossaryentry{xm3}
@@ -383,7 +917,138 @@
   type=alphanumeric,
 	name={\ensuremath{\mathbf{x}_m}},
 	description={Vector of model parameters, as a particular realization},
-	sort={xm3}
+	sort={x5}
+}
+
+% X -----------------
+\newglossaryentry{Xz}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{X}}},
+	description={input domain},
+	sort={Xz1}
+}
+
+\newglossaryentry{Xzcal}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}}},
+	description={inputs, as a generic vector of random variables},
+	sort={Xz2}
+}
+
+\newglossaryentry{xc2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}_c}},
+	description={Vector of controllable inputs, as a random variable},
+	sort={xz3}
+}	
+
+\newglossaryentry{xm2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\bm{\mathcal{X}}_m}},
+	description={Vector of model parameters, as a random variable},
+	sort={xz4}
+}
+
+\newglossaryentry{Xens}
+{
+  type=alphanumeric,
+	name={\ensuremath{\vec{\bm{\mathcal{X}}}}},
+	description={ensemble of multivariate random variables},
+	sort={xz5}
+}
+
+% y -----------------
+\newglossaryentry{y1}
+{
+  type=alphanumeric,
+	name={\ensuremath{y}},
+	description={output, as a generic variable},
+	sort={y1}
+}
+
+\newglossaryentry{y2}
+{
+  type=alphanumeric,
+	name={$\textnormal{y}$},
+	description={output, as a particular realization},
+	sort={y2}
+}
+
+\newglossaryentry{ycirc}
+{
+  type=alphanumeric,
+	name={\ensuremath{y (\circ)}},
+	description={output, as a function},
+	sort={ycirc}
+}
+
+\newglossaryentry{y3}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{\bar{y}}}},
+	description={vector of sample mean},
+	sort={yd}
+}
+
+\newglossaryentry{ye}
+{
+  type=alphanumeric,
+	name={\ensuremath{y_E}},
+	description={experimental observation of system response},
+	sort={ye}
+}
+
+\newglossaryentry{ym}
+{
+  type=alphanumeric,
+	name={\ensuremath{y_M}},
+	description={computer simulator prediction},
+	sort={ym}
+}
+
+\newglossaryentry{yt}
+{
+  type=alphanumeric,
+	name={\ensuremath{y_T}},
+	description={true system response value},
+	sort={yt}
+}
+
+\newglossaryentry{Yz1}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathbf{Y}}},
+	description={(raw) outputs, as a matrix from $N$ simulation experiment runs},
+	sort={Yz1}
+}
+
+\newglossaryentry{Yz2}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{Y}}},
+	description={output, as a generic random process (or function)},
+	sort={Yz2}
+}
+
+\newglossaryentry{Yzm}
+{
+  type=alphanumeric,
+	name={\ensuremath{\mathcal{Y}_M}},
+	description={computer simulator prediction, as a stochastic process},
+	sort={Yzm}
+}
+
+% z ---------------------
+\newglossaryentry{z}
+{
+  type=alphanumeric,
+	name={\ensuremath{z}},
+	description={axial location},
+	sort={z}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -394,16 +1059,161 @@
 {
   type=greek,
 	name={\ensuremath{\alpha}},
-	description={gas phase volume fraction},
+	description={Chapter~\ref{ch:bayesian_calibration}, acceptance probability of an MCMC algorithm. \newline Elsewhere, gas phase volume fraction},
 	sort={a}
 }	
 
+% Gamma ----------------
 \newglossaryentry{Gamma}
 {
   type=greek,
 	name={\ensuremath{\Gamma}},
 	description={volumetric interfacial mass-transfer rate},
-	sort={Gamma}
+	sort={B}
+}
+
+% delta ----------------
+\newglossaryentry{delta}
+{
+  type=greek,
+	name={\ensuremath{\delta}},
+	description={model bias term},
+	sort={delta1}
+}
+
+\newglossaryentry{Delta}
+{
+  type=greek,
+	name={\ensuremath{\Delta}},
+	description={grid jump for the trajectory-based OAT experimental design},
+	sort={delta2}
+}
+
+% epsilon -----------------
+\newglossaryentry{epsilon1}
+{
+  type=greek,
+	name={\ensuremath{\epsilon}},
+	description={Section~\ref{sec:bc_mcmc_diagnostic}, fraction true standard deviation of a random function \newline Elsewhere, observation error},
+	sort={epsilon1}
+}
+
+\newglossaryentry{epsilon2}
+{
+  type=greek,
+	name={\ensuremath{\mathcal{E}}},
+	description={Observation error, as a stochastic process},
+	sort={epsilon2}
+}
+
+% theta ------------------
+\newglossaryentry{thetajn}
+{
+  type=greek,
+	name={\ensuremath{\theta_{n,j}}},
+	description={principal component score of realization $n$ associated with the $j$-th principal component},
+	sort={f1}
+}
+
+\newglossaryentry{Thetaz}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Theta}}},
+	description={hyper-parameters related to correlation function $R$},
+	sort={f2}
+}
+
+\newglossaryentry{Thetazhat}
+{
+  type=greek,
+	name={\ensuremath{\widehat{\bm{\Theta}}}},
+	description={hyper-parameters related to correlation function $R$, their estimates},
+	sort={f3}
+}
+
+% lambda -----------------
+\newglossaryentry{lambda}
+{
+  type=greek,
+	name={\ensuremath{\bm{\lambda}}},
+	description={element of observation layout},
+	sort={lambda1}
+}
+
+\newglossaryentry{Lambda}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Lambda}}},
+	description={observation layout},
+	sort={lambda2}
+}
+
+% mu -----------------
+\newglossaryentry{mud}
+{
+  type=greek,
+	name={\ensuremath{\mu_d}},
+	description={arithmetic mean of sampled elementary effects of parameter $d$},
+	sort={mud}
+}
+
+\newglossaryentry{mudstar}
+{
+  type=greek,
+	name={\ensuremath{\mu_d^*}},
+	description={arithmetic mean of the absolute value of sampled elementary effects of parameter $d$},
+	sort={mudstar}
+}
+
+% nu ----------------
+\newglossaryentry{nu}
+{
+  type=greek,
+	name={\ensuremath{\nu}},
+	description={empirical covariance function of a functional data set},
+	sort={nu}
+}
+
+\newglossaryentry{xij}
+{
+  type=greek,
+	name={\ensuremath{\xi_{j}}},
+	description={eigenfunction (i.e., functional principal component), $j$-th element},
+	sort={nu2}
+}
+
+% pi --------------------
+\newglossaryentry{pistar}
+{
+  type=greek,
+	name={\ensuremath{\pi^*}},
+	description={stationary probability density},
+	sort={pi}
+}
+
+\newglossaryentry{pisrc}
+{
+  type=greek,
+	name={\ensuremath{\pi_{src, Y}}},
+	description={possibility measure of source $src$ for QoI $Y$},
+	sort={pisrc}
+}
+
+\newglossaryentry{pit}
+{
+  type=greek,
+	name={\ensuremath{\pi_{t}}},
+	description={target probability density},
+	sort={pit}
+}
+
+% rho -----------------
+\newglossaryentry{rhof}
+{
+  type=greek,
+	name={\ensuremath{\rho_f (t)}},
+	description={lag-$t$ autocorrelation function with respect to function $f$},
+	sort={rhof}
 }
 
 \newglossaryentry{rhog}
@@ -412,6 +1222,14 @@
 	name={\ensuremath{\rho_g}},
 	description={mass density, gas phase},
 	sort={rhog}
+}
+
+\newglossaryentry{rhoj}
+{
+  type=greek,
+	name={\ensuremath{\rho_{j}}},
+	description={eigenvalue, $j$-th element (Section~\ref{sub:sa_fpca})},
+	sort={rhoj}
 }
 
 \newglossaryentry{rhol}
@@ -430,10 +1248,95 @@
 	sort={rhos}
 }
 
-\newglossaryentry{matrix}% the label
-{name={matrix},% the term
-    description={a rectangular table of elements},% brief description
-    plural={matrices}% the plural
+\newglossaryentry{sigma2}
+{
+  type=greek,
+	name={\ensuremath{\sigma^2}},
+	description={Chapter~\ref{ch:gp_metamodel}, (gaussian) process variance},
+	sort={sigma2}
+}
+
+\newglossaryentry{sigmad}
+{
+  type=greek,
+	name={\ensuremath{\sigma_d}},
+	description={standard deviation of sampled elementary effects of parameter $d$},
+	sort={sigmad}
+}
+
+\newglossaryentry{sigmaobs}
+{
+  type=greek,
+	name={\ensuremath{\sigma_\textnormal{obs}}},
+	description={variance of observation error},
+	sort={sigmaobs}
+}
+
+\newglossaryentry{Sigmav}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Sigma}}},
+	description={covariance matrix},
+	sort={Sigmav}
+}
+
+% tau ----------------
+\newglossaryentry{tau}
+{
+  type=greek,
+	name={\ensuremath{\bm{\tau}, \tau_k}},
+	description={sequence of knots and $k$-th knot, respectively},
+	sort={tau1}
+}
+
+\newglossaryentry{tauexp}
+{
+  type=greek,
+	name={\ensuremath{\tau_{\textnormal{exp},f}}},
+	description={exponential autocorrelation time with respect to function $f$},
+	sort={tau2}
+}
+
+\newglossaryentry{tauint}
+{
+  type=greek,
+	name={\ensuremath{\tau_{\textnormal{int},f}}},
+	description={integrated autocorrelation time with respect to function $f$},
+	sort={tau3}
+}
+
+% Phi ----------------
+\newglossaryentry{Phi}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Phi}}},
+	description={matrix of empirical orthogonal basis functions},
+	sort={X1}
+}
+
+\newglossaryentry{Phistar}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Phi}^*}},
+	description={matrix of principal component loadings},
+	sort={X2}
+}
+
+% psi --------------------
+\newglossaryentry{Psidelta}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Psi}_\delta}},
+	description={hyper-parameters associated with model bias term $\mathcal{D}$},
+	sort={YPsidelta}
+}
+
+\newglossaryentry{Psim}
+{
+  type=greek,
+	name={\ensuremath{\bm{\Psi}_m}},
+	description={hyper-parameters associated with computer simulator prediction $\mathcal{Y}_M$},
+	sort={YPsim}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -496,4 +1399,3 @@
 \newacronym{usnrc}{USNRC}{the United States Nuclear Regulatory Commission}
 \newacronym{vv}{V\&V}{verification and validation}
 \newacronym{wgama}{WGAMA}{Working Group on the Analysis and Management of Accidents}
-%\newglossaryentry{sample}{name={sample}, description={a sample entry}}
