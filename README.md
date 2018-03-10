@@ -76,7 +76,7 @@ Furthermore, he also made a modification to have multiple figures (two or three)
 [glossary]: https://www.ctan.org/pkg/glossaries?lang=en
 [stackexchange]: http://tex.stackexchange.com/questions/156308/classicthesis-conflicts-with-glossaries
 [EPFL Infoscience]: https://infoscience.epfl.ch/record/253113?ln=en
-[Github project page]: https://github.com/damar-wicaksono/wd41-thesis/blob/master/wd41-thesis/wd41_thesis.pdf
+[Github project page]: https://github.com/damar-wicaksono/wd41-thesis/blob/master/wd41_thesis.pdf
 [Read the Docs]: http://wd41-thesis.readthedocs.io/en/feature-sphinx/
 [oral exam]: https://speakerdeck.com/dcwicaksono/bayesian-uncertainty-quantification-of-physical-models-in-thermal-hydraulics-system-codes
 [public defense]: https://speakerdeck.com/dcwicaksono/bayesian-uncertainty-quantification-of-physical-models-in-thermal-hydraulics-system-codes-1
