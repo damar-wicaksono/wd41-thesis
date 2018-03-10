@@ -1,0 +1,54 @@
+%*****************************************************************************************
+\section{Landmark Registration and Time Warping Function}\label{app:landmark_registration}
+%*****************************************************************************************
+
+The most straightforward curve registration procedure is the landmark registration/marker registration \cite{Ramsay2009}.
+\emph{Landmarks} are salient features of a curve that can be observed or expected to occur in a set of curves.
+In the context of reflood simulations, examples of such landmarks are the time of maximum temperature and the time of quenching.
+A transformation of time for each curve is carried out such that these features are aligned with respect to a reference curve.
+
+The landmark registration problem can be expressed as the following: 
+Let $\{y_i(t); i = 1, 2, \cdots, N; t \in [t_a,t_b]\}$ be a set of continuous functions defined over the domain $t_a$ to $t_b$.
+Let $\{y_{ref}(t_{ref,j}); j = 1, \cdots, M\}$ be a set of $M$ landmarks of a given reference function $y_{ref}(t)$.
+Then a set of time warping functions $\{h_i(t); i = 1, 2, \cdots, N; t \in [t_a, t_b]\}$ for each curve in the data set can be defined.
+These functions have the following properties:
+
+\begin{enumerate}
+	
+	\item Each $h_i(t)$ is defined in the same domain as the domain of the original curve $y_i(t)$. That is, $t \in [t_a, t_b]$;
+  
+	\item Each $h_i(t)$ satisfies the boundary conditions,
+    \begin{equation}
+      \begin{split}
+        h_i(t_a) & = t_a \\
+        h_i(t_b) & = t_b \text{;}
+      \end{split}
+    \label{eq:warping_boundaries}
+    \end{equation}
+   
+	\item Each $h_i(t)$ is a strictly increasing function. The first implication of this property is that the time transformation process cannot alter the ordering of the landmarks.
+         In other words, time is strictly increasing both in the original and the transformed frames.
+         The second implication is that the time warping function is an invertible function 
+         such that for the same event there exists a unique pair of time and its transformed value.
+  
+	\item Each $h_i(t)$ transforms the time $t_{ref}$ of the reference curve $y_{ref}(t)$ such that the timing of the $M$ reference landmarks are aligned with respect to the landmarks of each curve,
+          \begin{equation}
+            \begin{split}
+						  h_i (t_{ref,j}) 		& = t_{i,j} \iff h_i^{-1}[t_{i,j}] = t_{ref,j}  ; \ \forall i,j \\
+							y_i [h_i(t_{ref})]  & =	y_i(t_{i}) \equiv y^*_i(t_{ref}) ; \ \forall i
+            \end{split}
+          \label{eq:warping_transformation}
+          \end{equation}
+          where $y_i^*$ is the \emph{registered} function of curve $i$, whose time scale is the same as the reference curve;
+					$t_{i,j}$ is the timing of the landmark $j$ of curve $i$;
+					and $h^{-1}_i(t)$, the inverse of the warping function, is the \emph{aligning} function, as it \emph{aligns} the timing of the landmark $j$ of curve $i$ to the timing of the same landmark of the reference curve. 
+					The argument $t_{ref}$ in $y_i^*(t_{ref})$ implies that the registered curve is in the time scale of the reference, which is the same for all the curves.
+          For instance, if $h_i(t_{ref,j}) > t_{ref,j}$ then the landmark $j$ for curve $i$ is delayed 
+          and the aligning function accelerates the time for curve $i$ to conform to the reference timing.
+          On the other hand, if $h_i(t_{ref,j}) < t_{ref,j}$ then the landmark $j$ for curve $i$ occurs earlier
+          and the aligning function retards the time for curve $i$ to conform to the reference timing.
+\end{enumerate}
+
+The registration problem can then be posed as an estimation problem of each time warping function $h_i(t)$ constrained by the above properties.
+Following \cite{Ramsay1998}, it is solved by using penalized least square regression method.
+In accordance to the \glsfirst[hyper=false]{fda} framework, the warping function is also represented as a linear combination of B-spline basis functions.

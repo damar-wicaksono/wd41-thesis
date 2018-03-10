@@ -1,0 +1,94 @@
+%----------------------------------------------------------------------------
+\section{Multivariate Random Variable (Random Vector)}\label{app:probability}
+%----------------------------------------------------------------------------
+
+% Jointly PDF
+A collection of finite $D$ continuous random variables (or random vector) $\bm{\mathcal{X}} = [\mathcal{X}_1, \mathcal{X}_2, \cdots, \mathcal{X}_D] \in \boldsymbol{X} \subseteq \mathbb{R}^D$ is \emph{jointly continuous} if a non-negative \emph{joint probability density function} $p_{\bm{\mathcal{X}}}: \bm{\mathcal{X}} \subseteq \mathbb{R}^D \mapsto \mathbb{R}_{\geq 0}$ exists such that, for any set of $B \in \boldsymbol{X} \subseteq \mathbb{R}^D$, the probability of $\bm{\mathcal{X}}$ belonging to $B$ is defined as,
+\begin{equation}
+  \mathbb{P} (\bm{\mathcal{X}} \in B) = \int_{\bm{x} \in B} p_{\bm{\mathcal{X}}} (\bm{x}) d\bm{x}
+\label{eq:joint_continuous}
+\end{equation}
+
+% Valid Joint PDF
+Additionally,
+the joint density function is also required to sum up to $1.0$ over the whole domain $\bm{\mathcal{X}}$ for it to be a valid probability density function.
+In other words, the probability of $\bm{\mathcal{X}}$ belonging to the domain $\boldsymbol{X}$ is 1.0,
+\begin{equation}
+  \mathbb{P} (\bm{\mathcal{X}} \in \boldsymbol{X}) = \int_{\bm{x} \in \boldsymbol{X}} p_{\bm{\mathcal{X}}} (\bm{x}) d\bm{x} = 1.0
+\label{eq:valid_pdf}
+\end{equation}
+
+% Convention
+In this thesis,
+the type of random variable is restricted to continuous random variable and the term \emph{probability} is often used referring to the \emph{probability density}.
+When the distinction is required (such as in the definition Eq.~(\ref{eq:joint_continuous}) and the condition Eq.~(\ref{eq:valid_pdf}) above) the notations used are $p$ and $\mathbb{P}$ for density and probability, respectively.
+Furthermore, the density function of random vector $\bm{\mathcal{X}}$ written as $p_{\bm{\mathcal{X}}} (\bm{x})$ is shortened simply to $p (\bm{x})$ as it is often clear from the context.
+
+% Partitioning a Random Vector
+\marginpar{partitioning random vector}
+Now suppose that $\bm{\mathcal{X}}$ is partitioned into two disjoint sets $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$ whose number of elements $\mathbf{card}(\bm{\mathcal{X}}_A)$ and $\mathbf{card}(\bm{\mathcal{X}}_B)$ are non-zero such that $\bm{\mathcal{X}} = [\bm{\mathcal{X}}_A, \bm{\mathcal{X}}_B]$; 
+$p(\bm{x}) = p(\bm{x}_a,\bm{x}_b)$; 
+and $\bm{\mathcal{X}}_A \in \boldsymbol{X}_A \subseteq \mathbb{R}^{D_1}$, $\bm{\mathcal{X}}_B \in \boldsymbol{X}_B \subseteq \mathbb{R}^{D_2}$, with $D_1 + D_2 = D$.
+  
+%Marginal Probability
+\marginpar{marginal probability}
+The \emph{marginal} probability of $\bm{\mathcal{X}}_A$ is defined as
+\begin{equation}
+  p(\bm{x}_A) = \int p(\bm{x}_A,\bm{x}_B) d\bm{x}_B
+\label{eq:marginal_set_a}
+\end{equation}
+where the integration is carried out only on the domain of random variables $\bm{\mathcal{X}}_B$, $\boldsymbol{X}_B \subseteq \mathbb{R}^{D_2}$. 
+Note that if $\mathbf{card}(\bm{\mathcal{X}}_A) \geq 1$ then $p(\bm{x}_A)$ itself is a joint probability.
+The marginal probability of $\bm{\mathcal{X}}_B$ follows suit,
+\begin{equation}
+  p(\bm{x}_B) = \int p(\bm{x}_A,\bm{x}_B) d\bm{x}_A
+\label{eq:marginal_set_b}
+\end{equation}
+where now the integration is carried out only on the domain of random variables $\bm{\mathcal{X}}_A$, $\boldsymbol{X}_A \subseteq \mathbb{R}^{D_1}$.
+
+% Conditional Probability
+\marginpar{conditional probability}
+The \emph{conditional} probability of $\bm{\mathcal{X}}_A$ given (or conditioned on) $\bm{\mathcal{X}}_B$ is defined as,
+\begin{equation}
+  p(\bm{x}_A|\bm{x}_B) = \frac{p(\bm{x}_A, \bm{x}_B)}{p(\bm{x}_B)}
+\label{eq:conditional_on_b}
+\end{equation}
+for $p(\bm{x}_B) > 0$. That is, the notion of conditional probability cannot be defined given an impossible event, $p(\bm{x}_B) = 0$. 
+The definition of the conditional probability of $\bm{\mathcal{X}}_B$ given (or conditioned on) $\bm{\mathcal{X}}_A$ follows suit, 
+\begin{equation}
+  p(\bm{x}_B|\bm{x}_A) = \frac{p(\bm{x}_A, \bm{x}_B)}{p(\bm{x}_A)}
+\label{eq:conditional_on_a}
+\end{equation}
+for $p(\bm{x}_A) > 0$.
+
+% Independence
+Random variables $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$ are said to be \emph{independent} of each
+\marginpar{independence}
+other if and only if their joint probability $p(\bm{x}_A, \bm{x}_B)$ is defined as,
+\begin{equation}
+  p(\bm{x}_A, \bm{x}_B) = p(\bm{x}_A) p(\bm{x}_B)
+\label{eq:independence}
+\end{equation}
+that is, it is the product of the marginals $p(\bm{x}_A)$ and $p(\bm{x}_B)$.
+The random variables $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$ are said to be \emph{dependent} otherwise.
+Also, following Eq.~(\ref{eq:conditional_on_b}) and Eq.~(\ref{eq:conditional_on_a}), the two random variables are independent from each other if and only the marginal is equal to the conditional, $p(\bm{x}_A) = p(\bm{x}_A|\bm{x}_B)$ and $p(\bm{x}_B) = p(\bm{x}_B|\bm{x}_A)$.
+
+% Exchangeability
+Random variables $\bm{\mathcal{X}}_A$ and $\bm{\mathcal{X}}_B$ are said to be \emph{exchangeable}
+\marginpar{exchangeability}
+if and only if their joint probability is symmetric \cite{Greenland2005}, that is
+\begin{equation}
+  p(\bm{x}_A, \bm{x}_B) = p(\bm{x}_B, \bm{x}_A)
+\label{eq:exchangeable}
+\end{equation}
+
+% Bayes' Theorem
+The exchangeability of random variables (Eq.~(\ref{eq:exchangeable})) combined with the definition of conditional probability (Eqs.~(\ref{eq:conditional_on_b}) and (\ref{eq:conditional_on_a})) lead to the \emph{Bayes' Theorem},
+\marginpar{Bayes' Theorem}
+\begin{equation}
+  \begin{split}
+    p(\bm{x}_A | \bm{x}_B) & = \frac{p(\bm{x}_B | \bm{x}_A) p(\bm{x}_A)}{p(\bm{x}_B)} \\
+    p(\bm{x}_B | \bm{x}_A) & = \frac{p(\bm{x}_A | \bm{x}_B) p(\bm{x}_B)}{p(\bm{x}_A)}
+  \end{split}
+\label{eq:bayes_theorem}
+\end{equation}

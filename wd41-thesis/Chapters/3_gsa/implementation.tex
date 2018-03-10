@@ -1,0 +1,198 @@
+%****************************************************
+\section{Implementation}\label{sec:sa_implementation}
+%****************************************************
+
+In this work, 
+an implementation of the Morris method and a Monte Carlo method to estimate the main- and total-effect sensitivity indices has been developed using the Python \cite{PCT2017} programming language, 
+to allow for well-controlled parametric and convergence studies.
+The implementation follows a black box approach of \gls[hyper=false]{sa}. 
+It deals with the generation of design of experiment (a set of input values at which the model or code is evaluated) and the post-processing of output to obtain the selected measures of sensitivity presented in the previous sub-sections.
+In the following, the basic procedures that underlie the implementation of both methods are laid out.
+More details on the programming aspects of the implementation (the so-called \texttt{gsa-module}) can be found in Appendix~\ref{app:gsa_module}.
+
+%--------------------------------------------------
+\subsection{The Morris Method}\label{sub:sa_morris}
+%--------------------------------------------------
+
+The implementation of the Morris method (see Section~\ref{sub:sa_ee_oat}) follows four sequential steps:
+\begin{enumerate}
+
+	\item An OAT design matrix consisting of $N_R$ replications is created by randomly sampling the nominal points as well as the perturbed points for each parameter.
+A replication in an OAT design consists of one nominal point with $D$ (number of dimensions/parameters) additional perturbed points.
+In each of the perturbed points, only one parameter change its value relative to the base.
+Note that in trajectory design, the nominal point only serves as the starting point and a perturbed point becomes the base point for the next perturbation.
+Different replications yield different nominal points and the associated perturbed points.
+
+  \item Each point in the design matrix, included in $[0,1]^D$, is scaled to the corresponding point in the $D$-dimensional parameter space of the model parameters through iso-probabilistic transformation (see Appendix~\ref{app:its}).
+
+  \item The model is evaluated for each (rescaled) point of the design matrix. The total number of model evaluations for a given design matrix is $N_R \times (D + 1)$.
+  
+  \item Finally, for a selected \gls[hyper=false]{qoi} the $N_R$ elementary effects $EE_d$ are computed for each input parameter $x_d$. The statistical summaries $\mu_d, \mu^*_d,$ and $\sigma_d$ are computed, and the ranking of the input parameters for the selected \gls[hyper=false]{qoi} is established based on $\mu^*_d$.
+
+\end{enumerate}
+
+The different rankings based on $\mu_d^*$ obtained from various relevant \glspl[hyper=false]{qoi} can then be used and compared to consistently identify and screen out noninfluential parameters (low $\mu_d^*$) from the relatively influential ones (high $\mu_d^*$)~\cite{Campolongo2007}.
+
+%-------------------------------------------------------------------
+\subsection{The Sobol'-Saltelli Method}\label{sub:sa_sobol_saltelli}
+%-------------------------------------------------------------------
+
+In principle, the estimation of the Sobol' sensitivity indices defined by Eqs.~(\ref{eq:sa_main_effect_index}) and (\ref{eq:sa_total_effect_index}) can be directly carried out using \gls[hyper=false]{mc} simulation.
+\marginpar{Brute force \\ Monte Carlo}
+The most straightforward, though rather rudimentary, 
+estimation method is to use two nested loops for the computation of the conditional variances and expectations appearing in both indices.
+
+In the estimation of the main-effect index of parameter $x_d$, for instance, 
+the outer loop samples values of $\mathcal{X}_d$ while the inner loop samples values of $\bm{\mathcal{X}}_{\sim d}$ (all parameters except $x_d$).
+These samples, in turn, are used to evaluate the model and generate the output realizations.
+
+Algorithm~\ref{alg:brute_force_mc} illustrates the procedure to compute the variance of conditional expectation used in main-effect indices estimation of a parameter $x_d$.
+In the inner loop, the arithmetic mean of the model output is taken for a given value of $\mathcal{X}_d$ but over many values of $\bm{\mathcal{X}}_{\sim d}$. 
+Afterward, in the outer loop, the variance of the model output is taken over many values of $\mathcal{X}_d$.
+
+% Brute forcem Monte Carlo Pseudo-code
+\begin{algorithm}
+\caption{Brute Force \gls[hyper=false]{mc} for estimating $\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]]$}
+\label{alg:brute_force_mc}
+\begin{algorithmic}
+\STATE $\Sigma_i \leftarrow 0$
+\STATE $\Sigma_{i^2} \leftarrow 0$
+  \FOR{$i=1$ to $N$}
+    \STATE sample $x_d^{(i)}$ from $\mathcal{X}_d$
+    \STATE $\Sigma_j \leftarrow 0$
+    \FOR{$j=1$ to $N$}
+      \STATE sample $\bm{x}_{\sim d}^{(j)}$ from $\bm{\mathcal{X}}_{\sim d}$
+      \STATE $\Sigma_j \mathrel{+}= f(\bm{x}_{\sim d}^{(j)}, x_d^{(i)})$ 
+    \ENDFOR
+    \STATE $\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)} \leftarrow \frac{1}{N} \Sigma_j$
+    \STATE $\Sigma_i \mathrel{+}= \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)}$
+    \STATE $\Sigma_{i^2} \mathrel{+}= \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)} \times \mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]^{(i)}$
+  \ENDFOR
+  \STATE $\mathbb{V}_d [\mathbb{E}_{\sim d} [\mathcal{Y}|\mathcal{X}_d]] \leftarrow \frac{1}{N} \left(\Sigma_{i^2} - \Sigma_i^2/N\right)$
+\end{algorithmic}
+\end{algorithm}
+
+% The cost of brute formce MC
+Algorithm~\ref{alg:brute_force_mc} can easily become prohibitively expensive as the nested structure requires $N^2$ model evaluations \emph{per input dimension} for one of the sensitivity indices (i.e., the main- or total-effect index), 
+while $N$ (the size of \gls[hyper=false]{mc} samples) are typically in the range of $10^2 - 10^4$ for a reliable estimate. 
+
+% Sobol'-Saltelli Approach
+Sobol' \cite{Sobol2001} and Saltelli \cite{Saltelli2002} proposed an alternative approach that circumvent the nested structure of \gls[hyper=false]{mc} simulation to estimate the indices.
+\marginpar{Sobol'-Saltelli method}
+The formulation starts by expressing the expectation and variance operators in their integral form 
+and ends with different possible \gls[hyper=false]{mc} estimators for both sensitivity indices.
+A detailed derivation of the integral form and the origin of the estimator can be found in Appendix~\ref{app:sobol_saltelli}. 
+
+An implementation of the Sobol'-Saltelli method is also part of \texttt{gsa-module} python3 package (see Appendix~\ref{app:gsa_module} for detail). 
+For $N$ number of \gls[hyper=false]{mc} samples and $D$ number of model parameters, the \gls[hyper=false]{mc} simulation procedure to estimate the sensitivity indices follows the sampling and resampling approach adopted in~\cite{Sobol2001,Saltelli2002,Homma1996} described in the following.
+
+\begin{enumerate}
+
+  \item Generate two $N \times D$ independent random samples $A$ and $B$ from a uniform independent distribution in $D$-dimension, $[0,1]^D$:
+    \begin{equation}
+      A = 
+      \begin{pmatrix}
+        a_{11}  & \cdots  & a_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        a_{N1}  & \cdots  & a_{ND}\\
+      \end{pmatrix}
+      ;\quad B = 
+      \begin{pmatrix}
+        b_{11}  & \cdots  & b_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        b_{N1}  & \cdots  & b_{ND}\\
+        \end{pmatrix}
+    \label{eq:ss_two_samples}
+    \end{equation}
+
+  \item Construct $D$ additional design matrices from $A$ and $B$ where each matrix $A^d_B$ is matrix $A$ with the $d$-th column substituted by the $d$-th column of $B$:
+  \begin{equation}
+    \begin{split}
+      & A_{B}^1 = 
+      \begin{pmatrix}
+        b_{11}  & \cdots  & a_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        b_{N1}  & \cdots  & a_{ND}\\
+      \end{pmatrix} \\
+      & A_{B}^{d} = 
+      \begin{pmatrix}
+        a_{11}  & \cdots & b_{1d} & \cdots & a_{1D}\\
+        \vdots	& \cdots & \vdots & \cdots & \vdots\\
+        a_{N1}  & \cdots & b_{Nd} & \cdots & a_{ND}\\
+      \end{pmatrix} \\
+      & A_{B}^{D} = 
+      \begin{pmatrix}
+        a_{11}  & \cdots  & b_{1D}\\
+        \vdots	& \ddots & \vdots\\
+        a_{N1}  & \cdots  & b_{ND}\\
+      \end{pmatrix}
+    \end{split}
+  \label{eq:ss_sampling_resampling}
+  \end{equation}
+
+  \item Rescale each element in the matrices of samples to the actual values of model parameters according to their actual range of variation through iso-probabilistic transformation (Appendix~\ref{app:its}).
+
+  \item Evaluate the model multiple times using input parameters vectors that correspond to each row of $A$, $B$, and all $A_B^d$.
+
+  \item Finally, extract the \gls[hyper=false]{qoi}s from all the outputs and recast them as vectors,
+  which will be used to estimate the main- and total-effect indices according to a selected estimator described below.
+  
+\end{enumerate}
+
+For the main-effect sensitivity index, two estimators are considered.
+One is proposed by Saltelli~\cite{Saltelli2002}, and the other, as an alternative, is proposed by Janon et al~\cite{Janon2014}.
+The latter proved to be more efficient, especially for a large variation around a parameter estimate~\cite{Iooss2015,Janon2014}.
+
+The general form of main-effect sensitivity index estimator is
+\marginpar{Main-effect sensitivity index estimator}
+\begin{equation}
+  \widehat{S}_d = \frac{\frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n - \mathbb{E}^2[\mathcal{Y}]}{\mathbb{V}[\mathcal{Y}]}
+\label{eq:ss_main_effect_estimator}
+\end{equation}
+where the subscript $n$ corresponds to the row of the sampled model parameters 
+such that $f(B)_n$ and $f(A^d_B)_n$ are the model outputs evaluated using inputs taken from the $n$-th row of matrix $B$ 
+and matrix $A_B^D$, respectively.
+The estimators for the term $\mathbb{E}^2[\mathcal{Y}]$ and $\mathbb{V}[\mathcal{Y}]$ differs for the two indices estimators and are given in Table~\ref{tab:ss_main_effect_estimator}.
+%The first term in the numerator of Eq.~(\ref{eq:ss_main_effect_estimator}) is the same for both Saltelli and Janon et al. estimators and is given by
+%\begin{equation}
+%  \int \int f(\mathbf{x}^{\prime}_{\sim d}, x_d) f(\mathbf{x}_{\sim d}, x_d) d\mathbf{x}^{\prime}_{\sim d} d\mathbf{x}_{\sim d} \approx \frac{1}{N}\sum_{n=1}^N f(B)_n \cdot f(A_B^d)_n
+%\label{eq:ss_first_term}
+%\end{equation}
+
+\begin{table}[h]
+	\myfloatalign
+	\caption[Monte Carlo estimators to estimate the main-effect indices]{Two \gls[hyper=false]{mc} estimators for the terms in Eq.~(\ref{eq:ss_main_effect_integral}) to estimate the main-effect indices (the sum is taken implicitly over all samples $N$)}
+	\label{tab:ss_main_effect_estimator}
+	\begin{tabularx}{\textwidth}{Xll} \toprule
+		\tableheadline{Estimator}         & $\mathbb{E}^2[\mathcal{Y}] = \left( \int f d\mathbf{x}\right)^2$          & $\mathbb{V}[\mathcal{Y}] = \int f^2 d\mathbf{x} - \left( \int f d\mathbf{x}\right)^2$ \\ \midrule 
+		Saltelli \cite{Saltelli2002}      & \footnotesize{$\frac{1}{N} \sum f(A)_n \cdot f(B)_n$}                     & \footnotesize{$\frac{1}{N}\sum f(A)_n^2-\left(\frac{1}{N}\sum f(A)_n\right)^2$}  \\[0.75cm]
+		Janon et~al.~\cite{Janon2014}     & \footnotesize{$\left(\frac{1}{2N} \sum f(B)_n + f(A_B^d)_n\right)^2$}      & \footnotesize{$\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2$} \\
+                                      &                                                                 & \footnotesize{$\quad -\left(\frac{1}{2N} \sum f(B)_n^2 + f(A_B^d)_n^2\right)^2$} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+To estimate the total-effect sensitivity indices, the Jansen estimator~\cite{Jansen1999} is recommended in~\cite{Saltelli2010a}.
+\marginpar{Total-effect sensitivity index estimator}
+The estimator reads
+\begin{equation}
+  \widehat{ST}_d = \frac{\frac{1}{2N}\sum_{n=1}^{N}\left(f(A)_n - f(A_B^d)_n\right)^2}{\mathbb{V}[\mathcal{Y}]}
+\label{eq:ss_jansen_estimator}
+\end{equation}
+where $\mathbb{V}[\mathcal{Y}]$ is estimated by the Saltelli et al. estimator in Table~\ref{tab:ss_main_effect_estimator}.
+
+% Sobol-Saltelli Computational Cost
+The computational cost associated with the estimation of all the main-effect and total-effect indices using the Sobol'-Saltelli method is $N \times (D + 2)$ code runs,
+\marginpar{Computational cost: \\ brute force Monte Carlo vs. Sobol'-Saltelli}
+where $N$ is the number of \gls[hyper=false]{mc} samples and $D$ is the number of parameters.
+Compare this to the cost of brute force Monte Carlo of $2 \times D \times N^2$ code runs to estimate all the main-effect and total-effect sensitivity indices. 
+
+% Morris method computational cost
+As an additional comparison, the cost for Morris method to compute the statistics of elementary effect is $N_R \times (D + 1)$ code runs,
+\marginpar{Computational cost: \\ Morris vs. Sobol'-Saltelli}
+where $N_R$ is the number of OAT design replications.
+In either methods, the number of samples $N$ (in the case of the Sobol'-Saltelli method) and replications $N_R$ (in the case of the Morris method)
+determines the precision of the estimates.
+A larger number of samples (and replications) increases the precision.
+Note, however, that in practice the typical number of Morris replications is between $10^1 - 10^2$~\cite{Saltelli2010}, 
+while the number of \gls[hyper=false]{mc} samples for the Sobol' indices estimation amounts to $10^2 - 10^4$~\cite{Sobol2001}.

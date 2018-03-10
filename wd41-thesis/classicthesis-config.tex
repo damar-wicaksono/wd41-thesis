@@ -1,0 +1,661 @@
+% ****************************************************************************************************
+% classicthesis-config.tex 
+% formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty 
+% Use it at the beginning of your ClassicThesis.tex, or as a LaTeX Preamble 
+% in your ClassicThesis.{tex,lyx} with \input{classicthesis-config}
+% ****************************************************************************************************  
+% If you like the classicthesis, then I would appreciate a postcard. 
+% My address can be found in the file ClassicThesis.pdf. A collection 
+% of the postcards I received so far is available online at 
+% http://postcards.miede.de
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 0. Set the encoding of your files. UTF-8 is the only sensible encoding nowadays. If you can't read
+% äöüßáéçèê∂åëæƒÏ€ then change the encoding setting in your editor, not the line below. If your editor
+% does not support utf8 use another editor!
+% ****************************************************************************************************
+\PassOptionsToPackage{utf8}{inputenc}
+	\usepackage{inputenc}
+
+% ****************************************************************************************************
+% 1. Configure classicthesis for your needs here, e.g., remove "drafting" below 
+% in order to deactivate the time-stamp on the pages
+% ****************************************************************************************************
+\PassOptionsToPackage{eulerchapternumbers,listings,%drafting,%
+					 pdfspacing,%floatperchapter,%linedheaders,%
+					 subfig,beramono,eulermath,parts}{classicthesis}                                        
+% ********************************************************************
+% Available options for classicthesis.sty 
+% (see ClassicThesis.pdf for more information):
+% drafting
+% parts nochapters linedheaders
+% eulerchapternumbers beramono eulermath pdfspacing minionprospacing
+% tocaligned dottedtoc manychapters
+% listings floatperchapter subfig
+% ********************************************************************
+
+
+% ****************************************************************************************************
+% 2. Personal data and user ad-hoc commands
+% ****************************************************************************************************
+\newcommand{\myTitle}{Bayesian Uncertainty Quantification of Physical Models in Thermal-Hydraulics System Codes\xspace}
+\newcommand{\mySubtitle}{\xspace}
+\newcommand{\myDegree}{ing. nucl. dipl. EPF\xspace}
+\newcommand{\myName}{Damar Canggih Wicaksono\xspace}
+\newcommand{\myProf}{Prof. Andreas Pautz\xspace}
+\newcommand{\myOtherProf}{Put name here\xspace}
+\newcommand{\mySupervisor}{Omar Zerkak\xspace}
+\newcommand{\myFaculty}{Put data here\xspace}
+\newcommand{\myDepartment}{Laboratory for Reactor Physics and Systems Behaviour\xspace}
+\newcommand{\myUni}{École polytechnique fédérale de Lausanne\xspace}
+\newcommand{\myLocation}{Lausanne\xspace}
+\newcommand{\myTime}{April 2017\xspace}
+\newcommand{\myVersion}{version 4.2\xspace}
+
+% ********************************************************************
+% Setup, finetuning, and useful commands
+% ********************************************************************
+\newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
+\newlength{\abcd} % for ab..z string length calculation
+\providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.} 
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 3. Loading some handy packages
+% ****************************************************************************************************
+% ******************************************************************** 
+% Packages with options that might require adjustments
+% ******************************************************************** 
+%\PassOptionsToPackage{french,american}{babel}   % change this to your language(s)
+% Spanish languages need extra options in order to work with this template
+%\PassOptionsToPackage{spanish,es-lcroman}{babel}
+	\usepackage{babel}                  
+
+\usepackage{csquotes}
+\PassOptionsToPackage{%
+    %backend=biber, %instead of bibtex
+	backend=bibtex8,bibencoding=ascii,%
+	language=auto,%
+	style=numeric-comp,%
+    %style=authoryear-comp, % Author 1999, 2010
+    %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
+    sorting=none, %nyts name, year, title
+    maxbibnames=10, % default: 3, et al.
+    %backref=true,%
+    natbib=true % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
+    \usepackage{biblatex}
+
+\PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS 
+    \usepackage{amsmath}
+
+% ******************************************************************** 
+% General useful packages
+% ******************************************************************** 
+\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+    \usepackage{fontenc}     
+\usepackage{textcomp} % fix warning with missing font shapes
+\usepackage{scrhack} % fix warnings when using KOMA with listings package          
+\usepackage{xspace} % to get the spacing after macros right  
+\usepackage{mparhack} % get marginpar right
+\usepackage{fixltx2e} % fixes some LaTeX stuff --> since 2015 in the LaTeX kernel (see below)
+%\usepackage[latest]{latexrelease} % will be used once available in more distributions (ISSUE #107)
+\PassOptionsToPackage{printonlyused,smaller}{acronym} 
+    \usepackage{acronym} % nice macros for handling all acronyms in the thesis
+    %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
+    %\renewcommand*{\acsfont}[1]{\textsc{#1}} 
+    \renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+% ****************************************************************************************************
+
+% ****************************************************************************************************
+% 4. Setup floats: tables, (sub)figures, and captions
+% ****************************************************************************************************
+\usepackage{tabularx} % better tables
+    \setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{c}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+\usepackage{caption}
+% Thanks to cgnieder and Claus Lahiri
+% http://tex.stackexchange.com/questions/69349/spacedlowsmallcaps-in-caption-label
+% [REMOVED DUE TO OTHER PROBLEMS, SEE ISSUE #82]    
+%\DeclareCaptionLabelFormat{smallcaps}{\bothIfFirst{#1}{~}\MakeTextLowercase{\textsc{#2}}}
+%\captionsetup{font=small,labelformat=smallcaps} % format=hang,
+\captionsetup{font=small} % format=hang,
+\usepackage{subfig}  
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 5. Setup code listings
+% ****************************************************************************************************
+\usepackage{listings} 
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{RoyalBlue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{Green}\ttfamily,
+    stringstyle=\rmfamily,
+    numbers=none,%left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=5,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    %frame=single,
+    belowcaptionskip=.75\baselineskip
+    %frame=L
+} 
+% ****************************************************************************************************             
+
+
+% ****************************************************************************************************
+% 6. PDFLaTeX, hyperreferences and citation backreferences
+% ****************************************************************************************************
+% ********************************************************************
+% Using PDFLaTeX
+% ********************************************************************
+\PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
+    \usepackage{hyperref}  % backref linktocpage pagebackref
+\pdfcompresslevel=9
+\pdfadjustspacing=1 
+\PassOptionsToPackage{pdftex}{graphicx}
+    \usepackage{graphicx} 
+ 
+
+% ********************************************************************
+% Hyperreferences
+% ********************************************************************
+\hypersetup{%
+    %draft, % = no hyperlinking at all (useful in b/w printouts)
+    colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+    % uncomment the following line if you want to have black links (e.g., for printing)
+    %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+    breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+    plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+    hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+    %urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=RoyalBlue,%
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=Black,%
+    pdftitle={\myTitle},%
+    pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+    pdfsubject={},%
+    pdfkeywords={},%
+    pdfcreator={pdfLaTeX},%
+    pdfproducer={LaTeX with hyperref and classicthesis}%
+}   
+
+% ********************************************************************
+% Setup autoreferences
+% ********************************************************************
+% There are some issues regarding autorefnames
+% http://www.ureader.de/msg/136221647.aspx
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
+% you have to redefine the makros for the 
+% language you use, e.g., american, ngerman
+% (as chosen when loading babel/AtBeginDocument)
+% ********************************************************************
+\makeatletter
+\@ifpackageloaded{babel}%
+    {%
+       \addto\extrasamerican{%
+			\renewcommand*{\figureautorefname}{Figure}%
+			\renewcommand*{\tableautorefname}{Table}%
+			\renewcommand*{\partautorefname}{Part}%
+			\renewcommand*{\chapterautorefname}{Chapter}%
+			\renewcommand*{\sectionautorefname}{Section}%
+			\renewcommand*{\subsectionautorefname}{Section}%
+			\renewcommand*{\subsubsectionautorefname}{Section}%     
+                }%
+       \addto\extrasngerman{% 
+			\renewcommand*{\paragraphautorefname}{Absatz}%
+			\renewcommand*{\subparagraphautorefname}{Unterabsatz}%
+			\renewcommand*{\footnoteautorefname}{Fu\"snote}%
+			\renewcommand*{\FancyVerbLineautorefname}{Zeile}%
+			\renewcommand*{\theoremautorefname}{Theorem}%
+			\renewcommand*{\appendixautorefname}{Anhang}%
+			\renewcommand*{\equationautorefname}{Gleichung}%        
+			\renewcommand*{\itemautorefname}{Punkt}%
+                }%  
+            % Fix to getting autorefs for subfigures right (thanks to Belinda Vogt for changing the definition)
+            \providecommand{\subfigureautorefname}{\figureautorefname}%             
+    }{\relax}
+\makeatother
+
+
+% ****************************************************************************************************
+% 7. Last calls before the bar closes
+% ****************************************************************************************************
+% ********************************************************************
+% Development Stuff
+% ********************************************************************
+\listfiles
+%\PassOptionsToPackage{l2tabu,orthodox,abort}{nag}
+%   \usepackage{nag}
+%\PassOptionsToPackage{warning, all}{onlyamsmath}
+%   \usepackage{onlyamsmath}
+
+% ********************************************************************
+% Last, but not least...
+% ********************************************************************
+\usepackage{classicthesis} 
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 8. Further adjustments (experimental)
+% ****************************************************************************************************
+% ********************************************************************
+% Changing the text area
+% ********************************************************************
+%\linespread{1.05} % a bit more for Palatino
+%\areaset[current]{312pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip
+%\setlength{\marginparwidth}{7em}%
+%\setlength{\marginparsep}{2em}%
+
+% ********************************************************************
+% Using different fonts
+% ********************************************************************
+%\usepackage[oldstylenums]{kpfonts} % oldstyle notextcomp
+%\usepackage[osf]{libertine}
+%\usepackage[light,condensed,math]{iwona}
+%\renewcommand{\sfdefault}{iwona}
+%\usepackage{lmodern} % <-- no osf support :-(
+%\usepackage{cfr-lm} % 
+%\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
+%\usepackage[default,osfigures]{opensans} % scale=0.95 
+%\usepackage[sfdefault]{FiraSans}
+% ****************************************************************************************************
+
+% ***********************************************************************
+% Additional WD41 packages
+% ***********************************************************************
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{multirow}
+\usepackage{chngcntr}
+\usepackage{rotating}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[style=long,nolist,nonumberlist,toc,acronym]{glossaries}
+\usepackage[roman]{parnotes}
+\usepackage{bm}
+\usepackage{amssymb}
+% Booktabs -----
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+% colortbl, for shading cells -----
+\usepackage{colortbl}
+% bbind, for checkmark symbol -----
+\usepackage{bbding}
+% changepage, to stretch booktabs table to the margin -----
+\usepackage[strict]{changepage}%
+% pdfpages for attaching my CV
+\usepackage{pdfpages}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% FIGURE TOOLS 
+% (From Bejamin Hopfer's Thesis)
+% http://benjaminhopfer.com/2014/04/16/typesetting-my-masters-thesis-in-latex/
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%helper functions, no direct use
+\usepackage{ifoddpage}
+
+\newlength\fullmarginwidth
+\fullmarginwidth=\marginparwidth
+\advance\fullmarginwidth by \marginparsep
+
+\newlength\fullwidth
+\fullwidth=\textwidth
+\advance\fullwidth by \fullmarginwidth
+
+
+%                   #1   #2       #3     #4   #5
+%\subFloatCorrCaps{Cap}{ShortCap}{Label}{Opt}{path}
+\newcommand{\subFloatCorrCaps}[5]{
+	\ifthenelse{\equal{#1}{}}%
+  {
+    %subfloat without captions
+    \subfloat{%
+      \expandafter\includegraphics\expandafter[#4]{#5}
+      \label{#3}
+    }
+  }
+  {
+    \ifthenelse{\equal{#2}{}}%
+    {
+      %subfloat with same captions
+      \subfloat[#1][#1]{%
+        \expandafter\includegraphics\expandafter[#4]{#5}
+        \label{#3}
+      }
+    }
+    {
+      %subfloat with different captions
+      \subfloat[#2][#1]{%
+        \expandafter\includegraphics\expandafter[#4]{#5}
+        \label{#3}
+      }
+    }
+  }
+}
+
+%Parameters: [keyvals (see below)]{file}{caption}
+\makeatletter
+  \define@key[FigTools]{OneFig}{pos}{\def\FtPos{#1}}
+  \define@key[FigTools]{OneFig}{opt}{\def\FtOpt{#1}}
+  \define@key[FigTools]{OneFig}{label}{\def\FtLabel{#1}}
+  \define@key[FigTools]{OneFig}{shortcaption}{\def\FtShortCaption{#1}}
+  
+  \define@key[FigTools]{TwoFig}{pos}{\def\FtPos{#1}}
+  \define@key[FigTools]{TwoFig}{mainlabel}{\def\FtMainLabel{#1}}
+  \define@key[FigTools]{TwoFig}{maincaption}{\def\FtMainCaption{#1}}
+  \define@key[FigTools]{TwoFig}{mainshortcaption}{\def\FtMainShortCaption{#1}}
+  \define@key[FigTools]{TwoFig}{leftopt}{\def\FtLeftOpt{#1}}
+  \define@key[FigTools]{TwoFig}{leftlabel}{\def\FtLeftLabel{#1}}
+  \define@key[FigTools]{TwoFig}{leftcaption}{\def\FtLeftCaption{#1}}
+  \define@key[FigTools]{TwoFig}{leftshortcaption}{\def\FtLeftShortCaption{#1}}
+  \define@key[FigTools]{TwoFig}{rightopt}{\def\FtRightOpt{#1}}
+  \define@key[FigTools]{TwoFig}{rightlabel}{\def\FtRightLabel{#1}}
+  \define@key[FigTools]{TwoFig}{rightcaption}{\def\FtRightCaption{#1}}  
+  \define@key[FigTools]{TwoFig}{rightshortcaption}{\def\FtRightShortCaption{#1}}    
+  \define@key[FigTools]{TwoFig}{spacing}{\def\FtSpacing{#1}}    
+  \define@key[FigTools]{TwoFig}{topspace}{\def\FtTopSpace{#1}}    
+    
+
+  \define@key[FigTools]{ThreeFig}{pos}{\def\FtPos{#1}}
+  \define@key[FigTools]{ThreeFig}{mainlabel}{\def\FtMainLabel{#1}}
+  \define@key[FigTools]{ThreeFig}{maincaption}{\def\FtMainCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{mainshortcaption}{\def\FtMainShortCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{leftopt}{\def\FtLeftOpt{#1}}
+  \define@key[FigTools]{ThreeFig}{leftlabel}{\def\FtLeftLabel{#1}}
+  \define@key[FigTools]{ThreeFig}{leftcaption}{\def\FtLeftCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{leftshortcaption}{\def\FtLeftShortCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{midopt}{\def\FtMidOpt{#1}}
+  \define@key[FigTools]{ThreeFig}{midlabel}{\def\FtMidLabel{#1}}
+  \define@key[FigTools]{ThreeFig}{midcaption}{\def\FtMidCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{midshortcaption}{\def\FtMidShortCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{rightopt}{\def\FtRightOpt{#1}}
+  \define@key[FigTools]{ThreeFig}{rightlabel}{\def\FtRightLabel{#1}}
+  \define@key[FigTools]{ThreeFig}{rightcaption}{\def\FtRightCaption{#1}}  
+  \define@key[FigTools]{ThreeFig}{rightshortcaption}{\def\FtRightShortCaption{#1}}
+  \define@key[FigTools]{ThreeFig}{spacing}{\def\FtSpacing{#1}}
+  \define@key[FigTools]{ThreeFig}{spacingtwo}{\def\FtSpacingTwo{#1}}
+\makeatother
+
+\newcommand{\bigplot}[3][]{%
+  \bigfloatinternal[#1]{#2}{#3}{plot}
+}
+
+\newcommand{\bigfigure}[3][]{%
+  \bigfloatinternal[#1]{#2}{#3}{graph}
+}
+
+\newcommand{\bigfloatinternal}[4][]{%
+  \begingroup
+    \setkeys[FigTools]{OneFig}{ pos=!htp,
+                                label={fig:#2},
+                                shortcaption={#3},
+                                opt={}%width=0.95\textwidth}
+                              }
+    \setkeys[FigTools]{OneFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      \checkoddpage
+      \edef\side{\ifoddpage l\else r\fi}
+      \makebox[\textwidth][\side]{% 
+        \begin{minipage}[t]{\fullwidth}
+          \centering
+          \ifthenelse{\equal{#4}{plot}}
+      		{
+          	\input{\evalDir{#2}}
+      		}{
+          	\expandafter\includegraphics\expandafter[\FtOpt]{#2}
+          }
+          \caption[\FtShortCaption]{#3}
+          \label{\FtLabel}
+        \end{minipage}
+      }%
+    \end{figure}
+  \endgroup
+}
+
+\newcommand{\bigdoublefigure}[3][]{%
+  \begingroup
+    %Default values:
+    \setkeys[FigTools]{TwoFig}{ pos=!htp,
+                                mainlabel={fig:#2-#3},
+                                maincaption={#2-#3},
+                                mainshortcaption={},%
+                                leftopt={},%0.45\textwidth,
+                                leftlabel={fig:#2-left},
+                                leftcaption={},
+                                leftshortcaption={},%
+                                rightopt={},%0.45\textwidth,
+                                rightlabel={fig:#3-right},
+                                rightcaption={},
+                                rightshortcaption={},
+                                spacing={\hfill},
+                                topspace={}
+                              }
+    %User provided values:
+    \setkeys[FigTools]{TwoFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      \FtTopSpace
+      %Check on which side whe are (right or left)
+      \checkoddpage
+      \edef\side{\ifoddpage l\else r\fi}
+      %Ensure there will be no overfull box message
+      \makebox[\textwidth][\side]{% 
+        \begin{minipage}{\fullwidth}
+          \centering
+					\subFloatCorrCaps{\FtLeftCaption}
+			                     {\FtLeftShortCaption}
+			                     {\FtLeftLabel}
+			                     {\FtLeftOpt}
+			                     {#2}
+			    \FtSpacing
+					\subFloatCorrCaps{\FtRightCaption}
+			                     {\FtRightShortCaption}
+			                     {\FtRightLabel}
+			                     {\FtRightOpt}
+			                     {#3}
+          \caption[\FtMainShortCaption]{\FtMainCaption}
+          \label{\FtMainLabel}
+        \end{minipage}
+      }
+    \end{figure}
+  \endgroup
+}
+
+\newcommand{\bigtriplefigure}[4][]{%
+  \begingroup
+    %Default values:
+    \setkeys[FigTools]{ThreeFig}{ pos=!htp,
+	                                mainlabel={fig:#2-#3},
+	                                maincaption={#2-#3},
+	                                mainshortcaption={},%
+	                                leftopt={},%0.45\textwidth,
+	                                leftlabel={fig:#2-left},
+	                                leftcaption={},
+	                                leftshortcaption={},%
+	                                midopt={},%0.45\textwidth,
+	                                midlabel={fig:#3-mid},
+	                                midcaption={},
+	                                midshortcaption={},%
+	                                rightopt={},%0.45\textwidth,
+	                                rightlabel={fig:#4-right},
+	                                rightcaption={},
+	                                rightshortcaption={},
+	                                spacing={\hfill},
+	                                spacingtwo={}
+	                              }
+    %User provided values:
+    \setkeys[FigTools]{ThreeFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      %Check on which side whe are (right or left)
+      \checkoddpage
+      \edef\side{\ifoddpage l\else r\fi}
+      %Ensure there will be no overfull box message
+      \makebox[\textwidth][\side]{% 
+        \begin{minipage}{\fullwidth}
+          \centering
+					\subFloatCorrCaps{\FtLeftCaption}
+			                     {\FtLeftShortCaption}
+			                     {\FtLeftLabel}
+			                     {\FtLeftOpt}
+			                     {#2}
+			    \FtSpacing
+					\subFloatCorrCaps{\FtMidCaption}
+			                     {\FtMidShortCaption}
+			                     {\FtMidLabel}
+			                     {\FtMidOpt}
+			                     {#3}
+			    \FtSpacing
+			    \FtSpacingTwo
+					\subFloatCorrCaps{\FtRightCaption}
+			                     {\FtRightShortCaption}
+			                     {\FtRightLabel}
+			                     {\FtRightOpt}
+			                     {#4}
+          \caption[\FtMainShortCaption]{\FtMainCaption}
+          \label{\FtMainLabel}
+        \end{minipage}
+      }
+    \end{figure}
+  \endgroup
+}
+
+\newcommand{\normplot}[3][]{%
+  \normfloatinternal[#1]{#2}{#3}{plot}
+}
+
+\newcommand{\normfigure}[3][]{%
+  \normfloatinternal[#1]{#2}{#3}{graph}
+}
+
+\newcommand{\normfloatinternal}[4][]{%
+  \begingroup
+    \setkeys[FigTools]{OneFig}{ pos=!htp,
+                                label={fig:#2},
+                                shortcaption={#3},
+                                opt={}%{width=0.95\textwidth}
+                              }
+    \setkeys[FigTools]{OneFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      \centering
+      \ifthenelse{\equal{#4}{plot}}
+      {
+        \input{\evalDir{#2}}
+      }{
+      	\expandafter\includegraphics\expandafter[\FtOpt]{#2}
+      }
+      \caption[\FtShortCaption]{#3}
+      \label{\FtLabel}
+    \end{figure}
+  \endgroup
+}
+
+\newcommand{\normdoublefigure}[3][]{%
+  \begingroup
+    %Default values:
+    \setkeys[FigTools]{TwoFig}{ pos=!htp,
+                                mainlabel={fig:#2-#3},
+                                maincaption={},
+                                mainshortcaption={},%
+                                leftopt={},%width=0.45\textwidth},
+                                leftlabel={fig:#2-left},
+                                leftcaption={},
+                                leftshortcaption={},%
+                                rightopt={},%width=0.45\textwidth},
+                                rightlabel={fig:#3-right},
+                                rightcaption={},
+                                rightshortcaption={},
+                                spacing={\hfill}
+                              }
+    %User provided values:
+    \setkeys[FigTools]{TwoFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      \centering
+			\subFloatCorrCaps{\FtLeftCaption}
+	                     {\FtLeftShortCaption}
+	                     {\FtLeftLabel}
+	                     {\FtLeftOpt}
+	                     {#2}
+			\FtSpacing
+			\subFloatCorrCaps{\FtRightCaption}
+	                     {\FtRightShortCaption}
+	                     {\FtRightLabel}
+	                     {\FtRightOpt}
+	                     {#3}
+      \caption[\FtMainShortCaption]{\FtMainCaption}
+      \label{\FtMainLabel}
+    \end{figure}
+  \endgroup
+}
+
+\newcommand{\normtriplefigure}[4][]{%
+  \begingroup
+    %Default values:
+    \setkeys[FigTools]{ThreeFig}{ pos=!htp,
+	                                mainlabel={fig:#2-#3},
+	                                maincaption={},
+	                                mainshortcaption={},%
+	                                leftopt={},%width=0.45\textwidth},
+	                                leftlabel={fig:#2-left},
+	                                leftcaption={},
+	                                leftshortcaption={},%
+	                                midopt={},%width=0.45\textwidth},
+	                                midlabel={fig:#3-mid},
+	                                midcaption={},
+	                                midshortcaption={},%
+	                                rightopt={},%width=0.45\textwidth},
+	                                rightlabel={fig:#4-right},
+	                                rightcaption={},
+	                                rightshortcaption={},
+	                                spacing={\hfill},
+	                                spacingtwo={}
+	                              }
+    %User provided values:
+    \setkeys[FigTools]{ThreeFig}{#1}
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\FtPos]
+      \centering
+			\subFloatCorrCaps{\FtLeftCaption}
+	                     {\FtLeftShortCaption}
+	                     {\FtLeftLabel}
+	                     {\FtLeftOpt}
+	                     {#2}
+			\FtSpacing
+			\subFloatCorrCaps{\FtMidCaption}
+	                     {\FtMidShortCaption}
+	                     {\FtMidLabel}
+	                     {\FtMidOpt}
+	                     {#3}
+			\FtSpacing
+			\FtSpacingTwo
+			\subFloatCorrCaps{\FtRightCaption}
+	                     {\FtRightShortCaption}
+	                     {\FtRightLabel}
+	                     {\FtRightOpt}
+	                     {#4}
+      \caption[\FtMainShortCaption]{\FtMainCaption}
+      \label{\FtMainLabel}
+    \end{figure}
+  \endgroup
+}

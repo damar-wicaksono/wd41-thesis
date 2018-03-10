@@ -1,0 +1,60 @@
+%******************************************************
+\section{Chapter Summary}\label{sec:bc_chapter_summary}
+%******************************************************
+
+% Opening Paragraph, this chapter
+The model calibration part of the proposed statistical framework has been presented in this chapter.
+The goal of the present chapter was to quantify the a posteriori uncertainty of the model parameters based on experimental data.
+The quantification followed a Bayesian calibration framework.
+
+% Reiterate first part (theory)
+The Bayesian calibration framework has been detailed in this chapter and consisted of two parts:
+the formulation of a probabilistic model for the calibration;
+and the computation of the formulated model to obtain the posterior uncertainty of the model parameters.
+A generic calibration formulation was presented along with a description on each of its element.
+Afterward, the computational aspects of a posterior distribution were presented.
+\gls[hyper=false]{mcmc} simulation was used in this thesis to directly obtain samples from the posterior,
+which are useful for the characterization of the posterior uncertainty or for uncertainty propagation.
+
+% Connection with Previous Chapters
+%The results of this chapter have been built upon the results of the three previous chapters.
+%The development of the \gls[hyper=false]{trace} model of interest, the selection of the initial input parameters, as well as the assignment of the parameters prior uncertainty were conducted in Chapter~\ref{ch:trace_reflood}.
+%The sensitivity analysis of the initial parameters selection were carried out in Chapter~\ref{ch:gsa}, in which the parameters importance were quantified and used as a basis for screening, reducing the size of the problem beforehand.
+%In Chapter~\ref{ch:gp_metamodel}, a fast surrogate of the \gls[hyper=false]{trace} model was developed -- and validated -- and used in this chapter as a substitute for directly running the \gls[hyper=false]{trace} code.
+
+% Reiterate the application part, calibration schemes.
+The calibration framework was applied to the running case study of the simulation of a reflood experiment using \gls[hyper=false]{trace} conducted at the \gls[hyper=false]{feba} facility (test No. $216$).
+Five calibration schemes that result in five likelihood (thus posterior) formulations were considered.
+The schemes considered different type of experimental data ($TC$, $DP$, $CO$, or all together), 
+and included (or not) a model bias term in their formulation.
+The five schemes calibrated the $8$ most influential reflood parameters.
+An additional scheme was introduced to investigate the effect of removing a strongly correlated parameter from the calibration process.
+The formulated posterior \glspl[hyper=false]{pdf} were then sampled using an implementation of the \gls[hyper=false]{aies} \gls[hyper=false]{mcmc} ensemble sampler to obtain different sets of posterior samples.
+Finally, these sets of samples were propagated through all the \gls[hyper=false]{trace} models of the \gls[hyper=false]{feba} tests with different system backpressure and reflood rate boundary conditions.
+
+% Result 1: MCMC Convergence
+The \gls[hyper=false]{mcmc} simulation was shown to converge in exploring the posterior parameter space.
+The resulting independent samples -- readily used for uncertainty propagation -- were large enough to yield model parameter estimates with statistical error of less than $1\%$ of the true standard deviation of the respective parameter.
+
+% Result 2: Identifiability Issues
+Two types of parameter non-identifiability were encountered during the calibration process:
+parameter non-identifiability due to insensitivity with respect to a type of data and non-identifiability due to correlation between parameters.
+The former was solved by simultaneously considering different types of output to which the parameter of interest was sensitive.
+The latter was more challenging as considering different types of data did not seem to solve the non-identifiability issue (the univariate marginals of the parameter of interest remained large).
+However, even without precise estimates of each parameter, the correlation structure among model parameters provided a set of “collectively-fitted” values that was consistent with the calibration data.
+Specifically, as long as the correlation structure was kept, propagation with parameters with large univariate marginal uncertainties would still produce predictions that were consistent with that data.
+
+This posterior correlation structure \emph{and} the posterior range were specific to the calibration data (here \gls[hyper=false]{feba} test No. $216$).
+One of two strongly correlated parameters could be argued to be an extraneous parameter with respect to the calibration data. 
+Its presence would allow many combinations of parameter values to reproduce the data with a tighter prediction uncertainty.
+However, if the calibration data was deemed not sufficiently large or comprehensive enough then care should be taken to avoid overfitting. 
+Excluding one of the correlated parameters allowed for a more precise estimation of the other parameters that were previously correlated.
+But at the same time, as the uncertainty of the excluded parameter was kept at its prior, the posterior uncertainty band of the outputs remained relatively wider.
+
+% Result 3: Correlation in the propagation
+The calibration scheme with model bias term and incorporating all types of outputs was able to constrain the prior uncertainties of the model parameters while keeping the nominal TRACE parameters values within the posterior uncertainty interval.
+That was in contrast with the results of the calibration scheme without a model bias term, in which the posterior uncertainties were concentrated on either or both sides of the prior range, and at times not including the nominal TRACE parameter values.
+This results implied that the previous calibration results (i.e., during the model development) were not consistent with the data of \gls[hyper=false]{feba};
+and that there were different model parameter values that would allow \gls[hyper=false]{trace} to better simulate the \gls[hyper=false]{feba} experiments.
+This illustrated the value of incorporating the model bias term in order to avoid overfitting, especially considering the fact that the calibration conducted here was based on one test run only. 
+The calibration scheme without model bias was found slightly more informative (having tighter uncertainty band) but less calibrated (in the sense of the \emph{calibration score}, i.e., having more experimental data points outside the uncertainty band) than the calibration scheme with model bias.

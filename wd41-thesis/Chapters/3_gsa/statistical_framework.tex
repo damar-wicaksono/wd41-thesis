@@ -1,0 +1,39 @@
+%******************************************************************
+\section{Statistical Framework}\label{sec:sa_statistical_framework}
+%******************************************************************
+
+The methodology for \gls[hyper=false]{sa} presented in this work belongs to the category of statistical framework,
+a term attributed to Cacuci and Ionescu-Bujor \cite{Ionescu-Bujor2004} or
+simply the global method, following the terminology from Saltelli et al. \cite{Saltelli2004}.
+Within this framework, sensitivity measures of a parametrized model are obtained 
+by post-processing the collection of model outputs obtained from multiple model evaluations 
+at different points in the input parameter space according to a certain experimental design. 
+As such, the model itself can be considered as a black box, 
+and the input parameters are modeled as random variables equipped with a joint \gls[hyper=false]{pdf}. 
+The specification of a joint \gls[hyper=false]{pdf} allows for the generation of an experimental design.
+
+Consider the following mathematical model used as a template for the rest of the present chapter:
+\begin{equation}
+  y(t) = f(t; \bm{x}), \, t \in [t_a, t_b]
+\end{equation}
+where $y(t)$ is the scalar output at time $t$ from a deterministic function $f$;
+and $\bm{x}$ is the input parameter vector in $D$-dimension, i.e., $\bm{x} = (x_1, x_2, \dots , x_d, \dots , x_D)$.
+It is customary to assume, for generality, that the input parameters are normalized between $[0,1]$ (i.e., $\bm{x} \in [0,1]^D$).
+
+Let $\mathbf{DM}$ be an experimental design matrix of size $N \times D$, where $N$ is the number of samples. 
+Each row in the matrix represents a point in the $D$-dimensional input parameter space. 
+The model is then evaluated at each of these $N$ points by using a simulation code that results in a matrix of discrete-time outputs of size $N\times \frac{t_b-t_a}{\Delta t}$ where $\Delta t$ is the time-step size,
+\begin{equation}
+  \mathbf{Y} =  
+    \begin{pmatrix}
+      y_1(t_a)  & \cdots & y_1(t_i) & \cdots & y_1(t_b)\\
+      \vdots	  &        & \vdots   &        & \vdots\\
+      y_n(t_a)  & \cdots & y_n(t_i) & \cdots & y_n(t_b)\\
+      \vdots	  &        & \vdots   &        & \vdots\\
+      y_N(t_a)  & \cdots & y_N(t_i) & \cdots & y_N(t_b) \\
+    \end{pmatrix}
+\label{eq:discrete_time}
+\end{equation}
+where $y_n (t_i) = y(t_i; \mathbf{x}_n)$ is the model output at time $t_i$ evaluated using $\mathbf{x}_n$, the input parameter vector at the $n$-th row of $\mathbf{DM}$. 
+
+Based on this general description of a time-dependent model output, the next three sections will outline the main components of the proposed \gls[hyper=false]{sa} methodology.

@@ -1,0 +1,181 @@
+%******************************************************************************************
+\section{Initial Selection of Input Parameters}\label{sec:reflood_initial_inputs_selection}
+%******************************************************************************************
+
+% Introductory paragraph
+This section presents the selection process of the initial set of uncertain input parameters of the \gls[hyper=false]{feba} simulation in \gls[hyper=false]{trace}.
+Afterward, the assignment of the initial (prior) uncertainties of these parameters are presented. 
+This part is closely related to PSI participation in the \gls[hyper=false]{premium} benchmark thus several reference are made to activities related to that benchmark \cite{Zerkak2016}.
+
+%---------------------------------------------------------------------------------
+\subsection{Selection of Input Parameters}\label{sub:reflood_parameters_selection}
+%---------------------------------------------------------------------------------
+
+% Introductory paragraph
+The selection process for the uncertain input parameters to consider differs depending on the type of parameter.
+Each of the selected parameters can broadly fall into one of the two following categories:
+\begin{itemize}
+	\item Input parameters that are not specific to the \gls[hyper=false]{trace} code (e.g., initial and boundary conditions, material thermo-physical properties).
+		This category of parameters is often referred to as the \emph{controllable inputs} of the simulation.
+	\item Input parameters that are specific to \gls[hyper=false]{trace} code (e.g., implementation of the two-phase momentum and heat transfer package for reflood condition).
+		This category is often referred to as the \emph{model parameters} of the simulation.
+\end{itemize}
+
+% Selection on the first category
+The selection of parameters belonging to the controllable inputs 
+\marginpar{Controllable inputs selection}
+category simply corresponds to the parameters recommended by the benchmark organizers and employed by most participants \cite{Kovtonyuk2015}.
+The $13$ selected parameters of this category are listed in Table~\ref{tab:trace_model_parameter_1}.
+
+% Selection on the second category
+On the other hand, the selection of the model parameters specific to the \gls[hyper=false]{trace} code is challenging due to the fact that \gls[hyper=false]{trace} is a relatively recent code (in comparison with codes like RELAP5, ATHLET, or CATHARE).
+In essence, the code has been developed from different variants of the TRAC codes for different reactor types (TRAC-BF1, TRAC-P) to result in a single consolidated code applicable to both \gls[hyper=false]{pwr} and \gls[hyper=false]{bwr}.
+Contributing to that difficulty is the fact that \gls[hyper=false]{trace} is currently undergoing significant developments and improvements, including modifications to the two-phase closure models for momentum and heat transfers.
+Consequently, the tasks of selecting the model parameters and later their prior uncertainties are more difficult than for a more established codes.
+
+% Criteria for choosing the parameters
+To overcome this issue,
+\marginpar{Model parameters selection}
+the following principles have been followed to select the model parameters:
+\begin{enumerate}
+	\item The selection has been focused on the physical models in the post-\glsentryshort{chf} package of the \gls[hyper=false]{trace} code (including the reflood models).
+		    Specifically, these are models for the \gls[hyper=false]{iafb} and \gls[hyper=false]{dffb} flow regimes \cite{USNRC2012}.
+	\item Models related to spacer grid are also included as they are known to have a significant impact on reflooding \cite{Miller2013}.
+	\item Parameters related to the minimum film boiling temperature and transition boiling should be selected, since they have (by model construction) an impact on the time of quenching.
+\end{enumerate}
+
+\clearpage
+\begin{sidewaystable}
+
+\caption{Selected \gls[hyper=false]{trace} input parameters (controllable inputs), their perturbation factors and their range of variations.}
+\label{tab:trace_model_parameter_1}
+\centering
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+%\begin{tabularx}{\textwidth}{@{}c|>{$}c<{$}|>{$}c<{$}|Y|Y|Y|Y|Y@{}}
+\begin{tabularx}{0.985\textwidth}{@{}cccc>{$}c<{$}>{$}c<{$}c@{}}
+\toprule
+No.	& Parameter 				& Description 										& Distribution & \text{Range of}  & \text{Nominal} & Mode of \\
+		& ID        				&                             		&              & \text{Variation} & \text{Value}   & Perturbation \\
+\midrule
+1  	& \texttt{breakP} 	& Outlet pressure 								& Uniform 	& [0.90, 1.10]   	& 1.0 			& Multiplicative \\ 
+2  	& \texttt{fillT} 		& Inlet water temperature 				& Uniform 	& [-5.00, +5.00] 	& 0.0\,[K] 	& Additive \\ 
+3  	& \texttt{fillV}		& Inlet water velocity          	& Uniform 	& [0.90, 1.10]   	& 1.0 			& Multiplicative \\ 
+4  	& \texttt{pwr} 			& Heater rod power             	 	& Uniform 	& [0.90, 1.05]   	& 1.0 			& Multiplicative \\ 
+\midrule
+5  	& \texttt{nicK} 		& Conductivity (Nichrome) 				& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+6  	& \texttt{nicCP} 		& Specific heat (Nichrome)				& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+7  	& \texttt{nicEM} 		& Emissivity (Nichrome) 					& Uniform 	& [0.90, 1.00] 		& 0.95			& Substitutive \\ 
+8  	& \texttt{mgoK} 		& Conductivity (MgO)							& Uniform 	& [0.80, 1.20] 		& 1.0 			& Multiplicative \\
+9  	& \texttt{mgoCP}		& Specific heat (MgO) 						& Uniform 	& [0.80, 1.20] 		& 1.0 			& Multiplicative \\ 
+10 	& \texttt{vesEps}		& Wall roughness 									& Uniform 	& [6.10\times 10^{-7}, 2.44\times 10^{-6}] & 1.5 \times 10^{-6} \, [m] & Substitutive \\ 
+11 	& \texttt{ssK} 			& Conductivity (stainless steel)	& Uniform 	& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+12 	& \texttt{ssCP} 		& Specific heat (stainless steel)	& Uniform		& [0.95, 1.05] 		& 1.0 			& Multiplicative \\ 
+13 	& \texttt{ssEM} 		& Emissivity (stainless steel)		& Uniform 	& [0.56, 0.94] 		& 0.84 			& Substitutive \\ 
+\bottomrule
+\end{tabularx}
+\end{sidewaystable}
+\clearpage
+
+% Perturbation factor, high-level perturbation
+Additionally, as a common principle, the selected models and their parameters are perturbed by means of perturbation factors (detailed below) at the highest-possible level of the structure of these models.
+Different codes share similarity in representing major flow regimes (high-level) but might differ in the constituents models (i.e., sub-models) for each flow regime (lower-level).
+Focusing on the higher-level implementation of the models allows, to some extent, to use reference uncertainty information obtained from codes other than \gls[hyper=false]{trace}.
+
+% Resulting List of Model Parameters 1
+In accordance with the first selection principle above, a set of $10$ high-level parameters has been selected (five for each flow regime).
+Specifically, for each flow regime: the wall-fluid \gls[hyper=false]{htc}, the liquid-inter\-face \gls[hyper=false]{htc}, the vapor-interface \gls[hyper=false]{htc}, the wall-fluid drag coefficient, and the interfacial drag coefficient.
+
+% Resulting List of Model Parameters 2
+Following the second principle, two additional parameters have been selected:
+the spacer grid pressure loss coefficient model from Yao, Loftus, and Hochreiter as well as the grid convective heat transfer enhancement model from Yao, Hochreiter, and Leech (see \cite{USNRC2012} pp. $425$--$429$ and \cite{Yao1982}).
+These perturbations on the parameters are applied to all seven spacer grids at once.
+
+% Resulting List of Model Parameters 3
+Lastly, from the third principle, the quench temperature parameter in \gls[hyper=false]{trace} and wall-fluid \gls[hyper=false]{htc} for transition boiling (see \cite{USNRC2012} pp. $293$--$299$) have been added to the list of uncertain input parameters.
+
+In the end, $14$ parameters are selected and are summarized in Table~\ref{tab:trace_model_parameter_2}, yielding a total number of $27$ uncertain input parameters.
+
+% Table of Model Parameters
+\begin{sidewaystable}
+
+\caption{Selected \gls[hyper=false]{trace} input parameters (model parameters), their perturbation factors and their range of variations}
+\label{tab:trace_model_parameter_2}
+
+\centering
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+%\begin{tabularx}{\textwidth}{@{}c|>{$}c<{$}|>{$}c<{$}|Y|Y|Y|Y|Y@{}}
+\begin{tabularx}{0.90\textwidth}{@{}cccc>{$}c<{$}>{$}c<{$}c@{}}
+\toprule
+No. & Parameter 							& Description & Distribution & \text{Range of}  & \text{Nominal} & Mode of \\
+    & ID        							&             &              & \text{Variation} & \text{Value}   & Perturbation \\
+\midrule
+14 	& \texttt{gridK} 					& Spacer grid $\Delta p$ coefficient															& Uniform 				& [0.25, 1.75] 		& 1.0 				& Multiplicative \\ 
+15  & \texttt{gridHT} 				& Spacer grid \gls[hyper=false]{htc} enhancement									& Log-Uniform 		& [0.50, 2.00] 		& 1.0				 	& Multiplicative \\ 
+16  & \texttt{iafbWHT}  			& Wall \gls[hyper=false]{htc} (\glsentryshort{iafb})							& Log-Uniform 		& [0.50, 2.00]   	& 1.0 				& Multiplicative \\ 
+17  & \texttt{dffbWHT}  			& Wall \gls[hyper=false]{htc} (\glsentryshort{dffb})  						& Log-Uniform 		& [0.50, 2.00] 	  & 0.0 				& Multiplicative \\ 
+18  & \texttt{iafbLIHT}				& Liquid-interface \gls[hyper=false]{htc} (\glsentryshort{iafb})  & Log-Uniform 		& [0.25, 4.00]   	& 1.0 				& Multiplicative \\ 
+19  & \texttt{iafbVIHT} 			& Vapor-interface \gls[hyper=false]{htc}  (\glsentryshort{iafb})  & Log-Uniform 		& [0.25, 4.00]   	& 1.0 				& Multiplicative \\ 
+20  & \texttt{dffbLIHT} 			& Liquid-interface \gls[hyper=false]{htc} (\glsentryshort{dffb}) 	& Log-Uniform 		& [0.25, 4.00] 	 	& 1.0 				& Multiplicative \\ 
+21  & \texttt{dffbVIHT} 			& Vapor-interface \gls[hyper=false]{htc} (\glsentryshort{dffb})	 	& Log-Uniform 		& [0.25, 4.00] 	 	& 1.0 				& Multiplicative \\ 
+22  & \texttt{iafbIntD} 			& Interfacial drag (\glsentryshort{iafb}) 												& Log-Uniform 		& [0.25, 4.00] 	 	& 1.0 				& Multiplicative \\ 
+23  & \texttt{dffbIntDr} 			& Interfacial drag (\glsentryshort{dffb})													& Log-Uniform 		& [0.25, 4.00]		& 1.0 				& Multiplicative \\
+24  & \texttt{iafbWallDr} 		& Wall drag (\glsentryshort{iafb}) 																& Log-Uniform 		& [0.50, 2.00] 		& 1.0 				& Multiplicative \\ 
+25	& \texttt{dffbWallDr} 		& Wall drag (\glsentryshort{dffb})			  												& Log-Uniform 		& [0.50, 2.00] 		& 1.0 				& Multiplicative \\ 
+26 	& \texttt{transHTCWallSV}	& Wall \gls[hyper=false]{htc} (Transition boiling)								& Log-uniform			& [0.50, 2.00] 		& 1.0 				& Multiplicative \\ 
+27 	& \texttt{tQuench} 				& Quenching temperature $[K]$																			& Uniform 				& [-50.0, +50.0] 	& 0.0 \, [K]	& Additive \\ 
+\bottomrule
+
+\end{tabularx}
+\end{sidewaystable}
+
+%----------------------------------------------------------------------------------
+\subsection{Perturbation Factors}\label{sub:reflood_parameters_perturbation_factor}
+%----------------------------------------------------------------------------------
+
+% Opening paragraph
+The nominal values of the selected input parameters of the \gls[hyper=false]{trace} \gls[hyper=false]{feba} model are varied by means of perturbation factors.
+\marginpar{Perturbation factor}
+These perturbation factors are modeled as random variables following a predefined \gls[hyper=false]{pdf} detailed in the next section, from which a set of samples of input parameters values can be generated.
+
+% Mode of perturbations
+For a given sampled perturbation factor, one of three modes of perturbation is possible: \emph{additive}, \emph{multiplicative,} and \emph{substitutive}.
+\marginpar{Modes of perturbation}
+In the additive mode, the sampled perturbation factor is added to the nominal parameter value of the \gls[hyper=false]{trace} model.
+In the multiplicative mode, the sampled perturbation factor is multiplied by the nominal parameter value.
+Finally, in the substitutive mode, the sampled perturbation factor directly substitutes for the nominal parameter value.
+The mode of perturbation for each selected input parameter are listed in last column of Table~\ref{tab:trace_model_parameter_1} and Table~\ref{tab:trace_model_parameter_2}.
+
+% trace-simexp
+A tool is developed in the Python programming language to assist in automatically pre-processing, executing, and post-processing 
+\marginpar{\texttt{trace-simexp}}
+numerous \gls[hyper=false]{trace} simulations of the \gls[hyper=false]{feba} model based on a set of sampled input parameters values.
+The tool, \texttt{trace-simexp}, is detailed in Appendix~\ref{app:trace_simexp}.
+
+%-----------------------------------------------------------------------------------
+\subsection{Prior Uncertainty Quantification}\label{sub:reflood_parameters_prior_uq}
+%-----------------------------------------------------------------------------------
+
+% Opening Paragraph
+The uncertainties associated with the controllable inputs were taken directly from the recommended value of the \gls[hyper=false]{premium} benchmark and the list can be found in Table~\ref{tab:trace_model_parameter_1}.
+As for the model parameters, the uncertainty ranges has been determined following the available literature on uncertainties in physical models for \gls[hyper=false]{lbloca}.
+
+% Main Source of Information
+The main sources of information consisted of Ref.\cite{Wickett1991} and Ref.~\cite{Glaeser2008a}, which included uncertainty information for the closure models of the system codes TRAC-PF1/MOD1 and ATHLET-Mod2.1 (Cycle B), respectively. 
+Furthermore, prior experience and knowledge of the closure model uncertainties of the CATHARE2 code (\texttt{V1.3L\_1}, Rev.5) have been used \cite{Zerkak2016,IPSN2001}.
+Ref.~\cite{IPSN2001} accounts for an analysis by IPSN\footnote{Institut de protection et de s\^{u}ret\'e nucl\'eaire (IPSN)} of the uncertainty quantification method ``M\'ethode D\'eterministe R\'ealiste'' for the \gls[hyper=false]{pwr} \gls[hyper=false]{lbloca} which was proposed by EDF\footnote{Electricit\'e de France} and was evaluated in $2000$.
+The high-level implementation of the perturbation factors for the uncertainty analysis in the post-\gls[hyper=false]{chf} closure models, allowed information from different codes to be extracted for the initial estimate.
+This approach was deemed adequate in the context of the determination of the prior \glspl[hyper=false]{pdf}.
+
+% Uniform and Log-Uniform
+To simplify the quantification of the prior uncertainties further, the \glspl[hyper=false]{pdf} of the multiplication factors were assumed to follow symmetric bounded uniform and log-uniform distributions with the nominal parameter value equals to the median value.
+For the log-uniform distribution the form $[2^{-n}, 2^{n}]$ was assumed, where $n$ is an integer.
+All model parameters that were a priori deemed to be important were assumed to follow log-uniform distributions.
+
+The ranges of the parameters (i.e., their minimum and maximum), were chosen to cover range of similar parameters available in Refs.~\cite{Wickett1991,Glaeser2008a}.
+Though this at times resulted in the selection of large bounds, they were deemed acceptable following a verification study against the nominal predictions.
+The verification heavily relied on engineering judgment via visual inspection of the width of the prediction uncertainty bands to decide if such bands were indeed reasonable\footnote{The loosely defined notion of ``reasonable'' in this case is similar to the notion of ``'behavioral vs. non-behavioral'' prediction in hydrology modeling \cite{Beven2009}.}.
+The approach is admittedly imprecise, but is intentional as it avoids underestimating the prior uncertainty range of influential model parameters. 
+
+%
+Table~\ref{tab:trace_model_parameter_2} lists the results of the prior uncertainty quantification of the selected model parameters.
+Note that all $27$ input parameters considered are a priori independent.

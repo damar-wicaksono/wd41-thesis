@@ -1,0 +1,19 @@
+%***************************************************************************************************************************************************************
+\section[Application to the TRACE Model of FEBA]{Application to the \gls[hyper=false]{trace} Model of \gls[hyper=false]{feba}}\label{sec:bc_application_to_feba}
+%***************************************************************************************************************************************************************
+
+% Introductory paragraph
+In this section, a Bayesian calibration on the parameters of the \gls[hyper=false]{trace} reflood model is conducted and assessed on the basis of the data from a test series of the \gls[hyper=false]{feba} reflood experiment.
+Following the results of Chapter~\ref{ch:gsa}, only the eight most relevant reflood model parameters are considered in the calibration (while the uncertainties of the four parameters related to boundary conditions are optionally taken into account).
+Furthermore, following the developments in Chapter~\ref{ch:gp_metamodel}, a \gls[hyper=false]{gp} metamodel is used to substitute the code run of the \gls[hyper=false]{trace} model.
+There were six experimental runs conducted in the test series that corresponded to different experimental boundary conditions.
+The calibration is conducted solely on test No. $216$, the base experimental run.
+The calibration results are then assessed by means of propagating the resulting model parameters posterior uncertainties and comparing the prediction uncertainties with the data from the other five experimental runs.
+
+% List of included subsections
+\input{Chapters/5_bayesian_calibration/application_to_feba/simulation_experiment}
+\input{Chapters/5_bayesian_calibration/application_to_feba/mcmc_convergence}
+\input{Chapters/5_bayesian_calibration/application_to_feba/calibration_results}
+\input{Chapters/5_bayesian_calibration/application_to_feba/calibration_evaluation}
+\input{Chapters/5_bayesian_calibration/application_to_feba/discussion}
+%*********************************************************************************

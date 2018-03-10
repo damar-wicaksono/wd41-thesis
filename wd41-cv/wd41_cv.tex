@@ -1,0 +1,242 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Classicthesis-Styled CV
+% LaTeX Template
+% Version 1.0 (22/2/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Alessandro Plasmati
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{scrartcl}
+
+\reversemarginpar % Move the margin to the left of the page 
+
+\newcommand{\MarginText}[1]{\marginpar{\raggedleft\itshape\small#1}} % New command defining the margin text style
+
+\usepackage{graphicx}
+\usepackage[nochapters]{classicthesis} % Use the classicthesis style for the style of the document
+\usepackage[LabelsAligned]{currvita} % Use the currvita style for the layout of the document
+
+\renewcommand{\cvheadingfont}{\LARGE\color{Maroon}} % Font color of your name at the top
+
+\usepackage{hyperref} % Required for adding links	and customizing them
+\hypersetup{colorlinks, breaklinks, urlcolor=Maroon, linkcolor=Maroon} % Set link colors
+
+\newlength{\datebox}\settowidth{\datebox}{Spring 201111} % Set the width of the date box in each block
+
+\newcommand{\NewEntry}[3]{\noindent\hangindent=2em\hangafter=0 \parbox{\datebox}{\small \textit{#1}}\hspace{1.5em} #2 #3 % Define a command for each new block - change spacing and font sizes here: #1 is the left margin, #2 is the italic date field and #3 is the position/employer/location field
+\vspace{0.5em}} % Add some white space after each new entry
+
+\newcommand{\Description}[1]{\hangindent=2em\hangafter=0\noindent\raggedright\footnotesize{#1}\par\normalsize\vspace{1em}} % Define a command for descriptions of each entry - change spacing and font sizes here
+
+\pagenumbering{gobble}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\thispagestyle{empty} % Stop the page count at the bottom of the first page
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{cv}{\spacedallcaps{Damar Canggih Wicaksono}}\vspace{1.5em} % Your name
+
+\noindent\spacedlowsmallcaps{Personal Information}\vspace{0.5em} % Personal information heading
+
+\NewEntry{}{\textit{Born in Jakarta,}}{15 May 1986} % Birthplace and date
+
+\NewEntry{email}{\href{mailto:damar.wicaksono@gmail.com}{damar.wicaksono@gmail.com}} % Email address
+
+\NewEntry{GitHub}{\href{https://github.com/damar-wicaksono}{https://github.com/damar-wicaksono}} % Personal website
+
+\NewEntry{phone}{(M) +41 (0) 78 798 5785} % Phone number(s)
+
+\smash{\includegraphics[width=2.35cm]{wd41_photo}}
+%\noindent\spacedlowsmallcaps{Goal}\vspace{1em} % Goal heading, could be used for a quotation or short profile instead
+
+%\Description{Gain fundamental experience in my area of interest and expertise.}\vspace{2em} % Goal text
+
+\vspace{2em} % Extra white space between the personal information section and goal
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics[width=3cm]{M02-z33v}
+\spacedlowsmallcaps{Education}\vspace{1em}
+
+\NewEntry{2013-2018}{EPF Lausanne, Switzerland}
+
+\Description{\MarginText{Doctor of Science}\textit{Nuclear Engineering}\newline 
+Thesis: \textit{Bayesian Uncertainty Quantification of Physical Models in Thermal-Hydraulics System Codes}\newline
+Advisors: Prof.~Andreas \textsc{Pautz},  Mr. Omar \textsc{Zerkak}, \& Dr. Gregory \textsc{Perret}}
+
+%------------------------------------------------
+
+\NewEntry{2010-2012}{EPF Lausanne -- ETH Z\"urich, Switzerland}
+
+\Description{\MarginText{Master of Science}\textit{Nuclear Engineering}\ \ $\cdotp$\ \ GPA: 5.52/6.00\newline 
+Thesis: \textit{Development and Assessment of an Improved Temporal Coupling for TRACE/S3K Analysis}\newline
+Advisors: Prof.~Rakesh \textsc{Chawla} \& Mr. Omar \textsc{Zerkak}}
+
+%------------------------------------------------
+
+\NewEntry{2004-2009}{Universitas Gadjah Mada, Indonesia}
+
+\Description{\MarginText{Bachelor of Engineering}\textit{Nuclear Engineering}\ \ $\cdotp$\ \ GPA: 3.92/4.00\newline
+Thesis: \textit{Multiobjective Optimization of PWR Fuel Loading Pattern using Simulated Annealing Algorithm}\newline
+Advisor: Dr. Alexander Agung}
+
+%------------------------------------------------
+
+\vspace{1em} % Extra space between major sections
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\noindent\spacedlowsmallcaps{Work Experience}\vspace{1em}
+
+\NewEntry{2013--2018}{Paul Scherrer Institut / EPF Lausanne}
+
+\Description{\MarginText{Doctoral Assistant} \begin{itemize}
+	\item Developed and validated novel methodology for inverse uncertainty
+quantification of nuclear safety analysis code using Bayesian statistics and
+techniques.
+  \item Applied Gaussian process regression technique for metamodeling a
+computationally expensive simulation code.
+  \item Gained skills in Python and \texttt{R} programming.
+  \item Project embedded within the STARS program, a Swiss technical safety
+organization supporting the Swiss Federal Nuclear Safety Inspectorate (ENSI).
+  \item Frequent technical reporting in an independent working environment.
+
+\end{itemize}
+}
+
+%------------------------------------------------
+
+\NewEntry{Aug-Nov 2011}{Paul Scherrer Institut}
+
+\Description{\MarginText{Intern}Tested, analyzed, and validated different Monte Carlo-based simulation codes for in-core nuclear fuel utilization.}
+
+%------------------------------------------------
+
+\NewEntry{Jul-Oct 2011}{Kernkraftwerk Leibstadt AG}
+
+\Description{\MarginText{Intern}Industrial internship in the Safety Analysis Group, developing computer model of
+nuclear power plant for deterministic safety analysis purpose. Gained experience in
+writing technical report.}
+
+%------------------------------------------------
+
+\vspace{1em} % Extra space between major sections
+
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS
+%----------------------------------------------------------------------------------------
+
+\spacedlowsmallcaps{Publications and Conference Contributions}\vspace{1em}
+
+\Description{D. Wicaksono, O. Zerkak, and A. Pautz, ``Global Sensitivity Analysis of Transient Code Output applied to a Reflood Experiment Model using TRACE Code,'' \textit{Nuclear Science and Engineering}, vol. 184, no. 6, 2016.}
+
+%------------------------------------------------
+
+\Description{D. Wicaksono, O. Zerkak, and A. Pautz, ``Bayesian Caliration of Thermal-Hydraulics Model with Time-Dependent Output,'' in the \textit{11th International Topical Meeting on Nuclear Thermal-Hydraulics, Operation and Safety (NUTHOS-11)}, Gyeongju, South Korea, Oct. 9--13, 2016.}
+
+%------------------------------------------------
+
+\Description{D. Wicaksono, O. Zerkak, and A. Pautz, ``A Methodology for Global Sensitivity Analysis of Transient Code Output applied to a Reflood Experiment Model using TRACE,'' in the \textit{16th International Topical Meeting on Nuclear Reactor Thermal-Hydraulics}, Chicago, Illinois, Aug. 30 -- Sept. 4, 2015.}
+
+%------------------------------------------------
+
+\Description{D. Wicaksono, O. Zerkak, and A. Pautz, ``Sensitivity Analysis of a Bottom Reflood Simulation using the Morris Screening Method,'' in the \textit{10th International Topical Meeting on Nuclear Thermal-Hydraulics, Operation and Safety (NUTHOS-10)}, Okinawa, Japan, Dec. 14 -- 18, 2014.}
+
+%------------------------------------------------
+
+\Description{D. Wicaksono, O. Zerkak, and A. Pautz, ``Exploring Variability in Reflood Simulation Results: an Application of Functional Data Analysis,'' in the \textit{10th International Topical Meeting on Nuclear Thermal-Hydraulics, Operation and Safety (NUTHOS-10)}, Okinawa, Japan, Dec. 14 -- 18, 2014.}
+
+%------------------------------------------------
+
+\vspace{1em} % Extra space between major sections
+
+%----------------------------------------------------------------------------------------
+%	COMPUTER SKILLS
+%----------------------------------------------------------------------------------------
+
+\spacedlowsmallcaps{Computer Skills}\vspace{1em}
+
+\Description{\MarginText{Basic}\texttt{C++}, Adobe Illustrator}
+
+\Description{\MarginText{Intermediate}Shell scripting, Matlab, \texttt{FORTRAN77/90}, \LaTeX, Microsoft Office}
+
+\Description{\MarginText{Advanced}\textsc{python}, \texttt{R}}
+
+%------------------------------------------------
+
+\vspace{1em} % Extra space between major sections
+
+%----------------------------------------------------------------------------------------
+%	OTHER INFORMATION
+%----------------------------------------------------------------------------------------
+
+\spacedlowsmallcaps{Awards and Accolades}\vspace{1em}
+
+\Description{2015\ \ $\cdotp$\ \ Best Student Paper \ \ $\cdotp$ \ \ NURETH-16, American Nuclear Society}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{2014\ \ $\cdotp$\ \ Best Student Paper \ \ $\cdotp$ \ \ NUTHOS-11, Japanese Nuclear Society}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{2014\ \ $\cdotp$\ \ Best 1\textsuperscript{st} Year Graduate Student \ \ $\cdotp$ \ \ NES PhD Day, PSI}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{2010-12\ \ $\cdotp$\ \ Excellence Scholarship\ \ $\cdotp$ \ \ Federal Commission for Scholarship, CH}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{2009\ \ $\cdotp$\ \ Cum Laude Graduate\ \ $\cdotp$ \ \ Universitas Gadjah Mada, Indonesia}
+ 
+%------------------------------------------------
+
+\vspace{1em}
+
+\newlength{\langbox} % Create a new length for the length of languages to keep them equally spaced
+\settowidth{\langbox}{Indonesian} % Length equals the length of "English" - if you have a longer language in your list put it here
+
+\Description{\MarginText{Languages}\parbox{\langbox}{\textsc{Indonesian}}\ \ $\cdotp$\ \ \ Mother tongue}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{\parbox{\langbox}{\textsc{English}}\ \ $\cdotp$\ \ \ Professional fluency}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{\parbox{\langbox}{\textsc{French}}\ \ $\cdotp$\ \ \ Intermediate (B1)}
+
+\vspace{-0.5em} % Negative vertical space to counteract the vertical space between every \Description command
+
+\Description{\parbox{\langbox}{\textsc{German}}\ \ $\cdotp$\ \ \ Basic (A1.2)}
+
+\vspace{1em} % Negative vertical space to counteract the vertical space between every \Description command
+
+%----------------------------------------------------------------------------------------
+
+\end{cv}
+
+\end{document}

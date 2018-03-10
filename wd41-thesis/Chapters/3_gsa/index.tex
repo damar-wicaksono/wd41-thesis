@@ -1,0 +1,32 @@
+%**********************************************************************************************************************************
+\chapter[Sensitivity Analysis]{Sensitivity Analysis: Understanding Model Input/Output Relationship Under Uncertainty}\label{ch:gsa}
+%**********************************************************************************************************************************
+
+% Linking Paragraph
+As mentioned in the introduction, describing and understanding properly the impact of model parameters variations on a model prediction are an essential part of the model development and assessment. 
+This chapter presents the application of global and statistical \gls[hyper=false]{sa} to analyze the \gls[hyper=false]{feba} model in \gls[hyper=false]{trace} in order to investigate the effects of the input parameter variations.
+
+% Focus
+After first introducing in Section~\ref{sec:sa_statistical_framework} the notational convention used in this chapter,
+the proposed methodology is presented.
+The methodology leverages various developments in \glsfirst[hyper=false]{gsa} and \glsfirst[hyper=false]{fda} methods and follows three key underlying ideas.
+
+% Overview
+The first idea, presented in Section~\ref{sec:sa_time_dependent_variation}, is to reduce the dimensionality of the output space while preserving the interpretability of the results by utilizing techniques derived from \gls[hyper=false]{fda} \cite{Ramsay2005}.
+Section~\ref{sec:sa_parameters_screening} introduces the second idea, which is to reduce the dimensionality of the input parameter space through screening analysis using the Morris method \cite{Morris1991,Campolongo2011}. 
+The third and final idea is to investigate, quantitatively and in more detail, the effect of variation of parameters on the overall time-dependent output variation. 
+This is done through variance-based SA using the Sobol’-Saltelli
+method \cite{Sobol2001, Saltelli2002}, which is presented in Section~\ref{sec:sa_variance_decomposition}.
+
+The methods are then applied to analyze the \gls[hyper=false]{feba} model in \gls[hyper=false]{trace} to understand better its inputs/outputs relationship under the assumed uncertainty on its input parameters.
+The results are presented and discussed in Section~\ref{sec:sa_application_to_feba}.
+Finally, Section~\ref{sec:sa_chapter_summary} closes the chapter with a summary.
+
+\input{Chapters/3_gsa/statistical_framework}
+\input{Chapters/3_gsa/time_dependent_variation}
+\input{Chapters/3_gsa/parameters_screening}
+\input{Chapters/3_gsa/variance_decomposition}
+\input{Chapters/3_gsa/implementation}
+\input{Chapters/3_gsa/application_to_feba/index}
+\input{Chapters/3_gsa/chapter_summary}
+%***********************************************

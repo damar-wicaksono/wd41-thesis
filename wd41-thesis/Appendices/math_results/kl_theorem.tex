@@ -1,0 +1,47 @@
+%*******************************************************
+\section{Karhunen-Lo\'eve Theorem}\label{app:kl_theorem}
+%*******************************************************
+
+The Karhunen-Lo\'eve theorem establishes that for any centered mean-square continuous stochastic process $\mathcal{Y}$ defined by a sample space $\Omega$ and on a domain $\mathcal{D} \subseteq \mathbb{R}$,
+there exists a set of basis functions ${\xi_j}$ defined on $\mathcal{D}$ such that for all $t \in \mathcal{D}$,
+\begin{equation}
+	\mathcal{Y} = \sum_{j=1}^{+\infty} \theta_j \cdot \xi_j(t)
+\label{eq:kl_theorem}
+\end{equation}
+
+The scalar coefficients $\theta_j$ in Eq.~(\ref{eq:kl_theorem}) are given for each $\omega \in \Omega$ by $\theta_j(\omega) = \int_\mathcal{D} \mathcal{Y}(\omega) \xi_j(t) dt$ and satisfy the following:
+\begin{equation}
+	\begin{split}
+		\mathbb{E}[\theta_j] & = 0 \\
+		\mathbb{V}[\theta_j] & = \rho_j \\
+    \mathbb{E}[\theta_j\cdot \theta_k] & = \delta_{jk} \rho_j
+	\end{split}
+\label{eq:kl_condition}
+\end{equation}
+where $\mathbb{E}[\circ]$ and $\mathbb{V}[\circ]$ are the expectation and the variance operators, respectively;
+$\delta$ is the Kronecker delta;
+$\rho_j$ is the eigenvalue associate with basis function $\xi_j(t)$.
+Eqs.~(\ref{eq:kl_theorem}) and~(\ref{eq:kl_condition}) imply that $\theta_j$ is independent and identically distributed (i.i.d) with mean $0$ and variance $\rho_j$~\cite{Wang2008}.
+
+The basis function, in turn, is defined as the eigenfunction of the functional operator $\mathbb{K}[f(\circ)]$ on some function $f(\circ)$ applied to $\xi_j(t)$
+\begin{equation}
+	\mathbb{K}[\xi_j(t)] = \int_{\mathcal{D}} R (t, s) \cdot \xi_j(s) ds = \rho_j \cdot \xi_j(t); \, \forall t \in \mathcal{D}
+\label{eq:kl_operator}
+\end{equation}
+where $R (t, s)$ is the covariance function of the stochastic process $\mathcal{Y}$ for the covariance between time $t$ and $s$,
+i.e., $R (t, s) \equiv \mathbb{E}[\mathcal{Y}_t \cdot \mathcal{Y}_s]$.
+
+The Karhunen-Lo\'eve theorem is applicable to the functional deviation from the proper mean and therefore allows for each element of the data set to be represented as a series that is optimal in the root-mean-square-of-error sense:
+\begin{equation}
+	y_n(t) = \bar{y}(t) + \sum_{j=1}^{+\infty} \theta_{j,n} \cdot \xi_j(t); \, n = 1, \dots, N
+\label{eq:kl_rmse_optimal}
+\end{equation}
+where $\xi_j(t)$ is the series of orthogonal eigenfunctions (or \gls[hyper=false]{fpc}),
+and the corresponding \gls[hyper=false]{fpc} score $\theta_{j,n}$ associated with each function realization is defined by the orthogonality condition
+\begin{equation}
+	\theta_{j,n} = \int_{\mathcal{D}} [y_n(t) - \bar{y}(t)] \cdot \xi_j(t) dt
+\label{eq:kl_orthogonality}
+\end{equation}
+
+As can be seen in Eq.~(\ref{eq:kl_rmse_optimal}), the transformation is exact if the set of eigenfunctions is infinite, but truncation is needed for practical application.
+Such details of the actual implementation of \gls[hyper=false]{fpca} can be found in Refs.~\cite{Ramsay2005,Ramsay2014,Wicaksono2014a}.

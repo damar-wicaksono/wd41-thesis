@@ -1,0 +1,110 @@
+%**************************************************************************
+\subsection{Simulation Experiment}\label{sub:gp_feba_simulation_experiment}
+%**************************************************************************
+
+% Introductory Paragraph
+The construction of \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{feba} \gls[hyper=false]{trace} model was carried out in three steps following the recommendation in the statistical/machine learning literature \cite{Rasmussen2006, Hastie2009}: training, validation, testing as summarized in Fig.~\ref{fig:ch4_simulation_experiment} below.
+\bigfigure[pos=tbhp,
+           opt={width=1.0\textwidth},
+           label={fig:ch4_simulation_experiment},
+           shortcaption={Flowchart of the simulation experiment for constructing a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility}]
+{../figures/chapter4/figures/simulation_experiment}
+{Flowchart of the simulation experiment for constructing a \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of the \gls[hyper=false]{feba} facility}
+
+% Training
+In the training step, a metamodel was constructed (i.e. \emph{trained}) based on a training data set. 
+\marginpar{Training, experimental design}
+The training data set consists of a set of training inputs and its code output counterparts (from actual code runs). 
+The set of training inputs was generated using an experimental design algorithm (of which several of them were considered: simple random sampling, latin hypercube, optimized latin hypercube, and Sobol' sequence).
+Following the recommendation in Ref.~\cite{Loeppky2009} the starting sample size was 120 (or $10\times D$, with $D$ the number of dimensions) and increased in multiples of two ($240$, $480$, and $960$).
+Furthermore, to take into account the effect of random variation in the training data set of each design and size,
+five replications of each data set were generated for training and
+five different metamodels were trained.
+
+% Dimension Reduction
+Metamodels predicting different types of outputs (i.e., clad temperature, pressure drop, and liquid carryover) were constructed separately.
+\marginpar{Dimension reduction}
+These different outputs were themselves of a multivariate nature:
+liquid carryover was a time-dependent quantity,
+while clad temperature and pressure drop were time- and space-dependent quantities.
+As such, \gls[hyper=false]{pca} was carried out on the raw outputs to reduce their dimensionality and 
+the metamodel was trained with respect to a few retained \gls[hyper=false]{pc} scores.
+
+Carrying out \gls[hyper=false]{pca} for each type of outputs results in pairs of standardized \gls[hyper=false]{pc} scores and \gls[hyper=false]{pc} loadings (see Section~\ref{sec:gp_dimension_reduction}).
+A \gls[hyper=false]{gp} metamodel was then trained with respect to the standardized \gls[hyper=false]{pc} scores for a selected number of retained \gls[hyper=false]{pc} loadings.
+Therefore, there were multiple \gls[hyper=false]{gp} metamodels representing the standardized \gls[hyper=false]{pc} scores associated with each of the retained \gls[hyper=false]{pc} loadings for each of the output types.
+
+% Model Fitting
+Several covariance kernel functions were considered for constructing a metamodel: Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, and power-exponential kernels.
+\marginpar{Model fitting}
+The hyper-parameters associated with each kernel were estimated (i.e., \emph{fitted}) by \gls[hyper=false]{mle} as implemented in the \texttt{R} package \texttt{DiceKriging} \cite{Roustant2012}.
+Following the hyper-parameters estimation for each \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel, a metamodel of the \gls[hyper=false]{trace} model was fully trained and ready for making prediction in arbitrary inputs.
+To make prediction back in the original physical space, the full output space had to be first reconstructed using linear combinations of the predicted standardized \gls[hyper=false]{pc} scores and the \gls[hyper=false]{pc} loadings (See Eq.~(\ref{eq:p_variate_metamodel})).
+
+% Validation
+A validation step was conducted to assess and compare the predictive performance of different metamodels constructed with different experimental designs and covariance functions,
+taking into account the effects of randomness in the experimental design generation and of training sample size.
+\marginpar{Model validation and selection}
+The validation step was conducted by means of independent validation data sets,
+a separate set of \gls[hyper=false]{trace} outputs from actual runs (preferably large enough) for the metamodels to predict.
+The predictivity coefficient defined in Eq.~(\ref{eq:predictivity_coefficient}) measured the discrepancy between the output from the validation data set and from the prediction by the metamodel, and thus the quality of the metamodel.
+However, to have a more intuitive measure of performance directly related to the output in the physical space (as opposed to the reduced space of the principal components),
+the \gls[hyper=false]{rmse} of the reconstructed prediction was also used. It is defined below,
+\begin{equation}
+	\begin{split}
+	& RMSE_{rec.} = \left[\frac{1}{N_{valid} P}  \sum_{n=1}^{N_{valid}} \sum_{p=1}^{P} \left(\text{y}_{n,p} - \hat{\text{y}}_{n,p}\right)^2\right]^{0.5} \\
+  & \hat{\mathbf{y}}_n = \bar{\mathbf{y}} + \boldsymbol{\Phi}^*_Q \mathbf{m}_{SK}(\mathbf{x}_n) = [\hat{\text{y}}_{n,1}, \ldots, \hat{\text{y}}_{n,p}, \ldots, \hat{\text{y}}_{n,P}]
+  \end{split}
+\label{eq:pc_rmse}
+\end{equation}
+where $N_{valid}$ is the number of validation data;
+$P$ is the number of dimension of the output space;
+$y_{np}$ is the value of the output dimension $p$ at validation input $n$;
+$\hat{\text{y}}_{n,p}$ is the predicted value of the output dimension $p$ at validation input $n$;
+and $\hat{\mathbf{y}}_n$ is the mean of the reconstructed multivariate output at validation input $n$ predicted by the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel (see the explanation of Eq.~(\ref{eq:p_variate_metamodel}) for detail).
+This error combined the error due to the misprediction of the standardized \gls[hyper=false]{pc} scores by the metamodel as well as the error due to the truncation of the \glspl[hyper=false]{pc}.
+The best setting of the metamodel (the experimental design and the covariance function) was then selected based on the \gls[hyper=false]{rmse} and one additional metamodel was trained using an increased number of training samples.
+
+% Testing
+Finally, the ultimate performance of the metamodel were assessed in the testing step based on yet another large number of test data set, separately generated.
+\marginpar{Testing}
+The purpose of this step was to further confirm the previous results on another data set 
+and to give a more robust idea of the expected error of the metamodel in the application setting.
+
+% Tables
+The settings used in the simulation experiment for constructing and assessing the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel are summarized in Table~\ref{tab:ch4_simulation_experiment}.
+\begin{table}[!htpb]
+    \myfloatalign
+    \caption{Simulation experiment settings for constructing and assessing the \gls[hyper=false]{gp} \gls[hyper=false]{pc} metamodel of the \gls[hyper=false]{trace} model of \gls[hyper=false]{feba} test No. $216$}
+    \label{tab:ch4_simulation_experiment}
+    \begin{tabularx}{\textwidth}{Xl} \toprule
+        \tableheadline{Description} & \tableheadline{Value} \\ \midrule
+        \textbf{\small{Inputs/Outputs}}       & \\
+        \footnotesize{Number of inputs} 	    & \footnotesize{$12$} \\
+        \footnotesize{Number of outputs:}     & \\		
+        \scriptsize{Clad temperature}	        & \footnotesize{$8$ (axial locations) $\times 10'000$ (time-steps) $= 80'000$} \\
+        \scriptsize{Pressure drop}		        & \footnotesize{$4$ (axial segments) $\times 10'000$ (time-steps) $= 40'000$}   \\
+        \scriptsize{Liquid carryover}	        & \footnotesize{$10'000$ (time-steps)}   \\
+        \footnotesize{Dimension reduction}    & \footnotesize{\glsfirst[hyper=false]{pca}} \\
+        \midrule
+        \textbf{\small{Training}}             & \\
+        \footnotesize{Experimental Designs}   & \footnotesize{Simple random (SRS), latin hypercube (LHS),} \\
+                                              & \footnotesize{optimized latin hypercube (Opt. LHS), Sobol' sequence} \\
+        \footnotesize{Sample sizes}  	        & \footnotesize{$120, 240, 480, 960, 1'920$ (only for testing)}\\
+        \footnotesize{Replication}           	& \footnotesize{$5$}\\
+        \footnotesize{Covariance kernels}     & \footnotesize{Gaussian, Mat\'ern $3/2$, Mat\'ern $5/2$, power-exponential} \\
+        \footnotesize{Model fitting}          & \footnotesize{\glsfirst[hyper=false]{mle}} \\
+        \midrule
+        \textbf{\small{Validation}}           & \\
+        \footnotesize{Strategy}		            & \footnotesize{Independent data set (holdout)} \\
+        \footnotesize{Experimental design}    & \footnotesize{Latin hypercube} \\
+        \footnotesize{Sample size}            & \footnotesize{$5'000$} \\
+        \footnotesize{Validation metric} 		  & \footnotesize{$Q_2$ (Eq.~(\ref{eq:predictivity_coefficient})) and $RMSE$ (Eq.~(\ref{eq:pc_rmse}))} \\
+        \midrule
+        \textbf{\small{Testing}}            & \\
+        \footnotesize{Strategy}		          & \footnotesize{Independent data set (holdout)} \\
+        \footnotesize{Experimental design}  & \footnotesize{Latin hypercube} \\
+        \footnotesize{Sample size}          & \footnotesize{$5'000$} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

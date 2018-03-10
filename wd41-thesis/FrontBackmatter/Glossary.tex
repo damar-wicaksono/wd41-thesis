@@ -1,0 +1,15 @@
+%*****************************************************************************
+%\chapter{Glossary}\label{app:glossary}
+%*****************************************************************************
+%\section*{Nomenclature}\label{nomenclature}
+% work-around to have small caps also here in the headline
+\manualmark
+\markboth{\spacedlowsmallcaps{Glossaries}}{\spacedlowsmallcaps{Glossaries}} % work-around to have small caps also
+%\phantomsection 
+\refstepcounter{dummy}
+%\addtocontents{gls}{\protect\vspace{\beforebibskip}} % to have the bib a bit from the rest in the toc
+%\addcontentsline{gls}{chapter}{\tocEntry{Glossaries}}
+\glsaddall
+\printglossary[type=\acronymtype,title=Acronyms and Abbreviations]
+\printglossary[title=Notations (Alphanumeric), type=alphanumeric]
+\printglossary[title=Notations (Greek), type=greek]

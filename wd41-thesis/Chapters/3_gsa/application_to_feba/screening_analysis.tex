@@ -1,0 +1,114 @@
+%***************************************************************************
+\subsection{Screening Analysis}\label{sub:sa_application_screening_analysis}
+%***************************************************************************
+
+% Introductory paragraph
+A screening analysis to identify the noninfluential parameters was first carried out on the $27$ model parameters using three different methods.
+The \glspl[hyper=false]{qoi} for this screening analysis were the time-averaged quantities for all output types (clad temperature, channel pressure drop and liquid carryover) as explained in Sec.~\ref{sub:sa_application_simulation_experiment}.
+$320$ replications were used for the Morris method while $1'000$ samples were used to estimate the total-effect indices for the Sobol'-Saltelli method.
+The parameter ranking was constructed based on $\mu^*_d$ (for the two Morris methods) and $\hat{ST}_d$ (the total-effect indices).
+
+% Convergence of results
+Fig.~\ref{fig:ch3_plot_running_screening} gives an example of convergence of sensitivity measures $\mu^*_d$ and $\hat{ST}_d$ with respect to the average temperature at the middle of the assembly, 
+with increasing number of replications (for the Morris methods) and samples (for the Sobol' total-effect indices estimation).
+It is shown that all of the sensitivity measures converged
+and the most important parameters identified by each of the methods are the same (in this case: \texttt{gridHT}, \texttt{dffbIntDr}, \texttt{dffbWHT}, \texttt{dffbVIHT}).
+Note that the values of the two measures cannot be compared with each other.
+The convergence of these measures with respect to other outputs was also found to have the same behavior. 
+\bigfigure[pos=tbhp,
+           opt={width=0.9\textwidth},
+           label={fig:ch3_plot_running_screening},
+           shortcaption={Trace plots of screening sensitivity measures estimations.}]
+{../figures/chapter3/figures/plotRunningScreening}
+{Evolution of $\mu^*_d$ and $\hat{ST}_d$ with respect to the average temperature at the middle of the assembly as a function of the number of replications or samples.
+The sensitivity measures related to the four most important parameters, the same for each method, are given unique line types in the plots.}
+
+% Explaining the table of results
+An important finding is that the noninfluential parameters identified by both variants of the Morris methods are confirmed by the total-effect indices based on the variance decomposition, whose values are estimated with small uncertainty.
+Table~\ref{tab:ch3_screening_results} presents the summary of parameters importance across different outputs.
+In the table, a parameter is considered noninfluential with respect to a particular output type if its Sobol' total-effect index value falls below $5\%$.
+This parameter will be screened out in the downstream analysis.
+The final selection of $12$ important parameters are then made by making a union set of the important parameters identified with respect to the different outputs.
+Complete numerical results of the sensitivity measures used in the ranking/screening of each parameter with respect to each of the different outputs are tabulated in Appendix~\ref{app:tbl_results_screening}.
+\begin{table*}[!htbp]\centering
+\ra{1.1}
+\begin{adjustwidth*}{}{-3cm}
+\caption{Parameters importance across different outputs, average quantities over the transient. Checkmark signifies a parameter with a Sobol' total-effect indices above $5\%$ and shaded cells signify the final selection of the retained influential parameters.}
+\label{tab:ch3_screening_results}
+\begin{tabular}{@{}rlrrrrrrrrcrrrrcr@{}}\toprule
+\multirow{2}{*}{No.} & \multirow{2}{*}{Parameter} & \multicolumn{8}{c}{$TC$ \tiny{($1$ is at the top, $8$ is at the bottom of the assembly)}} & \phantom{a} & \multicolumn{4}{c}{$DP$} & \phantom{a} & \multirow{2}{*}{$CO$}\\             
+                                                    \cmidrule{3-10}                                                                                           \cmidrule{12-15}
+    &                                         & $1$      & $2$      & $3$      & $4$      & $5$      & $6$      & $7$      & $8$      && Bot.     & Mid.     & Top      & Tot.     &&           \\ \midrule
+1   & \cellcolor[gray]{0.8}\texttt{breakP}	  &          &          &          &          &          &          &          &          &&          &\Checkmark&          &          &&           \\
+2   & \cellcolor[gray]{0.8}\texttt{fillT}     &          &          &          &          &          &          &          &\Checkmark&&          &          &          &          &&           \\
+3   & \cellcolor[gray]{0.8}\texttt{fillV}     &          &          &          &          &\Checkmark&\Checkmark&\Checkmark&\Checkmark&&\Checkmark&\Checkmark&\Checkmark&\Checkmark&&\Checkmark \\
+4   & \cellcolor[gray]{0.8}\texttt{pwr}       &          &          &          &          &          &          &          &          &&          &\Checkmark&          &          &&           \\
+5   & \texttt{nicK}                           &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+6   & \texttt{nicCP}                          &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+7   & \texttt{nicEm}                          &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+8   & \texttt{mgoK}                           &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+9   & \texttt{mgoCp}                          &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+10  & \texttt{vesEps}                         &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+11  & \texttt{ssK}                            &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+12  & \texttt{ssCp}                           &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+13  & \texttt{ssEm}                           &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+14  & \texttt{GridK}                          &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+15  & \cellcolor[gray]{0.8}\texttt{GridHT}    &\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&          &&\Checkmark&\Checkmark&\Checkmark&\Checkmark&&\Checkmark \\
+16  & \cellcolor[gray]{0.8}\texttt{iafbWHT}   &          &          &          &          &          &          &\Checkmark&          &&          &          &          &          &&           \\
+17  & \cellcolor[gray]{0.8}\texttt{dffbWHT}   &          &\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&          &&          &\Checkmark&\Checkmark&\Checkmark&&           \\
+18  & \texttt{iafbLIHT}                       &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+19  & \texttt{iafbVIHT}                       &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+20  & \texttt{dffbLIHT}                       &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+21  & \cellcolor[gray]{0.8}\texttt{dffbVIHT}  &\Checkmark&\Checkmark&\Checkmark&\Checkmark&          &          &          &          &&          &          &\Checkmark&          &&\Checkmark \\
+22  & \cellcolor[gray]{0.8}\texttt{iafbIntDr} &          &          &          &          &          &          &          &          &&\Checkmark&\Checkmark&\Checkmark&\Checkmark&&           \\
+23  & \cellcolor[gray]{0.8}\texttt{dffbIntDr} &\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&\Checkmark&          &          &&\Checkmark&\Checkmark&\Checkmark&\Checkmark&&\Checkmark \\
+24  & \texttt{iafbWDr}                        &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+25  & \cellcolor[gray]{0.8}\texttt{dffbWDr}   &          &          &          &          &          &          &          &          &&          &          &\Checkmark&\Checkmark&&           \\
+26  & \texttt{transWHT}                       &          &          &          &          &          &          &          &          &&          &          &          &          &&           \\
+27  & \cellcolor[gray]{0.8}\texttt{tQuench}   &          &          &          &          &          &          &          &\Checkmark&&\Checkmark&\Checkmark&          &\Checkmark&&           \\ \bottomrule
+\end{tabular}
+\end{adjustwidth*}
+\end{table*}
+
+% Consistency of results
+Using a $5\%$ cut-off value to screen out noninfluential parameters is admittedly an \emph{ad hoc} approach.
+To check the consistency of the screening approach, Fig.~\ref{fig:ch3_plot_influential_noninfluential_runs} illustrates the notion of noninfluential and influential parameters,
+in terms of the effects of their perturbations on the transient of three different outputs.
+\gls[hyper=false]{trace} was executed using $500$ samples of parameter value from each set of parameters (i.e., influential and noninfluential).
+The figure confirms that the use of time-averaged quantity for each output type is a viable \gls[hyper=false]{qoi} for screening.
+The identified noninfluential parameters were indeed the ones that result in minor variation (black curves) of all outputs transient as compared to the variation brought by the influential parameter perturbations (gray curves).
+Furthermore, it also confirms that by making the union set of all the important parameters subsets (each with respect to a particular output, using the $5\%$ cut-off value), 
+the final selection of $12$ influential parameters is valid for all outputs.
+
+% Influential vs non influential runs, examples
+\bigfigure[pos=tbhp,
+           opt={width=0.9\textwidth},
+           label={fig:ch3_plot_influential_noninfluential_runs},
+           shortcaption={The effect of influential vs. noninfluential parameters perturbations on different output.}]
+{../figures/chapter3/figures/plotInfluentialNonInfluentialRuns}
+{Illustration of the variations in the transient of three different outputs using only the $12$ influential parameters (background, gray) and only the $15$ noninfluential parameters (foreground, black).
+Each case uses $500$ samples.}
+
+% From Screening to Detailed analysis on the 12-parameter model
+From the screening analysis results, a more detailed analysis was carried out on the $12$-parameter model involving only the aforementioned influential parameters.
+\marginpar{\gls[hyper=false]{feba} \gls[hyper=false]{trace} model with $12$ influential parameters}
+The detailed analysis consisted of the estimation of the Sobol' main-effect sensitivity index (in complementary with the total-effect index used in the screening above) with respect to different types of time-dependent outputs as well as to different \glspl[hyper=false]{qoi} associated with each of them.
+The analysis was aimed at exposing how an individual input parameter might have affected particular model behavior as highlighted by the different choices of \glspl[hyper=false]{qoi}.
+
+% Convergence study
+It should be noted that the estimation of the main-effect indices were relatively more expensive as a larger number of samples was required to reliably estimate the indices (i.e., such that the uncertainty associated with 
+\marginpar{Convergence of the Sobol' indices estimation} 
+the Monte Carlo estimation was within an acceptable level).
+In relation to this, the convergence of two different Sobol' main-effect index estimators as well as one Sobol' total-effect index estimator was investigated empirically. 
+The result of the analysis was useful in the planning of the simulation experiments regarding the number of samples in relation to the expected uncertainty (in terms of \glsfirst[hyper=false]{ci}) of the estimates.
+It was found that the \gls[hyper=false]{ci} length of a given estimator depended on the \gls[hyper=false]{qoi}, the estimand, the estimator used, and the number of samples.
+A more detailed discussion is presented in Appendix~\ref{app:sobol_convergence}.
+
+% The final setting for the 12-parameter model
+Consequently, by benefiting from the screening procedure taken before ($12$ influential parameters instead of $27$ parameters) and by considering the results of the empirical convergence study,
+a total of $2'000$ samples (which corresponds to $28'000$ \gls[hyper=false]{trace} runs) was deemed appropriate for the more detailed \gls[hyper=false]{sa} presented below.
+\marginpar{Selected results for detailed analysis}
+For conciseness only the results of selected types of output are presented to illustrate the method application, 
+namely the mid-height clad temperature transient (TC$4$ at elevation $z = 2.4 \, [m]$),
+the pressure drop transient at the middle of the assembly (the segment between $z = 1.7 \, [m]$ and $z = 2.3 \, [m]$),
+and the liquid carryover.

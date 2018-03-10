@@ -1,0 +1,245 @@
+%**********************************************************************************************************
+\section[Diagnosing MCMC Samples]{Diagnosing \gls[hyper=false]{mcmc} Samples}\label{sec:bc_mcmc_diagnostic}
+%**********************************************************************************************************
+
+% Opening paragraph
+Consider once more Eq.~(\ref{eq:ch5_markov_chain_clt}), the central limit theorem (CLT) for the \gls[hyper=false]{mcmc}.
+Let $\{\bm{\mathcal{X}}^{(i)}\}_{i=1}^{I}$ be a stationary Markov chain of length $I$ with a stationary distribution $\pi_t$ (i.e., the target distribution).
+The chain is used to estimate the expectation of a function $f$ under $\pi_t$ such that $\hat{f} = 1/I \sum_i f(\bm{\mathcal{X}}^{(i)})$.
+The asymptotic error of the estimator is as follows
+\begin{equation*}
+  \lim_{I \rightarrow \infty} \,\, \hat{f} - \mathbb{E}_{\pi_t}[f] \thicksim \mathcal{N} \left(0, \frac{\sigma_f^2}{I}\right)
+\end{equation*}
+where $\sigma^2_f$ is the variance of a given function $f$ evaluated under the stationary distribution of the chain.
+As mentioned, by construction, the successive realizations in a Markov chain are not independent.
+Before discussing in Section~\ref{sub:bc_mcmc_thinning} the implication of this correlation on the statistical error $\frac{\sigma^2_f}{I}$, several important concepts are introduced below\footnote{Note that the dependence on $\pi_t$ in the discussion below is implicitly assumed and suppressed from the notation.}.
+
+% Autocovariance
+The autocovariance of the function $f$ is defined as the covariation between 
+\marginpar{Autocovariance}
+the function $f$ evaluated using the chain at the iteration $i$ and iteration $j$.
+That is,
+\begin{equation}
+  \text{Cov}\left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(j)}) \right] \equiv \mathbb{E}\left[\left(f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right) \cdot \left(f[\bm{\mathcal{X}}^{(j)}]  - \mathbb{E}[f] \right) \right]
+\label{eq:ch5_autocovariance}
+\end{equation}
+Assuming a stationary chain, the covariance becomes only a function of the separation between the two iterations irrespective at which particular point in the chain the function is evaluated.
+In other words,
+\begin{equation}
+  \text{Cov}\left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(i+t)}) \right] \equiv C_f(t) 
+\label{eq:ch5_autocovariance_function}
+\end{equation}
+where $C_f$ is the autocovariance function of $f$ and $t$ is the \emph{lag} of the covariance function.
+Note that according to the notation above the covariance function $C_f$ is always defined with respect to a given function $f$, as indicated in the subscript.
+Such function includes function that returns a particular dimension of a multivariate chain, e.g., $f(\bm{\mathcal{X}}^{(i)}) = \mathcal{X}^{(i)}_d$, with $d$ a dimension of the multivariate chain.
+
+% Autocorrelation
+The autocorrelation function $\rho_f$ of $f$ is the normalized autocovariance function defined as,
+\marginpar{Autocorrelation function}
+\begin{equation}
+  \rho_f (t) \equiv \frac{C_f(t)}{C_f(0)}
+\label{eq:ch5_autocorrelation}
+\end{equation}
+where $C_f(0)$ is the lag-$0$ autocovariance and is equal to the process variance $\mathbb{V}[f]$ for a stationary process.
+
+% Some illustration
+Autocovariance (and autocorrelation) measures the strength of the covariance (and correlation) between samples in a Markov chain.
+By definition, both functions are symmetric about the origin.
+They also tend to decay with increasing lag as illustrated in the figure below for three different Markov chains with different autocorrelations.
+\normdoublefigure[pos=tbhp,
+                  mainlabel={fig:ch5_plot_illustrate_acf},
+                  maincaption={Illustration of autocorrelation functions for three different Markov chains. The Markov chain at the top has the strongest autocorrelation shown as solid line in the right plot. The correlation between samples dies off much slower than the other two chains.},%
+									mainshortcaption={Illustration of autocorrelation functions for three different Markov chains.},
+                  leftopt={width=0.45\textwidth},
+                  leftlabel={fig:ch5_plot_illustrate_acf_1},
+                  leftcaption={Three different Markov chains},
+                  %leftshortcaption={},%
+                  rightopt={width=0.45\textwidth},
+                 rightlabel={fig:ch5_plot_illustrate_acf_2},
+                  rightcaption={Autocorrelation functions as function of lag $t$},
+                  %rightshortcaption={},
+                  %spacing={\hfill}
+                 ]
+{../figures/chapter5/figures/plotIllustrateACF_1}
+{../figures/chapter5/figures/plotIllustrateACF_2}
+
+\clearpage
+
+%--------------------------------------------------------------------------------------------------------------------------------
+\subsection[Autocorrelation in Equilibrium and Thinning]{Autocorrelation in Equilibrium and Thinning}\label{sub:bc_mcmc_thinning}
+%--------------------------------------------------------------------------------------------------------------------------------
+
+Assuming that the stationary chain has been attained, the asymptotic results of Eq.~(\ref{eq:ch5_markov_chain_clt}) applies.
+To derive the expression for $\sigma^2_f$ in the equation, consider that the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ for the expected value of $f$ computed by a Markov chain $\{\bm{\mathcal{X}}^{(i)}\}$ of length $I$ is,
+\begin{equation}
+  \mathbb{V}[\,\hat{f}\,] = \mathbb{E}\left[\left(\frac{1}{I} \sum_{i=1}^I \left( f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right)\right)^2 \right]
+\label{eq:ch5_markov_chain_estimate_variance}
+\end{equation}
+By using nested sum, the definition can be rewritten as,
+\begin{equation*}
+  \begin{split}
+  \mathbb{V}[\,\hat{f}\,] & = \mathbb{E}\left[\frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I \left(f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right) \cdot \left(f[\bm{\mathcal{X}}^{(j)}]  - \mathbb{E}[f] \right) \right] \\
+  & = \frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I \mathbb{E}\left[\left(f[\bm{\mathcal{X}}^{(i)}]  - \mathbb{E}[f] \right) \cdot \left(f[\bm{\mathcal{X}}^{(j)}]  - \mathbb{E}[f] \right) \right] \\
+  & = \frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I \text{Cov} \left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(j)}) \right]
+  \end{split}
+\label{eq:ch5_markov_chain_estimate_variance_nested_sum}
+\end{equation*}
+where the definition of covariance between two random variables have been applied to arrive to the last line above.
+
+Assuming that the chain $\{\bm{\mathcal{X}}^{(i)}\}$ is stationary then the covariance function is simply a function of the separation between the two iterations $i$ and $j$,
+\begin{equation*}
+  \begin{split}
+  \mathbb{V}[\,\hat{f}\,] & =  \frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I \text{Cov} \left[ f(\bm{\mathcal{X}}^{(i)}), f(\bm{\mathcal{X}}^{(j)}) \right] \\
+                          & = \frac{1}{I^2} \sum_{i=1}^I \sum_{j=1}^I C_f (|i - j|) \\
+                          & \approx \frac{1}{I^2} \sum_{i=1}^I \sum_{t = -\infty}^{\infty} C_f (|t|) = \frac{1}{I} \sum_{t = -\infty}^{\infty} C_f (|t|)
+  \end{split}
+\label{eq:ch5_markov_chain_estimate_variance_stationary}
+\end{equation*}
+where $C_f$ is the (stationary) autocovariance function associated with function $f$.
+The approximation in the last line above is valid assuming that $C_f$ decays as the separation $t = i - j$ becomes larger \cite{Sokal1997}.
+Noting that the covariance function $C_f$ is a symmetric function about zero,
+\begin{equation*}
+  \begin{split}
+  \mathbb{V}[\,\hat{f}\,] & = \frac{1}{I} \left( C_f (0) + 2 \sum_{t = 1}^{\infty} C_f (t) \right) \\
+                          & = \frac{2 C_f (0)}{I} \left( \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t) \right)
+  \end{split}
+\label{eq:ch5_markov_chain_estimate_variance_expand}
+\end{equation*}
+where $\rho_f$ is the autocorrelation function of $f$ defined in Eq.~(\ref{eq:ch5_autocorrelation}).
+Rearranging the term, the variance of the \gls[hyper=false]{mcmc} estimator $\hat{f}$ is,
+\marginpar{Integrated autocorrelation time}
+\begin{equation}
+  \mathbb{V}[\,\hat{f}\,] = \frac{2 \tau_{\text{int},f}}{I} C_f (0) \quad\quad\quad \tau_{\text{int},f} \equiv  \frac{1}{2} + \sum_{t = 1}^{\infty} \rho_f (t)
+\label{eq:ch5_markov_chain_estimator_variance}
+\end{equation}
+where $\tau_{\text{int},f}$ is the \emph{integrated autocorrelation time} (or, in this thesis, simply the autocorrelation time).
+
+Comparing with Eq.~(\ref{eq:ch5_markov_chain_clt}), Eq.~(\ref{eq:ch5_markov_chain_estimator_variance}) can be interpreted in two ways.
+\marginpar{Effective sample size}
+First, the use of a Markov chain of length $I$ to estimate the expectation of $f$ inflates the estimator variance by a factor $2 \tau_{\text{int},f}$.
+In other words, $\sigma^2_f \equiv 2 \tau_{\text{int},f} C_f(0)$.
+Or, equivalently, the number of independent samples required in the computation of the \gls[hyper=false]{mc} sampling variance is only a factor of $\frac{1}{2 \tau_{\text{int},f}}$ of the total number of \gls[hyper=false]{mcmc} samples $I$.
+In other words, $N \equiv \frac{I}{2 \tau_{\text{int},f}}$ with $N$ the number of independent samples (or \emph{effective sample size}).
+From this latter interpretation, the autocorrelation time gives a measure of the number of \gls[hyper=false]{mcmc} iterations required to generate a single independent sample.
+
+% Autocorrelation time and the length of the chain
+In either interpretation, the statistical error associated with the \gls[hyper=false]{mc} estimation is larger for an estimation using \gls[hyper=false]{mcmc} samples than using independent samples due to the inherent correlation.
+\marginpar{Determining the length of a chain}
+Moreover, in the case of \gls[hyper=false]{mcmc}, the autocorrelation time $\tau_{\text{int},f}$ directly affects the statistical error.
+As such, this quantity is useful in either determining the required length of the chain in a \gls[hyper=false]{mcmc} simulation or assessing the statistical error of a chain of a given length.
+
+That is, the minimum length of the chain can be determined such that the statistical error of the estimator of $f$ $\mathbb{V}[\hat{f}]^{0.5}$ is smaller than a fraction $\epsilon$ of the true standard deviation $\mathbb{V}[f]^{0.5}$ \cite{Akeret2013},
+\begin{equation}
+  \left(\frac{\mathbb{V}[\hat{f}]}{C_f(0)}\right)^{0.5} = \left(\frac{\mathbb{V}[\hat{f}]}{\mathbb{V}[f]}\right)^{0.5} = \left(\frac{2\tau_{\text{int},f}}{I}\right)^{0.5} \leq \epsilon \Leftrightarrow I \geq \frac{2\tau_{\text{int},f}}{\epsilon^2} 
+\label{eq:ch5_markov_chain_relative_error}
+\end{equation}
+where $I$ is the number of \gls[hyper=false]{mcmc} samples.
+For a single particle \gls[hyper=false]{mcmc} this number is also the number of \gls[hyper=false]{mcmc} iterations\footnote{hence the notation $I$.}.
+For an ensemble sampler, the total number of samples is a multiplication between the number of iterations $I$ and the number of walkers $L$ such that,
+\begin{equation}
+  I \geq \frac{2\,\tau_{\text{int},f}}{\epsilon^2\,L} 
+\label{eq:ch5_markov_chain_relative_error_ensemble}
+\end{equation}
+The autocorrelation time gives a measure of the required length of the chain to reach a target statistical error.
+For instance, $10'000$ \gls[hyper=false]{mcmc} iterations are relatively long for a single particle chain having an autocorrelation time of $5$ ($\epsilon \approx 3\%)$, but much shorter in comparison to a chain having an autocorrelation time of $100$ ($\epsilon \approx 14\%)$.
+In the latter case, in such a relatively short chain, the reliability of the estimation of the autocorrelation time itself can actually become suspect. 
+
+% Estimating Autocovariance function
+The autocovariance function of $f$ can be estimated from a realization of a Markov chain $\{\bm{\mathbf{x}}^{(i)}\}_{i=1}^{I}$ using the following estimator \cite{Sokal1997,Akeret2013},
+\marginpar{Estimating autocorrelation time}
+\begin{equation}
+  \hat{C}_f (t) =  \frac{1}{I - t} \sum_{t = 1}^{I - t} (f(\mathbf{x}^{(i)}) - \bar{f}) \, (f(\mathbf{x}^{(i+t)}) - \bar{f})
+\label{eq:ch5_markov_chain_autocovariance_function_estimator}
+\end{equation}
+where $\bar{f} = 1/I \sum_{i} f(\mathbf{x}^{(i)})$ is the sample mean of $f$.
+The autocorrelation function estimator follows,
+\begin{equation}
+  \hat{\rho}_f (t) =  \frac{\hat{C}_f(t)}{\hat{C}_f(0)}
+\label{eq:ch5_markov_chain_autocorrelation_function_estimator}
+\end{equation}
+Finally, the estimator of the autocorrelation time is given by,
+\begin{equation}
+  \hat{\tau}_{\text{int},f} =  \frac{1}{2} + \sum_{t = 1}^{I} \hat{\rho}_f (t)
+\label{eq:ch5_markov_chain_autocorrelation_time_estimator}
+\end{equation}
+Direct estimation of the autocorrelation time using the above estimator is usually unstable due to the statistical noise associated with large lag $t$.
+For a large $t$, the data of iterations that are far separated becomes too sparse to have a reliable estimate of the autocovariance function value. 
+A ``windowing'' technique is proposed in \cite{Sokal1997} to stabilize the estimation and is implemented in the routine \texttt{ACOR} \cite{Goodman2009,Foreman-Mackey2014} used in this thesis.
+
+% On thinning
+The notion of independent samples (or effective sample size) mentioned above are coupled with the practice of \emph{thinning} or sub-sampling the \gls[hyper=false]{mcmc} samples \cite{Geyer1992}.
+\marginpar{On thinning the chain}
+Thinning the chain means that only $1$ \gls[hyper=false]{mcmc} sample is kept for every $k$ iterations, with $k$ an integer.
+Often, the integer $k$ is chosen to be close to, or at least the same order of magnitude as, twice the autocorrelation time $\tau_{\text{int},f}$.
+Historically, thinning was mainly motivated by the limited storage and memory to store all the samples, especially for a long running \gls[hyper=false]{mcmc} simulation.
+As the end purpose of conducting \gls[hyper=false]{mc} estimation requires the use of independent samples, it was argued that by thinning, only samples that matters (i.e., independent) were kept for further analysis.
+
+On the other hand, the practice of thinning is questioned by several authors \cite{Geyer1992,Link2011}.
+The argument against thinning is relatively easy to intuit: there can be much a smaller number of samples left after thinning that often worsen the accuracy of the estimator.
+ 
+Thinning can be justified in the case of expensive ``post-processing'' of the \gls[hyper=false]{mcmc} samples.
+That is, if the function $f$ is expensive to evaluate.
+For example, in the context of Bayesian data analysis, the posterior samples obtained via \gls[hyper=false]{mcmc} simulation might need to be propagated through a computationally expensive code for the purpose of forward uncertainty quantification by an ordinary \gls[hyper=false]{mc} simulation.
+In this case, only calculations of a few samples might be afforded and, as required by \gls[hyper=false]{mc} simulation, such selection of samples should be independent of each other which, in turn, can be achieved by thinning the chain first. 
+
+%-----------------------------------------------------------------------------------------------------------------
+\subsection[Initialization Bias and Burn-in]{Initialization Bias and Burn-in}\label{sub:bc_mcmc_diagnostic_burnin}
+%-----------------------------------------------------------------------------------------------------------------
+
+% Opening paragraph, why there is
+The results above hold for \gls[hyper=false]{mcmc} samples obtained from a stationary chain.
+As illustrated in Fig.~\ref{fig:ch5_plot_aies_walker_ensemble_1}, the \gls[hyper=false]{mcmc} samples at the beginning of the chain are taken from a lower probability region of the target probability distribution and thus are less representative of the distribution.
+\marginpar{Burn-in}
+After some period, however, the apparent ``initial transient'' eventually dies off and the chain settles in a more typical region of the parameter space.
+The colloquial term \emph{burn-in} period is used to characterize this initial part of the chain.
+By \emph{burn-in} the chain, it is meant that the samples of that period are discarded.
+
+% Consequence of burn-in period
+As opposed to the previous discussion on autocorrelation in equilibrium that causes inflation of \gls[hyper=false]{mc} \emph{statistical error},
+\marginpar{Initialization bias}
+the presence of burn-in period in an \gls[hyper=false]{mcmc} simulation can cause a \emph{systematic bias} on the \gls[hyper=false]{mc} estimator \cite{Sokal1997}.
+Therefore, for a short chain, it is important to remove the burn-in period lest the estimator will be heavily affected by initialization bias.
+In a single particle \gls[hyper=false]{mcmc} algorithm discarding the samples corresponding to the burn-in period is generally not necessary as the total number of iterations tends to be much larger than this period and the simulation can be extended to wash out that initialization bias.
+
+% Burn-in for ensemble sampler
+On the other hand, in an ensemble sampler, burn-in period might contain much larger biased samples relative to the total number of samples due to the use of multiple walkers within an iteration \cite{Hou2012,Foreman-Mackey2013,Akeret2013}.
+Multiple walkers can be initialized from low probability regions.
+Furthermore, although an iteration computationally costs more, the number of iterations in an ensemble sampler is relatively shorter than in a single particle sampler.
+As such, determining the length of burn-in period -- and discarding the corresponding samples -- is more important for ensemble samplers.
+
+% Burn-in and autocorrelation
+Burn-in period can be associated with the relaxation period of an infinitely long Markov chain \cite{Sokal1997}.
+In that case, the autocorrelation function of Eq.~(\ref{eq:ch5_autocorrelation}) can often be expressed as an exponential law, i.e., $\rho_f(t) \approx \exp{(-t/\tau_\text{exp,f})}$. 
+Under this assumption, the \emph{exponential} autocorrelation time of a function $f$ can be defined as follow,
+\marginpar{Exponential autocorrelation time}
+\begin{equation}
+  \tau_{\text{exp},f} = \lim\limits_{t\rightarrow\infty} \frac{t}{-\ln{|\rho_f(t)|}} 
+\label{eq:ch5_markov_chain_exponential_autocorrelation_time}
+\end{equation}
+The time represents the rate of convergence of a Markov chain with respect to the given function $f$, starting from arbitrary initial values to its stationary distribution \cite{Sokal1997}.
+It can be used to determine the number of iterations to discard before the chain is considered stationary.
+
+% Importance of Burn-in period revisited
+The relationship between exponential correlation time and stationarity only strictly holds for exponential correlation functions.
+Fortunately, most infinitely long chains have exponential correlation functions \cite{Sokal1997}.
+In addition, although the exponential autocorrelation time is different from (twice) the integrated autocorrelation time\footnote{except in the case of exponentially decaying autocorrelation function.},
+in practice, the two are often assumed to be the same \cite{Foreman-Mackey2013,Akeret2013} or at least having the same order of magnitude \cite{Sokal1997}.
+
+In this thesis, they are both estimated using the definition of the integrated autocorrelation time (Eq.~(\ref{eq:ch5_markov_chain_estimator_variance})).
+\marginpar{Determining the number of iterations to discard}
+That is, the autocorrelation time is first estimated for the whole chain and is used, after multiplication by a conservative factor of $20$ \cite{Sokal1997}, to determine the length of the burn-in period. 
+Afterward, assuming that the stationary chain has been attained, the autocorrelation time is re-estimated and is used as the basis for assessing the autocorrelation between successive realizations (and if applies, for thinning).
+
+In the end, it is important to acknowledge that the burn-in period as determined by the autocorrelation time is a heuristic.
+\marginpar{Burn-in, a heuristic}
+It is useful to avoid initialization bias from a Markov chain of a finite length especially in the case of ensemble samplers.
+Moreover, a suspiciously long burn-in period can give an indication of a more serious underlying problem either in the posterior formulation or the sampler.
+It cannot, however, establish the fact that a Markov chain has indeed settled in its stationary (and simultaneously, its target) distribution \cite{Sokal1997,Geyer2011}. 
+
+% Why there's burn-in
+Finally, note that the initial transient is mainly due to selecting values with low posterior probability to initialize the chain.
+\marginpar{Burn-in, alternatives}
+In a simple problem, perhaps it can be straightforward to determine a value that lies in a high probability region of the posterior.
+This is not the case for a more complex high-dimensional problem and some arbitrary values are often selected instead.
+Thus, some authors \cite{Geyer1992, Akeret2013} proposed instead to tune the initial values such that they are more representative of the posterior \gls[hyper=false]{pdf} and make do without burn-in.
+This tuning, however, requires additional preliminary calculations.

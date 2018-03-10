@@ -1,0 +1,49 @@
+\newpage
+%*****************************************************************************************************************
+\section[\texttt{trace-simexp}]{\texttt{trace-simexp}: Computer Experiment for TRACE code}\label{app:trace_simexp}
+%*****************************************************************************************************************
+
+% Introductory paragraph
+A computer experiment, loosely defined, is a multiple computer model runs using different values of the model parameters.
+Its design, in particular the selection of the design points at which the model will be evaluated; as well as its analysis, in particular the analysis of the output variation in relation to the inputs variation, are useful for sensitivity and uncertainty analyses of the model subjected to the experimentation.
+
+An important prerequisite of carrying out such experiment is the availability of a supporting tool able to handle the related logistical aspects.
+A Python3-based scripting utility has been developed to assist in carrying such experiments for the thermal-hydraulics system code \gls[hyper=false]{trace}.
+The scope of the utility is ranging from the pre-processing of the \gls[hyper=false]{trace} input deck amenable for batch parallel execution to the post-treatment of the resulting binary \texttt{xtv} / \texttt{dmx} file amenable to subsequent sensitivity and uncertainty analyses.
+
+A user interacts with the utility via command line interface.
+A set of of command line applications corresponding to each of the three processes involved.
+For reproducibility, an explicit set of parameters are required to be supplied and after successful execution of each, a log file is produced. 
+The log files are also used as a connection between two successive steps.
+The general flowchart of the processes involved in \texttt{trace-simexp} package is Fig.~\ref{fig:trace_simexp}.
+\bigfigure[pos=tbhp,
+           opt={width=1.0\textwidth},
+           label={fig:trace_simexp},
+           shortcaption={Flowchart of \texttt{trace-simexp}.}]
+{../figures/appendices/trace-simexp/trace_simexp}
+{Flowchart of \texttt{trace-simexp}.}
+
+\paragraph{Main Features}
+
+\begin{itemize}
+
+	\item Complete separation of the processes in $3$ different steps: \texttt{prepro}, \texttt{exec}, and \texttt{postpro}.
+		Interaction is conducted via command line interface.
+	\item Specification of a computer experiment for \gls[hyper=false]{trace} by the users is done through a set of input files (list of parameters file, design matrix file, and list of graphic variables file).
+	\item Three modes of parameter perturbation are supported: additive, multiplicative, and substitutive.
+	\item Four categories of \gls[hyper=false]{trace} variables in the input deck can be perturbed: spacer grid, material properties, sensitivity coefficient, and components.
+	\item For \gls[hyper=false]{trace} components, five are supported: \texttt{PIPE}, \texttt{VESSEL}, \texttt{POWER}, \texttt{FILL}, \texttt{BREAK}.
+	\item Iso-probabilistic transformation of the normalized design matrix is available for uniform, discrete, log-uniform, and normal distributions.
+\end{itemize}
+
+\paragraph{Requirements, Installation, and Documentation}\mbox{}\\
+
+The module was developed and tested using the \href{https://www.anaconda.com/distribution/}{Anaconda Python} distribution of Python \texttt{v3.5}.
+No additional package except the base installation of the distribution is required.
+
+\texttt{trace-simexp} is hosted on \href{https://bitbucket.org/lrs-uq/trace-simexp}{BitBucket}.
+Installation instruction and detailed documentation can be found in the project page.
+
+\paragraph{License}\mbox{}\\
+
+\texttt{trace-simexp} is licensed under the MIT License.
