@@ -55,6 +55,7 @@ plot_ensemble <- function(ens_rds, burnin, param_names, param_ranges,
         p[[k]] <- p[[k]] + stat_bin(aes(y = ..count../sum(..count..)),
                                     geom = "step",
                                     bins = n_bins)
+        # Setup axis
         p[[k]] <- p[[k]] + theme_bw()
         p[[k]] <- p[[k]] + theme(axis.text.x = element_blank())
         p[[k]] <- p[[k]] + theme(axis.ticks.x = element_blank())
@@ -66,8 +67,7 @@ plot_ensemble <- function(ens_rds, burnin, param_names, param_ranges,
         p[[k]] <- p[[k]] + theme(plot.title = element_text(hjust = 0.5,
                                                            size = 14,
                                                            face = "bold"))
-        #p[[k]] <- p[[k]] + geom_vline(
-        #  xintercept = HPDI(ens_samples_rescaled[,i], prob = 0.95))
+        # Add vertical lines denoting the credible interval
         p[[k]] <- p[[k]] + geom_vline(
           xintercept = quantile(ens_samples_rescaled[,i],
                                 probs = c(0.025, 0.975)))
@@ -160,6 +160,3 @@ plot_ensemble <- function(ens_rds, burnin, param_names, param_ranges,
             cols = 8)
 
 }
-
-#          geom_vline(xintercept = quantile(ens_samples_rescaled[,i],
-#                                           probs = c(0.025, 0.975)), linetype = 3) +
