@@ -1,6 +1,6 @@
 # Bayesian Uncertainty Quantification of Physical Model in Thermal-Hydraulics System Code
 
-This is a repository for thesis entitled *Bayesian Uncertainty Quantification of Physical Model in Thermal-Hydraulics System Code* submitted to the Doctoral School of Physics as a partial requirement to 
+This is a repository for a thesis entitled *Bayesian Uncertainty Quantification of Physical Model in Thermal-Hydraulics System Code* submitted to the Doctoral School of Physics as a partial requirement to 
 obtain a doctoral degree in nuclear engineering from the Swiss Federal Institute of Technology, Lausanne (EPFL).
 
 The thesis was successfully defended in a closed oral exam session at the EPFL campus on January 19, 2018 in front of jury members and publicly thereafter at the Paul Scherrer Institut on February 23, 2018.
