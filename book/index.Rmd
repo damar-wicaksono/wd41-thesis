@@ -1,6 +1,6 @@
 --- 
 title: "Bayesian Uncertainty Quantification of Physical Model in Thermal-Hydraulics System Code"
-author: "Yihui Xie"
+author: "Damar Wicaksono"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
